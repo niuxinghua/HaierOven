@@ -273,7 +273,6 @@
 		45C7E55E1A3FD9AE000B086B /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E5571A3FD9AE000B086B /* BaseNavigationController.m */; };
 		45C7E5601A3FD9AE000B086B /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E55B1A3FD9AE000B086B /* BaseTableViewController.m */; };
 		45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E55D1A3FD9AE000B086B /* BaseViewController.m */; };
-		45C7E56E1A3FDA43000B086B /* MyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E5671A3FDA43000B086B /* MyTool.m */; };
 		45C7E56F1A3FDA43000B086B /* MyUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E5691A3FDA43000B086B /* MyUtils.m */; };
 		45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E56B1A3FDA43000B086B /* NSString+MD5Addition.m */; };
 		45C7E5711A3FDA43000B086B /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E56D1A3FDA43000B086B /* UIView+Sizes.m */; };
@@ -780,8 +779,6 @@
 		45C7E55C1A3FD9AE000B086B /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		45C7E55D1A3FD9AE000B086B /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		45C7E5631A3FD9E7000B086B /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
-		45C7E5661A3FDA43000B086B /* MyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTool.h; sourceTree = "<group>"; };
-		45C7E5671A3FDA43000B086B /* MyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTool.m; sourceTree = "<group>"; };
 		45C7E5681A3FDA43000B086B /* MyUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUtils.h; sourceTree = "<group>"; };
 		45C7E5691A3FDA43000B086B /* MyUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUtils.m; sourceTree = "<group>"; };
 		45C7E56A1A3FDA43000B086B /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -1684,8 +1681,6 @@
 		45C7E5651A3FDA43000B086B /* myTools */ = {
 			isa = PBXGroup;
 			children = (
-				45C7E5661A3FDA43000B086B /* MyTool.h */,
-				45C7E5671A3FDA43000B086B /* MyTool.m */,
 				45C7E5681A3FDA43000B086B /* MyUtils.h */,
 				45C7E5691A3FDA43000B086B /* MyUtils.m */,
 				45C7E56A1A3FDA43000B086B /* NSString+MD5Addition.h */,
@@ -2391,7 +2386,6 @@
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				45C7E56E1A3FDA43000B086B /* MyTool.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
 				45C7E5711A3FDA43000B086B /* UIView+Sizes.m in Sources */,
