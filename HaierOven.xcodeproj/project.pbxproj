@@ -168,6 +168,11 @@
 		45B88E591A4BE9A300722EF6 /* tk-xz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E551A4BE9A300722EF6 /* tk-xz@2x.png */; };
 		45B88E5C1A4BE9AD00722EF6 /* tk-cxz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E5A1A4BE9AD00722EF6 /* tk-cxz@3x.png */; };
 		45B88E5D1A4BE9AD00722EF6 /* tk-xz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E5B1A4BE9AD00722EF6 /* tk-xz@3x.png */; };
+		45B88E601A4BF19500722EF6 /* DeviceAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */; };
+		45B88E621A4BF1B900722EF6 /* DeviceAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */; };
+		45B88E661A4BF50600722EF6 /* tk.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E631A4BF50600722EF6 /* tk.png */; };
+		45B88E671A4BF50600722EF6 /* tk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E641A4BF50600722EF6 /* tk@2x.png */; };
+		45B88E681A4BF50600722EF6 /* tk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B88E651A4BF50600722EF6 /* tk@3x.png */; };
 		45BA02C61A43D807003810C7 /* PersonalEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BA02C51A43D807003810C7 /* PersonalEditViewController.m */; };
 		45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BA02DD1A4408E7003810C7 /* PersonalCenterSectionView.m */; };
 		45BA02E01A4408FB003810C7 /* PersonalCenterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BA02DF1A4408FB003810C7 /* PersonalCenterSectionView.xib */; };
@@ -712,6 +717,12 @@
 		45B88E551A4BE9A300722EF6 /* tk-xz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tk-xz@2x.png"; sourceTree = "<group>"; };
 		45B88E5A1A4BE9AD00722EF6 /* tk-cxz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tk-cxz@3x.png"; sourceTree = "<group>"; };
 		45B88E5B1A4BE9AD00722EF6 /* tk-xz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tk-xz@3x.png"; sourceTree = "<group>"; };
+		45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceAlertView.h; sourceTree = "<group>"; };
+		45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceAlertView.m; sourceTree = "<group>"; };
+		45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceAlertView.xib; sourceTree = "<group>"; };
+		45B88E631A4BF50600722EF6 /* tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tk.png; sourceTree = "<group>"; };
+		45B88E641A4BF50600722EF6 /* tk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tk@2x.png"; sourceTree = "<group>"; };
+		45B88E651A4BF50600722EF6 /* tk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tk@3x.png"; sourceTree = "<group>"; };
 		45BA02C41A43D807003810C7 /* PersonalEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalEditViewController.h; sourceTree = "<group>"; };
 		45BA02C51A43D807003810C7 /* PersonalEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalEditViewController.m; sourceTree = "<group>"; };
 		45BA02DC1A4408E7003810C7 /* PersonalCenterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSectionView.h; sourceTree = "<group>"; };
@@ -1202,6 +1213,8 @@
 		458952C51A493FAF009B5DD1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
+				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
 				45B650C21A47F64000A6376D /* MyDeviceView.h */,
 				45B650C31A47F64000A6376D /* MyDeviceView.m */,
 				45B650DA1A48169000A6376D /* MyDeviceAddView.h */,
@@ -1246,6 +1259,7 @@
 		45B650C71A47F9BF00A6376D /* DeviceView */ = {
 			isa = PBXGroup;
 			children = (
+				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
 				45B650DD1A4816A500A6376D /* MyDeviceAddView.xib */,
 				45B650C51A47F65500A6376D /* MyDeviceView.xib */,
 				45BB13671A49116A00FA44F4 /* DeviceConnectProgressView.xib */,
@@ -1292,6 +1306,9 @@
 		45BB35EC1A4A68CF000EE3C4 /* DeviceBoard */ = {
 			isa = PBXGroup;
 			children = (
+				45B88E631A4BF50600722EF6 /* tk.png */,
+				45B88E641A4BF50600722EF6 /* tk@2x.png */,
+				45B88E651A4BF50600722EF6 /* tk@3x.png */,
 				45B88E5A1A4BE9AD00722EF6 /* tk-cxz@3x.png */,
 				45B88E5B1A4BE9AD00722EF6 /* tk-xz@3x.png */,
 				45B88E521A4BE9A300722EF6 /* tk-cxz.png */,
@@ -2409,7 +2426,9 @@
 				45B88E3F1A4BD7A100722EF6 /* kashi@2x.png in Resources */,
 				45B650F71A482D6B00A6376D /* 1-2.png in Resources */,
 				45BC578A1A4B08C00052F520 /* naozhong-cxz@3x.png in Resources */,
+				45B88E621A4BF1B900722EF6 /* DeviceAlertView.xib in Resources */,
 				45B6510A1A482EDB00A6376D /* n1@2x.png in Resources */,
+				45B88E681A4BF50600722EF6 /* tk@3x.png in Resources */,
 				45D906A31A47CAAB00B97D92 /* b_01@2x.png in Resources */,
 				45B651101A482EDB00A6376D /* n3@2x.png in Resources */,
 				45BB35F21A4A6955000EE3C4 /* devicelogo@2x.png in Resources */,
@@ -2510,6 +2529,7 @@
 				45C7E53F1A3FD165000B086B /* LaunchScreen.xib in Resources */,
 				45B88E5C1A4BE9AD00722EF6 /* tk-cxz@3x.png in Resources */,
 				45BB36731A4AAFD5000EE3C4 /* whiteline.png in Resources */,
+				45B88E661A4BF50600722EF6 /* tk.png in Resources */,
 				45B88E571A4BE9A300722EF6 /* tk-cxz@2x.png in Resources */,
 				45D906FE1A47CAAB00B97D92 /* shijian@2x.png in Resources */,
 				458952DD1A495FC3009B5DD1 /* shebei2tianjian@3x.png in Resources */,
@@ -2526,6 +2546,7 @@
 				45D906B21A47CAAB00B97D92 /* edit.png in Resources */,
 				45B88E511A4BE2A300722EF6 /* tzyx-cxz@3x.png in Resources */,
 				457A76D21A41592600E422D0 /* page_state_highlight.png in Resources */,
+				45B88E671A4BF50600722EF6 /* tk@2x.png in Resources */,
 				45BB363A1A4A953A000EE3C4 /* xz-cxz@2x.png in Resources */,
 				45B651171A48448500A6376D /* wodeWIFI@3x.png in Resources */,
 				458952C41A493C05009B5DD1 /* wifilianjie08@3x.png in Resources */,
@@ -2637,6 +2658,7 @@
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
+				45B88E601A4BF19500722EF6 /* DeviceAlertView.m in Sources */,
 				45C7E5711A3FDA43000B086B /* UIView+Sizes.m in Sources */,
 				844117701A4BB8AF00628A64 /* DataCenter.m in Sources */,
 				457A77881A42EC3400E422D0 /* FoodListCell.m in Sources */,
