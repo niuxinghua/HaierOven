@@ -16,10 +16,18 @@
 @property int time;
 @property (strong, nonatomic) IBOutlet UIScrollView *deviceScrollView;
 @property (strong, nonatomic) NSMutableArray *workModelBtns;
+@property (strong, nonatomic) UIBarButtonItem *startTab;
+@property (strong, nonatomic) UIBarButtonItem *ksyrTab;
+@property (strong, nonatomic) UIBarButtonItem *tzyxTab;
+@property (strong, nonatomic) UIBarButtonItem *fixbtn;
 @end
 
 @implementation DeviceBoardViewController
 
+@synthesize startTab;
+@synthesize ksyrTab;
+@synthesize tzyxTab;
+@synthesize fixbtn;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
@@ -28,51 +36,53 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    self.navigationController.toolbarHidden = YES;
+}
 - (void)setupToolbarItems
 {
     // 设置工具栏颜色 这里的图片需要黑色半透明图片
     self.navigationController.toolbarHidden = NO;
-//    self.navigationController.toolbar.height = 54;
-    self.navigationController.toolbar.frame = CGRectMake(0, PageH-54, PageW, 54);
-    [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"lx-ybx")
-                                       forToolbarPosition:UIBarPositionAny
-                                               barMetrics:UIBarMetricsDefault];
-
+    self.navigationController.toolbar.height = PageW*0.18;
+    self.navigationController.toolbar.frame = CGRectMake(0, PageH-PageW*0.18, PageW, PageW*0.18);
+    
+    [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"sectionbg") forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationController.toolbar.clipsToBounds = YES;
     
-    
     //工具栏  ToolBar
-    UIButton* messageButton = [[UIButton alloc] init];
-    [messageButton setImage:IMAGENAMED(@"icon_chat_n.png") forState:UIControlStateNormal];
-    [messageButton setImage:IMAGENAMED(@"icon_chat_s.png") forState:UIControlStateHighlighted];
-    [messageButton addTarget:self action:@selector(leaveMesage) forControlEvents:UIControlEventTouchUpInside];
-    messageButton.frame = CGRectMake(0, 0, 26, 26);
-    UIBarButtonItem* tb1 = [[UIBarButtonItem alloc] initWithCustomView:messageButton];
+    UIButton * ksyr = [[UIButton alloc] init];
+    [ksyr setImage:IMAGENAMED(@"ksyr-xz") forState:UIControlStateNormal];
+    [ksyr setImage:IMAGENAMED(@"ksyr-wxz") forState:UIControlStateDisabled];
+    [ksyr setImage:IMAGENAMED(@"ksyr-cxz") forState:UIControlStateSelected];
+    [ksyr addTarget:self action:@selector(StartWarmUp) forControlEvents:UIControlEventTouchUpInside];
+    float width = (PageW-50)/2;
+    ksyr.frame = CGRectMake(0, 0, width, width *0.272);
     
-    UIButton* talkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [talkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [talkButton setTitle:@"立即约谈" forState:UIControlStateNormal];
-    [talkButton setBackgroundColor:GlobalOrangeColor];
-    [talkButton addTarget:self action:@selector(talk) forControlEvents:UIControlEventTouchUpInside];
-    talkButton.frame = CGRectMake(0, 0, 105, 30);
-    talkButton.layer.masksToBounds = YES;
-    talkButton.layer.cornerRadius = 5.0;
-    UIBarButtonItem *tb2 = [[UIBarButtonItem alloc]initWithCustomView:talkButton];
     
-    UIButton* investButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [investButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [investButton setTitle:@"立即投资" forState:UIControlStateNormal];
-    [investButton setBackgroundColor:GlobalRedColor];
-    [investButton addTarget:self action:@selector(invest) forControlEvents:UIControlEventTouchUpInside];
-    investButton.frame = CGRectMake(0, 0, 105, 30);
-    investButton.layer.masksToBounds = YES;
-    investButton.layer.cornerRadius = 5.0;
-    UIBarButtonItem *tb3 = [[UIBarButtonItem alloc]initWithCustomView:investButton];
+    UIButton * start = [UIButton buttonWithType:UIButtonTypeCustom];
+    [start setImage:IMAGENAMED(@"kaishi-xz") forState:UIControlStateNormal];
+    [start setImage:IMAGENAMED(@"kaishi") forState:UIControlStateDisabled];
+    [start setImage:IMAGENAMED(@"kaishi-cxz") forState:UIControlStateSelected];
+    [start addTarget:self action:@selector(StartWorking) forControlEvents:UIControlEventTouchUpInside];
+    start.frame = CGRectMake(0, 0, width, width *0.272);
+
+    
+    UIButton * tzyx = [UIButton buttonWithType:UIButtonTypeCustom];
+    [tzyx setImage:IMAGENAMED(@"tzyx-cxz") forState:UIControlStateNormal];
+    [tzyx addTarget:self action:@selector(StopWorking) forControlEvents:UIControlEventTouchUpInside];
+    tzyx.frame = CGRectMake(0, 0, PageW-30, width *0.272);
     
 
-    self.toolbarItems = @[tb2, tb3];
+    //木棍
+    fixbtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     
+    startTab = [[UIBarButtonItem alloc]initWithCustomView:start];
+    tzyxTab = [[UIBarButtonItem alloc]initWithCustomView:tzyx];
+    ksyrTab = [[UIBarButtonItem alloc] initWithCustomView:ksyr];
+    self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
 }
+
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
     
@@ -89,8 +99,8 @@
     self.workModelBtns = [NSMutableArray new];
     for (int i = 0; i<cxz.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setBackgroundImage:IMAGENAMED(cxz[i]) forState:UIControlStateNormal];
-        [btn setBackgroundImage:IMAGENAMED(xz[i]) forState:UIControlStateSelected];
+        [btn setBackgroundImage:IMAGENAMED(xz[i]) forState:UIControlStateNormal];
+        [btn setBackgroundImage:IMAGENAMED(cxz[i]) forState:UIControlStateSelected];
         [btn setBackgroundImage:IMAGENAMED(wxz[i]) forState:UIControlStateDisabled];
         btn.tag = i;
         [btn addTarget:self action:@selector(WorkModelChick:) forControlEvents:UIControlEventTouchUpInside];
@@ -100,9 +110,9 @@
         [self.workModelBtns addObject:btn];
     }
     
-    for (UIButton *btn in self.workModelBtns) {
-        [btn setEnabled:NO];
-    }
+//    for (UIButton *btn in self.workModelBtns) {
+//        [btn setEnabled:NO];
+//    }
 }
 
 -(void)WorkModelChick:(UIButton*)sender{
@@ -143,6 +153,12 @@
             break;
         case 3:
           return  PageW*0.375;
+            break;
+        case 6:
+            return  PageW*0.298;
+            break;
+        case 7:
+            return  PageW*0.180-44;
             break;
         default:
             return 0;
@@ -215,6 +231,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - toolbarAction
+-(void)StartWarmUp{
+    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
+
+}
+-(void)StartWorking{
+    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
+
+}
+-(void)StopWorking{
+    self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+
+}
+#pragma mark-
+
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
