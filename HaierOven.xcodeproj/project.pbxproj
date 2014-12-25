@@ -478,6 +478,7 @@
 		45D907201A47EBE900B97D92 /* SecDeviceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D9071E1A47EBE900B97D92 /* SecDeviceTableViewCell.xib */; };
 		840141501A4BDAE60050615F /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 8401414F1A4BDAE60050615F /* clear.png */; };
 		840141521A4BDD470050615F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 840141511A4BDD470050615F /* Icon.png */; };
+		840141911A4C0B7A0050615F /* MyPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840141901A4C0B7A0050615F /* MyPageView.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
@@ -1058,6 +1059,8 @@
 		45D9071E1A47EBE900B97D92 /* SecDeviceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecDeviceTableViewCell.xib; sourceTree = "<group>"; };
 		8401414F1A4BDAE60050615F /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
 		840141511A4BDD470050615F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8401418F1A4C0B7A0050615F /* MyPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageView.h; sourceTree = "<group>"; };
+		840141901A4C0B7A0050615F /* MyPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageView.m; sourceTree = "<group>"; };
 		8441171E1A4BB8AF00628A64 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		8441171F1A4BB8AF00628A64 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		844117211A4BB8AF00628A64 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -1798,6 +1801,7 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				840141531A4BF6880050615F /* PageControl */,
 				45BA02F81A442B31003810C7 /* MainViewNormalCell.xib */,
 				45B650C71A47F9BF00A6376D /* DeviceView */,
 				45BA02E51A441386003810C7 /* PersonCenterView */,
@@ -1929,6 +1933,15 @@
 				45B88DE21A4BC42D00722EF6 /* libc++.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		840141531A4BF6880050615F /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				8401418F1A4C0B7A0050615F /* MyPageView.h */,
+				840141901A4C0B7A0050615F /* MyPageView.m */,
+			);
+			name = PageControl;
 			sourceTree = "<group>";
 		};
 		8441171C1A4BB8AF00628A64 /* Models */ = {
@@ -2688,6 +2701,7 @@
 				844117831A4BB8AF00628A64 /* AFURLSessionManager.m in Sources */,
 				45D906171A47C01900B97D92 /* RelationshipListViewController.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
+				840141911A4C0B7A0050615F /* MyPageView.m in Sources */,
 				844117721A4BB8AF00628A64 /* Cookbook.m in Sources */,
 				454916B91A403993005503C8 /* PersonalCenterViewController.m in Sources */,
 				45BB13661A49115700FA44F4 /* DeviceConnectProgressView.m in Sources */,

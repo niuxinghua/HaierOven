@@ -10,11 +10,17 @@
 #import "DeviceMessageController.h"
 #import "DeviceEditController.h"
 #import "DeviceWorkView.h"
-@interface DeviceBoardViewController ()
+
+#import "MyPageView.h"
+
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet DeviceWorkView *startStatusView;
 @property (strong, nonatomic) NSTimer *timeable;
 @property int time;
 @property (strong, nonatomic) IBOutlet UIScrollView *deviceScrollView;
+
+@property (weak, nonatomic) IBOutlet MyPageView *pageView;
+
 @property (strong, nonatomic) NSMutableArray *workModelBtns;
 @property (strong, nonatomic) UIBarButtonItem *startTab;
 @property (strong, nonatomic) UIBarButtonItem *ksyrTab;
@@ -113,7 +119,39 @@
 //    for (UIButton *btn in self.workModelBtns) {
 //        [btn setEnabled:NO];
 //    }
+    
+#warning 调试PageView
+    self.pageView.numberOfPages = 4;
+    self.deviceScrollView.contentSize = CGSizeMake(_deviceScrollView.frame.size.width * 4, _deviceScrollView.frame.size.height);
+    self.deviceScrollView.pagingEnabled = YES;
+    self.deviceScrollView.delegate = self;
 }
+
+
+
+- (void)updatePager
+{
+    self.pageView.page = floorf(_deviceScrollView.contentOffset.x / _deviceScrollView.frame.size.width);
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView
+{
+    [self updatePager];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self updatePager];
+    }
+}
+
+- (void)pageView:(MyPageView *)pageView didUpdateToPage:(NSInteger)newPage
+{
+    CGPoint offset = CGPointMake(_deviceScrollView.frame.size.width * self.pageView.page, 0);
+    [_deviceScrollView setContentOffset:offset animated:YES];
+}
+
 
 -(void)WorkModelChick:(UIButton*)sender{
 

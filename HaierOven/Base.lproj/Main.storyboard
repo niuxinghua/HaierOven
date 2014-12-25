@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qb9-bz-vmv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qb9-bz-vmv">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -548,7 +548,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="6bo-pi-eFP">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPb-KW-CtE">
@@ -828,55 +828,26 @@
                                                         <constraint firstAttribute="height" constant="1" id="JGo-6u-nCp"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-oQ-QzE">
-                                                    <rect key="frame" x="145" y="111" width="30" height="3"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-tw-WwB" customClass="MyPageView">
+                                                    <rect key="frame" x="0.0" y="109" width="320" height="8"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="55D-9n-Trj"/>
-                                                        <constraint firstAttribute="height" constant="3" id="x4n-vk-XSc"/>
+                                                        <constraint firstAttribute="height" constant="8" id="av4-Fi-OLp"/>
                                                     </constraints>
-                                                    <state key="normal" image="tk-xz.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="tk-cxz.png"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-KX-PZo">
-                                                    <rect key="frame" x="183" y="111" width="30" height="3"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="3" id="UR8-jo-h47"/>
-                                                        <constraint firstAttribute="width" constant="30" id="xpt-XM-hAC"/>
-                                                    </constraints>
-                                                    <state key="normal" image="tk-xz.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="tk-cxz.png"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ek-Pd-0d4">
-                                                    <rect key="frame" x="107" y="111" width="30" height="3"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="3" id="86S-MY-9vF"/>
-                                                        <constraint firstAttribute="width" constant="30" id="LUM-Ro-hXN"/>
-                                                    </constraints>
-                                                    <state key="normal" image="tk-xz.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" image="tk-cxz.png"/>
-                                                </button>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="YKG-gg-ma4" firstAttribute="top" secondItem="2U6-3A-1Ky" secondAttribute="bottom" id="0dD-rJ-IvK"/>
                                                 <constraint firstAttribute="trailing" secondItem="4ss-4i-zGl" secondAttribute="trailing" id="0lh-wn-HrY"/>
+                                                <constraint firstItem="4ss-4i-zGl" firstAttribute="top" secondItem="wuU-tw-WwB" secondAttribute="bottom" id="4Pc-ee-8FT"/>
                                                 <constraint firstItem="2U6-3A-1Ky" firstAttribute="leading" secondItem="cdY-IU-4Jh" secondAttribute="leading" id="75M-eh-L6Q"/>
                                                 <constraint firstItem="4ss-4i-zGl" firstAttribute="leading" secondItem="cdY-IU-4Jh" secondAttribute="leading" id="8Em-of-7j9"/>
-                                                <constraint firstItem="4ss-4i-zGl" firstAttribute="top" secondItem="8Ek-Pd-0d4" secondAttribute="bottom" constant="3" id="9D1-p2-TxY"/>
                                                 <constraint firstAttribute="bottom" secondItem="4ss-4i-zGl" secondAttribute="bottom" id="MzX-47-AXO"/>
-                                                <constraint firstItem="4ss-4i-zGl" firstAttribute="top" secondItem="2hl-KX-PZo" secondAttribute="bottom" constant="3" id="Udy-QU-rHi"/>
-                                                <constraint firstAttribute="centerX" secondItem="ETJ-oQ-QzE" secondAttribute="centerX" id="ZmG-mp-qZe"/>
-                                                <constraint firstAttribute="centerX" secondItem="8Ek-Pd-0d4" secondAttribute="centerX" constant="38" id="dB9-qv-6oL"/>
+                                                <constraint firstAttribute="trailing" secondItem="wuU-tw-WwB" secondAttribute="trailing" id="W1I-t0-yI0"/>
                                                 <constraint firstAttribute="trailing" secondItem="YKG-gg-ma4" secondAttribute="trailing" id="hT4-rd-LYI"/>
-                                                <constraint firstItem="4ss-4i-zGl" firstAttribute="top" secondItem="ETJ-oQ-QzE" secondAttribute="bottom" constant="3" id="hbt-vo-E7x"/>
                                                 <constraint firstItem="YKG-gg-ma4" firstAttribute="leading" secondItem="cdY-IU-4Jh" secondAttribute="leading" id="igv-jN-yWR"/>
-                                                <constraint firstAttribute="centerX" secondItem="2hl-KX-PZo" secondAttribute="centerX" constant="-38" id="pzM-hT-feb"/>
+                                                <constraint firstItem="wuU-tw-WwB" firstAttribute="leading" secondItem="cdY-IU-4Jh" secondAttribute="leading" id="ue3-Bq-im6"/>
                                                 <constraint firstItem="2U6-3A-1Ky" firstAttribute="top" secondItem="cdY-IU-4Jh" secondAttribute="top" id="vvK-Fp-rIG"/>
                                                 <constraint firstAttribute="trailing" secondItem="2U6-3A-1Ky" secondAttribute="trailing" id="w5w-SH-pv0"/>
                                             </constraints>
@@ -1149,7 +1120,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="wpK-WS-z7o">
-                            <rect key="frame" x="120" y="6" width="80" height="33"/>
+                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itx-8j-Sqc">
@@ -1210,6 +1181,7 @@
                     <size key="freeformSize" width="320" height="700"/>
                     <connections>
                         <outlet property="deviceScrollView" destination="YKG-gg-ma4" id="1HL-Wk-NvS"/>
+                        <outlet property="pageView" destination="wuU-tw-WwB" id="7aL-WM-Rnr"/>
                         <outlet property="startStatusView" destination="Ra4-cc-dIf" id="iAo-r4-BbX"/>
                     </connections>
                 </tableViewController>
@@ -1324,7 +1296,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Xsg-N2-LCt">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqj-UZ-54D">
@@ -1454,7 +1426,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="AKS-vE-Zdk">
-                            <rect key="frame" x="115" y="6" width="90" height="33"/>
+                            <rect key="frame" x="115" y="5.5" width="90" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-Ud-IX3">
@@ -1639,7 +1611,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="iQM-9p-7YY">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIG-RA-TJn">
@@ -1815,7 +1787,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="AGO-xZ-2Ex">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配置失败" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3u-jX-THX">
@@ -1985,7 +1957,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="gd4-ZK-r7M">
-                            <rect key="frame" x="115" y="6" width="90" height="33"/>
+                            <rect key="frame" x="115" y="5.5" width="90" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3p-U4-XBi">
@@ -2163,7 +2135,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="XQq-PJ-Dcd">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配置成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-Vp-LLg">
@@ -2393,7 +2365,7 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="ua5-ZW-0rP">
-                            <rect key="frame" x="130" y="6" width="60" height="33"/>
+                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="个人中心" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gce-jh-uck">
@@ -3200,7 +3172,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="iyi-rn-5dH">
-                            <rect key="frame" x="115" y="6" width="90" height="33"/>
+                            <rect key="frame" x="115" y="5.5" width="90" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-xP-OOE">
@@ -3308,8 +3280,6 @@
         <image name="shezhi.png" width="26" height="26"/>
         <image name="shijian-xz.png" width="33" height="33"/>
         <image name="sousuo.png" width="26" height="26"/>
-        <image name="tk-cxz.png" width="23" height="3"/>
-        <image name="tk-xz.png" width="23" height="3"/>
         <image name="tuolian.png" width="21" height="21"/>
         <image name="wdtz-xz.png" width="50" height="49"/>
         <image name="wendu cx.png" width="33" height="33"/>
