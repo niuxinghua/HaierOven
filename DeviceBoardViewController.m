@@ -34,7 +34,7 @@
     self.navigationController.toolbarHidden = NO;
 //    self.navigationController.toolbar.height = 54;
     self.navigationController.toolbar.frame = CGRectMake(0, PageH-54, PageW, 54);
-    [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"bg_toolBar.png")
+    [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"lx-ybx")
                                        forToolbarPosition:UIBarPositionAny
                                                barMetrics:UIBarMetricsDefault];
 
