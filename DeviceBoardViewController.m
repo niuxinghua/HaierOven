@@ -10,7 +10,7 @@
 #import "DeviceMessageController.h"
 #import "DeviceEditController.h"
 #import "DeviceWorkView.h"
-
+#import "DeviceAlertView.h"
 #import "MyPageView.h"
 
 @interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate>
@@ -141,10 +141,7 @@
 
     self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-40, (PageW-40)*1.167)];
     [self.myWindow addSubview:self.deviceAlertView];
-
 }
-
-
 
 - (void)updatePager
 {
