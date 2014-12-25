@@ -18,7 +18,7 @@
     [self.avater.layer setBorderWidth:1.5]; //边框宽度
     [self.avater.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
-    NSLog(@"awakeFromNib");
+    NSLog(@"awakeFromNibmmmm");
 // Initialization code
 }
 
