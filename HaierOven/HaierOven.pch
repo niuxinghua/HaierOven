@@ -52,8 +52,6 @@
 
 #import "DataCenter.h"
 
-#import "MyTool.h"
-
 
 /**
  *  海尔app信息
