@@ -10,6 +10,7 @@
 #import "DeviceMessageController.h"
 #import "DeviceEditController.h"
 #import "DeviceWorkView.h"
+#import "DeviceAlertView.h"
 @interface DeviceBoardViewController ()
 @property (strong, nonatomic) IBOutlet DeviceWorkView *startStatusView;
 @property (strong, nonatomic) NSTimer *timeable;
@@ -20,6 +21,9 @@
 @property (strong, nonatomic) UIBarButtonItem *ksyrTab;
 @property (strong, nonatomic) UIBarButtonItem *tzyxTab;
 @property (strong, nonatomic) UIBarButtonItem *fixbtn;
+@property (strong, nonatomic) UIWindow *myWindow;
+@property (strong, nonatomic) DeviceAlertView *deviceAlertView;
+
 @end
 
 @implementation DeviceBoardViewController
@@ -28,10 +32,11 @@
 @synthesize ksyrTab;
 @synthesize tzyxTab;
 @synthesize fixbtn;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
-    
+    [self SetUPAlertView];
     [self setupToolbarItems];
     
 }
@@ -114,6 +119,19 @@
 //        [btn setEnabled:NO];
 //    }
 }
+-(void)SetUPAlertView{
+    self.myWindow = [UIWindow new];
+    self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
+    self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = YES;
+
+    self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-40, (PageW-40)*1.167)];
+    [self.myWindow addSubview:self.deviceAlertView];
+
+}
 
 -(void)WorkModelChick:(UIButton*)sender{
 
@@ -165,72 +183,28 @@
             break;
     }
 }
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+#pragma mark - tableviewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    self.deviceAlertView.alertDescription = @"我去你妈呀";
+//    self.deviceAlertView.alertTitle = @"去你大爷";
     
-    // Configure the cell...
+    if (indexPath.row == 0) {
+        self.deviceAlertView.alertType = alertTime;
+
+    }else if (indexPath.row==3){
+        self.deviceAlertView.alertType = alertNeedle;
+
+    }
+
+    self.myWindow.hidden = NO;
     
-    return cell;
 }
-*/
+#pragma mark -
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 #pragma mark - toolbarAction
 -(void)StartWarmUp{
     self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
@@ -257,5 +231,6 @@
     DeviceMessageController *message = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceMessageController"];
     [self.navigationController pushViewController:message animated:YES];
 }
+
 
 @end
