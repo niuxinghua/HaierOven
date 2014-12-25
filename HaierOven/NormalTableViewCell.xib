@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="normalMenuCell" id="wRD-F6-G84" customClass="NormalTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wRD-F6-G84" id="yWf-1h-4WQ">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="7LR-nu-BIt">
+                        <rect key="frame" x="28" y="15" width="26" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="5vz-fg-eoe"/>
+                            <constraint firstAttribute="width" constant="26" id="eKq-FG-OjU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="五个字的哦" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbt-HA-mRZ">
+                        <rect key="frame" x="75" y="19" width="70" height="17"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMc-mO-Esn">
+                        <rect key="frame" x="0.0" y="0.0" width="12" height="55"/>
+                        <color key="backgroundColor" red="0.74117647058823533" green="0.36862745098039218" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="NIY-UP-AAH"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZm-Zk-92b">
+                        <rect key="frame" x="0.0" y="54" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.78823529410000004" green="0.58823529409999997" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="fH7-sk-HJh"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZZm-Zk-92b" secondAttribute="trailing" id="BTf-SM-OTb"/>
+                    <constraint firstAttribute="centerY" secondItem="7LR-nu-BIt" secondAttribute="centerY" id="DYC-2t-C9w"/>
+                    <constraint firstAttribute="bottom" secondItem="EMc-mO-Esn" secondAttribute="bottom" id="Mqs-aq-6Wf"/>
+                    <constraint firstAttribute="centerY" secondItem="cbt-HA-mRZ" secondAttribute="centerY" id="TUF-PF-iaf"/>
+                    <constraint firstItem="EMc-mO-Esn" firstAttribute="top" secondItem="yWf-1h-4WQ" secondAttribute="top" id="d6C-fT-Ye3"/>
+                    <constraint firstItem="EMc-mO-Esn" firstAttribute="leading" secondItem="yWf-1h-4WQ" secondAttribute="leading" id="fZa-dh-1a6"/>
+                    <constraint firstAttribute="bottom" secondItem="ZZm-Zk-92b" secondAttribute="bottom" id="k6j-nD-5Fr"/>
+                    <constraint firstItem="cbt-HA-mRZ" firstAttribute="leading" secondItem="7LR-nu-BIt" secondAttribute="trailing" constant="21" id="kLq-iV-U44"/>
+                    <constraint firstItem="7LR-nu-BIt" firstAttribute="leading" secondItem="EMc-mO-Esn" secondAttribute="trailing" constant="16" id="rue-Wh-TrF"/>
+                    <constraint firstItem="ZZm-Zk-92b" firstAttribute="leading" secondItem="yWf-1h-4WQ" secondAttribute="leading" id="zRe-W6-MPC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.95294117649999999" green="0.64705882349999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="cellSelectedView" destination="EMc-mO-Esn" id="uVS-LM-Su5"/>
+                <outlet property="titleImage" destination="7LR-nu-BIt" id="5QK-Tp-Yw8"/>
+                <outlet property="titleLabel" destination="cbt-HA-mRZ" id="Cv6-oB-avo"/>
+            </connections>
+            <point key="canvasLocation" x="249" y="61"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="QQQ.png" width="480" height="640"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

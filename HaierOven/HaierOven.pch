@@ -1,0 +1,49 @@
+//
+//  HaierOven.pch
+//  HaierOven
+//
+//  Created by dongl on 14/12/16.
+//  Copyright (c) 2014年 edaysoft. All rights reserved.
+//
+
+#ifndef HaierOven_HaierOven_pch
+#define HaierOven_HaierOven_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+
+
+#import "UConstants.h"
+#import "UIView+Sizes.h"
+#import "MyTool.h"
+#import "MyUtils.h"
+#define GlobalTextFontName              @"FZLTXHK--GBK1-0"
+#define GlobalTitleFontName              @"FZLTHJW--GB1-0"
+
+#define GlobalRedColor              UIColorFromRGB(0xf34b4b)
+
+#define SearchBarColor              UIColorFromRGB(0xee1212)
+
+#define GlobalOrangeColor           UIColorFromRGB(0xffa800)
+
+#define GlobalGreenColor            UIColorFromRGB(0x00c25e)
+
+#define GlobalGrayColor             UIColorFromRGB(0xf5f5f5)
+
+#define GlobalYellowColor           ([UIColor colorWithRed:239.0f/255 green:152.0f/255 blue:40.0f/255 alpha:1.0])
+
+
+
+
+//屏幕大小
+#define PageH ([[UIScreen mainScreen] bounds].size.height)
+#define PageW ([[UIScreen mainScreen] bounds].size.width)
+
+
+
+
+
+
