@@ -37,8 +37,7 @@
     [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"bg_toolBar.png")
                                        forToolbarPosition:UIBarPositionAny
                                                barMetrics:UIBarMetricsDefault];
-    [self.navigationController.toolbar setShadowImage:IMAGENAMED(@"bg_toolBar.png")
-                                   forToolbarPosition:UIToolbarPositionAny];
+
     self.navigationController.toolbar.clipsToBounds = YES;
     
     
