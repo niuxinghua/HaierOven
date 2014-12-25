@@ -112,6 +112,7 @@
 		45B651151A48448500A6376D /* wodeWIFI.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B651121A48448500A6376D /* wodeWIFI.png */; };
 		45B651161A48448500A6376D /* wodeWIFI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B651131A48448500A6376D /* wodeWIFI@2x.png */; };
 		45B651171A48448500A6376D /* wodeWIFI@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B651141A48448500A6376D /* wodeWIFI@3x.png */; };
+		45B88DE31A4BC42D00722EF6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B88DE21A4BC42D00722EF6 /* libc++.dylib */; };
 		45BA02C61A43D807003810C7 /* PersonalEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BA02C51A43D807003810C7 /* PersonalEditViewController.m */; };
 		45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BA02DD1A4408E7003810C7 /* PersonalCenterSectionView.m */; };
 		45BA02E01A4408FB003810C7 /* PersonalCenterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BA02DF1A4408FB003810C7 /* PersonalCenterSectionView.xib */; };
@@ -598,6 +599,7 @@
 		45B651121A48448500A6376D /* wodeWIFI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wodeWIFI.png; sourceTree = "<group>"; };
 		45B651131A48448500A6376D /* wodeWIFI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wodeWIFI@2x.png"; sourceTree = "<group>"; };
 		45B651141A48448500A6376D /* wodeWIFI@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wodeWIFI@3x.png"; sourceTree = "<group>"; };
+		45B88DE21A4BC42D00722EF6 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		45BA02C41A43D807003810C7 /* PersonalEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalEditViewController.h; sourceTree = "<group>"; };
 		45BA02C51A43D807003810C7 /* PersonalEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalEditViewController.m; sourceTree = "<group>"; };
 		45BA02DC1A4408E7003810C7 /* PersonalCenterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterSectionView.h; sourceTree = "<group>"; };
@@ -1022,6 +1024,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B88DE31A4BC42D00722EF6 /* libc++.dylib in Frameworks */,
 				844117901A4BB8AF00628A64 /* uSDKFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1557,6 +1560,7 @@
 		45C7E5221A3FD165000B086B = {
 			isa = PBXGroup;
 			children = (
+				45B88DE21A4BC42D00722EF6 /* libc++.dylib */,
 				457A76D81A41686E00E422D0 /* fakedataImage.png */,
 				45C7E5BE1A400044000B086B /* QQQ.png */,
 				45C7E52D1A3FD165000B086B /* HaierOven */,
@@ -2590,6 +2594,7 @@
 		45C7E54F1A3FD166000B086B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2611,6 +2616,7 @@
 		45C7E5501A3FD166000B086B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
