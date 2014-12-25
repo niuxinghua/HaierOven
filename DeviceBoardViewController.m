@@ -24,8 +24,56 @@
     [super viewDidLoad];
     [self SetUpSubviews];
     
+    [self setupToolbarItems];
+    
 }
 
+- (void)setupToolbarItems
+{
+    // 设置工具栏颜色 这里的图片需要黑色半透明图片
+    self.navigationController.toolbarHidden = NO;
+//    self.navigationController.toolbar.height = 54;
+    self.navigationController.toolbar.frame = CGRectMake(0, PageH-54, PageW, 54);
+    [self.navigationController.toolbar setBackgroundImage:IMAGENAMED(@"bg_toolBar.png")
+                                       forToolbarPosition:UIBarPositionAny
+                                               barMetrics:UIBarMetricsDefault];
+    [self.navigationController.toolbar setShadowImage:IMAGENAMED(@"bg_toolBar.png")
+                                   forToolbarPosition:UIToolbarPositionAny];
+    self.navigationController.toolbar.clipsToBounds = YES;
+    
+    
+    //工具栏  ToolBar
+    UIButton* messageButton = [[UIButton alloc] init];
+    [messageButton setImage:IMAGENAMED(@"icon_chat_n.png") forState:UIControlStateNormal];
+    [messageButton setImage:IMAGENAMED(@"icon_chat_s.png") forState:UIControlStateHighlighted];
+    [messageButton addTarget:self action:@selector(leaveMesage) forControlEvents:UIControlEventTouchUpInside];
+    messageButton.frame = CGRectMake(0, 0, 26, 26);
+    UIBarButtonItem* tb1 = [[UIBarButtonItem alloc] initWithCustomView:messageButton];
+    
+    UIButton* talkButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [talkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [talkButton setTitle:@"立即约谈" forState:UIControlStateNormal];
+    [talkButton setBackgroundColor:GlobalOrangeColor];
+    [talkButton addTarget:self action:@selector(talk) forControlEvents:UIControlEventTouchUpInside];
+    talkButton.frame = CGRectMake(0, 0, 105, 30);
+    talkButton.layer.masksToBounds = YES;
+    talkButton.layer.cornerRadius = 5.0;
+    UIBarButtonItem *tb2 = [[UIBarButtonItem alloc]initWithCustomView:talkButton];
+    
+    UIButton* investButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [investButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [investButton setTitle:@"立即投资" forState:UIControlStateNormal];
+    [investButton setBackgroundColor:GlobalRedColor];
+    [investButton addTarget:self action:@selector(invest) forControlEvents:UIControlEventTouchUpInside];
+    investButton.frame = CGRectMake(0, 0, 105, 30);
+    investButton.layer.masksToBounds = YES;
+    investButton.layer.cornerRadius = 5.0;
+    UIBarButtonItem *tb3 = [[UIBarButtonItem alloc]initWithCustomView:investButton];
+    
+
+    self.toolbarItems = @[tb2, tb3];
+    
+}
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
     
