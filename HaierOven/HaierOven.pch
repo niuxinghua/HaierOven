@@ -46,4 +46,25 @@
 
 
 
+#import "InternetManager.h"
+
+#import "OvenManager.h"
+
+#import "DataCenter.h"
+
+#import "MyTool.h"
+
+
+/**
+ *  海尔app信息
+ */
+#define AppId       @"MB-SMARTAIR1-0001"
+
+#define AppKey      @"b7a70f1560e37086cceee7e46a4df9e2"
+
+#define AppVersion  @"10.01.11.00025"
+
+
+
+
 
