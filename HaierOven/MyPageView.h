@@ -2,7 +2,7 @@
 //  MyPageView.h
 //  HaierOven
 //
-//  Created by Admin on 14/12/25.
+//  Created by 刘康 on 14/12/25.
 //  Copyright (c) 2014年 edaysoft. All rights reserved.
 //
 
