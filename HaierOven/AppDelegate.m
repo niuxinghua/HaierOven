@@ -24,7 +24,35 @@
     NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
     [accountDefaults setBool:YES forKey:@"hadDevice"];
     [accountDefaults synchronize];
+    
+    
+    [self startUSdk];
+    
+    
     return YES;
+}
+
+- (void)startUSdk
+{
+    [[OvenManager sharedManager] startSdkWithResult:^(BOOL result) {
+        if (result) {
+            NSLog(@"uSDK开启成功");
+        } else {
+            NSLog(@"uSDK开启失败");
+        }
+    }];
+}
+
+- (void)stopUSdk
+{
+    [[OvenManager sharedManager] stopSdkWithResult:^(BOOL result) {
+        if (result) {
+            NSLog(@"uSDK关闭成功");
+        } else {
+            NSLog(@"uSDK关闭失败");
+        }
+
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -47,6 +75,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [self stopUSdk];
+    
 }
 
 @end

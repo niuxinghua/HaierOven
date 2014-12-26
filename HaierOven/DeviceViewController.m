@@ -14,7 +14,7 @@
 #import "DeviceUnconnectController.h"
 #define TopPadding   10
 #define WidthPadding   10
-@interface DeviceViewController ()<MyDeviceAddViewDelegate,MyDeviceViewDelegate>
+@interface DeviceViewController () <MyDeviceAddViewDelegate, MyDeviceViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 @end
@@ -23,17 +23,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.myDevices = @[@"海尔烤箱",@"海尔烤箱",@"海尔烤箱"];
-    [self SetUpSubviews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalOvens) name:MyOvensInfoHadChangedNotificatin object:nil];
+    [self loadLocalOvens];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)loadLocalOvens
+{
+    self.myDevices = [DataCenter sharedInstance].myOvens;
+    [self SetUpSubviews];
 }
 
 -(void)SetUpSubviews{
+    
+    for (UIView* view in self.mainScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
     for (int i  = 0; i<self.myDevices.count+1; i++) {
         float x = i % 2 * ((PageW-2*self.mainScrollView.left)/2);
         float y = i / 2 * ((PageW-2*self.mainScrollView.left)/2);
@@ -48,7 +59,8 @@
         }else{
             MyDeviceView *deviceView = [MyDeviceView new];
             deviceView.delegate = self;
-            deviceView.deviceName.text = self.myDevices[i];
+            LocalOven* oven = self.myDevices[i];
+            deviceView.deviceName.text = oven.name;
             deviceView.deviceStatusLabel.text = @"已连接";
             deviceView.frame = CGRectMake(x, y, (PageW-2*self.mainScrollView.left)/2, (PageW-2*self.mainScrollView.left)/2);
             [self.mainScrollView addSubview:deviceView];

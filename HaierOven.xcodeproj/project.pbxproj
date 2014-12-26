@@ -519,6 +519,7 @@
 		844117901A4BB8AF00628A64 /* uSDKFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844117691A4BB8AF00628A64 /* uSDKFramework.framework */; };
 		844117911A4BB8AF00628A64 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176C1A4BB8AF00628A64 /* DataParser.m */; };
 		844117921A4BB8AF00628A64 /* MyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176F1A4BB8AF00628A64 /* MyTool.m */; };
+		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1143,6 +1144,8 @@
 		8441176C1A4BB8AF00628A64 /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
 		8441176E1A4BB8AF00628A64 /* MyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTool.h; sourceTree = "<group>"; };
 		8441176F1A4BB8AF00628A64 /* MyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTool.m; sourceTree = "<group>"; };
+		844D0F561A4D2FE10018D79C /* LocalOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalOven.h; sourceTree = "<group>"; };
+		844D0F571A4D2FE10018D79C /* LocalOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalOven.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2003,6 +2006,8 @@
 				8441172E1A4BB8AF00628A64 /* Tag.m */,
 				8441172F1A4BB8AF00628A64 /* User.h */,
 				844117301A4BB8AF00628A64 /* User.m */,
+				844D0F561A4D2FE10018D79C /* LocalOven.h */,
+				844D0F571A4D2FE10018D79C /* LocalOven.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2716,6 +2721,7 @@
 				8441177B1A4BB8AF00628A64 /* AFHTTPRequestOperation.m in Sources */,
 				457A77641A4294AB00E422D0 /* SearchView.m in Sources */,
 				45C7E5891A3FE25A000B086B /* RECommonFunctions.m in Sources */,
+				844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */,
 				458952FB1A496EFA009B5DD1 /* DeviceEditController.m in Sources */,
 				45034AE21A401FA100FDD70D /* NormalTableViewCell.m in Sources */,
 				844117801A4BB8AF00628A64 /* AFURLConnectionOperation.m in Sources */,

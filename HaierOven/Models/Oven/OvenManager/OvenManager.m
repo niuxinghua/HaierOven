@@ -26,9 +26,14 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationAplied:) name:DEVICE_OPERATION_ACK_NOTIFICATION object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - uSDK管理
@@ -36,7 +41,7 @@
 - (void)startSdkWithResult:(result)result
 {
     uSDKManager* sdkManager = [uSDKManager getSingleInstance];
-    [sdkManager initLog:USDK_LOG_DEBUG withWriteToFile:NO];
+    [sdkManager initLog:USDK_LOG_NONE withWriteToFile:NO];  //日志级别
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -87,6 +92,14 @@
     return myDictionary[@"SSID"];
 }
 
+/**
+ *  smartLink连接方式，构建设备配置信息
+ *
+ *  @param ssid     WiFi SSID
+ *  @param password WiFi密码
+ *
+ *  @return 配置信息实例
+ */
 - (uSDKDeviceConfigInfo*)getDeviceConfigInfoWithSsid:(NSString*)ssid andApPassword:(NSString*)password
 {
     if (ssid == nil) {
@@ -99,8 +112,9 @@
     return configInfo;
 }
 
-- (void)bindDeviceWithDeviceConfigInfo:(uSDKDeviceConfigInfo*)configInfo bindResult:(result)result
+- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password bindResult:(result)result
 {
+    uSDKDeviceConfigInfo* configInfo = [self getDeviceConfigInfoWithSsid:ssid andApPassword:password];
     uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -114,11 +128,29 @@
             }
         });
     });
+}
 
+#pragma mark - 获取设备列表和设备信息
+
+- (void)getDevicesCompletion:(completion)callback
+{
+    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSArray* devices = [deviceManager getDeviceList:OVEN];     //获取烤箱列表
+        dispatch_async(dispatch_get_main_queue(), ^{
+            uSDKDevice* device = [devices firstObject];
+            NSLog(@"device info: ");
+            callback(YES, devices, nil);
+        });
+    });
+    
 }
 
 
 #pragma mark - usdk订阅通知流程：uSDKNotificationCenter
+
+#pragma mark - 订阅通知
 
 - (void)subscribeDevice
 {
@@ -149,6 +181,16 @@
     [[uSDKNotificationCenter defaultCenter] subscribeBusinessMessage:self selector:@selector(businessMessageReport:)];
 }
 
+- (void)subscribeAllNotifications
+{
+    [self subscribeBusinessMessage];
+    [self subscribeDevice];
+    [self subscribeDeviceListChanged];
+    [self subscribeInnerError];
+}
+
+#pragma mark - 取消订阅通知
+
 - (void)unSubscribeDevice
 {
     for (uSDKDevice* device in [[uSDKDeviceManager getSingleInstance] getDeviceList]) {
@@ -173,6 +215,13 @@
     [[uSDKNotificationCenter defaultCenter] unSubscribeBusinessMessage:self];
 }
 
+- (void)unSubscribeAllNotifications
+{
+    [self unSubscribeDevice];
+    [self unSubscribeDeviceListChanged];
+    [self unSubscribeInnerError];
+    [self unSubscribeBusinessMeassage];
+}
 
 
 #pragma mark - usdk通知响应事件
@@ -184,7 +233,26 @@
  */
 - (void)deviceAttributeReport:(NSNotification*)notification
 {
-    NSLog(@"设备状态改变了");
+    
+    if ([notification.name isEqualToString:DEVICE_ONLINE_CHANGED_NOTIFICATION]) {
+        NSLog(@"设备在线状态改变了");
+        
+    } else if ([notification.name isEqualToString:DEVICE_STATUS_CHANGED_NOTIFICATION]) {
+        NSLog(@"设备状态上报通知");
+        
+    } else if ([notification.name isEqualToString:DEVICE_ALARM_NOTIFICATION]) {
+        NSLog(@"设备报警");
+        
+    } else if ([notification.name isEqualToString:DEVICE_INFRAREDINFO_NOTIFICATION]) {
+        NSLog(@"设备红外上报");
+        
+    } else if ([notification.name isEqualToString:BIGDATA_NOTIFICATION]) {
+        NSLog(@"大数据上报");
+        
+    } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
+        NSLog(@"Session失效");
+        
+    }
     
 }
 
@@ -195,7 +263,15 @@
  */
 - (void)receiveDeviceListChanged:(NSNotification*)notification
 {
-    NSLog(@"设备列表发生了变化");
+    if ([notification.name isEqualToString:DEVICE_LIST_CHANGED_NOTIFICATION]) {
+        NSLog(@"设备列表发生了变化");
+        
+    } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
+        NSLog(@"Session失效");
+        
+    }
+    
+    
 }
 
 /**
@@ -205,12 +281,28 @@
  */
 - (void)receiveInnerError:(NSNotification*)notification
 {
-    NSLog(@"发生了内部错误");
+    if ([notification.name isEqualToString:DEVICE_INFRAREDINFO_NOTIFICATION]) {
+        NSLog(@"发生了内部错误");
+        
+    } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
+        NSLog(@"Session失效");
+        
+    }
+    
+    
 }
 
 - (void)businessMessageReport:(NSNotification*)notification
 {
-    NSLog(@"收到了一个业务数据");
+    if ([notification.name isEqualToString:BUSINESS_MESSAGE_NOTIFICATION]) {
+        NSLog(@"收到了一个业务数据");
+        
+    } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
+        NSLog(@"Session失效");
+        
+    }
+    
+    
 }
 
 #pragma mark - 执行命令
@@ -236,7 +328,59 @@
     
 }
 
+- (void)operationAplied:(NSNotification*)notification
+{
+    NSLog(@"设备操作应答消息通知：%@", notification.userInfo);
+}
+
+- (void)bootupToDevice:(uSDKDevice*)device
+{
+    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:@"20v001" withAttrValue:@"20v001"];
+    [self executeCommands:[@[attr] mutableCopy]
+                 toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
+             andCommandSN:0
+      andGroupCommandName:@""
+                andResult:^(BOOL result) {
+                    if(result) {
+                        
+                    } else {
+                        
+                    }
+                }];
+}
+
+- (void)shutdownToDevice:(uSDKDevice*)device
+{
+    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:@"20v002" withAttrValue:@"20v002"];
+    [self executeCommands:[@[attr] mutableCopy]
+                 toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
+             andCommandSN:0
+      andGroupCommandName:@""
+                andResult:^(BOOL result) {
+                    if(result) {
+                        
+                    } else {
+                        
+                    }
+                }];
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

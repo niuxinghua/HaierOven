@@ -19,6 +19,8 @@ NSString* const kCurrentLoginUserName                = @"Current login user name
 NSString* const kLocalUserInfoFileName          = @"currentUser.data";
 NSString* const kLocalTagsFileName              = @"tags.data";
 NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
+NSString* const kLocalOvensFileName             = @"myOvens.data";
+
 
 @interface DataCenter ()
 
@@ -177,6 +179,28 @@ NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
     return jsonObj;
 }
 
+- (void)addOvenInfoToLocal:(LocalOven*)oven
+{
+    NSMutableArray* ovens = self.myOvens;
+    NSMutableArray* ovenArr = [NSMutableArray array];
+    LocalOven* theOven;
+    for (LocalOven* localOven in ovens) {
+        if ([localOven.mac isEqualToString:oven.mac]) {
+            theOven = localOven;
+        } else {
+            [ovenArr addObject:[localOven toDictionary]];
+        }
+    }
+    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
+        [ovens removeObject:theOven];
+    }
+    NSDictionary* ovenDict = [oven toDictionary];
+    [ovenArr addObject:ovenDict];
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
+    [ovenArr writeToFile:filePath atomically:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
+}
+
 
 #pragma mark - setters
 
@@ -228,6 +252,26 @@ NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
 //    
 //    return _currentUser;
 //}
+
+- (NSMutableArray *)myOvens
+{
+    _myOvens = [NSMutableArray array];
+    NSMutableArray* array;
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        array = [NSMutableArray arrayWithContentsOfFile:filePath];
+    } else {
+        array = [NSMutableArray array];
+    }
+    if (array.count != 0) {
+        for (NSDictionary* ovenDict in array) {
+            [_myOvens addObject:[LocalOven localOvenWithDictionary:ovenDict]];
+        }
+    }
+    
+    return _myOvens;
+}
+
 
 
 @end
