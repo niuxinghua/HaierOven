@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LocalOven.h"
+
+#define MyOvensInfoHadChangedNotificatin    @"My ovens info had changed"
 
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径
 #define DOWNLOAD_DATA_PATH  ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/DownloadData"])  //保存下载数据的路径
@@ -24,6 +27,11 @@ extern NSString* const kRecommendProjectsFileName;
  *  手机唯一标识，海尔格式是IMEI+MAC，这里我用deviceUUID代替
  */
 @property (copy, nonatomic) NSString* clientId;
+
+/**
+ *  我已绑定的烤箱列表
+ */
+@property (strong, nonatomic) NSMutableArray* myOvens;
 
 /**
  *  模型层单例
@@ -103,6 +111,13 @@ extern NSString* const kRecommendProjectsFileName;
  *  @return json dict
  */
 - (id)getCookbooksObject;
+
+/**
+ *  保存烤箱信息到本地
+ *
+ *  @param oven 本地烤箱信息
+ */
+- (void)addOvenInfoToLocal:(LocalOven*)oven;
 
 @end
 

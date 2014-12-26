@@ -56,9 +56,10 @@
 /**
  *  海尔app信息
  */
-#define AppId       @"MB-SMARTAIR1-0001"
+#define AppId       @"MB-HBDS-0001"
 
-#define AppKey      @"b7a70f1560e37086cceee7e46a4df9e2"
+#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key
+//#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
 
 #define AppVersion  @"10.01.11.00025"
 

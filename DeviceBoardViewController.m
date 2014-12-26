@@ -208,6 +208,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadMyOvenInstance
+{
+    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.myOven = [obj firstObject];
+            if (![self.myOven.mac isEqualToString:self.currentOven.mac]) {
+                NSLog(@"搜索到的设备和本地设备不一致！！！");
+                
+            }
+        }
+    }];
+}
+
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -257,7 +270,18 @@
 //    self.myWindow.hidden = NO;
     
 }
-#pragma mark -
+
+#pragma mark - 设备指令
+
+- (void)bootup //开机
+{
+    [[OvenManager sharedManager] bootupToDevice:self.myOven];
+}
+
+- (void)shutdown
+{
+    [[OvenManager sharedManager] shutdownToDevice:self.myOven];
+}
 
 
 

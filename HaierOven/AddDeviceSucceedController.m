@@ -94,11 +94,31 @@
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case 2:
+            [self saveDeviceInfo];
             [self.navigationController popToRootViewControllerAnimated:YES];
             break;
         default:
             break;
     }
+}
+
+/**
+ *  绑定成功后保存烤箱到本地，这里可能需要优化：保存制定烤箱信息（如果有很多烤箱的话）
+ */
+- (void)saveDeviceInfo
+{
+    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSArray* ovens = obj;
+            LocalOven* oven = [[LocalOven alloc] init];
+            uSDKDevice* device = [ovens firstObject];
+            oven.ip = device.ip;
+            oven.mac = device.mac;
+            oven.typeIdentifier = device.typeIdentifier;
+            oven.attribute = device.attributeDict;
+            [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
+        }
+    }];
 }
 
 @end

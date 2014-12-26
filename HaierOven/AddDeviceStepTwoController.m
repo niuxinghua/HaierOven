@@ -23,6 +23,11 @@
     [super viewDidLoad];
     [self setUpSubviews];
     // Do any additional setup after loading the view.
+    
+    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        
+    }];
+    
 }
 -(void)setUpSubviews{
     
@@ -87,6 +92,11 @@
     self.view.frame = CGRectMake(0,64, PageW, PageH);
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.psdTextField resignFirstResponder];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
 }
@@ -95,11 +105,23 @@
 }
 - (IBAction)chickWIFI:(id)sender {
     self.myWindow.hidden = NO;
-//    self.deviceConnectProgressView.progressView.progress = 0.7;
-    [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
+    [self.deviceConnectProgressView.progressView setProgress:0.8 andTimeInterval:0.03];
     
-    [self performSelector:@selector(jumpPageTwo) withObject:nil afterDelay:3.6];
+    [[OvenManager sharedManager] bindDeviceWithSsid:nil andApPassword:self.psdTextField.text bindResult:^(BOOL result) {
+        if (result) {
+            NSLog(@"绑定成功");
+            [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
+            [self performSelector:@selector(jumpPageTwo) withObject:nil afterDelay:1];
+        } else {
+            NSLog(@"绑定失败");
+            [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
+            AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
+            [self.navigationController pushViewController:failed animated:YES];
+        }
+    }];
+    
 }
+
 
 
 - (void)jumpPageTwo

@@ -18,7 +18,7 @@
 
 @interface OvenManager : NSObject
 
-typedef void (^completion) (id obj, NSError* error);
+typedef void (^completion) (BOOL success, id obj, NSError* error);
 
 typedef void (^result) (BOOL result);
 
@@ -48,23 +48,17 @@ typedef void (^result) (BOOL result);
 #pragma mark - 设备绑定流程：uSDKDeviceManager
 
 /**
- *  smartLink连接方式，构建设备配置信息
+ *  通过ssid和wifi password构建uSDKDeviceConfigInfo， 通过CONFIG_MODE_SMARTCONFIG方式绑定
  *
- *  @param ssid     WiFi SSID
- *  @param password WiFi密码
- *
- *  @return 配置信息实例
+ *  @param ssid     wifi名称
+ *  @param password wifi密码
+ *  @param result   绑定结果
  */
-- (uSDKDeviceConfigInfo*)getDeviceConfigInfoWithSsid:(NSString*)ssid andApPassword:(NSString*)password;
+- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password bindResult:(result)result;
 
-/**
- *  通过uSDKDeviceConfigInfo绑定设备 CONFIG_MODE_SMARTCONFIG方式绑定
- *
- *  @param configInfo 绑定信息
- */
-- (void)bindDeviceWithDeviceConfigInfo:(uSDKDeviceConfigInfo*)configInfo bindResult:(result)result;
+#pragma mark - 获取设备列表和设备信息
 
-
+- (void)getDevicesCompletion:(completion)callback;
 
 
 #pragma mark - usdk订阅通知流程：uSDKNotificationCenter
@@ -90,6 +84,11 @@ typedef void (^result) (BOOL result);
 - (void)subscribeBusinessMessage;
 
 /**
+ *  订阅所有通知
+ */
+- (void)subscribeAllNotifications;
+
+/**
  *  取消订阅设备
  */
 - (void)unSubscribeDevice;
@@ -109,6 +108,10 @@ typedef void (^result) (BOOL result);
  */
 - (void)unSubscribeBusinessMeassage;
 
+/**
+ *  取消订阅所有通知，应该与subscribeAllNotifications成对出现
+ */
+- (void)unSubscribeAllNotifications;
 
 #pragma mark - 命令执行流程
 
@@ -126,7 +129,19 @@ typedef void (^result) (BOOL result);
     andGroupCommandName:(NSString*)groupCmdName
               andResult:(result)result;
 
+/**
+ *  设备开机
+ *
+ *  @param device 设备对象
+ */
+- (void)bootupToDevice:(uSDKDevice*)device;
 
+/**
+ *  设备关机
+ *
+ *  @param device 设备对象
+ */
+- (void)shutdownToDevice:(uSDKDevice*)device;
 
 
 
