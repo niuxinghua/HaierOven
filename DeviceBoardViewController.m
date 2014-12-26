@@ -143,6 +143,8 @@
     [self.myWindow addSubview:self.deviceAlertView];
 }
 
+#pragma mark - PageView&DeviceScrollView setting
+
 - (void)updatePager
 {
     self.pageView.page = floorf(_deviceScrollView.contentOffset.x / _deviceScrollView.frame.size.width);
@@ -165,6 +167,8 @@
     CGPoint offset = CGPointMake(_deviceScrollView.frame.size.width * self.pageView.page, 0);
     [_deviceScrollView setContentOffset:offset animated:YES];
 }
+
+#pragma mark - Actions
 
 
 -(void)WorkModelChick:(UIButton*)sender{
