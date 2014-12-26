@@ -46,6 +46,8 @@
 @property (strong, nonatomic) NSString *timeString;
 @property (strong, nonatomic) NSString *warmUpString;
 
+@property (strong, nonatomic) uSDKDevice* myOven;
+
 @end
 
 @implementation DeviceBoardViewController

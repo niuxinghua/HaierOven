@@ -21,4 +21,6 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
 
 @property (nonatomic) DeviceBoardStatus deviceBoardStatus;
 
+@property (strong, nonatomic) LocalOven* currentOven;
+
 @end
