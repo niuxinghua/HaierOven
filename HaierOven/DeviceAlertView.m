@@ -26,9 +26,24 @@
 }
 
 - (IBAction)chickAlert:(UIButton *)sender {
+    switch (sender.tag) {
+        case 1:
+            if (self.alertType == alertOrder) {
+                self.string = [NSString stringWithFormat:@"%@:%@",self.hour,self.min];
+            }
+            [self.delegate confirm:self.string andAlertTye:_alertType andbtn:self.btn];
+            break;
+        case 2:
+            [self.delegate cancel];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)layoutSubviews{
+    self.string = @" ";
     [super layoutSubviews];
     
 }
@@ -45,8 +60,8 @@
 -(void)setPickViewArr:(NSArray *)pickViewArr{
     self.pickview.delegate = self;
     self.pickview.dataSource = self;
-    [self.pickview selectRow:20 inComponent:0 animated:NO];
-
+    [self.pickview selectRow:10 inComponent:0 animated:NO];
+    self.colonLabel.hidden = YES;
     _pickViewArr = pickViewArr;
     [self.pickview reloadAllComponents];
 }
@@ -70,7 +85,7 @@
             break;
         case alertClock:
             self.alertTitle = @"设置闹钟";
-            self.alertTitleLabel.frame = self.alertTitleLabel.frame;
+            self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在时间达到时提醒您";
             self.pickViewArr = [self getTimeArr];
 
@@ -78,15 +93,28 @@
             
         case alertNeedle:
             self.alertTitle = @"设置探针目标温度";
-            self.alertTitleLabel.frame = self.alertTitleLabel.frame;
+            self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在探针温度达到目标温度时提醒您";
             self.pickViewArr = [self getTempArr];
 
             break;
         case alertWormUp:
-            NSLog(@"去你妈预热");
+            self.alertTitle = @"设置预热目标温度";
+            self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
+            self.alertDescription = @"将在烤箱内温度达到目标温度时提醒您";
+            self.pickViewArr = [self getTempArr];
             break;
-        
+            
+        case alertOrder:
+            self.alertTitle = @"设置预约开始时间";
+            self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
+            self.alertDescription = @"将在预约时间开始工作";
+            [self.pickview reloadAllComponents];
+            [self.pickview selectRow:10 inComponent:0 animated:NO];
+            [self.pickview selectRow:15 inComponent:1 animated:NO];
+            self.colonLabel.hidden = NO;
+
+            break;
             
         default:
             break;
@@ -94,9 +122,13 @@
 }
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
+    return self.alertType==alertOrder?2:1;
 }
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    
+    if (self.alertType == alertOrder) {
+        return component==0?25:61;
+    }else
     return self.pickViewArr.count;
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -105,16 +137,55 @@
 }
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
+    if (self.alertType == alertOrder) {
+        
+        UILabel *myView = nil;
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 150)];
+        myView.textAlignment = NSTextAlignmentCenter;
+        
+        myView.font = [UIFont fontWithName:GlobalTitleFontName size:17];         //用label来设置字体大小
+        myView.backgroundColor = [UIColor clearColor];
+        myView.textColor = [UIColor blackColor];
+        NSArray *arr = [NSArray new];
+        if (component ==0) {
+            arr = [self gethourArr];
+            myView.text = [arr objectAtIndex:row];
+        }else {
+            arr = [self getMinute];
+            myView.text = [arr  objectAtIndex:row];
+        }
+        return myView;
+
+
+
+    }else{
     
-    UILabel *myView = nil;
-    myView = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 20.0, 100, 150)];
-    myView.textAlignment = NSTextAlignmentCenter;
-    myView.text = [self.pickViewArr objectAtIndex:row];
-    myView.font = [UIFont fontWithName:GlobalTitleFontName size:17];         //用label来设置字体大小
-    myView.backgroundColor = [UIColor clearColor];
-    myView.textColor = [UIColor blackColor];
-    return myView;
+        UILabel *myView = nil;
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 20.0, 100, 150)];
+        myView.textAlignment = NSTextAlignmentCenter;
+        myView.text = [self.pickViewArr objectAtIndex:row];
+        myView.font = [UIFont fontWithName:GlobalTitleFontName size:17];         //用label来设置字体大小
+        myView.backgroundColor = [UIColor clearColor];
+        myView.textColor = [UIColor blackColor];
+        return myView;
+
+    }
 }
+
+
+
+-(void) pickerView: (UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent: (NSInteger)component{
+
+    if (self.alertType == alertOrder) {
+        if (component==0)
+            self.hour = [NSString stringWithFormat:@"%i",row];
+        else
+            self.min = [NSString stringWithFormat:@"%i",row];
+    }else
+        self.string = self.pickViewArr[row];
+}
+
+
 
 
 -(NSArray *)getTempArr{
@@ -141,4 +212,24 @@
     return [minutes copy];
 }
 
+-(NSArray*)gethourArr{
+    NSString *hour;
+    NSMutableArray *minutes = [NSMutableArray new];
+    for ( int i = 0; i<25; i++) {
+        hour = [NSString stringWithFormat:@"%d",i];
+        [minutes addObject:hour];
+    }
+    return [minutes copy];
+}
+
+-(NSArray *)getMinute{
+    NSString *minute;
+    NSMutableArray *minutes = [NSMutableArray new];
+    for ( int i = 0; i<61; i++) {
+        minute = [NSString stringWithFormat:@"%d",i];
+        [minutes addObject:minute];
+    }
+    
+    return [minutes copy];
+}
 @end

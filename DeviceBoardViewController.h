@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, DeviceBoardStatus)
+{
+    DeviceBoardStatusStart          = 1,
+    DeviceBoardStatusClose          = 2,
+    DeviceBoardStatusChoseModel     = 3,
+    DeviceBoardStatusOpen           = 4,
+
+};
+
 
 @interface DeviceBoardViewController : UITableViewController
+
+@property (nonatomic) DeviceBoardStatus deviceBoardStatus;
 
 @end

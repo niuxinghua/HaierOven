@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -90,6 +90,12 @@
                     <rect key="frame" x="-10" y="94" width="320" height="162"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-oy-nbv">
+                    <rect key="frame" x="129" y="164" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
@@ -98,15 +104,19 @@
                 <constraint firstAttribute="trailing" secondItem="UmL-3Q-Krq" secondAttribute="trailing" id="H5t-76-d9n"/>
                 <constraint firstItem="WQv-9U-dTZ" firstAttribute="leading" secondItem="cND-Z2-DHd" secondAttribute="trailing" id="K8h-yy-Lwz"/>
                 <constraint firstItem="WQv-9U-dTZ" firstAttribute="width" secondItem="cND-Z2-DHd" secondAttribute="width" id="Lfw-pR-v8s"/>
+                <constraint firstAttribute="trailing" secondItem="Jgb-oy-nbv" secondAttribute="trailing" constant="129" id="Q4Y-mQ-Skg"/>
+                <constraint firstItem="Jgb-oy-nbv" firstAttribute="top" secondItem="UmL-3Q-Krq" secondAttribute="bottom" constant="124" id="SMf-FM-ZPp"/>
                 <constraint firstItem="5Bd-Cb-qMu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TQW-ff-rSe"/>
                 <constraint firstItem="cND-Z2-DHd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Tyz-oN-cMn"/>
                 <constraint firstAttribute="bottom" secondItem="WQv-9U-dTZ" secondAttribute="bottom" id="Ye6-25-iw8"/>
                 <constraint firstItem="WQv-9U-dTZ" firstAttribute="leading" secondItem="cND-Z2-DHd" secondAttribute="trailing" id="bCR-VP-3kz"/>
                 <constraint firstItem="UmL-3Q-Krq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dD4-3q-DoR"/>
+                <constraint firstItem="Jgb-oy-nbv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="129" id="ddn-PE-bLJ"/>
                 <constraint firstAttribute="centerX" secondItem="iyg-C7-SA2" secondAttribute="centerX" id="eln-pt-lA7"/>
                 <constraint firstItem="UmL-3Q-Krq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mEJ-eQ-EYP"/>
                 <constraint firstAttribute="bottom" secondItem="cND-Z2-DHd" secondAttribute="bottom" id="pyA-mc-51M"/>
                 <constraint firstAttribute="trailing" secondItem="5Bd-Cb-qMu" secondAttribute="trailing" id="vP9-ot-2oV"/>
+                <constraint firstItem="WQv-9U-dTZ" firstAttribute="top" secondItem="Jgb-oy-nbv" secondAttribute="bottom" constant="125" id="yLz-VZ-JdU"/>
                 <constraint firstAttribute="bottom" secondItem="5Bd-Cb-qMu" secondAttribute="bottom" id="zX4-zd-XrH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -114,6 +124,7 @@
             <connections>
                 <outlet property="alertDescriptionLabel" destination="WPX-pK-eWc" id="2a3-jy-A5b"/>
                 <outlet property="alertTitleLabel" destination="TJY-6F-NR0" id="TPx-Jz-ZVY"/>
+                <outlet property="colonLabel" destination="Jgb-oy-nbv" id="eFU-XE-ael"/>
                 <outlet property="pickview" destination="iyg-C7-SA2" id="cNf-hH-1oh"/>
                 <outlet property="titleBg" destination="UmL-3Q-Krq" id="9cF-Pz-kf8"/>
             </connections>

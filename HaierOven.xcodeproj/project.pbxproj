@@ -325,6 +325,16 @@
 		45BEED731A412AED003000AD /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BEED6B1A412AED003000AD /* MyPageControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		45BEED741A412AED003000AD /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BEED6D1A412AED003000AD /* NSTimer+Addition.m */; };
 		45BEED831A412E29003000AD /* MainViewNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BEED821A412E29003000AD /* MainViewNormalCell.m */; };
+		45C01C051A4D653600B54941 /* yrwc.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C021A4D653600B54941 /* yrwc.png */; };
+		45C01C061A4D653600B54941 /* yrwc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C031A4D653600B54941 /* yrwc@2x.png */; };
+		45C01C071A4D653600B54941 /* yrwc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C041A4D653600B54941 /* yrwc@3x.png */; };
+		45C01C0A1A4D659800B54941 /* prwc.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C081A4D659800B54941 /* prwc.png */; };
+		45C01C0B1A4D659800B54941 /* prwc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C091A4D659800B54941 /* prwc@2x.png */; };
+		45C01C0D1A4D65AA00B54941 /* prwc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C0C1A4D65AA00B54941 /* prwc@3x.png */; };
+		45C01C101A4D668E00B54941 /* yurewanchen.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C0E1A4D668E00B54941 /* yurewanchen.png */; };
+		45C01C111A4D668E00B54941 /* yurewanchen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C0F1A4D668E00B54941 /* yurewanchen@2x.png */; };
+		45C01C131A4D669D00B54941 /* yurewanchen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45C01C121A4D669D00B54941 /* yurewanchen@3x.png */; };
+		45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C01C151A4D68F400B54941 /* CompleteCookController.m */; };
 		45C7E5311A3FD165000B086B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E5301A3FD165000B086B /* main.m */; };
 		45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C7E5331A3FD165000B086B /* AppDelegate.m */; };
 		45C7E53A1A3FD165000B086B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45C7E5381A3FD165000B086B /* Main.storyboard */; };
@@ -887,6 +897,17 @@
 		45BEED6D1A412AED003000AD /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		45BEED811A412E29003000AD /* MainViewNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewNormalCell.h; sourceTree = "<group>"; };
 		45BEED821A412E29003000AD /* MainViewNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewNormalCell.m; sourceTree = "<group>"; };
+		45C01C021A4D653600B54941 /* yrwc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yrwc.png; sourceTree = "<group>"; };
+		45C01C031A4D653600B54941 /* yrwc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yrwc@2x.png"; sourceTree = "<group>"; };
+		45C01C041A4D653600B54941 /* yrwc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yrwc@3x.png"; sourceTree = "<group>"; };
+		45C01C081A4D659800B54941 /* prwc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prwc.png; sourceTree = "<group>"; };
+		45C01C091A4D659800B54941 /* prwc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prwc@2x.png"; sourceTree = "<group>"; };
+		45C01C0C1A4D65AA00B54941 /* prwc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prwc@3x.png"; sourceTree = "<group>"; };
+		45C01C0E1A4D668E00B54941 /* yurewanchen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yurewanchen.png; sourceTree = "<group>"; };
+		45C01C0F1A4D668E00B54941 /* yurewanchen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yurewanchen@2x.png"; sourceTree = "<group>"; };
+		45C01C121A4D669D00B54941 /* yurewanchen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yurewanchen@3x.png"; sourceTree = "<group>"; };
+		45C01C141A4D68F400B54941 /* CompleteCookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteCookController.h; sourceTree = "<group>"; };
+		45C01C151A4D68F400B54941 /* CompleteCookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteCookController.m; sourceTree = "<group>"; };
 		45C7E52B1A3FD165000B086B /* HaierOven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaierOven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C7E52F1A3FD165000B086B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C7E5301A3FD165000B086B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1251,6 +1272,8 @@
 				458952FD1A497F10009B5DD1 /* DeviceMessageCell.m */,
 				458952F91A496EFA009B5DD1 /* DeviceEditController.h */,
 				458952FA1A496EFA009B5DD1 /* DeviceEditController.m */,
+				45C01C141A4D68F400B54941 /* CompleteCookController.h */,
+				45C01C151A4D68F400B54941 /* CompleteCookController.m */,
 				458952C51A493FAF009B5DD1 /* View */,
 			);
 			name = DeviceViewController;
@@ -1306,6 +1329,15 @@
 		45BB35EC1A4A68CF000EE3C4 /* DeviceBoard */ = {
 			isa = PBXGroup;
 			children = (
+				45C01C0E1A4D668E00B54941 /* yurewanchen.png */,
+				45C01C0F1A4D668E00B54941 /* yurewanchen@2x.png */,
+				45C01C121A4D669D00B54941 /* yurewanchen@3x.png */,
+				45C01C021A4D653600B54941 /* yrwc.png */,
+				45C01C031A4D653600B54941 /* yrwc@2x.png */,
+				45C01C041A4D653600B54941 /* yrwc@3x.png */,
+				45C01C081A4D659800B54941 /* prwc.png */,
+				45C01C091A4D659800B54941 /* prwc@2x.png */,
+				45C01C0C1A4D65AA00B54941 /* prwc@3x.png */,
 				45B88E631A4BF50600722EF6 /* tk.png */,
 				45B88E641A4BF50600722EF6 /* tk@2x.png */,
 				45B88E651A4BF50600722EF6 /* tk@3x.png */,
@@ -2223,6 +2255,7 @@
 				45BB36271A4A8E6E000EE3C4 /* fs-cxz.png in Resources */,
 				45D906D11A47CAAB00B97D92 /* hongbeiwu@2x.png in Resources */,
 				45BB36531A4A9615000EE3C4 /* zm-xz@3x.png in Resources */,
+				45C01C051A4D653600B54941 /* yrwc.png in Resources */,
 				45D907201A47EBE900B97D92 /* SecDeviceTableViewCell.xib in Resources */,
 				45BB36631A4A96D4000EE3C4 /* sd-xz.png in Resources */,
 				45B6510C1A482EDB00A6376D /* n2.png in Resources */,
@@ -2254,6 +2287,7 @@
 				45BB364B1A4A9615000EE3C4 /* zm-cxz.png in Resources */,
 				45BC57631A4AF3AF0052F520 /* rfpk-xz@3x.png in Resources */,
 				45D906AE1A47CAAB00B97D92 /* cancel.png in Resources */,
+				45C01C071A4D653600B54941 /* yrwc@3x.png in Resources */,
 				45BC57541A4AF3AF0052F520 /* pk-cxz@3x.png in Resources */,
 				45B88E561A4BE9A300722EF6 /* tk-cxz.png in Resources */,
 				45D906BC1A47CAAB00B97D92 /* femail@2x.png in Resources */,
@@ -2328,6 +2362,7 @@
 				45B650DE1A4816A500A6376D /* MyDeviceAddView.xib in Resources */,
 				8441178F1A4BB8AF00628A64 /* configFiles.bundle in Resources */,
 				45BB360B1A4A771F000EE3C4 /* boardbg@3x.png in Resources */,
+				45C01C111A4D668E00B54941 /* yurewanchen@2x.png in Resources */,
 				45BC57661A4AF3AF0052F520 /* sk-cxz@3x.png in Resources */,
 				45B651111A482EDB00A6376D /* n3@3x.png in Resources */,
 				45BC577B1A4B08380052F520 /* wendu-cxz@3x.png in Resources */,
@@ -2353,6 +2388,7 @@
 				45D9070B1A47CAAB00B97D92 /* v@2x.png in Resources */,
 				45BB35FF1A4A6C80000EE3C4 /* guanji@3x.png in Resources */,
 				45BB35F81A4A6B4E000EE3C4 /* kaiji@2x.png in Resources */,
+				45C01C131A4D669D00B54941 /* yurewanchen@3x.png in Resources */,
 				45B88DFF1A4BCBF300722EF6 /* nz-xz.png in Resources */,
 				45D906A41A47CAAB00B97D92 /* b_01@3x.png in Resources */,
 				45D906DD1A47CAAB00B97D92 /* liebieo@2x.png in Resources */,
@@ -2379,6 +2415,7 @@
 				45B650D71A4815B400A6376D /* tianjiashebei.png in Resources */,
 				45D906D21A47CAAB00B97D92 /* hongbeiwu@3x.png in Resources */,
 				45BC57531A4AF3AF0052F520 /* pk-cxz@2x.png in Resources */,
+				45C01C0A1A4D659800B54941 /* prwc.png in Resources */,
 				45B650E41A48177E00A6376D /* deviceAdd@3x.png in Resources */,
 				45D906D81A47CAAB00B97D92 /* jianjing@3x.png in Resources */,
 				45D906C11A47CAAB00B97D92 /* garyline.png in Resources */,
@@ -2426,12 +2463,14 @@
 				45B88E3F1A4BD7A100722EF6 /* kashi@2x.png in Resources */,
 				45B650F71A482D6B00A6376D /* 1-2.png in Resources */,
 				45BC578A1A4B08C00052F520 /* naozhong-cxz@3x.png in Resources */,
+				45C01C0D1A4D65AA00B54941 /* prwc@3x.png in Resources */,
 				45B88E621A4BF1B900722EF6 /* DeviceAlertView.xib in Resources */,
 				45B6510A1A482EDB00A6376D /* n1@2x.png in Resources */,
 				45B88E681A4BF50600722EF6 /* tk@3x.png in Resources */,
 				45D906A31A47CAAB00B97D92 /* b_01@2x.png in Resources */,
 				45B651101A482EDB00A6376D /* n3@2x.png in Resources */,
 				45BB35F21A4A6955000EE3C4 /* devicelogo@2x.png in Resources */,
+				45C01C061A4D653600B54941 /* yrwc@2x.png in Resources */,
 				45B650E31A48177E00A6376D /* deviceAdd@2x.png in Resources */,
 				45D906BE1A47CAAB00B97D92 /* gantan.png in Resources */,
 				458952E81A4962CF009B5DD1 /* message@2x.png in Resources */,
@@ -2508,6 +2547,7 @@
 				45BB363D1A4A953A000EE3C4 /* xz-wxz@2x.png in Resources */,
 				45B88E0D1A4BCC8B00722EF6 /* yy-cxz@3x.png in Resources */,
 				45BB36651A4A96D4000EE3C4 /* sd-xz@3x.png in Resources */,
+				45C01C101A4D668E00B54941 /* yurewanchen.png in Resources */,
 				45D906FC1A47CAAB00B97D92 /* shezhi@3x.png in Resources */,
 				45BC57331A4AF27C0052F520 /* dlfp-wxz@3x.png in Resources */,
 				45D906D61A47CAAB00B97D92 /* jianjing.png in Resources */,
@@ -2610,6 +2650,7 @@
 				45C7E5781A3FDAB0000B086B /* 37x-Checkmark@2x.png in Resources */,
 				45D907101A47CAAB00B97D92 /* xinzeng.png in Resources */,
 				45B88E431A4BD7A100722EF6 /* ksyr-cxz@3x.png in Resources */,
+				45C01C0B1A4D659800B54941 /* prwc@2x.png in Resources */,
 				45BB362D1A4A8E6E000EE3C4 /* fs-xz.png in Resources */,
 				45D907021A47CAAB00B97D92 /* shouye@3x.png in Resources */,
 				45B6510B1A482EDB00A6376D /* n1@3x.png in Resources */,
@@ -2687,6 +2728,7 @@
 				457A77711A42B23C00E422D0 /* SearchTableCell.m in Sources */,
 				45BA02C61A43D807003810C7 /* PersonalEditViewController.m in Sources */,
 				8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */,
+				45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */,
 				45C7E58A1A3FE25A000B086B /* RESideMenu.m in Sources */,
 				45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */,
 				457A773E1A418EF200E422D0 /* ContainerView.m in Sources */,
