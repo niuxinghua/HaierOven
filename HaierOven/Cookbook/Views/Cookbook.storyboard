@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="FZLTXHK.TTF">
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Cookbook Detail Controller View Controller-->
+        <scene sceneID="REj-9c-pYz">
+            <objects>
+                <tableViewController storyboardIdentifier="Cookbook detail controller" id="nCF-pj-vsv" customClass="CookbookDetailControllerViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UTB-xh-HJr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lqh-Rt-pqG">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-IQ-WUJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="9OH-IQ-WUJ" secondAttribute="height" multiplier="5:4" id="2IC-mp-QNz"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Ms-RU-hbI">
+                                    <rect key="frame" x="0.0" y="168" width="320" height="88"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="88" id="5cA-IF-ybR"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="7RA-72-NEa">
+                                    <rect key="frame" x="20" y="201" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="B7z-cl-oS4"/>
+                                        <constraint firstAttribute="height" constant="40" id="hK6-4C-uV5"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小小羊爱吃肉" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unU-9k-fqA">
+                                    <rect key="frame" x="78" y="213" width="142" height="18"/>
+                                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQf-Zd-uEO">
+                                    <rect key="frame" x="228" y="206" width="72" height="30"/>
+                                    <color key="backgroundColor" red="0.12549020349979401" green="0.81960791349411011" blue="0.14901961386203766" alpha="1" colorSpace="deviceRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="EFy-rB-5E7"/>
+                                        <constraint firstAttribute="width" constant="72" id="lyn-uX-SIH"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
+                                    <state key="normal" title="+关注">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="6Ms-RU-hbI" firstAttribute="leading" secondItem="lqh-Rt-pqG" secondAttribute="leading" id="1OR-VO-eAS"/>
+                                <constraint firstAttribute="trailing" secondItem="zQf-Zd-uEO" secondAttribute="trailing" constant="20" id="4y4-xe-ID6"/>
+                                <constraint firstItem="7RA-72-NEa" firstAttribute="leading" secondItem="lqh-Rt-pqG" secondAttribute="leading" constant="20" id="9xb-E8-gdm"/>
+                                <constraint firstItem="9OH-IQ-WUJ" firstAttribute="bottom" secondItem="7RA-72-NEa" secondAttribute="bottom" constant="15" id="Ecz-ee-kik"/>
+                                <constraint firstAttribute="trailing" secondItem="9OH-IQ-WUJ" secondAttribute="trailing" id="IER-Re-EAN"/>
+                                <constraint firstItem="9OH-IQ-WUJ" firstAttribute="top" secondItem="lqh-Rt-pqG" secondAttribute="top" id="MKz-j6-ZhY"/>
+                                <constraint firstItem="9OH-IQ-WUJ" firstAttribute="leading" secondItem="lqh-Rt-pqG" secondAttribute="leading" id="Mit-rb-Xab"/>
+                                <constraint firstItem="unU-9k-fqA" firstAttribute="leading" secondItem="7RA-72-NEa" secondAttribute="trailing" constant="18" id="MnW-7p-gtd"/>
+                                <constraint firstItem="zQf-Zd-uEO" firstAttribute="leading" secondItem="unU-9k-fqA" secondAttribute="trailing" constant="8" id="Pgv-aF-eCU"/>
+                                <constraint firstItem="zQf-Zd-uEO" firstAttribute="leading" secondItem="unU-9k-fqA" secondAttribute="trailing" constant="8" id="QmP-Yq-fVm"/>
+                                <constraint firstItem="9OH-IQ-WUJ" firstAttribute="bottom" secondItem="6Ms-RU-hbI" secondAttribute="bottom" id="YZy-xf-VKJ"/>
+                                <constraint firstItem="unU-9k-fqA" firstAttribute="leading" secondItem="7RA-72-NEa" secondAttribute="trailing" constant="18" id="ajV-bK-Sa8"/>
+                                <constraint firstItem="7RA-72-NEa" firstAttribute="centerY" secondItem="zQf-Zd-uEO" secondAttribute="centerY" id="giQ-XT-uN8"/>
+                                <constraint firstItem="9OH-IQ-WUJ" firstAttribute="bottom" secondItem="unU-9k-fqA" secondAttribute="bottom" constant="25" id="uiP-ra-DzN"/>
+                                <constraint firstAttribute="trailing" secondItem="6Ms-RU-hbI" secondAttribute="trailing" id="xEe-5S-2hj"/>
+                            </constraints>
+                        </view>
+                        <sections>
+                            <tableViewSection headerTitle="Section-1" id="vEA-yb-eIZ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="HkO-oc-X2t">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HkO-oc-X2t" id="r9x-TH-QV9">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="黑胡椒煎小牛肉" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSN-cF-wSK">
+                                                    <rect key="frame" x="20" y="10" width="135" height="21"/>
+                                                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ST-Cq-DTt">
+                                                    <rect key="frame" x="163" y="11" width="70" height="20"/>
+                                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="12"/>
+                                                    <state key="normal" title="官方菜谱 &gt;">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Qz-0c-CFQ">
+                                                    <rect key="frame" x="20" y="40" width="189" height="40"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utr-qf-NeX">
+                                                    <rect key="frame" x="217" y="43" width="32" height="32"/>
+                                                    <state key="normal" image="lianjie.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yb-bu-NIh">
+                                                    <rect key="frame" x="266" y="43" width="32" height="32"/>
+                                                    <state key="normal" image="lianjie.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="e9d-yT-7My">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e9d-yT-7My" id="pm4-0I-hCh">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="已150度烘烤约70分钟出炉晾凉后脱模，冷藏4小时以上可切开食用。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-OC-Whd">
+                                                    <rect key="frame" x="22" y="9" width="290" height="53"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="45" id="c82-Ad-rdX">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c82-Ad-rdX" id="idO-MH-XrF">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3n-ws-fae">
+                                                    <rect key="frame" x="18" y="7" width="285" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="17"/>
+                                                    <state key="normal" title="新手学烘焙">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="p3n-ws-fae" firstAttribute="leading" secondItem="idO-MH-XrF" secondAttribute="leading" constant="18" id="bQu-cy-UMW"/>
+                                                <constraint firstAttribute="trailing" secondItem="p3n-ws-fae" secondAttribute="trailing" constant="17" id="fMp-qM-OWr"/>
+                                                <constraint firstAttribute="bottom" secondItem="p3n-ws-fae" secondAttribute="bottom" constant="6" id="ibO-yx-H8P"/>
+                                                <constraint firstItem="p3n-ws-fae" firstAttribute="top" secondItem="idO-MH-XrF" secondAttribute="top" constant="7" id="wHZ-U2-NOb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Section-2" id="LhE-aF-SMt">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="smK-F0-EMr">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="smK-F0-EMr" id="d4E-bR-vda">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="nCF-pj-vsv" id="jlx-Ca-u15"/>
+                            <outlet property="delegate" destination="nCF-pj-vsv" id="T05-el-4s7"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="cookbookDescCell" destination="e9d-yT-7My" id="tji-Z8-V3n"/>
+                        <outlet property="cookbookDetailCell" destination="smK-F0-EMr" id="B8x-No-8Td"/>
+                        <outlet property="cookbookImageView" destination="9OH-IQ-WUJ" id="B4z-x6-L8Z"/>
+                        <outlet property="cookbookTitleCell" destination="HkO-oc-X2t" id="SeP-L3-wlU"/>
+                        <outlet property="creatorAvatar" destination="7RA-72-NEa" id="hep-MZ-0fQ"/>
+                        <outlet property="creatorNameLabel" destination="unU-9k-fqA" id="3nV-GR-sZZ"/>
+                        <outlet property="followButton" destination="zQf-Zd-uEO" id="i8b-95-lbO"/>
+                        <outlet property="learnCookBtnCell" destination="c82-Ad-rdX" id="sLx-Qm-nDj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wxv-Pi-CNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="413" y="70"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="QQQ.png" width="480" height="640"/>
+        <image name="fakedataImage.png" width="600" height="469"/>
+        <image name="lianjie.png" width="32" height="32"/>
+        <image name="mask_bottom.png" width="640" height="138"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
