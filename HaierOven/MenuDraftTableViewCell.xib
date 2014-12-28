@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuDraftTableViewCell" rowHeight="191" id="KGk-i7-Jjw" customClass="MenuDraftTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Ln-L1l">
+                        <rect key="frame" x="0.0" y="1" width="320" height="185"/>
+                    </imageView>
+                    <view alpha="0.85000002384185791" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aac-C2-aa9" customClass="ContainerView">
+                        <rect key="frame" x="0.0" y="134" width="320" height="53"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="53" id="7aD-37-bQZ"/>
+                            <constraint firstAttribute="width" secondItem="Aac-C2-aa9" secondAttribute="height" multiplier="320:53" id="AFl-Qf-ZhA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7aD-37-bQZ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tTt-2t-6fb">
+                        <rect key="frame" x="0.0" y="134" width="320" height="53"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="芒果芝士蛋糕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14j-eN-fIV">
+                                <rect key="frame" x="4" y="15" width="267" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="0f1-qu-zJU"/>
+                                    <constraint firstAttribute="width" secondItem="14j-eN-fIV" secondAttribute="height" multiplier="267:16" id="7bj-NS-2Nh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7bj-NS-2Nh"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="mv9-Xu-3KX">
+                                <rect key="frame" x="279" y="12" width="41" height="41"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mv9-Xu-3KX" secondAttribute="height" multiplier="1:1" id="JEw-T3-j6v"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xda-OQ-YiT">
+                                <rect key="frame" x="279" y="12" width="41" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xda-OQ-YiT" secondAttribute="height" multiplier="1:1" id="p6i-Kr-Zs1"/>
+                                </constraints>
+                                <state key="normal" image="xcqr.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="DeleteDraft:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="w8C-Sp-L9p"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="以150度烘烤约70分钟，出炉晒凉后脱模，冷藏4小时以上切开食用。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lue-1Y-Vym">
+                                <rect key="frame" x="4" y="28" width="267" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lue-1Y-Vym" firstAttribute="top" secondItem="14j-eN-fIV" secondAttribute="bottom" constant="-3" id="2ov-xg-tIB"/>
+                            <constraint firstItem="mv9-Xu-3KX" firstAttribute="top" secondItem="tTt-2t-6fb" secondAttribute="top" constant="12" id="Dqo-yA-O8J"/>
+                            <constraint firstAttribute="trailing" secondItem="mv9-Xu-3KX" secondAttribute="trailing" id="GR2-ZI-CAp"/>
+                            <constraint firstAttribute="width" secondItem="tTt-2t-6fb" secondAttribute="height" multiplier="320:53" id="S7A-Ke-mp8"/>
+                            <constraint firstItem="Xda-OQ-YiT" firstAttribute="leading" secondItem="lue-1Y-Vym" secondAttribute="trailing" constant="8" id="T5k-aD-qoc"/>
+                            <constraint firstAttribute="bottom" secondItem="Xda-OQ-YiT" secondAttribute="bottom" id="TKq-bM-9lK"/>
+                            <constraint firstItem="Xda-OQ-YiT" firstAttribute="top" secondItem="tTt-2t-6fb" secondAttribute="top" constant="12" id="YhN-eO-yAt"/>
+                            <constraint firstItem="lue-1Y-Vym" firstAttribute="leading" secondItem="tTt-2t-6fb" secondAttribute="leading" constant="4" id="ccv-H2-7RP"/>
+                            <constraint firstAttribute="bottom" secondItem="mv9-Xu-3KX" secondAttribute="bottom" id="fbj-Vy-1mF"/>
+                            <constraint firstAttribute="height" constant="53" id="n5g-Hr-r5d"/>
+                            <constraint firstItem="Xda-OQ-YiT" firstAttribute="leading" secondItem="14j-eN-fIV" secondAttribute="trailing" constant="8" id="oJu-WT-fbb"/>
+                            <constraint firstAttribute="bottom" secondItem="lue-1Y-Vym" secondAttribute="bottom" id="pDb-lK-B1q"/>
+                            <constraint firstAttribute="trailing" secondItem="Xda-OQ-YiT" secondAttribute="trailing" id="r8Q-ks-Wl3"/>
+                            <constraint firstItem="14j-eN-fIV" firstAttribute="top" secondItem="tTt-2t-6fb" secondAttribute="top" constant="15" id="sGf-sV-Rgu"/>
+                            <constraint firstItem="14j-eN-fIV" firstAttribute="leading" secondItem="tTt-2t-6fb" secondAttribute="leading" constant="4" id="zkP-Fb-kOE"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="n5g-Hr-r5d"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tTt-2t-6fb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2x3-RB-M9h"/>
+                    <constraint firstAttribute="bottom" secondItem="6uB-Ln-L1l" secondAttribute="bottom" constant="5" id="3gf-0X-3zB"/>
+                    <constraint firstAttribute="bottom" secondItem="tTt-2t-6fb" secondAttribute="bottom" constant="4" id="ILV-8T-Toc"/>
+                    <constraint firstAttribute="trailing" secondItem="Aac-C2-aa9" secondAttribute="trailing" id="RCR-jw-2Vf"/>
+                    <constraint firstAttribute="trailing" secondItem="6uB-Ln-L1l" secondAttribute="trailing" id="Yiw-w2-5gz"/>
+                    <constraint firstItem="6uB-Ln-L1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ebD-ZE-CyR"/>
+                    <constraint firstItem="Aac-C2-aa9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mlh-FK-Tn9"/>
+                    <constraint firstAttribute="trailing" secondItem="tTt-2t-6fb" secondAttribute="trailing" id="nVF-P1-upO"/>
+                    <constraint firstAttribute="bottom" secondItem="Aac-C2-aa9" secondAttribute="bottom" constant="4" id="tIE-jx-mCZ"/>
+                    <constraint firstItem="6uB-Ln-L1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vBr-NZ-wIu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="coverImage" destination="6uB-Ln-L1l" id="28x-xM-YvY"/>
+                <outlet property="deleteBg" destination="mv9-Xu-3KX" id="JGX-Kr-Q7c"/>
+                <outlet property="deleteBtn" destination="Xda-OQ-YiT" id="1cn-tD-sDv"/>
+                <outlet property="descriptionLabel" destination="lue-1Y-Vym" id="f8J-FB-5wp"/>
+                <outlet property="foodNameLabel" destination="14j-eN-fIV" id="hI8-Ue-ZUF"/>
+            </connections>
+            <point key="canvasLocation" x="252" y="262.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="QQQ.png" width="480" height="640"/>
+        <image name="fakedataImage.png" width="600" height="469"/>
+        <image name="xcqr.png" width="26" height="26"/>
+    </resources>
+</document>

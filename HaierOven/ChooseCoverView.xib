@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTXHK.TTF">
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChooseCoverView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orangel.png" translatesAutoresizingMaskIntoConstraints="NO" id="Olq-Jq-i3H">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="0Q7-L2-FFv"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SM6-lg-H1J">
+                    <rect key="frame" x="16" y="19" width="288" height="30"/>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="GkP-P7-vIL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
+                    <state key="normal" title="拍照上传">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="action:" destination="iN0-l3-epB" eventType="touchUpInside" id="S6u-b3-QGF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYA-AZ-GeF">
+                    <rect key="frame" x="16" y="65" width="288" height="30"/>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="UTI-Ib-sL2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
+                    <state key="normal" title="手机相册上传">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="action:" destination="iN0-l3-epB" eventType="touchUpInside" id="Xuy-Nu-p2q"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Oh-YF-MP8">
+                    <rect key="frame" x="16" y="111" width="288" height="30"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="w2f-mG-oFn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="action:" destination="iN0-l3-epB" eventType="touchUpInside" id="sS8-j2-y9g"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="SM6-lg-H1J" secondAttribute="centerX" id="0BL-1k-iKJ"/>
+                <constraint firstAttribute="trailing" secondItem="HYA-AZ-GeF" secondAttribute="trailing" constant="16" id="4TI-uM-1gW"/>
+                <constraint firstItem="SM6-lg-H1J" firstAttribute="top" secondItem="Olq-Jq-i3H" secondAttribute="bottom" constant="17" id="5gY-hN-64F"/>
+                <constraint firstItem="Olq-Jq-i3H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="B2a-sw-eeg"/>
+                <constraint firstItem="8Oh-YF-MP8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="DKo-PC-8L9"/>
+                <constraint firstItem="SM6-lg-H1J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="GbD-Gn-tsm"/>
+                <constraint firstItem="HYA-AZ-GeF" firstAttribute="top" secondItem="SM6-lg-H1J" secondAttribute="bottom" constant="16" id="LLH-TB-CeK"/>
+                <constraint firstAttribute="centerX" secondItem="8Oh-YF-MP8" secondAttribute="centerX" id="Q0u-ag-hJM"/>
+                <constraint firstItem="8Oh-YF-MP8" firstAttribute="top" secondItem="HYA-AZ-GeF" secondAttribute="bottom" constant="16" id="ZXO-EA-ZRo"/>
+                <constraint firstAttribute="trailing" secondItem="Olq-Jq-i3H" secondAttribute="trailing" id="aHh-4d-Bex"/>
+                <constraint firstItem="Olq-Jq-i3H" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aQA-7S-7gn"/>
+                <constraint firstAttribute="centerX" secondItem="HYA-AZ-GeF" secondAttribute="centerX" id="lGQ-PJ-n6b"/>
+                <constraint firstAttribute="trailing" secondItem="8Oh-YF-MP8" secondAttribute="trailing" constant="16" id="sTE-tL-HOj"/>
+                <constraint firstAttribute="trailing" secondItem="SM6-lg-H1J" secondAttribute="trailing" constant="16" id="y12-Ac-N4N"/>
+                <constraint firstItem="HYA-AZ-GeF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="yKb-dJ-rqg"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="btns" destination="SM6-lg-H1J" id="bf6-x6-Hpb"/>
+                <outletCollection property="btns" destination="HYA-AZ-GeF" id="lJh-em-VaC"/>
+                <outletCollection property="btns" destination="8Oh-YF-MP8" id="HNR-fF-Q6g"/>
+            </connections>
+            <point key="canvasLocation" x="12" y="366.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="orangel.png" width="152" height="2"/>
+    </resources>
+</document>

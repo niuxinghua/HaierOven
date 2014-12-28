@@ -24,7 +24,8 @@
     NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
     [accountDefaults setBool:YES forKey:@"hadDevice"];
     [accountDefaults synchronize];
-    
+//    
+    [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     [self startUSdk];
     

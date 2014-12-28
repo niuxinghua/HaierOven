@@ -162,11 +162,11 @@
 {
     self.progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cancel.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     
-    self.progressHUD.color = [UIColor redColor];
-    self.progressHUD.labelColor = [UIColor whiteColor];
+    self.progressHUD.color = GlobalGrayColor;
+    self.progressHUD.labelColor = GlobalOrangeColor;
     
     self.progressHUD.labelText = text;
     [self.progressHUD hide:YES afterDelay:delay];

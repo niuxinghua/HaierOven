@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSInteger, CompleteTye) {
+    CompleteTyeCook   = 1,
+    CompleteTyeWarmUp = 2,
+};
 @interface CompleteCookController : UIViewController
-
+@property (nonatomic) CompleteTye completeTye;
 @end
