@@ -10,6 +10,7 @@
 #import "CycleScrollView.h"
 #import "MainViewNormalCell.h"
 #import "FoodListViewController.h"
+#import "CookbookDetailControllerViewController.h"
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.6
@@ -116,6 +117,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDataSource & UITableViewDelegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -143,6 +146,15 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return PageW*CellImageRate;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Cookbook" bundle:nil];
+    CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    [self.navigationController pushViewController:cookbookDetailController animated:YES];
+}
+
+
 -(void)ChickPlayBtn:(id)cellClass{
     
     NSLog(@"播播播放");

@@ -530,6 +530,11 @@
 		844117911A4BB8AF00628A64 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176C1A4BB8AF00628A64 /* DataParser.m */; };
 		844117921A4BB8AF00628A64 /* MyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176F1A4BB8AF00628A64 /* MyTool.m */; };
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
+		C4182E181A4E4A4A006A44D0 /* Cookbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4182E171A4E4A4A006A44D0 /* Cookbook.storyboard */; };
+		C4182E1B1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */; };
+		C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */; };
+		C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */; };
+		C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1167,6 +1172,13 @@
 		8441176F1A4BB8AF00628A64 /* MyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTool.m; sourceTree = "<group>"; };
 		844D0F561A4D2FE10018D79C /* LocalOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalOven.h; sourceTree = "<group>"; };
 		844D0F571A4D2FE10018D79C /* LocalOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalOven.m; sourceTree = "<group>"; };
+		C4182E171A4E4A4A006A44D0 /* Cookbook.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cookbook.storyboard; sourceTree = "<group>"; };
+		C4182E191A4E4ACF006A44D0 /* CookbookDetailControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookDetailControllerViewController.h; sourceTree = "<group>"; };
+		C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookDetailControllerViewController.m; sourceTree = "<group>"; };
+		C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask_bottom.png; sourceTree = "<group>"; };
+		C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookbookSectionHeaderView.xib; sourceTree = "<group>"; };
+		C4182E201A4E610E006A44D0 /* CookbookSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookSectionHeaderView.h; sourceTree = "<group>"; };
+		C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookSectionHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1804,6 +1816,7 @@
 			isa = PBXGroup;
 			children = (
 				45C7E57A1A3FDB57000B086B /* UConstants.h */,
+				C4182E121A4E49FD006A44D0 /* Cookbook */,
 				8441171C1A4BB8AF00628A64 /* Models */,
 				45D9061B1A47CAAA00B97D92 /* Images */,
 				45C7E5641A3FDA30000B086B /* Tools */,
@@ -1972,6 +1985,7 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */,
 				458952941A493C05009B5DD1 /* wifilianjie0 */,
 				45BB35ED1A4A68EF000EE3C4 /* image */,
 				45BB35EC1A4A68CF000EE3C4 /* DeviceBoard */,
@@ -2172,6 +2186,35 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		C4182E121A4E49FD006A44D0 /* Cookbook */ = {
+			isa = PBXGroup;
+			children = (
+				C4182E151A4E4A27006A44D0 /* Controllers */,
+				C4182E161A4E4A27006A44D0 /* Views */,
+			);
+			path = Cookbook;
+			sourceTree = "<group>";
+		};
+		C4182E151A4E4A27006A44D0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C4182E191A4E4ACF006A44D0 /* CookbookDetailControllerViewController.h */,
+				C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C4182E161A4E4A27006A44D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4182E171A4E4A4A006A44D0 /* Cookbook.storyboard */,
+				C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */,
+				C4182E201A4E610E006A44D0 /* CookbookSectionHeaderView.h */,
+				C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2286,6 +2329,7 @@
 				45BC577C1A4B08380052F520 /* wendu-wxz.png in Resources */,
 				45BC57791A4B08380052F520 /* wendu-cxz.png in Resources */,
 				45D906B41A47CAAB00B97D92 /* edit1@2x.png in Resources */,
+				C4182E181A4E4A4A006A44D0 /* Cookbook.storyboard in Resources */,
 				45D906A21A47CAAB00B97D92 /* b_01.png in Resources */,
 				45D906A81A47CAAB00B97D92 /* back.png in Resources */,
 				45B88E461A4BD7A100722EF6 /* ksyr-wxz@3x.png in Resources */,
@@ -2651,12 +2695,14 @@
 				45B88E4B1A4BDDBF00722EF6 /* toolbarbg.png in Resources */,
 				458952BB1A493C05009B5DD1 /* wifilianjie05@3x.png in Resources */,
 				45D906FF1A47CAAB00B97D92 /* shijian@3x.png in Resources */,
+				C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */,
 				45BB36031A4A73E1000EE3C4 /* sectionbg.png in Resources */,
 				45C7E5781A3FDAB0000B086B /* 37x-Checkmark@2x.png in Resources */,
 				45D907101A47CAAB00B97D92 /* xinzeng.png in Resources */,
 				45B88E431A4BD7A100722EF6 /* ksyr-cxz@3x.png in Resources */,
 				45C01C0B1A4D659800B54941 /* prwc@2x.png in Resources */,
 				45BB362D1A4A8E6E000EE3C4 /* fs-xz.png in Resources */,
+				C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */,
 				45D907021A47CAAB00B97D92 /* shouye@3x.png in Resources */,
 				45B6510B1A482EDB00A6376D /* n1@3x.png in Resources */,
 				45D906A01A47CAAB00B97D92 /* aixin@2x.png in Resources */,
@@ -2725,6 +2771,7 @@
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
 				45BB36711A4AA0A4000EE3C4 /* LineProgressView.m in Sources */,
+				C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */,
 				844117891A4BB8AF00628A64 /* UIButton+AFNetworking.m in Sources */,
 				844117841A4BB8AF00628A64 /* InternetManager.m in Sources */,
 				458952F51A49692C009B5DD1 /* DeviceUnconnectController.m in Sources */,
@@ -2733,6 +2780,7 @@
 				457A77711A42B23C00E422D0 /* SearchTableCell.m in Sources */,
 				45BA02C61A43D807003810C7 /* PersonalEditViewController.m in Sources */,
 				8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */,
+				C4182E1B1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m in Sources */,
 				45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */,
 				45C7E58A1A3FE25A000B086B /* RESideMenu.m in Sources */,
 				45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */,
