@@ -20,5 +20,9 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
 @interface DeviceBoardViewController : UITableViewController
 
 @property (nonatomic) DeviceBoardStatus deviceBoardStatus;
+/**
+ *  本地当前烤箱对象，Model可根据此对象构建uSDKDevice对象，从而控制烤箱
+ */
+@property (strong, nonatomic) LocalOven* currentOven;
 
 @end

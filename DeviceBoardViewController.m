@@ -37,6 +37,10 @@
 @property (strong, nonatomic) UIButton *tempBtn;//记录模版上一个点击按钮
 @property (strong, nonatomic) IBOutlet UIButton *temputure;
 @property (strong, nonatomic) IBOutlet UIButton *howlong;
+/**
+ *  Oven实例
+ */
+@property (strong, nonatomic) uSDKDevice* myOven;
 
 @property (nonatomic) AlertType alertType;
 @property (strong, nonatomic) NSString *orderString;
