@@ -85,7 +85,6 @@
 }
 
 -(void)reloadMainTableView:(NSMutableArray *)arr{
-    
     self.foods = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
 
