@@ -93,6 +93,11 @@
  */
 #define GetTags  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"tag/getTags"]
 
+/**
+ *  获取热门标签
+ */
+#define GetHotTags [NSString stringWithFormat:@"%@/%@", BaseUrl, @"tag/getHotTags"]
+
 
 #pragma mark - 评论
 
@@ -144,26 +149,26 @@
  */
 #define DeleteCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/delete"]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ *  赞菜谱
+ */
+#define PraiseCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/superp"]
 
 #pragma mark - 文件
 
 #define DownloadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Download"]
 
-#define UploadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Upload"]
+#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8080/haieroven/file/upload"]
+
+
+
+
+
+
+
+
+
+
 
 // 个人信息隐私政策
 #define GetPolicy       @"http://loveaction.qiniudn.com/Policy.html"

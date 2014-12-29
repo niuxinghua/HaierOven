@@ -829,6 +829,42 @@
     
 }
 
+- (void)getHotTagsCallback:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 发送请求
+        
+        [[self manager] GET:GetHotTags parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 2. 缓存本地
+                [[DataCenter sharedInstance] saveTagsWithObject:responseObject];
+                
+                // 3. 解析json字典
+                NSMutableArray* tags = [DataParser parseTagsWithDict:responseObject];
+                completion(YES, tags, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:nil]);
+        }];
+        
+    } else {
+        // 如果没有网络，从本地缓存读取用户信息
+//        id tagsDict = [[DataCenter sharedInstance] getTagsObject];
+//        NSMutableArray* tags = [DataParser parseTagsWithDict:tagsDict];
+//        completion(YES, tags, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
 #pragma mark - 添加菜谱评论
 
 - (void)addCommentWithCookbookId:(NSString*)cookbookId andUserBaseid:(NSString*)userBaseId andComment:(NSString*)content callBack:(myCallback)completion
@@ -1112,8 +1148,14 @@
         }
         NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
         creatorDict[@"id"] = cookbookDetail.creator.ID;
-        creatorDict[@"userName"] = cookbookDetail.creator.userName;
-        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+//        creatorDict[@"userName"] = cookbookDetail.creator.userName;
+//        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+        
+        NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
+        cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
+        cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
+        cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime;
+        cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
         
         NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
                                      @"cookbookDesc" : cookbookDetail.desc,
@@ -1183,8 +1225,14 @@
         }
         NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
         creatorDict[@"id"] = cookbookDetail.creator.ID;
-        creatorDict[@"userName"] = cookbookDetail.creator.userName;
-        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+//        creatorDict[@"userName"] = cookbookDetail.creator.userName;
+//        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+        
+        NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
+        cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
+        cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
+        cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime;
+        cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
         
         NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
                                      @"cookbookDesc" : cookbookDetail.desc,
@@ -1261,6 +1309,80 @@
     }
 }
 
+- (void)praiseCookbookWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"cookbookID" : cookbookId,     //关键字
+                                     @"userBaseID" : userBaseId
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:PraiseCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        
+    }
+}
+
+
+#pragma mark - 文件
+
+- (void)uploadFile:(NSData*)data callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        NSString* imagePath = [[[DataCenter sharedInstance] getLibraryPath] stringByAppendingPathComponent:@"avatar.jpg"];
+        
+        [data writeToFile:imagePath atomically:YES];
+        
+        //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+        [self manager].responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+        
+        [[self manager] POST:UploadFile parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            if ([formData appendPartWithFileURL:[NSURL fileURLWithPath:imagePath] name:@"avater.jpg" error:nil]) {
+                NSLog(@"%@", formData);
+            }
+            
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSLog(@"上传成功");
+            completion(YES, responseObject, nil);
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            NSLog(@"上传失败");
+            completion(NO, nil, error);
+            
+        }];
+    } else {
+        
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        
+    }
+}
 
 
 @end

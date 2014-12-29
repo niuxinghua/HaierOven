@@ -65,6 +65,7 @@
 {
     // 设置NavigationBar
     [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:IMAGENAMED(@"clear.png")];
     self.navigationController.navigationBar.translucent = YES;
     
 }
