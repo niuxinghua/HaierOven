@@ -9,9 +9,18 @@
 #import "CookbookDetailControllerViewController.h"
 #import "CookbookSectionHeaderView.h"
 
-@interface CookbookDetailControllerViewController ()
+@interface CookbookDetailControllerViewController () <UIScrollViewDelegate>
+{
+    CGFloat _lastContentOffsetY;
+}
+
+#pragma mark - NavigationBar
+
+@property (weak, nonatomic) IBOutlet UIView *rightNavigationView;
+
 
 #pragma mark - headerView
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *cookbookImageView;
 
@@ -31,15 +40,106 @@
 
 #pragma mark - section 1
 
+@property (strong, nonatomic) CookbookSectionHeaderView* sectionHeaderView;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *cookbookDetailCell;
 
 @end
 
 @implementation CookbookDetailControllerViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.sectionHeaderView = [[CookbookSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50) andCurrentContentType:CurrentContentTypeFoods];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupSubviews];
+}
+
+- (void)setupSubviews
+{
+    // 设置NavigationBar
+    [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.rightNavigationView.alpha = 0.0;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    _lastContentOffsetY = scrollView.contentOffset.y;
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //    NSLog(@"%f", scrollView.contentOffset.y);
+    if (scrollView.tag != 5) { // 不是滑动评论
+        if (scrollView.contentOffset.y > self.cookbookImageView.height - 64) {
+            [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+            [self showRightNavigationView:YES];
+            
+        } else if (scrollView.contentOffset.y > self.cookbookImageView.height) {
+            
+        } else {
+            [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
+            [self showRightNavigationView:NO];
+            
+        }
+        
+        if (scrollView.contentOffset.y < _lastContentOffsetY)
+        {
+            //        NSLog(@"向下拉动");
+            if (scrollView.contentOffset.y < 0) {
+                [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+                [self showRightNavigationView:NO];
+            }
+            
+        } else if (scrollView.contentOffset.y > _lastContentOffsetY)
+        {
+            
+            //        NSLog(@"向上拉动");
+            
+            
+        }
+    } else {    //滑动评论
+        NSLog(@"%f", scrollView.contentOffset.y);
+    }
+    
+    
+}
+
+- (void)showRightNavigationView:(BOOL)show
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.rightNavigationView.alpha = show ? 1.0 : 0.0;
+    }];
+    self.rightNavigationView.userInteractionEnabled = show;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -80,7 +180,8 @@
         return view;
     }
     
-    CookbookSectionHeaderView* headerView = [[CookbookSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+    // 如果sectionHeader不是属性的话，每次滑动都会init新的对象
+    CookbookSectionHeaderView* headerView = self.sectionHeaderView;
 
     return headerView;
     
@@ -117,5 +218,13 @@
     return 0;
     
 }
+
+#pragma mark - 按钮响应事件
+
+- (IBAction)back:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
