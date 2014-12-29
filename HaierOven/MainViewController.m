@@ -11,10 +11,17 @@
 #import "MainViewNormalCell.h"
 #import "FoodListViewController.h"
 #import "CookbookDetailControllerViewController.h"
+
+#import "Tag.h"
+#import "Cookbook.h"
+
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.6
-@interface MainViewController ()<MainViewNormalCellDelegate>
+@interface MainViewController () <MainViewNormalCellDelegate>
+{
+    NSInteger _pageIndex;
+}
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
 @property (strong, nonatomic) IBOutlet UIView *adView;
@@ -22,27 +29,77 @@
 @property (strong, nonatomic) IBOutlet UITableView *maintable;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (strong, nonatomic) NSArray* cookbooks;
 
 @end
 
 @implementation MainViewController
 
+#pragma mark - 获取网络数据
+
+- (void)loadTags
+{
+    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+    [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            self.tags = obj;
+            [self setupTagsScrollView];
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+            }
+        }
+    }];
+}
+
+- (void)loadCookbooks
+{
+    [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.cookbooks = obj;
+            [self.maintable reloadData];
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+            }
+        }
+    }];
+    
+}
+
+#pragma mark - 加载系列
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        _pageIndex = 1;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fakeData];
 
     [self setupSubviews];
+    
+    [self loadTags];
     
     [self loadAds];
     
     self.maintable.dataSource = self;
     self.maintable.delegate = self;
     
+    [self loadCookbooks];
+    
     // Do any additional setup after loading the view.
 }
--(void)fakeData{
-    self.tags=@[@"  面包",@"  蛋糕",@"  吐司",@"  烤鸡",@"  牛排",@"  日料",@"  排骨"];
-}
+
+
 - (void)setupSubviews
 {
     [self.maintable registerNib:[UINib nibWithNibName:NSStringFromClass([MainViewNormalCell class]) bundle:nil] forCellReuseIdentifier:@"MainViewNormalCell"];
@@ -54,15 +111,22 @@
     self.adCycleView.pageControlMiddle = YES;
     [self.adView addSubview:self.adCycleView];
     
+    
+        
+}
+
+- (void)setupTagsScrollView
+{
     self.tagsScrollView = [UIScrollView new];
     self.tagsScrollView.frame = CGRectMake(0, self.adCycleView.bottom, PageW, PageW*ScrRate);
     self.tagsScrollView.contentSize = CGSizeMake((PageW/5)*self.tags.count, self.tagsScrollView.height);
     [self.adView addSubview:self.tagsScrollView];
     
     
-    for (int loop = 0 ; loop<self.tags.count ; loop++) {
+    for (int loop = 0 ; loop < self.tags.count ; loop++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setTitle:self.tags[loop] forState:UIControlStateNormal];
+        Tag* tag = self.tags[loop];
+        [btn setTitle:[NSString stringWithFormat:@"  %@", tag.name] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"orangepoint"] forState:UIControlStateNormal];
         btn.tag = loop;
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -72,8 +136,8 @@
         btn.frame = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
         [self.tagsScrollView addSubview:btn];
     }
-        
 }
+
 #pragma mark 点击tag方法
 -(void)SelectTagBtn:(UIButton*)sender{
     FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
@@ -126,21 +190,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 10;
+    return self.cookbooks.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
-        NSString *cellIdentifier =@"MainViewNormalCell";
-        MainViewNormalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        cell.backgroundColor = GlobalGrayColor;
-        cell.delegate = self;
-        cell.foodName.font = [UIFont fontWithName:GlobalTitleFontName size:17];
-        cell.foodMakeFunction.font = [UIFont fontWithName:GlobalTextFontName size:11.5];
-        cell.cookerName.font = [UIFont fontWithName:GlobalTextFontName size:11];
-        return cell;
+    
+    NSString *cellIdentifier =@"MainViewNormalCell";
+    MainViewNormalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell.backgroundColor = GlobalGrayColor;
+    cell.delegate = self;
+    
+    cell.foodName.font = [UIFont fontWithName:GlobalTitleFontName size:17];
+    cell.foodMakeFunction.font = [UIFont fontWithName:GlobalTextFontName size:11.5];
+    cell.cookerName.font = [UIFont fontWithName:GlobalTextFontName size:11];
+    
+    cell.cookbook = self.cookbooks[indexPath.row];
+    
+    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -196,7 +196,6 @@
     
     NSDictionary* detailDict = dict[@"data"];
     
-    
     cookbookDetail.cookbookId       = [detailDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookID"]];
     cookbookDetail.name             = [detailDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookName"]];
     cookbookDetail.desc             = [detailDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookDesc"]];
@@ -226,7 +225,14 @@
     }
     cookbookDetail.foods            = [foods copy];
     
-    cookbookDetail.oven            = detailDict[@"oven"];
+    NSDictionary* ovenDict          = detailDict[@"cookbookOven"];
+    CookbookOven* oven              = [[CookbookOven alloc] init];
+    oven.roastStyle                 = [ovenDict[@"roastStyle"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastStyle"]];
+    oven.roastTemperature           = [ovenDict[@"roastTemperature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTemperature"]];
+    oven.roastTime                  = [ovenDict[@"roastTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTime"]];
+    oven.ovenInfo                   = ovenDict[@"oveninfo"];
+    cookbookDetail.oven             = oven;
+    
     cookbookDetail.creator          = [DataParser parseCreatorWithDict:detailDict[@"creator"]];
     
     return cookbookDetail;

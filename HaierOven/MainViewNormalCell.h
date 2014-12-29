@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ContainerView.h"
+#import "Cookbook.h"
 @class MainViewNormalCell;
 @protocol MainViewNormalCellDelegate <NSObject>
 -(void)ChickLikeBtn:(id)cellClass andBtn:(UIButton*)btn;
@@ -24,6 +25,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *cookerName;
 @property (strong, nonatomic) IBOutlet UILabel *foodName;
 @property (strong, nonatomic) IBOutlet UILabel *foodMakeFunction;
+
+@property (strong, nonatomic) Cookbook* cookbook;
+
 @property (weak, nonatomic)id<MainViewNormalCellDelegate>delegate;
 - (IBAction)Like:(UIButton *)sender;
 - (IBAction)Play:(UIButton *)sender;

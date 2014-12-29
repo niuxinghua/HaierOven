@@ -567,7 +567,6 @@
 		844117911A4BB8AF00628A64 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176C1A4BB8AF00628A64 /* DataParser.m */; };
 		844117921A4BB8AF00628A64 /* MyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176F1A4BB8AF00628A64 /* MyTool.m */; };
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
-		849F91691A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91481A513981006234B9 /* icon_follow.png */; };
 		849F916A1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow@2x.png */; };
 		849F916B1A513981006234B9 /* icon_follow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@3x.png */; };
 		849F916C1A513981006234B9 /* icon_followd.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd.png */; };
@@ -594,7 +593,6 @@
 		849F91811A513981006234B9 /* icon_share_navi_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91601A513981006234B9 /* icon_share_navi_n.png */; };
 		849F91821A513981006234B9 /* icon_share_navi_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91611A513981006234B9 /* icon_share_navi_n@2x.png */; };
 		849F91831A513981006234B9 /* icon_share_navi_n@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91621A513981006234B9 /* icon_share_navi_n@3x.png */; };
-		849F91841A513981006234B9 /* icon_share_navi_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91631A513981006234B9 /* icon_share_navi_s.png */; };
 		849F91851A513981006234B9 /* icon_share_navi_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91641A513981006234B9 /* icon_share_navi_s@2x.png */; };
 		849F91861A513981006234B9 /* icon_share_navi_s@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91651A513981006234B9 /* icon_share_navi_s@3x.png */; };
 		849F91871A513981006234B9 /* step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91661A513981006234B9 /* step1.png */; };
@@ -605,6 +603,7 @@
 		C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */; };
 		C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */; };
 		C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */; };
+		C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B1104C1A517ECD005ADE4B /* CookbookOven.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1330,6 +1329,8 @@
 		C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookbookSectionHeaderView.xib; sourceTree = "<group>"; };
 		C4182E201A4E610E006A44D0 /* CookbookSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookSectionHeaderView.h; sourceTree = "<group>"; };
 		C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookSectionHeaderView.m; sourceTree = "<group>"; };
+		C4B1104B1A517ECD005ADE4B /* CookbookOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookOven.h; sourceTree = "<group>"; };
+		C4B1104C1A517ECD005ADE4B /* CookbookOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookOven.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2272,6 +2273,8 @@
 				844117221A4BB8AF00628A64 /* Comment.m */,
 				844117231A4BB8AF00628A64 /* Cookbook.h */,
 				844117241A4BB8AF00628A64 /* Cookbook.m */,
+				C4B1104B1A517ECD005ADE4B /* CookbookOven.h */,
+				C4B1104C1A517ECD005ADE4B /* CookbookOven.m */,
 				844117251A4BB8AF00628A64 /* CookbookDetail.h */,
 				844117261A4BB8AF00628A64 /* CookbookDetail.m */,
 				844117271A4BB8AF00628A64 /* Creator.h */,
@@ -3078,6 +3081,7 @@
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
+				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
 				45B88E601A4BF19500722EF6 /* DeviceAlertView.m in Sources */,
 				45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */,

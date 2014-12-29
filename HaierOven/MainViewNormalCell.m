@@ -27,6 +27,27 @@
     // Configure the view for the selected state
 }
 
+- (void)setCookbook:(Cookbook *)cookbook
+{
+    _cookbook = cookbook;
+    [self resetCell];
+    // 这里应该判断我是否已赞过
+    self.goodCountLabel.text = cookbook.praises;
+    
+    [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto] placeholderImage:IMAGENAMED(@"fakedataImage.png")];
+    [self.AuthorityLabel setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    
+    self.foodName.text = cookbook.name;
+    self.foodMakeFunction.text = cookbook.desc;
+    self.cookerName.text = cookbook.creator.userName;
+    
+}
+
+- (void)resetCell
+{
+    self.chickGoodBtn.selected = NO;
+}
+
 - (IBAction)Like:(UIButton *)sender {
     [self.delegate ChickLikeBtn:self andBtn:sender];
 }

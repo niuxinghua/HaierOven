@@ -225,6 +225,13 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)getTagsCallBack:(myCallback)completion;
 
+/**
+ *  获取热门标签
+ *
+ *  @param completion 结果回调
+ */
+- (void)getHotTagsCallback:(myCallback)completion;
+
 
 #pragma mark - 评论
 
@@ -307,7 +314,25 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)deleteCookbookWithCookbookId:(NSString*)cookbookId callBack:(myCallback)completion;
 
+/**
+ *  赞菜谱
+ *
+ *  @param cookbookId 菜谱ID
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)praiseCookbookWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
 
+
+#pragma mark - 文件
+
+/**
+ *  文件上传 上传文件到服务器临时文件夹，并返回已上传文件路径。支持多个文件同时上传。
+ *
+ *  @param data       文件Data
+ *  @param completion 结果回调
+ */
+- (void)uploadFile:(NSData*)data callBack:(myCallback)completion;
 
 @end
 
