@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="216" id="KGk-i7-Jjw" customClass="CellOfAddFoodTable">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加食材" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-LN-XvN">
+                        <rect key="frame" x="30" y="17" width="68" height="20"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（必填）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieR-wD-oTo">
+                        <rect key="frame" x="91" y="22" width="57" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57" id="FZ4-hQ-Fwd"/>
+                            <constraint firstAttribute="height" constant="15" id="imA-Nq-fB2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tOA-1X-VxE">
+                        <rect key="frame" x="8" y="46" width="304" height="161"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ieR-wD-oTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="91" id="5f5-9P-BPB"/>
+                    <constraint firstAttribute="trailing" secondItem="tOA-1X-VxE" secondAttribute="trailing" constant="8" id="QgI-yI-0Ed"/>
+                    <constraint firstItem="12f-LN-XvN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="U3V-wn-Wqn"/>
+                    <constraint firstAttribute="bottom" secondItem="tOA-1X-VxE" secondAttribute="bottom" constant="8" id="UY9-ZJ-aGx"/>
+                    <constraint firstItem="12f-LN-XvN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="Znl-Se-QBE"/>
+                    <constraint firstItem="tOA-1X-VxE" firstAttribute="top" secondItem="ieR-wD-oTo" secondAttribute="bottom" constant="9" id="b1j-RB-WMJ"/>
+                    <constraint firstItem="ieR-wD-oTo" firstAttribute="bottom" secondItem="12f-LN-XvN" secondAttribute="bottom" id="iKM-RF-ox0"/>
+                    <constraint firstItem="tOA-1X-VxE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="qd5-NV-hZ9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addfoodTableView" destination="tOA-1X-VxE" id="MQu-0U-zdj"/>
+            </connections>
+            <point key="canvasLocation" x="295" y="303"/>
+        </tableViewCell>
+    </objects>
+</document>
