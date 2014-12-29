@@ -97,6 +97,8 @@
 		45A5E8261A50081200FCD2BD /* xcqr.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8241A50081200FCD2BD /* xcqr.png */; };
 		45A5E8271A50081200FCD2BD /* xcqr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8251A50081200FCD2BD /* xcqr@2x.png */; };
 		45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8281A50082400FCD2BD /* xcqr@3x.png */; };
+		45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */; };
+		45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */; };
 		45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A9994A1A50FB710008AFE3 /* CreatMneuController.m */; };
 		45A9994F1A50FD640008AFE3 /* pzy.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A9994C1A50FD640008AFE3 /* pzy.png */; };
 		45A999501A50FD640008AFE3 /* pzy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A9994D1A50FD640008AFE3 /* pzy@2x.png */; };
@@ -732,6 +734,9 @@
 		45A5E8241A50081200FCD2BD /* xcqr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xcqr.png; sourceTree = "<group>"; };
 		45A5E8251A50081200FCD2BD /* xcqr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@2x.png"; sourceTree = "<group>"; };
 		45A5E8281A50082400FCD2BD /* xcqr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@3x.png"; sourceTree = "<group>"; };
+		45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodAlertView.h; sourceTree = "<group>"; };
+		45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodAlertView.m; sourceTree = "<group>"; };
+		45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFoodAlertView.xib; sourceTree = "<group>"; };
 		45A999491A50FB710008AFE3 /* CreatMneuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatMneuController.h; sourceTree = "<group>"; };
 		45A9994A1A50FB710008AFE3 /* CreatMneuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatMneuController.m; sourceTree = "<group>"; };
 		45A9994C1A50FD640008AFE3 /* pzy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pzy.png; sourceTree = "<group>"; };
@@ -1463,9 +1468,28 @@
 			name = UploadingMneu;
 			sourceTree = "<group>";
 		};
+		45A7E6721A519C800075E2C1 /* 添加材料Cell */ = {
+			isa = PBXGroup;
+			children = (
+				45A999681A51307C0008AFE3 /* CellOfAddFoodTable.h */,
+				45A999691A51307C0008AFE3 /* CellOfAddFoodTable.m */,
+				45A9996D1A513EE60008AFE3 /* AddFoodCell.h */,
+				45A9996E1A513EE60008AFE3 /* AddFoodCell.m */,
+				45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */,
+				45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */,
+				45A999721A5149400008AFE3 /* AddFoodLastCell.h */,
+				45A999731A5149400008AFE3 /* AddFoodLastCell.m */,
+			);
+			name = "添加材料Cell";
+			sourceTree = "<group>";
+		};
 		45A999481A50FA960008AFE3 /* UpLoadingMneu */ = {
 			isa = PBXGroup;
 			children = (
+				45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */,
+				45A9996A1A51307C0008AFE3 /* CellOfAddFoodTable.xib */,
+				45A9996F1A513EE60008AFE3 /* AddFoodCell.xib */,
+				45A999741A5149400008AFE3 /* AddFoodLastCell.xib */,
 				45A5E8211A5002D600FCD2BD /* MenuDraftTableViewCell.xib */,
 				45A5E8141A4FF26B00FCD2BD /* ChooseCoverView.xib */,
 			);
@@ -1479,6 +1503,7 @@
 				45A9995D1A510AAB0008AFE3 /* CoverCell.m */,
 				45A9995F1A510ABE0008AFE3 /* ChooseTagsCell.h */,
 				45A999601A510ABE0008AFE3 /* ChooseTagsCell.m */,
+				45A7E6721A519C800075E2C1 /* 添加材料Cell */,
 			);
 			name = UploadingMneuCell;
 			sourceTree = "<group>";
@@ -2100,15 +2125,6 @@
 			isa = PBXGroup;
 			children = (
 				45A5E7FA1A4FC85100FCD2BD /* UpLoadingMenuController */,
-				45A999681A51307C0008AFE3 /* CellOfAddFoodTable.h */,
-				45A999691A51307C0008AFE3 /* CellOfAddFoodTable.m */,
-				45A9996A1A51307C0008AFE3 /* CellOfAddFoodTable.xib */,
-				45A9996D1A513EE60008AFE3 /* AddFoodCell.h */,
-				45A9996E1A513EE60008AFE3 /* AddFoodCell.m */,
-				45A9996F1A513EE60008AFE3 /* AddFoodCell.xib */,
-				45A999721A5149400008AFE3 /* AddFoodLastCell.h */,
-				45A999731A5149400008AFE3 /* AddFoodLastCell.m */,
-				45A999741A5149400008AFE3 /* AddFoodLastCell.xib */,
 				45B650BE1A47F2D700A6376D /* DeviceViewController */,
 				45BA02C31A43D766003810C7 /* PersonCenterController */,
 				45BEED791A412CB1003000AD /* MainViewController */,
@@ -2612,6 +2628,7 @@
 				C4182E181A4E4A4A006A44D0 /* Cookbook.storyboard in Resources */,
 				45D906A21A47CAAB00B97D92 /* b_01.png in Resources */,
 				45A999711A513EE60008AFE3 /* AddFoodCell.xib in Resources */,
+				849F91841A513981006234B9 /* icon_share_navi_s.png in Resources */,
 				45D906A81A47CAAB00B97D92 /* back.png in Resources */,
 				45B88E461A4BD7A100722EF6 /* ksyr-wxz@3x.png in Resources */,
 				45BB364B1A4A9615000EE3C4 /* zm-cxz.png in Resources */,
@@ -2726,6 +2743,7 @@
 				45D906CC1A47CAAB00B97D92 /* guangfang@3x.png in Resources */,
 				45D906E11A47CAAB00B97D92 /* logo@3x.png in Resources */,
 				45B88E391A4BD7A100722EF6 /* kaishi-cxz@2x.png in Resources */,
+				45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */,
 				45D9070B1A47CAAB00B97D92 /* v@2x.png in Resources */,
 				45BB35FF1A4A6C80000EE3C4 /* guanji@3x.png in Resources */,
 				45BB35F81A4A6B4E000EE3C4 /* kaiji@2x.png in Resources */,
@@ -2877,6 +2895,7 @@
 				458952D01A49428D009B5DD1 /* dui@2x.png in Resources */,
 				45B88E121A4BCC8B00722EF6 /* yy-xz@2x.png in Resources */,
 				45A9994F1A50FD640008AFE3 /* pzy.png in Resources */,
+				849F91691A513981006234B9 /* icon_follow.png in Resources */,
 				45B650CC1A4813DC00A6376D /* kaxiang@2x.png in Resources */,
 				45BC578C1A4B08C00052F520 /* naozhong-wxz@2x.png in Resources */,
 				45B88E5D1A4BE9AD00722EF6 /* tk-xz@3x.png in Resources */,
@@ -3088,6 +3107,7 @@
 				8441177D1A4BB8AF00628A64 /* AFHTTPSessionManager.m in Sources */,
 				844117711A4BB8AF00628A64 /* Comment.m in Sources */,
 				45BB36701A4AA0A4000EE3C4 /* LineProgressLayer.m in Sources */,
+				45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */,
 				844117791A4BB8AF00628A64 /* FCUUID.m in Sources */,
 				45BB36681A4A9A70000EE3C4 /* DeviceWorkView.m in Sources */,
 				45BEED831A412E29003000AD /* MainViewNormalCell.m in Sources */,

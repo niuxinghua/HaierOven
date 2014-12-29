@@ -40,6 +40,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
                 </subviews>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="ieR-wD-oTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="91" id="5f5-9P-BPB"/>
                     <constraint firstAttribute="trailing" secondItem="tOA-1X-VxE" secondAttribute="trailing" constant="8" id="QgI-yI-0Ed"/>

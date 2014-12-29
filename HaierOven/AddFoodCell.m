@@ -55,7 +55,8 @@
 
 -(void)import:(UITapGestureRecognizer*)tap{
     UILabel *label = (UILabel*)[tap view];
-    NSLog(@"%ld",(long)label.tag);
+    
+    [self.delegate setLabelText:label];
 }
 
 

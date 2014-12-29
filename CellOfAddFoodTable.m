@@ -10,7 +10,8 @@
 #import "AddfoodCell.h"
 #import "Food.h"
 #import "AddFoodLastCell.h"
-@interface CellOfAddFoodTable ()<AddFoodLastCellDelegate>
+#import "AddFoodAlertView.h"
+@interface CellOfAddFoodTable ()<AddFoodLastCellDelegate,AddFoodCellDelegate>
 
 @end
 @implementation CellOfAddFoodTable
@@ -70,6 +71,7 @@
             cell.foodName = self.food[indexPath.row];
 
         }
+        cell.delegate = self;
         return cell;
     }
 
@@ -84,25 +86,20 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-//        // 2.更新UI界面
-//        //[tableView reloadData];
-//        NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
-//        [self.food addObject:@"鸡肉"];
-//        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 -(void)addFoodCell{
-//    AddFoodCell *addfood = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AddFoodCell class]) owner:self options:nil] firstObject];
-    
-//    self.addfoodTableView.editing = YES;
     [self.food addObject:@"鸡肉"];
-
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.food.count inSection:0];
     [self.addfoodTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     [self.delegate reloadMainTableView:self.food];
 }
+
+-(void)setLabelText:(UILabel *)label{
+//    self.myWindow.hidden = NO;
+//    self.addFoodAlertView.addFoodAlertType = label.tag;
+//    self.addFoodAlertView.label = label;
+    [self.delegate ImportAlertView:label];
+    
+}
+
 
 @end

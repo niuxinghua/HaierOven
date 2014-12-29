@@ -11,7 +11,7 @@
 @protocol CellOfAddFoodTableDelegate <NSObject>
 
 -(void)reloadMainTableView:(NSMutableArray *)arr;
-
+-(void)ImportAlertView:(UILabel*)label;
 @end
 
 @interface CellOfAddFoodTable : UITableViewCell <UITableViewDataSource,UITableViewDelegate>

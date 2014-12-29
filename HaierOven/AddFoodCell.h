@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class AddFoodCell;
+@protocol AddFoodCellDelegate <NSObject>
 
+-(void)setLabelText:(UILabel *)label;
+
+@end
 @interface AddFoodCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *foodLabel;
 @property (strong, nonatomic) IBOutlet UILabel *foodCountLabel;
 
 @property (strong, nonatomic) NSString *foodName;
 @property (strong, nonatomic) NSString *foodCount;
+@property (weak, nonatomic)id<AddFoodCellDelegate> delegate;
 @end

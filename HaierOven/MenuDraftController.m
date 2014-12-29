@@ -51,7 +51,7 @@
     MenuDraftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuDraftTableViewCell" forIndexPath:indexPath];
     cell.delegate = self;
     cell.tag      = indexPath.row;
-    cell.isEdit = self.delete;
+    cell.isEdit   = self.delete;
     return cell;
 }
 

@@ -667,7 +667,7 @@
                                 <state key="normal" title="预览">
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="CGXDJ.png"/>
+                                <state key="highlighted" title="预览"/>
                             </button>
                         </barButtonItem>
                     </navigationItem>

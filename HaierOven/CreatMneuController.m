@@ -11,8 +11,11 @@
 #import "ChooseTagsCell.h"
 #import "AutoSizeLabelView.h"
 #import "CellOfAddFoodTable.h"
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate>
+#import "AddFoodAlertView.h"
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *foods;
+@property (strong, nonatomic) UIWindow *myWindow;
+@property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
 @end
 #define PADDING_WIDE    15   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
@@ -22,12 +25,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tags =  @[@"烘焙",@"蒸菜",@"微波炉",@"巧克力",@"面包",@"饼干海鲜",@"有五个字呢",@"四个字呢",@"三个字呢",@"没规律呢",@"都能识别的呢",@"鱼",@"零食",@"早点",@"海鲜"];
-
-    self.foods = [NSMutableArray new];
-        [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellOfAddFoodTable class]) bundle:nil] forCellReuseIdentifier:@"CellOfAddFoodTable"];
+    [self SetUpSubviews];
 }
 
+-(void)SetUpSubviews{
+    
+    self.tags =  @[@"烘焙",@"蒸菜",@"微波炉",@"巧克力",@"面包",@"饼干海鲜",@"有五个字呢",@"四个字呢",@"三个字呢",@"没规律呢",@"都能识别的呢",@"鱼",@"零食",@"早点",@"海鲜"];
+    
+    self.foods = [NSMutableArray new];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellOfAddFoodTable class]) bundle:nil] forCellReuseIdentifier:@"CellOfAddFoodTable"];
+    
+    
+    self.myWindow = [UIWindow new];
+    self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
+    self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = YES;
+    
+    self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-30, 138)];
+    self.addFoodAlertView.delegate = self;
+    [self.myWindow addSubview:self.addFoodAlertView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -79,7 +99,7 @@
             return [self getHeight];
             break;
         default:
-            return (PageW-16)*0.13*(self.foods.count+2)+64;
+            return (PageW-16)*0.13*(self.foods.count+2)+51;
             break;
     }
 }
@@ -92,49 +112,7 @@
     }completion:nil];
     [self.tableView reloadData];
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -142,6 +120,7 @@
 #pragma mark- 自动标签delegate
 -(void)chooseTags:(UIButton*)btn{
     btn.selected = btn.selected ==YES?NO:YES;
+
     NSLog(@"%d",btn.tag);
 }
 #pragma mark-
@@ -167,4 +146,19 @@
     return (PADDING_HIGHT+LABEL_H)*line+75;
 
 }
+
+-(void)ImportAlertView:(UILabel *)label{
+    self.addFoodAlertView.addFoodAlertType = label.tag;
+    self.addFoodAlertView.label = label;
+    self.myWindow.hidden = NO;
+}
+#pragma mark- AddFoodAlertView 弹出框delegate
+-(void)Cancel{
+    self.myWindow.hidden = YES;
+}
+
+-(void)ChickAlert:(UILabel *)label{
+    self.myWindow.hidden = YES;
+}
+#pragma mark -
 @end

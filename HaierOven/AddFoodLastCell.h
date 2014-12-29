@@ -11,6 +11,7 @@
 @protocol AddFoodLastCellDelegate <NSObject>
 
 -(void)addFoodCell;
+-(void)alertError;
 
 @end
 @interface AddFoodLastCell : UITableViewCell

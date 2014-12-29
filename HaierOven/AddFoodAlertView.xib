@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="j68-tS-ArJ" customClass="AddFoodAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="138"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpL-Am-vvg">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhp-vm-yPy">
+                            <rect key="frame" x="25" y="8" width="267" height="24"/>
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="uhp-vm-yPy" secondAttribute="trailing" constant="8" id="QvO-N0-122"/>
+                        <constraint firstItem="uhp-vm-yPy" firstAttribute="leading" secondItem="fpL-Am-vvg" secondAttribute="leading" constant="25" id="SkA-zj-WzZ"/>
+                        <constraint firstAttribute="bottom" secondItem="uhp-vm-yPy" secondAttribute="bottom" constant="8" id="gb1-1B-3TO"/>
+                        <constraint firstItem="uhp-vm-yPy" firstAttribute="top" secondItem="fpL-Am-vvg" secondAttribute="top" constant="8" id="vN9-6e-Z8z"/>
+                        <constraint firstAttribute="width" secondItem="fpL-Am-vvg" secondAttribute="height" multiplier="15:2" id="ypr-lA-tTh"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk.png" translatesAutoresizingMaskIntoConstraints="NO" id="a2f-Jy-GHs" customClass="tk">
+                    <rect key="frame" x="0.0" y="98" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="nch-Aj-l1p"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a87-79-sFN">
+                    <rect key="frame" x="0.0" y="98" width="150" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Bud-mu-krt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ChickAlert:" destination="j68-tS-ArJ" eventType="touchUpInside" id="Uqt-7U-rkv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fc3-j5-OUl">
+                    <rect key="frame" x="150" y="98" width="150" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JJA-FY-fNv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ChickAlert:" destination="j68-tS-ArJ" eventType="touchUpInside" id="Ltd-kL-K2a"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cgq-pq-wBe">
+                    <rect key="frame" x="8" y="48" width="284" height="42"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fc3-j5-OUl" secondAttribute="bottom" id="4Ks-9A-0OC"/>
+                <constraint firstAttribute="trailing" secondItem="Cgq-pq-wBe" secondAttribute="trailing" constant="8" id="A9P-a5-IRY"/>
+                <constraint firstItem="fc3-j5-OUl" firstAttribute="width" secondItem="a87-79-sFN" secondAttribute="width" id="FH1-nw-rA8"/>
+                <constraint firstItem="fpL-Am-vvg" firstAttribute="top" secondItem="j68-tS-ArJ" secondAttribute="top" id="Rg6-57-IuZ"/>
+                <constraint firstAttribute="trailing" secondItem="fpL-Am-vvg" secondAttribute="trailing" id="SDl-gZ-6aL"/>
+                <constraint firstAttribute="trailing" secondItem="a2f-Jy-GHs" secondAttribute="trailing" id="V8M-eA-mcK"/>
+                <constraint firstAttribute="bottom" secondItem="a87-79-sFN" secondAttribute="bottom" id="WVE-hD-stQ"/>
+                <constraint firstItem="fc3-j5-OUl" firstAttribute="top" secondItem="Cgq-pq-wBe" secondAttribute="bottom" constant="8" id="We6-3i-Rgc"/>
+                <constraint firstItem="fc3-j5-OUl" firstAttribute="leading" secondItem="a87-79-sFN" secondAttribute="trailing" id="YXM-bm-TOf"/>
+                <constraint firstAttribute="trailing" secondItem="fc3-j5-OUl" secondAttribute="trailing" id="dwH-Cw-CUn"/>
+                <constraint firstItem="a87-79-sFN" firstAttribute="leading" secondItem="j68-tS-ArJ" secondAttribute="leading" id="iuB-Oi-oj7"/>
+                <constraint firstItem="fpL-Am-vvg" firstAttribute="leading" secondItem="j68-tS-ArJ" secondAttribute="leading" id="j8v-dv-IEU"/>
+                <constraint firstAttribute="bottom" secondItem="a2f-Jy-GHs" secondAttribute="bottom" id="jQ0-nZ-se3"/>
+                <constraint firstItem="a2f-Jy-GHs" firstAttribute="leading" secondItem="j68-tS-ArJ" secondAttribute="leading" id="nQT-nS-Fxk"/>
+                <constraint firstItem="fc3-j5-OUl" firstAttribute="leading" secondItem="a87-79-sFN" secondAttribute="trailing" id="tkb-7W-7UM"/>
+                <constraint firstItem="Cgq-pq-wBe" firstAttribute="leading" secondItem="j68-tS-ArJ" secondAttribute="leading" constant="8" id="uoP-5L-cQ0"/>
+                <constraint firstItem="Cgq-pq-wBe" firstAttribute="top" secondItem="fpL-Am-vvg" secondAttribute="bottom" constant="8" id="w9i-Pt-sKw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="alertTextFailed" destination="Cgq-pq-wBe" id="sqM-RC-xha"/>
+                <outlet property="alertTitle" destination="uhp-vm-yPy" id="gi7-r3-j1w"/>
+            </connections>
+            <point key="canvasLocation" x="113" y="91"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tk.png" width="898" height="123"/>
+    </resources>
+</document>
