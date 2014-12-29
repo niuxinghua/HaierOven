@@ -8,6 +8,7 @@
 
 #import "UpLoadingMneuController.h"
 #import "ChooseCoverView.h"
+#import "CreatMneuController.h"
 @interface UpLoadingMneuController ()<UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ChooseCoverViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *cover;
 @property (strong, nonatomic) IBOutlet UITextField *menuTitleTextFiled;
@@ -77,11 +78,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)CreatMenu:(id)sender {
-    if (self.isChooseCover==NO||self.titleString.length == 0||self.descriptionString.length == 0) {
-    }
-    
-}
+
 -(void)TakeCover:(NSInteger)tag{
     [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH, PageW, PageW*0.58)];
     }completion:^(BOOL finished) {
@@ -164,6 +161,17 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - 创建菜谱
+- (IBAction)CreatMenu:(id)sender {
+    if (self.isChooseCover==NO||self.titleString.length == 0||self.descriptionString.length == 0) {
+    }
+    CreatMneuController *creatMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
+    [self.navigationController pushViewController:creatMenu animated:YES];
+    
+    
+}
+#pragma mark -
 
 //当键盘出现或改变时调用
 
