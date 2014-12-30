@@ -15,6 +15,7 @@
 
 @property (nonatomic)AutoSizeLabelViewStyle style;
 
+@property (strong, nonatomic)UIButton *tempBtn;
 @end
 
 @implementation AutoSizeLabelView
@@ -34,6 +35,8 @@
     }
     return self;
 }
+
+
 
 - (instancetype)initWithFrame:(CGRect)frame style:(AutoSizeLabelViewStyle)style
 {

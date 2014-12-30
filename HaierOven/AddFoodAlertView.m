@@ -21,7 +21,8 @@
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AddFoodAlertView class]) owner:self options:nil] firstObject];
     self.frame = frame;
-    self.center = CGPointMake(PageW/2, PageH/2);
+    self.center = CGPointMake(PageW/2, PageH/3.2);
+    self.layer.cornerRadius = 15;
     return self;
 }
 
@@ -50,8 +51,10 @@
     if (sender.tag == 1) {
         self.label.text = self.alertTextFailed.text;
         self.label.textColor = [UIColor blackColor];
-        [self.delegate ChickAlert:self.label];
+        [self.delegate ChickAlert:self.label andTextFailed:self.alertTextFailed];
     }else
         [self.delegate Cancel];
 }
+
+
 @end

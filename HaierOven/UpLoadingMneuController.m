@@ -151,9 +151,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.cover.image = image;
     self.isChooseCover = YES;
-
-    //    [self.avaterButton setImage:image forState:UIControlStateNormal];
-    //    [self.avaterButton setImage:image forState:UIControlStateHighlighted];
+    
 }
 
 
