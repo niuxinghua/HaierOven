@@ -41,7 +41,7 @@
     user.phone          = [userDict[@"mobile"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"mobile"]];
     user.accType        = [userDict[@"accType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"accType"]];
     user.status         = [userDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"status"]];
-    user.isDeleted      = [userDict[@"IsDeleted"] boolValue];
+    user.isDeleted      = [userDict[@"IsDeleted"] isKindOfClass:[NSNull class]] ? NO : [userDict[@"IsDeleted"] boolValue];
     
     NSDictionary* profileDict = userDict[@"userProfile"];
     
@@ -99,8 +99,8 @@
     Tag* tag = [[Tag alloc] init];
     tag.ID      = [tagDict[@"tagID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", tagDict[@"tagID"]];
     tag.name    = [tagDict[@"tagName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", tagDict[@"tagName"]];
-    tag.isHot   = [tagDict[@"isHot"] boolValue];
-    tag.isDeleted = [tagDict[@"isDeleted"] boolValue];
+    tag.isHot   = [tagDict[@"isHot"] isKindOfClass:[NSNull class]] ? NO : [tagDict[@"isHot"] boolValue];
+    tag.isDeleted = [tagDict[@"isDeleted"] isKindOfClass:[NSNull class]] ? NO : [tagDict[@"isDeleted"] boolValue];
     return tag;
 }
 
@@ -118,6 +118,7 @@
         comment.ID                  = [commentDict[@"commentID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentID"]];
         comment.content             = [commentDict[@"commentContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentContent"]];
         comment.objectId            = [commentDict[@"commentObjectID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentObjectID"]];
+        comment.parentId            = [commentDict[@"parentID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"parentID"]];
         comment.creatorLoginName    = [commentDict[@"creatorLoginName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorLoginName"]];
         comment.creatorName         = [commentDict[@"creatorName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorName"]];
         comment.creatorAvatar       = [commentDict[@"creatorPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorPhoto"]];

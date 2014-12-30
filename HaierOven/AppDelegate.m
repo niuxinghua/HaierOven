@@ -27,7 +27,7 @@
 //    
     [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
-    [self startUSdk];
+//    [self startUSdk];
     
     
     return YES;

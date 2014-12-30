@@ -79,7 +79,7 @@
     }];
     
     // Delegation
-    
+    [self.delegate CookbookSectionView:self didTappedWithContentType:self.contentType];
 }
 
 

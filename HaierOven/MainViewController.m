@@ -191,6 +191,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
     return self.cookbooks.count;
+//    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -218,6 +219,7 @@
 {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Cookbook" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
 

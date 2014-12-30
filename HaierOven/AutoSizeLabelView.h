@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, AutoSizeLabelViewStyle) {
-    AutoSizeLabelViewStyleCreatMenu = 0,        // 项目简介
-    AutoSizeLabelViewStyleMenuDetail = 1,     //团队介绍
+    AutoSizeLabelViewStyleCreatMenu = 0,        //创建菜谱中的tag标签
+    AutoSizeLabelViewStyleMenuDetail = 1,     //菜谱详情中的tag标签
 
 };
 @class AutoSizeLabelView;
