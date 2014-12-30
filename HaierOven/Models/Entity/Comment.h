@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+extern const CGFloat kAvatarSize;
+extern const CGFloat kReplyButtonWidth;
+extern const CGFloat kLineSpacing;
+extern const CGFloat kCharacterSpacing;
+
+#define CommentFont [UIFont italicSystemFontOfSize:15]
+
 @interface Comment : NSObject
 
 /**
@@ -24,6 +31,11 @@
  *  菜谱Id
  */
 @property (copy, nonatomic) NSString* objectId;
+
+/**
+ *  回复评论的主键ID
+ */
+@property (copy, nonatomic) NSString* parentId;
 
 /**
  *  评论者登录名
@@ -45,5 +57,11 @@
  */
 @property (copy, nonatomic) NSString* modifiedTime;
 
+/**
+ *  获取评论高度
+ *
+ *  @return 评论高度
+ */
+- (CGFloat)getHeight;
 
 @end

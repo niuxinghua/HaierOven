@@ -7,7 +7,10 @@
 //
 
 #import "BaseTableViewController.h"
+#import "Cookbook.h"
 
 @interface CookbookDetailControllerViewController : BaseTableViewController
+
+@property (strong, nonatomic) Cookbook* cookbook;
 
 @end

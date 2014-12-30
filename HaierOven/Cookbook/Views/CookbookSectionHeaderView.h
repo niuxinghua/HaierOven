@@ -13,8 +13,17 @@ typedef NS_ENUM(NSUInteger, CurrentContentType) {
     CurrentContentTypeMethods,     //做法
     CurrentContentTypeComment,       //评论
 };
+@class CookbookSectionHeaderView;
+@protocol CookbookSectionHeaderDelegate <NSObject>
+
+@required
+- (void)CookbookSectionView:(CookbookSectionHeaderView*)sectionHeader didTappedWithContentType:(CurrentContentType)type;
+
+@end
 
 @interface CookbookSectionHeaderView : UIView
+
+@property (weak, nonatomic) id <CookbookSectionHeaderDelegate>delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame andCurrentContentType:(CurrentContentType)type;
 

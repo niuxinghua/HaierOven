@@ -35,7 +35,7 @@
 
 #define GlobalYellowColor           ([UIColor colorWithRed:239.0f/255 green:152.0f/255 blue:40.0f/255 alpha:1.0])
 
-
+#define GlobalTableViewColor        RGB(245, 245, 245)
 
 
 //屏幕大小
