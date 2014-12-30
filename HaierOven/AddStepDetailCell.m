@@ -49,6 +49,13 @@
     self.stepDescriptionLabel.text = stepDescriptionString;
 }
 
+-(void)setEditStyle:(EditStyle)editStyle{
+    _editStyle = editStyle;
+    if (editStyle == EditStyleNone) {
+        self.deleteBtn.hidden = YES;
+    }else
+        self.deleteBtn.hidden = NO;
+}
 #pragma mark- 点击图片和描述
 -(void)AddStepImage{
     [self.delegate AddStepImage:self.stepImage];
@@ -57,5 +64,8 @@
 -(void)AddDescription{
     [self.delegate AddStepDescription:self.stepDescriptionLabel];
 
+}
+- (IBAction)DeleteStep:(UIButton*)sender {
+    [self.delegate DeleteStepsAtIndex:sender.tag];
 }
 @end

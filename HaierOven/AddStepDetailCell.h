@@ -12,12 +12,21 @@
 
 -(void)AddStepImage:(UIImageView*)imageview;
 -(void)AddStepDescription:(UILabel*)label;
+-(void)DeleteStepsAtIndex:(NSInteger)index;
 @end
 
+typedef NS_ENUM(NSUInteger, EditStyle) {
+    EditStyleNone = 0,
+    EditStyleDelete = 1,
+    
+};
+
 @interface AddStepDetailCell : UITableViewCell
+@property (nonatomic)EditStyle editStyle;
 @property (strong, nonatomic) IBOutlet UIImageView *stepImage;
 @property (strong, nonatomic) IBOutlet UILabel *stepIndexLabel;
 @property (strong, nonatomic) IBOutlet UILabel *stepDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic)id<AddStepCellDetailDelegate>delegate;
 /**
  *  添加步骤文字说明

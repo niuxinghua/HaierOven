@@ -41,11 +41,27 @@
                         <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxA-TR-n25">
+                        <rect key="frame" x="290" y="8" width="22" height="22"/>
+                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="lVU-JZ-jQs"/>
+                            <constraint firstAttribute="height" constant="22" id="vF2-kF-uk7"/>
+                        </constraints>
+                        <state key="normal" image="delete.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="DeleteStep:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mQp-n0-z92"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="dBF-pF-ypj" secondAttribute="bottom" constant="8" id="1tT-nh-cun"/>
                     <constraint firstAttribute="trailing" secondItem="dBF-pF-ypj" secondAttribute="trailing" constant="8" id="1zC-7X-TJP"/>
+                    <constraint firstAttribute="trailing" secondItem="JxA-TR-n25" secondAttribute="trailing" constant="8" id="Lo8-7L-9Xn"/>
                     <constraint firstItem="GAF-N6-vJB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="R5V-s9-1IZ"/>
+                    <constraint firstItem="JxA-TR-n25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="apj-uZ-XE5"/>
                     <constraint firstItem="dBF-pF-ypj" firstAttribute="top" secondItem="GAF-N6-vJB" secondAttribute="bottom" constant="8" id="cG8-TR-SIc"/>
                     <constraint firstItem="FI6-uc-BjX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="pWk-HJ-dFt"/>
                     <constraint firstItem="GAF-N6-vJB" firstAttribute="leading" secondItem="FI6-uc-BjX" secondAttribute="trailing" constant="15" id="tDW-Xt-je7"/>
@@ -54,6 +70,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="deleteBtn" destination="JxA-TR-n25" id="FvJ-4m-OY4"/>
                 <outlet property="stepDescriptionLabel" destination="dBF-pF-ypj" id="KEO-T6-U1u"/>
                 <outlet property="stepImage" destination="GAF-N6-vJB" id="QjI-Fz-Fza"/>
                 <outlet property="stepIndexLabel" destination="FI6-uc-BjX" id="0R7-Fa-ScB"/>
@@ -63,5 +80,6 @@
     </objects>
     <resources>
         <image name="YJTP.png" width="120" height="120"/>
+        <image name="delete.png" width="22" height="22"/>
     </resources>
 </document>

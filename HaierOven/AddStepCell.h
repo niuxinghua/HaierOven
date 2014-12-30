@@ -11,6 +11,8 @@
 @protocol AddStepCellDelegate <NSObject>
 
 -(void)AddStepOfMainTableView:(NSMutableArray *)arr;
+-(void)DeleteStepOfMainTableView:(NSMutableArray *)arr;
+
 -(void)ImportStepDescription:(UILabel*)label;
 -(void)AddStepImage:(UIImageView*)imageView;
 @end

@@ -10,12 +10,13 @@
 #import "AddStepDetailCell.h"
 @interface AddStepCell ()<AddStepCellDetailDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *AddStepBtn;
-@property int stepIndex;
+@property (nonatomic)EditStyle editStyle;
 @end
 @implementation AddStepCell
 
 - (void)awakeFromNib {
-    self.stepIndex =1;
+
+    self.editStyle = EditStyleNone;
     // Initialization code
 }
 
@@ -46,14 +47,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.steps.count+1;
+    return self.steps.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AddStepDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddStepDetailCell" forIndexPath:indexPath];
     cell.delegate = self;
-    cell.stepIndexString = [NSString stringWithFormat:@"%d",self.stepIndex];
+    cell.editStyle = self.editStyle;
+//    cell.deleteBtn.tag = self.steps.count - 1 ;
+    cell.stepIndexString = self.steps[indexPath.row];
     return cell;
 }
 
@@ -66,18 +69,42 @@
 {
     return YES;
 }
+#pragma mark- 添加步骤
 - (IBAction)AddStep:(id)sender {
-    self.stepIndex++;
     [self.steps addObject:@"鸡肉"];
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.steps.count inSection:0];
+
+    for (int i = 0; i<self.steps.count; i++) {
+        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.steps.count-1 inSection:0];
     [self.addStepTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.delegate AddStepOfMainTableView:self.steps];
 }
+#pragma mark- 删除步骤
+-(void)DeleteStepsAtIndex:(NSInteger)index{
+    [self.steps removeObjectAtIndex:index];
+    for (int i = 0; i<self.steps.count; i++) {
+        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
+    }
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.addStepTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.addStepTableView reloadData];
+    [self.delegate DeleteStepOfMainTableView:self.steps];
 
+}
+
+#pragma mark -
 -(void)AddStepImage:(UIImageView *)imageview{
     [self.delegate AddStepImage:imageview];
 }
 -(void)AddStepDescription:(UILabel *)label{
     [self.delegate ImportStepDescription:label];
+}
+- (IBAction)DeleteStep:(id)sender {
+    self.editStyle = self.editStyle ==EditStyleNone? EditStyleDelete:EditStyleNone;
+    [self.addStepTableView reloadData];
 }
 @end

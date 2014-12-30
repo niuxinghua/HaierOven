@@ -47,14 +47,14 @@
     self.tagsCellHight = [self getHeight];
     self.psCellHight = 210;
     
-    self.tagsView = [[AutoSizeLabelView alloc]init];
-
-    
-    self.tagsView.tags = [self.tags copy];
-    
+//    self.tagsView = [AutoSizeLabelView new];
+//    self.tagsView.tags = [self.tags copy];
+//    
     
     self.foods = [NSMutableArray new];
     self.steps = [NSMutableArray new];
+    [self.steps addObject:@"1"];
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellOfAddFoodTable class]) bundle:nil] forCellReuseIdentifier:@"CellOfAddFoodTable"];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([AddStepCell class]) bundle:nil] forCellReuseIdentifier:@"AddStepCell"];
@@ -102,7 +102,11 @@
         }else if(indexPath.row ==1)  {
             ChooseTagsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseTagsCell" forIndexPath:indexPath];
             cell.tagsView.delegate = self;
-            cell.tagsView = self.tagsView;
+            if (!self.tagsView) {
+                cell.tagsView.tags = self.tags;
+                self.tagsView = cell.tagsView;
+            }
+//            cell.tagsView = self.tagsView;
             return cell;
             
         }else if(indexPath.row == 2){
@@ -148,7 +152,7 @@
             return 80;
             break;
         case 4:
-            return (PageW - 60)*0.58*(self.steps.count+1)+80;
+            return (PageW - 60)*0.58*(self.steps.count)+80;
             break;
             
         default:
@@ -191,6 +195,14 @@
     [self.tableView reloadData];
     
 }
+-(void)DeleteStepOfMainTableView:(NSMutableArray *)arr{
+    self.steps = [arr mutableCopy];
+    CGPoint point = self.tableView.contentOffset;
+    
+    [UIView animateWithDuration:0.6 animations:^{self.tableView.contentOffset = CGPointMake(0, point.y-(PageW - 60)*0.58);
+    }completion:nil];
+    [self.tableView reloadData];
+}
 
 
 -(void)ImportStepDescription:(UILabel *)label{
@@ -226,8 +238,8 @@
                 CGSize size = CGSizeZero;
                 size = [MyUtils getTextSizeWithText:self.myPs_String andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:self.tableView.width-100];
                 size.height = size.height<18?18:size.height;
-                self.psCellHight =size.height;
-                
+                self.psCellHight =size.height+145;
+            
                 [self.tableView reloadData];
                 
             }
@@ -320,9 +332,7 @@
         count++;
     }
     
-    
     return (PADDING_HIGHT+LABEL_H)*line+75;
-
 }
 
 

@@ -36,6 +36,14 @@
     return self;
 }
 
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.style = AutoSizeLabelViewStyleCreatMenu;
+
+        
+    }
+    return self;
+}
 
 
 - (instancetype)initWithFrame:(CGRect)frame style:(AutoSizeLabelViewStyle)style

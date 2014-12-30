@@ -64,6 +64,20 @@
                             <action selector="AddStep:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="K3C-ND-dh5"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rQ-M1-m4Y">
+                        <rect key="frame" x="268" y="7" width="22" height="22"/>
+                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="Kcm-IF-Ix9"/>
+                            <constraint firstAttribute="width" constant="22" id="Ykb-qR-grh"/>
+                        </constraints>
+                        <state key="normal" image="delete.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="DeleteStep:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3oc-5F-jXu"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="UPu-Cu-ETk" secondAttribute="bottom" constant="8" id="7sj-cg-vAg"/>
@@ -80,6 +94,8 @@
                     <constraint firstAttribute="trailing" secondItem="CF4-79-qZv" secondAttribute="trailing" constant="30" id="WCc-98-erh"/>
                     <constraint firstItem="UPu-Cu-ETk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="dLa-kK-yeL"/>
                     <constraint firstAttribute="trailing" secondItem="eO5-nU-MhF" secondAttribute="trailing" id="daV-q1-6hB"/>
+                    <constraint firstItem="7rQ-M1-m4Y" firstAttribute="centerY" secondItem="y5M-NZ-7ma" secondAttribute="centerY" id="iai-ZD-6Pb"/>
+                    <constraint firstAttribute="trailing" secondItem="7rQ-M1-m4Y" secondAttribute="trailing" constant="30" id="rRv-9o-buY"/>
                     <constraint firstItem="y5M-NZ-7ma" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="zbR-35-T6U"/>
                 </constraints>
                 <variation key="default">
@@ -96,6 +112,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delete.png" width="22" height="22"/>
         <image name="garyline.png" width="90" height="15"/>
     </resources>
 </document>
