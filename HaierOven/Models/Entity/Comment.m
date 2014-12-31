@@ -9,7 +9,7 @@
 #import "Comment.h"
 #import "AttributedLabel.h"
 
-const CGFloat kAvatarSize = 30.0;
+const CGFloat kAvatarSize = 35.0;
 const CGFloat kReplyButtonWidth = 50;
 const CGFloat kLineSpacing = 4;
 const CGFloat kCharacterSpacing = 2;
@@ -28,7 +28,7 @@ const CGFloat kCharacterSpacing = 2;
     commentHeight += kAvatarSize;
     
 //    CGFloat commentWidth = self.isSubComment ? Main_Screen_Width - 60 - 20 : Main_Screen_Width - 60;
-    CGFloat commentWidth = Main_Screen_Width - 60;
+    CGFloat commentWidth = Main_Screen_Width - 68;
     
     // 计算评论高度
     AttributedLabel *tempLabel = [[AttributedLabel alloc] init];
@@ -38,8 +38,8 @@ const CGFloat kCharacterSpacing = 2;
     tempLabel.text = self.content;
     commentHeight += [tempLabel getAttributedStringHeightWidthValue:commentWidth];
     
-    // 评论时间高度和评论距离
-    commentHeight += 21 + 15;
+    // 评论下边距
+    commentHeight += 15;
     
     //    if (self.subComments.count > 0) {
     //        for (Comment* subComment in self.subComments) {

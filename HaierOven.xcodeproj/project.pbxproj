@@ -629,11 +629,14 @@
 		849F91871A513981006234B9 /* step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91661A513981006234B9 /* step1.png */; };
 		849F91881A513981006234B9 /* step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91671A513981006234B9 /* step2.png */; };
 		849F91891A513981006234B9 /* step3.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91681A513981006234B9 /* step3.png */; };
+		84AD6D961A53A1C0002729D9 /* CommentCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D941A53A1C0002729D9 /* CommentCountCell.m */; };
+		84AD6D971A53A1C0002729D9 /* CommentCountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */; };
+		84AD6D9D1A53A679002729D9 /* RDRStickyKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */; };
+		84AD6D9E1A53A679002729D9 /* RDRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D9C1A53A679002729D9 /* RDRTextView.m */; };
 		84E113781A52A2FF00D16DDB /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E113771A52A2FF00D16DDB /* CommentViewController.m */; };
 		84E1137B1A52A45600D16DDB /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1137A1A52A45600D16DDB /* CommentView.m */; };
 		84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1137F1A52A46B00D16DDB /* CommentListCell.m */; };
 		84E113831A52A46B00D16DDB /* CommentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E113801A52A46B00D16DDB /* CommentListCell.xib */; };
-		84E113881A52A4B100D16DDB /* AttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E113851A52A4B100D16DDB /* AttributedString.m */; };
 		84E113891A52A4B100D16DDB /* AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E113871A52A4B100D16DDB /* AttributedLabel.m */; };
 		84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1138B1A52A4C700D16DDB /* DrawedButton.m */; };
 		C4182E181A4E4A4A006A44D0 /* Cookbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4182E171A4E4A4A006A44D0 /* Cookbook.storyboard */; };
@@ -1405,6 +1408,13 @@
 		849F91661A513981006234B9 /* step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1.png; sourceTree = "<group>"; };
 		849F91671A513981006234B9 /* step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2.png; sourceTree = "<group>"; };
 		849F91681A513981006234B9 /* step3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step3.png; sourceTree = "<group>"; };
+		84AD6D931A53A1C0002729D9 /* CommentCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCountCell.h; sourceTree = "<group>"; };
+		84AD6D941A53A1C0002729D9 /* CommentCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCountCell.m; sourceTree = "<group>"; };
+		84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCountCell.xib; sourceTree = "<group>"; };
+		84AD6D991A53A679002729D9 /* RDRStickyKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRStickyKeyboardView.h; sourceTree = "<group>"; };
+		84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRStickyKeyboardView.m; sourceTree = "<group>"; };
+		84AD6D9B1A53A679002729D9 /* RDRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRTextView.h; sourceTree = "<group>"; };
+		84AD6D9C1A53A679002729D9 /* RDRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRTextView.m; sourceTree = "<group>"; };
 		84E113761A52A2FF00D16DDB /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		84E113771A52A2FF00D16DDB /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		84E113791A52A45600D16DDB /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
@@ -2666,11 +2676,25 @@
 			name = Cookbook;
 			sourceTree = "<group>";
 		};
+		84AD6D981A53A679002729D9 /* RDRStickyKeyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				84AD6D991A53A679002729D9 /* RDRStickyKeyboardView.h */,
+				84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */,
+				84AD6D9B1A53A679002729D9 /* RDRTextView.h */,
+				84AD6D9C1A53A679002729D9 /* RDRTextView.m */,
+			);
+			path = RDRStickyKeyboardView;
+			sourceTree = "<group>";
+		};
 		84E113751A52A2E200D16DDB /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
 				84E113761A52A2FF00D16DDB /* CommentViewController.h */,
 				84E113771A52A2FF00D16DDB /* CommentViewController.m */,
+				84AD6D931A53A1C0002729D9 /* CommentCountCell.h */,
+				84AD6D941A53A1C0002729D9 /* CommentCountCell.m */,
+				84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */,
 				84E1137E1A52A46B00D16DDB /* CommentListCell.h */,
 				84E1137F1A52A46B00D16DDB /* CommentListCell.m */,
 				84E113801A52A46B00D16DDB /* CommentListCell.xib */,
@@ -2707,6 +2731,7 @@
 		C4182E161A4E4A27006A44D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84AD6D981A53A679002729D9 /* RDRStickyKeyboardView */,
 				84E113751A52A2E200D16DDB /* CommentView */,
 				842A86DC1A52755700C75EE4 /* StepsView */,
 				842A86CA1A5243FA00C75EE4 /* FoodsView */,
@@ -2962,6 +2987,7 @@
 				45B88E391A4BD7A100722EF6 /* kaishi-cxz@2x.png in Resources */,
 				45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */,
 				45D9070B1A47CAAB00B97D92 /* v@2x.png in Resources */,
+				84AD6D971A53A1C0002729D9 /* CommentCountCell.xib in Resources */,
 				45BB35FF1A4A6C80000EE3C4 /* guanji@3x.png in Resources */,
 				45BB35F81A4A6B4E000EE3C4 /* kaiji@2x.png in Resources */,
 				45C01C131A4D669D00B54941 /* yurewanchen@3x.png in Resources */,
@@ -3353,6 +3379,7 @@
 				45BEED721A412AED003000AD /* CycleScrollView.m in Sources */,
 				45A5E8131A4FF25600FCD2BD /* ChooseCoverView.m in Sources */,
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
+				84AD6D9E1A53A679002729D9 /* RDRTextView.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
@@ -3412,6 +3439,7 @@
 				844117801A4BB8AF00628A64 /* AFURLConnectionOperation.m in Sources */,
 				844117781A4BB8AF00628A64 /* User.m in Sources */,
 				844117831A4BB8AF00628A64 /* AFURLSessionManager.m in Sources */,
+				84AD6D9D1A53A679002729D9 /* RDRStickyKeyboardView.m in Sources */,
 				45D906171A47C01900B97D92 /* RelationshipListViewController.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
 				84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */,
@@ -3437,6 +3465,7 @@
 				457A77591A4279CC00E422D0 /* MainSearchViewController.m in Sources */,
 				842A86CD1A52457300C75EE4 /* FoodsViewController.m in Sources */,
 				458952F81A496E6D009B5DD1 /* DeviceMessageController.m in Sources */,
+				84AD6D961A53A1C0002729D9 /* CommentCountCell.m in Sources */,
 				842A86ED1A527DC700C75EE4 /* StepCell.m in Sources */,
 				45C7E58B1A3FE25A000B086B /* UIViewController+RESideMenu.m in Sources */,
 				45A5E8221A5002D600FCD2BD /* MenuDraftTableViewCell.m in Sources */,

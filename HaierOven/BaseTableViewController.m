@@ -106,6 +106,7 @@
 {
     self.progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.progressHUD.labelText = text;
+    self.progressHUD.labelColor = [UIColor whiteColor];
     self.progressHUD.dimBackground = dimBackground;
 }
 

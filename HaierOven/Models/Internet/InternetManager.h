@@ -288,7 +288,7 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param cookbookId 菜谱ID
  *  @param completion 结果回调
  */
-- (void)getCookbookDetailWithCookbookId:(NSString*)cookbookId callBack:(myCallback)completion;
+- (void)getCookbookDetailWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
 
 /**
  *  添加菜谱

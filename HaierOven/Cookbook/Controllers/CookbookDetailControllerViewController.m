@@ -13,10 +13,13 @@
 #import "FoodsViewController.h"
 #import "StepsViewController.h"
 #import "CommentViewController.h"
+#import "RDRStickyKeyboardView.h"
+
 
 @interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate>
 {
     CGFloat _lastContentOffsetY;
+    NSInteger _commentPageIndex;
 }
 
 #pragma mark - NavigationBar
@@ -39,9 +42,15 @@
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *cookbookTitleCell;
 
+@property (weak, nonatomic) IBOutlet UILabel *cookbookNameLabel;
+
+
 @property (weak, nonatomic) IBOutlet AutoSizeLabelView *tagsView;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *cookbookDescCell;
+
+@property (weak, nonatomic) IBOutlet UILabel *cookbookDescLabel;
+
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *learnCookBtnCell;
 
@@ -67,7 +76,13 @@
 
 @property (strong, nonatomic) CookbookDetail* cookbookDetail;
 
+@property (strong, nonatomic) NSMutableArray* comments;
+
 @property (nonatomic) CurrentContentType contentType;
+
+@property (nonatomic, strong) RDRStickyKeyboardView *contentWrapper;
+
+@property (strong, nonatomic) UIWindow* myWindow;
 
 @end
 
@@ -78,7 +93,7 @@
 - (void)loadCookbookDetail
 {
     [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-    [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:@"5" callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             self.cookbookDetail = obj;
@@ -94,6 +109,27 @@
     }];
 }
 
+- (void)loadComments
+{
+//    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+    [[InternetManager sharedManager] getCommentsWithCookbookId:self.cookbook.ID andPageIndex:_commentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+//        [super hiddenProgressHUD];
+        if (success) {
+            self.comments = obj;
+            if (self.commentsTableView == nil) {
+                [self initTableViewWithContentType:CurrentContentTypeComment];
+                [self setupWrapper];
+            }
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+            }
+        }
+    }];
+}
+
 - (void)updateUI
 {
     // 设置第二个分区默认显示内容
@@ -105,12 +141,18 @@
         [self initTableViewWithContentType:CurrentContentTypeMethods];
     }
     
+    
+    
     // 其他显示的内容
     NSMutableArray* tagNames = [NSMutableArray array];
     for (Tag* tag in self.cookbookDetail.tags) {
         [tagNames addObject:tag.name];
     }
     self.tagsView.tags = [tagNames copy];
+    
+    self.cookbookNameLabel.text = self.cookbook.name;
+    
+    self.cookbookDescLabel.text = self.cookbookDetail.desc;
     
     // reloadData
     [self.tableView reloadData];
@@ -157,6 +199,9 @@
         }
         case CurrentContentTypeComment:
         {
+            tableView.scrollEnabled = YES;
+            
+            tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             
             self.commentsTableView = tableView;
             
@@ -165,11 +210,25 @@
             tableView.tag = 7;
             
             // 这里应该从网络获取Comments
-            CommentViewController* controller = [[CommentViewController alloc] initWithData:[NSMutableArray array] andController:self];
+            
+            if (self.comments.count == 0) {
+                Comment* comment = [[Comment alloc] init];
+                comment.content = @"这个菜谱真好啊！";
+                comment.creatorAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
+                comment.modifiedTime = @"2014-12-31 10:47";
+                comment.creatorLoginName = @"黄靖雯";
+                [self.comments addObject:comment];
+                [self.comments addObject:comment];
+                [self.comments addObject:comment];
+                [self.comments addObject:comment];
+            
+            }
+            
+            CommentViewController* controller = [[CommentViewController alloc] initWithData:self.comments andController:self];
             self.commentsTableViewDataSource = controller;
             tableView.delegate = controller;
             tableView.dataSource = controller;
-            
+            [tableView registerNib:[UINib nibWithNibName:@"CommentCountCell" bundle:nil] forCellReuseIdentifier:@"Comment count cell"];
             [tableView registerNib:[UINib nibWithNibName:@"CommentListCell" bundle:nil] forCellReuseIdentifier:@"Comment list cell"];
             
             break;
@@ -188,6 +247,8 @@
         self.sectionHeaderView = [[CookbookSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50) andCurrentContentType:CurrentContentTypeFoods];
         self.sectionHeaderView.delegate = self;
         self.contentType = CurrentContentTypeFoods;
+        _commentPageIndex = 1;
+        self.comments = [NSMutableArray array];
     }
     return self;
 }
@@ -196,6 +257,8 @@
     [super viewDidLoad];
     [self setupSubviews];
     [self loadCookbookDetail];
+    [self loadComments];
+    
 }
 
 - (void)setupSubviews
@@ -210,6 +273,39 @@
     self.creatorAvatar.layer.cornerRadius = self.creatorAvatar.height / 2.0;
     
     self.tagsView.backgroundColor = [UIColor clearColor];
+    
+    
+    
+}
+
+- (void)setupWrapper
+{
+    // Setup wrapper
+    if (self.contentWrapper == nil) {
+        self.contentWrapper = [[RDRStickyKeyboardView alloc] initWithScrollView:self.commentsTableView];
+        self.contentWrapper.frame = self.cookbookDetailCell.contentView.bounds;
+        self.contentWrapper.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+        self.contentWrapper.placeholder = @"Message";
+        [self.contentWrapper.inputView.rightButton addTarget:self action:@selector(didTapSend:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.cookbookDetailCell.contentView addSubview:self.contentWrapper];
+//        self.myWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 200, Main_Screen_Width, 60)];
+////        self.myWindow.frame = self.tableView.bounds;
+//        self.myWindow.backgroundColor =[UIColor orangeColor];
+//        self.myWindow.windowLevel = UIWindowLevelAlert;
+//        [self.myWindow makeKeyAndVisible];
+//        self.myWindow.userInteractionEnabled = YES;
+//        
+//        [self.myWindow addSubview:self.contentWrapper];
+       
+    }
+    
+}
+
+- (void)didTapSend:(id)sender
+{
+    [self.contentWrapper hideKeyboard];
+    
+    NSLog(@"添加评论");
     
 }
 
@@ -264,11 +360,14 @@
                 [self showRightNavigationView:NO];
             }
             
+            
         } else if (scrollView.contentOffset.y > _lastContentOffsetY)
         {
             
             //        NSLog(@"向上拉动");
-            
+            if (self.contentType == CurrentContentTypeComment) {
+                self.commentsTableView.scrollEnabled = YES;
+            }
             
         }
     } else {    //滑动评论
@@ -369,11 +468,11 @@
             }
             case CurrentContentTypeComment:
             {
-                
+                return minHeight;
                 break;
             }
             default:
-                return Main_Screen_Height - 64 - 50; //屏幕高度 - NavigationBar高度 - 状态栏高度 - SectionHeaderView高度
+                return minHeight;
                 break;
         }
         
@@ -399,27 +498,23 @@
     return height;
 }
 
+
 #pragma mark - CookbookSectionHeaderDelegate
 
 - (void)CookbookSectionView:(CookbookSectionHeaderView *)sectionHeader didTappedWithContentType:(CurrentContentType)type
 {
-//    CGRect frameOfFoods;
-//    CGRect frameOfSteps;
-//    CGRect frameOfComment;
+    
+    self.contentType = type;
+    
     for (UIView* view in self.cookbookDetailCell.contentView.subviews) {
-        if ([view isKindOfClass:[UITableView class]]) {
+        if ([view isKindOfClass:[UITableView class]] || [view isKindOfClass:[RDRStickyKeyboardView class]]) {
             [view removeFromSuperview];
         }
     }
     switch (type) {
         case CurrentContentTypeFoods:
         {
-//            frameOfFoods = self.foodsTableView.frame;
-//            frameOfFoods.origin.x = 0;
-//            frameOfSteps = self.stepsTableView.frame;
-//            frameOfSteps.origin.x = Main_Screen_Width;
-//            frameOfComment = self.commentsTableView.frame;
-//            frameOfComment.origin.x = Main_Screen_Width * 2;
+
             [self.cookbookDetailCell.contentView addSubview:self.foodsTableView];
             
             break;
@@ -428,12 +523,6 @@
         
         case CurrentContentTypeMethods:
         {
-//            CGRect frameOfFoods = self.foodsTableView.frame;
-//            frameOfFoods.origin.x = - Main_Screen_Width;
-//            CGRect frameOfSteps = self.stepsTableView.frame;
-//            frameOfSteps.origin.x = 0;
-//            CGRect frameOfComment = self.commentsTableView.frame;
-//            frameOfComment.origin.x = Main_Screen_Width;
             
             [self.cookbookDetailCell.contentView addSubview:self.stepsTableView];
             break;
@@ -441,13 +530,9 @@
             
         case CurrentContentTypeComment:
         {
-//            CGRect frameOfFoods = self.foodsTableView.frame;
-//            frameOfFoods.origin.x = - Main_Screen_Width * 2;
-//            CGRect frameOfSteps = self.stepsTableView.frame;
-//            frameOfSteps.origin.x = - Main_Screen_Width;
-//            CGRect frameOfComment = self.commentsTableView.frame;
-//            frameOfComment.origin.x = 0;
-            [self.cookbookDetailCell.contentView addSubview:self.commentsTableView];
+
+//            [self.cookbookDetailCell.contentView addSubview:self.commentsTableView];
+            [self.cookbookDetailCell.contentView addSubview:self.contentWrapper];
             break;
         }
             
@@ -456,11 +541,7 @@
             break;
     }
     [self.tableView reloadData];
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.foodsTableView.frame = frameOfFoods;
-//        self.stepsTableView.frame = frameOfSteps;
-//        self.commentsTableView.frame = frameOfComment;
-//    }];
+
 }
 
 #pragma mark - AutoSizeLabelViewDelegate

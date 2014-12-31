@@ -1079,7 +1079,7 @@
     
 }
 
-- (void)getCookbookDetailWithCookbookId:(NSString*)cookbookId callBack:(myCallback)completion
+- (void)getCookbookDetailWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion
 {
     
     if ([self canConnectInternet]) {
@@ -1087,6 +1087,7 @@
         // 1. 将参数序列化
         NSDictionary* paramsDict = @{
                                      @"cookbookID" : cookbookId,     //关键字
+                                     @"userBaseID" : userBaseId
                                     };
         
         // 2. 发送网络请求

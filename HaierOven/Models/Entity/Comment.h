@@ -13,7 +13,7 @@ extern const CGFloat kReplyButtonWidth;
 extern const CGFloat kLineSpacing;
 extern const CGFloat kCharacterSpacing;
 
-#define CommentFont [UIFont italicSystemFontOfSize:15]
+#define CommentFont [UIFont fontWithName:GlobalTitleFontName size:14]
 
 @interface Comment : NSObject
 

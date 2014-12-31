@@ -11,6 +11,7 @@
 #import "Food.h"
 #import "Step.h"
 #import "CookbookOven.h"
+#import "Comment.h"
 
 //{"status":1,"err":"","data":{"cookbookID":28,"cookbookName":"名称","cookbookDesc":"描述","cookbookCoverPhoto":"file/temp/64663631-31ab-4f9e-8e25-aa7765979d44.jpg","cookbookTip":"小贴士","status":1,"modifiedTime":1418910487000,"tags":[{"tagID":1,"tagName":"烘焙","isHot":null,"isDeleted":null},{"tagID":5,"tagName":"蒸菜","isHot":null,"isDeleted":null},{"tagID":6,"tagName":"微波","isHot":null,"isDeleted":null},{"tagID":7,"tagName":"巧克力","isHot":null,"isDeleted":null},{"tagID":8,"tagName":"饼干","isHot":null,"isDeleted":null}],"steps":[{"cookbookStepID":28,"stepIndex":0,"stepPhoto":"file/temp/c510943a-73b0-4ee3-8353-33649debf099.jpg","stepDesc":"步骤1","cookbookID":null},{"cookbookStepID":29,"stepIndex":1,"stepPhoto":"file/temp/c510943a-73b0-4ee3-8353-33649debf099.jpg","stepDesc":"步骤2","cookbookID":null}],"foods":[{"cookbookFoodsID":33,"cookbookFoodIndex":0,"cookbookID":null,"foodName":"牛肉","foodDesc":"500g"},{"cookbookFoodsID":34,"cookbookFoodIndex":1,"cookbookID":null,"foodName":"生姜","foodDesc":"20g"}],"ovens":[{"name":"烤箱1","id":null},{"name":"烤箱2","id":null}],"creator":{"id":4,"userName":"33","userAvatar":"file/temp/cff87d3e-8ccf-4a7d-bcad-6601cc6ecdd7.jpg"}}}
 
@@ -52,6 +53,11 @@
  *  菜谱状态 0为草稿箱， 1为已发布
  */
 @property (copy, nonatomic) NSString* status;
+
+/**
+ *  是否赞过 0代表未赞， >=1代表已赞
+ */
+@property (copy, nonatomic) NSString* praised;
 
 /**
  *  修改时间
