@@ -631,8 +631,6 @@
 		849F91891A513981006234B9 /* step3.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91681A513981006234B9 /* step3.png */; };
 		84AD6D961A53A1C0002729D9 /* CommentCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D941A53A1C0002729D9 /* CommentCountCell.m */; };
 		84AD6D971A53A1C0002729D9 /* CommentCountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */; };
-		84AD6D9D1A53A679002729D9 /* RDRStickyKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */; };
-		84AD6D9E1A53A679002729D9 /* RDRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D9C1A53A679002729D9 /* RDRTextView.m */; };
 		84E113781A52A2FF00D16DDB /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E113771A52A2FF00D16DDB /* CommentViewController.m */; };
 		84E1137B1A52A45600D16DDB /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1137A1A52A45600D16DDB /* CommentView.m */; };
 		84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1137F1A52A46B00D16DDB /* CommentListCell.m */; };
@@ -644,6 +642,7 @@
 		C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */; };
 		C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */; };
 		C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */; };
+		C43BFB1F1A57E87B00FB00B6 /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BFB1E1A57E87B00FB00B6 /* DAKeyboardControl.m */; };
 		C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B1104C1A517ECD005ADE4B /* CookbookOven.m */; };
 /* End PBXBuildFile section */
 
@@ -1411,10 +1410,6 @@
 		84AD6D931A53A1C0002729D9 /* CommentCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCountCell.h; sourceTree = "<group>"; };
 		84AD6D941A53A1C0002729D9 /* CommentCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCountCell.m; sourceTree = "<group>"; };
 		84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCountCell.xib; sourceTree = "<group>"; };
-		84AD6D991A53A679002729D9 /* RDRStickyKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRStickyKeyboardView.h; sourceTree = "<group>"; };
-		84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRStickyKeyboardView.m; sourceTree = "<group>"; };
-		84AD6D9B1A53A679002729D9 /* RDRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRTextView.h; sourceTree = "<group>"; };
-		84AD6D9C1A53A679002729D9 /* RDRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRTextView.m; sourceTree = "<group>"; };
 		84E113761A52A2FF00D16DDB /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		84E113771A52A2FF00D16DDB /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		84E113791A52A45600D16DDB /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
@@ -1435,6 +1430,8 @@
 		C4182E1E1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookbookSectionHeaderView.xib; sourceTree = "<group>"; };
 		C4182E201A4E610E006A44D0 /* CookbookSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookSectionHeaderView.h; sourceTree = "<group>"; };
 		C4182E211A4E610E006A44D0 /* CookbookSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookSectionHeaderView.m; sourceTree = "<group>"; };
+		C43BFB1D1A57E87B00FB00B6 /* DAKeyboardControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAKeyboardControl.h; sourceTree = "<group>"; };
+		C43BFB1E1A57E87B00FB00B6 /* DAKeyboardControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAKeyboardControl.m; sourceTree = "<group>"; };
 		C4B1104B1A517ECD005ADE4B /* CookbookOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookOven.h; sourceTree = "<group>"; };
 		C4B1104C1A517ECD005ADE4B /* CookbookOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookOven.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2676,17 +2673,6 @@
 			name = Cookbook;
 			sourceTree = "<group>";
 		};
-		84AD6D981A53A679002729D9 /* RDRStickyKeyboardView */ = {
-			isa = PBXGroup;
-			children = (
-				84AD6D991A53A679002729D9 /* RDRStickyKeyboardView.h */,
-				84AD6D9A1A53A679002729D9 /* RDRStickyKeyboardView.m */,
-				84AD6D9B1A53A679002729D9 /* RDRTextView.h */,
-				84AD6D9C1A53A679002729D9 /* RDRTextView.m */,
-			);
-			path = RDRStickyKeyboardView;
-			sourceTree = "<group>";
-		};
 		84E113751A52A2E200D16DDB /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2731,7 +2717,7 @@
 		C4182E161A4E4A27006A44D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84AD6D981A53A679002729D9 /* RDRStickyKeyboardView */,
+				C43BFB1C1A57E87B00FB00B6 /* DAKeyboardControl */,
 				84E113751A52A2E200D16DDB /* CommentView */,
 				842A86DC1A52755700C75EE4 /* StepsView */,
 				842A86CA1A5243FA00C75EE4 /* FoodsView */,
@@ -2739,6 +2725,15 @@
 				C4182E171A4E4A4A006A44D0 /* Cookbook.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C43BFB1C1A57E87B00FB00B6 /* DAKeyboardControl */ = {
+			isa = PBXGroup;
+			children = (
+				C43BFB1D1A57E87B00FB00B6 /* DAKeyboardControl.h */,
+				C43BFB1E1A57E87B00FB00B6 /* DAKeyboardControl.m */,
+			);
+			path = DAKeyboardControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3362,6 +3357,7 @@
 				842A86E41A52772000C75EE4 /* MethodCell.m in Sources */,
 				84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */,
 				842A86E11A52767300C75EE4 /* StepsViewController.m in Sources */,
+				C43BFB1F1A57E87B00FB00B6 /* DAKeyboardControl.m in Sources */,
 				8441177D1A4BB8AF00628A64 /* AFHTTPSessionManager.m in Sources */,
 				45BBA6971A52552F0066C143 /* AddStepDetailCell.m in Sources */,
 				844117711A4BB8AF00628A64 /* Comment.m in Sources */,
@@ -3379,7 +3375,6 @@
 				45BEED721A412AED003000AD /* CycleScrollView.m in Sources */,
 				45A5E8131A4FF25600FCD2BD /* ChooseCoverView.m in Sources */,
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
-				84AD6D9E1A53A679002729D9 /* RDRTextView.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
@@ -3439,7 +3434,6 @@
 				844117801A4BB8AF00628A64 /* AFURLConnectionOperation.m in Sources */,
 				844117781A4BB8AF00628A64 /* User.m in Sources */,
 				844117831A4BB8AF00628A64 /* AFURLSessionManager.m in Sources */,
-				84AD6D9D1A53A679002729D9 /* RDRStickyKeyboardView.m in Sources */,
 				45D906171A47C01900B97D92 /* RelationshipListViewController.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
 				84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */,
