@@ -17,7 +17,7 @@
 #import "ChooseCoverView.h"
 #import "YIPopupTextView.h"
 #import "BottomCell.h"
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate>
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSMutableArray* selectedTags;
 
 
+@property BOOL ischangeCover;
 #pragma mark - outlets
 
 
@@ -132,6 +133,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         if (indexPath.row ==0) {
             CoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CoverCell" forIndexPath:indexPath];
+            cell.delegate = self;
             cell.coverImage = self.cookbookCoverPhoto;
             return cell;
             
@@ -337,6 +339,10 @@
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
+    if (self.ischangeCover) {
+        self.cookbookCoverPhoto = image;
+        [self.tableView reloadData];
+    }else
     self.tempImageView.image = image;
     //    [self.avaterButton setImage:image forState:UIControlStateNormal];
     //    [self.avaterButton setImage:image forState:UIControlStateHighlighted];

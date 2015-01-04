@@ -37,4 +37,7 @@
     self.coverImageView.image = coverImage;
 }
 
+- (IBAction)ChangeCoverImage:(id)sender {
+    [self.delegate changeCover];
+}
 @end

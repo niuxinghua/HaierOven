@@ -79,6 +79,19 @@
 		4597EB261A501E640083AFE5 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB231A501E640083AFE5 /* delete.png */; };
 		4597EB271A501E640083AFE5 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB241A501E640083AFE5 /* delete@2x.png */; };
 		4597EB281A501E640083AFE5 /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB251A501E640083AFE5 /* delete@3x.png */; };
+		45A546841A58E56500BE62EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A546831A58E56500BE62EC /* LoginViewController.m */; };
+		45A546861A58EE5500BE62EC /* delete-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546851A58EE5500BE62EC /* delete-line.png */; };
+		45A5468B1A58EF4400BE62EC /* txdlwdj.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546881A58EF4400BE62EC /* txdlwdj.png */; };
+		45A5468C1A58EF4400BE62EC /* txdlwdj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546891A58EF4400BE62EC /* txdlwdj@2x.png */; };
+		45A5468D1A58EF4400BE62EC /* txdlwdj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5468A1A58EF4400BE62EC /* txdlwdj@3x.png */; };
+		45A546911A58F08B00BE62EC /* wbdlwdj.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5468E1A58F08B00BE62EC /* wbdlwdj.png */; };
+		45A546921A58F08B00BE62EC /* wbdlwdj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5468F1A58F08B00BE62EC /* wbdlwdj@2x.png */; };
+		45A546931A58F08B00BE62EC /* wbdlwdj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546901A58F08B00BE62EC /* wbdlwdj@3x.png */; };
+		45A546961A59119000BE62EC /* UnderLineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A546951A59119000BE62EC /* UnderLineButton.m */; };
+		45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A546981A591BFE00BE62EC /* RegisterViewController.m */; };
+		45A5469C1A592E2C00BE62EC /* EmailRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */; };
+		45A5469F1A592E4200BE62EC /* PhoneRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */; };
+		45A546A11A592F9D00BE62EC /* EmailRegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */; };
 		45A5E7FD1A4FC88C00FCD2BD /* UpLoadingMneuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5E7FC1A4FC88C00FCD2BD /* UpLoadingMneuController.m */; };
 		45A5E8051A4FCACC00FCD2BD /* CGX.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E7FF1A4FCACC00FCD2BD /* CGX.png */; };
 		45A5E8061A4FCACC00FCD2BD /* CGX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8001A4FCACC00FCD2BD /* CGX@2x.png */; };
@@ -751,6 +764,24 @@
 		4597EB231A501E640083AFE5 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		4597EB241A501E640083AFE5 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		4597EB251A501E640083AFE5 /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		45A546821A58E56500BE62EC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		45A546831A58E56500BE62EC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		45A546851A58EE5500BE62EC /* delete-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-line.png"; sourceTree = "<group>"; };
+		45A546881A58EF4400BE62EC /* txdlwdj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = txdlwdj.png; sourceTree = "<group>"; };
+		45A546891A58EF4400BE62EC /* txdlwdj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txdlwdj@2x.png"; sourceTree = "<group>"; };
+		45A5468A1A58EF4400BE62EC /* txdlwdj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txdlwdj@3x.png"; sourceTree = "<group>"; };
+		45A5468E1A58F08B00BE62EC /* wbdlwdj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wbdlwdj.png; sourceTree = "<group>"; };
+		45A5468F1A58F08B00BE62EC /* wbdlwdj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wbdlwdj@2x.png"; sourceTree = "<group>"; };
+		45A546901A58F08B00BE62EC /* wbdlwdj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wbdlwdj@3x.png"; sourceTree = "<group>"; };
+		45A546941A59119000BE62EC /* UnderLineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderLineButton.h; sourceTree = "<group>"; };
+		45A546951A59119000BE62EC /* UnderLineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnderLineButton.m; sourceTree = "<group>"; };
+		45A546971A591BFE00BE62EC /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		45A546981A591BFE00BE62EC /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		45A5469A1A592E2C00BE62EC /* EmailRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailRegisterView.h; sourceTree = "<group>"; };
+		45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailRegisterView.m; sourceTree = "<group>"; };
+		45A5469D1A592E4200BE62EC /* PhoneRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneRegisterView.h; sourceTree = "<group>"; };
+		45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneRegisterView.m; sourceTree = "<group>"; };
+		45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailRegisterView.xib; sourceTree = "<group>"; };
 		45A5E7FB1A4FC88C00FCD2BD /* UpLoadingMneuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLoadingMneuController.h; sourceTree = "<group>"; };
 		45A5E7FC1A4FC88C00FCD2BD /* UpLoadingMneuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLoadingMneuController.m; sourceTree = "<group>"; };
 		45A5E7FF1A4FCACC00FCD2BD /* CGX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CGX.png; sourceTree = "<group>"; };
@@ -1525,6 +1556,37 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		45A546811A58E41700BE62EC /* LoginController */ = {
+			isa = PBXGroup;
+			children = (
+				45A546821A58E56500BE62EC /* LoginViewController.h */,
+				45A546831A58E56500BE62EC /* LoginViewController.m */,
+				45A546941A59119000BE62EC /* UnderLineButton.h */,
+				45A546951A59119000BE62EC /* UnderLineButton.m */,
+				45A546971A591BFE00BE62EC /* RegisterViewController.h */,
+				45A546981A591BFE00BE62EC /* RegisterViewController.m */,
+				45A5469A1A592E2C00BE62EC /* EmailRegisterView.h */,
+				45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */,
+				45A5469D1A592E4200BE62EC /* PhoneRegisterView.h */,
+				45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */,
+				45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */,
+			);
+			name = LoginController;
+			sourceTree = "<group>";
+		};
+		45A546871A58EF3300BE62EC /* LoginIn */ = {
+			isa = PBXGroup;
+			children = (
+				45A5468E1A58F08B00BE62EC /* wbdlwdj.png */,
+				45A5468F1A58F08B00BE62EC /* wbdlwdj@2x.png */,
+				45A546901A58F08B00BE62EC /* wbdlwdj@3x.png */,
+				45A546881A58EF4400BE62EC /* txdlwdj.png */,
+				45A546891A58EF4400BE62EC /* txdlwdj@2x.png */,
+				45A5468A1A58EF4400BE62EC /* txdlwdj@3x.png */,
+			);
+			name = LoginIn;
+			sourceTree = "<group>";
+		};
 		45A5E7FA1A4FC85100FCD2BD /* UpLoadingMenuController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2255,6 +2317,7 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45A546811A58E41700BE62EC /* LoginController */,
 				45A5E7FA1A4FC85100FCD2BD /* UpLoadingMenuController */,
 				45B650BE1A47F2D700A6376D /* DeviceViewController */,
 				45BA02C31A43D766003810C7 /* PersonCenterController */,
@@ -2362,6 +2425,8 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				45A546871A58EF3300BE62EC /* LoginIn */,
+				45A546851A58EE5500BE62EC /* delete-line.png */,
 				849F91471A512D21006234B9 /* Cookbook */,
 				45A5E7FE1A4FCA5700FCD2BD /* UploadingMneu */,
 				C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */,
@@ -2846,6 +2911,7 @@
 				45A5E8151A4FF26B00FCD2BD /* ChooseCoverView.xib in Resources */,
 				45C01C051A4D653600B54941 /* yrwc.png in Resources */,
 				45D907201A47EBE900B97D92 /* SecDeviceTableViewCell.xib in Resources */,
+				45A5468C1A58EF4400BE62EC /* txdlwdj@2x.png in Resources */,
 				45BB36631A4A96D4000EE3C4 /* sd-xz.png in Resources */,
 				45B6510C1A482EDB00A6376D /* n2.png in Resources */,
 				45D906CE1A47CAAB00B97D92 /* hongbeiquan@2x.png in Resources */,
@@ -2886,6 +2952,7 @@
 				842A86D51A5248F700C75EE4 /* FoodCell.xib in Resources */,
 				849F91831A513981006234B9 /* icon_share_navi_n@2x.png in Resources */,
 				45BC57631A4AF3AF0052F520 /* rfpk-xz@3x.png in Resources */,
+				45A546A11A592F9D00BE62EC /* EmailRegisterView.xib in Resources */,
 				45D906AE1A47CAAB00B97D92 /* cancel.png in Resources */,
 				45A5E8061A4FCACC00FCD2BD /* CGX@2x.png in Resources */,
 				45C01C071A4D653600B54941 /* yrwc@3x.png in Resources */,
@@ -2933,6 +3000,7 @@
 				45D9069E1A47CAAB00B97D92 /* aixin2@2x.png in Resources */,
 				457A777E1A42CA4500E422D0 /* RecommendTagView.xib in Resources */,
 				45C7E5BD1A3FFDCD000B086B /* FirstTableViewCell.xib in Resources */,
+				45A546931A58F08B00BE62EC /* wbdlwdj@3x.png in Resources */,
 				458952F11A496876009B5DD1 /* tuolian@2x.png in Resources */,
 				45D906EF1A47CAAB00B97D92 /* orangel@2x.png in Resources */,
 				45BC576B1A4AF3AF0052F520 /* sk-xz@2x.png in Resources */,
@@ -2994,6 +3062,7 @@
 				45D907171A47CAAB00B97D92 /* yiqiandao@2x.png in Resources */,
 				45B88E411A4BD7A100722EF6 /* ksyr-cxz.png in Resources */,
 				45B650F91A482D6B00A6376D /* 1-2@3x.png in Resources */,
+				45A546861A58EE5500BE62EC /* delete-line.png in Resources */,
 				45D9069F1A47CAAB00B97D92 /* aixin2@3x.png in Resources */,
 				45D906CC1A47CAAB00B97D92 /* guangfang@3x.png in Resources */,
 				45D906E11A47CAAB00B97D92 /* logo@3x.png in Resources */,
@@ -3009,6 +3078,7 @@
 				45D906DD1A47CAAB00B97D92 /* liebieo@2x.png in Resources */,
 				45D9071A1A47CAAB00B97D92 /* yqd@2x.png in Resources */,
 				458952BC1A493C05009B5DD1 /* wifilianjie06.png in Resources */,
+				45A5468B1A58EF4400BE62EC /* txdlwdj.png in Resources */,
 				45BC57991A4B0B0B0052F520 /* xiaji-wxz@3x.png in Resources */,
 				45D906EA1A47CAAB00B97D92 /* mydessertcount@3x.png in Resources */,
 				45BC575F1A4AF3AF0052F520 /* rfpk-wxz@2x.png in Resources */,
@@ -3177,6 +3247,7 @@
 				45D906F11A47CAAB00B97D92 /* orangepoint.png in Resources */,
 				45D9070C1A47CAAB00B97D92 /* v@3x.png in Resources */,
 				45D906F71A47CAAB00B97D92 /* searchborder.png in Resources */,
+				45A546921A58F08B00BE62EC /* wbdlwdj@2x.png in Resources */,
 				45D906F31A47CAAB00B97D92 /* orangepoint@3x.png in Resources */,
 				45D906CD1A47CAAB00B97D92 /* hongbeiquan.png in Resources */,
 				45D906D91A47CAAB00B97D92 /* l.png in Resources */,
@@ -3261,6 +3332,7 @@
 				45D906DE1A47CAAB00B97D92 /* liebieo@3x.png in Resources */,
 				45BC572F1A4AF27C0052F520 /* dlfp-cxz@2x.png in Resources */,
 				45D907111A47CAAB00B97D92 /* xinzeng@2x.png in Resources */,
+				45A546911A58F08B00BE62EC /* wbdlwdj.png in Resources */,
 				458952BD1A493C05009B5DD1 /* wifilianjie06@2x.png in Resources */,
 				45BB35FE1A4A6C80000EE3C4 /* guanji@2x.png in Resources */,
 				45BB36501A4A9615000EE3C4 /* zm-wxz@3x.png in Resources */,
@@ -3275,6 +3347,7 @@
 				45BC577D1A4B08380052F520 /* wendu-wxz@2x.png in Resources */,
 				45B88E221A4BCEDD00722EF6 /* wdtz-wxz@3x.png in Resources */,
 				842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */,
+				45A5468D1A58EF4400BE62EC /* txdlwdj@3x.png in Resources */,
 				45BB35FD1A4A6C80000EE3C4 /* guanji.png in Resources */,
 				45BB363C1A4A953A000EE3C4 /* xz-wxz.png in Resources */,
 				45B88E1F1A4BCEDD00722EF6 /* wdtz-cxz@3x.png in Resources */,
@@ -3358,10 +3431,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				454916B61A403958005503C8 /* BakedFriendsViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
+				45A546961A59119000BE62EC /* UnderLineButton.m in Sources */,
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
 				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
@@ -3378,6 +3453,7 @@
 				C43BFB1F1A57E87B00FB00B6 /* DAKeyboardControl.m in Sources */,
 				8441177D1A4BB8AF00628A64 /* AFHTTPSessionManager.m in Sources */,
 				45BBA6971A52552F0066C143 /* AddStepDetailCell.m in Sources */,
+				45A546841A58E56500BE62EC /* LoginViewController.m in Sources */,
 				844117711A4BB8AF00628A64 /* Comment.m in Sources */,
 				45BB36701A4AA0A4000EE3C4 /* LineProgressLayer.m in Sources */,
 				842A86D81A52491B00C75EE4 /* AddShoppingListCell.m in Sources */,
@@ -3457,6 +3533,7 @@
 				45D906171A47C01900B97D92 /* RelationshipListViewController.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
 				84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */,
+				45A5469F1A592E4200BE62EC /* PhoneRegisterView.m in Sources */,
 				840141911A4C0B7A0050615F /* MyPageView.m in Sources */,
 				844117721A4BB8AF00628A64 /* Cookbook.m in Sources */,
 				454916B91A403993005503C8 /* PersonalCenterViewController.m in Sources */,
@@ -3467,6 +3544,7 @@
 				84E113891A52A4B100D16DDB /* AttributedLabel.m in Sources */,
 				45C7E5601A3FD9AE000B086B /* BaseTableViewController.m in Sources */,
 				45A999611A510ABE0008AFE3 /* ChooseTagsCell.m in Sources */,
+				45A5469C1A592E2C00BE62EC /* EmailRegisterView.m in Sources */,
 				8441178C1A4BB8AF00628A64 /* UIRefreshControl+AFNetworking.m in Sources */,
 				458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */,
 				844117821A4BB8AF00628A64 /* AFURLResponseSerialization.m in Sources */,
