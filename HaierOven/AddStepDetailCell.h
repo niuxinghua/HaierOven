@@ -10,9 +10,9 @@
 @class AddStepDetailCell;
 @protocol AddStepCellDetailDelegate <NSObject>
 
--(void)AddStepImage:(UIImageView*)imageview;
--(void)AddStepDescription:(UILabel*)label;
--(void)DeleteStepsAtIndex:(NSInteger)index;
+-(void)stepDetailCell:(AddStepDetailCell*)cell AddStepImage:(UIImageView*)imageview;
+-(void)stepDetailCell:(AddStepDetailCell*)cell AddStepDescription:(UILabel*)label;
+-(void)stepDetailCell:(AddStepDetailCell*)cell DeleteStepsAtIndex:(NSInteger)index;
 @end
 
 typedef NS_ENUM(NSUInteger, EditStyle) {
@@ -37,4 +37,8 @@ typedef NS_ENUM(NSUInteger, EditStyle) {
  *  添加步骤下标
  */
 @property (strong, nonatomic) NSString *stepIndexString;
+
+
+@property (strong, nonatomic) Step* step;
+
 @end

@@ -10,4 +10,15 @@
 
 @implementation CookbookOven
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.roastStyle = @"";
+        self.roastTemperature = @"";
+        self.roastTime = @"20";
+        self.ovenInfo = @{@"name" : @"haha"};
+    }
+    return self;
+}
+
 @end

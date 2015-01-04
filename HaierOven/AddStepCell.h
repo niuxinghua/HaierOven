@@ -13,8 +13,8 @@
 -(void)AddStepOfMainTableView:(NSMutableArray *)arr;
 -(void)DeleteStepOfMainTableView:(NSMutableArray *)arr;
 
--(void)ImportStepDescription:(UILabel*)label;
--(void)AddStepImage:(UIImageView*)imageView;
+-(void)ImportStepDescription:(UILabel*)label withStepIndex:(NSInteger)index;
+-(void)AddStepImage:(UIImageView*)imageView withStepIndex:(NSInteger)index;
 @end
 
 @interface AddStepCell : UITableViewCell<UITableViewDataSource,UITableViewDelegate>

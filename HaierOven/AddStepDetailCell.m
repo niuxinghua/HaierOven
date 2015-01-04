@@ -57,15 +57,16 @@
         self.deleteBtn.hidden = NO;
 }
 #pragma mark- 点击图片和描述
--(void)AddStepImage{
-    [self.delegate AddStepImage:self.stepImage];
+-(void)AddStepImage
+{
+    [self.delegate stepDetailCell:self AddStepImage:self.stepImage];
 
 }
 -(void)AddDescription{
-    [self.delegate AddStepDescription:self.stepDescriptionLabel];
+    [self.delegate stepDetailCell:self AddStepDescription:self.stepDescriptionLabel];
 
 }
 - (IBAction)DeleteStep:(UIButton*)sender {
-    [self.delegate DeleteStepsAtIndex:sender.tag];
+    [self.delegate stepDetailCell:self DeleteStepsAtIndex:sender.tag];
 }
 @end
