@@ -15,12 +15,22 @@
 
 @implementation MenuDraftController
 
+- (void)loadCookbookDrafts
+{
+    [[InternetManager sharedManager] getCookbooksWithUserBaseId:@"5" cookbookStatus:0 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+        
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MenuDraftTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"MenuDraftTableViewCell"];
     self.deleteBtn.selected = NO;
     self.delete = self.deleteBtn.selected;
+    
+    [self loadCookbookDrafts];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

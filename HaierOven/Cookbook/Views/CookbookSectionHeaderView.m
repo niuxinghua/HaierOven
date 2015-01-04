@@ -82,6 +82,20 @@
     [self.delegate CookbookSectionView:self didTappedWithContentType:self.contentType];
 }
 
-
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    UIBezierPath* path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, 1)];
+    [path addLineToPoint:CGPointMake(self.right, 1)];
+    path.lineWidth = 1;
+    [RGB(200, 200, 200) setStroke];
+    [path stroke];
+    
+    CGContextRestoreGState(context);
+    
+}
 
 @end

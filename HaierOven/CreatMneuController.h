@@ -11,4 +11,9 @@
 
 @interface CreatMneuController : UITableViewController
 @property (strong, nonatomic) NSArray *tags;
+
+@property (strong, nonatomic) UIImage* cookbookCoverPhoto;
+
+@property (strong, nonatomic) CookbookDetail* cookbookDetail;
+
 @end

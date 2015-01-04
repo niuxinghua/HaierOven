@@ -29,12 +29,18 @@
 @property (strong, nonatomic) AutoSizeLabelView *tagsView;
 @property float tagsCellHight;
 @property float psCellHight;
+
+#pragma mark - outlets
+
+
 @end
 #define PADDING_WIDE    15   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
 #define LABEL_H    20   //标签high
 
 @implementation CreatMneuController
+
+#pragma mark - 加载系列
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,6 +88,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 显示系列
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -97,6 +111,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         if (indexPath.row ==0) {
             CoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CoverCell" forIndexPath:indexPath];
+            cell.coverImage = self.cookbookCoverPhoto;
             return cell;
             
         }else if(indexPath.row ==1)  {
