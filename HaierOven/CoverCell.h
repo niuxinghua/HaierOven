@@ -10,4 +10,6 @@
 
 @interface CoverCell : UITableViewCell
 
+@property (strong, nonatomic) UIImage* coverImage;
+
 @end

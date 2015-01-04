@@ -271,7 +271,15 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param pageIndex  当前请求页数
  *  @param completion 结果回调
  */
-- (void)getCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+/**
+ *  获取我发布的菜谱
+ *
+ *  @param userBaseId 用户ID
+ *  @param status     菜谱状态：-1为所有状态的菜谱 0为草稿 1为已发布
+ *  @param pageIndex  获取页数
+ *  @param completion 结果回调
+ */
+- (void)getCookbooksWithUserBaseId:(NSString*)userBaseId cookbookStatus:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 /**
  *  搜索菜谱

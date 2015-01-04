@@ -8,6 +8,17 @@
 
 #import "CoverCell.h"
 
+@interface CoverCell ()
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+
+
+
+
+
+@end
+
 @implementation CoverCell
 
 - (void)awakeFromNib {
@@ -18,6 +29,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setCoverImage:(UIImage *)coverImage
+{
+    _coverImage = coverImage;
+    self.coverImageView.image = coverImage;
 }
 
 @end

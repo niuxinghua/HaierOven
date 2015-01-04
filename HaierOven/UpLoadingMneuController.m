@@ -150,6 +150,8 @@
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.cover.image = image;
+    
+    
     self.isChooseCover = YES;
     
 }
@@ -162,13 +164,61 @@
 
 #pragma mark - 创建菜谱
 - (IBAction)CreatMenu:(id)sender {
-    if (self.isChooseCover==NO||self.titleString.length == 0||self.descriptionString.length == 0) {
+    
+    if (!self.isChooseCover) {
+        [super showProgressErrorWithLabelText:@"请选择菜谱封面" afterDelay:1];
+        return;
     }
-    CreatMneuController *creatMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
-    [self.navigationController pushViewController:creatMenu animated:YES];
+    
+    if (self.menuTitleTextFiled.text.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写菜谱名称" afterDelay:1];
+        return;
+    }
+    
+    if (self.descriptionTextView.text.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写菜谱描述" afterDelay:1];
+        return;
+    }
+    
+    [self createCookbook];
+    
+}
+
+#pragma mark -
+
+- (void)createCookbook
+{
+    CookbookDetail* cookbookDetail = [[CookbookDetail alloc] init];
+    cookbookDetail.name = self.menuTitleTextFiled.text;
+    cookbookDetail.desc = self.descriptionTextView.text;
+    NSData* imageData = UIImageJPEGRepresentation(self.cover.image, 0.6);
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            NSDictionary* objDict = [obj firstObject];
+            cookbookDetail.coverPhoto = objDict[@"name"];
+            CreatMneuController *creatMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
+            creatMenu.cookbookCoverPhoto = self.cover.image;
+            creatMenu.cookbookDetail = cookbookDetail;
+            [self.navigationController pushViewController:creatMenu animated:YES];
+            
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
+            }
+        }
+        
+        
+    }];
     
     
 }
+
+
+
 #pragma mark -
 
 //当键盘出现或改变时调用

@@ -11,7 +11,8 @@
 
 
 // Base url
-#define BaseUrl   @"http://115.29.8.251:8080/haieroven/app"
+#define BaseUrl         @"http://115.29.8.251:8080/haieroven/app"
+#define BaseOvenUrl     @"http://115.29.8.251:8080/haieroven"
 
 
 #pragma mark - 登录注册

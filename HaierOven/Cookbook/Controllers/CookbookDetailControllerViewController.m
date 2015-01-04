@@ -200,7 +200,6 @@
             [tableView registerNib:[UINib nibWithNibName:@"StepCell" bundle:nil] forCellReuseIdentifier:@"Step cell"];
             [tableView registerNib:[UINib nibWithNibName:@"OvenInfoCell" bundle:nil] forCellReuseIdentifier:@"Oven info cell"];
             [tableView registerNib:[UINib nibWithNibName:@"MethodCell" bundle:nil] forCellReuseIdentifier:@"Method cell"];
-//            [self.cookbookDetailCell.contentView addSubview:self.stepsTableView];
             break;
 
         }
@@ -221,9 +220,9 @@
             if (self.comments.count == 0) {
                 Comment* comment = [[Comment alloc] init];
                 comment.content = @"这个菜谱真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！";
-                comment.creatorAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
-                comment.modifiedTime = @"2014-12-31 10:47";
-                comment.creatorLoginName = @"黄靖雯";
+                comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
+                comment.commentTime = @"2014-12-31 10:47";
+                comment.fromUser.loginName = @"黄靖雯";
                 [self.comments addObject:comment];
             
             }
@@ -281,6 +280,8 @@
     // 设置其他
     self.creatorAvatar.layer.masksToBounds = YES;
     self.creatorAvatar.layer.cornerRadius = self.creatorAvatar.height / 2.0;
+    self.creatorAvatar.layer.borderWidth = 1;
+    self.creatorAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
     
     self.tagsView.backgroundColor = [UIColor clearColor];
     
@@ -338,12 +339,7 @@
     
     
     [self.cookbookDetailCell.contentView addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        /*
-         Try not to call "self" inside this block (retain cycle).
-         But if you do, make sure to remove DAKeyboardControl
-         when you are done with the view controller by calling:
-         [self.view removeKeyboardControl];
-         */
+        
         NSLog(@"keyboardFrameInView y : %.2f", keyboardFrameInView.origin.y);
         CGRect windowFrame = window.frame;
         windowFrame.origin.y = keyboardFrameInView.origin.y - windowFrame.size.height + 64 + 50;
@@ -370,9 +366,9 @@
     [self hideKeyboard];
     Comment* comment = [[Comment alloc] init];
     comment.content = self.commentTextField.text;
-    comment.creatorAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
-    comment.modifiedTime = @"2015-01-4 21:07";
-    comment.creatorLoginName = @"刘康";
+    comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
+    comment.commentTime = @"2015-01-4 21:07";
+    comment.fromUser.loginName = @"刘康";
     [self.comments addObject:comment];
     CGPoint point = self.commentsTableView.contentOffset;
     [UIView animateWithDuration:0.3 animations:^{
@@ -428,19 +424,28 @@
             [self showRightNavigationView:YES];
         }
         
+        if (self.contentType == CurrentContentTypeComment) {
+            
+            CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
+            self.window.hidden = scrollView.contentOffset.y >= height ? NO : YES;
+            
+            
+            
+        }
+        
         if (scrollView.contentOffset.y > self.cookbookImageView.height - 64) {
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
             
-            if (self.contentType == CurrentContentTypeComment) {
-                self.window.hidden = NO;
-            }
+//            if (self.contentType == CurrentContentTypeComment) {
+//                self.window.hidden = NO;
+//            }
             
             
         } else {
             [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
-            if (self.contentType == CurrentContentTypeComment) {
-                self.window.hidden = YES;
-            }
+//            if (self.contentType == CurrentContentTypeComment) {
+//                self.window.hidden = YES;
+//            }
         }
         
         if (scrollView.contentOffset.y < _lastContentOffsetY)
@@ -610,7 +615,9 @@
         self.window.hidden = YES;
     }
     
-    if (_lastContentOffsetY > self.cookbookImageView.height && self.contentType == CurrentContentTypeComment) {
+    CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
+    
+    if (_lastContentOffsetY >= height && self.contentType == CurrentContentTypeComment) {
         self.window.hidden = NO;
     }
     

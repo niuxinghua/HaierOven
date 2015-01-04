@@ -53,7 +53,7 @@
     
     self.commentView.frame = CGRectMake(0, 0, Main_Screen_Width, [comment getHeight]);
     
-    CGFloat y = self.commentView.bottom;
+//    CGFloat y = self.commentView.bottom;
     
 //    for (Comment* subComment in comment.subComments) {
 //        

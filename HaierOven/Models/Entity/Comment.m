@@ -17,6 +17,15 @@ const CGFloat kCharacterSpacing = 2;
 
 @implementation Comment
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.fromUser = [[CommentUser alloc] init];
+        self.toUser = [[CommentUser alloc] init];
+    }
+    return self;
+}
+
 - (CGFloat)getHeight
 {
     CGFloat commentHeight = 0.0f;

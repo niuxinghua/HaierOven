@@ -55,7 +55,8 @@
     user.maritalStatus      = [profileDict[@"maritalStatus"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"maritalStatus"]];
     user.occupation         = [profileDict[@"occupation"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"occupation"]];
     user.monthlyIncome      = [profileDict[@"monthlyIncome"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"monthlyIncome"]];
-    user.userAvatar         = [profileDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userAvatar"]];
+    NSString* userAvatar    = [profileDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userAvatar"]];
+    user.userAvatar         = [DataParser parseImageUrlWithString:userAvatar];
     user.focusCount         = [profileDict[@"focusCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"focusCount"]];
     user.followCount        = [profileDict[@"followCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"followCount"]];
     user.points             = [profileDict[@"points"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"points"]];
@@ -118,11 +119,11 @@
         comment.ID                  = [commentDict[@"commentID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentID"]];
         comment.content             = [commentDict[@"commentContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentContent"]];
         comment.objectId            = [commentDict[@"commentObjectID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentObjectID"]];
-        comment.parentId            = [commentDict[@"parentID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"parentID"]];
-        comment.creatorLoginName    = [commentDict[@"creatorLoginName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorLoginName"]];
-        comment.creatorName         = [commentDict[@"creatorName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorName"]];
-        comment.creatorAvatar       = [commentDict[@"creatorPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"creatorPhoto"]];
-        comment.modifiedTime        = [commentDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"modifiedTime"]];
+        
+        comment.fromUser            = [DataParser parseCommentUserWithDict:commentDict[@"fromUser"]];
+        comment.toUser              = [DataParser parseCommentUserWithDict:commentDict[@"toUser"]];
+        
+        comment.commentTime        = [commentDict[@"commentTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentTime"]];
         
         [comments addObject:comment];
     }
@@ -131,13 +132,46 @@
     return comments;
 }
 
++ (CommentUser*)parseCommentUserWithDict:(NSDictionary*)userDict
+{
+    CommentUser* commentUser = [[CommentUser alloc] init];
+    
+    if ([userDict isKindOfClass:[NSNull class]]) {
+        return commentUser;
+    }
+    
+    commentUser.userBaseId      = [userDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userBaseID"]];
+    commentUser.loginName       = [userDict[@"loginName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"loginName"]];
+    commentUser.nickName        = [userDict[@"nickName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"nickName"]];
+    commentUser.userName        = [userDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userName"]];
+    commentUser.signature       = [userDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"signature"]];
+    commentUser.userLevel       = [userDict[@"userLevel"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userLevel"]];
+    NSString* userAvatar      = [userDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userAvatar"]];
+    
+    commentUser.userAvatar    = [DataParser parseImageUrlWithString:userAvatar];
+    
+    return commentUser;
+}
+
++ (NSString*)parseImageUrlWithString:(NSString*)path
+{
+    NSString* imagePath;
+    
+//    path = [path stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+    
+    imagePath = [BaseOvenUrl stringByAppendingPathComponent:path];
+    
+    return imagePath;
+}
+
 + (Creator*)parseCreatorWithDict:(NSDictionary*)creatorDict
 {
     Creator* creator = [[Creator alloc] init];
     
     creator.ID              = [creatorDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"id"]];
     creator.userName        = [creatorDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userName"]];
-    creator.avatarPath      = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
+    NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
+    creator.avatarPath      = [DataParser parseImageUrlWithString:avatarPath];
     
     return creator;
 }
@@ -156,7 +190,8 @@
         cookbook.ID             = [cookbookDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookID"]];
         cookbook.name           = [cookbookDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookName"]];
         cookbook.desc           = [cookbookDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookDesc"]];
-        cookbook.coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
+        NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
+        cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
         cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
         NSDictionary* creatDict = cookbookDict[@"creator"];
         cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
@@ -173,7 +208,8 @@
     Step* step = [[Step alloc] init];
     step.ID             = [stepDict[@"cookbookStepID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"cookbookStepID"]];
     step.index          = [stepDict[@"stepIndex"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"stepIndex"]];
-    step.photo          = [stepDict[@"stepPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"stepPhoto"]];
+    NSString* photo          = [stepDict[@"stepPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"stepPhoto"]];
+    step.photo          = [DataParser parseImageUrlWithString:photo];
     step.desc           = [stepDict[@"stepDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"stepDesc"]];
     step.cookbookID     = [stepDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", stepDict[@"cookbookID"]];
     
@@ -200,7 +236,8 @@
     cookbookDetail.cookbookId       = [detailDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookID"]];
     cookbookDetail.name             = [detailDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookName"]];
     cookbookDetail.desc             = [detailDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookDesc"]];
-    cookbookDetail.coverPhoto       = [detailDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookCoverPhoto"]];
+    NSString* coverPhoto       = [detailDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookCoverPhoto"]];
+    cookbookDetail.coverPhoto       = [DataParser parseImageUrlWithString:coverPhoto];
     cookbookDetail.cookbookTip      = [detailDict[@"cookbookTip"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookTip"]];
     cookbookDetail.status           = [detailDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"status"]];
     cookbookDetail.praised          = [detailDict[@"praised"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"praised"]];

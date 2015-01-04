@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CommentUser.h"
 
 extern const CGFloat kAvatarSize;
 extern const CGFloat kReplyButtonWidth;
@@ -33,29 +34,19 @@ extern const CGFloat kCharacterSpacing;
 @property (copy, nonatomic) NSString* objectId;
 
 /**
- *  回复评论的主键ID
+ *  评论者
  */
-@property (copy, nonatomic) NSString* parentId;
+@property (strong, nonatomic) CommentUser* fromUser;
 
 /**
- *  评论者登录名
+ *  评论的对象
  */
-@property (copy, nonatomic) NSString* creatorLoginName;
-
-/**
- *  评论者真实姓名
- */
-@property (copy, nonatomic) NSString* creatorName;
-
-/**
- *  评论者头像
- */
-@property (copy, nonatomic) NSString* creatorAvatar;
+@property (strong, nonatomic) CommentUser* toUser;
 
 /**
  *  评论时间
  */
-@property (copy, nonatomic) NSString* modifiedTime;
+@property (copy, nonatomic) NSString* commentTime;
 
 /**
  *  获取评论高度

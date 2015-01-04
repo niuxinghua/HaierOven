@@ -996,17 +996,17 @@
 }
 
 
-- (void)getCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+- (void)getCookbooksWithUserBaseId:(NSString*)userBaseId cookbookStatus:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
 {
     if ([self canConnectInternet]) {
         
         // 1. 将参数序列化
         NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
         NSDictionary* paramsDict = @{
-                                     @"userId" : userBaseId,     //UsrId
+                                     @"userBaseID" : userBaseId,     //UsrId
                                      @"limit" : @PageLimit,     //每页行数
                                      @"page" : currentPage,     //当前请求的页数
-//                                     @"containsTotalCount" : @YES //是否包含总页数
+                                     @"status" : [NSNumber numberWithInteger:status] //菜谱状态：-1所有菜谱
                                      };
         
         // 2. 发送网络请求
@@ -1354,7 +1354,7 @@
 {
     if ([self canConnectInternet]) {
         
-        NSString* imagePath = [[[DataCenter sharedInstance] getLibraryPath] stringByAppendingPathComponent:@"avatar.jpg"];
+        NSString* imagePath = [[[DataCenter sharedInstance] getLibraryPath] stringByAppendingPathComponent:@"photo.jpg"];
         
         [data writeToFile:imagePath atomically:YES];
         
@@ -1363,7 +1363,7 @@
         
         [[self manager] POST:UploadFile parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
-            if ([formData appendPartWithFileURL:[NSURL fileURLWithPath:imagePath] name:@"avater.jpg" error:nil]) {
+            if ([formData appendPartWithFileURL:[NSURL fileURLWithPath:imagePath] name:@"photo.jpg" error:nil]) {
                 NSLog(@"%@", formData);
             }
             

@@ -95,20 +95,20 @@ const CGFloat kTimeLabelWidth = 150.0;
 //        frame.size.width -= 20;
 //        self.frame = frame;
 //    }
-    NSString* avatarPath = self.comment.creatorAvatar;
+    NSString* avatarPath = self.comment.fromUser.userAvatar;
     [self.userAvatar setImageWithURL:[NSURL URLWithString:avatarPath] placeholderImage:IMAGENAMED(@"placeholder.png")];
     
     CGPoint center = self.userAvatar.center;
     CGRect frame = CGRectMake(self.userAvatar.right + 10, center.y - 21 / 2, self.width - 10 - kAvatarSize - 10 - 10, 21);
     self.userNameLabel.frame = frame;
-    self.userNameLabel.text = self.comment.creatorLoginName;
+    self.userNameLabel.text = self.comment.fromUser.loginName;
     
     self.commentLabel.text = self.comment.content;
     CGFloat commentHeight = [self.commentLabel getAttributedStringHeightWidthValue:self.width - 60];
     self.commentLabel.frame = CGRectMake(self.userAvatar.right - 10, self.userAvatar.bottom + 10, self.width - 60, commentHeight);
     
     self.commentTimeLabel.frame = CGRectMake(self.right - 20 - kTimeLabelWidth, self.userNameLabel.top, kTimeLabelWidth, 21);
-    self.commentTimeLabel.text = self.comment.modifiedTime;
+    self.commentTimeLabel.text = self.comment.commentTime;
     
 //    if (!self.comment.isSubComment) {
 //        self.replyButton.frame = CGRectMake(self.width - kReplyButtonWidth - 30, self.commentTimeLabel.top, kReplyButtonWidth, 21);
