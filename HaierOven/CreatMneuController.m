@@ -32,7 +32,6 @@
 @property (strong, nonatomic) NSMutableArray*  tagsForTagsView;
 @property (strong, nonatomic) NSMutableArray* selectedTags;
 
-
 @property BOOL ischangeCover;
 #pragma mark - outlets
 
@@ -450,6 +449,14 @@
 - (void)updateCookbookDetail
 {
     self.cookbookDetail.tags = self.selectedTags;
+}
+#pragma mark- 点击编辑图片
+-(void)changeCover{
+    self.myWindow.hidden = NO;
+    self.addFoodAlertView.hidden = YES;
+    self.ischangeCover = YES;
+    [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH-PageW*0.58, PageW, PageW*0.58)];
+    }completion:nil];
     
 }
 
