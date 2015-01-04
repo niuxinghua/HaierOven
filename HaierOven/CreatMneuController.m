@@ -225,9 +225,6 @@
 #pragma mark - 添加步骤cell delegate
 -(void)AddStepOfMainTableView:(NSMutableArray *)arr{
     
-    
-    
-    
     self.steps = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
     
