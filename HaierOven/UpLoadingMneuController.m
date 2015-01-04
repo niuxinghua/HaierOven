@@ -9,6 +9,9 @@
 #import "UpLoadingMneuController.h"
 #import "ChooseCoverView.h"
 #import "CreatMneuController.h"
+
+typedef void (^result) (BOOL success);
+
 @interface UpLoadingMneuController ()<UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ChooseCoverViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *cover;
 @property (strong, nonatomic) IBOutlet UITextField *menuTitleTextFiled;
@@ -20,9 +23,19 @@
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) ChooseCoverView  *chooseCoverView;
 @property BOOL isChooseCover;
+
+@property (strong, nonatomic) NSMutableArray* tags;
+
 @end
 
 @implementation UpLoadingMneuController
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [super showStatusTip:YES title:@"烤箱已连接！！"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -123,7 +136,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    textField.text = self.titleString;
+//    textField.text = self.titleString;
    return [textField resignFirstResponder];
 }
 
@@ -186,6 +199,31 @@
 
 #pragma mark -
 
+#pragma mark - 获取标签
+
+
+
+- (void)loadTagsCompletion:(result)callback
+{
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            
+            self.tags = obj;
+            
+            callback(YES);
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"获取标签失败" afterDelay:1];
+            }
+            callback(NO);
+        }
+    }];
+}
+
 - (void)createCookbook
 {
     CookbookDetail* cookbookDetail = [[CookbookDetail alloc] init];
@@ -198,10 +236,19 @@
         if (success) {
             NSDictionary* objDict = [obj firstObject];
             cookbookDetail.coverPhoto = objDict[@"name"];
-            CreatMneuController *creatMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
-            creatMenu.cookbookCoverPhoto = self.cover.image;
-            creatMenu.cookbookDetail = cookbookDetail;
-            [self.navigationController pushViewController:creatMenu animated:YES];
+            
+            
+            [self loadTagsCompletion:^(BOOL success) {
+                if (success) {
+                    CreatMneuController *creatMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
+                    creatMenu.cookbookCoverPhoto = self.cover.image;
+                    creatMenu.cookbookDetail = cookbookDetail;
+                    creatMenu.tags = self.tags;
+                    [self.navigationController pushViewController:creatMenu animated:YES];
+                }
+            }];
+            
+            
             
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {

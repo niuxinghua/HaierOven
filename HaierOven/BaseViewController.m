@@ -30,8 +30,8 @@
     
     if (self.navigationController.viewControllers.count > 1 && self.isBackButton) {
         UIButton *backButton = [[UIButton alloc] init];
-        [backButton setImage:IMAGENAMED(@"icon_back_n.png") forState:UIControlStateNormal];
-        [backButton setImage:IMAGENAMED(@"icon_back_h.png") forState:UIControlStateHighlighted];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateNormal];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateHighlighted];
         backButton.showsTouchWhenHighlighted = YES;
         [backButton setFrame:CGRectMake(0, 0, 26, 26)];
         [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
