@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CoverCell;
+@protocol CoverCellDelegate <NSObject>
 
+-(void)changeCover;
+
+@end
 @interface CoverCell : UITableViewCell
 
 @property (strong, nonatomic) UIImage* coverImage;
-
+@property (weak, nonatomic)id <CoverCellDelegate>delegate;
 @end
