@@ -29,6 +29,9 @@
 @property (strong, nonatomic) AutoSizeLabelView *tagsView;
 @property float tagsCellHight;
 @property float psCellHight;
+@property (strong, nonatomic) NSMutableArray*  tagsForTagsView;
+@property (strong, nonatomic) NSMutableArray* selectedTags;
+
 
 #pragma mark - outlets
 
@@ -42,14 +45,31 @@
 
 #pragma mark - 加载系列
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.tags = [NSMutableArray array];
+        self.selectedTags = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
+//    [self loadTags];
 }
+
+
 
 -(void)SetUpSubviews{
     
-    self.tags =  @[@"烘焙",@"蒸菜",@"微波炉",@"巧克力",@"面包",@"饼干海鲜",@"有五个字呢",@"四个字呢",@"三个字呢",@"没规律呢",@"都能识别的呢",@"鱼",@"零食",@"早点",@"海鲜"];
+//    self.tags =  [@[@"烘焙",@"蒸菜",@"微波炉",@"巧克力",@"面包",@"饼干海鲜",@"有五个字呢",@"四个字呢",@"三个字呢",@"没规律呢",@"都能识别的呢",@"鱼",@"零食",@"早点",@"海鲜"] mutableCopy];
+    self.tagsForTagsView = [NSMutableArray array];
+    for (Tag* tag in self.tags) {
+        [self.tagsForTagsView addObject:tag.name];
+    }
+    
     self.tagsCellHight = [self getHeight];
     self.psCellHight = 210;
     
@@ -88,6 +108,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - 显示系列
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,8 +138,9 @@
         }else if(indexPath.row ==1)  {
             ChooseTagsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseTagsCell" forIndexPath:indexPath];
             cell.tagsView.delegate = self;
+            cell.cookName.text = self.cookbookDetail.name;
             if (!self.tagsView) {
-                cell.tagsView.tags = self.tags;
+                cell.tagsView.tags = self.tagsForTagsView;
                 self.tagsView = cell.tagsView;
             }
 //            cell.tagsView = self.tagsView;
@@ -202,6 +224,10 @@
 
 #pragma mark - 添加步骤cell delegate
 -(void)AddStepOfMainTableView:(NSMutableArray *)arr{
+    
+    
+    
+    
     self.steps = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
     
@@ -324,8 +350,22 @@
 
 #pragma mark- 自动标签delegate
 -(void)chooseTags:(UIButton*)btn{
+    
+    
+    Tag* theTag = [self.tags objectAtIndex:btn.tag];
+    
+    if (!btn.selected) {
+        if (self.selectedTags.count > 2) {
+            [super showProgressErrorWithLabelText:@"不能超过三个" afterDelay:1];
+            btn.selected = NO;
+            return;
+        }
+        [self.selectedTags addObject:theTag];
+        
+    } else {
+        [self.selectedTags removeObject:theTag];
+    }
     btn.selected = btn.selected ==YES?NO:YES;
-
     NSLog(@"%d",btn.tag);
 }
 #pragma mark-
@@ -334,8 +374,8 @@
     float leftpadding = 0;
     int line = 1;
     int count = 0;
-    for (int i = 0; i<self.tags.count; i++) {
-        float wide  =  [AutoSizeLabelView boolLabelLength:self.tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
+    for (int i = 0; i<self.tagsForTagsView.count; i++) {
+        float wide  =  [AutoSizeLabelView boolLabelLength:self.tagsForTagsView[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
         
         if (leftpadding+wide+PADDING_WIDE*count>PageW-60) {
             leftpadding=0;
@@ -359,6 +399,18 @@
 -(void)ChickAlert:(UILabel *)label andTextFailed:(UITextField *)textfield{
     self.myWindow.hidden = YES;
     [textfield resignFirstResponder];
+    
+    Food* food = [[Food alloc] init];
+    [self.foods addObject:food];
+    food.index = [NSString stringWithFormat:@"%d", self.foods.count];
+    if (label.tag == 2) {
+        food.name = label.text;
+    }
+    if (label.tag == 1) {
+        food.desc = label.text;
+    }
+
+    
 }
 #pragma mark -
 
@@ -391,4 +443,12 @@
 - (IBAction)Public:(id)sender {
     NSLog(@"发发发布");
 }
+
+- (void)updateCookbookDetail
+{
+    self.cookbookDetail.tags = self.selectedTags;
+    
+}
+
+
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 @class CreatMneuController;
 
-@interface CreatMneuController : UITableViewController
-@property (strong, nonatomic) NSArray *tags;
+@interface CreatMneuController : BaseTableViewController
+@property (strong, nonatomic) NSMutableArray *tags;
 
 @property (strong, nonatomic) UIImage* cookbookCoverPhoto;
 
