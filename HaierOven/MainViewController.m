@@ -111,7 +111,6 @@
     self.adCycleView.pageControlMiddle = YES;
     [self.adView addSubview:self.adCycleView];
     
-    
         
 }
 

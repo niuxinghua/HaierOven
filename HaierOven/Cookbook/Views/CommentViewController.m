@@ -9,8 +9,12 @@
 #import "CommentViewController.h"
 #import "Comment.h"
 #import "CommentListCell.h"
+#import "CommentCountCell.h"
 
-@interface CommentViewController ()
+@interface CommentViewController () <UIScrollViewDelegate>
+{
+    CGFloat _lastContentOffsetY;
+}
 
 @property (strong, nonatomic) NSMutableArray* comments;
 @property (weak, nonatomic) id controller;
@@ -41,36 +45,85 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.comments.count;
+    return self.comments.count + 1;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    CGFloat height = 0;
-    Comment* comment = self.comments[indexPath.row];
-    height += [comment getHeight];
-    //    for (Comment* subComment in comment.subComments) {
-    //        height += [subComment getHeight];
-    //    }
-    NSLog(@"indexPath.row：%d, Height:%.2f", indexPath.row, height);
-    return height;
-    
+    if (indexPath.row == 0) {
+        return 44;
+    } else {
+        
+        CGFloat height = 0;
+        Comment* comment = self.comments[indexPath.row - 1];
+        height += [comment getHeight];
+        //    for (Comment* subComment in comment.subComments) {
+        //        height += [subComment getHeight];
+        //    }
+        NSLog(@"indexPath.row：%d, Height:%.2f", indexPath.row, height);
+        return height;
+    }
     
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentListCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Comment list cell"];
     
-    cell.delegete = self.controller;
+    if (indexPath.row == 0) {
+        CommentCountCell* countCell = [tableView dequeueReusableCellWithIdentifier:@"Comment count cell" forIndexPath:indexPath];
+        countCell.commentCount = self.comments.count;
+        return countCell;
+    } else {
+        
+        CommentListCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Comment list cell"];
+        
+        cell.delegete = self.controller;
+        
+        cell.comment = self.comments[indexPath.row - 1];
+        
+        return cell;
+    }
     
-    cell.comment = self.comments[indexPath.row];
     
-    return cell;
     
 }
+
+#pragma mark - UIScrollViewDelegate
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    _lastContentOffsetY = scrollView.contentOffset.y;
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%f", scrollView.contentOffset.y);
+  
+    if (scrollView.contentOffset.y <= 0) {
+        scrollView.scrollEnabled = NO;
+    } else {
+        scrollView.scrollEnabled = YES;
+    }
+    
+        if (scrollView.contentOffset.y < _lastContentOffsetY)
+        {
+            //        NSLog(@"向下拉动");
+            
+            
+        } else if (scrollView.contentOffset.y > _lastContentOffsetY)
+        {
+            
+            //        NSLog(@"向上拉动");
+            
+            
+        }
+    
+    
+}
+
+
 /*
 #pragma mark - Navigation
 

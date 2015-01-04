@@ -203,6 +203,7 @@
     cookbookDetail.coverPhoto       = [detailDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookCoverPhoto"]];
     cookbookDetail.cookbookTip      = [detailDict[@"cookbookTip"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookTip"]];
     cookbookDetail.status           = [detailDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"status"]];
+    cookbookDetail.praised          = [detailDict[@"praised"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"praised"]];
     cookbookDetail.modifiedTime     = [detailDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"modifiedTime"]];
     
     NSMutableArray* tags            = [NSMutableArray array];

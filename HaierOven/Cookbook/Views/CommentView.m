@@ -8,6 +8,7 @@
 
 #import "CommentView.h"
 
+const CGFloat kTimeLabelWidth = 150.0;
 
 @interface CommentView ()
 
@@ -38,11 +39,14 @@
     self.userAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, kAvatarSize, kAvatarSize)];
     self.userAvatar.layer.cornerRadius = self.userAvatar.height / 2;
     self.userAvatar.layer.masksToBounds = YES;
+    self.userAvatar.layer.borderWidth = 1;
+    self.userAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    
     [self addSubview:self.userAvatar];
     
     CGRect frame = CGRectMake(self.userAvatar.right + 8, 10, self.width - 8 - kAvatarSize - 8 - 8, 21);
     self.userNameLabel = [[UILabel alloc] initWithFrame:frame];
-    self.userNameLabel.font = [UIFont systemFontOfSize:15];
+    self.userNameLabel.font = CommentFont;
     self.userNameLabel.textColor = [UIColor orangeColor];
     [self addSubview:self.userNameLabel];
     
@@ -54,8 +58,9 @@
     [self addSubview:self.commentLabel];
     
     self.commentTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, self.commentTimeLabel.bottom + 8, self.width / 2, 21)];
-    self.commentTimeLabel.font = [UIFont italicSystemFontOfSize:15];
+    self.commentTimeLabel.font = CommentFont;
     self.commentTimeLabel.textColor = [UIColor grayColor];
+    self.commentTimeLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.commentTimeLabel];
     
     self.replyButton = [DrawedButton buttonWithType:UIButtonTypeCustom];
@@ -65,12 +70,16 @@
     [self.replyButton addTarget:self action:@selector(replyCommentTapped) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.replyButton];
     
+    self.backgroundColor = [UIColor clearColor];
+    
 }
 
 - (void)replyCommentTapped
 {
     [self.delegate replyButtonTappedForCommentView:self];
 }
+
+#define TimeLabelWidth  80.0;
 
 /**
  *  当赋值comment对象是调用此方法重新布局以显示内容
@@ -96,9 +105,9 @@
     
     self.commentLabel.text = self.comment.content;
     CGFloat commentHeight = [self.commentLabel getAttributedStringHeightWidthValue:self.width - 60];
-    self.commentLabel.frame = CGRectMake(20, self.userAvatar.bottom + 10, self.width - 60, commentHeight);
+    self.commentLabel.frame = CGRectMake(self.userAvatar.right - 10, self.userAvatar.bottom + 10, self.width - 60, commentHeight);
     
-    self.commentTimeLabel.frame = CGRectMake(20, self.commentLabel.bottom + 10, self.width / 2, 21);
+    self.commentTimeLabel.frame = CGRectMake(self.right - 20 - kTimeLabelWidth, self.userNameLabel.top, kTimeLabelWidth, 21);
     self.commentTimeLabel.text = self.comment.modifiedTime;
     
 //    if (!self.comment.isSubComment) {
@@ -109,56 +118,6 @@
     
 }
 
-#define CELL_MARGIN_TB      8.0     // 气泡上下外边距
-#define CELL_MARGIN_LR      8.0     // 气泡左右外边距
-#define CELL_CORNER         10.0     // 气泡圆角半径
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    UIBezierPath* path = [UIBezierPath bezierPath];
-    
-    [path moveToPoint:CGPointMake(CELL_MARGIN_LR, self.bottom - 2)];
-    [path addLineToPoint:CGPointMake(self.right - CELL_MARGIN_LR, self.bottom - 2)];
-    
-//    [path moveToPoint:CGPointMake(CELL_MARGIN_LR, CELL_MARGIN_TB + CELL_CORNER)];
-//    [path addArcWithCenter:CGPointMake(CELL_MARGIN_LR + CELL_CORNER, CELL_MARGIN_TB + CELL_CORNER)
-//                    radius:CELL_CORNER
-//                startAngle:M_PI
-//                  endAngle:M_PI*3/2
-//                 clockwise:YES];
-//    [path addLineToPoint:CGPointMake(self.bounds.size.width - CELL_MARGIN_LR - CELL_CORNER, CELL_MARGIN_TB)];
-//    [path addArcWithCenter:CGPointMake(self.bounds.size.width - CELL_MARGIN_LR - CELL_CORNER, CELL_MARGIN_TB + CELL_CORNER)
-//                    radius:CELL_CORNER
-//                startAngle:M_PI*3/2
-//                  endAngle:M_PI*2
-//                 clockwise:YES];
-//    [path addLineToPoint:CGPointMake(self.bounds.size.width - CELL_MARGIN_LR, self.bounds.size.height - CELL_MARGIN_TB - CELL_CORNER)];
-//    [path addArcWithCenter:CGPointMake(self.bounds.size.width - CELL_MARGIN_LR - CELL_CORNER, self.bounds.size.height - CELL_MARGIN_TB - CELL_CORNER)
-//                    radius:CELL_CORNER
-//                startAngle:0.
-//                  endAngle:M_PI/2
-//                 clockwise:YES];
-//    [path addLineToPoint:CGPointMake(CELL_MARGIN_LR + CELL_CORNER, self.bounds.size.height - CELL_MARGIN_TB)];
-//    [path addArcWithCenter:CGPointMake(CELL_MARGIN_LR + CELL_CORNER, self.bounds.size.height - CELL_MARGIN_TB - CELL_CORNER)
-//                    radius:CELL_CORNER
-//                startAngle:M_PI/2
-//                  endAngle:M_PI
-//                 clockwise:YES];
-    
-    [path closePath];
-    path.lineWidth = 1;
-    [[UIColor grayColor] setStroke];
-    [path stroke];
-    
-    CGContextRestoreGState(context);
-    
-}
 
 
 @end
