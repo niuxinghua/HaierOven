@@ -37,7 +37,6 @@
 
 #define GlobalTableViewColor        RGB(245, 245, 245)
 
-
 //屏幕大小
 #define PageH ([[UIScreen mainScreen] bounds].size.height)
 #define PageW ([[UIScreen mainScreen] bounds].size.width)

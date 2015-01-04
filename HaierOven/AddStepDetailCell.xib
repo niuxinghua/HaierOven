@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,16 +31,34 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="120" id="17x-fL-E0c"/>
                             <constraint firstAttribute="width" constant="120" id="dGt-97-EBg"/>
+                            <constraint firstAttribute="width" secondItem="GAF-N6-vJB" secondAttribute="height" multiplier="1:1" id="gym-3o-mIq"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="17x-fL-E0c"/>
+                                <exclude reference="dGt-97-EBg"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文字说明" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBF-pF-ypj">
                         <rect key="frame" x="45" y="137" width="267" height="41"/>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.92941176470588238" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="41" id="HUn-hi-biM"/>
+                            <constraint firstAttribute="width" secondItem="dBF-pF-ypj" secondAttribute="height" multiplier="267:41" id="SnN-te-TX3"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="41" id="l1s-Et-tMC"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="HUn-hi-biM"/>
+                                <exclude reference="SnN-te-TX3"/>
+                            </mask>
+                        </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxA-TR-n25">
                         <rect key="frame" x="290" y="8" width="22" height="22"/>
