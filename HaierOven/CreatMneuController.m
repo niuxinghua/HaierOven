@@ -33,6 +33,12 @@
 @property (strong, nonatomic) NSMutableArray* selectedTags;
 
 @property BOOL ischangeCover;
+
+/**
+ *  当前编辑的步骤
+ */
+@property (strong, nonatomic) Step* edittingStep;
+
 #pragma mark - outlets
 
 
@@ -50,6 +56,16 @@
     if (self = [super initWithCoder:aDecoder]) {
         self.tags = [NSMutableArray array];
         self.selectedTags = [NSMutableArray array];
+        
+        self.foods = [NSMutableArray new];
+        self.steps = [NSMutableArray new];
+        
+        Step* step = [[Step alloc] init];
+        
+        [self.steps addObject:step];
+        
+        step.index = [NSString stringWithFormat:@"%d", self.steps.count];
+        
     }
     return self;
 }
@@ -77,9 +93,7 @@
 //    self.tagsView.tags = [self.tags copy];
 //    
     
-    self.foods = [NSMutableArray new];
-    self.steps = [NSMutableArray new];
-    [self.steps addObject:@"1"];
+    
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CellOfAddFoodTable class]) bundle:nil] forCellReuseIdentifier:@"CellOfAddFoodTable"];
     
@@ -244,7 +258,8 @@
 }
 
 
--(void)ImportStepDescription:(UILabel *)label{
+-(void)ImportStepDescription:(UILabel *)label withStepIndex:(NSInteger)index{
+    self.edittingStep = self.steps[index];
     //添加表述
     YIPopupTextView* popupTextView =
     [[YIPopupTextView alloc] initWithPlaceHolder:nil
@@ -272,6 +287,7 @@
             if (textView.tag ==1) {
                 self.tempLabel.text = text;
                 self.tempLabel.textColor = [UIColor blackColor];
+                self.edittingStep.desc = text;
             }else if (textView.tag==2){
                 self.myPs_String = text;
                 CGSize size = CGSizeZero;
@@ -286,7 +302,8 @@
     }
 }
 
--(void)AddStepImage:(UIImageView *)imageView{
+-(void)AddStepImage:(UIImageView *)imageView withStepIndex:(NSInteger)index{
+    self.edittingStep = self.steps[index];
     NSLog(@"添加图片");
     self.myWindow.hidden = NO;
     self.addFoodAlertView.hidden = YES;
@@ -338,13 +355,33 @@
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
+    NSData* imageData = UIImageJPEGRepresentation(image, 0.6);
+    
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    
     if (self.ischangeCover) {
         self.cookbookCoverPhoto = image;
+        
         [self.tableView reloadData];
-    }else
-    self.tempImageView.image = image;
-    //    [self.avaterButton setImage:image forState:UIControlStateNormal];
-    //    [self.avaterButton setImage:image forState:UIControlStateHighlighted];
+    }else {
+        self.tempImageView.image = image;
+        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSDictionary* objDict = [obj firstObject];
+                self.edittingStep.photo = objDict[@"name"];
+                
+            } else {
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
+                }
+            }
+        }];
+    }
+    
+
 }
 
 #pragma mark-
@@ -402,7 +439,7 @@
     self.myWindow.hidden = YES;
     [textfield resignFirstResponder];
     
-    Food* food = [[Food alloc] init];
+    Food* food = [[Food alloc] init]; // 这里应该拿到对象
     [self.foods addObject:food];
     food.index = [NSString stringWithFormat:@"%d", self.foods.count];
     if (label.tag == 2) {
@@ -440,16 +477,41 @@
 
 - (IBAction)SaveToDraft:(id)sender {
     NSLog(@"存存存");
+    self.cookbookDetail.status = @"0";
+    [self submitCookbook];
 }
 
 - (IBAction)Public:(id)sender {
     NSLog(@"发发发布");
+    self.cookbookDetail.status = @"1";
+    [self submitCookbook];
 }
 
-- (void)updateCookbookDetail
+- (void)submitCookbook
 {
     self.cookbookDetail.tags = self.selectedTags;
+    self.cookbookDetail.steps = self.steps;
+//    self.cookbookDetail.foods = self.foods;
+    Food* food = [[Food alloc] init];
+    food.index = @"0";
+    food.name = @"猪肉";
+    food.desc = @"500 g";
+    self.foods = [NSMutableArray array];
+    [self.foods addObject:food];
+    [self.foods addObject:food];
+    self.cookbookDetail.foods = self.foods;
+    self.cookbookDetail.cookbookTip = @"用心就好";
+    self.cookbookDetail.oven = [[CookbookOven alloc] init];
+    self.cookbookDetail.creator = [[Creator alloc] init];
+    self.cookbookDetail.creator.ID = @"5";
+    
+    [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"发布成功");
+        }
+    }];
 }
+
 #pragma mark- 点击编辑图片
 -(void)changeCover{
     self.myWindow.hidden = NO;

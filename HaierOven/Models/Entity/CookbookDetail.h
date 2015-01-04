@@ -80,7 +80,7 @@
 @property (strong, nonatomic) NSArray* foods;
 
 /**
- *  Oven字典：{"name":"烤箱1","id":null}
+ *  CookbookOven对象
  */
 @property (strong, nonatomic) CookbookOven* oven;
 
