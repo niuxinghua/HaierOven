@@ -20,6 +20,8 @@
     // Configure the view for the selected state
 }
 
+
+
 -(void)setStepImage:(UIImageView *)stepImage{
     _stepImage = stepImage;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(AddStepImage)];

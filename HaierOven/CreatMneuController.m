@@ -39,6 +39,13 @@
  */
 @property (strong, nonatomic) Step* edittingStep;
 
+/**
+ *  当前编辑的食材
+ */
+@property (strong, nonatomic) Food* edittingFood;
+
+
+
 #pragma mark - outlets
 
 
@@ -65,6 +72,10 @@
         [self.steps addObject:step];
         
         step.index = [NSString stringWithFormat:@"%d", self.steps.count];
+        
+        Food* food = [[Food alloc] init];
+        [self.foods addObject:food];
+        food.index = [NSString stringWithFormat:@"%d", self.foods.count];
         
     }
     return self;
@@ -139,7 +150,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        return 6;
+    return 6;
 }
 
 
@@ -164,7 +175,7 @@
         }else if(indexPath.row == 2){
             CellOfAddFoodTable *cell = [tableView dequeueReusableCellWithIdentifier:@"CellOfAddFoodTable" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.food = [self.foods mutableCopy];
+            cell.foods = [self.foods mutableCopy];
             cell.delegate = self;
 
             return cell;
@@ -198,7 +209,7 @@
             return self.tagsCellHight;
             break;
         case 2:
-            return (PageW-16)*0.13*(self.foods.count+2)+51;
+            return (PageW-16)*0.13*(self.foods.count+1)+51;
             break;
         case 3:
             return 80;
@@ -226,7 +237,9 @@
     }completion:nil];
     [self.tableView reloadData];
 }
--(void)ImportAlertView:(UILabel *)label{
+-(void)ImportAlertView:(UILabel *)label withFoodIndex:(NSInteger)foodIndex
+{
+    self.edittingFood = self.foods[foodIndex];
     self.addFoodAlertView.addFoodAlertType = label.tag;
     self.addFoodAlertView.label = label;
     self.myWindow.hidden = NO;
@@ -248,7 +261,8 @@
     [self.tableView reloadData];
     
 }
--(void)DeleteStepOfMainTableView:(NSMutableArray *)arr{
+-(void)DeleteStepOfMainTableView:(NSMutableArray *)arr
+{
     self.steps = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
     
@@ -439,14 +453,11 @@
     self.myWindow.hidden = YES;
     [textfield resignFirstResponder];
     
-    Food* food = [[Food alloc] init]; // 这里应该拿到对象
-    [self.foods addObject:food];
-    food.index = [NSString stringWithFormat:@"%d", self.foods.count];
     if (label.tag == 2) {
-        food.name = label.text;
+        self.edittingFood.name = label.text;
     }
     if (label.tag == 1) {
-        food.desc = label.text;
+        self.edittingFood.desc = label.text;
     }
 
     
@@ -492,13 +503,12 @@
     self.cookbookDetail.tags = self.selectedTags;
     self.cookbookDetail.steps = self.steps;
 //    self.cookbookDetail.foods = self.foods;
-    Food* food = [[Food alloc] init];
-    food.index = @"0";
-    food.name = @"猪肉";
-    food.desc = @"500 g";
-    self.foods = [NSMutableArray array];
-    [self.foods addObject:food];
-    [self.foods addObject:food];
+//    Food* food = [[Food alloc] init];
+//    food.index = @"0";
+//    food.name = @"猪肉";
+//    food.desc = @"500 g";
+//    self.foods = [NSMutableArray array];
+//    [self.foods addObject:food];
     self.cookbookDetail.foods = self.foods;
     self.cookbookDetail.cookbookTip = @"用心就好";
     self.cookbookDetail.oven = [[CookbookOven alloc] init];

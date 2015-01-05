@@ -168,6 +168,8 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     
+//    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    
     [manager.requestSerializer setValue:AppId forHTTPHeaderField:@"appId"];
     [manager.requestSerializer setValue:AppKey forHTTPHeaderField:@"appKey"];
     [manager.requestSerializer setValue:AppVersion forHTTPHeaderField:@"appVersion"];
@@ -177,6 +179,8 @@
     if (accessToken != nil) {
         [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"accessToken"];
     }
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     return manager;
 }
@@ -1128,7 +1132,7 @@
         NSMutableArray* tags = [NSMutableArray array];
         for (Tag* tag in cookbookDetail.tags) {
             NSMutableDictionary* tagDict = [NSMutableDictionary dictionary];
-            tagDict[@"tagID"] = tag.ID;
+            tagDict[@"tagID"] = [NSNumber numberWithInt:[tag.ID intValue]];
             [tags addObject:tagDict];
         }
         NSMutableArray* steps = [NSMutableArray array];
@@ -1136,7 +1140,7 @@
             NSMutableDictionary* stepDict = [NSMutableDictionary dictionary];
             stepDict[@"stepPhoto"] = step.photo;
             stepDict[@"stepDesc"] = step.desc;
-            stepDict[@"stepIndex"] = step.index;
+            stepDict[@"stepIndex"] = [NSNumber numberWithInt: [step.index intValue]];
             [steps addObject:stepDict];
         }
         NSMutableArray* foods = [NSMutableArray array];
@@ -1144,7 +1148,7 @@
             NSMutableDictionary* foodDict = [NSMutableDictionary dictionary];
             foodDict[@"foodName"] = food.name;
             foodDict[@"foodDesc"] = food.desc;
-            foodDict[@"cookbookFoodIndex"] = food.index;
+            foodDict[@"cookbookFoodIndex"] = [NSNumber numberWithInt:[food.index intValue]];
             [foods addObject:foodDict];
         }
 //        NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
@@ -1155,20 +1159,25 @@
         NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
         cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
         cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
-        cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime;
+        cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
         cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
         
         NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
                                      @"cookbookDesc" : cookbookDetail.desc,
                                      @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
                                      @"cookbookTip" : cookbookDetail.cookbookTip,
-                                     @"status" : cookbookDetail.status,
+                                     @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
                                      @"tags" : tags,
                                      @"steps" : steps,
                                      @"foods" : foods,
-                                     @"oven" : cookbookOvenDict,
-                                     @"creatorID" : cookbookDetail.creator.ID
+                                     @"cookbookOven" : cookbookOvenDict,
+                                     @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                                     
                                      };
+        
+        NSData* data = [NSJSONSerialization dataWithJSONObject:paramsDict options:NSJSONWritingPrettyPrinted error:nil];
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        
         
         // 2. 发送网络请求
         [[self manager] POST:AddCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

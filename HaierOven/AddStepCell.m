@@ -56,7 +56,8 @@
     cell.delegate = self;
     cell.editStyle = self.editStyle;
 //    cell.deleteBtn.tag = self.steps.count - 1 ;
-    cell.stepIndexString = [NSString stringWithFormat:@"%d",indexPath.row];
+    Step* step = self.steps[indexPath.row];
+    cell.stepIndexString = [NSString stringWithFormat:@"%@",step.index];
     return cell;
 }
 
@@ -74,10 +75,13 @@
 - (IBAction)AddStep:(id)sender {
     Step* step = [[Step alloc] init];
     step.index = [NSString stringWithFormat:@"%d", self.steps.count];
+    
     [self.steps addObject:step];
 
     for (int i = 0; i<self.steps.count; i++) {
-        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
+        Step* step = self.steps[i];
+        step.index = [NSString stringWithFormat:@"%d",i+1];
+
     }
     
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.steps.count-1 inSection:0];
@@ -87,13 +91,21 @@
 
 #pragma mark- 删除步骤
 -(void)stepDetailCell:(AddStepDetailCell*)cell DeleteStepsAtIndex:(NSInteger)index{
-    [self.steps removeObjectAtIndex:index];
-    for (int i = 0; i<self.steps.count; i++) {
-        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
-    }
+
+    NSIndexPath* indexPath= [self.addStepTableView indexPathForCell:cell];
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.steps removeObjectAtIndex:indexPath.row];
+    
+//    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    
     [self.addStepTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    
+    for (int i = 0; i<self.steps.count; i++) {
+//        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
+        Step* step = self.steps[i];
+        step.index = [NSString stringWithFormat:@"%d",i+1];
+    }
     
     [self.addStepTableView reloadData];
     [self.delegate DeleteStepOfMainTableView:self.steps];
