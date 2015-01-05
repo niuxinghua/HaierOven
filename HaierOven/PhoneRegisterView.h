@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PhoneRegisterView;
+@protocol  PhoneRegisterViewDelegate<NSObject>
 
+- (void)turnDealEmail;
+- (void)RegisterWithEmail:(BOOL)isSucceed;
+- (void)turnBackEmail;
+- (void)alertErrorEmail:(NSString *)string;
+
+@end
 @interface PhoneRegisterView : UIView
 @property (strong, nonatomic) IBOutlet UIView *tempHight;
+@property (weak, nonatomic)id<PhoneRegisterViewDelegate>delegate;
 
 @end

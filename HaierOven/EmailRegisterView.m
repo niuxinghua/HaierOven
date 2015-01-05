@@ -39,30 +39,17 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
-    
-}
-
-
--(void)setTextbgview:(NSArray *)textbgview{
-    _textbgview = textbgview;
-    for (UIView *view in textbgview) {
+    for (UIView *view in _textbgview) {
         view.layer.borderColor = GlobalOrangeColor.CGColor;
         view.layer.borderWidth = 1.0f;
     }
+    _sendCodeBtn.layer.cornerRadius = 10;
+    _sendCodeBtn.layer.masksToBounds = YES;
+    
+    _registBtn.layer.cornerRadius = 15;
+    _registBtn.layer.masksToBounds = YES;
 }
 
--(void)setSendCodeBtn:(UIButton *)sendCodeBtn{
-    _sendCodeBtn = sendCodeBtn;
-    sendCodeBtn.layer.cornerRadius = 10;
-    sendCodeBtn.layer.masksToBounds = YES;
-}
-
--(void)setRegistBtn:(UIButton *)registBtn{
-    _registBtn = registBtn;
-    registBtn.layer.cornerRadius = 15;
-    registBtn.layer.masksToBounds = YES;
-}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
@@ -81,7 +68,7 @@
     
     if (!self.phoneTextfailed.text.length)
         [self.delegate alertError:@"输入手机号不能为空"];
-    else if(self.phoneTextfailed.text.length<11)
+    else if(![MyTool validateTelephone:self.phoneTextfailed.text])
         [self.delegate alertError:@"输入手机号有误"];
     else if (!self.passCodeTextfailed.text.length)
         [self.delegate alertError:@"输入验证码不能为空"];

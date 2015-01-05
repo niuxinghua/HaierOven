@@ -25,7 +25,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIU-eM-5IM">
                     <rect key="frame" x="16" y="25" width="288" height="41"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAw-vS-Ydo">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAw-vS-Ydo">
                             <rect key="frame" x="8" y="3" width="272" height="35"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -95,6 +95,9 @@
                     <state key="normal" title="海尔烤箱隐私协议">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="turnDeal:" destination="iN0-l3-epB" eventType="touchUpInside" id="cPT-Bg-e3S"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="160-ON-uzD">
                     <rect key="frame" x="25" y="205" width="270" height="31"/>
@@ -106,6 +109,9 @@
                     <state key="normal" title="注册">
                         <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="regist:" destination="iN0-l3-epB" eventType="touchUpInside" id="vuF-SR-pe4"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBi-9h-7pU">
                     <rect key="frame" x="95" y="254" width="131" height="28"/>
@@ -114,6 +120,9 @@
                         <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="turnBack:" destination="iN0-l3-epB" eventType="touchUpInside" id="09b-B4-ozf"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYn-TT-m7i">
                     <rect key="frame" x="16" y="165" width="17" height="17"/>
@@ -125,6 +134,9 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="yty.png"/>
+                    <connections>
+                        <action selector="readDeal:" destination="iN0-l3-epB" eventType="touchUpInside" id="W34-zx-rfc"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -154,7 +166,13 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="emailTextfailed" destination="PAw-vS-Ydo" id="7q0-XR-s4d"/>
+                <outlet property="psdTextFailed" destination="Dmv-Kd-gaa" id="kBD-hA-GNp"/>
+                <outlet property="readDealBtn" destination="pYn-TT-m7i" id="g19-So-hZg"/>
+                <outlet property="registBtn" destination="160-ON-uzD" id="dg4-Gb-mfv"/>
                 <outlet property="tempHight" destination="K3q-Hc-hGG" id="BhQ-46-W8s"/>
+                <outletCollection property="textbgview" destination="mIU-eM-5IM" id="avr-wg-bpU"/>
+                <outletCollection property="textbgview" destination="K3q-Hc-hGG" id="c5c-fc-kJP"/>
             </connections>
         </view>
     </objects>

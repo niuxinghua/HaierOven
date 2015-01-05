@@ -10,7 +10,7 @@
 #import "EmailRegisterView.h"
 #import "RootViewController.h"
 #import "PhoneRegisterView.h"
-@interface RegisterViewController ()<EmailRegisterViewDelegate>
+@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
 @property (strong, nonatomic) IBOutlet UIButton *PhoneBtn;
@@ -39,14 +39,17 @@
     self.orangeLine.image = [MyTool createImageWithColor:GlobalOrangeColor];
     self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
     [self.view addSubview:self.orangeLine];
+    
+    
     self.emailRegisterView = [[EmailRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
     self.emailRegisterView.delegate = self;
     
     self.phoneRegisterView = [[PhoneRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
-    
-    self.registerType = RegisterTypePhone;
-    [self.view addSubview:self.registerView];
-    
+    self.phoneRegisterView.delegate = self;
+    self.registerType = RegisterTypeEmail;
+    [self.view addSubview:self.emailRegisterView];
+    [self.view addSubview:self.phoneRegisterView];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
      
@@ -69,17 +72,20 @@
 
 -(void)setRegisterType:(RegisterType)registerType{
     _registerType = registerType;
-    if (registerType == RegisterTypeEmail) {
+    if (registerType == RegisterTypePhone) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
+            self.orangeLine.frame = CGRectMake(self.PhoneBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
         }];
-        self.registerView =  self.emailRegisterView;
+        
+        self.emailRegisterView.hidden = NO;
+        self.phoneRegisterView.hidden = YES;
         self.y = self.emailRegisterView.tempHight.bottom+64+43;
     }else{
         [UIView animateWithDuration:0.2 animations:^{
-            self.orangeLine.frame = CGRectMake(self.PhoneBtn.left+20, self.PhoneBtn.bottom-7, self.PhoneBtn.width-40, 2);
+            self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.PhoneBtn.bottom-7, self.PhoneBtn.width-40, 2);
         }];
-        self.registerView =  self.phoneRegisterView;
+        self.emailRegisterView.hidden = YES;
+        self.phoneRegisterView.hidden = NO;
         self.y = self.phoneRegisterView.tempHight.bottom+64+43;
     }
 }
@@ -90,6 +96,10 @@
 - (IBAction)Turnback:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+
 
 
 #pragma mark - 手机注册回调方法
@@ -109,6 +119,27 @@
 }
 
 -(void)alertError:(NSString *)string{
+    [super showProgressErrorWithLabelText:string afterDelay:1];
+}
+
+
+#pragma mark - 邮箱注册回调方法
+-(void)turnBackEmail{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)turnDealEmail{
+    NSLog(@"跳转至用户隐私合约");
+}
+
+-(void)RegisterWithEmail:(BOOL)isSucceed{
+    if (isSucceed) {
+        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+        [self presentViewController:root animated:YES completion:nil];
+    }
+}
+
+-(void)alertErrorEmail:(NSString *)string{
     [super showProgressErrorWithLabelText:string afterDelay:1];
 }
 /*
