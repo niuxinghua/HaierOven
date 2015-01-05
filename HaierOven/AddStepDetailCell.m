@@ -21,6 +21,11 @@
     // Configure the view for the selected state
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+
+}
 
 
 -(void)setStepImage:(UIImageView *)stepImage{
@@ -30,11 +35,13 @@
 }
 
 -(void)setStepDescriptionLabel:(UILabel *)stepDescriptionLabel{
-    self.stepDescriptionLabel.layer.borderColor = GlobalOrangeColor.CGColor;
-    self.stepDescriptionLabel.layer.borderWidth = 1;
+    _stepDescriptionLabel = stepDescriptionLabel;
+    stepDescriptionLabel.layer.borderColor = GlobalOrangeColor.CGColor;
+    stepDescriptionLabel.layer.borderWidth = 1;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(AddDescription)];
-    [self.stepDescriptionLabel addGestureRecognizer:tap];
-}
+    [stepDescriptionLabel addGestureRecognizer:tap];
+
+  }
 
 -(void)setStepIndexLabel:(UILabel *)stepIndexLabel{
     _stepIndexLabel = stepIndexLabel;
