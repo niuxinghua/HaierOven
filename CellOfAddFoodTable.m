@@ -53,21 +53,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.food.count+2;
+    return self.foods.count+1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==self.food.count+1) {
+    if (indexPath.row==self.foods.count) {
         AddFoodLastCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddFoodLastCell" forIndexPath:indexPath];
         cell.delegate = self;
         return cell;
     }else{
         AddFoodCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddFoodCell" forIndexPath:indexPath];
-        if (self.food.count>0&&indexPath.row!=self.food.count) {
-//            Food *data = self.food[indexPath.row];
-//            cell.foodName = data.name;
-//            cell.foodCount = data.desc;
-            cell.foodName = self.food[indexPath.row];
+        if (indexPath.row!=self.foods.count) {
+           cell.food = self.foods[indexPath.row];
 
         }
         cell.chickDeleteBtn = self.deleteBtn.selected;
@@ -88,17 +85,21 @@
 
 -(void)addFoodCell{
     Food* food = [[Food alloc] init];
-    [self.food addObject:food];
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.food.count inSection:0];
+    [self.foods addObject:food];
+    food.index = [NSString stringWithFormat:@"%d", self.foods.count];
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.foods.count-1 inSection:0];
     [self.addfoodTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    [self.delegate reloadMainTableView:self.food];
+    [self.delegate reloadMainTableView:self.foods];
 }
 
--(void)setLabelText:(UILabel *)label{
+-(void)addFoodCell:(AddFoodCell *)cell setLabelText:(UILabel *)label
+{
+    NSIndexPath* indexPath = [self.addfoodTableView indexPathForCell:cell];
 //    self.myWindow.hidden = NO;
 //    self.addFoodAlertView.addFoodAlertType = label.tag;
 //    self.addFoodAlertView.label = label;
-    [self.delegate ImportAlertView:label];
+    [self.delegate ImportAlertView:label withFoodIndex:indexPath.row];
     
 }
 

@@ -10,7 +10,7 @@
 @class AddFoodCell;
 @protocol AddFoodCellDelegate <NSObject>
 
--(void)setLabelText:(UILabel *)label;
+-(void)addFoodCell:(AddFoodCell*)cell setLabelText:(UILabel *)label;
 
 @end
 @interface AddFoodCell : UITableViewCell

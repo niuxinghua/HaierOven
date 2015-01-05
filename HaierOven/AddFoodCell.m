@@ -12,6 +12,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    self.foodLabel.textColor = [UIColor blackColor];
+    self.foodCountLabel.textColor = [UIColor blackColor];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,22 +45,19 @@
     [_foodLabel addGestureRecognizer:tapfood];
 }
 
--(void)setFoodName:(NSString *)foodName{
-    _foodName = foodName;
-    self.foodLabel.text = foodName;
-    self.foodLabel.textColor = [UIColor blackColor];
-}
-
--(void)setFoodCount:(NSString *)foodCount{
-    _foodCount = foodCount;
-    self.foodCountLabel.text = foodCount;
-    self.foodCountLabel.textColor = [UIColor blackColor];
+- (void)setFood:(Food *)food
+{
+    _food = food;
+    
+    self.foodLabel.text = food.name == nil ? @"请输入食材" : food.name;
+    self.foodCountLabel.text = food.desc == nil ? @"请输入分量" : food.desc;
+    
 }
 
 -(void)import:(UITapGestureRecognizer*)tap{
     UILabel *label = (UILabel*)[tap view];
     
-    [self.delegate setLabelText:label];
+    [self.delegate addFoodCell:self setLabelText:label];
 }
 
 
