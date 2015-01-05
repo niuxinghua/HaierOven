@@ -61,4 +61,15 @@
 }
 
 
+-(void)setChickDeleteBtn:(BOOL)chickDeleteBtn{
+    _chickDeleteBtn = chickDeleteBtn;
+    if (chickDeleteBtn) {
+        self.deleteBtn.hidden = NO;
+    }else
+        self.deleteBtn.hidden = YES;
+
+}
+- (IBAction)deleteFood:(id)sender {
+    [self.delegate deleteFoodCell:self];
+}
 @end

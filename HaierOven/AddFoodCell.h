@@ -11,14 +11,16 @@
 @protocol AddFoodCellDelegate <NSObject>
 
 -(void)addFoodCell:(AddFoodCell*)cell setLabelText:(UILabel *)label;
-
+-(void)deleteFoodCell:(AddFoodCell *)cell;
 @end
 @interface AddFoodCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *foodLabel;
 @property (strong, nonatomic) IBOutlet UILabel *foodCountLabel;
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @property (weak, nonatomic)id<AddFoodCellDelegate> delegate;
 
 @property (strong, nonatomic) Food* food;
 
+@property (nonatomic) BOOL chickDeleteBtn;
 @end

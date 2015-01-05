@@ -11,30 +11,30 @@
 #import "MainViewNormalCell.h"
 #import "FoodListViewController.h"
 #import "CookbookDetailControllerViewController.h"
-
+#import "MJRefresh.h"
 #import "Tag.h"
 #import "Cookbook.h"
 
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.6
-@interface MainViewController () <MainViewNormalCellDelegate>
-{
-    NSInteger _pageIndex;
-}
+@interface MainViewController () <MainViewNormalCellDelegate,UIScrollViewDelegate>
+//{
+//    NSInteger _pageIndex;
+//}
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
 @property (strong, nonatomic) IBOutlet UIView *adView;
 @property (strong, nonatomic) IBOutlet UIScrollView *tagsScrollView;
 @property (strong, nonatomic) IBOutlet UITableView *maintable;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
+@property NSInteger pageIndex;
 @property (strong, nonatomic) NSArray* cookbooks;
 
 @end
+//@synthesize pageIndex;
 
 @implementation MainViewController
-
 #pragma mark - 获取网络数据
 
 - (void)loadTags
@@ -95,6 +95,9 @@
     self.maintable.delegate = self;
     
     [self loadCookbooks];
+    
+    [self addHeader];
+    [self addFooter];
     
     // Do any additional setup after loading the view.
 }
@@ -241,7 +244,114 @@
     NSLog(@"赞赞赞");
 }
 
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.maintable addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        if (1) {
+            vc.pageIndex = 1;
+            [vc loadCookbooks];
+        } else {
+            [vc.maintable headerEndRefreshing];
+            return;
+        }
+        
+        
+        // 加载数据，0.5秒后执行
+        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [vc.maintable reloadData];
+        // 结束刷新
+        [vc.maintable headerEndRefreshing];
+        
+        //        });
+        
+    }];
+    
+}
 
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.maintable addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        if (1) {
+            _pageIndex++;
+            [vc loadCookbooks];
+        } else {
+            [vc.maintable footerEndRefreshing];
+            return;
+        }
+        
+        
+        // 加载数据，0.5秒后执行
+        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [vc.maintable reloadData];
+        // 结束刷新
+        [vc.maintable footerEndRefreshing];
+        
+        //        });
+        
+    }];
+    
+}
+
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//
+//{
+//    
+//    // 假设偏移表格高度的20%进行刷新
+//    
+//    
+//    
+//    if (!_isLoading) { // 判断是否处于刷新状态，刷新中就不执行
+//    
+//        
+//        
+//        // 取内容的高度：
+//        
+//        //    如果内容高度大于UITableView高度，就取TableView高度
+//        
+//        //    如果内容高度小于UITableView高度，就取内容的实际高度
+//        
+//        float height = scrollView.contentSize.height > self.maintable.frame.size.height ?self.maintable.frame.size.height : scrollView.contentSize.height;
+//        
+//        
+//        
+//        if ((height - scrollView.contentSize.height + scrollView.contentOffset.y) / height > 0.2) {
+//            
+//            NSLog(@"下拉刷新");
+//            // 调用上拉刷新方法
+//            
+//        }
+//        
+//        
+//        
+//        if (- scrollView.contentOffset.y / self.maintable.frame.size.height > 0.2) {
+//            
+//            // 调用下拉刷新方法
+//            NSLog(@"上拉刷新");
+//
+//        }
+//    
+//    }
+//
+//}
 
 @end
 

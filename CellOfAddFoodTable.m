@@ -12,6 +12,7 @@
 #import "AddFoodLastCell.h"
 #import "AddFoodAlertView.h"
 @interface CellOfAddFoodTable ()<AddFoodLastCellDelegate,AddFoodCellDelegate>
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @end
 @implementation CellOfAddFoodTable
@@ -24,7 +25,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -32,7 +32,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-
+    self.deleteBtn.selected = NO;
 }
 
 
@@ -68,6 +68,7 @@
 
         }
 //        cell.food = self.foods[indexPath.row];
+        cell.chickDeleteBtn = self.deleteBtn.selected;
         cell.delegate = self;
         return cell;
     }
@@ -103,5 +104,30 @@
     
 }
 
+- (IBAction)deleteAddFood:(UIButton *)sender {
+    sender.selected = sender.selected ==NO?YES:NO;
+    [self.addfoodTableView reloadData];
+}
 
+-(void)deleteFoodCell:(AddFoodCell *)cell{
+    
+    NSIndexPath* indexPath= [self.addfoodTableView indexPathForCell:cell];
+    
+    [self.foods removeObjectAtIndex:indexPath.row];
+    
+    //    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    
+    [self.addfoodTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    
+    for (int i = 0; i<self.foods.count; i++) {
+        //        [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
+        Food* food = self.foods[i];
+        food.index = [NSString stringWithFormat:@"%d",i+1];
+    }
+    
+    [self.addfoodTableView reloadData];
+    [self.delegate reloadMainTableView:self.foods];
+
+}
 @end
