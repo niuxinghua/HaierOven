@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PhoneRegisterView : UIView
+@property (strong, nonatomic) IBOutlet UIView *tempHight;
 
 @end

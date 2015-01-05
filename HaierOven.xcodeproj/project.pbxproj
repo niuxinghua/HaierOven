@@ -92,6 +92,13 @@
 		45A5469C1A592E2C00BE62EC /* EmailRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */; };
 		45A5469F1A592E4200BE62EC /* PhoneRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */; };
 		45A546A11A592F9D00BE62EC /* EmailRegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */; };
+		45A546A31A593A8000BE62EC /* PhoneRegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A21A593A8000BE62EC /* PhoneRegisterView.xib */; };
+		45A546AA1A593E9C00BE62EC /* wty.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A41A593E9C00BE62EC /* wty.png */; };
+		45A546AB1A593E9C00BE62EC /* wty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A51A593E9C00BE62EC /* wty@2x.png */; };
+		45A546AC1A593E9C00BE62EC /* yty.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A61A593E9C00BE62EC /* yty.png */; };
+		45A546AD1A593E9C00BE62EC /* yty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A71A593E9C00BE62EC /* yty@2x.png */; };
+		45A546AE1A593E9C00BE62EC /* wty@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A81A593E9C00BE62EC /* wty@3x.png */; };
+		45A546AF1A593E9C00BE62EC /* yty@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546A91A593E9C00BE62EC /* yty@3x.png */; };
 		45A5E7FD1A4FC88C00FCD2BD /* UpLoadingMneuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A5E7FC1A4FC88C00FCD2BD /* UpLoadingMneuController.m */; };
 		45A5E8051A4FCACC00FCD2BD /* CGX.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E7FF1A4FCACC00FCD2BD /* CGX.png */; };
 		45A5E8061A4FCACC00FCD2BD /* CGX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8001A4FCACC00FCD2BD /* CGX@2x.png */; };
@@ -782,6 +789,13 @@
 		45A5469D1A592E4200BE62EC /* PhoneRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneRegisterView.h; sourceTree = "<group>"; };
 		45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneRegisterView.m; sourceTree = "<group>"; };
 		45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailRegisterView.xib; sourceTree = "<group>"; };
+		45A546A21A593A8000BE62EC /* PhoneRegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneRegisterView.xib; sourceTree = "<group>"; };
+		45A546A41A593E9C00BE62EC /* wty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wty.png; sourceTree = "<group>"; };
+		45A546A51A593E9C00BE62EC /* wty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wty@2x.png"; sourceTree = "<group>"; };
+		45A546A61A593E9C00BE62EC /* yty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yty.png; sourceTree = "<group>"; };
+		45A546A71A593E9C00BE62EC /* yty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yty@2x.png"; sourceTree = "<group>"; };
+		45A546A81A593E9C00BE62EC /* wty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wty@3x.png"; sourceTree = "<group>"; };
+		45A546A91A593E9C00BE62EC /* yty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yty@3x.png"; sourceTree = "<group>"; };
 		45A5E7FB1A4FC88C00FCD2BD /* UpLoadingMneuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLoadingMneuController.h; sourceTree = "<group>"; };
 		45A5E7FC1A4FC88C00FCD2BD /* UpLoadingMneuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLoadingMneuController.m; sourceTree = "<group>"; };
 		45A5E7FF1A4FCACC00FCD2BD /* CGX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CGX.png; sourceTree = "<group>"; };
@@ -1567,9 +1581,10 @@
 				45A546981A591BFE00BE62EC /* RegisterViewController.m */,
 				45A5469A1A592E2C00BE62EC /* EmailRegisterView.h */,
 				45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */,
+				45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */,
 				45A5469D1A592E4200BE62EC /* PhoneRegisterView.h */,
 				45A5469E1A592E4200BE62EC /* PhoneRegisterView.m */,
-				45A546A01A592F9D00BE62EC /* EmailRegisterView.xib */,
+				45A546A21A593A8000BE62EC /* PhoneRegisterView.xib */,
 			);
 			name = LoginController;
 			sourceTree = "<group>";
@@ -1577,6 +1592,12 @@
 		45A546871A58EF3300BE62EC /* LoginIn */ = {
 			isa = PBXGroup;
 			children = (
+				45A546A41A593E9C00BE62EC /* wty.png */,
+				45A546A51A593E9C00BE62EC /* wty@2x.png */,
+				45A546A61A593E9C00BE62EC /* yty.png */,
+				45A546A71A593E9C00BE62EC /* yty@2x.png */,
+				45A546A81A593E9C00BE62EC /* wty@3x.png */,
+				45A546A91A593E9C00BE62EC /* yty@3x.png */,
 				45A5468E1A58F08B00BE62EC /* wbdlwdj.png */,
 				45A5468F1A58F08B00BE62EC /* wbdlwdj@2x.png */,
 				45A546901A58F08B00BE62EC /* wbdlwdj@3x.png */,
@@ -2221,13 +2242,6 @@
 			name = MainViewController;
 			sourceTree = "<group>";
 		};
-		45BEED841A412E52003000AD /* MainView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MainView;
-			sourceTree = "<group>";
-		};
 		45C7E5221A3FD165000B086B = {
 			isa = PBXGroup;
 			children = (
@@ -2309,7 +2323,6 @@
 				45B650C71A47F9BF00A6376D /* DeviceView */,
 				45BA02E51A441386003810C7 /* PersonCenterView */,
 				457A772F1A41700300E422D0 /* LeftMenuCellView */,
-				45BEED841A412E52003000AD /* MainView */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2906,6 +2919,7 @@
 				4597EB261A501E640083AFE5 /* delete.png in Resources */,
 				45D906E21A47CAAB00B97D92 /* mingrentang.png in Resources */,
 				45BB36271A4A8E6E000EE3C4 /* fs-cxz.png in Resources */,
+				45A546AC1A593E9C00BE62EC /* yty.png in Resources */,
 				45D906D11A47CAAB00B97D92 /* hongbeiwu@2x.png in Resources */,
 				45BB36531A4A9615000EE3C4 /* zm-xz@3x.png in Resources */,
 				45A5E8151A4FF26B00FCD2BD /* ChooseCoverView.xib in Resources */,
@@ -3000,6 +3014,7 @@
 				45D9069E1A47CAAB00B97D92 /* aixin2@2x.png in Resources */,
 				457A777E1A42CA4500E422D0 /* RecommendTagView.xib in Resources */,
 				45C7E5BD1A3FFDCD000B086B /* FirstTableViewCell.xib in Resources */,
+				45A546AD1A593E9C00BE62EC /* yty@2x.png in Resources */,
 				45A546931A58F08B00BE62EC /* wbdlwdj@3x.png in Resources */,
 				458952F11A496876009B5DD1 /* tuolian@2x.png in Resources */,
 				45D906EF1A47CAAB00B97D92 /* orangel@2x.png in Resources */,
@@ -3049,6 +3064,7 @@
 				45D906ED1A47CAAB00B97D92 /* nan@3x.png in Resources */,
 				45B88E471A4BD7A100722EF6 /* ksyr-xz.png in Resources */,
 				45BC577A1A4B08380052F520 /* wendu-cxz@2x.png in Resources */,
+				45A546AB1A593E9C00BE62EC /* wty@2x.png in Resources */,
 				45D906D41A47CAAB00B97D92 /* huisousuo@2x.png in Resources */,
 				849F916A1A513981006234B9 /* icon_follow.png in Resources */,
 				45C7E53A1A3FD165000B086B /* Main.storyboard in Resources */,
@@ -3153,10 +3169,12 @@
 				458952B81A493C05009B5DD1 /* wifilianjie04@3x.png in Resources */,
 				45D906E91A47CAAB00B97D92 /* mydessertcount@2x.png in Resources */,
 				45B6510E1A482EDB00A6376D /* n2@3x.png in Resources */,
+				45A546A31A593A8000BE62EC /* PhoneRegisterView.xib in Resources */,
 				45D906DC1A47CAAB00B97D92 /* liebieo.png in Resources */,
 				458952CF1A49428D009B5DD1 /* dui.png in Resources */,
 				45BC57901A4B08C00052F520 /* naozhong-xz@3x.png in Resources */,
 				45A999511A50FD640008AFE3 /* pzy@3x.png in Resources */,
+				45A546AA1A593E9C00BE62EC /* wty.png in Resources */,
 				45B88E3F1A4BD7A100722EF6 /* kashi@2x.png in Resources */,
 				45B650F71A482D6B00A6376D /* 1-2.png in Resources */,
 				45BC578A1A4B08C00052F520 /* naozhong-cxz@3x.png in Resources */,
@@ -3347,6 +3365,7 @@
 				45BC577D1A4B08380052F520 /* wendu-wxz@2x.png in Resources */,
 				45B88E221A4BCEDD00722EF6 /* wdtz-wxz@3x.png in Resources */,
 				842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */,
+				45A546AE1A593E9C00BE62EC /* wty@3x.png in Resources */,
 				45A5468D1A58EF4400BE62EC /* txdlwdj@3x.png in Resources */,
 				45BB35FD1A4A6C80000EE3C4 /* guanji.png in Resources */,
 				45BB363C1A4A953A000EE3C4 /* xz-wxz.png in Resources */,
@@ -3397,6 +3416,7 @@
 				849F91811A513981006234B9 /* icon_share_navi_n-.png in Resources */,
 				849F91801A513981006234B9 /* icon_share_n@2x.png in Resources */,
 				45BC57651A4AF3AF0052F520 /* sk-cxz@2x.png in Resources */,
+				45A546AF1A593E9C00BE62EC /* yty@3x.png in Resources */,
 				45D906E61A47CAAB00B97D92 /* mrqd@2x.png in Resources */,
 				45D906BA1A47CAAB00B97D92 /* fakebg@3x.png in Resources */,
 				45B651151A48448500A6376D /* wodeWIFI.png in Resources */,

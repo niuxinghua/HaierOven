@@ -30,8 +30,8 @@
     
     if (self.navigationController.viewControllers.count > 1 && self.isBackButton) {
         UIButton *backButton = [[UIButton alloc] init];
-        [backButton setImage:IMAGENAMED(@"icon_back_n.png") forState:UIControlStateNormal];
-        [backButton setImage:IMAGENAMED(@"icon_back_h.png") forState:UIControlStateHighlighted];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateNormal];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateHighlighted];
         backButton.showsTouchWhenHighlighted = YES;
         [backButton setFrame:CGRectMake(0, 0, 26, 26)];
         [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -163,13 +163,15 @@
 {
     self.progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cancel.png"]];
+//    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cancel.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     
-    self.progressHUD.color = GlobalGrayColor;
-    self.progressHUD.labelColor = GlobalOrangeColor;
+    self.progressHUD.color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];;
+    self.progressHUD.labelColor = [UIColor whiteColor];
     
     self.progressHUD.labelText = text;
+    self.progressHUD.labelFont = [UIFont fontWithName:GlobalTitleFontName size:15];
+    
     [self.progressHUD hide:YES afterDelay:delay];
 }
 

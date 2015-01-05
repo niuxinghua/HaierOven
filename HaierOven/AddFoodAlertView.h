@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSUInteger, AddFoodAlertType) {
-    AddFoodAlertTypeAddFood     = 0,
+    AddFoodAlertTypeAddFood     = 2,
     AddFoodAlertTypeAddWeight   = 1,
     
 };
