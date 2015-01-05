@@ -60,4 +60,11 @@
 }
 
 
+-(void)setChickDeleteBtn:(BOOL)chickDeleteBtn{
+    if (self.chickDeleteBtn) {
+        self.delebtn.hidden = NO;
+    }else
+        self.delebtn.hidden = YES;
+
+}
 @end

@@ -12,6 +12,7 @@
 #import "AddFoodLastCell.h"
 #import "AddFoodAlertView.h"
 @interface CellOfAddFoodTable ()<AddFoodLastCellDelegate,AddFoodCellDelegate>
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @end
 @implementation CellOfAddFoodTable
@@ -24,7 +25,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -32,7 +32,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-
+    self.deleteBtn.selected = NO;
 }
 
 
@@ -70,6 +70,7 @@
             cell.foodName = self.food[indexPath.row];
 
         }
+        cell.chickDeleteBtn = self.deleteBtn.selected;
         cell.delegate = self;
         return cell;
     }
@@ -101,5 +102,10 @@
     
 }
 
+- (IBAction)deleteAddFood:(UIButton *)sender {
+    sender.selected = sender.selected ==YES?NO:YES;
+    [self.addfoodTableView reloadData];
+    
+}
 
 @end

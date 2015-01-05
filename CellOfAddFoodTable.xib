@@ -39,10 +39,26 @@
                         <rect key="frame" x="8" y="46" width="304" height="161"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT2-O3-OZM">
+                        <rect key="frame" x="290" y="16" width="22" height="22"/>
+                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="US3-lP-myk"/>
+                            <constraint firstAttribute="height" constant="22" id="XTs-yr-gNe"/>
+                        </constraints>
+                        <state key="normal" image="delete.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteAddFood:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5BG-QO-YbA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="ieR-wD-oTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="91" id="5f5-9P-BPB"/>
+                    <constraint firstItem="pT2-O3-OZM" firstAttribute="centerY" secondItem="12f-LN-XvN" secondAttribute="centerY" id="BSy-OC-FWt"/>
+                    <constraint firstAttribute="trailing" secondItem="pT2-O3-OZM" secondAttribute="trailing" constant="8" id="Jl3-wK-9Q7"/>
                     <constraint firstAttribute="trailing" secondItem="tOA-1X-VxE" secondAttribute="trailing" constant="8" id="QgI-yI-0Ed"/>
                     <constraint firstItem="12f-LN-XvN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="U3V-wn-Wqn"/>
                     <constraint firstAttribute="bottom" secondItem="tOA-1X-VxE" secondAttribute="bottom" constant="8" id="UY9-ZJ-aGx"/>
@@ -54,8 +70,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addfoodTableView" destination="tOA-1X-VxE" id="MQu-0U-zdj"/>
+                <outlet property="deleteBtn" destination="pT2-O3-OZM" id="CAL-zf-DTp"/>
             </connections>
             <point key="canvasLocation" x="295" y="303"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="delete.png" width="22" height="22"/>
+    </resources>
 </document>

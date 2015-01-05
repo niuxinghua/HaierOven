@@ -22,7 +22,7 @@
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AddFoodAlertView class]) owner:self options:nil] firstObject];
     self.frame = frame;
     self.center = CGPointMake(PageW/2, PageH/3.2);
-    self.layer.cornerRadius = 15;
+//    self.layer.cornerRadius = 15;
     return self;
 }
 

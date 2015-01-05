@@ -16,8 +16,9 @@
 @interface AddFoodCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *foodLabel;
 @property (strong, nonatomic) IBOutlet UILabel *foodCountLabel;
-
+@property (strong, nonatomic) IBOutlet UIButton *delebtn;
 @property (strong, nonatomic) NSString *foodName;
 @property (strong, nonatomic) NSString *foodCount;
 @property (weak, nonatomic)id<AddFoodCellDelegate> delegate;
+@property (nonatomic) BOOL chickDeleteBtn;
 @end
