@@ -60,6 +60,7 @@
     int line = 0;
     int count = 0;
     for (int i = 0; i<tags.count; i++) {
+        
         float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
         if (leftpadding+wide+PADDING_WIDE+PADDING_WIDE*count>PageW-60) {
             leftpadding=0;
@@ -83,6 +84,7 @@
         count++;
         
         if (self.style == AutoSizeLabelViewStyleCreatMenu) {
+            
             [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
             [title setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forState:UIControlStateSelected];
             title.layer.cornerRadius  = 5;

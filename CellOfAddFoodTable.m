@@ -86,7 +86,8 @@
 }
 
 -(void)addFoodCell{
-    [self.food addObject:@"鸡肉"];
+    Food* food = [[Food alloc] init];
+    [self.food addObject:food];
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.food.count inSection:0];
     [self.addfoodTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     [self.delegate reloadMainTableView:self.food];

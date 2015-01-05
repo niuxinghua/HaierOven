@@ -1140,15 +1140,15 @@
             [steps addObject:stepDict];
         }
         NSMutableArray* foods = [NSMutableArray array];
-        for (Food* food in cookbookDetail.steps) {
+        for (Food* food in cookbookDetail.foods) {
             NSMutableDictionary* foodDict = [NSMutableDictionary dictionary];
             foodDict[@"foodName"] = food.name;
             foodDict[@"foodDesc"] = food.desc;
             foodDict[@"cookbookFoodIndex"] = food.index;
             [foods addObject:foodDict];
         }
-        NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
-        creatorDict[@"id"] = cookbookDetail.creator.ID;
+//        NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
+//        creatorDict[@"creatorID"] = cookbookDetail.creator.ID;
 //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
 //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
@@ -1162,11 +1162,12 @@
                                      @"cookbookDesc" : cookbookDetail.desc,
                                      @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
                                      @"cookbookTip" : cookbookDetail.cookbookTip,
+                                     @"status" : cookbookDetail.status,
                                      @"tags" : tags,
                                      @"steps" : steps,
                                      @"foods" : foods,
-                                     @"oven" : cookbookDetail.oven,
-                                     @"creator" : creatorDict
+                                     @"oven" : cookbookOvenDict,
+                                     @"creatorID" : cookbookDetail.creator.ID
                                      };
         
         // 2. 发送网络请求

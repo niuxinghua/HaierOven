@@ -56,7 +56,7 @@
     cell.delegate = self;
     cell.editStyle = self.editStyle;
 //    cell.deleteBtn.tag = self.steps.count - 1 ;
-    cell.stepIndexString = self.steps[indexPath.row];
+    cell.stepIndexString = [NSString stringWithFormat:@"%d",indexPath.row];
     return cell;
 }
 
@@ -69,9 +69,12 @@
 {
     return YES;
 }
+
 #pragma mark- 添加步骤
 - (IBAction)AddStep:(id)sender {
-    [self.steps addObject:@"鸡肉"];
+    Step* step = [[Step alloc] init];
+    step.index = [NSString stringWithFormat:@"%d", self.steps.count];
+    [self.steps addObject:step];
 
     for (int i = 0; i<self.steps.count; i++) {
         [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
@@ -81,8 +84,9 @@
     [self.addStepTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.delegate AddStepOfMainTableView:self.steps];
 }
+
 #pragma mark- 删除步骤
--(void)DeleteStepsAtIndex:(NSInteger)index{
+-(void)stepDetailCell:(AddStepDetailCell*)cell DeleteStepsAtIndex:(NSInteger)index{
     [self.steps removeObjectAtIndex:index];
     for (int i = 0; i<self.steps.count; i++) {
         [self.steps replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d",i+1]];
@@ -97,11 +101,13 @@
 }
 
 #pragma mark -
--(void)AddStepImage:(UIImageView *)imageview{
-    [self.delegate AddStepImage:imageview];
+-(void)stepDetailCell:(AddStepDetailCell*)cell AddStepImage:(UIImageView *)imageview{
+    NSIndexPath* indexPath = [self.addStepTableView indexPathForCell:cell];
+    [self.delegate AddStepImage:imageview  withStepIndex:indexPath.row];
 }
--(void)AddStepDescription:(UILabel *)label{
-    [self.delegate ImportStepDescription:label];
+-(void)stepDetailCell:(AddStepDetailCell*)cell AddStepDescription:(UILabel *)label{
+    NSIndexPath* indexPath = [self.addStepTableView indexPathForCell:cell];
+    [self.delegate ImportStepDescription:label  withStepIndex:indexPath.row];
 }
 - (IBAction)DeleteStep:(id)sender {
     self.editStyle = self.editStyle ==EditStyleNone? EditStyleDelete:EditStyleNone;
