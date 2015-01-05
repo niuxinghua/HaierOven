@@ -58,6 +58,8 @@
     [self presentViewController:root animated:YES completion:nil];
 }
 - (IBAction)Register:(id)sender {
+    [self.userNameTextFailed resignFirstResponder];
+    [self.psdTextfailed resignFirstResponder];
     RegisterViewController* reg = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];
     [self.navigationController pushViewController:reg animated:YES];
 }

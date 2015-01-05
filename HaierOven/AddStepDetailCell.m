@@ -11,6 +11,10 @@
 @implementation AddStepDetailCell
 
 - (void)awakeFromNib {
+    self.stepDescriptionLabel.layer.borderColor = GlobalOrangeColor.CGColor;
+    self.stepDescriptionLabel.layer.borderWidth = 1;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(AddDescription)];
+    [self.stepDescriptionLabel addGestureRecognizer:tap];
     // Initialization code
 }
 
@@ -29,11 +33,7 @@
 }
 
 -(void)setStepDescriptionLabel:(UILabel *)stepDescriptionLabel{
-    _stepDescriptionLabel = stepDescriptionLabel;
-    stepDescriptionLabel.layer.borderColor = GlobalOrangeColor.CGColor;
-    stepDescriptionLabel.layer.borderWidth = 1;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(AddDescription)];
-    [stepDescriptionLabel addGestureRecognizer:tap];
+
 }
 
 -(void)setStepIndexLabel:(UILabel *)stepIndexLabel{
@@ -58,6 +58,15 @@
     }else
         self.deleteBtn.hidden = NO;
 }
+
+-(void)setStep:(Step *)step{
+    _step = step;
+    self.stepDescriptionLabel.text =  step.desc;
+//    self.stepImage.image = step.
+    NSString* imagePath = [BaseOvenUrl stringByAppendingString:step.photo];
+    [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"YJTP.png")];
+}
+
 #pragma mark- 点击图片和描述
 -(void)AddStepImage
 {

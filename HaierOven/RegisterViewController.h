@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 typedef NS_ENUM(NSInteger, RegisterType) {
     RegisterTypeEmail = 0,
     RegisterTypePhone = 1,
 
 };
 
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : BaseViewController
 @property (nonatomic) RegisterType registerType;
 @end

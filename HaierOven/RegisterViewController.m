@@ -7,11 +7,17 @@
 //
 
 #import "RegisterViewController.h"
-
-@interface RegisterViewController ()
+#import "EmailRegisterView.h"
+#import "RootViewController.h"
+#import "PhoneRegisterView.h"
+@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
 @property (strong, nonatomic) IBOutlet UIButton *PhoneBtn;
+@property (strong, nonatomic) IBOutlet UIView *registerView;
+@property (strong, nonatomic) EmailRegisterView *emailRegisterView;
+@property (strong, nonatomic) PhoneRegisterView *phoneRegisterView;
+@property CGFloat y;
 @end
 
 @implementation RegisterViewController
@@ -28,26 +34,59 @@
 }
 
 -(void)SetUpSubView{
-    self.registerType = RegisterTypeEmail;
     
     self.orangeLine = [UIImageView new];
     self.orangeLine.image = [MyTool createImageWithColor:GlobalOrangeColor];
     self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
     [self.view addSubview:self.orangeLine];
+    
+    
+    self.emailRegisterView = [[EmailRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
+    self.emailRegisterView.delegate = self;
+    
+    self.phoneRegisterView = [[PhoneRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
+    self.phoneRegisterView.delegate = self;
+    self.registerType = RegisterTypeEmail;
+    [self.view addSubview:self.emailRegisterView];
+    [self.view addSubview:self.phoneRegisterView];
 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillShow:)
+     
+                                                 name:UIKeyboardWillShowNotification
+     
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillHide:)
+     
+                                                 name:UIKeyboardWillHideNotification
+     
+                                               object:nil];
+
+    
 }
 
 -(void)setRegisterType:(RegisterType)registerType{
     _registerType = registerType;
-    if (registerType == RegisterTypeEmail) {
-        
+    if (registerType == RegisterTypePhone) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
+            self.orangeLine.frame = CGRectMake(self.PhoneBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
         }];
+        
+        self.emailRegisterView.hidden = NO;
+        self.phoneRegisterView.hidden = YES;
+        self.y = self.emailRegisterView.tempHight.bottom+64+43;
     }else{
         [UIView animateWithDuration:0.2 animations:^{
-            self.orangeLine.frame = CGRectMake(self.PhoneBtn.left+20, self.PhoneBtn.bottom-7, self.PhoneBtn.width-40, 2);
+            self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.PhoneBtn.bottom-7, self.PhoneBtn.width-40, 2);
         }];
+        self.emailRegisterView.hidden = YES;
+        self.phoneRegisterView.hidden = NO;
+        self.y = self.phoneRegisterView.tempHight.bottom+64+43;
     }
 }
 
@@ -58,6 +97,51 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+
+
+
+
+#pragma mark - 手机注册回调方法
+-(void)turnBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)turnDeal{
+    NSLog(@"跳转至用户隐私合约");
+}
+
+-(void)RegisterWithPhone:(BOOL)isSucceed{
+    if (isSucceed) {
+        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+        [self presentViewController:root animated:YES completion:nil];
+    }
+}
+
+-(void)alertError:(NSString *)string{
+    [super showProgressErrorWithLabelText:string afterDelay:1];
+}
+
+
+#pragma mark - 邮箱注册回调方法
+-(void)turnBackEmail{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)turnDealEmail{
+    NSLog(@"跳转至用户隐私合约");
+}
+
+-(void)RegisterWithEmail:(BOOL)isSucceed{
+    if (isSucceed) {
+        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+        [self presentViewController:root animated:YES completion:nil];
+    }
+}
+
+-(void)alertErrorEmail:(NSString *)string{
+    [super showProgressErrorWithLabelText:string afterDelay:1];
+}
 /*
 #pragma mark - Navigation
 
@@ -67,5 +151,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    int k = PageH - self.y;
+    if (k<height) {
+        self.view.frame = CGRectMake(0,-(height - k), PageW, PageH);
+    }
+}
+
+
+//当键退出时调用
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+
+{
+    self.view.frame = CGRectMake(0,0, PageW, PageH);
+    
+}
 
 @end
