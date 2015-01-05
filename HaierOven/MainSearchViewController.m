@@ -16,9 +16,37 @@
 @property (strong, nonatomic)  UILabel *notfFindLabel;
 @property (strong, nonatomic) UIView *recommendTagsView;
 @property (strong, nonatomic) NSArray *recommendTag;
+
+@property (strong, nonatomic) NSMutableArray* searchedCookbooks;
+@property (strong, nonatomic) NSMutableArray* recentSearchedKeywords;
+/**
+ *  如果有输入搜索关键字，则数据源为搜索结果，否则为最近搜索记录
+ */
+@property (nonatomic) BOOL searchedFlag;
+
 @end
 
 @implementation MainSearchViewController
+
+#pragma mark - 网络请求
+
+- (void)searchCookbookWithKeyword:(NSString*)keyword
+{
+    if (keyword.length == 0) {
+        self.searchedFlag = NO;
+        [self.table reloadData];
+        return;
+    }
+    [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.searchedFlag = YES;
+            [self.searchedCookbooks addObjectsFromArray:obj];
+            [self.table reloadData];
+        }
+    }];
+}
+
+#pragma mark - 加载和初始化
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -90,7 +118,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark SearchDelagate
+
 -(void)TouchUpInsideCancelBtn{
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -98,11 +128,18 @@
 
 -(void)StartReach:(UITextField *)searchTextFailed{
     self.table.hidden = NO;
+    self.searchedFlag = NO;
 }
 
 -(void)Cancel{
     self.table.hidden = YES;
 }
+
+- (void)textFieldTextChanged:(NSString *)text
+{
+    [self searchCookbookWithKeyword:text];
+}
+
 #pragma mark-
 #pragma mark 点击推荐按钮delegate
 -(void)TouchUpTag:(id)tag{
@@ -118,27 +155,43 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        NSString *cellIdentifier =@"recent";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        return cell;
+    if (self.searchedFlag) {
         
-    }else{
         NSString *cellIdentifier =@"SearchTableCell";
         SearchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
+        Cookbook* cookbook = self.searchedCookbooks[indexPath.row];
+        cell.cookbookNameLabel.text = cookbook.name;
         return cell;
+        
+    } else {
+        
+        if (indexPath.row == 0) {
+            NSString *cellIdentifier =@"recent";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
+            return cell;
+            
+        }else{
+            NSString *cellIdentifier =@"SearchTableCell";
+            SearchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
+            
+            return cell;
+        }
+        
     }
+    return nil;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.searchedFlag ? self.searchedCookbooks.count : self.recentSearchedKeywords.count + 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        return 35;
+        return self.searchedFlag ? 60 : 35;
     }else{
         return 60;
     }

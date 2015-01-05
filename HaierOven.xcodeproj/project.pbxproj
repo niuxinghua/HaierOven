@@ -1542,7 +1542,6 @@
 				45D857CD1A401134007B7AB7 /* SecTableViewCell.xib */,
 				45D9071E1A47EBE900B97D92 /* SecDeviceTableViewCell.xib */,
 				45034AE11A401FA100FDD70D /* NormalTableViewCell.xib */,
-				457A77651A4294C900E422D0 /* SearchView.xib */,
 				457A777D1A42CA4500E422D0 /* RecommendTagView.xib */,
 			);
 			name = LeftMenuCellView;
@@ -1671,8 +1670,8 @@
 		45A546CE1A5A4EC600BE62EC /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				457A77651A4294C900E422D0 /* SearchView.xib */,
 				45BA02F81A442B31003810C7 /* MainViewNormalCell.xib */,
-				45A546B11A5A4EC100BE62EC /* MJRefresh */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -2386,6 +2385,7 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45A546B11A5A4EC100BE62EC /* MJRefresh */,
 				45A546CE1A5A4EC600BE62EC /* MainView */,
 				45A546B01A5A4A5F00BE62EC /* Login */,
 				45A999481A50FA960008AFE3 /* UpLoadingMneu */,

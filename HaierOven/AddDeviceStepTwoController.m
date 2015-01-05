@@ -89,7 +89,7 @@
 - (void)keyboardWillHide:(NSNotification *)aNotification
 
 {
-    self.view.frame = CGRectMake(0,64, PageW, PageH);
+    self.view.frame = CGRectMake(0,0, PageW, PageH);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

@@ -10,4 +10,7 @@
 
 @interface SearchTableCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *cookbookNameLabel;
+
+
 @end

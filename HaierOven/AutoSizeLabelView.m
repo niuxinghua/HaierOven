@@ -62,7 +62,7 @@
     for (int i = 0; i<tags.count; i++) {
         
         float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
-        if (leftpadding+wide+PADDING_WIDE+PADDING_WIDE*count>PageW-60) {
+        if (leftpadding+wide+PADDING_WIDE+PADDING_WIDE*count>PageW-40) {
             leftpadding=0;
             ++line;
             count = 0;

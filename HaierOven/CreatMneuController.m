@@ -430,7 +430,7 @@
     for (int i = 0; i<self.tagsForTagsView.count; i++) {
         float wide  =  [AutoSizeLabelView boolLabelLength:self.tagsForTagsView[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
         
-        if (leftpadding+wide+PADDING_WIDE*count>PageW-60) {
+        if (leftpadding+wide+PADDING_WIDE*count>PageW-40) {
             leftpadding=0;
             ++line;
             count = 0;
@@ -489,7 +489,9 @@
 - (IBAction)SaveToDraft:(id)sender {
     NSLog(@"存存存");
     self.cookbookDetail.status = @"0";
-    [self submitCookbook];
+    if ([self validateCookbookDetail]) {
+        [self submitCookbook];
+    }
 }
 
 - (IBAction)Public:(id)sender {
@@ -508,31 +510,34 @@
  */
 - (BOOL)validateCookbookDetail
 {
-    BOOL validate = YES;
-    if (self.tags.count == 0) {
+    if (self.selectedTags.count == 0) {
         [super showProgressErrorWithLabelText:@"请选择标签" afterDelay:1];
-        validate = NO;
+        return NO;
     }
     for (Food* food in self.foods) {
         if(food.name.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材名称" afterDelay:1];
-            validate = NO;
+            return NO;
         } else if (food.desc.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材用量" afterDelay:1];
-            validate = NO;
+            return NO;
         }
     }
     for (Step* step in self.steps) {
         if (step.photo.length == 0) {
             [super showProgressErrorWithLabelText:@"请选择步骤图片" afterDelay:1];
-            validate = NO;
+            return NO;
         } else if (step.desc.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写步骤描述" afterDelay:1];
-            validate = NO;
+            return NO;
         }
     }
+    if (self.myPs_String.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
+        return NO;
+    }
     
-    return validate;
+    return YES;
 }
 
 - (void)submitCookbook

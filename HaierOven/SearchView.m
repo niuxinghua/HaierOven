@@ -53,6 +53,12 @@
     
 }
 
+
+- (IBAction)textChanged:(UITextField *)sender {
+    [self.delegate textFieldTextChanged:sender.text];
+}
+
+
 - (IBAction)TurnBack:(id)sender {
     [self.delegate TouchUpInsideCancelBtn];
 }
