@@ -58,7 +58,7 @@
     Step *step = self.steps[indexPath.row];
     cell.step = step;
 //    cell.deleteBtn.tag = self.steps.count - 1 ;
-    Step* step = self.steps[indexPath.row];
+//    Step* step = self.steps[indexPath.row];
     cell.stepIndexString = [NSString stringWithFormat:@"%@",step.index];
     return cell;
 }
