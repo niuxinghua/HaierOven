@@ -56,6 +56,13 @@
 }
 
 - (IBAction)getPassCode:(id)sender {
+    
+    if (![MyTool validateTelephone:self.phoneTextfailed.text]) {
+        [self.delegate alertError:@"请输入正确的手机号"];
+    } else {
+        [self.delegate getVerifyCodeWithPhone:self.phoneTextfailed.text];
+    }
+    
     NSLog(@"获取验证码");
 }
 - (IBAction)readDeal:(UIButton*)sender {
@@ -82,7 +89,7 @@
         [self.delegate alertError:@"请确认海尔烤箱隐私协议"];
     else{
         //开始注册吧
-        [self.delegate RegisterWithPhone:YES];
+        [self.delegate RegisterWithPhone:self.phoneTextfailed.text andVerifyCode:self.passCodeTextfailed.text andPassword:self.psdTextFailed.text];
         }
 }
 - (IBAction)turnBack:(id)sender {

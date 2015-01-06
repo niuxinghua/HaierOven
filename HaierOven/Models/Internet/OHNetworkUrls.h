@@ -14,6 +14,11 @@
 #define BaseUrl         @"http://115.29.8.251:8080/haieroven/app"
 #define BaseOvenUrl     @"http://115.29.8.251:8080/haieroven"
 
+//#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
+#define BaseUhomeUrl    @"http://uhome.haier.net:6000/commonapp"
+
+
+
 
 #pragma mark - 登录注册
 
@@ -153,7 +158,7 @@
 /**
  *  赞菜谱
  */
-#define PraiseCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/superp"]
+#define PraiseCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/praise"]
 
 #pragma mark - 文件
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLTHJW.ttf">
@@ -16,31 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="260" height="260"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifilianjie08.png" translatesAutoresizingMaskIntoConstraints="NO" id="6eA-Q7-8gh">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifilianjie08.png" id="6eA-Q7-8gh">
                     <rect key="frame" x="80" y="35" width="100" height="100"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="100" id="6ZQ-RP-ST4"/>
-                        <constraint firstAttribute="height" constant="100" id="PGE-3z-yro"/>
-                    </constraints>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在努力匹配中, 请稍候..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jN-ig-mle">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在努力匹配中, 请稍候..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1jN-ig-mle">
                     <rect key="frame" x="23" y="191" width="214" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="508-es-fki"/>
-                    </constraints>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="1jN-ig-mle" secondAttribute="trailing" constant="23" id="8Qs-1R-QLa"/>
-                <constraint firstAttribute="bottom" secondItem="1jN-ig-mle" secondAttribute="bottom" constant="48" id="VOj-WI-j9x"/>
-                <constraint firstAttribute="centerX" secondItem="6eA-Q7-8gh" secondAttribute="centerX" id="asF-zb-qsy"/>
-                <constraint firstItem="1jN-ig-mle" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="23" id="hhR-06-WT2"/>
-                <constraint firstItem="6eA-Q7-8gh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="iCX-yK-zHn"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -52,4 +40,9 @@
     <resources>
         <image name="wifilianjie08.png" width="93" height="93"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

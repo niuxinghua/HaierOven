@@ -11,7 +11,7 @@
 @protocol  PhoneRegisterViewDelegate<NSObject>
 
 - (void)turnDealEmail;
-- (void)RegisterWithEmail:(BOOL)isSucceed;
+- (void)RegisterWithEmail:(NSString*)email andPassword:(NSString*)password;
 - (void)turnBackEmail;
 - (void)alertErrorEmail:(NSString *)string;
 

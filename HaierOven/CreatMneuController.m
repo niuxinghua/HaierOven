@@ -549,7 +549,7 @@
     self.cookbookDetail.cookbookTip = self.myPs_String;
     self.cookbookDetail.oven = [[CookbookOven alloc] init];
     self.cookbookDetail.creator = [[Creator alloc] init];
-    self.cookbookDetail.creator.ID = @"5";
+    self.cookbookDetail.creator.ID = @"5"; // creatorID应为已登录用户
     
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {

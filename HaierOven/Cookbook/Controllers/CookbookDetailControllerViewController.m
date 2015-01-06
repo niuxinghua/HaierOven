@@ -675,5 +675,49 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  赞菜谱
+ *
+ *  @param sender 赞
+ */
+- (IBAction)praiseCookbookTapped:(UIButton *)sender
+{
+    [self praiseCookbook];
+    
+}
+
+- (IBAction)shareCookbookTapped:(UIButton *)sender
+{
+    [self shareCookbook];
+}
+
+#pragma mark - 点赞和分享
+
+- (void)praiseCookbook
+{
+    NSString* userID = @"5";
+    [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbook.ID userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            [super showProgressCompleteWithLabelText:@"已赞" afterDelay:1];
+        } else {
+            [super showProgressErrorWithLabelText:@"点赞失败" afterDelay:1];
+        }
+    }];
+    
+}
+
+- (void)shareCookbook
+{
+    NSLog(@"分享");
+}
 
 @end
+
+
+
+
+
+
+
+
+

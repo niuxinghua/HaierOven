@@ -64,13 +64,14 @@
         [self.delegate alertErrorEmail:@"请输入6～16位数字和字母"];
     else if(self.psdTextFailed.text.length>16)
         [self.delegate alertErrorEmail:@"请输入6～16位数字和字母"];
-    else if(![self invalidInputWithUserName:nil andPassword:self.psdTextFailed.text])
-        [self.delegate alertErrorEmail:@"密码请输入6～16位数字和字母"];
+//    else if(![self invalidInputWithUserName:nil andPassword:self.psdTextFailed.text])
+//        [self.delegate alertErrorEmail:@"密码请输入6～16位数字和字母"];
     else if(!self.readDealBtn.selected)
         [self.delegate alertErrorEmail:@"请确认海尔烤箱隐私协议"];
     else{
         //开始注册吧
-        [self.delegate RegisterWithEmail:YES];
+        
+        [self.delegate RegisterWithEmail:self.emailTextfailed.text andPassword:self.psdTextFailed.text];
     }
 }
 - (IBAction)turnBack:(id)sender {
