@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "268"
             endingLineNumber = "268"
-            landmarkName = "-ImportStepDescription:withStepIndex:"
+            landmarkName = "-DeleteStepOfMainTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

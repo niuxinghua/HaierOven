@@ -97,10 +97,16 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 3:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"CookHallofFameViewController"]]
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"CookStarController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
+            
+            case 6:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
+                                                         animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+
         default:
             break;
     }

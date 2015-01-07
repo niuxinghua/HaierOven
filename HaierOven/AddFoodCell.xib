@@ -35,13 +35,13 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uui-7w-l42">
                         <rect key="frame" x="290" y="11" width="22" height="22"/>
-                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="WeX-DZ-ALg"/>
                             <constraint firstAttribute="width" secondItem="Uui-7w-l42" secondAttribute="height" multiplier="1:1" id="dyR-86-TA9"/>
                             <constraint firstAttribute="height" constant="22" id="eZ3-Kv-Txh"/>
                         </constraints>
-                        <state key="normal" image="delete.png">
+                        <state key="normal" image="deletec.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <variation key="default">
@@ -80,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="delete.png" width="22" height="22"/>
+        <image name="deletec.png" width="26" height="26"/>
     </resources>
 </document>

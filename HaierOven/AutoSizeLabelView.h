@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSUInteger, AutoSizeLabelViewStyle) {
     AutoSizeLabelViewStyleCreatMenu = 0,        //创建菜谱中的tag标签
     AutoSizeLabelViewStyleMenuDetail = 1,     //菜谱详情中的tag标签
-
+    AutoSizeLabelViewStyleCookStarDetail = 2,
 };
 @class AutoSizeLabelView;
 @protocol AutoSizeLabelViewDelegate <NSObject>
@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, AutoSizeLabelViewStyle) {
 @end
 @interface AutoSizeLabelView : UIView
 @property (strong, nonatomic)NSArray *tags;
+@property (nonatomic)AutoSizeLabelViewStyle style;
 @property (nonatomic,weak)id<AutoSizeLabelViewDelegate>delegate;
 +(float )boolLabelLength:(NSString *)strString
             andAttribute:(NSDictionary *)attribute;
