@@ -489,35 +489,80 @@
 - (IBAction)SaveToDraft:(id)sender {
     NSLog(@"存存存");
     self.cookbookDetail.status = @"0";
-    [self submitCookbook];
+    if ([self validateCookbookDetail]) {
+        [self submitCookbook];
+    }
 }
 
 - (IBAction)Public:(id)sender {
     NSLog(@"发发发布");
     self.cookbookDetail.status = @"1";
-    [self submitCookbook];
+    if ([self validateCookbookDetail]) {
+        [self submitCookbook];
+    }
+    
+}
+
+/**
+ *  检查菜谱信息是否完善
+ *
+ *  @return 是否完善
+ */
+- (BOOL)validateCookbookDetail
+{
+    if (self.selectedTags.count == 0) {
+        [super showProgressErrorWithLabelText:@"请选择标签" afterDelay:1];
+        return NO;
+    }
+    for (Food* food in self.foods) {
+        if(food.name.length == 0) {
+            [super showProgressErrorWithLabelText:@"请填写食材名称" afterDelay:1];
+            return NO;
+        } else if (food.desc.length == 0) {
+            [super showProgressErrorWithLabelText:@"请填写食材用量" afterDelay:1];
+            return NO;
+        }
+    }
+    for (Step* step in self.steps) {
+        if (step.photo.length == 0) {
+            [super showProgressErrorWithLabelText:@"请选择步骤图片" afterDelay:1];
+            return NO;
+        } else if (step.desc.length == 0) {
+            [super showProgressErrorWithLabelText:@"请填写步骤描述" afterDelay:1];
+            return NO;
+        }
+    }
+    if (self.myPs_String.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)submitCookbook
 {
     self.cookbookDetail.tags = self.selectedTags;
     self.cookbookDetail.steps = self.steps;
-//    self.cookbookDetail.foods = self.foods;
-//    Food* food = [[Food alloc] init];
-//    food.index = @"0";
-//    food.name = @"猪肉";
-//    food.desc = @"500 g";
-//    self.foods = [NSMutableArray array];
-//    [self.foods addObject:food];
+
     self.cookbookDetail.foods = self.foods;
-    self.cookbookDetail.cookbookTip = @"用心就好";
+    self.cookbookDetail.cookbookTip = self.myPs_String;
     self.cookbookDetail.oven = [[CookbookOven alloc] init];
     self.cookbookDetail.creator = [[Creator alloc] init];
-    self.cookbookDetail.creator.ID = @"5";
+    self.cookbookDetail.creator.ID = @"5"; // creatorID应为已登录用户
     
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSLog(@"发布成功");
+            [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressCompleteWithLabelText:@"网络连接失败..." afterDelay:1];
+            } else {
+                [super showProgressCompleteWithLabelText:@"发布失败..." afterDelay:1];
+            }
         }
     }];
 }

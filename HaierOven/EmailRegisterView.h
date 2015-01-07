@@ -10,9 +10,28 @@
 @class EmailRegisterView;
 @protocol EmailRegisterViewDelegate <NSObject>
 
+@required
+
 - (void)turnDeal;
-- (void)RegisterWithPhone:(BOOL)isSucceed;
+
+/**
+ *  获取手机验证码
+ *
+ *  @param phone 手机号
+ */
+- (void)getVerifyCodeWithPhone:(NSString*)phone;
+
+/**
+ *  通过手机号注册
+ *
+ *  @param phone    手机号
+ *  @param code     验证码
+ *  @param password 密码
+ */
+- (void)RegisterWithPhone:(NSString*)phone andVerifyCode:(NSString*)code andPassword:(NSString*)password;
+
 - (void)turnBack;
+
 - (void)alertError:(NSString *)string;
 
 @end

@@ -33,12 +33,17 @@ typedef NS_ENUM(NSInteger, ValidateScene) {
 };
 
 typedef NS_ENUM(NSInteger, AccType) {
-    AccTypeNormal,      //
+    AccTypeHaier    = 0,    //官网
+    AccTypeQQ,      //QQ
+    AccTypeWeixin,  //微信
+    AccTypeSina,    //新浪
     
 };
 
 typedef NS_ENUM(NSInteger, LoginType) {
-    LoginTypeNormal,      //
+    LoginTypeUserName = 0,  //用户名登录
+    LoginTypeMobile,      //手机号登录
+    LoginTypeEmail,         //邮箱登录
     
 };
 
@@ -341,6 +346,21 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)uploadFile:(NSData*)data callBack:(myCallback)completion;
+
+
+#pragma mark - 测试API接口使用
+
+- (void)testRegisterWithEmail:(NSString*)email andPhone:(NSString*)phone andPassword:(NSString*)password callBack:(myCallback)completion;
+
+- (void)testLoginWithSequenceId:(NSString*)sequenceId
+                     andAccType:(AccType)accType
+                     andloginId:(NSString*)loginId
+                    andPassword:(NSString*)password
+             andThirdpartyAppId:(NSString*)thirdPartyAppId
+       andThirdpartyAccessToken:(NSString*)thirdPartyAccessToken
+                   andLoginType:(LoginType)loginType
+                       callBack:(myCallback)completion;
+
 
 @end
 

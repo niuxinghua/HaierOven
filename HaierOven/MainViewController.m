@@ -19,9 +19,6 @@
 #define ScrRate         0.1388888
 #define CellImageRate   0.6
 @interface MainViewController () <MainViewNormalCellDelegate,UIScrollViewDelegate>
-//{
-//    NSInteger _pageIndex;
-//}
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
 @property (strong, nonatomic) IBOutlet UIView *adView;
@@ -29,7 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *maintable;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property NSInteger pageIndex;
-@property (strong, nonatomic) NSArray* cookbooks;
+@property (strong, nonatomic) NSMutableArray* cookbooks;
 
 @end
 //@synthesize pageIndex;
@@ -59,7 +56,16 @@
 {
     [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
-            self.cookbooks = obj;
+            NSArray* arr = obj;
+            if (arr.count < PageLimit) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.cookbooks = obj;
+            } else {
+                [self.cookbooks addObjectsFromArray:arr];
+            }
+            
             [self.maintable reloadData];
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
@@ -78,6 +84,7 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         _pageIndex = 1;
+        self.cookbooks = [NSMutableArray array];
     }
     return self;
 }
@@ -253,24 +260,16 @@
         // 进入刷新状态就会回调这个Block
         
         // 增加根据pageIndex加载数据
-        
-        if (1) {
-            vc.pageIndex = 1;
-            [vc loadCookbooks];
-        } else {
-            [vc.maintable headerEndRefreshing];
-            return;
-        }
-        
+        vc.pageIndex = 1;
+        [vc loadCookbooks];
         
         // 加载数据，0.5秒后执行
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [vc.maintable reloadData];
-        // 结束刷新
-        [vc.maintable headerEndRefreshing];
-        
-        //        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.maintable headerEndRefreshing];
+            
+        });
         
     }];
     
@@ -287,24 +286,17 @@
         // 进入刷新状态就会回调这个Block
         
         // 增加根据pageIndex加载数据
-        
-        if (1) {
-            _pageIndex++;
-            [vc loadCookbooks];
-        } else {
-            [vc.maintable footerEndRefreshing];
-            return;
-        }
-        
-        
+
+        vc.pageIndex++;
+        [vc loadCookbooks];
+ 
         // 加载数据，0.5秒后执行
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [vc.maintable reloadData];
-        // 结束刷新
-        [vc.maintable footerEndRefreshing];
+            // 结束刷新
+            [vc.maintable footerEndRefreshing];
         
-        //        });
+        });
         
     }];
     

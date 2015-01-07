@@ -210,7 +210,7 @@
     }
     NSString *regex = @"^[0-9a-zA-Z._!]{1}([a-zA-Z0-9]|[._!-@?]){5,16}$"; //只能输入5-20个以字母数字开头、可带数字、“_”、“.”、“!”、“@”、“?”的字串，长度为5-16
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    if ([predicate evaluateWithObject:password]) {
+    if (![predicate evaluateWithObject:password]) {
         completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"密码不合法，请输入5-16位数字和字母"]);
         return;
     }
@@ -1395,6 +1395,171 @@
     }
 }
 
+
+
+#pragma mark - 测试API接口使用
+
+- (void)testRegisterWithEmail:(NSString*)email andPhone:(NSString*)phone andPassword:(NSString*)password callBack:(myCallback)completion
+{
+    // 1. 检查参数是否合法
+    if (email.length == 0 && phone.length == 0) {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"手机号或邮箱不能为空"]);
+        return;
+    }
+    if (email != nil) {
+        if (![MyTool validateEmail:email]) {
+            completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"请输入合法的邮箱"]);
+            return;
+        }
+    }
+    if (phone != nil) {
+        if (![MyTool validateTelephone:phone]) {
+            completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"请输入合法的手机号"]);
+            return;
+        }
+    }
+    NSString *regex = @"^[0-9a-zA-Z._!]{1}([a-zA-Z0-9]|[._!-@?]){5,16}$"; //只能输入5-20个以字母数字开头、可带数字、“_”、“.”、“!”、“@”、“?”的字串，长度为5-16
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if (![predicate evaluateWithObject:password]) {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"密码不合法，请输入5-16位数字和字母"]);
+        return;
+    }
+    
+    // 2. 将密码进行MD5加密
+//    NSString* md5Password = [MyTool stringToMD5:password];
+    
+    // 3. 序列化为字典
+    NSNull* null = [NSNull null];
+    NSDictionary* userDict = @{@"password":password,
+                               @"user":@{
+                                       @"userBase":@{
+                                               @"loginName":null,
+                                               @"email":email == nil ? @"" : email,
+                                               @"mobile":phone == nil ? @"" : phone,
+                                               @"accType":@0
+                                               },
+                                       @"userProfile":@{
+//                                               @"nickName":@"origheart",
+//                                               @"userName":@"kenny",
+//                                               @"points":@"0",
+//                                               @"focusCount":@"0",
+//                                               @"followCount":@"0"
+                                               }
+                                       }
+                               };
+    
+    // 4. 发送网络请求
+    
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    
+    // 这里配置Header信息和accessToken等
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    
+    //    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    
+    [manager.requestSerializer setValue:AppId forHTTPHeaderField:@"appId"];
+    [manager.requestSerializer setValue:AppKey forHTTPHeaderField:@"appKey"];
+    [manager.requestSerializer setValue:AppVersion forHTTPHeaderField:@"appVersion"];
+    [manager.requestSerializer setValue:[DataCenter sharedInstance].clientId forHTTPHeaderField:@"clientId"];
+    
+    NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
+    if (accessToken != nil) {
+        [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"accessToken"];
+    }
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    
+    NSString* path = [BaseUhomeUrl stringByAppendingPathComponent:@"users/register"];
+    
+    if ([self canConnectInternet]) {
+        
+        [manager POST:path parameters:userDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
+            
+            if ([status isEqualToString:@"00000"]) {
+                
+                // 3. 保存登录信息
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
+
+- (void)testLoginWithSequenceId:(NSString*)sequenceId
+                     andAccType:(AccType)accType
+                     andloginId:(NSString*)loginId
+                    andPassword:(NSString*)password
+             andThirdpartyAppId:(NSString*)thirdPartyAppId
+       andThirdpartyAccessToken:(NSString*)thirdPartyAccessToken
+                   andLoginType:(LoginType)loginType
+                       callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+//        NSString* md5Password = [MyTool stringToMD5:password];
+        
+        // 1. 将参数序列化
+        NSNumber* acctp = [NSNumber numberWithInteger:accType];
+        NSNumber* logintp = [NSNumber numberWithInteger:loginType];
+        NSDictionary* paramsDict = @{
+                                     @"sequenceId" : sequenceId,
+                                     @"accType": acctp,
+                                     @"loginId" : loginId,
+                                     @"password" : password,
+                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId,
+                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
+                                     @"loginType" : logintp
+                                     };
+        
+        // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
+        
+        NSString* path = @"http://uhome.haier.net:9080/security/userlogin";
+        
+        [[self manager] POST:path parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
+            NSLog(@"%@", responseObject[@"retInfo"]);
+            if ([status isEqualToString:@"00000"]) {
+                // 3. 保存登录信息
+//                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//                [userDefaults setObject:responseObject[@"userBaseID"] forKey:@"userBaseId"];
+//                [userDefaults setObject:responseObject[@"accessToken"] forKey:@"accessToken"];
+//                [userDefaults setObject:password forKey:@"password"];
+//                [userDefaults synchronize];
+                
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
 
 @end
 

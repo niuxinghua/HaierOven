@@ -43,19 +43,47 @@
 }
 
 - (IBAction)Login:(id)sender {
-    RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-    [self presentViewController:root animated:YES completion:nil];
+    
+    [[InternetManager sharedManager] testLoginWithSequenceId:@"201501060242"
+                                                  andAccType:AccTypeHaier
+                                                  andloginId:self.userNameTextFailed.text
+                                                 andPassword:self.psdTextfailed.text
+                                          andThirdpartyAppId:nil
+                                    andThirdpartyAccessToken:nil
+                                                andLoginType:LoginTypeEmail
+                                                    callBack:^(BOOL success, id obj, NSError *error) {
+                                                        if (success) {
+                                                            NSLog(@"登录成功");
+                                                        }
+                                                        
+//                                                        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//                                                        [self presentViewController:root animated:YES completion:nil];
+                                                        
+                                                    }];
+    
+    
 }
 - (IBAction)forgetPsd:(id)sender {
     
 }
 - (IBAction)TencentLogin:(id)sender {
-    RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-    [self presentViewController:root animated:YES completion:nil];
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        NSLog(@"response is %@",response);
+        [self loginWithQQ];
+    });
+    
+//    RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//    [self presentViewController:root animated:YES completion:nil];
 }
+
+
 - (IBAction)SinawbLogin:(id)sender {
+    
     RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
     [self presentViewController:root animated:YES completion:nil];
+    
 }
 - (IBAction)Register:(id)sender {
     [self.userNameTextFailed resignFirstResponder];
@@ -71,6 +99,37 @@
     [self.userNameTextFailed resignFirstResponder];
     [self.psdTextfailed resignFirstResponder];
 }
+
+#pragma mark - QQ登录
+
+- (void)loginWithQQ
+{
+    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
+        NSLog(@"SnsInformation is %@",response.data);
+        
+        [[InternetManager sharedManager] testLoginWithSequenceId:@"20150107102633000001"
+                                                      andAccType:AccTypeQQ
+                                                      andloginId:response.data[@"openid"]
+                                                     andPassword:@"13524lk"
+                                              andThirdpartyAppId:@"100424468"
+                                        andThirdpartyAccessToken:response.data[@"access_token"]
+                                                    andLoginType:LoginTypeUserName
+                                                        callBack:^(BOOL success, id obj, NSError *error) {
+                                                            
+                                                            if (success) {
+                                                                NSLog(@"登录成功");
+                                                                [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                            } else {
+                                                                [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                            }
+                                                            
+                                                            
+                                                        }];
+        
+        
+    }];
+}
+
 /*
 #pragma mark - Navigation
 

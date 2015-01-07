@@ -111,11 +111,24 @@
     NSLog(@"跳转至用户隐私合约");
 }
 
--(void)RegisterWithPhone:(BOOL)isSucceed{
-    if (isSucceed) {
-        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-        [self presentViewController:root animated:YES completion:nil];
-    }
+-(void)RegisterWithPhone:(NSString *)phone andVerifyCode:(NSString *)code andPassword:(NSString *)password
+{
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [[InternetManager sharedManager] testRegisterWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            
+            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+            [self presentViewController:root animated:YES completion:nil];
+        } else {
+            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+        }
+        
+        
+    }];
+    
+    
+    
 }
 
 -(void)alertError:(NSString *)string{
@@ -132,16 +145,37 @@
     NSLog(@"跳转至用户隐私合约");
 }
 
--(void)RegisterWithEmail:(BOOL)isSucceed{
-    if (isSucceed) {
-        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-        [self presentViewController:root animated:YES completion:nil];
-    }
+- (void)getVerifyCodeWithPhone:(NSString *)phone
+{
+    NSLog(@"获取手机验证码");
+}
+
+-(void)RegisterWithEmail:(NSString *)email andPassword:(NSString *)password
+{
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [[InternetManager sharedManager] testRegisterWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+            [self presentViewController:root animated:YES completion:nil];
+        } else {
+            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+        }
+    }];
+    
+    
+    
 }
 
 -(void)alertErrorEmail:(NSString *)string{
     [super showProgressErrorWithLabelText:string afterDelay:1];
 }
+
+#pragma mark - email注册
+
+
+
+
 /*
 #pragma mark - Navigation
 

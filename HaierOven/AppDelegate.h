@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UMSocial.h"
+#import "UMSocialQQHandler.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

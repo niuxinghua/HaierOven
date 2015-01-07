@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLTHJW.ttf">
@@ -39,6 +39,9 @@
                     <rect key="frame" x="33" y="3" width="200" height="30"/>
                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="textChanged:" destination="TY8-99-rAZ" eventType="editingChanged" id="tap-1a-QdT"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqs-f3-seY">
                     <rect key="frame" x="241" y="7" width="17" height="22"/>

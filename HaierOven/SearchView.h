@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 @class SearchView;
 @protocol searchViewDelegate <NSObject>
-
+@required
 -(void)TouchUpInsideCancelBtn;
 -(void)StartReach:(UITextField*)searchTextFailed;
 -(void)Cancel;
+
+- (void)textFieldTextChanged:(NSString*)text;
+
 @end
 @interface SearchView : UIView<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *cancelbtn;
