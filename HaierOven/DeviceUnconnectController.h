@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DeviceUnconnectControllerDelegate <NSObject>
+
+@required
+- (void)bindOvenAgain;
+
+@end
+
 @interface DeviceUnconnectController : UIViewController
+
+@property (strong, nonatomic) LocalOven* currentOven;
+@property (weak, nonatomic) id<DeviceUnconnectControllerDelegate> delegate;
 
 @end

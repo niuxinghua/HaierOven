@@ -41,7 +41,7 @@
 - (void)startSdkWithResult:(result)result
 {
     uSDKManager* sdkManager = [uSDKManager getSingleInstance];
-    [sdkManager initLog:USDK_LOG_NONE withWriteToFile:NO];  //日志级别
+//    [sdkManager initLog:USDK_LOG_NONE withWriteToFile:NO];  //日志级别
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -152,14 +152,16 @@
 
 #pragma mark - 订阅通知
 
-- (void)subscribeDevice
+- (void)subscribeDevice:(uSDKDevice*)device
 {
     uSDKNotificationCenter* sdkNotificationCenter = [uSDKNotificationCenter defaultCenter];
     
-    for (uSDKDevice* device in [[uSDKDeviceManager getSingleInstance] getDeviceList]) {
-        NSArray* deviceMacs = @[device.mac];
-        [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:deviceMacs];
-    }
+    [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
+    
+//    for (uSDKDevice* device in [[uSDKDeviceManager getSingleInstance] getDeviceList:OVEN]) {
+//        NSArray* deviceMacs = @[device.mac];
+//        [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:deviceMacs];
+//    }
 
     
 }
@@ -181,10 +183,10 @@
     [[uSDKNotificationCenter defaultCenter] subscribeBusinessMessage:self selector:@selector(businessMessageReport:)];
 }
 
-- (void)subscribeAllNotifications
+- (void)subscribeAllNotificationsWithDevice:(uSDKDevice*)device
 {
+    [self subscribeDevice:device];
     [self subscribeBusinessMessage];
-    [self subscribeDevice];
     [self subscribeDeviceListChanged];
     [self subscribeInnerError];
 }
@@ -281,7 +283,7 @@
  */
 - (void)receiveInnerError:(NSNotification*)notification
 {
-    if ([notification.name isEqualToString:DEVICE_INFRAREDINFO_NOTIFICATION]) {
+    if ([notification.name isEqualToString:INNER_ERROR_NOTIFICATION]) {
         NSLog(@"发生了内部错误");
         
     } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
@@ -333,34 +335,34 @@
     NSLog(@"设备操作应答消息通知：%@", notification.userInfo);
 }
 
-- (void)bootupToDevice:(uSDKDevice*)device
+- (void)bootupToDevice:(uSDKDevice*)device result:(result)success
 {
-    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:@"20v001" withAttrValue:@"20v001"];
+    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:kBootUp withAttrValue:kBootUp];
     [self executeCommands:[@[attr] mutableCopy]
                  toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
              andCommandSN:0
       andGroupCommandName:@""
                 andResult:^(BOOL result) {
                     if(result) {
-                        
+                        success(YES);
                     } else {
-                        
+                        success(NO);
                     }
                 }];
 }
 
-- (void)shutdownToDevice:(uSDKDevice*)device
+- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success
 {
-    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:@"20v002" withAttrValue:@"20v002"];
+    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:kShutDown withAttrValue:kShutDown];
     [self executeCommands:[@[attr] mutableCopy]
                  toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
              andCommandSN:0
       andGroupCommandName:@""
                 andResult:^(BOOL result) {
                     if(result) {
-                        
+                        success(YES);
                     } else {
-                        
+                        success(NO);
                     }
                 }];
 }

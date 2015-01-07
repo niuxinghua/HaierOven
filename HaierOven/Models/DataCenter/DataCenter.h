@@ -119,6 +119,20 @@ extern NSString* const kRecommendProjectsFileName;
  */
 - (void)addOvenInfoToLocal:(LocalOven*)oven;
 
+/**
+ *  删除已绑定的设备
+ *
+ *  @param oven 本地烤箱信息
+ */
+- (void)removeOvenInLocal:(LocalOven*)oven;
+
+/**
+ *  更新本地烤箱信息
+ *
+ *  @param oven 本地烤箱对象
+ */
+- (void)updateOvenInLocal:(LocalOven*)oven;
+
 @end
 
 

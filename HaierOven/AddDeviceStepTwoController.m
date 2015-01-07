@@ -104,6 +104,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)chickWIFI:(id)sender {
+    if (![InternetManager sharedManager].isWiFiConnected) {
+        [super showProgressErrorWithLabelText:@"请用WiFi连接喔" afterDelay:1];
+        return;
+    }
     self.myWindow.hidden = NO;
     [self.deviceConnectProgressView.progressView setProgress:0.8 andTimeInterval:0.03];
     

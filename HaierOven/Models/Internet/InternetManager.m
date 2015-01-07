@@ -112,15 +112,18 @@
             case NotReachable:
                 // 没有网络连接
                 NSLog(@"无法连接到网络");
+                self.isWiFiConnected = NO;
                 break;
             case ReachableViaWWAN:
                 // 使用3G网络
                 NSLog(@"3G网络连接到网络");
+                self.isWiFiConnected = NO;
                 canConnectWebsite = YES;
                 break;
             case ReachableViaWiFi:
                 // 使用WiFi网络
                 NSLog(@"WiFi连接到网络");
+                self.isWiFiConnected = YES;
                 canConnectWebsite = YES;
                 break;
         }

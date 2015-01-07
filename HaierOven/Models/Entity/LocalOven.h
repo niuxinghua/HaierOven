@@ -26,6 +26,11 @@
 @property (copy, nonatomic) NSString* mac;
 
 /**
+ *  烤箱上次所在WiFi的SSID, 可根据此判断局域网内的烤箱是否离线
+ */
+@property (copy, nonatomic) NSString* ssid;
+
+/**
  *  烤箱标识符
  */
 @property (copy, nonatomic) NSString* typeIdentifier;

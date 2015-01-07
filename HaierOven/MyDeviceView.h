@@ -10,7 +10,7 @@
 @class MyDeviceView;
 @protocol MyDeviceViewDelegate <NSObject>
 
--(void)SelectDevice;
+-(void)SelectDeviceWithDeviceView:(MyDeviceView*)deviceView;
 
 @end
 @interface MyDeviceView : UIView

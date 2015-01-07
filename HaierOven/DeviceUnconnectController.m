@@ -34,8 +34,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)DeleteDevice:(id)sender {
+    [[DataCenter sharedInstance] removeOvenInLocal:self.currentOven];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)ConnectDevice:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
+    [self.delegate bindOvenAgain];
+    
 }
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

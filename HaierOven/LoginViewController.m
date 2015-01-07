@@ -56,9 +56,6 @@
                                                             NSLog(@"登录成功");
                                                         }
                                                         
-//                                                        RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-//                                                        [self presentViewController:root animated:YES completion:nil];
-                                                        
                                                     }];
     
     

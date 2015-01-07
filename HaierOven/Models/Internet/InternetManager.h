@@ -69,6 +69,11 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (BOOL)canConnectInternet;
 
+/**
+ *  当前网络环境是不是Wifi
+ */
+@property (nonatomic) BOOL isWiFiConnected;
+
 #pragma mark - 登录注册
 
 /**

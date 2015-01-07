@@ -18,7 +18,7 @@
 }
 
 -(void)TouchUpDevice{
-    [self.delegate SelectDevice];
+    [self.delegate SelectDeviceWithDeviceView:self];
 }
 
 -(void)layoutSubviews{

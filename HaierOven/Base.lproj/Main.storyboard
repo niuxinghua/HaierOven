@@ -1567,6 +1567,9 @@
                                                     </state>
                                                     <state key="disabled" image="fs-wxz.png"/>
                                                     <state key="selected" image="fs-cxz.png"/>
+                                                    <connections>
+                                                        <action selector="deviceControlsTapped:" destination="ev3-io-dBY" eventType="touchUpInside" id="Q8G-Pl-qn3"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeh-9b-Edw">
                                                     <rect key="frame" x="103" y="31" width="26" height="48"/>
@@ -1575,6 +1578,9 @@
                                                     </state>
                                                     <state key="disabled" image="xz-wxz.png"/>
                                                     <state key="selected" image="xz-cxz.png"/>
+                                                    <connections>
+                                                        <action selector="deviceControlsTapped:" destination="ev3-io-dBY" eventType="touchUpInside" id="0Su-8n-WB5"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLK-48-f7S">
                                                     <rect key="frame" x="191" y="31" width="26" height="48"/>
@@ -1583,6 +1589,9 @@
                                                     </state>
                                                     <state key="disabled" image="zm-wxz.png"/>
                                                     <state key="selected" image="zm-cxz.png"/>
+                                                    <connections>
+                                                        <action selector="deviceControlsTapped:" destination="ev3-io-dBY" eventType="touchUpInside" id="iW5-zV-gTG"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYu-Wv-y77">
                                                     <rect key="frame" x="266" y="31" width="26" height="48"/>
@@ -1591,6 +1600,9 @@
                                                     </state>
                                                     <state key="disabled" image="sd-wxz.png"/>
                                                     <state key="selected" image="sd-cxz.png"/>
+                                                    <connections>
+                                                        <action selector="deviceControlsTapped:" destination="ev3-io-dBY" eventType="touchUpInside" id="bCz-vT-rGO"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteline.png" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-1l-NX0">
                                                     <rect key="frame" x="0.0" y="86" width="320" height="1"/>
