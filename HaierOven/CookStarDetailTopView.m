@@ -57,6 +57,7 @@
 
 -(void)initTagsView{
     self.tagsView = [[AutoSizeLabelView alloc]initWithFrame:CGRectMake(15, self.cookBookLabel.bottom+8, self.width-30, self.backDownView.height-57)];
+    self.tagsView.delegate = self;
     [self.backDownView addSubview:self.tagsView];
 }
 
@@ -69,7 +70,7 @@
 }
 
 -(void)chooseTags:(UIButton *)btn{
-    [self.delegate chickTags:btn.tag];
+    [self.delegate chickTags:btn];
 }
 
 - (IBAction)labelSwipped:(UISwipeGestureRecognizer *)sender {
@@ -112,6 +113,7 @@
     
     
 }
+
 
 //- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 //{

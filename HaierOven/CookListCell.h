@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CookListFoodView.h"
-@interface CookListCell : UITableViewCell
-//@property (strong, nonatomic) ;
+@class CookListCell;
+@protocol CookListCellDelegate <NSObject>
 
+-(void)turnCookDetailView:(UITableViewCell*)cell;
+
+@end
+@interface CookListCell : UITableViewCell
+@property (strong, nonatomic) NSArray *foods;
+@property (weak, nonatomic) id<CookListCellDelegate>delegate;
 @end

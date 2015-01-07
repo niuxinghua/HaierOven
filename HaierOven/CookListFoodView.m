@@ -38,7 +38,12 @@
             sender.selected =YES;
         }];
     }else
-        sender.selected = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
+        } completion:^(BOOL finished) {
+            sender.selected =NO;
+        }];
+
 }
 
 
@@ -46,13 +51,32 @@
     _foodName = foodName;
     [self.FoodBtn setTitle:foodName forState:UIControlStateNormal];
 }
-/*
+
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    UIBezierPath* path = [UIBezierPath bezierPath];
+    
+    [path moveToPoint:CGPointMake(0, 1)];
+    [path addLineToPoint:CGPointMake(self.width, 1)];
+    //    [path addLineToPoint:CGPointMake(self.right, self.bottom - 2)];
+    
+    path.lineWidth = 1;
+    [GlobalGrayColor setStroke];
+    [path stroke];
+    
+    //    [[UIColor blueColor] setFill];
+    //    [path fill];
+    
+    CGContextRestoreGState(context);
+
 }
-*/
+
 
 
 @end

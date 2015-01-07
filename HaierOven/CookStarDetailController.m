@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSString *decString;
 
 @property (strong, nonatomic) NSArray *tags;
-
+@property (strong, nonatomic) UIButton *tempBtn;
 @end
 
 @implementation CookStarDetailController
@@ -112,7 +112,12 @@
     NSLog(@"新手学烘焙");
 }
 
-
+-(void)chickTags:(UIButton*)btn{
+    self.tempBtn.selected = NO;
+    btn.selected= btn.selected ==YES? NO:YES;
+    self.tempBtn = btn;
+    
+}
 #define PADDING_WIDE    15   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
 #define LABEL_H    20   //标签high

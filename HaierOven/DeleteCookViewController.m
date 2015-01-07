@@ -1,24 +1,35 @@
 //
-//  ShoppingListTableViewController.m
+//  DeleteCookViewController.m
 //  HaierOven
 //
-//  Created by dongl on 15/1/5.
+//  Created by dongl on 15/1/7.
 //  Copyright (c) 2015年 edaysoft. All rights reserved.
 //
 
-#import "ShoppingListTableViewController.h"
-#import "CookListCell.h"
 #import "DeleteCookViewController.h"
-@interface ShoppingListTableViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *cookCount;
+#import "DeleteCookCell.h"
+@interface DeleteCookViewController ()<DeleteCookCellDelegate>
 
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
+
+/**
+ *  菜谱数据源
+ */
+@property (strong, nonatomic) NSMutableArray *cooks;
+/**
+ *  纪录删除菜谱数组
+ */
+@property (strong, nonatomic) NSMutableArray *deleteArr;
 @end
 
-@implementation ShoppingListTableViewController
+@implementation DeleteCookViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.cooks = [NSMutableArray new];
+    [self.cooks addObjectsFromArray:@[@"1",@"2",@"3"]];
     
+    self.deleteArr = [NSMutableArray new];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -34,36 +45,64 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 3;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50+(2*40);
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return self.cooks.count;
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CookListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookListCell" forIndexPath:indexPath];
-    cell.foods = @[@"123",@"123"];
+    DeleteCookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeleteCookCell" forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.isAllselected = self.deleteBtn.selected;
+    cell.cookString = self.cooks[indexPath.row];
     // Configure the cell...
     
     return cell;
 }
 
 
+#pragma mark -  删除按钮点击事件
+- (IBAction)DeleteFoods:(UIButton *)sender {
+    if (sender.selected==NO) {
+        sender.selected = YES;
+        self.deleteArr = [self.cooks mutableCopy];
+        [self.tableView reloadData];
+        
+    }else if (sender.selected ==YES){
+        NSLog(@"我要删除了");
+        sender.selected = NO;
+        
+        [self.cooks removeObjectsInArray:self.deleteArr];
 
-#pragma mark-  跳至删除页面
-- (IBAction)turnDeleteCookView:(id)sender {
-    DeleteCookViewController *deleteCook = [self.storyboard instantiateViewControllerWithIdentifier:@"DeleteCookViewController"];
-    [self.navigationController pushViewController:deleteCook animated:YES];
+        [self.tableView reloadData];
+    }
 }
 
+
+#pragma mark- DeleteFoodCell回调事件
+-(void)DeleteFoodCell:(UITableViewCell *)cell adnDeleteBtn:(UIButton *)btn{
+    NSIndexPath *index = [self.tableView indexPathForCell:cell];
+    
+    if (btn.selected == NO) {
+        [self.deleteArr removeObject:self.cooks[index.row]];
+    }else{
+        [self.deleteArr addObject:self.cooks[index.row]];
+    }
+    
+    self.deleteBtn.selected = self.deleteArr.count > 0?YES:NO;
+}
+
+
+
+- (IBAction)TurnBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

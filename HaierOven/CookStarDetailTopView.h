@@ -10,7 +10,7 @@
 @class CookStarDetailTopView;
 @protocol CookStarDetailTopViewDelegate <NSObject>
 
--(void)chickTags:(NSInteger)index;
+-(void)chickTags:(UIButton *)btn;
 -(void)ponnedHeadView:(NSInteger)height
                   top:(NSInteger)top
             AndBottom:(NSInteger)Bottom;
