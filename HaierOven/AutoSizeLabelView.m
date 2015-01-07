@@ -13,7 +13,6 @@
 
 @interface AutoSizeLabelView ()
 
-@property (nonatomic)AutoSizeLabelViewStyle style;
 
 @property (strong, nonatomic)UIButton *tempBtn;
 @end
@@ -56,20 +55,27 @@
 
 
 -(void)setTags:(NSArray *)tags{
-    float leftpadding = 0;
-    int line = 0;
-    int count = 0;
     for (int i = 0; i<tags.count; i++) {
-        
         float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
-        if (leftpadding+wide+PADDING_WIDE+PADDING_WIDE*count>PageW-40) {
-            leftpadding=0;
-            ++line;
-            count = 0;
-        }
         UIButton *title = [UIButton buttonWithType:UIButtonTypeCustom];
-        title.frame = CGRectMake(PADDING_WIDE*count+leftpadding,(PADDING_HIGHT+LABEL_H)*line , wide, LABEL_H);
+        if (i==0) {
+            title.frame = CGRectMake(0, 0, 0, 0);
+            self.tempBtn = title;
 
+        }
+        if(self.tempBtn.right+wide+PADDING_WIDE > self.width){
+            CGRect rect = self.tempBtn.frame;
+            rect.origin.y = self.tempBtn.bottom+PADDING_HIGHT;
+            self.tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.tempBtn.frame = CGRectMake(0, rect.origin.y, 0, 0);
+        }
+
+
+        title.frame = CGRectMake(self.tempBtn.right+PADDING_WIDE, self.tempBtn.top, wide, LABEL_H);
+        
+        self.tempBtn = title;
+
+        
         [title setTitle:tags[i] forState:UIControlStateNormal];
         [title setTitle:tags[i] forState:UIControlStateSelected];
         [title setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -80,8 +86,7 @@
         title.selected = NO;
         [title addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
         title.layer.masksToBounds = YES;
-        leftpadding +=wide;
-        count++;
+
         
         if (self.style == AutoSizeLabelViewStyleCreatMenu) {
             
@@ -94,6 +99,10 @@
             title.layer.cornerRadius  = 15;
             [title setBackgroundImage:[MyTool createImageWithColor:[UIColor purpleColor]] forState:UIControlStateNormal];
             title.enabled = NO;
+        }else if (self.style == AutoSizeLabelViewStyleCookStarDetail){
+            title.layer.cornerRadius  = 10;
+            [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+            [title setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forState:UIControlStateSelected];
         }
         
         [self addSubview:title];

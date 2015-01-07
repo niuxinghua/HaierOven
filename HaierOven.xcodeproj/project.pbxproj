@@ -9,7 +9,27 @@
 /* Begin PBXBuildFile section */
 		45034AE21A401FA100FDD70D /* NormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45034AE01A401FA100FDD70D /* NormalTableViewCell.m */; };
 		45034AE31A401FA100FDD70D /* NormalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45034AE11A401FA100FDD70D /* NormalTableViewCell.xib */; };
-		454916B31A403902005503C8 /* CookHallofFameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B21A403902005503C8 /* CookHallofFameViewController.m */; };
+		452A6E521A5A7AAA00ABFE75 /* ShoppingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E511A5A7AAA00ABFE75 /* ShoppingListTableViewController.m */; };
+		452A6E551A5A7F6700ABFE75 /* CookListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E541A5A7F6700ABFE75 /* CookListCell.m */; };
+		452A6E581A5A7F9800ABFE75 /* CookListFoodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E571A5A7F9800ABFE75 /* CookListFoodView.m */; };
+		452A6E5A1A5A7FA600ABFE75 /* CookListFoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E591A5A7FA600ABFE75 /* CookListFoodView.xib */; };
+		452A6E5F1A5A8FEA00ABFE75 /* Vcs.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E5C1A5A8FEA00ABFE75 /* Vcs.png */; };
+		452A6E601A5A8FEA00ABFE75 /* Vcs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E5D1A5A8FEA00ABFE75 /* Vcs@2x.png */; };
+		452A6E611A5A8FEA00ABFE75 /* Vcs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E5E1A5A8FEA00ABFE75 /* Vcs@3x.png */; };
+		452A6E651A5A90BE00ABFE75 /* CookStarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E641A5A90BE00ABFE75 /* CookStarController.m */; };
+		452A6E681A5A90DE00ABFE75 /* CookStarDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E671A5A90DE00ABFE75 /* CookStarDetailController.m */; };
+		452A6E6B1A5A921800ABFE75 /* CookStarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E6A1A5A921800ABFE75 /* CookStarCell.m */; };
+		452A6E741A5A964100ABFE75 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E6E1A5A964100ABFE75 /* follow.png */; };
+		452A6E751A5A964100ABFE75 /* follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E6F1A5A964100ABFE75 /* follow@2x.png */; };
+		452A6E761A5A964100ABFE75 /* follow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E701A5A964100ABFE75 /* follow@3x.png */; };
+		452A6E771A5A964100ABFE75 /* followed.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E711A5A964100ABFE75 /* followed.png */; };
+		452A6E781A5A964100ABFE75 /* followed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E721A5A964100ABFE75 /* followed@2x.png */; };
+		452A6E791A5A964100ABFE75 /* followed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E731A5A964100ABFE75 /* followed@3x.png */; };
+		452A6E7D1A5B8A4D00ABFE75 /* ly.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E7A1A5B8A4D00ABFE75 /* ly.png */; };
+		452A6E7E1A5B8A4D00ABFE75 /* ly@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E7B1A5B8A4D00ABFE75 /* ly@2x.png */; };
+		452A6E7F1A5B8A4D00ABFE75 /* ly@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E7C1A5B8A4D00ABFE75 /* ly@3x.png */; };
+		452A6E821A5BA53300ABFE75 /* CookStarDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */; };
+		452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */; };
 		454916B61A403958005503C8 /* BakedFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B51A403958005503C8 /* BakedFriendsViewController.m */; };
 		454916B91A403993005503C8 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B81A403993005503C8 /* PersonalCenterViewController.m */; };
 		454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916BB1A403A18005503C8 /* DeviceViewController.m */; };
@@ -79,6 +99,20 @@
 		4597EB261A501E640083AFE5 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB231A501E640083AFE5 /* delete.png */; };
 		4597EB271A501E640083AFE5 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB241A501E640083AFE5 /* delete@2x.png */; };
 		4597EB281A501E640083AFE5 /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB251A501E640083AFE5 /* delete@3x.png */; };
+		459E8BA31A5CDC1D009D4ADA /* deletec.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BA01A5CDC1D009D4ADA /* deletec.png */; };
+		459E8BA41A5CDC1D009D4ADA /* deletec@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BA11A5CDC1D009D4ADA /* deletec@2x.png */; };
+		459E8BA51A5CDC1D009D4ADA /* deletec@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BA21A5CDC1D009D4ADA /* deletec@3x.png */; };
+		459E8BA91A5D25FB009D4ADA /* DeleteCookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BA81A5D25FB009D4ADA /* DeleteCookViewController.m */; };
+		459E8BB21A5D2AA7009D4ADA /* qrd.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BAC1A5D2AA7009D4ADA /* qrd.png */; };
+		459E8BB31A5D2AA7009D4ADA /* qrd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BAD1A5D2AA7009D4ADA /* qrd@2x.png */; };
+		459E8BB41A5D2AA7009D4ADA /* sc.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BAE1A5D2AA7009D4ADA /* sc.png */; };
+		459E8BB51A5D2AA7009D4ADA /* sc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BAF1A5D2AA7009D4ADA /* sc@2x.png */; };
+		459E8BB61A5D2AA7009D4ADA /* qrd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BB01A5D2AA7009D4ADA /* qrd@3x.png */; };
+		459E8BB71A5D2AA7009D4ADA /* sc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BB11A5D2AA7009D4ADA /* sc@3x.png */; };
+		459E8BBA1A5D2B95009D4ADA /* DeleteCookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BB91A5D2B95009D4ADA /* DeleteCookCell.m */; };
+		45A22B911A5BCC0B00E38AD6 /* xl.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B8E1A5BCC0B00E38AD6 /* xl.png */; };
+		45A22B921A5BCC0B00E38AD6 /* xl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B8F1A5BCC0B00E38AD6 /* xl@2x.png */; };
+		45A22B931A5BCC0B00E38AD6 /* xl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B901A5BCC0B00E38AD6 /* xl@3x.png */; };
 		45A546841A58E56500BE62EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A546831A58E56500BE62EC /* LoginViewController.m */; };
 		45A546861A58EE5500BE62EC /* delete-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546851A58EE5500BE62EC /* delete-line.png */; };
 		45A5468B1A58EF4400BE62EC /* txdlwdj.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A546881A58EF4400BE62EC /* txdlwdj.png */; };
@@ -734,8 +768,34 @@
 		45034ADF1A401FA100FDD70D /* NormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalTableViewCell.h; sourceTree = "<group>"; };
 		45034AE01A401FA100FDD70D /* NormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalTableViewCell.m; sourceTree = "<group>"; };
 		45034AE11A401FA100FDD70D /* NormalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalTableViewCell.xib; sourceTree = "<group>"; };
-		454916B11A403902005503C8 /* CookHallofFameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookHallofFameViewController.h; sourceTree = "<group>"; };
-		454916B21A403902005503C8 /* CookHallofFameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookHallofFameViewController.m; sourceTree = "<group>"; };
+		452A6E501A5A7AAA00ABFE75 /* ShoppingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingListTableViewController.h; sourceTree = "<group>"; };
+		452A6E511A5A7AAA00ABFE75 /* ShoppingListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingListTableViewController.m; sourceTree = "<group>"; };
+		452A6E531A5A7F6700ABFE75 /* CookListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookListCell.h; sourceTree = "<group>"; };
+		452A6E541A5A7F6700ABFE75 /* CookListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookListCell.m; sourceTree = "<group>"; };
+		452A6E561A5A7F9800ABFE75 /* CookListFoodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookListFoodView.h; sourceTree = "<group>"; };
+		452A6E571A5A7F9800ABFE75 /* CookListFoodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookListFoodView.m; sourceTree = "<group>"; };
+		452A6E591A5A7FA600ABFE75 /* CookListFoodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookListFoodView.xib; sourceTree = "<group>"; };
+		452A6E5C1A5A8FEA00ABFE75 /* Vcs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vcs.png; sourceTree = "<group>"; };
+		452A6E5D1A5A8FEA00ABFE75 /* Vcs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vcs@2x.png"; sourceTree = "<group>"; };
+		452A6E5E1A5A8FEA00ABFE75 /* Vcs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vcs@3x.png"; sourceTree = "<group>"; };
+		452A6E631A5A90BE00ABFE75 /* CookStarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarController.h; sourceTree = "<group>"; };
+		452A6E641A5A90BE00ABFE75 /* CookStarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarController.m; sourceTree = "<group>"; };
+		452A6E661A5A90DE00ABFE75 /* CookStarDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarDetailController.h; sourceTree = "<group>"; };
+		452A6E671A5A90DE00ABFE75 /* CookStarDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarDetailController.m; sourceTree = "<group>"; wrapsLines = 1; };
+		452A6E691A5A921800ABFE75 /* CookStarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarCell.h; sourceTree = "<group>"; };
+		452A6E6A1A5A921800ABFE75 /* CookStarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarCell.m; sourceTree = "<group>"; };
+		452A6E6E1A5A964100ABFE75 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
+		452A6E6F1A5A964100ABFE75 /* follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow@2x.png"; sourceTree = "<group>"; };
+		452A6E701A5A964100ABFE75 /* follow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow@3x.png"; sourceTree = "<group>"; };
+		452A6E711A5A964100ABFE75 /* followed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followed.png; sourceTree = "<group>"; };
+		452A6E721A5A964100ABFE75 /* followed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followed@2x.png"; sourceTree = "<group>"; };
+		452A6E731A5A964100ABFE75 /* followed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followed@3x.png"; sourceTree = "<group>"; };
+		452A6E7A1A5B8A4D00ABFE75 /* ly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ly.png; sourceTree = "<group>"; };
+		452A6E7B1A5B8A4D00ABFE75 /* ly@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ly@2x.png"; sourceTree = "<group>"; };
+		452A6E7C1A5B8A4D00ABFE75 /* ly@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ly@3x.png"; sourceTree = "<group>"; };
+		452A6E801A5BA53300ABFE75 /* CookStarDetailTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarDetailTopView.h; sourceTree = "<group>"; };
+		452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarDetailTopView.m; sourceTree = "<group>"; };
+		452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookStarDetailTopView.xib; sourceTree = "<group>"; };
 		454916B41A403958005503C8 /* BakedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BakedFriendsViewController.h; path = ../BakedFriendsViewController.h; sourceTree = "<group>"; };
 		454916B51A403958005503C8 /* BakedFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BakedFriendsViewController.m; path = ../BakedFriendsViewController.m; sourceTree = "<group>"; };
 		454916B71A403993005503C8 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
@@ -823,6 +883,22 @@
 		4597EB231A501E640083AFE5 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		4597EB241A501E640083AFE5 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		4597EB251A501E640083AFE5 /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		459E8BA01A5CDC1D009D4ADA /* deletec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deletec.png; sourceTree = "<group>"; };
+		459E8BA11A5CDC1D009D4ADA /* deletec@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deletec@2x.png"; sourceTree = "<group>"; };
+		459E8BA21A5CDC1D009D4ADA /* deletec@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deletec@3x.png"; sourceTree = "<group>"; };
+		459E8BA71A5D25FB009D4ADA /* DeleteCookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCookViewController.h; sourceTree = "<group>"; };
+		459E8BA81A5D25FB009D4ADA /* DeleteCookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCookViewController.m; sourceTree = "<group>"; };
+		459E8BAC1A5D2AA7009D4ADA /* qrd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrd.png; sourceTree = "<group>"; };
+		459E8BAD1A5D2AA7009D4ADA /* qrd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrd@2x.png"; sourceTree = "<group>"; };
+		459E8BAE1A5D2AA7009D4ADA /* sc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sc.png; sourceTree = "<group>"; };
+		459E8BAF1A5D2AA7009D4ADA /* sc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc@2x.png"; sourceTree = "<group>"; };
+		459E8BB01A5D2AA7009D4ADA /* qrd@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrd@3x.png"; sourceTree = "<group>"; };
+		459E8BB11A5D2AA7009D4ADA /* sc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc@3x.png"; sourceTree = "<group>"; };
+		459E8BB81A5D2B95009D4ADA /* DeleteCookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCookCell.h; sourceTree = "<group>"; };
+		459E8BB91A5D2B95009D4ADA /* DeleteCookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCookCell.m; sourceTree = "<group>"; };
+		45A22B8E1A5BCC0B00E38AD6 /* xl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xl.png; sourceTree = "<group>"; };
+		45A22B8F1A5BCC0B00E38AD6 /* xl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xl@2x.png"; sourceTree = "<group>"; };
+		45A22B901A5BCC0B00E38AD6 /* xl@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xl@3x.png"; sourceTree = "<group>"; };
 		45A546821A58E56500BE62EC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		45A546831A58E56500BE62EC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		45A546851A58EE5500BE62EC /* delete-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-line.png"; sourceTree = "<group>"; };
@@ -1681,6 +1757,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		452A6E4F1A5A7A2C00ABFE75 /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				452A6E501A5A7AAA00ABFE75 /* ShoppingListTableViewController.h */,
+				452A6E511A5A7AAA00ABFE75 /* ShoppingListTableViewController.m */,
+				452A6E531A5A7F6700ABFE75 /* CookListCell.h */,
+				452A6E541A5A7F6700ABFE75 /* CookListCell.m */,
+				452A6E561A5A7F9800ABFE75 /* CookListFoodView.h */,
+				452A6E571A5A7F9800ABFE75 /* CookListFoodView.m */,
+				459E8BA71A5D25FB009D4ADA /* DeleteCookViewController.h */,
+				459E8BA81A5D25FB009D4ADA /* DeleteCookViewController.m */,
+				459E8BB81A5D2B95009D4ADA /* DeleteCookCell.h */,
+				459E8BB91A5D2B95009D4ADA /* DeleteCookCell.m */,
+			);
+			name = ShoppingList;
+			sourceTree = "<group>";
+		};
+		452A6E5B1A5A8FDC00ABFE75 /* HallFame */ = {
+			isa = PBXGroup;
+			children = (
+				452A6E7A1A5B8A4D00ABFE75 /* ly.png */,
+				452A6E7B1A5B8A4D00ABFE75 /* ly@2x.png */,
+				452A6E7C1A5B8A4D00ABFE75 /* ly@3x.png */,
+				452A6E6E1A5A964100ABFE75 /* follow.png */,
+				452A6E6F1A5A964100ABFE75 /* follow@2x.png */,
+				452A6E701A5A964100ABFE75 /* follow@3x.png */,
+				452A6E711A5A964100ABFE75 /* followed.png */,
+				452A6E721A5A964100ABFE75 /* followed@2x.png */,
+				452A6E731A5A964100ABFE75 /* followed@3x.png */,
+				452A6E5C1A5A8FEA00ABFE75 /* Vcs.png */,
+				452A6E5D1A5A8FEA00ABFE75 /* Vcs@2x.png */,
+				452A6E5E1A5A8FEA00ABFE75 /* Vcs@3x.png */,
+			);
+			name = HallFame;
+			sourceTree = "<group>";
+		};
+		452A6E621A5A908400ABFE75 /* CookStarController */ = {
+			isa = PBXGroup;
+			children = (
+				452A6E661A5A90DE00ABFE75 /* CookStarDetailController.h */,
+				452A6E671A5A90DE00ABFE75 /* CookStarDetailController.m */,
+				452A6E801A5BA53300ABFE75 /* CookStarDetailTopView.h */,
+				452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */,
+				452A6E631A5A90BE00ABFE75 /* CookStarController.h */,
+				452A6E641A5A90BE00ABFE75 /* CookStarController.m */,
+				452A6E691A5A921800ABFE75 /* CookStarCell.h */,
+				452A6E6A1A5A921800ABFE75 /* CookStarCell.m */,
+			);
+			name = CookStarController;
+			sourceTree = "<group>";
+		};
 		457A772F1A41700300E422D0 /* LeftMenuCellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1743,6 +1870,38 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		459E8BA61A5D08DF009D4ADA /* CookStar */ = {
+			isa = PBXGroup;
+			children = (
+				452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */,
+			);
+			name = CookStar;
+			sourceTree = "<group>";
+		};
+		459E8BAA1A5D2604009D4ADA /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				452A6E591A5A7FA600ABFE75 /* CookListFoodView.xib */,
+			);
+			name = ShoppingList;
+			sourceTree = "<group>";
+		};
+		459E8BAB1A5D2A8B009D4ADA /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				459E8BA01A5CDC1D009D4ADA /* deletec.png */,
+				459E8BA11A5CDC1D009D4ADA /* deletec@2x.png */,
+				459E8BA21A5CDC1D009D4ADA /* deletec@3x.png */,
+				459E8BAC1A5D2AA7009D4ADA /* qrd.png */,
+				459E8BAD1A5D2AA7009D4ADA /* qrd@2x.png */,
+				459E8BAE1A5D2AA7009D4ADA /* sc.png */,
+				459E8BAF1A5D2AA7009D4ADA /* sc@2x.png */,
+				459E8BB01A5D2AA7009D4ADA /* qrd@3x.png */,
+				459E8BB11A5D2AA7009D4ADA /* sc@3x.png */,
+			);
+			name = ShoppingList;
+			sourceTree = "<group>";
+		};
 		45A546811A58E41700BE62EC /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1763,6 +1922,7 @@
 		45A546871A58EF3300BE62EC /* LoginIn */ = {
 			isa = PBXGroup;
 			children = (
+				45A546851A58EE5500BE62EC /* delete-line.png */,
 				45A546A41A593E9C00BE62EC /* wty.png */,
 				45A546A51A593E9C00BE62EC /* wty@2x.png */,
 				45A546A61A593E9C00BE62EC /* yty.png */,
@@ -2206,6 +2366,9 @@
 		45BB35ED1A4A68EF000EE3C4 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				45A22B8E1A5BCC0B00E38AD6 /* xl.png */,
+				45A22B8F1A5BCC0B00E38AD6 /* xl@2x.png */,
+				45A22B901A5BCC0B00E38AD6 /* xl@3x.png */,
 				45D9FEC11A52902000023B9D /* xts.png */,
 				45D9FEC21A52902000023B9D /* xts@2x.png */,
 				45D9FEC31A52902000023B9D /* xts@3x.png */,
@@ -2531,6 +2694,8 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				459E8BAA1A5D2604009D4ADA /* ShoppingList */,
+				459E8BA61A5D08DF009D4ADA /* CookStar */,
 				45A546B11A5A4EC100BE62EC /* MJRefresh */,
 				45A546CE1A5A4EC600BE62EC /* MainView */,
 				45A546B01A5A4A5F00BE62EC /* Login */,
@@ -2546,20 +2711,20 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				452A6E4F1A5A7A2C00ABFE75 /* ShoppingList */,
 				45A546811A58E41700BE62EC /* LoginController */,
 				45A5E7FA1A4FC85100FCD2BD /* UpLoadingMenuController */,
 				45B650BE1A47F2D700A6376D /* DeviceViewController */,
 				45BA02C31A43D766003810C7 /* PersonCenterController */,
 				45BEED791A412CB1003000AD /* MainViewController */,
 				45C7E5621A3FD9B1000B086B /* BaseControllers */,
-				454916B11A403902005503C8 /* CookHallofFameViewController.h */,
-				454916B21A403902005503C8 /* CookHallofFameViewController.m */,
+				45C7E5B81A3FFD5D000B086B /* LeftMenuViewController */,
+				45C7E5721A3FDAB0000B086B /* MBProgress */,
+				452A6E621A5A908400ABFE75 /* CookStarController */,
 				454916B41A403958005503C8 /* BakedFriendsViewController.h */,
 				454916B51A403958005503C8 /* BakedFriendsViewController.m */,
 				454916BD1A403A78005503C8 /* BakedHouseViewController.h */,
 				454916BE1A403A78005503C8 /* BakedHouseViewController.m */,
-				45C7E5B81A3FFD5D000B086B /* LeftMenuViewController */,
-				45C7E5721A3FDAB0000B086B /* MBProgress */,
 				45C7E5AC1A3FE51F000B086B /* RootViewController.h */,
 				45C7E5AD1A3FE51F000B086B /* RootViewController.m */,
 			);
@@ -2654,11 +2819,11 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				459E8BAB1A5D2A8B009D4ADA /* ShoppingList */,
+				452A6E5B1A5A8FDC00ABFE75 /* HallFame */,
 				45A546871A58EF3300BE62EC /* LoginIn */,
-				45A546851A58EE5500BE62EC /* delete-line.png */,
 				849F91471A512D21006234B9 /* Cookbook */,
 				45A5E7FE1A4FCA5700FCD2BD /* UploadingMneu */,
-				C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */,
 				458952941A493C05009B5DD1 /* wifilianjie0 */,
 				45BB35ED1A4A68EF000EE3C4 /* image */,
 				45BB35EC1A4A68CF000EE3C4 /* DeviceBoard */,
@@ -3213,6 +3378,7 @@
 		849F91471A512D21006234B9 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
+				C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */,
 				849F91481A513981006234B9 /* icon_follow-.png */,
 				849F91491A513981006234B9 /* icon_follow.png */,
 				849F914A1A513981006234B9 /* icon_follow@2x.png */,
@@ -3422,6 +3588,7 @@
 				45A5E8051A4FCACC00FCD2BD /* CGX.png in Resources */,
 				45D906E31A47CAAB00B97D92 /* mingrentang@2x.png in Resources */,
 				45BC57A71A4B0DDB0052F520 /* shijian-cxz@2x.png in Resources */,
+				459E8BB41A5D2AA7009D4ADA /* sc.png in Resources */,
 				45D9FEC41A52902000023B9D /* xts.png in Resources */,
 				849F916E1A513981006234B9 /* icon_followd@2x.png in Resources */,
 				458952B41A493C05009B5DD1 /* wifilianjie03@2x.png in Resources */,
@@ -3433,6 +3600,7 @@
 				45B88E591A4BE9A300722EF6 /* tk-xz@2x.png in Resources */,
 				45D906DF1A47CAAB00B97D92 /* logo.png in Resources */,
 				45B88E491A4BD7A100722EF6 /* ksyr-xz@3x.png in Resources */,
+				452A6E781A5A964100ABFE75 /* followed@2x.png in Resources */,
 				45D907091A47CAAB00B97D92 /* tongzhi@3x.png in Resources */,
 				45BC57621A4AF3AF0052F520 /* rfpk-xz@2x.png in Resources */,
 				45A9996C1A51307C0008AFE3 /* CellOfAddFoodTable.xib in Resources */,
@@ -3473,23 +3641,27 @@
 				8447CAB61A5B7FEE00FADF9D /* UMFeedbackLocalizable.strings in Resources */,
 				849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */,
 				45D9069D1A47CAAB00B97D92 /* aixin2.png in Resources */,
+				459E8BA31A5CDC1D009D4ADA /* deletec.png in Resources */,
 				45B88E201A4BCEDD00722EF6 /* wdtz-wxz.png in Resources */,
 				45D906C91A47CAAB00B97D92 /* gouwuqindan@3x.png in Resources */,
 				45D906D01A47CAAB00B97D92 /* hongbeiwu.png in Resources */,
 				45B88E231A4BCEDD00722EF6 /* wdtz-xz.png in Resources */,
 				45D907001A47CAAB00B97D92 /* shouye.png in Resources */,
 				45C7E5771A3FDAB0000B086B /* 37x-Checkmark.png in Resources */,
+				452A6E771A5A964100ABFE75 /* followed.png in Resources */,
 				45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */,
 				45D906C61A47CAAB00B97D92 /* gfcp@3x.png in Resources */,
 				458952BE1A493C05009B5DD1 /* wifilianjie06@3x.png in Resources */,
 				457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */,
 				45B88E101A4BCC8B00722EF6 /* yy-wxz@3x.png in Resources */,
+				452A6E5F1A5A8FEA00ABFE75 /* Vcs.png in Resources */,
 				45BB36391A4A953A000EE3C4 /* xz-cxz.png in Resources */,
 				458952D51A494E1E009B5DD1 /* kaoxiang.png in Resources */,
 				45B650D11A4814CA00A6376D /* lianjie.png in Resources */,
 				45D906E71A47CAAB00B97D92 /* mrqd@3x.png in Resources */,
 				45BC57B31A4B107A0052F520 /* lx-ybx@2x.png in Resources */,
 				457A76D91A41686E00E422D0 /* fakedataImage.png in Resources */,
+				452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */,
 				45BC57691A4AF3AF0052F520 /* sk-wxz@3x.png in Resources */,
 				840141501A4BDAE60050615F /* clear.png in Resources */,
 				458952B71A493C05009B5DD1 /* wifilianjie04@2x.png in Resources */,
@@ -3508,6 +3680,7 @@
 				45D906EF1A47CAAB00B97D92 /* orangel@2x.png in Resources */,
 				45BC576B1A4AF3AF0052F520 /* sk-xz@2x.png in Resources */,
 				45D906B71A47CAAB00B97D92 /* edit@3x.png in Resources */,
+				459E8BB61A5D2AA7009D4ADA /* qrd@3x.png in Resources */,
 				457A76D31A41592600E422D0 /* page_state_highlight@2x.png in Resources */,
 				45D906F01A47CAAB00B97D92 /* orangel@3x.png in Resources */,
 				45D907041A47CAAB00B97D92 /* sousuo@2x.png in Resources */,
@@ -3606,20 +3779,24 @@
 				45A5E80E1A4FCBD700FCD2BD /* xzfmz.png in Resources */,
 				45BB365F1A4A96D4000EE3C4 /* sd-cxz@3x.png in Resources */,
 				45BB363E1A4A953A000EE3C4 /* xz-wxz@3x.png in Resources */,
+				459E8BB71A5D2AA7009D4ADA /* sc@3x.png in Resources */,
 				45BC578B1A4B08C00052F520 /* naozhong-wxz.png in Resources */,
 				45BC57591A4AF3AF0052F520 /* pk-xz@2x.png in Resources */,
 				45B650D71A4815B400A6376D /* tianjiashebei.png in Resources */,
 				45D906D21A47CAAB00B97D92 /* hongbeiwu@3x.png in Resources */,
 				45BC57531A4AF3AF0052F520 /* pk-cxz@2x.png in Resources */,
 				45C01C0A1A4D659800B54941 /* prwc.png in Resources */,
+				452A6E7E1A5B8A4D00ABFE75 /* ly@2x.png in Resources */,
 				849F917C1A513981006234B9 /* icon_like_navi_s.png in Resources */,
 				45B650E41A48177E00A6376D /* deviceAdd@3x.png in Resources */,
 				45A5E8081A4FCACC00FCD2BD /* CGXDJ@2x.png in Resources */,
 				45D906D81A47CAAB00B97D92 /* jianjing@3x.png in Resources */,
 				45D906C11A47CAAB00B97D92 /* garyline.png in Resources */,
+				452A6E7F1A5B8A4D00ABFE75 /* ly@3x.png in Resources */,
 				45D906C31A47CAAB00B97D92 /* garyline@3x.png in Resources */,
 				45BB35F31A4A6955000EE3C4 /* devicelogo@3x.png in Resources */,
 				45D9FEC61A52902000023B9D /* xts@3x.png in Resources */,
+				459E8BA41A5CDC1D009D4ADA /* deletec@2x.png in Resources */,
 				849F91871A513981006234B9 /* step1.png in Resources */,
 				45BB35F71A4A6B4E000EE3C4 /* kaiji.png in Resources */,
 				45D906F61A47CAAB00B97D92 /* qianjin@3x.png in Resources */,
@@ -3669,6 +3846,7 @@
 				458952CF1A49428D009B5DD1 /* dui.png in Resources */,
 				45BC57901A4B08C00052F520 /* naozhong-xz@3x.png in Resources */,
 				45A999511A50FD640008AFE3 /* pzy@3x.png in Resources */,
+				452A6E751A5A964100ABFE75 /* follow@2x.png in Resources */,
 				45A546AA1A593E9C00BE62EC /* wty.png in Resources */,
 				45B88E3F1A4BD7A100722EF6 /* kashi@2x.png in Resources */,
 				45B650F71A482D6B00A6376D /* 1-2.png in Resources */,
@@ -3688,6 +3866,7 @@
 				45D906BE1A47CAAB00B97D92 /* gantan.png in Resources */,
 				458952E81A4962CF009B5DD1 /* message@2x.png in Resources */,
 				45BB36281A4A8E6E000EE3C4 /* fs-cxz@2x.png in Resources */,
+				452A6E5A1A5A7FA600ABFE75 /* CookListFoodView.xib in Resources */,
 				45B650D81A4815B400A6376D /* tianjiashebei@2x.png in Resources */,
 				45BB365E1A4A96D4000EE3C4 /* sd-cxz@2x.png in Resources */,
 				45BB36641A4A96D4000EE3C4 /* sd-xz@2x.png in Resources */,
@@ -3757,6 +3936,8 @@
 				45B88DFD1A4BCBF300722EF6 /* nz-wxz@2x.png in Resources */,
 				45BC57AC1A4B0DDB0052F520 /* shijian-xz.png in Resources */,
 				45D906AA1A47CAAB00B97D92 /* back@3x.png in Resources */,
+				452A6E791A5A964100ABFE75 /* followed@3x.png in Resources */,
+				452A6E741A5A964100ABFE75 /* follow.png in Resources */,
 				458952BF1A493C05009B5DD1 /* wifilianjie07.png in Resources */,
 				45BB36051A4A73E1000EE3C4 /* sectionbg@3x.png in Resources */,
 				45D906F11A47CAAB00B97D92 /* orangepoint.png in Resources */,
@@ -3770,6 +3951,7 @@
 				45D906E81A47CAAB00B97D92 /* mydessertcount.png in Resources */,
 				45D9071B1A47CAAB00B97D92 /* yqd@3x.png in Resources */,
 				45BC57521A4AF3AF0052F520 /* pk-cxz.png in Resources */,
+				452A6E7D1A5B8A4D00ABFE75 /* ly.png in Resources */,
 				458952AE1A493C05009B5DD1 /* wifilianjie01@2x.png in Resources */,
 				45BB363D1A4A953A000EE3C4 /* xz-wxz@2x.png in Resources */,
 				45B88E0D1A4BCC8B00722EF6 /* yy-cxz@3x.png in Resources */,
@@ -3794,6 +3976,8 @@
 				45D906B91A47CAAB00B97D92 /* fakebg@2x.png in Resources */,
 				45BC576C1A4AF3AF0052F520 /* sk-xz@3x.png in Resources */,
 				45BC57341A4AF27C0052F520 /* dlfp-xz.png in Resources */,
+				452A6E611A5A8FEA00ABFE75 /* Vcs@3x.png in Resources */,
+				45A22B921A5BCC0B00E38AD6 /* xl@2x.png in Resources */,
 				458952C31A493C05009B5DD1 /* wifilianjie08@2x.png in Resources */,
 				8447CABE1A5B7FEE00FADF9D /* UMSCommentInputControlleriPad.xib in Resources */,
 				45D906D31A47CAAB00B97D92 /* huisousuo.png in Resources */,
@@ -3843,7 +4027,9 @@
 				45B650FE1A482DEA00A6376D /* 2-1@2x.png in Resources */,
 				458952F01A496876009B5DD1 /* tuolian.png in Resources */,
 				45B88E0C1A4BCC8B00722EF6 /* yy-cxz@2x.png in Resources */,
+				459E8BB31A5D2AA7009D4ADA /* qrd@2x.png in Resources */,
 				45B651161A48448500A6376D /* wodeWIFI@2x.png in Resources */,
+				459E8BA51A5CDC1D009D4ADA /* deletec@3x.png in Resources */,
 				45BC57201A4AF20A0052F520 /* cthp-wxz@2x.png in Resources */,
 				4597EB271A501E640083AFE5 /* delete@2x.png in Resources */,
 				45D906DE1A47CAAB00B97D92 /* liebieo@3x.png in Resources */,
@@ -3853,10 +4039,13 @@
 				458952BD1A493C05009B5DD1 /* wifilianjie06@2x.png in Resources */,
 				45BB35FE1A4A6C80000EE3C4 /* guanji@2x.png in Resources */,
 				45BB36501A4A9615000EE3C4 /* zm-wxz@3x.png in Resources */,
+				459E8BB21A5D2AA7009D4ADA /* qrd.png in Resources */,
 				458952C21A493C05009B5DD1 /* wifilianjie08.png in Resources */,
+				452A6E761A5A964100ABFE75 /* follow@3x.png in Resources */,
 				45BC57A91A4B0DDB0052F520 /* shijian-wxz.png in Resources */,
 				45BC57551A4AF3AF0052F520 /* pk-wxz.png in Resources */,
 				45D906BD1A47CAAB00B97D92 /* femail@3x.png in Resources */,
+				452A6E601A5A8FEA00ABFE75 /* Vcs@2x.png in Resources */,
 				45BC575E1A4AF3AF0052F520 /* rfpk-wxz.png in Resources */,
 				45B650FF1A482DEA00A6376D /* 2-1@3x.png in Resources */,
 				45C7E5BF1A400044000B086B /* QQQ.png in Resources */,
@@ -3873,6 +4062,7 @@
 				45BB364E1A4A9615000EE3C4 /* zm-wxz.png in Resources */,
 				45D906BF1A47CAAB00B97D92 /* gantan@2x.png in Resources */,
 				45D9070F1A47CAAB00B97D92 /* xiaoxituisong@3x.png in Resources */,
+				45A22B911A5BCC0B00E38AD6 /* xl.png in Resources */,
 				45B88E3A1A4BD7A100722EF6 /* kaishi-cxz@3x.png in Resources */,
 				458952E91A4962CF009B5DD1 /* message@3x.png in Resources */,
 				45BB136E1A49124400FA44F4 /* progressBorder@3x.png in Resources */,
@@ -3906,6 +4096,7 @@
 				C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */,
 				45D907021A47CAAB00B97D92 /* shouye@3x.png in Resources */,
 				45B6510B1A482EDB00A6376D /* n1@3x.png in Resources */,
+				459E8BB51A5D2AA7009D4ADA /* sc@2x.png in Resources */,
 				45D906A01A47CAAB00B97D92 /* aixin@2x.png in Resources */,
 				45C7E53C1A3FD165000B086B /* Images.xcassets in Resources */,
 				45D906F91A47CAAB00B97D92 /* searchborder@3x.png in Resources */,
@@ -3926,6 +4117,7 @@
 				45B6510D1A482EDB00A6376D /* n2@2x.png in Resources */,
 				849F916D1A513981006234B9 /* icon_followd.png in Resources */,
 				45D906C21A47CAAB00B97D92 /* garyline@2x.png in Resources */,
+				45A22B931A5BCC0B00E38AD6 /* xl@3x.png in Resources */,
 				45A5E8261A50081200FCD2BD /* xcqr.png in Resources */,
 				45BC578D1A4B08C00052F520 /* naozhong-wxz@3x.png in Resources */,
 				45D906DA1A47CAAB00B97D92 /* l2.png in Resources */,
@@ -3962,6 +4154,7 @@
 				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
 				45B88E601A4BF19500722EF6 /* DeviceAlertView.m in Sources */,
+				452A6E521A5A7AAA00ABFE75 /* ShoppingListTableViewController.m in Sources */,
 				45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */,
 				45C7E5711A3FDA43000B086B /* UIView+Sizes.m in Sources */,
 				844117701A4BB8AF00628A64 /* DataCenter.m in Sources */,
@@ -3974,17 +4167,18 @@
 				45A546C81A5A4EC200BE62EC /* MJRefreshConst.m in Sources */,
 				8441177D1A4BB8AF00628A64 /* AFHTTPSessionManager.m in Sources */,
 				45BBA6971A52552F0066C143 /* AddStepDetailCell.m in Sources */,
+				459E8BBA1A5D2B95009D4ADA /* DeleteCookCell.m in Sources */,
 				45A546841A58E56500BE62EC /* LoginViewController.m in Sources */,
 				844117711A4BB8AF00628A64 /* Comment.m in Sources */,
 				45BB36701A4AA0A4000EE3C4 /* LineProgressLayer.m in Sources */,
 				842A86D81A52491B00C75EE4 /* AddShoppingListCell.m in Sources */,
 				45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */,
 				844117791A4BB8AF00628A64 /* FCUUID.m in Sources */,
+				459E8BA91A5D25FB009D4ADA /* DeleteCookViewController.m in Sources */,
 				45BB36681A4A9A70000EE3C4 /* DeviceWorkView.m in Sources */,
 				45BEED831A412E29003000AD /* MainViewNormalCell.m in Sources */,
 				45B650DC1A48169000A6376D /* MyDeviceAddView.m in Sources */,
 				8441178A1A4BB8AF00628A64 /* UIImageView+AFNetworking.m in Sources */,
-				454916B31A403902005503C8 /* CookHallofFameViewController.m in Sources */,
 				45A546CD1A5A4EC200BE62EC /* UIView+Extension.m in Sources */,
 				45A999701A513EE60008AFE3 /* AddFoodCell.m in Sources */,
 				45B650EA1A48211C00A6376D /* AddDeviceStepOneController.m in Sources */,
@@ -3996,9 +4190,11 @@
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
 				45A546CB1A5A4EC200BE62EC /* UIScrollView+Extension.m in Sources */,
+				452A6E581A5A7F9800ABFE75 /* CookListFoodView.m in Sources */,
 				45BB36711A4AA0A4000EE3C4 /* LineProgressView.m in Sources */,
 				C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */,
 				844117891A4BB8AF00628A64 /* UIButton+AFNetworking.m in Sources */,
+				452A6E551A5A7F6700ABFE75 /* CookListCell.m in Sources */,
 				844117841A4BB8AF00628A64 /* InternetManager.m in Sources */,
 				842A86DB1A52493F00C75EE4 /* FoodCell.m in Sources */,
 				458952F51A49692C009B5DD1 /* DeviceUnconnectController.m in Sources */,
@@ -4016,7 +4212,9 @@
 				45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */,
 				45C7E58A1A3FE25A000B086B /* RESideMenu.m in Sources */,
 				45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */,
+				452A6E681A5A90DE00ABFE75 /* CookStarDetailController.m in Sources */,
 				45A5E81B1A50007300FCD2BD /* MenuDraftController.m in Sources */,
+				452A6E821A5BA53300ABFE75 /* CookStarDetailTopView.m in Sources */,
 				457A773E1A418EF200E422D0 /* ContainerView.m in Sources */,
 				45C7E56F1A3FDA43000B086B /* MyUtils.m in Sources */,
 				8441177C1A4BB8AF00628A64 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -4045,6 +4243,7 @@
 				458952CB1A49400E009B5DD1 /* AddDeviceFailedController.m in Sources */,
 				8441178B1A4BB8AF00628A64 /* UIProgressView+AFNetworking.m in Sources */,
 				8441177B1A4BB8AF00628A64 /* AFHTTPRequestOperation.m in Sources */,
+				452A6E651A5A90BE00ABFE75 /* CookStarController.m in Sources */,
 				457A77641A4294AB00E422D0 /* SearchView.m in Sources */,
 				84E113781A52A2FF00D16DDB /* CommentViewController.m in Sources */,
 				45C7E5891A3FE25A000B086B /* RECommonFunctions.m in Sources */,
@@ -4092,6 +4291,7 @@
 				8441178D1A4BB8AF00628A64 /* UIWebView+AFNetworking.m in Sources */,
 				844117761A4BB8AF00628A64 /* Step.m in Sources */,
 				844117731A4BB8AF00628A64 /* CookbookDetail.m in Sources */,
+				452A6E6B1A5A921800ABFE75 /* CookStarCell.m in Sources */,
 				454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

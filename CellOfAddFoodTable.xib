@@ -41,12 +41,12 @@
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT2-O3-OZM">
                         <rect key="frame" x="290" y="16" width="22" height="22"/>
-                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="US3-lP-myk"/>
                             <constraint firstAttribute="height" constant="22" id="XTs-yr-gNe"/>
                         </constraints>
-                        <state key="normal" image="delete.png">
+                        <state key="normal" image="deletec.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -76,6 +76,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="delete.png" width="22" height="22"/>
+        <image name="deletec.png" width="26" height="26"/>
     </resources>
 </document>
