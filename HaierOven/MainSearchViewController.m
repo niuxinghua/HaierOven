@@ -7,11 +7,10 @@
 //
 
 #import "MainSearchViewController.h"
-#import "SearchView.h"
 #import "SearchTableCell.h"
 #import "RecommendTagView.h"
 #import "FoodListViewController.h"
-@interface MainSearchViewController ()<searchViewDelegate,RecommendTagViewDelegate>
+@interface MainSearchViewController ()<RecommendTagViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic)  UILabel *notfFindLabel;
 @property (strong, nonatomic) UIView *recommendTagsView;
@@ -19,6 +18,8 @@
 
 @property (strong, nonatomic) NSMutableArray* searchedCookbooks;
 @property (strong, nonatomic) NSMutableArray* recentSearchedKeywords;
+
+@property (strong, nonatomic) UITextField *tempTextField;
 /**
  *  如果有输入搜索关键字，则数据源为搜索结果，否则为最近搜索记录
  */
@@ -70,6 +71,10 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.tempTextField resignFirstResponder];
+}
+
 -(void)setUpSubView{
     self.table.delegate = self;
     self.table.dataSource = self;
@@ -77,6 +82,7 @@
     self.table.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = GlobalGrayColor;
     SearchView *searchView = [[SearchView alloc]initWithFrame:CGRectMake(0, 0, PageW-25, 35)];
+    self.tempTextField = searchView.searchTextFailed;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:searchView];
     searchView.delegate = self;
     [self addObserver:self forKeyPath:@"self.table.hidden" options:NSKeyValueObservingOptionNew context:NULL];

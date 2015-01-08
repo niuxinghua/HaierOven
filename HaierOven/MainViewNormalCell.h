@@ -25,8 +25,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *cookerName;
 @property (strong, nonatomic) IBOutlet UILabel *foodName;
 @property (strong, nonatomic) IBOutlet UILabel *foodMakeFunction;
+@property (strong, nonatomic) IBOutlet UIButton *vedioBtn;
 
 @property (strong, nonatomic) Cookbook* cookbook;
+
+@property (nonatomic) BOOL hadVideo;
 
 @property (weak, nonatomic)id<MainViewNormalCellDelegate>delegate;
 - (IBAction)Like:(UIButton *)sender;

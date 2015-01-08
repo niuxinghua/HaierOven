@@ -30,10 +30,8 @@
 		452A6E7F1A5B8A4D00ABFE75 /* ly@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E7C1A5B8A4D00ABFE75 /* ly@3x.png */; };
 		452A6E821A5BA53300ABFE75 /* CookStarDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */; };
 		452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */; };
-		454916B61A403958005503C8 /* BakedFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B51A403958005503C8 /* BakedFriendsViewController.m */; };
 		454916B91A403993005503C8 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B81A403993005503C8 /* PersonalCenterViewController.m */; };
 		454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916BB1A403A18005503C8 /* DeviceViewController.m */; };
-		454916BF1A403A78005503C8 /* BakedHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916BE1A403A78005503C8 /* BakedHouseViewController.m */; };
 		457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CA1A4158C800E422D0 /* page_state_normal.png */; };
 		457A76CF1A4158C800E422D0 /* page_state_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */; };
 		457A76D21A41592600E422D0 /* page_state_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76D01A41592600E422D0 /* page_state_highlight.png */; };
@@ -110,6 +108,13 @@
 		459E8BB61A5D2AA7009D4ADA /* qrd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BB01A5D2AA7009D4ADA /* qrd@3x.png */; };
 		459E8BB71A5D2AA7009D4ADA /* sc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BB11A5D2AA7009D4ADA /* sc@3x.png */; };
 		459E8BBA1A5D2B95009D4ADA /* DeleteCookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BB91A5D2B95009D4ADA /* DeleteCookCell.m */; };
+		459E8BBE1A5E32FB009D4ADA /* BakedGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BBD1A5E32FB009D4ADA /* BakedGroupController.m */; };
+		459E8BC21A5E5AB3009D4ADA /* BakeGroupAdviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BC01A5E5AB3009D4ADA /* BakeGroupAdviceCell.m */; };
+		459E8BC31A5E5AB3009D4ADA /* BakeGroupAdviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BC11A5E5AB3009D4ADA /* BakeGroupAdviceCell.xib */; };
+		459E8BC81A5E80AC009D4ADA /* hpds-640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BC51A5E80AC009D4ADA /* hpds-640x1136.png */; };
+		459E8BC91A5E80AD009D4ADA /* hpds750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BC61A5E80AC009D4ADA /* hpds750x1334.png */; };
+		459E8BCA1A5E80AD009D4ADA /* phpds640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 459E8BC71A5E80AC009D4ADA /* phpds640x960.png */; };
+		459E8BCE1A5E85F2009D4ADA /* BakedHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459E8BCD1A5E85F2009D4ADA /* BakedHouseViewController.m */; };
 		45A22B911A5BCC0B00E38AD6 /* xl.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B8E1A5BCC0B00E38AD6 /* xl.png */; };
 		45A22B921A5BCC0B00E38AD6 /* xl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B8F1A5BCC0B00E38AD6 /* xl@2x.png */; };
 		45A22B931A5BCC0B00E38AD6 /* xl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A22B901A5BCC0B00E38AD6 /* xl@3x.png */; };
@@ -796,14 +801,10 @@
 		452A6E801A5BA53300ABFE75 /* CookStarDetailTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarDetailTopView.h; sourceTree = "<group>"; };
 		452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarDetailTopView.m; sourceTree = "<group>"; };
 		452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookStarDetailTopView.xib; sourceTree = "<group>"; };
-		454916B41A403958005503C8 /* BakedFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BakedFriendsViewController.h; path = ../BakedFriendsViewController.h; sourceTree = "<group>"; };
-		454916B51A403958005503C8 /* BakedFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BakedFriendsViewController.m; path = ../BakedFriendsViewController.m; sourceTree = "<group>"; };
 		454916B71A403993005503C8 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		454916B81A403993005503C8 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		454916BA1A403A18005503C8 /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
 		454916BB1A403A18005503C8 /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
-		454916BD1A403A78005503C8 /* BakedHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakedHouseViewController.h; sourceTree = "<group>"; };
-		454916BE1A403A78005503C8 /* BakedHouseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakedHouseViewController.m; sourceTree = "<group>"; };
 		457A76CA1A4158C800E422D0 /* page_state_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_normal.png; sourceTree = "<group>"; };
 		457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_state_normal@2x.png"; sourceTree = "<group>"; };
 		457A76D01A41592600E422D0 /* page_state_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_highlight.png; sourceTree = "<group>"; };
@@ -896,6 +897,16 @@
 		459E8BB11A5D2AA7009D4ADA /* sc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sc@3x.png"; sourceTree = "<group>"; };
 		459E8BB81A5D2B95009D4ADA /* DeleteCookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteCookCell.h; sourceTree = "<group>"; };
 		459E8BB91A5D2B95009D4ADA /* DeleteCookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteCookCell.m; sourceTree = "<group>"; };
+		459E8BBC1A5E32FB009D4ADA /* BakedGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakedGroupController.h; sourceTree = "<group>"; };
+		459E8BBD1A5E32FB009D4ADA /* BakedGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakedGroupController.m; sourceTree = "<group>"; };
+		459E8BBF1A5E5AB3009D4ADA /* BakeGroupAdviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeGroupAdviceCell.h; sourceTree = "<group>"; };
+		459E8BC01A5E5AB3009D4ADA /* BakeGroupAdviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeGroupAdviceCell.m; sourceTree = "<group>"; };
+		459E8BC11A5E5AB3009D4ADA /* BakeGroupAdviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BakeGroupAdviceCell.xib; sourceTree = "<group>"; };
+		459E8BC51A5E80AC009D4ADA /* hpds-640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hpds-640x1136.png"; sourceTree = "<group>"; };
+		459E8BC61A5E80AC009D4ADA /* hpds750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hpds750x1334.png; sourceTree = "<group>"; };
+		459E8BC71A5E80AC009D4ADA /* phpds640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phpds640x960.png; sourceTree = "<group>"; };
+		459E8BCC1A5E85F2009D4ADA /* BakedHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakedHouseViewController.h; sourceTree = "<group>"; };
+		459E8BCD1A5E85F2009D4ADA /* BakedHouseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakedHouseViewController.m; sourceTree = "<group>"; };
 		45A22B8E1A5BCC0B00E38AD6 /* xl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xl.png; sourceTree = "<group>"; };
 		45A22B8F1A5BCC0B00E38AD6 /* xl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xl@2x.png"; sourceTree = "<group>"; };
 		45A22B901A5BCC0B00E38AD6 /* xl@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xl@3x.png"; sourceTree = "<group>"; };
@@ -1901,6 +1912,37 @@
 			name = ShoppingList;
 			sourceTree = "<group>";
 		};
+		459E8BBB1A5E327B009D4ADA /* BakedGroup */ = {
+			isa = PBXGroup;
+			children = (
+				459E8BBC1A5E32FB009D4ADA /* BakedGroupController.h */,
+				459E8BBD1A5E32FB009D4ADA /* BakedGroupController.m */,
+				459E8BBF1A5E5AB3009D4ADA /* BakeGroupAdviceCell.h */,
+				459E8BC01A5E5AB3009D4ADA /* BakeGroupAdviceCell.m */,
+				459E8BC11A5E5AB3009D4ADA /* BakeGroupAdviceCell.xib */,
+			);
+			name = BakedGroup;
+			sourceTree = "<group>";
+		};
+		459E8BC41A5E80AC009D4ADA /* hpds */ = {
+			isa = PBXGroup;
+			children = (
+				459E8BC51A5E80AC009D4ADA /* hpds-640x1136.png */,
+				459E8BC61A5E80AC009D4ADA /* hpds750x1334.png */,
+				459E8BC71A5E80AC009D4ADA /* phpds640x960.png */,
+			);
+			path = hpds;
+			sourceTree = "<group>";
+		};
+		459E8BCB1A5E83C5009D4ADA /* BakedHouseController */ = {
+			isa = PBXGroup;
+			children = (
+				459E8BCC1A5E85F2009D4ADA /* BakedHouseViewController.h */,
+				459E8BCD1A5E85F2009D4ADA /* BakedHouseViewController.m */,
+			);
+			name = BakedHouseController;
+			sourceTree = "<group>";
+		};
 		45A546811A58E41700BE62EC /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2710,6 +2752,8 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				459E8BCB1A5E83C5009D4ADA /* BakedHouseController */,
+				459E8BBB1A5E327B009D4ADA /* BakedGroup */,
 				452A6E4F1A5A7A2C00ABFE75 /* ShoppingList */,
 				45A546811A58E41700BE62EC /* LoginController */,
 				45A5E7FA1A4FC85100FCD2BD /* UpLoadingMenuController */,
@@ -2720,10 +2764,6 @@
 				45C7E5B81A3FFD5D000B086B /* LeftMenuViewController */,
 				45C7E5721A3FDAB0000B086B /* MBProgress */,
 				452A6E621A5A908400ABFE75 /* CookStarController */,
-				454916B41A403958005503C8 /* BakedFriendsViewController.h */,
-				454916B51A403958005503C8 /* BakedFriendsViewController.m */,
-				454916BD1A403A78005503C8 /* BakedHouseViewController.h */,
-				454916BE1A403A78005503C8 /* BakedHouseViewController.m */,
 				45C7E5AC1A3FE51F000B086B /* RootViewController.h */,
 				45C7E5AD1A3FE51F000B086B /* RootViewController.m */,
 			);
@@ -2818,6 +2858,7 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				459E8BC41A5E80AC009D4ADA /* hpds */,
 				459E8BAB1A5D2A8B009D4ADA /* ShoppingList */,
 				452A6E5B1A5A8FDC00ABFE75 /* HallFame */,
 				45A546871A58EF3300BE62EC /* LoginIn */,
@@ -3643,6 +3684,7 @@
 				45B88E201A4BCEDD00722EF6 /* wdtz-wxz.png in Resources */,
 				45D906C91A47CAAB00B97D92 /* gouwuqindan@3x.png in Resources */,
 				45D906D01A47CAAB00B97D92 /* hongbeiwu.png in Resources */,
+				459E8BCA1A5E80AD009D4ADA /* phpds640x960.png in Resources */,
 				45B88E231A4BCEDD00722EF6 /* wdtz-xz.png in Resources */,
 				45D907001A47CAAB00B97D92 /* shouye.png in Resources */,
 				45C7E5771A3FDAB0000B086B /* 37x-Checkmark.png in Resources */,
@@ -3914,6 +3956,7 @@
 				45BC571D1A4AF20A0052F520 /* cthp-cxz@2x.png in Resources */,
 				45BB136C1A49124400FA44F4 /* progressBorder.png in Resources */,
 				45D906B61A47CAAB00B97D92 /* edit@2x.png in Resources */,
+				459E8BC91A5E80AD009D4ADA /* hpds750x1334.png in Resources */,
 				45D906CA1A47CAAB00B97D92 /* guangfang.png in Resources */,
 				458952D01A49428D009B5DD1 /* dui@2x.png in Resources */,
 				45B88E121A4BCC8B00722EF6 /* yy-xz@2x.png in Resources */,
@@ -3959,6 +4002,7 @@
 				45D906FC1A47CAAB00B97D92 /* shezhi@3x.png in Resources */,
 				45BC57331A4AF27C0052F520 /* dlfp-wxz@3x.png in Resources */,
 				849F917A1A513981006234B9 /* icon_like_navi_n@2x.png in Resources */,
+				459E8BC31A5E5AB3009D4ADA /* BakeGroupAdviceCell.xib in Resources */,
 				45D906D61A47CAAB00B97D92 /* jianjing.png in Resources */,
 				45A999501A50FD640008AFE3 /* pzy@2x.png in Resources */,
 				45D906CF1A47CAAB00B97D92 /* hongbeiquan@3x.png in Resources */,
@@ -3982,6 +4026,7 @@
 				45BBA69C1A5257010066C143 /* YJTP.png in Resources */,
 				45BA02E01A4408FB003810C7 /* PersonalCenterSectionView.xib in Resources */,
 				458952DB1A495FC3009B5DD1 /* shebei2tianjian.png in Resources */,
+				459E8BC81A5E80AC009D4ADA /* hpds-640x1136.png in Resources */,
 				45C7E53F1A3FD165000B086B /* LaunchScreen.xib in Resources */,
 				45A5E8091A4FCACC00FCD2BD /* CGX@3x.png in Resources */,
 				849F91881A513981006234B9 /* step2.png in Resources */,
@@ -4142,7 +4187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
-				454916B61A403958005503C8 /* BakedFriendsViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
@@ -4189,6 +4233,7 @@
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
 				45A546CB1A5A4EC200BE62EC /* UIScrollView+Extension.m in Sources */,
 				452A6E581A5A7F9800ABFE75 /* CookListFoodView.m in Sources */,
+				459E8BBE1A5E32FB009D4ADA /* BakedGroupController.m in Sources */,
 				45BB36711A4AA0A4000EE3C4 /* LineProgressView.m in Sources */,
 				C4182E221A4E610E006A44D0 /* CookbookSectionHeaderView.m in Sources */,
 				844117891A4BB8AF00628A64 /* UIButton+AFNetworking.m in Sources */,
@@ -4230,7 +4275,6 @@
 				45A546CA1A5A4EC200BE62EC /* MJRefreshHeaderView.m in Sources */,
 				45A546C91A5A4EC200BE62EC /* MJRefreshFooterView.m in Sources */,
 				844117881A4BB8AF00628A64 /* UIAlertView+AFNetworking.m in Sources */,
-				454916BF1A403A78005503C8 /* BakedHouseViewController.m in Sources */,
 				458952C81A493FF2009B5DD1 /* AddDeviceSucceedController.m in Sources */,
 				8441177A1A4BB8AF00628A64 /* UICKeyChainStore.m in Sources */,
 				8441177E1A4BB8AF00628A64 /* AFNetworkReachabilityManager.m in Sources */,
@@ -4281,6 +4325,7 @@
 				458952F81A496E6D009B5DD1 /* DeviceMessageController.m in Sources */,
 				84AD6D961A53A1C0002729D9 /* CommentCountCell.m in Sources */,
 				842A86ED1A527DC700C75EE4 /* StepCell.m in Sources */,
+				459E8BCE1A5E85F2009D4ADA /* BakedHouseViewController.m in Sources */,
 				45C7E58B1A3FE25A000B086B /* UIViewController+RESideMenu.m in Sources */,
 				45A5E8221A5002D600FCD2BD /* MenuDraftTableViewCell.m in Sources */,
 				45A546CC1A5A4EC200BE62EC /* UIScrollView+MJRefresh.m in Sources */,
@@ -4288,6 +4333,7 @@
 				45A999751A5149400008AFE3 /* AddFoodLastCell.m in Sources */,
 				8441178D1A4BB8AF00628A64 /* UIWebView+AFNetworking.m in Sources */,
 				844117761A4BB8AF00628A64 /* Step.m in Sources */,
+				459E8BC21A5E5AB3009D4ADA /* BakeGroupAdviceCell.m in Sources */,
 				844117731A4BB8AF00628A64 /* CookbookDetail.m in Sources */,
 				452A6E6B1A5A921800ABFE75 /* CookStarCell.m in Sources */,
 				454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */,
@@ -4431,7 +4477,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4473,7 +4519,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

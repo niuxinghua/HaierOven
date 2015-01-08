@@ -7,10 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, SectionType) {
+    sectionPersonalCenter   =1,
+    sectionFollow           =2
+};
 
+@class PersonalCenterSectionView;
+@protocol PersonalCenterSectionViewDelegate <NSObject>
+
+-(void)SectionType:(NSInteger)type;
+
+@end
 @interface PersonalCenterSectionView : UIView
+
+@property (nonatomic) SectionType sectionType;
 @property (strong, nonatomic) IBOutlet UIButton *pushedButton;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet UIImageView *orangeLine;
-
+@property (weak, nonatomic)id<PersonalCenterSectionViewDelegate>delegate;
 @end

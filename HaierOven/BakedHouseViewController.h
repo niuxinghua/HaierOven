@@ -2,12 +2,12 @@
 //  BakedHouseViewController.h
 //  HaierOven
 //
-//  Created by dongl on 14/12/16.
-//  Copyright (c) 2014年 edaysoft. All rights reserved.
+//  Created by dongl on 15/1/8.
+//  Copyright (c) 2015年 edaysoft. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface BakedHouseViewController : BaseViewController
+@interface BakedHouseViewController : UICollectionViewController
 
 @end

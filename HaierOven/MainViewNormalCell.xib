@@ -59,7 +59,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGW-sZ-8v5">
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGW-sZ-8v5">
                         <rect key="frame" x="279" y="22" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="Iil-H7-Si8"/>
@@ -68,6 +68,7 @@
                         <state key="normal" image="aixin2.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="aixin.png"/>
                         <state key="selected" image="aixin.png"/>
                         <connections>
                             <action selector="Like:" destination="OUd-eZ-CUo" eventType="touchUpInside" id="vHf-jS-WyE"/>
@@ -104,7 +105,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hh-yy-YOe">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hh-yy-YOe">
                                 <rect key="frame" x="271" y="28" width="41" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="41" id="2Tj-cS-O0x"/>
@@ -113,6 +114,8 @@
                                 <state key="normal" image="bofang.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled" image="bofang.png"/>
+                                <state key="highlighted" image="bofang.png"/>
                                 <connections>
                                     <action selector="Play:" destination="OUd-eZ-CUo" eventType="touchUpInside" id="rNX-ar-Z6P"/>
                                 </connections>
@@ -204,6 +207,7 @@
                 <outlet property="foodName" destination="Qcm-dR-3B3" id="wBR-x4-vLG"/>
                 <outlet property="goodCountLabel" destination="9VT-Kj-Qfw" id="r3Z-K1-AwV"/>
                 <outlet property="timeLabel" destination="oRg-8d-2Ux" id="71e-7r-beu"/>
+                <outlet property="vedioBtn" destination="3hh-yy-YOe" id="kdu-o0-iSn"/>
             </connections>
             <point key="canvasLocation" x="266" y="274.5"/>
         </tableViewCell>

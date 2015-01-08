@@ -50,6 +50,10 @@
     self.chickGoodBtn.selected = NO;
 }
 
+-(void)setHadVideo:(BOOL)hadVideo{
+    _hadVideo = hadVideo;
+    self.vedioBtn.hidden = hadVideo;
+}
 - (IBAction)Like:(UIButton *)sender {
     [self.delegate ChickLikeBtn:self andBtn:sender];
 }
