@@ -9,6 +9,7 @@
 #import "CookStarController.h"
 #import "CookStarCell.h"
 #import "CookStarDetailController.h"
+#import "MJRefresh.h"
 @interface CookStarController ()
 
 @end
@@ -17,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self addFooter];
+    [self addHeader];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -55,6 +57,58 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CookStarDetailController *csd = [self.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
     [self.navigationController pushViewController:csd animated:YES];
+}
+
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+//        vc.pageIndex = 1;
+//        [vc loadCookbooks];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+//        vc.pageIndex++;
+//        [vc loadCookbooks];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView footerEndRefreshing];
+            
+        });
+        
+    }];
+    
 }
 /*
 // Override to support conditional editing of the table view.

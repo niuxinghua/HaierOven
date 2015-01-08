@@ -16,9 +16,7 @@
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([PersonalCenterSectionView class]) owner:self options:nil] firstObject];
     self.frame = frame;
-    
-    
-    
+    self.sectionType = sectionPersonalCenter;
     
     self.pushedButton.frame = CGRectMake(0, PageW*ScrRate-30/2, PageW/2, 30);
     self.likeButton.frame = CGRectMake(PageW/2, PageW*ScrRate-30/2, PageW/2, 30);
@@ -35,6 +33,7 @@
 - (IBAction)TurnPushedController:(UIButton *)sender {
         [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(15, PageW*ScrRate-10, PageW/2-30, 2)];
         }completion:^(BOOL finished) {
+            [self.delegate SectionType:sender.tag];
         }];
     
 }
@@ -43,8 +42,25 @@
     
     [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(PageW/2+15, PageW*ScrRate-10, PageW/2-30, 2)];
     }completion:^(BOOL finished) {
+        [self.delegate SectionType:sender.tag];
     }];
 
+}
+
+-(void)setSectionType:(SectionType)sectionType{
+    _sectionType = sectionType;
+    switch (sectionType) {
+        case sectionFollow:
+            [self.pushedButton setTitle:@"关注" forState:UIControlStateNormal];
+            [self.likeButton setTitle:@"推荐" forState:UIControlStateNormal];
+            break;
+        case sectionPersonalCenter:
+            [self.pushedButton setTitle:@"发布的" forState:UIControlStateNormal];
+            [self.likeButton setTitle:@"赞过的" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

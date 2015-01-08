@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchView.h"
 
-@interface MainSearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MainSearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, searchViewDelegate,UITextFieldDelegate>
 
 @end
