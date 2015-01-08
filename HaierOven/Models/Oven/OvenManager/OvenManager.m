@@ -139,8 +139,7 @@
     dispatch_async(queue, ^{
         NSArray* devices = [deviceManager getDeviceList:OVEN];     //获取烤箱列表
         dispatch_async(dispatch_get_main_queue(), ^{
-            uSDKDevice* device = [devices firstObject];
-            NSLog(@"device info: ");
+//            uSDKDevice* device = [devices firstObject];
             callback(YES, devices, nil);
         });
     });
@@ -157,12 +156,6 @@
     uSDKNotificationCenter* sdkNotificationCenter = [uSDKNotificationCenter defaultCenter];
     
     [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
-    
-//    for (uSDKDevice* device in [[uSDKDeviceManager getSingleInstance] getDeviceList:OVEN]) {
-//        NSArray* deviceMacs = @[device.mac];
-//        [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:deviceMacs];
-//    }
-
     
 }
 
@@ -311,17 +304,24 @@
 
 - (void)executeCommands:(NSMutableArray*)commands toDevice:(uSDKDevice*)device andCommandSN:(int)cmdsn andGroupCommandName:(NSString*)groupCmdName andResult:(result)result
 {
-    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
+//    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        uSDKErrorConst errorConst = [device execDeviceOperation:commands withCmdSN:cmdsn withGroupCmdName:groupCmdName];
+        
+        NSMutableArray* cmds = [NSMutableArray array];
+        for (NSString* cmd in commands) {
+            uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:cmd withAttrValue:cmd];
+            [cmds addObject:attr];
+        }
+        
+        uSDKErrorConst errorConst = [device execDeviceOperation:cmds withCmdSN:cmdsn withGroupCmdName:groupCmdName];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (errorConst == RET_USDK_OK) {
                 NSLog(@"发送成功");
                 result(YES);
             } else {
-                NSLog(@"发送失败");
+                NSLog(@"发送失败, errorCode:%d", errorConst);
                 result(NO);
             }
         });
@@ -337,9 +337,8 @@
 
 - (void)bootupToDevice:(uSDKDevice*)device result:(result)success
 {
-    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:kBootUp withAttrValue:kBootUp];
-    [self executeCommands:[@[attr] mutableCopy]
-                 toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
+    [self executeCommands:[@[kBootUp] mutableCopy]
+                 toDevice:device
              andCommandSN:0
       andGroupCommandName:@""
                 andResult:^(BOOL result) {
@@ -353,9 +352,8 @@
 
 - (void)shutdownToDevice:(uSDKDevice*)device result:(result)success
 {
-    uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:kShutDown withAttrValue:kShutDown];
-    [self executeCommands:[@[attr] mutableCopy]
-                 toDevice:[[[uSDKDeviceManager getSingleInstance] getDeviceList] firstObject]
+    [self executeCommands:[@[kShutDown] mutableCopy]
+                 toDevice:device
              andCommandSN:0
       andGroupCommandName:@""
                 andResult:^(BOOL result) {

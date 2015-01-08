@@ -13,4 +13,14 @@
 
 @property (strong, nonatomic) Cookbook* cookbook;
 
+/**
+ *  是否是菜谱预览
+ */
+@property (nonatomic) BOOL isPreview;
+
+/**
+ *  菜谱预览传过来的对象
+ */
+@property (strong, nonatomic) CookbookDetail* cookbookDetail;
+
 @end

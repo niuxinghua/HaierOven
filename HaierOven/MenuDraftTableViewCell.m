@@ -38,4 +38,22 @@
     _deleteBg = deleteBg;
     deleteBg.image = [MyTool createImageWithColor:GlobalRedColor];
 }
+
+- (void)setCookbook:(Cookbook *)cookbook
+{
+    _cookbook = cookbook;
+    NSURL* imageUrl = [NSURL URLWithString:cookbook.coverPhoto];
+    [self.coverImage setImageWithURL:imageUrl placeholderImage:IMAGENAMED(@"fakedataImage.png")];
+    self.foodNameLabel.text = cookbook.name;
+    self.descriptionLabel.text = cookbook.desc;
+}
+
 @end
+
+
+
+
+
+
+
+

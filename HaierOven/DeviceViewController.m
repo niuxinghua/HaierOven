@@ -63,8 +63,10 @@
             LocalOven* oven = self.myDevices[i];
             deviceView.deviceName.text = oven.name;
             if ([oven.ssid isEqualToString:[[OvenManager sharedManager] fetchSSID]]) {
+                deviceView.connectStatusImage.image = IMAGENAMED(@"lianjie.png");
                 deviceView.deviceStatusLabel.text = @"已连接";
             } else {
+                deviceView.connectStatusImage.image = IMAGENAMED(@"tuolian.png");
                 deviceView.deviceStatusLabel.text = @"脱机中";
             }
             

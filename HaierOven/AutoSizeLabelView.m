@@ -13,8 +13,8 @@
 
 @interface AutoSizeLabelView ()
 
-
 @property (strong, nonatomic)UIButton *tempBtn;
+
 @end
 
 @implementation AutoSizeLabelView
@@ -27,10 +27,12 @@
 }
 */
 
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.style = AutoSizeLabelViewStyleCreatMenu;
+       
     }
     return self;
 }
@@ -38,7 +40,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.style = AutoSizeLabelViewStyleCreatMenu;
-
+     
         
     }
     return self;
@@ -55,9 +57,11 @@
 
 
 -(void)setTags:(NSArray *)tags{
+    _tags = tags;
     for (int i = 0; i<tags.count; i++) {
         float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
         UIButton *title = [UIButton buttonWithType:UIButtonTypeCustom];
+     
         if (i==0) {
             title.frame = CGRectMake(0, 0, 0, 0);
             self.tempBtn = title;
@@ -83,10 +87,20 @@
         title.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         title.titleLabel.textAlignment = NSTextAlignmentCenter;
         title.tag = i;
-        title.selected = NO;
+        if (self.selectedTags != nil) {
+            for (NSString* tagStr in self.selectedTags) {
+                if ([[title titleForState:UIControlStateNormal] isEqualToString:tagStr]) {
+                    title.selected = YES;
+                    break;
+                }
+            }
+        } else {
+            title.selected = NO;
+        }
+        
+        
         [title addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
         title.layer.masksToBounds = YES;
-
         
         if (self.style == AutoSizeLabelViewStyleCreatMenu) {
             

@@ -43,7 +43,10 @@
 {
     _step = step;
     self.stepIndexLabel.text = step.index;
-    [self.stepImageView setImageWithURL:[NSURL URLWithString:step.photo] placeholderImage:IMAGENAMED(@"")];
+    //区分是否是全路径
+    NSString* imagePath = [step.photo hasPrefix:@"http"] ? step.photo : [BaseOvenUrl stringByAppendingPathComponent:step.photo];
+    
+    [self.stepImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"")];
     self.stepDescLabel.text = step.desc;
 }
 

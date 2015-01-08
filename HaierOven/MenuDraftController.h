@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface MenuDraftController : UITableViewController
+@interface MenuDraftController : BaseTableViewController
 
 @end

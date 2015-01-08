@@ -58,11 +58,13 @@
  *  海尔app信息
  */
 #define AppId       @"MB-HBDS-0001"
+//#define AppId       @"MB-HBDS-0000"
 
 //#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key
-#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
+//#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
+#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // 测试Key
 
-#define AppVersion  @"10.01.11.00025"
+#define AppVersion  @"0.1"
 
 #define UMengAppKey                 @"54601e25fd98c51761002286"
 

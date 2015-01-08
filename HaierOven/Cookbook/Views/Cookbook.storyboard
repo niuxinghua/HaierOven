@@ -67,6 +67,10 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <state key="selected" image="icon_followd.png"/>
+                                    <connections>
+                                        <action selector="follow:" destination="nCF-pj-vsv" eventType="touchUpInside" id="5J1-nJ-59N"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -296,6 +300,7 @@
         <image name="back.png" width="26" height="26"/>
         <image name="fakedataImage.png" width="600" height="469"/>
         <image name="icon_follow.png" width="93" height="39"/>
+        <image name="icon_followd.png" width="93" height="39"/>
         <image name="icon_gfcp_n.png" width="113" height="30"/>
         <image name="icon_gfcp_s.png" width="113" height="30"/>
         <image name="icon_like_n.png" width="48" height="48"/>

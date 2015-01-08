@@ -8,17 +8,31 @@
 
 #import "MenuDraftController.h"
 #import "MenuDraftTableViewCell.h"
+#import "CreatMneuController.h"
 @interface MenuDraftController ()<MenuDraftTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property bool delete;
+@property (strong, nonatomic) NSArray* cookbooks;
+@property (strong, nonatomic) NSMutableArray* tags;
 @end
 
 @implementation MenuDraftController
 
 - (void)loadCookbookDrafts
 {
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:@"5" cookbookStatus:0 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
-        
+        [super hiddenProgressHUD];
+        if (success) {
+            self.cookbooks = obj;
+            [self.tableView reloadData];
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"获取草稿失败" afterDelay:1];
+            }
+        }
     }];
 }
 
@@ -53,7 +67,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+//    return 10;
+    return self.cookbooks.count;
 }
 
 
@@ -62,11 +77,48 @@
     cell.delegate = self;
     cell.tag      = indexPath.row;
     cell.isEdit   = self.delete;
+    cell.cookbook = self.cookbooks[indexPath.row];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return PageW*0.597;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CreatMneuController* editCookbookController = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
+    
+    editCookbookController.cookbook = self.cookbooks[indexPath.row];
+    editCookbookController.isDraft = YES;
+    [self loadTagsCompletion:^(BOOL result) {
+        editCookbookController.tags = self.tags;
+        [self.navigationController pushViewController:editCookbookController animated:YES];
+    }];
+    
+    
+    
+}
+
+- (void)loadTagsCompletion:(result)callback
+{
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            
+            self.tags = obj;
+            
+            callback(YES);
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"获取标签失败" afterDelay:1];
+            }
+            callback(NO);
+        }
+    }];
 }
 
 -(void)DeleteDraftMneu:(UITableViewCell *)cell{

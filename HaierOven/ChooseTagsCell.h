@@ -10,6 +10,6 @@
 #import "AutoSizeLabelView.h"
 @interface ChooseTagsCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *cookName;
-@property (strong, nonatomic) IBOutlet AutoSizeLabelView *tagsView;
+@property (weak, nonatomic) IBOutlet AutoSizeLabelView *tagsView;
 
 @end

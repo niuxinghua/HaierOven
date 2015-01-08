@@ -26,6 +26,11 @@
     // Configure the view for the selected state
 }
 
+- (void)setSteps:(NSMutableArray *)steps
+{
+    _steps = steps;
+    [self.addStepTableView reloadData];
+}
 
 -(void)setAddStepTableView:(UITableView *)addStepTableView{
     _addStepTableView = addStepTableView;
