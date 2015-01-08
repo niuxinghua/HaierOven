@@ -103,17 +103,24 @@
 }
 
 /**
- *  绑定成功后保存烤箱到本地，这里可能需要优化：保存制定烤箱信息（如果有很多烤箱的话）
+ *  绑定成功后保存烤箱到本地，这里可能需要优化：保存指定烤箱信息（如果有很多烤箱的话）
  */
+#warning 这里可能需要优化：保存指定烤箱信息（如果有很多烤箱的话）
 - (void)saveDeviceInfo
 {
+    if (self.deviceTextFailed.text.length == 0) {
+        [super showProgressErrorWithLabelText:@"请输入烤箱名" afterDelay:1];
+        return;
+    }
     [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* ovens = obj;
             LocalOven* oven = [[LocalOven alloc] init];
             uSDKDevice* device = [ovens firstObject];
+            oven.name = self.deviceTextFailed.text;
             oven.ip = device.ip;
             oven.mac = device.mac;
+            oven.ssid = [[OvenManager sharedManager] fetchSSID];
             oven.typeIdentifier = device.typeIdentifier;
             oven.attribute = device.attributeDict;
             [[DataCenter sharedInstance] addOvenInfoToLocal:oven];

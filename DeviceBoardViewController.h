@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
+
 typedef NS_ENUM(NSInteger, DeviceBoardStatus)
 {
     DeviceBoardStatusStart          = 1,
@@ -17,7 +19,7 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
 };
 
 
-@interface DeviceBoardViewController : UITableViewController
+@interface DeviceBoardViewController : BaseTableViewController
 
 @property (nonatomic) DeviceBoardStatus deviceBoardStatus;
 /**

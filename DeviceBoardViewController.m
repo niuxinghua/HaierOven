@@ -67,6 +67,8 @@
     [self SetUPAlertView];
     [self setupToolbarItems];
     self.deviceBoardStatus = DeviceBoardStatusClose;
+    
+    [self loadMyOvenInstance];
 
 }
 
@@ -216,13 +218,21 @@
 
 - (void)loadMyOvenInstance
 {
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
     [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
-            self.myOven = [obj firstObject];
-            if (![self.myOven.mac isEqualToString:self.currentOven.mac]) {
-                NSLog(@"搜索到的设备和本地设备不一致！！！");
-                
+            //找到Wifi下烤箱列表，并获取指定烤箱对象
+            NSArray* ovenList = obj;
+            for (uSDKDevice* oven in ovenList) {
+                if ([self.currentOven.mac isEqualToString:oven.mac]) {
+                    self.myOven = oven;
+                    //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
+                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
+                }
             }
+        } else {
+            [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
         }
     }];
 }
@@ -281,12 +291,20 @@
 
 - (void)bootup //开机
 {
-    [[OvenManager sharedManager] bootupToDevice:self.myOven];
+    [[OvenManager sharedManager] bootupToDevice:self.myOven result:^(BOOL result) {
+        if (!result) {
+            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
+        }
+    }];
 }
 
 - (void)shutdown
 {
-    [[OvenManager sharedManager] shutdownToDevice:self.myOven];
+    [[OvenManager sharedManager] shutdownToDevice:self.myOven result:^(BOOL result) {
+        if (!result) {
+            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
+        }
+    }];
 }
 
 
@@ -322,7 +340,8 @@
     self.deviceBoardStatus = DeviceBoardStatusOpen;
 
 }
-#pragma mark-
+
+#pragma mark - 按钮响应事件
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -337,6 +356,46 @@
 }
 
 
+- (IBAction)deviceControlsTapped:(UIButton *)sender
+{
+    NSArray* commands;
+    switch (sender.tag) {
+        case 1:     //风扇
+        {
+            
+            break;
+        }
+        case 2:     //旋转
+        {
+            
+            break;
+        }
+        case 3:     //照明
+        {
+            commands = sender.selected ? @[kOffLighting] : @[kLighting];
+            break;
+        }
+        case 4:     //锁定
+        {
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+    [[OvenManager sharedManager] executeCommands:[commands mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+    
+    sender.selected = !sender.selected;
+}
+
+
 #pragma mark - 开机关机
 - (IBAction)onoff:(id)sender {
     for (UIButton *btn in self.deviceStatusBtns) {
@@ -344,6 +403,14 @@
     }
     UIButton *btn = [self.deviceStatusBtns firstObject];
     self.deviceBoardStatus = btn.selected ==NO?DeviceBoardStatusClose:DeviceBoardStatusOpen;
+    
+    UIButton* button = sender;
+    if (button.selected) {
+        [self bootup];
+    } else {
+        [self shutdown];
+    }
+    
 }
 
 -(void)setDeviceBoardStatus:(DeviceBoardStatus)deviceBoardStatus{

@@ -182,13 +182,62 @@ NSString* const kLocalOvensFileName             = @"myOvens.data";
 - (void)addOvenInfoToLocal:(LocalOven*)oven
 {
     NSMutableArray* ovens = self.myOvens;
-    NSMutableArray* ovenArr = [NSMutableArray array];
+    NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
     LocalOven* theOven;
     for (LocalOven* localOven in ovens) {
         if ([localOven.mac isEqualToString:oven.mac]) {
             theOven = localOven;
         } else {
-            [ovenArr addObject:[localOven toDictionary]];
+            [ovenArr addObject:localOven];
+        }
+    }
+    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
+        [ovens removeObject:theOven];
+    }
+    NSDictionary* ovenDict = [oven toDictionary];
+    [ovenArr addObject:ovenDict];
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
+    [ovenArr writeToFile:filePath atomically:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
+}
+
+/**
+ *  删除已绑定的设备
+ *
+ *  @param oven 本地烤箱信息
+ */
+- (void)removeOvenInLocal:(LocalOven*)oven
+{
+    NSMutableArray* ovens = self.myOvens;
+    LocalOven* theOven;
+    for (LocalOven* localOven in ovens) {
+        if ([localOven.mac isEqualToString:oven.mac]) {
+            theOven = localOven;
+        }
+    }
+    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
+        [ovens removeObject:theOven];
+    }
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
+    [ovens writeToFile:filePath atomically:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
+}
+
+/**
+ *  更新本地烤箱信息
+ *
+ *  @param oven 本地烤箱对象
+ */
+- (void)updateOvenInLocal:(LocalOven*)oven
+{
+    NSMutableArray* ovens = self.myOvens;
+    NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
+    LocalOven* theOven;
+    for (LocalOven* localOven in ovens) {
+        if ([localOven.mac isEqualToString:oven.mac]) {
+            theOven = localOven;
+        } else {
+            [ovenArr addObject:localOven];
         }
     }
     if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存

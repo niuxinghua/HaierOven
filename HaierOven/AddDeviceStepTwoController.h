@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface AddDeviceStepTwoController : UIViewController<UITextFieldDelegate>
+@interface AddDeviceStepTwoController : BaseViewController<UITextFieldDelegate>
 
 @end

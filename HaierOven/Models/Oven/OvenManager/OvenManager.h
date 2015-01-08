@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OvenCommandsDefine.h"
 #import <uSDKFramework/BaseMessage.h>
 #import <uSDKFramework/uSDKBusinessMessage.h>
 #import <uSDKFramework/uSDKConstantInfo.h>
@@ -48,6 +49,13 @@ typedef void (^result) (BOOL result);
 #pragma mark - 设备绑定流程：uSDKDeviceManager
 
 /**
+ *  获取当前wifi网络的ssid
+ *
+ *  @return ssid字符串
+ */
+- (NSString*)fetchSSID;
+
+/**
  *  通过ssid和wifi password构建uSDKDeviceConfigInfo， 通过CONFIG_MODE_SMARTCONFIG方式绑定
  *
  *  @param ssid     wifi名称
@@ -64,9 +72,11 @@ typedef void (^result) (BOOL result);
 #pragma mark - usdk订阅通知流程：uSDKNotificationCenter
 
 /**
- *  订阅设备消息，设备处于任何状态都可以进行订阅
+ *  订阅设备消息，设备处于任何状态都可以进行订阅，订阅设备后，设备状态会改为就绪状态
+ *
+ *  @param device uSDKDevice对象
  */
-- (void)subscribeDevice;
+- (void)subscribeDevice:(uSDKDevice*)device;
 
 /**
  *  订阅设备列表变化
@@ -86,7 +96,7 @@ typedef void (^result) (BOOL result);
 /**
  *  订阅所有通知
  */
-- (void)subscribeAllNotifications;
+- (void)subscribeAllNotificationsWithDevice:(uSDKDevice*)device;
 
 /**
  *  取消订阅设备
@@ -134,14 +144,14 @@ typedef void (^result) (BOOL result);
  *
  *  @param device 设备对象
  */
-- (void)bootupToDevice:(uSDKDevice*)device;
+- (void)bootupToDevice:(uSDKDevice*)device result:(result)success;
 
 /**
  *  设备关机
  *
  *  @param device 设备对象
  */
-- (void)shutdownToDevice:(uSDKDevice*)device;
+- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success;
 
 
 

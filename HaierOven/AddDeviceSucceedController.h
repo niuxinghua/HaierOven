@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AddDeviceSucceedController : UIViewController<UITextFieldDelegate>
+@interface AddDeviceSucceedController : BaseViewController<UITextFieldDelegate>
 
 @end

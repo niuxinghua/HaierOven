@@ -1651,6 +1651,7 @@
 		8447CAE11A5B98D500FADF9D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		8447CAE31A5B98E200FADF9D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		8447CAE51A5B98EE00FADF9D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		8447CAE71A5D352700FADF9D /* OvenCommandsDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvenCommandsDefine.h; sourceTree = "<group>"; };
 		844D0F561A4D2FE10018D79C /* LocalOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalOven.h; sourceTree = "<group>"; };
 		844D0F571A4D2FE10018D79C /* LocalOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalOven.m; sourceTree = "<group>"; };
 		845B33941A58EB4300DD8887 /* DescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescCell.h; sourceTree = "<group>"; };
@@ -3116,6 +3117,7 @@
 		844117641A4BB8AF00628A64 /* OvenManager */ = {
 			isa = PBXGroup;
 			children = (
+				8447CAE71A5D352700FADF9D /* OvenCommandsDefine.h */,
 				844117651A4BB8AF00628A64 /* OvenManager.h */,
 				844117661A4BB8AF00628A64 /* OvenManager.m */,
 			);

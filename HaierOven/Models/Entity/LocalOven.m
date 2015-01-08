@@ -25,6 +25,7 @@
     oven.name           = dict[@"name"];
     oven.ip             = dict[@"ip"];
     oven.mac            = dict[@"mac"];
+    oven.ssid           = dict[@"ssid"];
     oven.typeIdentifier = dict[@"typeIdentifier"];
     oven.attribute      = dict[@"attribute"];
     
@@ -38,6 +39,7 @@
     dict[@"name"]           = self.name;
     dict[@"ip"]             = self.ip;
     dict[@"mac"]            = self.mac;
+    dict[@"ssid"]           = self.ssid;
     dict[@"typeIdentifier"] = self.typeIdentifier;
     dict[@"attribute"]      = self.attribute;
     

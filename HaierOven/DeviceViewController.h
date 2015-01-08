@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
+#import "DeviceUnconnectController.h"
 
-@interface DeviceViewController : UIViewController
+@interface DeviceViewController : UIViewController <DeviceUnconnectControllerDelegate>
 @property (strong, nonatomic) NSArray *myDevices;
 @end
