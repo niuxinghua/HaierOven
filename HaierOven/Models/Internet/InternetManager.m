@@ -1434,10 +1434,11 @@
     // 3. 序列化为字典
     NSNull* null = [NSNull null];
     NSDictionary* userDict = @{@"password":password,
+                               @"sequenceId" : @"1234",
                                @"user":@{
                                        @"userBase":@{
-                                               @"loginName":null,
-                                               @"email":email == nil ? @"" : email,
+//                                               @"loginName":null,
+//                                               @"email":email == nil ? @"" : email,
                                                @"mobile":phone == nil ? @"" : phone,
                                                @"accType":@0
                                                },
@@ -1466,15 +1467,15 @@
     [manager.requestSerializer setValue:AppKey forHTTPHeaderField:@"appKey"];
     [manager.requestSerializer setValue:AppVersion forHTTPHeaderField:@"appVersion"];
     [manager.requestSerializer setValue:[DataCenter sharedInstance].clientId forHTTPHeaderField:@"clientId"];
-    
+    manager.requestSerializer.timeoutInterval = 120;
     NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
     if (accessToken != nil) {
         [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"accessToken"];
     }
-    
+    [manager.requestSerializer setValue:@"TGT3CVCJEYK9WJRB2Q5DNZFGOK9Y10" forHTTPHeaderField:@"accessToken"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
-    NSString* path = [BaseUhomeUrl stringByAppendingPathComponent:@"users/register"];
+    NSString* path = @"http://103.8.220.166:40000/commonapp/users/register";
     
     if ([self canConnectInternet]) {
         
@@ -1526,16 +1527,37 @@
                                      @"accType": acctp,
                                      @"loginId" : loginId,
                                      @"password" : password,
-                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId,
-                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
+//                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId,
+//                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
                                      @"loginType" : logintp
                                      };
         
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
+        AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
         
-        NSString* path = @"http://uhome.haier.net:9080/security/userlogin";
+        // 这里配置Header信息和accessToken等
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         
-        [[self manager] POST:path parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+        
+        [manager.requestSerializer setValue:AppId forHTTPHeaderField:@"appId"];
+        [manager.requestSerializer setValue:AppKey forHTTPHeaderField:@"appKey"];
+        [manager.requestSerializer setValue:AppVersion forHTTPHeaderField:@"appVersion"];
+        [manager.requestSerializer setValue:[DataCenter sharedInstance].clientId forHTTPHeaderField:@"clientId"];
+        manager.requestSerializer.timeoutInterval = 120;
+        
+        NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
+        if (accessToken != nil) {
+            [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"accessToken"];
+        }
+        [manager.requestSerializer setValue:@"TGT3CVCJEYK9WJRB2Q5DNZFGOK9Y10" forHTTPHeaderField:@"accessToken"];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+        
+        NSString* path = @"http://103.8.220.166:40000/security/userlogin";
+        
+        [manager POST:path parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
             NSLog(@"%@", responseObject[@"retInfo"]);

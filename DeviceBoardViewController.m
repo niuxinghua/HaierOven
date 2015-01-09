@@ -229,6 +229,7 @@
                     self.myOven = oven;
                     //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
                     [[OvenManager sharedManager] subscribeDevice:self.myOven];
+                    
                 }
             }
         } else {
@@ -362,12 +363,12 @@
     switch (sender.tag) {
         case 1:     //风扇
         {
-            
+            commands = sender.selected ? @[kCloseAirFan] : @[kOpenAirFan];
             break;
         }
         case 2:     //旋转
         {
-            
+            commands = sender.selected ? @[kCloseChassisRotation] : @[kOpenChassisRotation];
             break;
         }
         case 3:     //照明
@@ -377,7 +378,7 @@
         }
         case 4:     //锁定
         {
-            
+            commands = sender.selected ? @[kUnlock] : @[kLock];
             break;
         }
         default:

@@ -226,6 +226,7 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getFansWithUserBaseId:(NSString*)userBaseId andPageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 
+
 #pragma mark - 标签
 
 /**

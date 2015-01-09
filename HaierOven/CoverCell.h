@@ -14,7 +14,7 @@
 
 @end
 @interface CoverCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (strong, nonatomic) UIImage* coverImage;
 @property (weak, nonatomic)id <CoverCellDelegate>delegate;
 @end

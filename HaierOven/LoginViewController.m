@@ -44,13 +44,13 @@
 
 - (IBAction)Login:(id)sender {
     
-    [[InternetManager sharedManager] testLoginWithSequenceId:@"201501060242"
+    [[InternetManager sharedManager] testLoginWithSequenceId:@"1234"
                                                   andAccType:AccTypeHaier
                                                   andloginId:self.userNameTextFailed.text
                                                  andPassword:self.psdTextfailed.text
                                           andThirdpartyAppId:nil
                                     andThirdpartyAccessToken:nil
-                                                andLoginType:LoginTypeEmail
+                                                andLoginType:LoginTypeMobile 
                                                     callBack:^(BOOL success, id obj, NSError *error) {
                                                         if (success) {
                                                             NSLog(@"登录成功");

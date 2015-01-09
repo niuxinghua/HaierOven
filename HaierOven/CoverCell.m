@@ -11,7 +11,7 @@
 @interface CoverCell ()
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+
 
 
 

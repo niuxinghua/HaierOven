@@ -17,6 +17,8 @@
 #import "ChooseCoverView.h"
 #import "YIPopupTextView.h"
 #import "BottomCell.h"
+#import "CookbookDetailControllerViewController.h"
+
 @interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate>
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
@@ -62,13 +64,15 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.tags = [NSMutableArray array];
+        self.cookbookDetail.tags = self.tags;
         self.selectedTags = [NSMutableArray array];
         
         self.foods = [NSMutableArray new];
+        self.cookbookDetail.foods = self.foods;
         self.steps = [NSMutableArray new];
         
         Step* step = [[Step alloc] init];
-        
+        self.cookbookDetail.steps = self.steps;
         [self.steps addObject:step];
         
         step.index = [NSString stringWithFormat:@"%d", self.steps.count];
@@ -84,9 +88,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
-//    [self loadTags];
+    
+    if (self.isDraft) {
+        [self loadCookbookDetail];
+    }
+    
 }
 
+- (void)loadCookbookDetail
+{
+    NSString* userId = @"5";
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:userId callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            self.cookbookDetail = obj;
+            // 需要将图片完整的路径转换为服务器保存的图片的相对路径，也就是需要去掉图片的BaseOvenUrl
+            
+            NSRange range = [self.cookbookDetail.coverPhoto rangeOfString:[BaseOvenUrl lastPathComponent]];
+            self.cookbookDetail.coverPhoto = [self.cookbookDetail.coverPhoto substringFromIndex:range.location+range.length];
+            self.steps = [self.cookbookDetail.steps mutableCopy];
+            for (Step* step in self.steps) {
+                range = [step.photo rangeOfString:[BaseOvenUrl lastPathComponent]];
+                step.photo = [step.photo substringFromIndex:range.location+range.length];
+            }
+            self.selectedTags = [self.cookbookDetail.tags mutableCopy];
+            self.foods = [self.cookbookDetail.foods mutableCopy];
+            self.myPs_String = self.cookbookDetail.cookbookTip;
+            [self.tableView reloadData];
+        } else {
+            [super showProgressErrorWithLabelText:@"获取菜谱信息失败" afterDelay:1];
+        }
+        
+    }];
+}
 
 
 -(void)SetUpSubviews{
@@ -158,18 +193,30 @@
         if (indexPath.row ==0) {
             CoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CoverCell" forIndexPath:indexPath];
             cell.delegate = self;
-            cell.coverImage = self.cookbookCoverPhoto;
+//            if (self.isDraft) {
+//                NSString* coverPath = [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
+//                [cell.coverImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
+//            } else {
+//                cell.coverImage = self.cookbookCoverPhoto;
+//            }
+            
+            //区分是否是全路径
+            NSString* imagePath = [self.cookbookDetail.coverPhoto hasPrefix:@"http"] ? self.cookbookDetail.coverPhoto : [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
+            [cell.coverImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
             return cell;
             
         }else if(indexPath.row ==1)  {
             ChooseTagsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChooseTagsCell" forIndexPath:indexPath];
             cell.tagsView.delegate = self;
             cell.cookName.text = self.cookbookDetail.name;
-            if (!self.tagsView) {
-                cell.tagsView.tags = self.tagsForTagsView;
-                self.tagsView = cell.tagsView;
+            NSMutableArray* sTags = [NSMutableArray array];
+            for (Tag* tag in self.selectedTags) {
+                [sTags addObject:tag.name];
             }
-//            cell.tagsView = self.tagsView;
+            self.tagsView.selectedTags = sTags;
+            cell.tagsView.tags = self.tagsForTagsView;
+            self.tagsView = cell.tagsView;
+            
             return cell;
             
         }else if(indexPath.row == 2){
@@ -298,11 +345,11 @@
         if (text.length == 0) {
             return;
         }else{
-            if (textView.tag ==1) {
+            if (textView.tag ==1) { //步骤描述
                 self.tempLabel.text = text;
                 self.tempLabel.textColor = [UIColor blackColor];
                 self.edittingStep.desc = text;
-            }else if (textView.tag==2){
+            }else if (textView.tag==2){ //菜谱小贴士
                 self.myPs_String = text;
                 CGSize size = CGSizeZero;
                 size = [MyUtils getTextSizeWithText:self.myPs_String andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:self.tableView.width-100];
@@ -311,6 +358,9 @@
             
                 [self.tableView reloadData];
                 
+            } else if (textView.tag == 3) { //修改菜谱名称
+                self.cookbookDetail.name = text;
+                [self.tableView reloadData];
             }
         }
     }
@@ -372,10 +422,23 @@
     NSData* imageData = UIImageJPEGRepresentation(image, 0.6);
     
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    
+
     if (self.ischangeCover) {
-        self.cookbookCoverPhoto = image;
-        
+       
+        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSDictionary* objDict = [obj firstObject];
+                self.cookbookDetail.coverPhoto = objDict[@"name"];
+                
+            } else {
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
+                }
+            }
+        }];
         [self.tableView reloadData];
     }else {
         self.tempImageView.image = image;
@@ -416,9 +479,16 @@
         [self.selectedTags addObject:theTag];
         
     } else {
+        for (Tag* tag in self.selectedTags) {
+            if ([tag.ID isEqualToString:theTag.ID]) {
+                theTag = tag;
+                break;
+            }
+        }
         [self.selectedTags removeObject:theTag];
     }
-    btn.selected = btn.selected ==YES?NO:YES;
+    btn.selected = !btn.selected;
+    [self.tableView reloadData];
     NSLog(@"%d",btn.tag);
 }
 #pragma mark-
@@ -470,6 +540,22 @@
 }
 
 #pragma mark -
+
+
+- (IBAction)modifyCookbookName:(UIButton *)sender
+{
+    YIPopupTextView* popupTextView =
+    [[YIPopupTextView alloc] initWithPlaceHolder:nil
+                                        maxCount:120
+                                     buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
+    popupTextView.delegate = self;
+    popupTextView.caretShiftGestureEnabled = YES;       // default = NO. using YISwipeShiftCaret is recommended.
+    popupTextView.editable = YES;                  // set editable=NO to show without keyboard
+    popupTextView.outerBackgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    [popupTextView showInViewController:self];
+    popupTextView.tag = 3;
+    popupTextView.text = self.cookbook.name;
+}
 
 
 - (IBAction)AddPS:(id)sender {
@@ -542,6 +628,8 @@
 
 - (void)submitCookbook
 {
+    
+    
     self.cookbookDetail.tags = self.selectedTags;
     self.cookbookDetail.steps = self.steps;
 
@@ -566,6 +654,20 @@
         }
     }];
 }
+
+#pragma mark - 预览菜谱
+
+- (IBAction)previewCookbook:(UIButton *)sender
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Cookbook" bundle:nil];
+    CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    detailController.cookbookDetail = self.cookbookDetail;
+    detailController.isPreview = YES;
+    [self.navigationController pushViewController:detailController animated:YES];
+    
+}
+
+
 
 #pragma mark- 点击编辑图片
 -(void)changeCover{

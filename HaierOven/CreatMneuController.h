@@ -17,4 +17,14 @@
 
 @property (strong, nonatomic) CookbookDetail* cookbookDetail;
 
+/**
+ *  若是从草稿箱跳转过来，可通过此对象获取CookbookDetail
+ */
+@property (strong, nonatomic) Cookbook* cookbook;
+
+/**
+ *  是不是从草稿箱跳过来的
+ */
+@property (nonatomic) BOOL isDraft;
+
 @end

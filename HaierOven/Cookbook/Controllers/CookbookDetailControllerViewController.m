@@ -77,7 +77,7 @@
 
 #pragma mark - Others
 
-@property (strong, nonatomic) CookbookDetail* cookbookDetail;
+
 
 @property (strong, nonatomic) NSMutableArray* comments;
 
@@ -95,21 +95,26 @@
 
 - (void)loadCookbookDetail
 {
-    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-    [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:@"5" callBack:^(BOOL success, id obj, NSError *error) {
-        [super hiddenProgressHUD];
-        if (success) {
-            self.cookbookDetail = obj;
-            [self updateUI];
-        } else {
-            if (error.code == InternetErrorCodeConnectInternetFailed) {
-                [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+    if (self.isPreview) {
+        [self updateUI];
+    } else {
+        [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+        [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:@"5" callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                self.cookbookDetail = obj;
+                [self updateUI];
             } else {
-                [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+                }
             }
-        }
-        
-    }];
+            
+        }];
+    }
+    
 }
 
 - (void)loadComments
@@ -145,8 +150,9 @@
     if (self.stepsTableView == nil) {
         [self initTableViewWithContentType:CurrentContentTypeMethods];
     }
-    
-    
+    NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbook.coverPhoto;
+
+    [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataImage.png")];
     
     // 其他显示的内容
     NSMutableArray* tagNames = [NSMutableArray array];
@@ -264,7 +270,10 @@
     [super viewDidLoad];
     [self setupSubviews];
     [self loadCookbookDetail];
-    [self loadComments];
+    if (!self.isPreview) {
+        [self loadComments];
+    }
+    
     
 }
 
@@ -674,6 +683,33 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)follow:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    NSString* userID = @"5";
+    if (!sender.selected) {
+        [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                [super showProgressCompleteWithLabelText:@"关注成功" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+            }
+        }];
+    } else {
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userID andFollowedUserBaseId:userID/*self.cookbookDetail.creator.ID*/ callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+            }
+        }];
+    }
+    
+    
+    
+}
+
 
 /**
  *  赞菜谱

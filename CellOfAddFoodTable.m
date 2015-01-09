@@ -35,6 +35,12 @@
     self.deleteBtn.selected = NO;
 }
 
+- (void)setFoods:(NSMutableArray *)foods
+{
+    _foods = foods;
+    [self.addfoodTableView reloadData];
+}
+
 
 -(void)setAddfoodTableView:(UITableView *)addfoodTableView{
     _addfoodTableView = addfoodTableView;

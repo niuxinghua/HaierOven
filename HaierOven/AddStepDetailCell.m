@@ -69,9 +69,13 @@
 -(void)setStep:(Step *)step{
     _step = step;
     self.stepDescriptionLabel.text =  step.desc;
+    
+    if (step.photo != nil) {
+        NSString* imagePath = [BaseOvenUrl stringByAppendingPathComponent:step.photo];
+        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"YJTP.png")];
+
+    }
 //    self.stepImage.image = step.
-//    NSString* imagePath = [BaseOvenUrl stringByAppendingString:step.photo];
-//    [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"YJTP.png")];
 }
 
 #pragma mark- 点击图片和描述

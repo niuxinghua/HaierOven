@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *deleteBg;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (nonatomic, weak)id<MenuDraftTableViewCellDelegate> delegate;
+
+@property (strong, nonatomic) Cookbook* cookbook;
+
 - (IBAction)DeleteDraft:(id)sender;
 
 @end

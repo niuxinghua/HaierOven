@@ -70,9 +70,36 @@
  */
 #define kStopCleaning     @"20v00c" 
 
+/**
+ *  开启风机
+ */
+#define kOpenAirFan         @"30v002"
+
+/**
+ *  关闭风机
+ */
+#define kCloseAirFan        @"30v001"
+
+/**
+ *  开启底盘旋转
+ */
+#define kOpenChassisRotation    @"30v002"
+
+/**
+ *  关闭底盘旋转
+ */
+#define kCloseChassisRotation   @"30v001"
+
+
+
+
 
 
 #endif
+
+
+
+
 
 
 
