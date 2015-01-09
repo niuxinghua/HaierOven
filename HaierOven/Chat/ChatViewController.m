@@ -44,11 +44,11 @@
     /**
      *  设置头像大小
      */
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(40, 40);
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(40, 40);
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(25, 25);
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(25, 25);
     
     //    self.showLoadEarlierMessagesHeader = YES;
-    
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:GlobalTextFontName size:12];
 }
 
 #pragma mark - 显示系列
@@ -281,14 +281,17 @@
     if (!msg.isMediaMessage) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
-            cell.textView.textColor = [UIColor blackColor];
-        }
-        else {
             cell.textView.textColor = [UIColor whiteColor];
         }
+        else {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+//        cell.textView.font = [UIFont fontWithName:GlobalTextFontName size:12];
+        
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid)
+                                              };
     }
     
     return cell;
