@@ -65,7 +65,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MenuDraftTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"MenuDraftTableViewCell"];
     self.deleteBtn.selected = NO;
     self.delete = self.deleteBtn.selected;
-    
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self loadCookbookDrafts];
     
     [self addHeader];
