@@ -294,6 +294,24 @@
             </objects>
             <point key="canvasLocation" x="499" y="70"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="xy8-JC-h0E">
+            <objects>
+                <viewController storyboardIdentifier="Chat view controller" id="r3c-hD-NRw" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ES8-UC-eZv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fa8-Au-sEB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mIm-9j-J4r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HY8-4J-sdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="80"/>
+        </scene>
     </scenes>
     <resources>
         <image name="QQQ.png" width="480" height="640"/>

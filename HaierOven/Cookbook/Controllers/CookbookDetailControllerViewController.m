@@ -19,7 +19,6 @@
 @interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate>
 {
     CGFloat _lastContentOffsetY;
-    NSInteger _commentPageIndex;
 }
 
 #pragma mark - NavigationBar
@@ -77,7 +76,7 @@
 
 #pragma mark - Others
 
-
+@property (nonatomic) NSInteger commentPageIndex;
 
 @property (strong, nonatomic) NSMutableArray* comments;
 
@@ -123,11 +122,18 @@
     [[InternetManager sharedManager] getCommentsWithCookbookId:self.cookbook.ID andPageIndex:_commentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
 //        [super hiddenProgressHUD];
         if (success) {
-            self.comments = obj;
-            if (self.commentsTableView == nil) {
-//                [self initTableViewWithContentType:CurrentContentTypeComment];
-//                [self setupWrapper];
+          
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _commentPageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
+            if (_commentPageIndex == 1) {
+                self.comments = obj;
+            } else {
+                [self.comments addObjectsFromArray:arr];
+            }
+            [self.commentsTableView reloadData];
+            
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
                 [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
@@ -135,7 +141,10 @@
                 [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
             }
         }
-        [self initTableViewWithContentType:CurrentContentTypeComment];
+        if (self.commentsTableView == nil) {
+            [self initTableViewWithContentType:CurrentContentTypeComment];
+        }
+        
 //        [self setupWrapper];
     }];
 }
@@ -244,12 +253,65 @@
             
             [self.tableView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
             
+            [self addFooter];
+            
             break;
             
         }
         default:
             break;
     }
+}
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.commentsTableView addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        vc.commentPageIndex = 1;
+        [vc loadComments];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.commentsTableView headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.commentsTableView addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        vc.commentPageIndex++;
+        [vc loadComments];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.commentsTableView footerEndRefreshing];
+            
+        });
+        
+    }];
+    
 }
 
 #pragma mark - 加载系列
@@ -384,6 +446,23 @@
         self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
     }
     completion:nil];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
+    } completion:^(BOOL finished) {
+        
+        [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbook.ID
+                                                    andUserBaseId:@"5"
+                                                       andComment:self.commentTextField.text
+                                                         parentId:nil
+                                                         callBack:^(BOOL success, id obj, NSError *error) {
+                                                             if (success) {
+                                                                 NSLog(@"评论成功");
+                                                             } else {
+                                                                 NSLog(@"评论失败");
+                                                             }
+                                                         }];
+        
+    }];
     [self.commentsTableView reloadData];
     
 }

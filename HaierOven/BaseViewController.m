@@ -236,7 +236,8 @@
 
     [titleLabel setText:title];
     [titleLabel sizeToFit];
-    [titleLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setFont:[UIFont fontWithName:GlobalTitleFontName size:18]];
     [titleLabel setBackgroundColor:[UIColor clearColor]];
     
     self.navigationItem.titleView = titleLabel;

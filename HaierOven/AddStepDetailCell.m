@@ -72,7 +72,7 @@
     
     if (step.photo != nil) {
         NSString* imagePath = [BaseOvenUrl stringByAppendingPathComponent:step.photo];
-        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"YJTP.png")];
+        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath]];
 
     }
 //    self.stepImage.image = step.
