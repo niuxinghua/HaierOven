@@ -127,7 +127,6 @@
         
         self.animationDuration = 3.0;
         CGRect frame = self.frame;
-        NSLog(@"%@", frame);
         self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:(self.animationDuration)
                                                                target:self
                                                              selector:@selector(animationTimerDidFired:)

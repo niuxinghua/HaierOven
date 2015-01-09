@@ -32,6 +32,11 @@
 		452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */; };
 		454916B91A403993005503C8 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916B81A403993005503C8 /* PersonalCenterViewController.m */; };
 		454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 454916BB1A403A18005503C8 /* DeviceViewController.m */; };
+		456402291A5FB5B50091CDFD /* mj.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402261A5FB5B50091CDFD /* mj.png */; };
+		4564022A1A5FB5B50091CDFD /* mj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402271A5FB5B50091CDFD /* mj@2x.png */; };
+		4564022B1A5FB5B50091CDFD /* mj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402281A5FB5B50091CDFD /* mj@3x.png */; };
+		4564022E1A5FB97D0091CDFD /* BakeHouseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4564022D1A5FB97D0091CDFD /* BakeHouseHeaderView.m */; };
+		456402301A5FB9C90091CDFD /* BakeHouseHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4564022F1A5FB9C90091CDFD /* BakeHouseHeaderView.xib */; };
 		457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CA1A4158C800E422D0 /* page_state_normal.png */; };
 		457A76CF1A4158C800E422D0 /* page_state_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */; };
 		457A76D21A41592600E422D0 /* page_state_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76D01A41592600E422D0 /* page_state_highlight.png */; };
@@ -166,6 +171,7 @@
 		45A5E8261A50081200FCD2BD /* xcqr.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8241A50081200FCD2BD /* xcqr.png */; };
 		45A5E8271A50081200FCD2BD /* xcqr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8251A50081200FCD2BD /* xcqr@2x.png */; };
 		45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8281A50082400FCD2BD /* xcqr@3x.png */; };
+		45A6A3CA1A5F7BC1004DD28A /* BakeHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */; };
 		45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */; };
 		45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */; };
 		45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A9994A1A50FB710008AFE3 /* CreatMneuController.m */; };
@@ -805,6 +811,12 @@
 		454916B81A403993005503C8 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		454916BA1A403A18005503C8 /* DeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceViewController.h; sourceTree = "<group>"; };
 		454916BB1A403A18005503C8 /* DeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceViewController.m; sourceTree = "<group>"; };
+		456402261A5FB5B50091CDFD /* mj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mj.png; sourceTree = "<group>"; };
+		456402271A5FB5B50091CDFD /* mj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@2x.png"; sourceTree = "<group>"; };
+		456402281A5FB5B50091CDFD /* mj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@3x.png"; sourceTree = "<group>"; };
+		4564022C1A5FB97D0091CDFD /* BakeHouseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeHouseHeaderView.h; sourceTree = "<group>"; };
+		4564022D1A5FB97D0091CDFD /* BakeHouseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeHouseHeaderView.m; sourceTree = "<group>"; };
+		4564022F1A5FB9C90091CDFD /* BakeHouseHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BakeHouseHeaderView.xib; sourceTree = "<group>"; };
 		457A76CA1A4158C800E422D0 /* page_state_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_normal.png; sourceTree = "<group>"; };
 		457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_state_normal@2x.png"; sourceTree = "<group>"; };
 		457A76D01A41592600E422D0 /* page_state_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_highlight.png; sourceTree = "<group>"; };
@@ -975,6 +987,8 @@
 		45A5E8241A50081200FCD2BD /* xcqr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xcqr.png; sourceTree = "<group>"; };
 		45A5E8251A50081200FCD2BD /* xcqr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@2x.png"; sourceTree = "<group>"; };
 		45A5E8281A50082400FCD2BD /* xcqr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@3x.png"; sourceTree = "<group>"; };
+		45A6A3C81A5F7BC1004DD28A /* BakeHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeHouseCell.h; sourceTree = "<group>"; };
+		45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeHouseCell.m; sourceTree = "<group>"; };
 		45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodAlertView.h; sourceTree = "<group>"; };
 		45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodAlertView.m; sourceTree = "<group>"; };
 		45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFoodAlertView.xib; sourceTree = "<group>"; };
@@ -1940,6 +1954,11 @@
 			children = (
 				459E8BCC1A5E85F2009D4ADA /* BakedHouseViewController.h */,
 				459E8BCD1A5E85F2009D4ADA /* BakedHouseViewController.m */,
+				4564022C1A5FB97D0091CDFD /* BakeHouseHeaderView.h */,
+				4564022D1A5FB97D0091CDFD /* BakeHouseHeaderView.m */,
+				4564022F1A5FB9C90091CDFD /* BakeHouseHeaderView.xib */,
+				45A6A3C81A5F7BC1004DD28A /* BakeHouseCell.h */,
+				45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */,
 			);
 			name = BakedHouseController;
 			sourceTree = "<group>";
@@ -2859,6 +2878,9 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				456402261A5FB5B50091CDFD /* mj.png */,
+				456402271A5FB5B50091CDFD /* mj@2x.png */,
+				456402281A5FB5B50091CDFD /* mj@3x.png */,
 				459E8BC41A5E80AC009D4ADA /* hpds */,
 				459E8BAB1A5D2A8B009D4ADA /* ShoppingList */,
 				452A6E5B1A5A8FDC00ABFE75 /* HallFame */,
@@ -3694,6 +3716,7 @@
 				45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */,
 				45D906C61A47CAAB00B97D92 /* gfcp@3x.png in Resources */,
 				458952BE1A493C05009B5DD1 /* wifilianjie06@3x.png in Resources */,
+				456402301A5FB9C90091CDFD /* BakeHouseHeaderView.xib in Resources */,
 				457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */,
 				45B88E101A4BCC8B00722EF6 /* yy-wxz@3x.png in Resources */,
 				452A6E5F1A5A8FEA00ABFE75 /* Vcs.png in Resources */,
@@ -3986,6 +4009,7 @@
 				45D906F11A47CAAB00B97D92 /* orangepoint.png in Resources */,
 				45D9070C1A47CAAB00B97D92 /* v@3x.png in Resources */,
 				45D906F71A47CAAB00B97D92 /* searchborder.png in Resources */,
+				4564022A1A5FB5B50091CDFD /* mj@2x.png in Resources */,
 				45A546921A58F08B00BE62EC /* wbdlwdj@2x.png in Resources */,
 				45D906F31A47CAAB00B97D92 /* orangepoint@3x.png in Resources */,
 				45D906CD1A47CAAB00B97D92 /* hongbeiquan.png in Resources */,
@@ -4025,6 +4049,7 @@
 				458952C31A493C05009B5DD1 /* wifilianjie08@2x.png in Resources */,
 				8447CABE1A5B7FEE00FADF9D /* UMSCommentInputControlleriPad.xib in Resources */,
 				45D906D31A47CAAB00B97D92 /* huisousuo.png in Resources */,
+				456402291A5FB5B50091CDFD /* mj.png in Resources */,
 				45BBA69C1A5257010066C143 /* YJTP.png in Resources */,
 				45BA02E01A4408FB003810C7 /* PersonalCenterSectionView.xib in Resources */,
 				458952DB1A495FC3009B5DD1 /* shebei2tianjian.png in Resources */,
@@ -4157,6 +4182,7 @@
 				45D906BA1A47CAAB00B97D92 /* fakebg@3x.png in Resources */,
 				45B651151A48448500A6376D /* wodeWIFI.png in Resources */,
 				45B88E4F1A4BE2A300722EF6 /* tzyx-cxz.png in Resources */,
+				4564022B1A5FB5B50091CDFD /* mj@3x.png in Resources */,
 				45B651091A482EDB00A6376D /* n1.png in Resources */,
 				45BC579C1A4B0B0B0052F520 /* xiaji-xz@3x.png in Resources */,
 				45B6510D1A482EDB00A6376D /* n2@2x.png in Resources */,
@@ -4232,6 +4258,7 @@
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				4564022E1A5FB97D0091CDFD /* BakeHouseHeaderView.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
 				45A546CB1A5A4EC200BE62EC /* UIScrollView+Extension.m in Sources */,
 				452A6E581A5A7F9800ABFE75 /* CookListFoodView.m in Sources */,
@@ -4253,6 +4280,7 @@
 				8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */,
 				845B33961A58EB4300DD8887 /* DescCell.m in Sources */,
 				C4182E1B1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m in Sources */,
+				45A6A3CA1A5F7BC1004DD28A /* BakeHouseCell.m in Sources */,
 				842A86E81A5277D000C75EE4 /* OvenInfoCell.m in Sources */,
 				45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */,
 				45C7E58A1A3FE25A000B086B /* RESideMenu.m in Sources */,
