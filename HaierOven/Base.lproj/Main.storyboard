@@ -1003,7 +1003,6 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="w15-Ms-3u0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="w15-Ms-3u0" secondAttribute="height" multiplier="32:19" id="JXb-Mf-5w5"/>
                                             </constraints>

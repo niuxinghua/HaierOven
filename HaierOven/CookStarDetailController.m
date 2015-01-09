@@ -10,6 +10,8 @@
 #import "CookStarDetailTopView.h"
 #import "MainViewNormalCell.h"
 #import "AutoSizeLabelView.h"
+#import "ChatViewController.h"
+
 @interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
 {
     CGSize movesize;
@@ -105,6 +107,13 @@
 -(void)leaveMessage{
     
     NSLog(@"留言");
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+    ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
+    
+    [self.navigationController pushViewController:chatViewController animated:YES];
+    
+    
 }
 -(void)playVideo{
     NSLog(@"播放");

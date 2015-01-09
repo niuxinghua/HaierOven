@@ -11,7 +11,6 @@
 #import "MainViewNormalCell.h"
 #import "FoodListViewController.h"
 #import "CookbookDetailControllerViewController.h"
-#import "MJRefresh.h"
 #import "Tag.h"
 #import "Cookbook.h"
 
@@ -57,7 +56,7 @@
     [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* arr = obj;
-            if (arr.count < PageLimit) {
+            if (arr.count < PageLimit && _pageIndex != 1) {
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_pageIndex == 1) {
@@ -226,11 +225,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Cookbook" bundle:nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
+
 
 
 -(void)ChickPlayBtn:(id)cellClass{

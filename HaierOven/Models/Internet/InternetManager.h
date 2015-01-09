@@ -13,6 +13,7 @@
 #import "User.h"
 #import "CookbookDetail.h"
 #import "Tag.h"
+#import "ShoppingOrder.h"
 
 typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeConnectInternetFailed      = -100,      //网络连接失败
@@ -243,6 +244,14 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)getHotTagsCallback:(myCallback)completion;
 
+/**
+ *  获取指定用户的标签
+ *
+ *  @param userBaseId 用户id
+ *  @param completion 结果回调
+ */
+- (void)getUserTagsWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
 
 #pragma mark - 评论
 
@@ -252,9 +261,10 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param cookbookId 菜谱ID
  *  @param userBaseId 用户ID
  *  @param content    评论内容
+ *  @param parentId   如果是回复某评论，则此字段为被回复的评论主键
  *  @param completion 结果回调
  */
-- (void)addCommentWithCookbookId:(NSString*)cookbookId andUserBaseid:(NSString*)userBaseId andComment:(NSString*)content callBack:(myCallback)completion;
+- (void)addCommentWithCookbookId:(NSString*)cookbookId andUserBaseId:(NSString*)userBaseId andComment:(NSString*)content parentId:(NSString*)parentId callBack:(myCallback)completion;
 
 /**
  *  获取指定菜谱的评论
@@ -279,18 +289,21 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 /**
  *  获取我发布的菜谱
  *
- *  @param pageIndex  当前请求页数
- *  @param completion 结果回调
- */
-/**
- *  获取我发布的菜谱
- *
  *  @param userBaseId 用户ID
  *  @param status     菜谱状态：-1为所有状态的菜谱 0为草稿 1为已发布
  *  @param pageIndex  获取页数
  *  @param completion 结果回调
  */
 - (void)getCookbooksWithUserBaseId:(NSString*)userBaseId cookbookStatus:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+/**
+ *  获取我关注的人菜谱
+ *
+ *  @param userBaseId 用户ID
+ *  @param pageIndex  获取的页数
+ *  @param completion 结果回调
+ */
+- (void)getFriendCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 /**
  *  搜索菜谱
@@ -341,6 +354,27 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)praiseCookbookWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+
+#pragma mark - 购物清单
+
+/**
+ *  保存购物清单
+ *
+ *  @param userBaseId    用户ID
+ *  @param shoppingOrder 购物清单
+ *  @param completion    结果回调
+ */
+//- (void)saveShoppingOrderWithUserBaseId:(NSString*)userBaseId shoppingOrder:(shoppingOrder*)shoppingOrder callBack:(myCallback)completion;
+
+/**
+ *  删除购物清单
+ *
+ *  @param userBaseId  <#userBaseId description#>
+ *  @param cookbookIds <#cookbookIds description#>
+ *  @param completion  <#completion description#>
+ */
+- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookIds:(NSArray*)cookbookIds callBack:(myCallback)completion;
 
 
 #pragma mark - 文件

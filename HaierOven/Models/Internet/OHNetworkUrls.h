@@ -104,6 +104,11 @@
  */
 #define GetHotTags [NSString stringWithFormat:@"%@/%@", BaseUrl, @"tag/getHotTags"]
 
+/**
+ *  获取指定用户标签
+ */
+#define GetMyTags   [NSString stringWithFormat:@"%@/%@", BaseUrl, @"tag/getmytags"]
+
 
 #pragma mark - 评论
 
@@ -129,6 +134,11 @@
  *  获取我的菜谱
  */
 #define GetCookbooksByUserId        [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/myCookbooks"]
+
+/**
+ *  获取我关注的人菜谱
+ */
+#define GetFriendCookbooks      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/myfriends"]
 
 /**
  *  搜索菜谱
@@ -159,6 +169,32 @@
  *  赞菜谱
  */
 #define PraiseCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/praise"]
+
+
+#pragma mark - 购物车
+
+/**
+ *  保存购物车
+ */
+#define SaveShoppingOrder   [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/save"]
+
+/**
+ *  批量删除购物车
+ */
+#define DeleteShoppingOrder     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/batchdelete"]
+
+/**
+ *  获取购物车详情
+ */
+#define GetShoppingOrder    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/get/cookbookid"]
+
+/**
+ *  获取购物车列表
+ */
+#define GetShoppingList     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/get/userbaseid"]
+
+
+
 
 #pragma mark - 文件
 
