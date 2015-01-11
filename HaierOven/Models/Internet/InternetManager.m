@@ -848,7 +848,7 @@
             
             if ([status isEqualToString:@"1"]) {
                 // 2. 缓存本地
-                [[DataCenter sharedInstance] saveTagsWithObject:responseObject];
+//                [[DataCenter sharedInstance] saveTagsWithObject:responseObject];
                 
                 // 3. 解析json字典
                 NSMutableArray* tags = [DataParser parseTagsWithDict:responseObject];
@@ -872,9 +872,48 @@
     }
 }
 
+- (void)getUserTagsWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId //用户Id
+                                    };
+        // 1. 发送请求
+        
+        [[self manager] POST:GetHotTags parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 2. 缓存本地
+//                [[DataCenter sharedInstance] saveTagsWithObject:responseObject];
+                
+                // 3. 解析json字典
+                NSMutableArray* tags = [DataParser parseTagsWithDict:responseObject];
+                completion(YES, tags, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:nil]);
+        }];
+        
+    } else {
+        // 如果没有网络，从本地缓存读取用户信息
+        //        id tagsDict = [[DataCenter sharedInstance] getTagsObject];
+        //        NSMutableArray* tags = [DataParser parseTagsWithDict:tagsDict];
+        //        completion(YES, tags, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
 #pragma mark - 添加菜谱评论
 
-- (void)addCommentWithCookbookId:(NSString*)cookbookId andUserBaseid:(NSString*)userBaseId andComment:(NSString*)content callBack:(myCallback)completion
+- (void)addCommentWithCookbookId:(NSString*)cookbookId andUserBaseId:(NSString*)userBaseId andComment:(NSString*)content parentId:(NSString *)parentId callBack:(myCallback)completion
 {
     if ([self canConnectInternet]) {
         
@@ -882,16 +921,16 @@
         NSDictionary* paramsDict = @{
                                      @"cookbookID" : cookbookId,
                                      @"comment" : content,
-                                     @"userBaseID" : userBaseId
-                                     };
+                                     @"userBaseID" : userBaseId,
+                                     @"parentID" : parentId == nil ? [NSNull null] : parentId    //如果是回复某评论，则此字段为被回复的评论主键
+                                    };
         
         // 2. 发送网络请求
-        [[self manager] POST:GetFans parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[self manager] POST:AddCommentToCookBook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
             
             if ([status isEqualToString:@"1"]) {
-                
                 
                 completion(YES, responseObject, nil);
             } else {
@@ -1041,6 +1080,47 @@
     } else {
         completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
+}
+
+- (void)getFriendCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,     //UsrId
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,     //当前请求的页数
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetFriendCookbooks parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* cookbooks = [DataParser parseCookbooksWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, cookbooks, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
 }
 
 - (void)searchCookbooksWithKeyword:(NSString*)keyword pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
@@ -1218,7 +1298,7 @@
         NSMutableArray* tags = [NSMutableArray array];
         for (Tag* tag in cookbookDetail.tags) {
             NSMutableDictionary* tagDict = [NSMutableDictionary dictionary];
-            tagDict[@"tagID"] = tag.ID;
+            tagDict[@"tagID"] = [NSNumber numberWithInt:[tag.ID intValue]];
             [tags addObject:tagDict];
         }
         NSMutableArray* steps = [NSMutableArray array];
@@ -1226,38 +1306,43 @@
             NSMutableDictionary* stepDict = [NSMutableDictionary dictionary];
             stepDict[@"stepPhoto"] = step.photo;
             stepDict[@"stepDesc"] = step.desc;
-            stepDict[@"stepIndex"] = step.index;
+            stepDict[@"stepIndex"] = [NSNumber numberWithInt: [step.index intValue]];
             [steps addObject:stepDict];
         }
         NSMutableArray* foods = [NSMutableArray array];
-        for (Food* food in cookbookDetail.steps) {
+        for (Food* food in cookbookDetail.foods) {
             NSMutableDictionary* foodDict = [NSMutableDictionary dictionary];
             foodDict[@"foodName"] = food.name;
             foodDict[@"foodDesc"] = food.desc;
-            foodDict[@"cookbookFoodIndex"] = food.index;
+            foodDict[@"cookbookFoodIndex"] = [NSNumber numberWithInt:[food.index intValue]];
             [foods addObject:foodDict];
         }
-        NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
-        creatorDict[@"id"] = cookbookDetail.creator.ID;
-//        creatorDict[@"userName"] = cookbookDetail.creator.userName;
-//        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+        //        NSMutableDictionary* creatorDict = [NSMutableDictionary dictionary];
+        //        creatorDict[@"creatorID"] = cookbookDetail.creator.ID;
+        //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
+        //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
         NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
         cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
         cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
-        cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime;
+        cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
         cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
         
         NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
                                      @"cookbookDesc" : cookbookDetail.desc,
                                      @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
                                      @"cookbookTip" : cookbookDetail.cookbookTip,
+                                     @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
                                      @"tags" : tags,
                                      @"steps" : steps,
                                      @"foods" : foods,
-                                     @"oven" : cookbookDetail.oven,
-                                     @"creator" : creatorDict
+                                     @"cookbookOven" : cookbookOvenDict,
+                                     @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                                     
                                      };
+        
+        NSData* data = [NSJSONSerialization dataWithJSONObject:paramsDict options:NSJSONWritingPrettyPrinted error:nil];
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         
         // 2. 发送网络请求
         [[self manager] POST:UpdateCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1302,9 +1387,8 @@
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 解析
-                id cookbookDetail = [DataParser parseCookbookDetailWithDict:responseObject];
                 
-                completion(YES, cookbookDetail, nil);
+                completion(YES, responseObject, nil);
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
@@ -1527,8 +1611,8 @@
                                      @"accType": acctp,
                                      @"loginId" : loginId,
                                      @"password" : password,
-//                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId,
-//                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
+                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId,
+                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
                                      @"loginType" : logintp
                                      };
         
@@ -1562,6 +1646,10 @@
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
             NSLog(@"%@", responseObject[@"retInfo"]);
             if ([status isEqualToString:@"00000"]) {
+                
+                NSLog(@"%@", operation.response.allHeaderFields);
+                
+                
                 // 3. 保存登录信息
 //                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
 //                [userDefaults setObject:responseObject[@"userBaseID"] forKey:@"userBaseId"];

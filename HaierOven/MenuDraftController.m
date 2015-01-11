@@ -12,19 +12,32 @@
 @interface MenuDraftController ()<MenuDraftTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property bool delete;
-@property (strong, nonatomic) NSArray* cookbooks;
+@property (strong, nonatomic) NSMutableArray* cookbooks;
 @property (strong, nonatomic) NSMutableArray* tags;
+@property (nonatomic) NSInteger pageIndex;
 @end
 
 @implementation MenuDraftController
 
+#pragma mark - 获取菜谱列表
+
 - (void)loadCookbookDrafts
 {
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    [[InternetManager sharedManager] getCookbooksWithUserBaseId:@"5" cookbookStatus:0 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] getCookbooksWithUserBaseId:@"5" cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
-            self.cookbooks = obj;
+            
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.cookbooks = obj;
+            } else {
+                [self.cookbooks addObjectsFromArray:arr];
+            }
+            
             [self.tableView reloadData];
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
@@ -36,14 +49,27 @@
     }];
 }
 
+#pragma mark - 加载和初始化
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.pageIndex = 1;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MenuDraftTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"MenuDraftTableViewCell"];
     self.deleteBtn.selected = NO;
     self.delete = self.deleteBtn.selected;
-    
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self loadCookbookDrafts];
+    
+    [self addHeader];
+    [self addFooter];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,6 +81,57 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        vc.pageIndex = 1;
+        [vc loadCookbookDrafts];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        vc.pageIndex++;
+        [vc loadCookbookDrafts];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView footerEndRefreshing];
+            
+        });
+        
+    }];
+    
 }
 
 #pragma mark - Table view data source
@@ -96,8 +173,6 @@
         [self.navigationController pushViewController:editCookbookController animated:YES];
     }];
     
-    
-    
 }
 
 - (void)loadTagsCompletion:(result)callback
@@ -123,6 +198,18 @@
 
 -(void)DeleteDraftMneu:(UITableViewCell *)cell{
     NSLog(@"%d",cell.tag);
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    Cookbook* cookbook = self.cookbooks[indexPath.row];
+    [self.cookbooks removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    [[InternetManager sharedManager] deleteCookbookWithCookbookId:cookbook.ID callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"删除成功");
+        } else {
+            NSLog(@"删除失败");
+        }
+    }];
+    
 }
 - (IBAction)Delete:(UIButton*)sender {
     sender.selected = sender.selected ==YES?NO:YES;

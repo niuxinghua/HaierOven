@@ -54,6 +54,9 @@
                                                     callBack:^(BOOL success, id obj, NSError *error) {
                                                         if (success) {
                                                             NSLog(@"登录成功");
+                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                        } else {
+                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                         }
                                                         
                                                     }];

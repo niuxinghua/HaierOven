@@ -201,8 +201,9 @@
 //            }
             
             //区分是否是全路径
-            NSString* imagePath = [self.cookbookDetail.coverPhoto hasPrefix:@"http"] ? self.cookbookDetail.coverPhoto : [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
-            [cell.coverImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
+//            NSString* imagePath = [self.cookbookDetail.coverPhoto hasPrefix:@"http"] ? self.cookbookDetail.coverPhoto : [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
+//            [cell.coverImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
+            cell.coverImage = self.cookbookCoverPhoto;
             return cell;
             
         }else if(indexPath.row ==1)  {
@@ -424,6 +425,7 @@
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
 
     if (self.ischangeCover) {
+        self.ischangeCover = NO;
        
         [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
             [super hiddenProgressHUD];
@@ -439,7 +441,9 @@
                 }
             }
         }];
+        self.cookbookCoverPhoto = image;
         [self.tableView reloadData];
+        
     }else {
         self.tempImageView.image = image;
         [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
@@ -447,7 +451,7 @@
             if (success) {
                 NSDictionary* objDict = [obj firstObject];
                 self.edittingStep.photo = objDict[@"name"];
-                
+                [self.tableView reloadData];
             } else {
                 if (error.code == InternetErrorCodeConnectInternetFailed) {
                     [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
@@ -639,27 +643,50 @@
     self.cookbookDetail.creator = [[Creator alloc] init];
     self.cookbookDetail.creator.ID = @"5"; // creatorID应为已登录用户
     
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
-    [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
-        [super hiddenProgressHUD];
-        if (success) {
-            NSLog(@"发布成功");
-            [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
-        } else {
-            if (error.code == InternetErrorCodeConnectInternetFailed) {
-                [super showProgressCompleteWithLabelText:@"网络连接失败..." afterDelay:1];
+    if (self.isDraft) {
+        
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+        [[InternetManager sharedManager] modifyCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSLog(@"发布成功");
+                [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
             } else {
-                [super showProgressCompleteWithLabelText:@"发布失败..." afterDelay:1];
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                }
             }
-        }
-    }];
+        }];
+        
+    } else {
+        
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+        [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSLog(@"发布成功");
+                [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
+            } else {
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                }
+            }
+        }];
+        
+    }
+    
+    
 }
 
 #pragma mark - 预览菜谱
 
 - (IBAction)previewCookbook:(UIButton *)sender
 {
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Cookbook" bundle:nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     detailController.cookbookDetail = self.cookbookDetail;
     detailController.isPreview = YES;
