@@ -306,6 +306,15 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getFriendCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 /**
+ *  根据标签获取菜谱
+ *
+ *  @param tagIds     标签数组
+ *  @param pageIndex  获取的页数
+ *  @param completion 结果回调
+ */
+- (void)getCookbooksWithTagIds:(NSArray*)tagIds pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+/**
  *  搜索菜谱
  *
  *  @param keyword    搜索关键字
@@ -361,20 +370,40 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 /**
  *  保存购物清单
  *
- *  @param userBaseId    用户ID
+ *  @param creatorId     用户ID
  *  @param shoppingOrder 购物清单
  *  @param completion    结果回调
  */
-//- (void)saveShoppingOrderWithUserBaseId:(NSString*)userBaseId shoppingOrder:(shoppingOrder*)shoppingOrder callBack:(myCallback)completion;
+- (void)saveShoppingOrderWithCreatorId:(NSString*)creatorId shoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion;
 
 /**
  *  删除购物清单
  *
- *  @param userBaseId  <#userBaseId description#>
- *  @param cookbookIds <#cookbookIds description#>
- *  @param completion  <#completion description#>
+ *  @param userBaseId  用户ID
+ *  @param cookbookIds 删除的购物清单列表
+ *  @param completion  结果回调
  */
 - (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookIds:(NSArray*)cookbookIds callBack:(myCallback)completion;
+
+/**
+ *  获取购物清单详情
+ *
+ *  @param userBaseId 用户ID
+ *  @param cookbookId 购物清单ID
+ *  @param completion 结果回调
+ */
+- (void)getShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookId:(NSString*)cookbookId callBack:(myCallback)completion;
+
+/**
+ *  获取购物清单列表
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)getShoppingListWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+
+
 
 
 #pragma mark - 文件
@@ -386,6 +415,13 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)uploadFile:(NSData*)data callBack:(myCallback)completion;
+
+
+
+
+
+
+
 
 
 #pragma mark - 测试API接口使用

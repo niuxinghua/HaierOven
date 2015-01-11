@@ -141,6 +141,11 @@
 #define GetFriendCookbooks      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/myfriends"]
 
 /**
+ *  根据标签获取菜谱
+ */
+#define GetCookbooksByTagIds      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/getbytagids"]
+
+/**
  *  搜索菜谱
  */
 #define SearchCookbook          [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/search"]
@@ -186,7 +191,7 @@
 /**
  *  获取购物车详情
  */
-#define GetShoppingOrder    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/get/cookbookid"]
+#define GetShoppingOrder    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/get/userbaseidandcookbookid"]
 
 /**
  *  获取购物车列表
