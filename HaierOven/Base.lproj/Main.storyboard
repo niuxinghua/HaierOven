@@ -286,7 +286,7 @@
                     <navigationItem key="navigationItem" id="UYu-wW-zSu">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="ftc-hP-qXv">
-                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
+                            <rect key="frame" x="130" y="6" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="登陆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNe-Mw-oan">
@@ -412,7 +412,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="aFV-4p-9FM">
-                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
+                            <rect key="frame" x="130" y="6" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="首 页" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8q-Qd-Ksm">
@@ -590,7 +590,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="20" id="S8n-xa-7IU">
                             <size key="itemSize" width="130" height="130"/>
-                            <size key="headerReferenceSize" width="50" height="54"/>
+                            <size key="headerReferenceSize" width="50" height="88"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="15" minY="20" maxX="15" maxY="10"/>
                         </collectionViewFlowLayout>
@@ -637,9 +637,46 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3sH-zp-kdU">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Bake house header view" id="H40-gw-zR4" customClass="BakeHouseHeaderReusableView">
                             <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOu-21-PKC">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="eFU-OL-hg1"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQs-sQ-Vkk">
+                                    <rect key="frame" x="107" y="44" width="213" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPG-7m-IrG">
+                                    <rect key="frame" x="0.0" y="44" width="107" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="IQs-sQ-Vkk" secondAttribute="trailing" id="3hd-S5-dud"/>
+                                <constraint firstItem="IPG-7m-IrG" firstAttribute="leading" secondItem="H40-gw-zR4" secondAttribute="leading" id="9If-st-rDU"/>
+                                <constraint firstAttribute="trailing" secondItem="aOu-21-PKC" secondAttribute="trailing" id="9Lg-OA-wxa"/>
+                                <constraint firstAttribute="bottom" secondItem="IQs-sQ-Vkk" secondAttribute="bottom" id="9Ud-u1-rYE"/>
+                                <constraint firstItem="IPG-7m-IrG" firstAttribute="width" secondItem="IQs-sQ-Vkk" secondAttribute="height" multiplier="107:44" id="AHu-4C-Klf"/>
+                                <constraint firstItem="aOu-21-PKC" firstAttribute="top" secondItem="H40-gw-zR4" secondAttribute="top" id="CsE-CJ-SB7"/>
+                                <constraint firstItem="IQs-sQ-Vkk" firstAttribute="leading" secondItem="IPG-7m-IrG" secondAttribute="trailing" id="fhg-Qp-Odg"/>
+                                <constraint firstItem="IQs-sQ-Vkk" firstAttribute="top" secondItem="aOu-21-PKC" secondAttribute="bottom" id="jBe-LV-d69"/>
+                                <constraint firstItem="IPG-7m-IrG" firstAttribute="top" secondItem="aOu-21-PKC" secondAttribute="bottom" id="m1Q-k9-0Ka"/>
+                                <constraint firstItem="aOu-21-PKC" firstAttribute="leading" secondItem="H40-gw-zR4" secondAttribute="leading" id="nO5-eR-uil"/>
+                                <constraint firstItem="IPG-7m-IrG" firstAttribute="height" secondItem="IQs-sQ-Vkk" secondAttribute="height" id="wQW-XG-3ns"/>
+                                <constraint firstAttribute="bottom" secondItem="IPG-7m-IrG" secondAttribute="bottom" id="ydd-dr-iu3"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="sectionFliexView" destination="IPG-7m-IrG" id="8JM-tf-vpL"/>
+                                <outlet property="sectionScrollView" destination="IQs-sQ-Vkk" id="IPd-TK-p9n"/>
+                                <outlet property="sectionSearchView" destination="aOu-21-PKC" id="cHU-7h-Ohg"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="heb-MY-Vi3" id="QSl-04-tPA"/>
@@ -817,7 +854,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Jnx-EA-4aR">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曲奇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR3-oJ-Zt0">
@@ -943,7 +980,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="eaw-J9-Gfg">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E06-Km-AnG">
@@ -1282,7 +1319,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="qcb-KP-toZ">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="652-EA-ZcK">
@@ -1349,7 +1386,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="5ei-0a-GmJ">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="草稿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDY-FA-vYM">
@@ -1595,7 +1632,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="x65-Bz-REc">
-                            <rect key="frame" x="101" y="5.5" width="118" height="33"/>
+                            <rect key="frame" x="101" y="6" width="118" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJz-J4-7r7">
@@ -1711,7 +1748,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="PMQ-3I-yWx">
-                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
+                            <rect key="frame" x="120" y="6" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="购物清单" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuj-Vx-Fgg">
@@ -1829,7 +1866,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Okl-2T-VQQ">
-                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
+                            <rect key="frame" x="120" y="6" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="购物清单" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-7J-EAi">
@@ -1993,7 +2030,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="MrZ-a2-vpd">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="厨神名人堂" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnB-pd-JVZ">
@@ -2090,7 +2127,7 @@
                     <navigationItem key="navigationItem" id="L3t-Ae-hgT">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="EyQ-1s-GQM">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="厨神名人堂" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJ3-VF-ZSz">
@@ -2193,7 +2230,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="6bo-pi-eFP">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPb-KW-CtE">
@@ -2823,7 +2860,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="wpK-WS-z7o">
-                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
+                            <rect key="frame" x="120" y="6" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itx-8j-Sqc">
@@ -3048,7 +3085,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="fqN-4I-e3h">
-                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
+                            <rect key="frame" x="120" y="6" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-pJ-ySs">
@@ -3225,7 +3262,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Xsg-N2-LCt">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqj-UZ-54D">
@@ -3540,7 +3577,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="iQM-9p-7YY">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIG-RA-TJn">
@@ -3716,7 +3753,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="AGO-xZ-2Ex">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配置失败" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3u-jX-THX">
@@ -3886,7 +3923,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="gd4-ZK-r7M">
-                            <rect key="frame" x="115" y="5.5" width="90" height="33"/>
+                            <rect key="frame" x="115" y="6" width="90" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3p-U4-XBi">
@@ -4064,7 +4101,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="XQq-PJ-Dcd">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配置成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-Vp-LLg">
@@ -4294,7 +4331,7 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="ua5-ZW-0rP">
-                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
+                            <rect key="frame" x="130" y="6" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="个人中心" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gce-jh-uck">
@@ -5101,7 +5138,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="iyi-rn-5dH">
-                            <rect key="frame" x="115" y="5.5" width="90" height="33"/>
+                            <rect key="frame" x="115" y="6" width="90" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdh-xP-OOE">

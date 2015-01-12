@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSInteger, SectionType) {
     sectionPersonalCenter   =1,
-    sectionFollow           =2
+    sectionFollow           =2,
+    sectionBakeHouse        =3,
+
 };
 
 @class PersonalCenterSectionView;

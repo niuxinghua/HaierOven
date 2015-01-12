@@ -18,20 +18,19 @@
     self.frame = frame;
     self.sectionType = sectionPersonalCenter;
     
-    self.pushedButton.frame = CGRectMake(0, PageW*ScrRate-30/2, PageW/2, 30);
-    self.likeButton.frame = CGRectMake(PageW/2, PageW*ScrRate-30/2, PageW/2, 30);
-    self.orangeLine = [UIImageView new];
+//    self.pushedButton.frame = CGRectMake(0, PageW*ScrRate-30/2, PageW/2, 30);
+//    self.likeButton.frame = CGRectMake(PageW/2, PageW*ScrRate-30/2, PageW/2, 30);
+    self.orangeLine = [[UIImageView alloc]initWithFrame:CGRectMake(15, self.pushedButton.height-9, self.width/2-30, 2)];
     self.orangeLine.image = IMAGENAMED(@"orangel.png");
-    self.orangeLine.frame = CGRectMake(15, PageW*ScrRate-10, self.pushedButton.width-30, 2);
+//    self.orangeLine.frame = CGRectMake(15, frame.size.height-7, self.width/2-30, 2);
     [self addSubview:self.orangeLine];
-
     return self;
 }
 
 
 
 - (IBAction)TurnPushedController:(UIButton *)sender {
-        [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(15, PageW*ScrRate-10, PageW/2-30, 2)];
+        [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(15, self.pushedButton.height-7, self.pushedButton.width-30, 2)];
         }completion:^(BOOL finished) {
             [self.delegate SectionType:sender.tag];
         }];
@@ -40,7 +39,7 @@
 
 - (IBAction)TurnLikeController:(UIButton *)sender {
     
-    [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(PageW/2+15, PageW*ScrRate-10, PageW/2-30, 2)];
+    [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(self.likeButton.left+15, self.pushedButton.height-7, self.pushedButton.width-30, 2)];
     }completion:^(BOOL finished) {
         [self.delegate SectionType:sender.tag];
     }];
@@ -57,6 +56,10 @@
         case sectionPersonalCenter:
             [self.pushedButton setTitle:@"发布的" forState:UIControlStateNormal];
             [self.likeButton setTitle:@"赞过的" forState:UIControlStateNormal];
+            break;
+        case sectionBakeHouse:
+            [self.pushedButton setTitle:@"热门" forState:UIControlStateNormal];
+            [self.likeButton setTitle:@"最新" forState:UIControlStateNormal];
             break;
         default:
             break;

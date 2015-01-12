@@ -4,16 +4,22 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PersonalCenterSectionView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1M3-Cm-wDS">
-                    <rect key="frame" x="0.0" y="11" width="160" height="29"/>
-                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="46"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
                     <state key="normal" title="发布的">
                         <color key="titleColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -23,8 +29,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOq-OJ-6wl">
-                    <rect key="frame" x="160" y="11" width="160" height="29"/>
-                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                    <rect key="frame" x="160" y="0.0" width="160" height="46"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
                     <state key="normal" title="赞过的">
                         <color key="titleColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,13 +42,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="1M3-Cm-wDS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5ki-jb-HjK"/>
-                <constraint firstItem="1M3-Cm-wDS" firstAttribute="width" secondItem="WOq-OJ-6wl" secondAttribute="width" id="A31-ex-dbi"/>
-                <constraint firstAttribute="centerY" secondItem="1M3-Cm-wDS" secondAttribute="centerY" id="XpP-al-04x"/>
-                <constraint firstItem="WOq-OJ-6wl" firstAttribute="leading" secondItem="1M3-Cm-wDS" secondAttribute="trailing" id="geT-TQ-723"/>
-                <constraint firstAttribute="centerY" secondItem="WOq-OJ-6wl" secondAttribute="centerY" id="ohY-16-7EI"/>
-                <constraint firstAttribute="trailing" secondItem="WOq-OJ-6wl" secondAttribute="trailing" id="wLI-Tp-NKH"/>
-                <constraint firstItem="1M3-Cm-wDS" firstAttribute="height" secondItem="WOq-OJ-6wl" secondAttribute="height" id="xsl-Zn-OQ6"/>
+                <constraint firstAttribute="bottom" secondItem="1M3-Cm-wDS" secondAttribute="bottom" id="5lR-1f-Pew"/>
+                <constraint firstAttribute="trailing" secondItem="WOq-OJ-6wl" secondAttribute="trailing" id="A3M-f1-frH"/>
+                <constraint firstItem="WOq-OJ-6wl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KbX-O2-XAE"/>
+                <constraint firstAttribute="bottom" secondItem="WOq-OJ-6wl" secondAttribute="bottom" id="QBz-58-6os"/>
+                <constraint firstItem="WOq-OJ-6wl" firstAttribute="width" secondItem="1M3-Cm-wDS" secondAttribute="width" id="TsK-Oy-JcW"/>
+                <constraint firstItem="WOq-OJ-6wl" firstAttribute="leading" secondItem="1M3-Cm-wDS" secondAttribute="trailing" id="ezi-vQ-2gy"/>
+                <constraint firstItem="1M3-Cm-wDS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l9H-LH-Z5N"/>
+                <constraint firstItem="1M3-Cm-wDS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oqw-oX-429"/>
+                <constraint firstItem="WOq-OJ-6wl" firstAttribute="height" secondItem="1M3-Cm-wDS" secondAttribute="height" id="ujE-Or-lhJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -50,7 +58,7 @@
                 <outlet property="likeButton" destination="WOq-OJ-6wl" id="5nL-0u-rYv"/>
                 <outlet property="pushedButton" destination="1M3-Cm-wDS" id="7i6-C5-YvQ"/>
             </connections>
-            <point key="canvasLocation" x="174" y="222"/>
+            <point key="canvasLocation" x="174" y="224"/>
         </view>
     </objects>
 </document>

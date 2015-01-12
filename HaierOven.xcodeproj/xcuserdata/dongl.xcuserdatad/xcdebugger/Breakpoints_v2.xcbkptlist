@@ -114,12 +114,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/BakedHouseViewController.m"
-            timestampString = "442486984.478933"
+            timestampString = "442750162.090762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-GetfiexibleBtnSelected:andUIView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/BakedHouseViewController.m"
+            timestampString = "442750809.29408"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-GetfiexibleBtnSelected:andUIView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

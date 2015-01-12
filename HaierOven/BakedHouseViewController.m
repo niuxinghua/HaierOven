@@ -8,30 +8,37 @@
 
 #import "BakedHouseViewController.h"
 #import "BakeHouseCell.h"
-@interface BakedHouseViewController ()
+#import "BakeHouseHeaderReusableView.h"
+@interface BakedHouseViewController ()<BakeHouseHeaderReusableViewDelegate>
+@property (strong, nonatomic)UIWindow *myWindow;
 
+@property (strong, nonatomic) NSArray *equipments;
 @end
 
 @implementation BakedHouseViewController
 
-static NSString * const reuseIdentifier = @"BakeHouseCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-//    [self.collectionView registerClass:[BakeHouseCell class] forCellWithReuseIdentifier:@"BakeHouseCell"];
-    
-    // Do any additional setup after loading the view.
+    [self setUpSubviews];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+
+-(void)setUpSubviews{
+    self.myWindow = [UIWindow new];
+    self.myWindow.backgroundColor = [UIColor whiteColor];
+    self.myWindow.layer.cornerRadius = 5;
+    self.myWindow.layer.borderColor = GlobalOrangeColor.CGColor;
+    self.myWindow.layer.borderWidth = 1;
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = NO;
+}
 /*
 #pragma mark - Navigation
 
@@ -54,10 +61,16 @@ static NSString * const reuseIdentifier = @"BakeHouseCell";
 }
 
 
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//
-//    
-//}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        BakeHouseHeaderReusableView* header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"Bake house header view" forIndexPath:indexPath];
+        header.delegate = self;
+        return header;
+    } else {
+        return [[UICollectionReusableView alloc] initWithFrame:CGRectZero];
+    }
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BakeHouseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BakeHouseCell" forIndexPath:indexPath];
@@ -68,35 +81,42 @@ static NSString * const reuseIdentifier = @"BakeHouseCell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+-(void)GetfiexibleBtnSelected:(UIButton *)sender andUIView:(SectionFiexibleView *)sectionFiexibleView{
+    
+    CGPoint location = sectionFiexibleView.frame.origin;
+    
+    CGPoint newLocation = [sectionFiexibleView convertPoint:location toView:sectionFiexibleView.superview.superview.superview];
+    
+    if (sender.selected==NO) {
+        self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width, 0);
+        [UIView animateWithDuration:0.5 animations:^{
+            self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width, 200);
+        } completion:^(BOOL finished) {
+            sender.selected = YES;
+            NSLog(@"下");
+        }];
+    }else{
+        [UIView animateWithDuration:0.5 animations:^{
+            self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width,0);
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
+        } completion:^(BOOL finished) {
+            sender.selected = NO;
+            NSLog(@"上");
+        }];
+    }
+
 }
-*/
 
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+
+
+#define LABEL_H    26   //标签high
+-(void)setEquipments:(NSArray *)equipments{
+    _equipments = equipments;
+    for (int i = 0; i<equipments.count; i++) {
+        UILabel *label = [UILabel new];
+        label.text = equipments[i];
+        label.frame = CGRectMake(0, i*LABEL_H+8+50, 107, LABEL_H);
+        [self.myWindow addSubview: label];
+    }
 }
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
-
 @end

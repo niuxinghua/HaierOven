@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zh-vR-QJW" userLabel="Bubble container">
-                        <rect key="frame" x="40" y="40" width="244" height="94"/>
+                        <rect key="frame" x="47" y="40" width="244" height="94"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-c6-OZf" userLabel="Bubble Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
@@ -71,20 +71,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X89-B1-aAd" userLabel="Avatar container">
-                        <rect key="frame" x="286" y="39" width="34" height="34"/>
+                        <rect key="frame" x="293" y="42" width="27" height="27"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y9b-D9-Q7W" userLabel="Avatar Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
+                                <rect key="frame" x="0.0" y="0.0" width="27" height="27"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="34" id="UCl-O4-LxQ"/>
-                            <constraint firstItem="y9b-D9-Q7W" firstAttribute="leading" secondItem="X89-B1-aAd" secondAttribute="leading" id="Ut3-Pm-ruv"/>
-                            <constraint firstItem="y9b-D9-Q7W" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="top" id="fT0-wy-fbD"/>
-                            <constraint firstAttribute="trailing" secondItem="y9b-D9-Q7W" secondAttribute="trailing" id="jV7-bZ-gjp"/>
-                            <constraint firstAttribute="height" constant="34" id="nCV-4h-3u9"/>
-                            <constraint firstAttribute="bottom" secondItem="y9b-D9-Q7W" secondAttribute="bottom" id="s7Q-iB-vwl"/>
+                            <constraint firstAttribute="bottom" secondItem="y9b-D9-Q7W" secondAttribute="bottom" id="7SX-4t-GAr"/>
+                            <constraint firstAttribute="width" constant="27" id="Pkm-tW-k4z"/>
+                            <constraint firstItem="y9b-D9-Q7W" firstAttribute="leading" secondItem="X89-B1-aAd" secondAttribute="leading" id="Pya-tL-FjE"/>
+                            <constraint firstItem="y9b-D9-Q7W" firstAttribute="top" secondItem="X89-B1-aAd" secondAttribute="top" id="e5w-hn-mre"/>
+                            <constraint firstAttribute="height" constant="27" id="tgw-aN-JJu"/>
+                            <constraint firstAttribute="trailing" secondItem="y9b-D9-Q7W" secondAttribute="trailing" id="w9X-3u-BNY"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -93,7 +93,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7Uc-dI-YDD" secondAttribute="trailing" id="1v4-5s-XmK"/>
                 <constraint firstItem="2zh-vR-QJW" firstAttribute="top" secondItem="p52-YN-yLu" secondAttribute="bottom" id="3Wx-g0-fTc"/>
-                <constraint firstItem="X89-B1-aAd" firstAttribute="top" secondItem="jxM-YD-sVG" secondAttribute="bottom" constant="19" id="8pm-KA-VAZ"/>
+                <constraint firstItem="X89-B1-aAd" firstAttribute="top" secondItem="p52-YN-yLu" secondAttribute="bottom" constant="2" id="7yw-3M-D9O"/>
                 <constraint firstAttribute="trailing" secondItem="jxM-YD-sVG" secondAttribute="trailing" id="AwY-g7-f1T"/>
                 <constraint firstItem="jxM-YD-sVG" firstAttribute="top" secondItem="23f-xH-rkY" secondAttribute="top" id="HYT-Tw-whz"/>
                 <constraint firstItem="7Uc-dI-YDD" firstAttribute="top" secondItem="2zh-vR-QJW" secondAttribute="bottom" id="Ngq-ew-t2K"/>

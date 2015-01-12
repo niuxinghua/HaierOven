@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FZLTHJW.ttf">
@@ -31,13 +32,12 @@
                         <bool key="isElement" value="YES"/>
                     </accessibility>
                     <constraints>
-                        <constraint firstAttribute="width" constant="17" id="MtQ-nw-8Vf"/>
-                        <constraint firstAttribute="height" constant="17" id="qP5-oZ-Uno"/>
+                        <constraint firstAttribute="width" secondItem="eLc-X6-hIA" secondAttribute="height" multiplier="1:1" id="7YV-YS-fAm"/>
                     </constraints>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入菜谱，食材···" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rfz-cM-A8d">
                     <rect key="frame" x="33" y="3" width="200" height="30"/>
-                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="textChanged:" destination="TY8-99-rAZ" eventType="editingChanged" id="tap-1a-QdT"/>
@@ -62,7 +62,7 @@
                         <constraint firstAttribute="height" constant="30" id="4au-o7-dwH"/>
                         <constraint firstAttribute="width" constant="46" id="Ohs-5C-O5z"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
                     <state key="normal" title="取消">
                         <color key="titleColor" red="0.95294117649999999" green="0.64705882349999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.95294117649999999" green="0.64705882349999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,25 +73,25 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="eLc-X6-hIA" secondAttribute="bottom" constant="9" id="0Wf-iA-HzP"/>
                 <constraint firstItem="EUn-se-D6N" firstAttribute="top" secondItem="TY8-99-rAZ" secondAttribute="top" constant="3" id="47E-oE-5zY"/>
                 <constraint firstAttribute="trailing" secondItem="8jh-Wq-yek" secondAttribute="trailing" constant="54" id="8Fl-Ku-Cdo"/>
                 <constraint firstAttribute="bottom" secondItem="EUn-se-D6N" secondAttribute="bottom" constant="2" id="9Z2-H9-ojv"/>
+                <constraint firstItem="rfz-cM-A8d" firstAttribute="leading" secondItem="eLc-X6-hIA" secondAttribute="trailing" constant="8" id="EvC-gp-4iY"/>
                 <constraint firstItem="hqs-f3-seY" firstAttribute="leading" secondItem="rfz-cM-A8d" secondAttribute="trailing" constant="8" id="G3y-cW-Ic4"/>
+                <constraint firstItem="eLc-X6-hIA" firstAttribute="top" secondItem="TY8-99-rAZ" secondAttribute="top" constant="9" id="KQk-r6-v5W"/>
                 <constraint firstItem="8jh-Wq-yek" firstAttribute="leading" secondItem="TY8-99-rAZ" secondAttribute="leading" id="KWP-Bn-nJa"/>
-                <constraint firstItem="eLc-X6-hIA" firstAttribute="leading" secondItem="TY8-99-rAZ" secondAttribute="leading" constant="8" id="LSr-Ma-w9z"/>
-                <constraint firstAttribute="bottom" secondItem="eLc-X6-hIA" secondAttribute="bottom" constant="9" id="N1e-v0-58n"/>
                 <constraint firstAttribute="bottom" secondItem="8jh-Wq-yek" secondAttribute="bottom" id="WVt-WP-A8B"/>
                 <constraint firstAttribute="trailing" secondItem="EUn-se-D6N" secondAttribute="trailing" id="ayb-NE-qdN"/>
                 <constraint firstItem="rfz-cM-A8d" firstAttribute="top" secondItem="TY8-99-rAZ" secondAttribute="top" constant="3" id="cOj-vT-J2U"/>
                 <constraint firstItem="8jh-Wq-yek" firstAttribute="top" secondItem="TY8-99-rAZ" secondAttribute="top" id="cYE-p9-fN0"/>
-                <constraint firstItem="eLc-X6-hIA" firstAttribute="top" secondItem="TY8-99-rAZ" secondAttribute="top" constant="9" id="eca-i3-pmo"/>
-                <constraint firstItem="rfz-cM-A8d" firstAttribute="leading" secondItem="eLc-X6-hIA" secondAttribute="trailing" constant="8" id="gXi-Tj-5pk"/>
+                <constraint firstItem="eLc-X6-hIA" firstAttribute="leading" secondItem="TY8-99-rAZ" secondAttribute="leading" constant="8" id="g2t-e5-vzE"/>
                 <constraint firstAttribute="bottom" secondItem="rfz-cM-A8d" secondAttribute="bottom" constant="2" id="jJI-UL-1LJ"/>
                 <constraint firstAttribute="centerY" secondItem="hqs-f3-seY" secondAttribute="centerY" id="jbS-Ec-9dJ"/>
-                <constraint firstAttribute="centerY" secondItem="eLc-X6-hIA" secondAttribute="centerY" id="jcL-sY-jMS"/>
                 <constraint firstAttribute="centerY" secondItem="rfz-cM-A8d" secondAttribute="centerY" id="uZe-6t-2u4"/>
                 <constraint firstItem="EUn-se-D6N" firstAttribute="leading" secondItem="hqs-f3-seY" secondAttribute="trailing" constant="16" id="v5t-I2-Kw5"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cancelbtn" destination="hqs-f3-seY" id="hoI-aO-CgY"/>

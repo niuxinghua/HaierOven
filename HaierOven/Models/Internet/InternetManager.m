@@ -1516,7 +1516,6 @@
 //    NSString* md5Password = [MyTool stringToMD5:password];
     
     // 3. 序列化为字典
-    NSNull* null = [NSNull null];
     NSDictionary* userDict = @{@"password":password,
                                @"sequenceId" : @"1234",
                                @"user":@{
