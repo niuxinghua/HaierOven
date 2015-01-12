@@ -22,6 +22,11 @@
 @property (copy, nonatomic) NSString* cookbookName;
 
 /**
+ *  购物清单创建人ID
+ */
+@property (copy, nonatomic) NSString* creatorId;
+
+/**
  *  购物清单
  */
 @property (strong, nonatomic) NSArray* foods;

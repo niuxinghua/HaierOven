@@ -11,9 +11,9 @@
 @interface PurchaseFood : NSObject
 
 /**
- *  购物清单食物ID
+ *  购物清单食物index
  */
-@property (copy, nonatomic) NSString* ID;
+@property (copy, nonatomic) NSString* index;
 
 /**
  *  物品名称
