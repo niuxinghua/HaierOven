@@ -30,7 +30,7 @@
     currentUser.userId = @"5";
     currentUser.userName = @"刘康";
     User* her = [[User alloc] init];
-    her.userName = @"刘诗诗";
+    her.userName = @"绣春刀";
     her.userId = @"2014";
     
     self.messages = [[NSMutableArray alloc] initWithObjects:
@@ -91,7 +91,7 @@
     JSQMessagesAvatarImage *meImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"QQQ.png"]
                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
-    JSQMessagesAvatarImage *herImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"QQQ.png"]
+    JSQMessagesAvatarImage *herImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Vcs"]
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     

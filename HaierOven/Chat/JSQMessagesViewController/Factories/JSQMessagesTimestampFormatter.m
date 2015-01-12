@@ -59,7 +59,7 @@
                                  NSForegroundColorAttributeName : color,
                                  NSParagraphStyleAttributeName : paragraphStyle };
         
-        _timeTextAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+        _timeTextAttributes = @{ NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:12.0],
                                  NSForegroundColorAttributeName : color,
                                  NSParagraphStyleAttributeName : paragraphStyle };
     }

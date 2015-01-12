@@ -44,11 +44,12 @@
     /**
      *  设置头像大小
      */
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(25, 25);
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(25, 25);
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(27, 27);
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(27, 27);
     
     //    self.showLoadEarlierMessagesHeader = YES;
     self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:GlobalTextFontName size:12];
+    
 }
 
 #pragma mark - 显示系列

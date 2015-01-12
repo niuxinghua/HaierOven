@@ -45,6 +45,7 @@
 
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets
 {
+//    bubbleImage = [MyTool createImageWithColor:GlobalOrangeColor];
 	NSParameterAssert(bubbleImage != nil);
     
 	self = [super init];

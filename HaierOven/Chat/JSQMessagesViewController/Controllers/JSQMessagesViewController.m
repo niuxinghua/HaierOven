@@ -128,8 +128,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.collectionView.delegate = self;
     
     self.inputToolbar.delegate = self;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"New Message", @"JSQMessages", @"Placeholder text for the message input text view");
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"请输入回复...", @"JSQMessages", @"Placeholder text for the message input text view");
     self.inputToolbar.contentView.textView.delegate = self;
+//    self.inputToolbar.contentView.textView.font = [UIFont fontWithName:GlobalTextFontName size:14.5];
     
     self.senderId = @"JSQDefaultSender";
     self.senderDisplayName = @"JSQDefaultSender";
@@ -486,7 +487,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     
     cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     cell.layer.shouldRasterize = YES;
     
