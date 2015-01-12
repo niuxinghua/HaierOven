@@ -370,11 +370,10 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 /**
  *  保存购物清单
  *
- *  @param creatorId     用户ID
- *  @param shoppingOrder 购物清单
+ *  @param shoppingOrder 购物清单, 包括creatorId
  *  @param completion    结果回调
  */
-- (void)saveShoppingOrderWithCreatorId:(NSString*)creatorId shoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion;
+- (void)saveShoppingOrderWithShoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion;
 
 /**
  *  删除购物清单
@@ -383,7 +382,7 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param cookbookIds 删除的购物清单列表
  *  @param completion  结果回调
  */
-- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookIds:(NSArray*)cookbookIds callBack:(myCallback)completion;
+- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbooks:(NSArray*)cookbooks callBack:(myCallback)completion;
 
 /**
  *  获取购物清单详情
@@ -401,6 +400,19 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)getShoppingListWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+
+#pragma mark - 烘焙圈
+
+/**
+ *  获取未关注、推荐厨师列表
+ *
+ *  @param userBaseId 用户ID
+ *  @param pageIndex  请求页面
+ *  @param completion 结果回调
+ */
+- (void)getRecommentCookersWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
 
 
 

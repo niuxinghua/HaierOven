@@ -10,23 +10,164 @@
 #import "PersonalCenterSectionView.h"
 #import "MainViewNormalCell.h"
 #import "BakeGroupAdviceCell.h"
+#import "Cooker.h"
+#import "MJRefresh.h"
+
 @interface BakedGroupController ()<PersonalCenterSectionViewDelegate,BackGroupAdviceCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
-@property (strong, nonatomic) NSArray *follows;
-@property (strong, nonatomic) NSArray *advices;
+@property (strong, nonatomic) NSMutableArray *followedCookbooks;
+@property (strong, nonatomic) NSMutableArray *recommendCookers;
 @property (strong, nonatomic) PersonalCenterSectionView* headerView;
+@property (nonatomic) NSInteger followPageIndex;
+@property (nonatomic) NSInteger recommentPageIndex;
 @end
 #define HeaderViewRate         0.1388888
 #define CellImageRate   0.6
 @implementation BakedGroupController
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.followPageIndex = 1;
+        self.recommentPageIndex = 1;
+        self.followedCookbooks = [NSMutableArray array];
+        self.recommendCookers = [NSMutableArray array];
+    }
+    return self;
+}
+
+#pragma mark - 网络请求
+
+- (void)loadFollowedCookbooks
+{
+    [super showProgressHUDWithLabelText:@"请稍后" dimBackground:NO];
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _followPageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_followPageIndex == 1) {
+                self.followedCookbooks = obj;
+            } else {
+                [self.followedCookbooks addObjectsFromArray:arr];
+            }
+            
+            [self.tableview reloadData];
+            
+        } else {
+            [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
+        }
+    }];
+    
+}
+
+
+- (void)loadRecommendCookders
+{
+    
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] getRecommentCookersWithUserBaseId:userBaseId pageIndex:self.recommentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _recommentPageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_recommentPageIndex == 1) {
+                self.recommendCookers = obj;
+            } else {
+                [self.recommendCookers addObjectsFromArray:arr];
+            }
+           
+            [self.tableview reloadData];
+        } else {
+            [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
+        }
+    }];
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
-    self.follows =@[@"关注",@"关注",@"关注",@"关注",@"关注"];
-    self.advices = @[@"建议",@"建议",@"建议",@"建议",@"建议",@"建议",];
+    
+    [self loadFollowedCookbooks];
+    [self loadRecommendCookders];
+    
+    [self addHeader];
+    [self addFooter];
+    
     // Do any additional setup after loading the view.
 }
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableview addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        if (vc.backGroupType == BackGroupTypeAdvice) {
+            // 推荐
+            vc.recommentPageIndex = 1;
+            [vc loadRecommendCookders];
+        } else {
+            vc.followPageIndex = 1;
+            [vc loadFollowedCookbooks];
+            
+        }
+       
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableview headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableview addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        if (vc.backGroupType == BackGroupTypeAdvice) {
+            // 推荐
+            vc.recommentPageIndex++;
+            [vc loadRecommendCookders];
+        } else {
+            vc.followPageIndex++;
+            [vc loadFollowedCookbooks];
+            
+        }
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableview footerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -54,7 +195,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.backGroupType ==BackGroupTypeAdvice?self.advices.count:self.follows.count;
+    return self.backGroupType ==BackGroupTypeAdvice?self.recommendCookers.count:self.followedCookbooks.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  self.backGroupType ==BackGroupTypeAdvice?93:PageW*CellImageRate;
@@ -71,6 +212,7 @@
             MainViewNormalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             //    cell.cookbook = self.advices[indexPath.row];
             cell.AuthorityLabel.hidden = YES;
+            cell.cookbook = self.followedCookbooks[indexPath.row];
             return cell;
             break;
         }
@@ -79,6 +221,7 @@
             NSString *cellIdentifier =@"BakeGroupAdviceCell";
             BakeGroupAdviceCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             cell.delegate = self;
+            cell.cooker = self.recommendCookers[indexPath.row];
             //    cell.cookbook = self.advices[indexPath.row];
             return cell;
             break;

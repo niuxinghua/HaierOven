@@ -199,6 +199,14 @@
 #define GetShoppingList     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"shoppingorder/get/userbaseid"]
 
 
+#pragma mark - 烘焙圈
+
+/**
+ *  获取未关注、推荐厨师列表
+ */
+#define GetRecommentCookerList  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookcircle/getunfollow"]
+
+
 
 
 #pragma mark - 文件

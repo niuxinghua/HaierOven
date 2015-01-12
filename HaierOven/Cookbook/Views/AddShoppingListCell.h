@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class AddShoppingListCell;
+@protocol AddShoppingListCellDelegate <NSObject>
+
+@required
+- (void)AddShoppingListWithCell:(AddShoppingListCell*)cell;
+
+@end
+
 @interface AddShoppingListCell : UITableViewCell
+
+@property (weak, nonatomic) id<AddShoppingListCellDelegate> delegate;
 
 @end

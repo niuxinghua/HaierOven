@@ -27,7 +27,12 @@
 @property (copy, nonatomic) NSString* creatorId;
 
 /**
- *  购物清单
+ *  创建时间
+ */
+@property (copy, nonatomic) NSString* createdTime;
+
+/**
+ *  购物清单，里面放的时PurchasedFood对象
  */
 @property (strong, nonatomic) NSArray* foods;
 

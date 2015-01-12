@@ -14,42 +14,61 @@
 @implementation CookListFoodView
 
 -(instancetype)initWithFrame:(CGRect)frame{
-    //    if (self = [ super initWithFrame:frame]) {
+    
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([CookListFoodView class]) owner:self options:nil] firstObject];
     self.frame = frame;
     
-    //    }
+    self.deleteLine = [UIImageView new];
+    self.deleteLine.image = IMAGENAMED(@"delete-line.png");
+    self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
+    [self addSubview:self.deleteLine];
+    
     return self;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.deleteLine = [UIImageView new];
-    self.deleteLine.image = IMAGENAMED(@"delete-line.png");
-    self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
-    [self addSubview:self.deleteLine];
+    
+    if (self.food.isPurchase) { //已购买的话，需要用线条标记，且按钮为被选中的状态
+        self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, self.FoodBtn.width/2, 1);
+        self.FoodBtn.selected = YES;
+    } else {
+        self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
+        self.FoodBtn.selected = NO;
+    }
+    
+    
 }
 
 - (IBAction)ChickFoodAdd:(UIButton*)sender {
     if (sender.selected == NO) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, self.FoodBtn.width+10, 1);
+            self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, self.FoodBtn.width/2, 1);
         } completion:^(BOOL finished) {
             sender.selected =YES;
+            self.food.isPurchase = YES;
+            [self.delegate purchaseFood:self.food purchased:YES];
         }];
     }else
         [UIView animateWithDuration:0.3 animations:^{
             self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
         } completion:^(BOOL finished) {
             sender.selected =NO;
+            self.food.isPurchase = NO;
+            [self.delegate purchaseFood:self.food purchased:NO];
         }];
-
+    
 }
 
-
--(void)setFoodName:(NSString *)foodName{
-    _foodName = foodName;
-    [self.FoodBtn setTitle:foodName forState:UIControlStateNormal];
+- (void)setFood:(PurchaseFood *)food
+{
+    _food = food;
+    [self.FoodBtn setTitle:food.name forState:UIControlStateNormal];
+    if (food.isPurchase) { //已购买的话，需要用线条标记，且按钮为被选中的状态
+        self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, self.FoodBtn.width/2, 1);
+        self.FoodBtn.selected = YES;
+    }
+    
 }
 
 

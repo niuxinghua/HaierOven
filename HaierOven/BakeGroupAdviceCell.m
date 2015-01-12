@@ -28,6 +28,38 @@
     // Configure the view for the selected state
 }
 
+- (void)setCooker:(Cooker *)cooker
+{
+    _cooker = cooker;
+    [self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
+    switch (cooker.userLevel) {
+        case 1:
+            self.tagLabel.text = @"天子一号";
+            break;
+        case 2:
+            self.tagLabel.text = @"厨神名人";
+            break;
+        case 3:
+            self.tagLabel.text = @"推荐达人";
+            break;
+            
+        default:
+            self.tagLabel.text = @"官方厨神";
+            break;
+    }
+    
+    self.nameLabel.text = cooker.userName;
+    self.titleLabel.text = cooker.signature;
+    NSString* cookNames = @"最近做过：";
+    for (int loop = 0; loop < self.cooker.cookbooks.count; loop++) {
+        Cookbook* cookbook = cooker.cookbooks[loop];
+        cookNames = loop != self.cooker.cookbooks.count-1 ? [cookNames stringByAppendingFormat:@"%@、", cookbook.name] : [cookNames stringByAppendingFormat:@"%@", cookbook.name];
+    }
+    self.recentCookLabel.text = cookNames;
+    self.followBtn.selected = !cooker.isFollowed;
+    
+}
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.avaterBtn.layer.masksToBounds = YES;

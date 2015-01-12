@@ -7,21 +7,22 @@
 //
 
 #import "FoodsViewController.h"
-#import "AddShoppingListCell.h"
 #import "FoodCell.h"
 
 @interface FoodsViewController () 
 
 @property (strong, nonatomic) NSArray* foods;
+@property (weak, nonatomic) id<AddShoppingListCellDelegate> delegate;
 
 @end
 
 @implementation FoodsViewController
 
-- (instancetype)initWithFoods:(NSArray*)foods
+- (instancetype)initWithFoods:(NSArray*)foods delegate:(id<AddShoppingListCellDelegate>)delegate
 {
     if (self = [super init]) {
         self.foods = foods;
+        self.delegate = delegate;
     }
     return self;
 }
@@ -49,6 +50,7 @@
 
     if (indexPath.row == 0) {
         AddShoppingListCell* addCell = [tableView dequeueReusableCellWithIdentifier:@"Add shopping list cell" forIndexPath:indexPath];
+        addCell.delegate = self.delegate;
         return addCell;
     } else {
         FoodCell* foodCell = [tableView dequeueReusableCellWithIdentifier:@"Food cell" forIndexPath:indexPath];

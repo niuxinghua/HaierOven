@@ -524,7 +524,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="8hT-pV-Ghh">
-                            <rect key="frame" x="130" y="6" width="60" height="33"/>
+                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="烘焙屋" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzA-tQ-JOs">
@@ -622,7 +622,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="R9J-ka-ZKw">
-                            <rect key="frame" x="130" y="6" width="60" height="33"/>
+                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="烘焙圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDR-4q-ACY">
@@ -1651,6 +1651,9 @@
                                         <constraint firstItem="YPt-md-gZD" firstAttribute="top" secondItem="918-Qv-2Sp" secondAttribute="top" id="akp-Pt-wC2"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cookbookNameBtn" destination="YPt-md-gZD" id="f8c-1U-diG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1699,6 +1702,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="shoppingListCountLabel" destination="q5z-zH-RW3" id="QuT-u1-1Pr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PK6-Hd-Ecn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1822,6 +1828,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="deleteBtn" destination="fW9-XV-q2J" id="Jsb-4P-xcV"/>
+                        <outlet property="shoppingListCountLabel" destination="Vdz-EI-fQ1" id="6Z4-ic-pkA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aws-db-bla" userLabel="First Responder" sceneMemberID="firstResponder"/>

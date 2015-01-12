@@ -759,6 +759,7 @@
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
+		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
 		849F916A1A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow.png */; };
 		849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@2x.png */; };
 		849F916C1A513981006234B9 /* icon_followd-.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd-.png */; };
@@ -1815,6 +1816,8 @@
 		845B33951A58EB4300DD8887 /* DescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescCell.m; sourceTree = "<group>"; };
 		845B33971A590FA800DD8887 /* CommentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentUser.h; sourceTree = "<group>"; };
 		845B33981A590FA800DD8887 /* CommentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentUser.m; sourceTree = "<group>"; };
+		84855F221A63B71200830B75 /* Cooker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cooker.h; sourceTree = "<group>"; };
+		84855F231A63B71200830B75 /* Cooker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cooker.m; sourceTree = "<group>"; };
 		849F91481A513981006234B9 /* icon_follow-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow-.png"; sourceTree = "<group>"; };
 		849F91491A513981006234B9 /* icon_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_follow.png; sourceTree = "<group>"; };
 		849F914A1A513981006234B9 /* icon_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow@2x.png"; sourceTree = "<group>"; };
@@ -3172,6 +3175,8 @@
 				8447CAEC1A5FAF2100FADF9D /* ShoppingOrder.m */,
 				8447CAE81A5FAEF700FADF9D /* PurchaseFood.h */,
 				8447CAE91A5FAEF700FADF9D /* PurchaseFood.m */,
+				84855F221A63B71200830B75 /* Cooker.h */,
+				84855F231A63B71200830B75 /* Cooker.m */,
 				8441172B1A4BB8AF00628A64 /* Step.h */,
 				8441172C1A4BB8AF00628A64 /* Step.m */,
 				8441172D1A4BB8AF00628A64 /* Tag.h */,
@@ -4642,6 +4647,7 @@
 				45A999541A50FFFF0008AFE3 /* AutoSizeLabelView.m in Sources */,
 				45A9996B1A51307C0008AFE3 /* CellOfAddFoodTable.m in Sources */,
 				45BBA68D1A524BED0066C143 /* UseDeviceCell.m in Sources */,
+				84855F241A63B71200830B75 /* Cooker.m in Sources */,
 				457A77711A42B23C00E422D0 /* SearchTableCell.m in Sources */,
 				45BA02C61A43D807003810C7 /* PersonalEditViewController.m in Sources */,
 				8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */,

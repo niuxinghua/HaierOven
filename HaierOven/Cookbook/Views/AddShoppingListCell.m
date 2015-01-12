@@ -36,6 +36,10 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)addButonTapped:(UIButton *)sender
+{
+    [self.delegate AddShoppingListWithCell:self];
+}
 
 
 @end

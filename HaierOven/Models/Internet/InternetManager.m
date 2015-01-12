@@ -1485,7 +1485,7 @@
 
 #pragma mark - 购物清单
 
-- (void)saveShoppingOrderWithCreatorId:(NSString*)creatorId shoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion
+- (void)saveShoppingOrderWithShoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion
 {
     
     if ([self canConnectInternet]) {
@@ -1504,7 +1504,7 @@
         NSDictionary* paramsDict = @{
                                      @"cookbookID" : shoppingOrder.cookbookID,     //菜谱ID
                                      @"cookbookName" : shoppingOrder.cookbookName,
-                                     @"creatorID" : [NSNumber numberWithInteger:[creatorId integerValue]],
+                                     @"creatorID" : [NSNumber numberWithInteger:[shoppingOrder.creatorId integerValue]],
                                      @"foods" : foods
                                      };
         
@@ -1536,15 +1536,20 @@
     
 }
 
-- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookIds:(NSArray*)cookbookIds callBack:(myCallback)completion
+- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbooks:(NSArray*)cookbooks callBack:(myCallback)completion
 {
     if ([self canConnectInternet]) {
         
         // 1. 将参数序列化
+        NSMutableArray* deleteCookbookIds = [NSMutableArray array];
+        for (ShoppingOrder* shoppingOrder in cookbooks) {
+            NSNumber* cookbookId = [NSNumber numberWithInt:[shoppingOrder.cookbookID intValue]];
+            [deleteCookbookIds addObject:cookbookId];
+        }
         
         NSDictionary* paramsDict = @{
                                      @"userBaseID" : [NSNumber numberWithInteger:[userBaseId integerValue]],     //用户ID
-                                     @"cookbookIDs" : cookbookIds
+                                     @"cookbookIDs" : deleteCookbookIds
                                     };
         
         // 2. 发送网络请求
@@ -1637,9 +1642,9 @@
             if ([status isEqualToString:@"1"]) {
                 // 3. 解析
                 
+                NSMutableArray* shoppingList = [DataParser parseShoppingListWithDict:responseObject];
                 
-                
-                completion(YES, responseObject, nil);
+                completion(YES, shoppingList, nil);
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
@@ -1658,6 +1663,52 @@
     }
     
 }
+
+
+#pragma mark - 烘焙圈
+
+- (void)getRecommentCookersWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,     //当前请求的页数
+                                     //                                     @"containsTotalCount" : @YES //是否包含总页数
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetRecommentCookerList parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* cookers = [DataParser parseCookersWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, cookers, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
 
 
 

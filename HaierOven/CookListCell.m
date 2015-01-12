@@ -27,11 +27,20 @@
 }
 
 -(void)setFoods:(NSArray *)foods{
+    _foods = foods;
     for (int i = 0; i<foods.count ; i++) {
         CookListFoodView *foodView = [[CookListFoodView alloc]initWithFrame:CGRectMake(0, Food_Height*i+50, PageW, Food_Height)];
-        foodView.foodName = foods[i];
+        foodView.delegate = self;
+        foodView.food = foods[i];
         [self addSubview:foodView];
     }
+}
+
+#pragma mark - CookListFoodViewDelegate
+
+- (void)purchaseFood:(PurchaseFood *)food purchased:(BOOL)isPurchase
+{
+    [self.delegate purchaseFood:food inCell:self isPurchased:isPurchase];
 }
 
 -(void)drawRect:(CGRect)rect{
