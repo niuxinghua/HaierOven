@@ -14,6 +14,7 @@
 #import "CookbookDetail.h"
 #import "Tag.h"
 #import "ShoppingOrder.h"
+#import "CookerStar.h"
 
 typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeConnectInternetFailed      = -100,      //网络连接失败
@@ -414,6 +415,16 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getRecommentCookersWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 
+#pragma mark - 厨神名人堂
+
+/**
+ *  获取厨神列表
+ *
+ *  @param userBaseId 用户id
+ *  @param pageIndex  请求的页面
+ *  @param completion 结果回调
+ */
+- (void)getCookerStarsWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 
 

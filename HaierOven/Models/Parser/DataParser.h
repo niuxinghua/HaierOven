@@ -89,6 +89,21 @@
  */
 + (NSMutableArray*)parseCookersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage;
 
+/**
+ *  解析厨神列表
+ *
+ *  @param dict        json
+ *  @param hadNextPage 是否有下一页
+ *
+ *  @return 厨神列表
+ */
++ (NSMutableArray*)parseCookerStarsWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage;
+
+
+
+
+
+
 @end
 
 

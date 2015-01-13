@@ -90,8 +90,17 @@
  */
 #define kCloseChassisRotation   @"30v001"
 
+/**
+ *  烘焙时间 格式：小时:分钟
+ *  小时取值范围：0~23，步长：1，单位：时
+ *  分钟取值范围：0~59，步长：1，单位：分
+ */
+#define kBakeTime       @"20v00f"
 
-
+/**
+ *  烘焙温度 取值范围：0～250，步长：1，单位：摄氏度
+ */
+#define kBakeTemperature    @"20v00g"
 
 
 

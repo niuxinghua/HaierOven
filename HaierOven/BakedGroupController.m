@@ -12,6 +12,7 @@
 #import "BakeGroupAdviceCell.h"
 #import "Cooker.h"
 #import "MJRefresh.h"
+#import "CookbookDetailControllerViewController.h"
 
 @interface BakedGroupController ()<PersonalCenterSectionViewDelegate,BackGroupAdviceCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
@@ -230,6 +231,21 @@
    
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.backGroupType == BackGroupTypeFollowed) {
+        //关注人的菜谱
+        Cookbook* selectedCookbook = self.followedCookbooks[indexPath.row];
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+        CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+        detailController.cookbook = selectedCookbook;
+        [self.navigationController pushViewController:detailController animated:YES];
+    } else {
+        //推荐厨师
+        
+    }
+}
+
 #define HeaderViewRate         0.1388888
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -248,9 +264,36 @@
     [self.tableview reloadData];
 }
 
--(void)followed:(UIButton *)sender{
+- (void)bakeGroupAdviceCell:(BakeGroupAdviceCell *)cell followed:(UIButton *)sender
+{
+    
+    NSIndexPath* indexPath = [self.tableview indexPathForCell:cell];
+    Cooker* selectedCooker = self.recommendCookers[indexPath.row];
+    NSString* userBaseId = @"5";
+    if (sender.selected) {
+        // 已关注，取消关注
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"取消关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+            }
+        }];
+    } else {
+        // 未关注，添加关注
+        [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+            }
+        }];
+    }
+    
     sender.selected = !sender.selected;
 }
+
+
 /*
 #pragma mark - Navigation
 

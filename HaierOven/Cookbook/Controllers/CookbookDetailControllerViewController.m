@@ -766,7 +766,7 @@
 
 - (IBAction)follow:(UIButton *)sender
 {
-    sender.selected = !sender.selected;
+    
     NSString* userID = @"5";
     if (!sender.selected) {
         [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
@@ -786,6 +786,7 @@
         }];
     }
     
+    sender.selected = !sender.selected;
     
     
 }

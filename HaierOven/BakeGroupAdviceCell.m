@@ -56,7 +56,7 @@
         cookNames = loop != self.cooker.cookbooks.count-1 ? [cookNames stringByAppendingFormat:@"%@、", cookbook.name] : [cookNames stringByAppendingFormat:@"%@", cookbook.name];
     }
     self.recentCookLabel.text = cookNames;
-    self.followBtn.selected = !cooker.isFollowed;
+    self.followBtn.selected = cooker.isFollowed;
     
 }
 
@@ -72,6 +72,6 @@
     self.followBtn.layer.cornerRadius = 15;
 }
 - (IBAction)follow:(UIButton *)sender {
-    [self.delegate followed:sender];
+    [self.delegate bakeGroupAdviceCell:self followed:sender];
 }
 @end

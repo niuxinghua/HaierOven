@@ -773,6 +773,9 @@
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
 		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
+		84855F2A1A64CA9900830B75 /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
+		84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84855F2B1A64F7D600830B75 /* MediaPlayer.framework */; };
+		84855F2E1A64FFFF00830B75 /* ios7-developer-cn-20130621_848x480.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84855F2D1A64FDD400830B75 /* ios7-developer-cn-20130621_848x480.mp4 */; };
 		849F916A1A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow.png */; };
 		849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@2x.png */; };
 		849F916C1A513981006234B9 /* icon_followd-.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd-.png */; };
@@ -1847,6 +1850,10 @@
 		845B33981A590FA800DD8887 /* CommentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentUser.m; sourceTree = "<group>"; };
 		84855F221A63B71200830B75 /* Cooker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cooker.h; sourceTree = "<group>"; };
 		84855F231A63B71200830B75 /* Cooker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cooker.m; sourceTree = "<group>"; };
+		84855F281A64CA9900830B75 /* CookerStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookerStar.h; sourceTree = "<group>"; };
+		84855F291A64CA9900830B75 /* CookerStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookerStar.m; sourceTree = "<group>"; };
+		84855F2B1A64F7D600830B75 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		84855F2D1A64FDD400830B75 /* ios7-developer-cn-20130621_848x480.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ios7-developer-cn-20130621_848x480.mp4"; sourceTree = "<group>"; };
 		849F91481A513981006234B9 /* icon_follow-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow-.png"; sourceTree = "<group>"; };
 		849F91491A513981006234B9 /* icon_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_follow.png; sourceTree = "<group>"; };
 		849F914A1A513981006234B9 /* icon_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow@2x.png"; sourceTree = "<group>"; };
@@ -1914,6 +1921,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */,
 				8447CAE61A5B98EE00FADF9D /* libz.dylib in Frameworks */,
 				8447CAE41A5B98E200FADF9D /* libstdc++.dylib in Frameworks */,
 				8447CAE21A5B98D500FADF9D /* CoreTelephony.framework in Frameworks */,
@@ -2909,6 +2917,7 @@
 		45C7E52E1A3FD165000B086B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84855F2D1A64FDD400830B75 /* ios7-developer-cn-20130621_848x480.mp4 */,
 				840141511A4BDD470050615F /* Icon.png */,
 				457A775A1A427B1800E422D0 /* FZLTHJW.ttf */,
 				457A775C1A427E2200E422D0 /* FZLTXHK.TTF */,
@@ -3118,6 +3127,7 @@
 		8401414E1A4BC9C20050615F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84855F2B1A64F7D600830B75 /* MediaPlayer.framework */,
 				8447CAE51A5B98EE00FADF9D /* libz.dylib */,
 				8447CAE31A5B98E200FADF9D /* libstdc++.dylib */,
 				8447CAE11A5B98D500FADF9D /* CoreTelephony.framework */,
@@ -3230,6 +3240,8 @@
 				8447CAE91A5FAEF700FADF9D /* PurchaseFood.m */,
 				84855F221A63B71200830B75 /* Cooker.h */,
 				84855F231A63B71200830B75 /* Cooker.m */,
+				84855F281A64CA9900830B75 /* CookerStar.h */,
+				84855F291A64CA9900830B75 /* CookerStar.m */,
 				8441172B1A4BB8AF00628A64 /* Step.h */,
 				8441172C1A4BB8AF00628A64 /* Step.m */,
 				8441172D1A4BB8AF00628A64 /* Tag.h */,
@@ -4037,6 +4049,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84855F2E1A64FFFF00830B75 /* ios7-developer-cn-20130621_848x480.mp4 in Resources */,
 				45BB362B1A4A8E6E000EE3C4 /* fs-wxz@2x.png in Resources */,
 				45BB360A1A4A771F000EE3C4 /* boardbg@2x.png in Resources */,
 				45D906FA1A47CAAB00B97D92 /* shezhi.png in Resources */,
@@ -4740,6 +4753,7 @@
 				45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */,
 				45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */,
 				8447CB681A5FC73700FADF9D /* JSQMessagesKeyboardController.m in Sources */,
+				84855F2A1A64CA9900830B75 /* CookerStar.m in Sources */,
 				45BB13771A4914E500FA44F4 /* LDProgressView.m in Sources */,
 				844117751A4BB8AF00628A64 /* Food.m in Sources */,
 				45C7E5AE1A3FE51F000B086B /* RootViewController.m in Sources */,

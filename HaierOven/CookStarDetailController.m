@@ -11,6 +11,9 @@
 #import "MainViewNormalCell.h"
 #import "AutoSizeLabelView.h"
 #import "ChatViewController.h"
+#import "MJRefresh.h"
+#import "CookbookDetailControllerViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
 {
@@ -22,24 +25,86 @@
 @property (strong, nonatomic) CookStarDetailTopView *cookStarDetailTopView;
 @property (strong, nonatomic) NSString *decString;
 
-@property (strong, nonatomic) NSArray *tags;
+@property (strong, nonatomic) NSMutableArray *tags;
 @property (strong, nonatomic) UIButton *tempBtn;
+
+@property (strong, nonatomic) NSMutableArray* cookbooks;
+
+@property (nonatomic) NSInteger pageIndex;
+
+@property (strong, nonatomic) MPMoviePlayerController* player;
+
 @end
 
 @implementation CookStarDetailController
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.tags = [NSMutableArray array];
+        self.cookbooks = [NSMutableArray array];
+        self.pageIndex = 1;
+    }
+    return self;
+}
+
+- (void)loadCookerStarTags
+{
+    [[InternetManager sharedManager] getUserTagsWithUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            for (Tag* tag in obj) {
+                [self.tags addObject:tag.name];
+            }
+            self.cookStarDetailTopView.tags = self.tags;
+        }else {
+            [super showProgressErrorWithLabelText:@"获取标签失败" afterDelay:1];
+        }
+    }];
+}
+
+- (void)loadUserCookbooks
+{
+    [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.cookbooks = obj;
+            } else {
+                [self.cookbooks addObjectsFromArray:arr];
+            }
+            
+            [self.mainTable reloadData];
+        } else {
+            [super showProgressErrorWithLabelText:@"获取菜谱失败" afterDelay:1];
+        }
+        
+        
+    }];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
     self.mainTable.delegate = self;
     self.mainTable.dataSource  = self;
-    
-
+    [self addFooter];
+    [self updateUI];
     // Do any additional setup after loading the view.
 }
 
+- (void)updateUI
+{
+    self.cookStarDetailTopView.cookerStar = self.cookerStar;
+    [self loadCookerStarTags];
+    [self loadUserCookbooks];
+}
+
 -(void)SetUpSubviews{
-    self.tags = @[@"1",@"2",@"3",@"4泡芙",@"泡芙",@"6泡芙",@"7蛋疼"];
     self.decString = @"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试";
     movesize = [MyUtils getTextSizeWithText:self.decString andTextAttribute:@{NSFontAttributeName:[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:PageW-32];
     
@@ -54,6 +119,58 @@
     
 
 }
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.mainTable addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        vc.pageIndex = 1;
+        [vc loadUserCookbooks];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.mainTable headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.mainTable addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        vc.pageIndex++;
+        [vc loadUserCookbooks];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.mainTable footerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,17 +184,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return self.cookbooks.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    
     NSString *cellIdentifier =@"MainViewNormalCell";
     MainViewNormalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.backgroundColor = GlobalGrayColor;
     cell.AuthorityLabel.hidden = YES;
+    cell.cookbook = self.cookbooks[indexPath.row];
     return cell;
 }
 
@@ -85,6 +201,14 @@
     return PageW*0.6;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Cookbook* selectedCookbook = self.cookbooks[indexPath.row];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+    CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    detailController.cookbook = selectedCookbook;
+    [self.navigationController pushViewController:detailController animated:YES];
+}
 
 
 #pragma mark-  TopViewDelegate
@@ -102,7 +226,31 @@
 }
 
 -(void)follow:(UIButton *)sender{
-    sender.selected =sender.selected==NO?YES:NO;
+  
+    NSString* userBaseId = @"5";
+    if (sender.selected) {
+        // 已关注，取消关注
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"取消关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+            }
+        }];
+    } else {
+        // 未关注，添加关注
+        [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+            }
+        }];
+    }
+    
+    sender.selected = !sender.selected;
+    
+    
 }
 -(void)leaveMessage{
     
@@ -117,7 +265,35 @@
 }
 -(void)playVideo{
     NSLog(@"播放");
+#warning 暂用视频
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"ios7-developer-cn-20130621_848x480" withExtension:@"mp4"];
+    self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
+    self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
+    [self.cookStarDetailTopView addSubview:self.player.view];
+    [self.player play];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrame:) name:MPMoviePlayerWillExitFullscreenNotification object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(close:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    
 }
+
+- (void)changeFrame:(NSNotification*)notification
+{
+    self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
+}
+
+- (void)close:(NSNotification*)sender
+{
+    [self.player stop];
+    [self.player.view removeFromSuperview];
+//    self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerWillExitFullscreenNotification object:self.player];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)studyCook{
     NSLog(@"新手学烘焙");
 }

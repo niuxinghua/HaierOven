@@ -228,7 +228,8 @@
                 if ([self.currentOven.mac isEqualToString:oven.mac]) {
                     self.myOven = oven;
                     //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
-                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
+//                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
+                    [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
                     
                 }
             }
@@ -359,33 +360,48 @@
 
 - (IBAction)deviceControlsTapped:(UIButton *)sender
 {
-    NSArray* commands;
+    uSDKDeviceAttribute* command;
     switch (sender.tag) {
         case 1:     //风扇
         {
-            commands = sender.selected ? @[kCloseAirFan] : @[kOpenAirFan];
+//            command = sender.selected ?
+//            [[OvenManager sharedManager] structureWithCommandName:kCloseAirFan commandAttrValue:kCloseAirFan] :
+//            [[OvenManager sharedManager] structureWithCommandName:kOpenAirFan commandAttrValue:kOpenAirFan];
+            command = [[OvenManager sharedManager] structureWithCommandName:kBakeTime commandAttrValue:@"00:01"];
+            
             break;
         }
         case 2:     //旋转
         {
-            commands = sender.selected ? @[kCloseChassisRotation] : @[kOpenChassisRotation];
+//            command = sender.selected ?
+//            [[OvenManager sharedManager] structureWithCommandName:kCloseChassisRotation commandAttrValue:kCloseChassisRotation] :
+//            [[OvenManager sharedManager] structureWithCommandName:kOpenChassisRotation commandAttrValue:kOpenChassisRotation];
+            command = [[OvenManager sharedManager] structureWithCommandName:kBakeTemperature commandAttrValue:@"80"];
             break;
         }
         case 3:     //照明
         {
-            commands = sender.selected ? @[kOffLighting] : @[kLighting];
+            command = sender.selected ?
+            [[OvenManager sharedManager] structureWithCommandName:kOffLighting commandAttrValue:kOffLighting] :
+            [[OvenManager sharedManager] structureWithCommandName:kLighting commandAttrValue:kLighting];
             break;
         }
         case 4:     //锁定
         {
-            commands = sender.selected ? @[kUnlock] : @[kLock];
+//            commands = sender.selected ? @[kUnlock] : @[kLock];
+//            command = sender.selected ?
+//            [[OvenManager sharedManager] structureWithCommandName:kUnlock commandAttrValue:kUnlock] :
+//            [[OvenManager sharedManager] structureWithCommandName:kLock commandAttrValue:kLock];
+            
+            command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+            
             break;
         }
         default:
             break;
     }
     
-    [[OvenManager sharedManager] executeCommands:[commands mutableCopy]
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""

@@ -20,8 +20,38 @@
     // Configure the view for the selected state
 }
 
+- (void)setCookerStar:(CookerStar *)cookerStar
+{
+    _cookerStar = cookerStar;
+    
+    [self.avaterImageView setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    
+    switch (cookerStar.userLevel) {
+        case 1:
+            self.vipType.image = IMAGENAMED(@"Vcs.png");
+            break;
+        case 2:
+            self.vipType.image = IMAGENAMED(@"Vcs.png");
+            break;
+        case 3:
+            self.vipType.image = IMAGENAMED(@"Vcs.png");
+            break;
+            
+        default:
+            self.vipType.image = IMAGENAMED(@"Vcs.png");
+            break;
+    }
+    
+    self.nameLabel.text = cookerStar.userName;
+    self.descLabel.text = cookerStar.signature;
+    self.foodCountLabel.text = [NSString stringWithFormat:@"%d个菜谱", cookerStar.cookbookAmount];
+    self.followButton.selected = cookerStar.isFollowed;
+    
+}
+
 - (IBAction)follow:(UIButton *)sender {
-    sender.selected = sender.selected == NO? YES:NO;
+    
+    [self.delegate cookStarCell:self followButtonTapped:sender];
 }
 
 -(void)layoutSubviews{

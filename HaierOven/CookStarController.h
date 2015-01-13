@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface CookStarController : UITableViewController
+@interface CookStarController : BaseTableViewController
 
 @end

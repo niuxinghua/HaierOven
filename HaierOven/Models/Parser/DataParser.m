@@ -360,7 +360,34 @@
     return cookers;
 }
 
-
++ (NSMutableArray*)parseCookerStarsWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
+{
+    NSMutableArray* cookerStars = [NSMutableArray array];
+    
+    NSDictionary* dataDict = dict[@"data"];
+    *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
+    
+    NSArray* cookerArr = dataDict[@"items"];
+    
+    for (NSDictionary* cookerDict in cookerArr) {
+        CookerStar* cookerStar = [[CookerStar alloc] init];
+        cookerStar.avatar = [cookerDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userAvatar"]];
+        cookerStar.avatar = [DataParser parseImageUrlWithString:cookerStar.avatar];
+        cookerStar.userName = [cookerDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userName"]];
+        cookerStar.signature = [cookerDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"signature"]];
+        cookerStar.introduction = [cookerDict[@"introduction"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"introduction"]];
+        cookerStar.videoPath = [cookerDict[@"vedioPath"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"vedioPath"]];
+        cookerStar.cookbookAmount = [cookerDict[@"cookbookAmount"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"cookbookAmount"] integerValue];
+        cookerStar.userLevel = [cookerDict[@"userLevel"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"userLevel"] integerValue];
+        cookerStar.isFollowed = [cookerDict[@"isFollowed"] integerValue] == 0 ? NO : YES;
+        cookerStar.userBaseId = [cookerDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userBaseID"]];
+        
+        [cookerStars addObject:cookerStar];
+    }
+    
+    
+    return cookerStars;
+}
 
 @end
 

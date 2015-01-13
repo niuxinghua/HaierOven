@@ -126,6 +126,16 @@ typedef void (^result) (BOOL result);
 #pragma mark - 命令执行流程
 
 /**
+ *  构建一个操作命令
+ *
+ *  @param cmdName  命令名称
+ *  @param cmdValue 命令参数
+ *
+ *  @return 返回命令对象
+ */
+- (uSDKDeviceAttribute*)structureWithCommandName:(NSString*)cmdName commandAttrValue:(NSString*)cmdValue;
+
+/**
  *  发送执行命令
  *
  *  @param commands     命令组，可以是一条指令

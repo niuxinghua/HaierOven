@@ -19,6 +19,7 @@
 -(void)playVideo;
 -(void)studyCook;
 @end
+
 @interface CookStarDetailTopView : UIView
 /**
  *  设置标签数字
@@ -29,4 +30,34 @@
 /**
  *  播放视频imageview
  */
-@property (strong, nonatomic) IBOutlet UIImageView *vedioImage;@end
+@property (strong, nonatomic) IBOutlet UIImageView *vedioImage;
+
+/**
+ *  关注按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
+
+/**
+ *  级别图标
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *levelImageView;
+
+/**
+ *  用户名
+ */
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+/**
+ *  签名
+ */
+@property (weak, nonatomic) IBOutlet UILabel *signatureLabel;
+
+/**
+ *  简介
+ */
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+
+@property (strong, nonatomic) CookerStar* cookerStar;
+
+@end

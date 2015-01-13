@@ -302,6 +302,11 @@
 
 #pragma mark - 执行命令
 
+- (uSDKDeviceAttribute*)structureWithCommandName:(NSString*)cmdName commandAttrValue:(NSString*)cmdValue
+{
+    return [[uSDKDeviceAttribute alloc] initWithAttrName:cmdName withAttrValue:cmdValue];
+}
+
 - (void)executeCommands:(NSMutableArray*)commands toDevice:(uSDKDevice*)device andCommandSN:(int)cmdsn andGroupCommandName:(NSString*)groupCmdName andResult:(result)result
 {
 //    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
@@ -309,13 +314,13 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-        NSMutableArray* cmds = [NSMutableArray array];
-        for (NSString* cmd in commands) {
-            uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:cmd withAttrValue:cmd];
-            [cmds addObject:attr];
-        }
+//        NSMutableArray* cmds = [NSMutableArray array];
+//        for (NSString* cmd in commands) {
+//            uSDKDeviceAttribute* attr = [[uSDKDeviceAttribute alloc] initWithAttrName:cmd withAttrValue:cmd];
+//            [cmds addObject:attr];
+//        }
         
-        uSDKErrorConst errorConst = [device execDeviceOperation:cmds withCmdSN:cmdsn withGroupCmdName:groupCmdName];
+        uSDKErrorConst errorConst = [device execDeviceOperation:commands withCmdSN:cmdsn withGroupCmdName:groupCmdName];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (errorConst == RET_USDK_OK) {
                 NSLog(@"发送成功");
@@ -337,7 +342,8 @@
 
 - (void)bootupToDevice:(uSDKDevice*)device result:(result)success
 {
-    [self executeCommands:[@[kBootUp] mutableCopy]
+    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kBootUp commandAttrValue:kBootUp];
+    [self executeCommands: [@[cmd] mutableCopy]
                  toDevice:device
              andCommandSN:0
       andGroupCommandName:@""
@@ -352,7 +358,8 @@
 
 - (void)shutdownToDevice:(uSDKDevice*)device result:(result)success
 {
-    [self executeCommands:[@[kShutDown] mutableCopy]
+    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kShutDown commandAttrValue:kShutDown];
+    [self executeCommands:[@[cmd] mutableCopy]
                  toDevice:device
              andCommandSN:0
       andGroupCommandName:@""
