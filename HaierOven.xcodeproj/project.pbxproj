@@ -111,6 +111,12 @@
 		458952F81A496E6D009B5DD1 /* DeviceMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458952F71A496E6D009B5DD1 /* DeviceMessageController.m */; };
 		458952FB1A496EFA009B5DD1 /* DeviceEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458952FA1A496EFA009B5DD1 /* DeviceEditController.m */; };
 		458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 458952FD1A497F10009B5DD1 /* DeviceMessageCell.m */; };
+		458DD0681A651A4B006E84DD /* PECropRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DD05E1A651A4B006E84DD /* PECropRectView.m */; };
+		458DD0691A651A4B006E84DD /* PECropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DD0601A651A4B006E84DD /* PECropView.m */; };
+		458DD06A1A651A4B006E84DD /* PECropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DD0621A651A4B006E84DD /* PECropViewController.m */; };
+		458DD06B1A651A4B006E84DD /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 458DD0631A651A4B006E84DD /* PEPhotoCropEditor.bundle */; };
+		458DD06C1A651A4B006E84DD /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DD0651A651A4B006E84DD /* PEResizeControl.m */; };
+		458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DD0671A651A4B006E84DD /* UIImage+PECrop.m */; };
 		4597EB261A501E640083AFE5 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB231A501E640083AFE5 /* delete.png */; };
 		4597EB271A501E640083AFE5 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB241A501E640083AFE5 /* delete@2x.png */; };
 		4597EB281A501E640083AFE5 /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4597EB251A501E640083AFE5 /* delete@3x.png */; };
@@ -967,6 +973,17 @@
 		458952FA1A496EFA009B5DD1 /* DeviceEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceEditController.m; sourceTree = "<group>"; };
 		458952FC1A497F10009B5DD1 /* DeviceMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceMessageCell.h; sourceTree = "<group>"; };
 		458952FD1A497F10009B5DD1 /* DeviceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceMessageCell.m; sourceTree = "<group>"; };
+		458DD05D1A651A4B006E84DD /* PECropRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropRectView.h; sourceTree = "<group>"; };
+		458DD05E1A651A4B006E84DD /* PECropRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropRectView.m; sourceTree = "<group>"; };
+		458DD05F1A651A4B006E84DD /* PECropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropView.h; sourceTree = "<group>"; };
+		458DD0601A651A4B006E84DD /* PECropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropView.m; sourceTree = "<group>"; };
+		458DD0611A651A4B006E84DD /* PECropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropViewController.h; sourceTree = "<group>"; };
+		458DD0621A651A4B006E84DD /* PECropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropViewController.m; sourceTree = "<group>"; };
+		458DD0631A651A4B006E84DD /* PEPhotoCropEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PEPhotoCropEditor.bundle; sourceTree = "<group>"; };
+		458DD0641A651A4B006E84DD /* PEResizeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEResizeControl.h; sourceTree = "<group>"; };
+		458DD0651A651A4B006E84DD /* PEResizeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEResizeControl.m; sourceTree = "<group>"; };
+		458DD0661A651A4B006E84DD /* UIImage+PECrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PECrop.h"; sourceTree = "<group>"; };
+		458DD0671A651A4B006E84DD /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
 		4597EB231A501E640083AFE5 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		4597EB241A501E640083AFE5 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		4597EB251A501E640083AFE5 /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
@@ -2091,6 +2108,32 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		458DD05B1A651A33006E84DD /* pickTool */ = {
+			isa = PBXGroup;
+			children = (
+				458DD05C1A651A4B006E84DD /* PhotoEditor */,
+			);
+			name = pickTool;
+			sourceTree = "<group>";
+		};
+		458DD05C1A651A4B006E84DD /* PhotoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				458DD05D1A651A4B006E84DD /* PECropRectView.h */,
+				458DD05E1A651A4B006E84DD /* PECropRectView.m */,
+				458DD05F1A651A4B006E84DD /* PECropView.h */,
+				458DD0601A651A4B006E84DD /* PECropView.m */,
+				458DD0611A651A4B006E84DD /* PECropViewController.h */,
+				458DD0621A651A4B006E84DD /* PECropViewController.m */,
+				458DD0631A651A4B006E84DD /* PEPhotoCropEditor.bundle */,
+				458DD0641A651A4B006E84DD /* PEResizeControl.h */,
+				458DD0651A651A4B006E84DD /* PEResizeControl.m */,
+				458DD0661A651A4B006E84DD /* UIImage+PECrop.h */,
+				458DD0671A651A4B006E84DD /* UIImage+PECrop.m */,
+			);
+			path = PhotoEditor;
+			sourceTree = "<group>";
+		};
 		459E8BA61A5D08DF009D4ADA /* CookStar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3003,6 +3046,7 @@
 		45C7E5641A3FDA30000B086B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				458DD05B1A651A33006E84DD /* pickTool */,
 				45BB136F1A4914D300FA44F4 /* progressTools */,
 				45C7E5651A3FDA43000B086B /* myTools */,
 			);
@@ -4139,6 +4183,7 @@
 				45D907001A47CAAB00B97D92 /* shouye.png in Resources */,
 				45C7E5771A3FDAB0000B086B /* 37x-Checkmark.png in Resources */,
 				452A6E771A5A964100ABFE75 /* followed.png in Resources */,
+				458DD06B1A651A4B006E84DD /* PEPhotoCropEditor.bundle in Resources */,
 				45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */,
 				45D906C61A47CAAB00B97D92 /* gfcp@3x.png in Resources */,
 				458952BE1A493C05009B5DD1 /* wifilianjie06@3x.png in Resources */,
@@ -4656,6 +4701,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */,
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
@@ -4665,6 +4711,7 @@
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
 				45A546961A59119000BE62EC /* UnderLineButton.m in Sources */,
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				458DD0681A651A4B006E84DD /* PECropRectView.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
 				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
@@ -4679,6 +4726,7 @@
 				8447CB7B1A5FC73700FADF9D /* JSQMessagesCellTextView.m in Sources */,
 				84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */,
 				842A86E11A52767300C75EE4 /* StepsViewController.m in Sources */,
+				458DD0691A651A4B006E84DD /* PECropView.m in Sources */,
 				C43BFB1F1A57E87B00FB00B6 /* DAKeyboardControl.m in Sources */,
 				45A546C81A5A4EC200BE62EC /* MJRefreshConst.m in Sources */,
 				8447CB641A5FC73700FADF9D /* UIColor+JSQMessages.m in Sources */,
@@ -4723,6 +4771,7 @@
 				842A86DB1A52493F00C75EE4 /* FoodCell.m in Sources */,
 				458952F51A49692C009B5DD1 /* DeviceUnconnectController.m in Sources */,
 				45B650C41A47F64000A6376D /* MyDeviceView.m in Sources */,
+				458DD06C1A651A4B006E84DD /* PEResizeControl.m in Sources */,
 				45D857CE1A401134007B7AB7 /* SecTableViewCell.m in Sources */,
 				45A999541A50FFFF0008AFE3 /* AutoSizeLabelView.m in Sources */,
 				45A9996B1A51307C0008AFE3 /* CellOfAddFoodTable.m in Sources */,
@@ -4771,6 +4820,7 @@
 				8441177A1A4BB8AF00628A64 /* UICKeyChainStore.m in Sources */,
 				8447CB741A5FC73700FADF9D /* JSQLocationMediaItem.m in Sources */,
 				8441177E1A4BB8AF00628A64 /* AFNetworkReachabilityManager.m in Sources */,
+				458DD06A1A651A4B006E84DD /* PECropViewController.m in Sources */,
 				844117911A4BB8AF00628A64 /* DataParser.m in Sources */,
 				8447CB7C1A5FC73700FADF9D /* JSQMessagesCollectionView.m in Sources */,
 				8447CB671A5FC73700FADF9D /* UIView+JSQMessages.m in Sources */,

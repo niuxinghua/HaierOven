@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UITableViewCell *avaterCell;
 @property (strong, nonatomic) IBOutlet UIView *descriptionCell;
+
+@property (strong, nonatomic) UIWindow *myWindow;
 @property CGSize size;
 @end
 
@@ -58,6 +60,18 @@
     float y = size.height>PageW/8?8:(PageW/8-size.height)/2;
     self.descriptionLabel.frame = CGRectMake(102, y, size.width,size.height);
     [self.descriptionCell addSubview:self.descriptionLabel];
+    
+    
+
+    
+    self.myWindow = [UIWindow new];
+    self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
+    self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = YES;
+    
 }
 #pragma mark tableviewDelegate
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

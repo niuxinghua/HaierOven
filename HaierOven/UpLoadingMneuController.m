@@ -9,10 +9,10 @@
 #import "UpLoadingMneuController.h"
 #import "ChooseCoverView.h"
 #import "CreatMneuController.h"
-
+#import "PECropViewController.h"
 typedef void (^result) (BOOL success);
 
-@interface UpLoadingMneuController ()<UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ChooseCoverViewDelegate>
+@interface UpLoadingMneuController ()<UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ChooseCoverViewDelegate,PECropViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *cover;
 @property (strong, nonatomic) IBOutlet UITextField *menuTitleTextFiled;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
@@ -22,6 +22,8 @@ typedef void (^result) (BOOL success);
 @property (strong, nonatomic) NSString *descriptionString;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) ChooseCoverView  *chooseCoverView;
+
+@property (strong, nonatomic) UIImage *tempImage;
 @property BOOL isChooseCover;
 
 @property (strong, nonatomic) NSMutableArray* tags;
@@ -100,9 +102,9 @@ typedef void (^result) (BOOL success);
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 UIImagePickerController * picker = [[UIImagePickerController alloc]init];
                 picker.sourceType=UIImagePickerControllerSourceTypeCamera;
-                picker.allowsEditing = YES;  //是否可编辑
+//                picker.allowsEditing = YES;  //是否可编辑
                 picker.delegate = self;
-//                picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+                picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
                 //摄像头
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [self presentViewController:picker animated:YES completion:nil];
@@ -118,9 +120,9 @@ typedef void (^result) (BOOL success);
                 pickerImage.sourceType =UIImagePickerControllerSourceTypePhotoLibrary;
                 //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                 pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+//                pickerImage.allowsEditing = YES;
             }
             pickerImage.delegate = self;
-            pickerImage.allowsEditing = NO;
             [self presentViewController:pickerImage animated:YES completion:nil];
         }
     }];
@@ -159,12 +161,46 @@ typedef void (^result) (BOOL success);
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
-    self.cover.image = image;
+    self.tempImage = image;
     
-    
-    self.isChooseCover = YES;
+    [self openEditor];
     
 }
+
+
+- (void)openEditor
+{
+    PECropViewController *controller = [[PECropViewController alloc] init];
+    controller.delegate = self;
+    controller.image = self.tempImage;
+    controller.toolbarHidden = YES;
+    controller.keepingCropAspectRatio = YES;
+    controller.cropAspectRatio = 65.0f/52.0f;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    [self presentViewController:navigationController animated:NO completion:NULL];
+}
+
+
+
+#pragma mark - PECropViewControllerDelegate methods
+
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage transform:(CGAffineTransform)transform cropRect:(CGRect)cropRect
+{
+    [controller dismissViewControllerAnimated:YES completion:NULL];
+    self.cover.image = croppedImage;
+    self.isChooseCover = YES;
+}
+
+- (void)cropViewControllerDidCancel:(PECropViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 
 
 

@@ -18,8 +18,9 @@
 #import "YIPopupTextView.h"
 #import "BottomCell.h"
 #import "CookbookDetailControllerViewController.h"
+#import "PECropViewController.h"
 
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
@@ -33,7 +34,7 @@
 @property float psCellHight;
 @property (strong, nonatomic) NSMutableArray*  tagsForTagsView;
 @property (strong, nonatomic) NSMutableArray* selectedTags;
-
+@property (strong, nonatomic) UIImage *peTempImage;//剪切暂存图片
 @property BOOL ischangeCover;
 
 /**
@@ -386,7 +387,6 @@
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 UIImagePickerController * picker = [[UIImagePickerController alloc]init];
                 picker.sourceType=UIImagePickerControllerSourceTypeCamera;
-                picker.allowsEditing = YES;  //是否可编辑
                 picker.delegate = self;
                 picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
                 //摄像头
@@ -405,10 +405,8 @@
                 pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                 pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-                
             }
             pickerImage.delegate = self;
-            pickerImage.allowsEditing = NO;
             [self presentViewController:pickerImage animated:YES completion:nil];
         }
         
@@ -419,50 +417,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
+    self.peTempImage = image;
     [picker dismissViewControllerAnimated:YES completion:nil];
-    NSData* imageData = UIImageJPEGRepresentation(image, 0.6);
+    [self openEditor];
     
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-
-    if (self.ischangeCover) {
-        self.ischangeCover = NO;
-       
-        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
-            [super hiddenProgressHUD];
-            if (success) {
-                NSDictionary* objDict = [obj firstObject];
-                self.cookbookDetail.coverPhoto = objDict[@"name"];
-                
-            } else {
-                if (error.code == InternetErrorCodeConnectInternetFailed) {
-                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
-                } else {
-                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
-                }
-            }
-        }];
-        self.cookbookCoverPhoto = image;
-        [self.tableView reloadData];
-        
-    }else {
-        self.tempImageView.image = image;
-        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
-            [super hiddenProgressHUD];
-            if (success) {
-                NSDictionary* objDict = [obj firstObject];
-                self.edittingStep.photo = objDict[@"name"];
-                [self.tableView reloadData];
-            } else {
-                if (error.code == InternetErrorCodeConnectInternetFailed) {
-                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
-                } else {
-                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
-                }
-            }
-        }];
-    }
-    
-
 }
 
 #pragma mark-
@@ -698,13 +656,96 @@
 
 #pragma mark- 点击编辑图片
 -(void)changeCover{
+    self.ischangeCover = YES;
     self.myWindow.hidden = NO;
     self.addFoodAlertView.hidden = YES;
-    self.ischangeCover = YES;
     [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH-PageW*0.58, PageW, PageW*0.58)];
     }completion:nil];
     
 }
 
+
+
+
+
+
+
+- (void)openEditor
+{
+    PECropViewController *controller = [[PECropViewController alloc] init];
+    controller.delegate = self;
+    controller.image = self.peTempImage;
+    controller.toolbarHidden = YES;
+    controller.keepingCropAspectRatio = YES;
+    
+    if (self.ischangeCover)
+        controller.cropAspectRatio = 65.0f/52.0f;
+    else
+        controller.cropAspectRatio = 53.0f/32.0f;
+
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    [self presentViewController:navigationController animated:NO completion:NULL];
+}
+
+
+
+#pragma mark - PECropViewControllerDelegate methods
+
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage transform:(CGAffineTransform)transform cropRect:(CGRect)cropRect
+{
+    NSData* imageData = UIImageJPEGRepresentation(croppedImage, 0.6);
+    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    
+    if (self.ischangeCover) {
+        self.ischangeCover = NO;
+        
+        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSDictionary* objDict = [obj firstObject];
+                self.cookbookDetail.coverPhoto = objDict[@"name"];
+                
+            } else {
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
+                }
+            }
+        }];
+        self.cookbookCoverPhoto = croppedImage;
+        [self.tableView reloadData];
+        
+    }else {
+        self.tempImageView.image = croppedImage;
+        [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                NSDictionary* objDict = [obj firstObject];
+                self.edittingStep.photo = objDict[@"name"];
+                [self.tableView reloadData];
+            } else {
+                if (error.code == InternetErrorCodeConnectInternetFailed) {
+                    [super showProgressErrorWithLabelText:@"网络连接失败" afterDelay:1];
+                } else {
+                    [super showProgressErrorWithLabelText:@"上传失败，请重试" afterDelay:1];
+                }
+            }
+        }];
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)cropViewControllerDidCancel:(PECropViewController *)controller
+{
+    self.ischangeCover = NO;
+    [controller dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end
