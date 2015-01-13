@@ -381,9 +381,10 @@
         }
         case 3:     //照明
         {
-            command = sender.selected ?
-            [[OvenManager sharedManager] structureWithCommandName:kOffLighting commandAttrValue:kOffLighting] :
-            [[OvenManager sharedManager] structureWithCommandName:kLighting commandAttrValue:kLighting];
+//            command = sender.selected ?
+//            [[OvenManager sharedManager] structureWithCommandName:kOffLighting commandAttrValue:kOffLighting] :
+//            [[OvenManager sharedManager] structureWithCommandName:kLighting commandAttrValue:kLighting];
+            command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode commandAttrValue:@"30v0Me"];
             break;
         }
         case 4:     //锁定

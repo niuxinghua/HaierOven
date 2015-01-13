@@ -212,7 +212,50 @@
 #define GetCookerStars      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"marvellouschef/get"]
 
 
+#pragma mark - 私信
 
+/**
+ *  发送站内消息
+ */
+#define SendMessage     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"message/send"]
+
+/**
+ *  更新消息状态为已读
+ */
+#define MessageHadRead      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"message/read"]
+
+/**
+ *  获取未读消息数量
+ */
+#define MessageCount        [NSString stringWithFormat:@"%@/%@", BaseUrl, @"message/count"]
+
+/**
+ *  获取指定消息接受者的消息列表
+ */
+#define GetMessageList      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"message/getbytouser"]
+
+/**
+ *  获取指定消息接受者和指定发送者互相发送的消息列表
+ */
+#define GetChatMessages     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"message/getbytouserandfromuser"]
+
+
+#pragma mark - 通知
+
+/**
+ *  更新指定用户ID所有通知状态为已读
+ */
+#define NotificationHadRead     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"noticfication/read"]
+
+/**
+ *  获取未读通知数量
+ */
+#define NotificationCount     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"noticfication/count"]
+
+/**
+ *  获取指定接受者的通知列表
+ */
+#define NotificationList     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"noticfication/get"]
 
 
 

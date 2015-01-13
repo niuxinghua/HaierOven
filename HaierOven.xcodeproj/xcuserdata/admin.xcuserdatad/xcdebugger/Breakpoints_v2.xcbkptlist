@@ -163,12 +163,12 @@
                   symbolName = "-[InternetManager modifyCookbook:callBack:]"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "442827740.780539"
+                  timestampString = "442829287.481032"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1350"
                   endingLineNumber = "1350"
-                  offsetFromSymbolStart = "1620">
+                  offsetFromSymbolStart = "1935">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -177,12 +177,12 @@
                   symbolName = "-[InternetManager modifyCookbook:callBack:]"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "442827740.780681"
+                  timestampString = "442829287.481517"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1350"
                   endingLineNumber = "1350"
-                  offsetFromSymbolStart = "1724">
+                  offsetFromSymbolStart = "2103">
                </Location>
             </Locations>
          </BreakpointContent>

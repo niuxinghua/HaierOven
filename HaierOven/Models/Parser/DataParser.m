@@ -11,8 +11,9 @@
 #import "Comment.h"
 #import "Cookbook.h"
 #import "Cooker.h"
+#import "CookerStar.h"
 
-@class Food, Creator, Step;
+@class Food, Creator, Step, CookerStar;
 
 @implementation DataParser
 

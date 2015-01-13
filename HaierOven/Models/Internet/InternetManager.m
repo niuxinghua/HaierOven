@@ -1753,6 +1753,333 @@
     
 }
 
+#pragma mark - 私信
+
+- (void)sendMessage:(NSString*)message toUser:(NSString*)userBaseId fromUser:(NSString*)fromUser callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+
+        NSDictionary* paramsDict = @{
+                                     @"messageFrom" : @{
+                                             @"userBaseID" : fromUser
+                                             },
+                                     @"messageTo" : @{
+                                             @"userBaseID" : fromUser
+                                             },
+                                     @"messageContent" : message
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:SendMessage parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+    
+}
+
+- (void)updateReadStatusWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:MessageHadRead parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+- (void)getMessageCountWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:MessageCount parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
+- (void)getMessagesListWithUserBaseId:(NSString*)userBaseId status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSNumber* messageStatus = [NSNumber numberWithInteger:status];
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,
+                                     @"read" : messageStatus
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetMessageList parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+- (void)getChatMessagesFromUser:(NSString*)fromUser toUser:(NSString*)toUser status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSNumber* messageStatus = [NSNumber numberWithInteger:status];
+        NSDictionary* paramsDict = @{
+                                     @"toUserBaseID" : toUser,
+                                     @"fromUserBaseID" : fromUser,
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,
+                                     @"read" : messageStatus
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetChatMessages parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+
+#pragma mark - 通知
+
+- (void)updateNotificationReadStatusWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:NotificationHadRead parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+
+- (void)getNotificationCountWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:NotificationCount parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
+
+- (void)getNotificationListWithUserBaseId:(NSString*)userBaseId status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSNumber* messageStatus = [NSNumber numberWithInteger:status];
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,
+                                     @"read" : messageStatus
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:NotificationList parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
+
+
+
 
 
 
