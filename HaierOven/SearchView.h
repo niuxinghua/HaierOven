@@ -13,7 +13,7 @@
 -(void)TouchUpInsideCancelBtn;
 -(void)StartReach:(UITextField*)searchTextFailed;
 -(void)Cancel;
-
+-(void)TouchUpInsideDone:(NSString *)string;
 - (void)textFieldTextChanged:(NSString*)text;
 
 @end

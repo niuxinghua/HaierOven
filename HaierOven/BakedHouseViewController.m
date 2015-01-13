@@ -9,11 +9,19 @@
 #import "BakedHouseViewController.h"
 #import "BakeHouseCell.h"
 #import "BakeHouseHeaderReusableView.h"
-@interface BakedHouseViewController ()<BakeHouseHeaderReusableViewDelegate>
-@property (strong, nonatomic)UIWindow *myWindow;
+#import "FiexibleView.h"
 
-@property (strong, nonatomic) NSArray *equipments;
+@interface BakedHouseViewController ()<BakeHouseHeaderReusableViewDelegate,FiexibleViewDelegate>
+{
+    CGFloat fiexViewHegih;
+    CGFloat fiexViewY;
+}
+@property (strong, nonatomic)FiexibleView *fiexView;
+@property (strong, nonatomic)NSArray *equipments;
+@property (strong, nonatomic)UIButton *tempFiexibleBtn;
 @end
+
+#define LABEL_H    38   //标签high
 
 @implementation BakedHouseViewController
 
@@ -29,25 +37,17 @@
 
 
 -(void)setUpSubviews{
-    self.myWindow = [UIWindow new];
-    self.myWindow.backgroundColor = [UIColor whiteColor];
-    self.myWindow.layer.cornerRadius = 5;
-    self.myWindow.layer.borderColor = GlobalOrangeColor.CGColor;
-    self.myWindow.layer.borderWidth = 1;
-    self.myWindow.windowLevel = UIWindowLevelAlert;
-    [self.myWindow makeKeyAndVisible];
-    self.myWindow.userInteractionEnabled = YES;
-    self.myWindow.hidden = NO;
+    self.equipments =@[@"烘焙器材",@"烘焙食材",@"飞机",@"坦克",@"航空母舰"];
+    fiexViewHegih = 10+20+(LABEL_H*self.equipments.count);
+    self.fiexView = [[FiexibleView alloc]initWithFrame:CGRectZero];
+    self.fiexView.equipments = self.equipments;
+    self.fiexView.backgroundColor = [UIColor clearColor];
+    self.fiexView.delegate = self;
+    UITapGestureRecognizer *packUp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(packUpFiex)];
+    [self.fiexView addGestureRecognizer:packUp];
+    [self.view addSubview:self.fiexView];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -82,41 +82,71 @@
 }
 
 -(void)GetfiexibleBtnSelected:(UIButton *)sender andUIView:(SectionFiexibleView *)sectionFiexibleView{
-    
+
     CGPoint location = sectionFiexibleView.frame.origin;
-    
-    CGPoint newLocation = [sectionFiexibleView convertPoint:location toView:sectionFiexibleView.superview.superview.superview];
-    
-    if (sender.selected==NO) {
-        self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width, 0);
-        [UIView animateWithDuration:0.5 animations:^{
-            self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width, 200);
-        } completion:^(BOOL finished) {
-            sender.selected = YES;
-            NSLog(@"下");
-        }];
-    }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            self.myWindow.frame = CGRectMake(newLocation.x, newLocation.y+64, sender.width,0);
 
-        } completion:^(BOOL finished) {
-            sender.selected = NO;
-            NSLog(@"上");
-        }];
-    }
-
+    CGPoint newLocation = [sectionFiexibleView convertPoint:location toView:sectionFiexibleView.superview.superview];
+    
+    self.tempFiexibleBtn = sender;
+    fiexViewY = newLocation.y;
+    
+    if (sender.selected==NO){
+        if (self.collectionView.contentOffset.y==0) {
+            [self fiexViewDown];
+        }
+    }else
+        [self fiexViewUp];
 }
 
 
 
-#define LABEL_H    26   //标签high
--(void)setEquipments:(NSArray *)equipments{
-    _equipments = equipments;
-    for (int i = 0; i<equipments.count; i++) {
-        UILabel *label = [UILabel new];
-        label.text = equipments[i];
-        label.frame = CGRectMake(0, i*LABEL_H+8+50, 107, LABEL_H);
-        [self.myWindow addSubview: label];
-    }
+#pragma mark - 获取点击label
+-(void)tapLabel:(UILabel *)label{
+    NSLog(@"%@",self.equipments[label.tag]);
+    [self.tempFiexibleBtn setTitle:label.text forState:UIControlStateNormal];
+    [self.tempFiexibleBtn setTitle:label.text forState:UIControlStateHighlighted];
+    [self fiexViewUp];
 }
+
+#pragma mark - BakeHouseHeaderReusableViewDelegate
+-(void)GetNeedEquipmentType:(NSInteger)type{
+    NSLog(@"%d",type);
+    [self fiexViewUp];
+}
+
+-(void)GetSearchKeyWord:(NSString *)string{
+    NSLog(@"%@",string);
+}
+
+
+#pragma mark- 动画
+
+-(void)packUpFiex{
+    [self fiexViewUp];
+}
+-(void)fiexViewUp{
+    self.collectionView.scrollEnabled = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.fiexView.frame = CGRectMake(12, fiexViewY, self.tempFiexibleBtn.width, 0);
+        self.fiexView.imageFrame = CGRectMake(0, 5, self.tempFiexibleBtn.width, 0);
+        
+    } completion:^(BOOL finished) {
+        self.tempFiexibleBtn.selected = NO;
+    }];
+
+}
+-(void)fiexViewDown{
+    self.fiexView.frame = CGRectMake(12, fiexViewY, self.tempFiexibleBtn.width, 0);
+    self.fiexView.imageFrame =CGRectMake(0, 5, self.tempFiexibleBtn.width, 0);
+    self.collectionView.scrollEnabled = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.fiexView.frame = CGRectMake(12, fiexViewY, self.tempFiexibleBtn.width, fiexViewHegih);
+        self.fiexView.imageFrame = CGRectMake(0, 5, self.tempFiexibleBtn.width, fiexViewHegih-5);
+        
+    } completion:^(BOOL finished) {
+        self.tempFiexibleBtn.selected = YES;
+    }];
+}
+
+
 @end

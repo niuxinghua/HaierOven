@@ -13,6 +13,9 @@
 -(void)GetfiexibleBtnSelected:(UIButton *)sender
                     andUIView:(SectionFiexibleView *)sectionFiexibleView;
 
+-(void)GetSearchKeyWord:(NSString*)string;
+
+-(void)GetNeedEquipmentType:(NSInteger)type;
 @end
 @interface BakeHouseHeaderReusableView : UICollectionReusableView
 @property (weak, nonatomic)id<BakeHouseHeaderReusableViewDelegate>delegate;
