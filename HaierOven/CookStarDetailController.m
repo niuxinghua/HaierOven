@@ -266,7 +266,7 @@
 -(void)playVideo{
     NSLog(@"播放");
 #warning 暂用视频
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"ios7-developer-cn-20130621_848x480" withExtension:@"mp4"];
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];
