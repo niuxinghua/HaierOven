@@ -45,8 +45,7 @@
 //    PageW-25, 35
     SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0, 0, self.sectionSearchView.width-25, 30)];
     search.searchTextFailed.placeholder = @"请搜索你的烘焙装备....";
-    
-//    search.center = CGPointMake(self.sectionSearchView.center.x, self.sectionSearchView.center.y);
+    search.delegate = self;
     search.center = self.sectionSearchView.center;
     [self.sectionSearchView addSubview:search];
 }
@@ -59,7 +58,7 @@
 }
 
 -(void)initFiexlibleView{
-    SectionFiexibleView *fiex = [[SectionFiexibleView alloc]initWithFrame:CGRectMake(12, self.sectionFliexView.height/2-13, 107, 26)];
+    SectionFiexibleView *fiex = [[SectionFiexibleView alloc]initWithFrame:CGRectMake(12, self.sectionFliexView.height/2-13, 100, 24)];
     fiex.delegate = self;
 //    fiex.center = self.sectionFliexView.center;
     [self.sectionFliexView addSubview:fiex];
@@ -83,10 +82,14 @@
 
 }
 
+-(void)TouchUpInsideDone:(NSString *)string{
+    [self.delegate GetSearchKeyWord:string];
+}
+
 
 #pragma mark - 显示热门还是最新
 -(void)SectionType:(NSInteger)type{
-
+    [self.delegate GetNeedEquipmentType:type];
 }
 
 

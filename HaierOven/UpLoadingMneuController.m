@@ -102,7 +102,7 @@ typedef void (^result) (BOOL success);
                 picker.sourceType=UIImagePickerControllerSourceTypeCamera;
                 picker.allowsEditing = YES;  //是否可编辑
                 picker.delegate = self;
-                picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+//                picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
                 //摄像头
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [self presentViewController:picker animated:YES completion:nil];
@@ -112,20 +112,17 @@ typedef void (^result) (BOOL success);
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"你没有摄像头" delegate:nil cancelButtonTitle:@"Drat!" otherButtonTitles:nil];
                 [alert show];
             }
-            
         }else if (tag == 2) {
             UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
             if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                pickerImage.sourceType =UIImagePickerControllerSourceTypePhotoLibrary;
                 //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                 pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-                
             }
             pickerImage.delegate = self;
             pickerImage.allowsEditing = NO;
             [self presentViewController:pickerImage animated:YES completion:nil];
         }
-
     }];
 }
 
@@ -279,7 +276,7 @@ typedef void (^result) (BOOL success);
     int height = keyboardRect.size.height;
     int y = PageH - self.middleView.bottom;
     if (y<height) {
-        self.view.frame = CGRectMake(0,-(height - y), PageW, PageH);
+        self.view.frame = CGRectMake(0,y-height, PageW, PageH);
     }
 }
 

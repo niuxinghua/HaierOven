@@ -48,6 +48,7 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 
 {
+    [self.delegate TouchUpInsideDone:textField.text];
     self.cancelbtn.hidden = YES;
     return [textField resignFirstResponder];
     

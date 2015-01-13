@@ -16,20 +16,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/CreatMneuController.m"
-            timestampString = "442054749.045548"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -113,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/BakedHouseViewController.m"
-            timestampString = "442750162.090762"
+            filePath = "HaierOven/FiexibleWindow.m"
+            timestampString = "442809451.983533"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-GetfiexibleBtnSelected:andUIView:"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-setEquipments:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -129,13 +115,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/BakedHouseViewController.m"
-            timestampString = "442750809.29408"
+            filePath = "HaierOven/BaseTableViewController.m"
+            timestampString = "442827721.872141"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-GetfiexibleBtnSelected:andUIView:"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "-showProgressErrorWithLabelText:afterDelay:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -5,8 +5,8 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FZLTXHK.TTF">
-            <string>FZLTXHK--GBK1-0</string>
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -18,7 +18,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ffh-7z-ee5">
                     <rect key="frame" x="0.0" y="0.0" width="107" height="26"/>
-                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal" title="全部" backgroundImage="xlqbwwz.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

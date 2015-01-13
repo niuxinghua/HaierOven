@@ -115,11 +115,13 @@
 {
     self.progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+//    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     
-    self.progressHUD.color = [UIColor greenColor];
+    self.progressHUD.color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];;
     self.progressHUD.labelColor = [UIColor whiteColor];
+    self.progressHUD.labelFont = [UIFont fontWithName:GlobalTitleFontName size:15];
+
     
     self.progressHUD.labelText = text;
     [self.progressHUD hide:YES afterDelay:delay];
@@ -130,11 +132,13 @@
 {
     self.progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+//    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     
-    self.progressHUD.color = [UIColor redColor];
+    self.progressHUD.color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];;
     self.progressHUD.labelColor = [UIColor whiteColor];
+    self.progressHUD.labelFont = [UIFont fontWithName:GlobalTitleFontName size:15];
+
     
     self.progressHUD.labelText = text;
     [self.progressHUD hide:YES afterDelay:delay];
