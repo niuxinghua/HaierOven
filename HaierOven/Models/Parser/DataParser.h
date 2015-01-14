@@ -99,8 +99,14 @@
  */
 + (NSMutableArray*)parseCookerStarsWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage;
 
-
-
+/**
+ *  解析聊天信息
+ *
+ *  @param dict json
+ *
+ *  @return 返回聊天列表
+ */
++ (NSMutableArray*)parseMessagesWithDict:(NSDictionary*)dict;
 
 
 

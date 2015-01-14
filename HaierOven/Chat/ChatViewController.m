@@ -8,21 +8,88 @@
 
 #import "ChatViewController.h"
 #import "MessagesModel.h"
+#import "Message.h"
 
 @interface ChatViewController () <UIActionSheetDelegate>
 
 @property (strong, nonatomic) MessagesModel* messagesModel;
 
+@property (nonatomic) NSInteger pageIndex;
+
 @end
 
 @implementation ChatViewController
 
+#pragma mark - 获取聊天记录
+
+- (void)loadMessages
+{
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.toUserId status:-1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.messages = obj;
+            } else {
+                [self.messages addObjectsFromArray:arr];
+            }
+            [self parseMessagesToJSQMessages];
+            [self.collectionView reloadData];
+            
+        } else {
+            [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
+        }
+        
+    }];
+    
+}
+
+- (void)parseMessagesToJSQMessages
+{
+    NSString* userBaseId = @"5";
+    for (Message* message in self.messages) {
+        
+        if ([message.fromUser.userBaseId isEqualToString:userBaseId]) {
+            JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:userBaseId
+                                                         senderDisplayName:@"刘康"
+                                                                      date:[NSDate distantPast]
+                                                                      text:message.content];
+            [self.messagesModel.messages insertObject:jsqMessage atIndex:0];
+        } else {
+            JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:self.toUserId
+                                                         senderDisplayName:message.toUser.userName
+                                                                      date:[NSDate distantPast]
+                                                                      text:message.content];
+            [self.messagesModel.messages insertObject:jsqMessage atIndex:0];
+            
+        }
+        
+    }
+}
+
 #pragma mark - 加载和初始化
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        self.pageIndex = 1;
+        self.isBackButton = YES;
+        self.messages = [NSMutableArray array];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupSubviews];
+    
+    [self loadMessages];
+//    [self parseMessagesToJSQMessages];
     
 }
 
@@ -40,6 +107,34 @@
      *  设置聊天假数据
      */
     self.messagesModel = [[MessagesModel alloc] init];
+    
+    JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"QQQ.png"]
+                                                                                 diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    
+    JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Vcs"]
+                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    
+    User* currentUser = [[User alloc] init];
+    currentUser.userId = @"5";
+    currentUser.userName = @"刘康";
+    User* her = [[User alloc] init];
+    her.userName = @"绣春刀";
+    her.userId = @"2";
+    
+    
+//    JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:her.userId
+//                                                 senderDisplayName:her.userName
+//                                                              date:[NSDate distantPast]
+//                                                              text:@"hello"];
+//    [self.messagesModel.messages addObject:jsqMessage];
+    [self parseMessagesToJSQMessages];
+    
+    self.messagesModel.avatars = @{ currentUser.userId : fromeImage,
+                      her.userId : toImage };
+    
+    
+    self.messagesModel.users = @{ currentUser.userId  : currentUser.userName,
+                    self.toUserId : her.userName };
     
     /**
      *  设置头像大小
@@ -89,6 +184,17 @@
     
     [self.messagesModel.messages addObject:message];
     [self finishSendingMessage];
+    
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] sendMessage:text toUser:self.toUserId fromUser:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"发送成功");
+        } else {
+            NSLog(@"发送失败");
+            [super showProgressErrorWithLabelText:@"发送失败" afterDelay:1];
+        }
+    }];
+    
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender

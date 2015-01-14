@@ -12,6 +12,7 @@
 #import "Cookbook.h"
 #import "Cooker.h"
 #import "CookerStar.h"
+#import "Message.h"
 
 @class Food, Creator, Step, CookerStar;
 
@@ -388,6 +389,32 @@
     
     
     return cookerStars;
+}
+
++ (NSMutableArray*)parseMessagesWithDict:(NSDictionary*)dict
+{
+    NSMutableArray* messages = [NSMutableArray array];
+    
+    NSDictionary* dataDict = dict[@"data"];
+    
+    NSArray* messageArr = dataDict[@"items"];
+    
+    for (NSDictionary* messageDict in messageArr) {
+        
+        Message* message = [[Message alloc] init];
+        message.ID = [messageDict[@"messageID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageID"]];
+        message.createdTime = [messageDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"createdTime"]];
+        message.isRead = [messageDict[@"isRead"] integerValue] == 0 ? NO : YES;
+        message.content = [messageDict[@"messageContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageContent"]];
+        
+        message.fromUser = [DataParser parseCommentUserWithDict:messageDict[@"messageFrom"]];
+        message.toUser = [DataParser parseCommentUserWithDict:messageDict[@"messageTo"]];
+        
+        [messages addObject:message];
+    }
+    
+    
+    return messages;
 }
 
 @end

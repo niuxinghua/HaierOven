@@ -8,7 +8,11 @@
 
 #import "MessagesModel.h"
 
-#import "MessagesModel.h"
+@interface MessagesModel ()
+
+@property (copy, nonatomic) NSString* toUserId;
+
+@end
 
 @implementation MessagesModel
 
@@ -16,10 +20,25 @@
 {
     if (self = [super init]) {
         self.messages = [NSMutableArray array];
-        [self loadFakeMessages];
+        
+//        [self loadFakeMessages];
+        
+        /**
+         *  Create message bubble images objects.
+         *
+         *  Be sure to create your bubble images one time and reuse them for good performance.
+         *
+         */
+        JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+        
+        self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:GlobalOrangeColor];
+        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:GlobalGrayColor];
+        
     }
     return self;
 }
+
+
 
 - (void)loadFakeMessages
 {

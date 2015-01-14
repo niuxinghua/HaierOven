@@ -1767,7 +1767,7 @@
                                              @"userBaseID" : fromUser
                                              },
                                      @"messageTo" : @{
-                                             @"userBaseID" : fromUser
+                                             @"userBaseID" : userBaseId
                                              },
                                      @"messageContent" : message
                                      };
@@ -1927,7 +1927,7 @@
         NSDictionary* paramsDict = @{
                                      @"toUserBaseID" : toUser,
                                      @"fromUserBaseID" : fromUser,
-                                     @"limit" : @PageLimit,     //每页行数
+                                     @"limit" : @2000,         //@PageLimit,     //每页行数
                                      @"page" : currentPage,
                                      @"read" : messageStatus
                                      };
@@ -1940,7 +1940,8 @@
             if ([status isEqualToString:@"1"]) {
                 // 3. 解析
                 
-                completion(YES, responseObject, nil);
+                NSMutableArray* messages = [DataParser parseMessagesWithDict:responseObject];
+                completion(YES, messages, nil);
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);

@@ -650,6 +650,7 @@
 		842A86E91A5277D000C75EE4 /* OvenInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86E71A5277D000C75EE4 /* OvenInfoCell.xib */; };
 		842A86ED1A527DC700C75EE4 /* StepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86EB1A527DC700C75EE4 /* StepCell.m */; };
 		842A86EE1A527DC700C75EE4 /* StepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86EC1A527DC700C75EE4 /* StepCell.xib */; };
+		8438F6EF1A660DE900E1436C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6EE1A660DE900E1436C /* Message.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
@@ -1598,6 +1599,8 @@
 		842A86EA1A527DC700C75EE4 /* StepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCell.h; sourceTree = "<group>"; };
 		842A86EB1A527DC700C75EE4 /* StepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCell.m; sourceTree = "<group>"; };
 		842A86EC1A527DC700C75EE4 /* StepCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCell.xib; sourceTree = "<group>"; };
+		8438F6ED1A660DE900E1436C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		8438F6EE1A660DE900E1436C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		8441171E1A4BB8AF00628A64 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		8441171F1A4BB8AF00628A64 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		844117211A4BB8AF00628A64 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -3854,6 +3857,8 @@
 			children = (
 				8447CB921A5FC89500FADF9D /* MessagesModel.h */,
 				8447CB931A5FC89500FADF9D /* MessagesModel.m */,
+				8438F6ED1A660DE900E1436C /* Message.h */,
+				8438F6EE1A660DE900E1436C /* Message.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4771,6 +4776,7 @@
 				8441177C1A4BB8AF00628A64 /* AFHTTPRequestOperationManager.m in Sources */,
 				45C7E5BC1A3FFDCD000B086B /* FirstTableViewCell.m in Sources */,
 				45BEED741A412AED003000AD /* NSTimer+Addition.m in Sources */,
+				8438F6EF1A660DE900E1436C /* Message.m in Sources */,
 				45BEED731A412AED003000AD /* MyPageControl.m in Sources */,
 				45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */,
 				45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */,

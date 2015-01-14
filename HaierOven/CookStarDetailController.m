@@ -34,6 +34,8 @@
 
 @property (strong, nonatomic) MPMoviePlayerController* player;
 
+@property (strong, nonatomic) NSMutableArray* messages;
+
 @end
 
 @implementation CookStarDetailController
@@ -47,6 +49,29 @@
     }
     return self;
 }
+
+#pragma mark - 获取聊天记录
+
+- (void)loadMessages
+{
+    NSString* userBaseId = @"5";
+    self.messages = [NSMutableArray array];
+    [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.cookerStar.userBaseId status:-1 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            NSArray* arr = obj;
+            
+            [self.messages addObjectsFromArray:arr];
+
+        } else {
+            [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
+        }
+        
+    }];
+    
+}
+
+#pragma mark - 其他网络请求
 
 - (void)loadCookerStarTags
 {
@@ -102,6 +127,7 @@
     self.cookStarDetailTopView.cookerStar = self.cookerStar;
     [self loadCookerStarTags];
     [self loadUserCookbooks];
+//    [self loadMessages];
 }
 
 -(void)SetUpSubviews{
@@ -258,7 +284,8 @@
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
-    
+    chatViewController.toUserId = self.cookerStar.userBaseId;
+    chatViewController.messages = self.messages;
     [self.navigationController pushViewController:chatViewController animated:YES];
     
     
