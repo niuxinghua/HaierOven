@@ -10,7 +10,6 @@
 typedef NS_ENUM(NSUInteger, AddFoodAlertType) {
     AddFoodAlertTypeAddFood     = 2,
     AddFoodAlertTypeAddWeight   = 1,
-    
 };
 
 @class AddFoodAlertView;
@@ -26,6 +25,7 @@ typedef NS_ENUM(NSUInteger, AddFoodAlertType) {
 @property (strong, nonatomic) IBOutlet UITextField *alertTextFailed;
 @property (weak, nonatomic)id<AddFoodAlertViewDelegate>delegate;
 
+@property (strong, nonatomic) NSString *alertTitleSting;
 @property (strong, nonatomic) UILabel *label;
 
 

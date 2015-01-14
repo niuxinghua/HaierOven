@@ -2058,6 +2058,13 @@
 			name = LeftMenuCellView;
 			sourceTree = "<group>";
 		};
+		458632951A6616330083C2FF /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AlertView;
+			sourceTree = "<group>";
+		};
 		458952941A493C05009B5DD1 /* wifilianjie0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2093,8 +2100,6 @@
 		458952C51A493FAF009B5DD1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
-				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
 				45B650C21A47F64000A6376D /* MyDeviceView.h */,
 				45B650C31A47F64000A6376D /* MyDeviceView.m */,
 				45B650DA1A48169000A6376D /* MyDeviceAddView.h */,
@@ -2296,7 +2301,6 @@
 				45A5E8201A5002D600FCD2BD /* MenuDraftTableViewCell.m */,
 				45A5E8111A4FF25600FCD2BD /* ChooseCoverView.h */,
 				45A5E8121A4FF25600FCD2BD /* ChooseCoverView.m */,
-				45D9FEB81A5285F500023B9D /* AlertView */,
 				45A9995B1A510A880008AFE3 /* UploadingMneuCell */,
 			);
 			name = UpLoadingMenuController;
@@ -2354,7 +2358,6 @@
 			children = (
 				45BBA6911A524DB90066C143 /* AddStepCell.xib */,
 				45BBA6961A52552F0066C143 /* AddStepDetailCell.xib */,
-				45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */,
 				45A9996A1A51307C0008AFE3 /* CellOfAddFoodTable.xib */,
 				45A9996F1A513EE60008AFE3 /* AddFoodCell.xib */,
 				45A999741A5149400008AFE3 /* AddFoodLastCell.xib */,
@@ -2412,7 +2415,6 @@
 		45B650C71A47F9BF00A6376D /* DeviceView */ = {
 			isa = PBXGroup;
 			children = (
-				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
 				45B650DD1A4816A500A6376D /* MyDeviceAddView.xib */,
 				45B650C51A47F65500A6376D /* MyDeviceView.xib */,
 				45BB13671A49116A00FA44F4 /* DeviceConnectProgressView.xib */,
@@ -2994,6 +2996,8 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45D9FEB81A5285F500023B9D /* AlertView */,
+				458632951A6616330083C2FF /* AlertView */,
 				45422DC51A63B70C001A7223 /* BakeHouse */,
 				459E8BAA1A5D2604009D4ADA /* ShoppingList */,
 				459E8BA61A5D08DF009D4ADA /* CookStar */,
@@ -3147,6 +3151,9 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
+				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
+				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
 				45D9FEBA1A52863900023B9D /* 添加步骤描述alertview */,
 				45D9FEB91A52861C00023B9D /* 添加食材alertview */,
 			);
@@ -3158,6 +3165,7 @@
 			children = (
 				45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */,
 				45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */,
+				45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */,
 			);
 			name = "添加食材alertview";
 			sourceTree = "<group>";

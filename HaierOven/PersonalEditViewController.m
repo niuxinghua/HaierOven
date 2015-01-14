@@ -7,7 +7,12 @@
 //
 
 #import "PersonalEditViewController.h"
-@interface PersonalEditViewController ()
+#import "AddFoodAlertView.h"
+@interface PersonalEditViewController ()<AddFoodAlertViewDelegate>{
+    CGRect alertShowRect;
+    CGRect alertHiddenRect;
+    CGSize size;
+}
 @property (strong, nonatomic) IBOutlet UIImageView *userAvater;
 @property (strong, nonatomic) IBOutlet UILabel *nikeNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
@@ -19,16 +24,18 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UITableViewCell *avaterCell;
 @property (strong, nonatomic) IBOutlet UIView *descriptionCell;
-
 @property (strong, nonatomic) UIWindow *myWindow;
-@property CGSize size;
+@property (strong, nonatomic) AddFoodAlertView *alertEdit;
+@property (strong, nonatomic) NSString *descrString;
 @end
 
 @implementation PersonalEditViewController
-@synthesize size;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpSubviews];
+    
+    alertShowRect = CGRectMake(PageW/2-(PageW-30)/2, PageH/3.2,PageW-30, 138);
+    alertHiddenRect = CGRectMake(PageW/2, PageH/2, 0, 0);
     // Do any additional setup after loading the view.
 }
 
@@ -52,13 +59,10 @@
     self.descriptionLabel = [UILabel new];
     self.descriptionLabel.font = [UIFont fontWithName:GlobalTextFontName size:14.5];
     size = CGSizeZero;
-    NSString *string = @"闲暇之时，写写美食专栏";
-    size = [MyUtils getTextSizeWithText:string  andTextAttribute:@{NSFontAttributeName :self.descriptionLabel.font} andTextWidth:PageW-160];
+    self.descrString = @"闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏";
     self.descriptionLabel.textColor = [UIColor darkGrayColor];
-    self.descriptionLabel.text = string;
     self.descriptionLabel.numberOfLines = 0;
-    float y = size.height>PageW/8?8:(PageW/8-size.height)/2;
-    self.descriptionLabel.frame = CGRectMake(102, y, size.width,size.height);
+    self.descriptionLabel.tag = 1;
     [self.descriptionCell addSubview:self.descriptionLabel];
     
     
@@ -71,6 +75,12 @@
     [self.myWindow makeKeyAndVisible];
     self.myWindow.userInteractionEnabled = YES;
     self.myWindow.hidden = YES;
+    
+    self.alertEdit = [[AddFoodAlertView alloc]initWithFrame:CGRectZero];
+    self.alertEdit.center = self.myWindow.center;
+    self.alertEdit.hidden = YES;
+    self.alertEdit.delegate = self;
+    [self.myWindow addSubview:self.alertEdit];
     
 }
 #pragma mark tableviewDelegate
@@ -104,5 +114,85 @@
 #pragma mark -
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)editInfo:(UIButton *)sender {
+    
+    switch (sender.tag) {
+        case 10:
+            self.alertEdit.alertTitleSting = @"修改昵称";
+            self.alertEdit.label = self.nikeNameLabel;
+            break;
+        case 11:
+            NSLog(@"修改性别");
+            break;
+        case 12:
+            self.alertEdit.alertTitleSting = @"修改所在地";
+            self.alertEdit.label = self.placeLabel;
+            break;
+        case 13:
+            self.alertEdit.alertTitleSting = @"修改简介";
+            self.alertEdit.label = self.descriptionLabel;
+            break;
+        case 14:
+            NSLog(@"修改生日");
+        case 15:
+            self.alertEdit.alertTitleSting = @"修改邮箱";
+            self.alertEdit.label = self.descriptionLabel;
+            break;
+        case 16:
+            self.alertEdit.alertTitleSting = @"修改电话";
+            self.alertEdit.label = self.phoneNumberLabel;
+            break;
+        default:
+            break;
+    }
+    self.myWindow.hidden = NO;
+    self.alertEdit.hidden = NO;
+    CATransition *animation = [CATransition animation];
+    //动画时间
+    animation.duration = 0.5f;
+    //先慢后快
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    animation.fillMode = kCAFillModeForwards;
+    animation.type = kCATransitionReveal;
+    [self.myWindow.layer addAnimation:animation forKey:@"animation"];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.alertEdit.frame = alertShowRect;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+
+-(void)ChickAlert:(UILabel*)label andTextFailed:(UITextField*)textfield{
+    self.alertEdit.hidden = YES;
+    self.alertEdit.frame = alertHiddenRect;
+    self.myWindow.hidden = YES;
+    label.textColor = [UIColor darkGrayColor];
+
+    textfield.text = @"";
+    
+    if (label.tag==1) {
+        self.descrString = label.text;
+        [self.tableView reloadData];
+    }
+    [textfield resignFirstResponder];
+}
+-(void)Cancel{
+    self.alertEdit.hidden = YES;
+    self.alertEdit.frame = alertHiddenRect;
+    self.myWindow.hidden = YES;
+}
+
+
+-(void)setDescrString:(NSString *)descrString{
+    _descrString = descrString;
+    size = [MyUtils getTextSizeWithText:descrString  andTextAttribute:@{NSFontAttributeName :self.descriptionLabel.font} andTextWidth:PageW-160];
+    self.descriptionLabel.text = descrString;
+    float y = size.height>PageW/8?8:(PageW/8-size.height)/2;
+    self.descriptionLabel.frame = CGRectMake(102, y, size.width,size.height);
+
 }
 @end

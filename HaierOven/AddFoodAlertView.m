@@ -44,6 +44,12 @@
     }
 }
 
+
+-(void)setAlertTitleSting:(NSString *)alertTitleSting{
+    _alertTitleSting = alertTitleSting;
+    self.alertTitle.text = alertTitleSting;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
 }
@@ -56,5 +62,8 @@
         [self.delegate Cancel];
 }
 
-
+-(void)setLabel:(UILabel *)label{
+    _label   = label;
+    self.alertTextFailed.text = label.text;
+}
 @end
