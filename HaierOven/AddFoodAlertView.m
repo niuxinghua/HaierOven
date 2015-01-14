@@ -21,8 +21,9 @@
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AddFoodAlertView class]) owner:self options:nil] firstObject];
     self.frame = frame;
-    self.center = CGPointMake(PageW/2, PageH/3.2);
 //    self.layer.cornerRadius = 15;
+    self.layer.cornerRadius = 5;
+    self.layer.masksToBounds = YES;
     return self;
 }
 
@@ -31,6 +32,8 @@
     _alertTextFailed = alertTextFailed;
     alertTextFailed.layer.borderColor = GlobalOrangeColor.CGColor;
     alertTextFailed.layer.borderWidth = 1;
+    alertTextFailed.layer.cornerRadius = 5;
+    alertTextFailed.layer.masksToBounds = YES;
     alertTextFailed.delegate = self;
 }
 
@@ -44,17 +47,24 @@
     }
 }
 
+
+-(void)setAlertTitleSting:(NSString *)alertTitleSting{
+    _alertTitleSting = alertTitleSting;
+    self.alertTitle.text = alertTitleSting;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
 }
 - (IBAction)ChickAlert:(UIButton*)sender {
     if (sender.tag == 1) {
-        self.label.text = self.alertTextFailed.text;
-        self.label.textColor = [UIColor blackColor];
         [self.delegate ChickAlert:self.label andTextFailed:self.alertTextFailed];
     }else
         [self.delegate Cancel];
 }
 
-
+-(void)setLabel:(UILabel *)label{
+    _label   = label;
+    self.alertTextFailed.text = label.text;
+}
 @end

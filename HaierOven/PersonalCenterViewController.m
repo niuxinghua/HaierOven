@@ -11,6 +11,7 @@
 #import "MainViewNormalCell.h"
 #import "PersonalEditViewController.h"
 #import "RelationshipListViewController.h"
+
 @interface PersonalCenterViewController ()<MainViewNormalCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic) IBOutlet UIImageView *personalAvater;
@@ -20,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *followBtn;
 @property (strong, nonatomic) IBOutlet UIButton *watchBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *genderImage;
-
 @end
 #define HeaderViewRate         0.1388888
 #define CellImageRate   0.6
