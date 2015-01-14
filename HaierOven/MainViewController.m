@@ -149,7 +149,11 @@
 #pragma mark 点击tag方法
 -(void)SelectTagBtn:(UIButton*)sender{
     FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
+    Tag* theTag = self.tags[sender.tag];
+    foodlist.tagId = theTag.ID;
+    foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
+ 
 }
 #pragma mark -
 

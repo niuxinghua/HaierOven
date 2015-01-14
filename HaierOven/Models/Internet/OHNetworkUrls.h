@@ -82,6 +82,11 @@
 #define FollowDelete     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/delete"]
 
 /**
+ *  签到
+ */
+#define SignIn      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/signin"]
+
+/**
  *  获取关注列表
  */
 #define GetFollows  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/get"]

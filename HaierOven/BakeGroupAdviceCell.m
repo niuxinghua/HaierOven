@@ -53,7 +53,7 @@
     NSString* cookNames = @"最近做过：";
     for (int loop = 0; loop < self.cooker.cookbooks.count; loop++) {
         Cookbook* cookbook = cooker.cookbooks[loop];
-        cookNames = loop != self.cooker.cookbooks.count-1 ? [cookNames stringByAppendingFormat:@"%@、", cookbook.name] : [cookNames stringByAppendingFormat:@"%@", cookbook.name];
+        cookNames = loop == self.cooker.cookbooks.count-1 ? [cookNames stringByAppendingFormat:@"%@", cookbook.name] : [cookNames stringByAppendingFormat:@"%@、", cookbook.name];
     }
     self.recentCookLabel.text = cookNames;
     self.followBtn.selected = cooker.isFollowed;

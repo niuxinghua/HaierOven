@@ -164,7 +164,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CreatMneuController* editCookbookController = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatMneuController"];
-    
+    MenuDraftTableViewCell* cell = (MenuDraftTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    editCookbookController.cookbookCoverPhoto = cell.coverImage.image;
     editCookbookController.cookbook = self.cookbooks[indexPath.row];
     editCookbookController.isDraft = YES;
     [self loadTagsCompletion:^(BOOL result) {

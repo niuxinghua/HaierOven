@@ -645,6 +645,43 @@
     }
 }
 
+
+- (void)signInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,         //用户ID
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:SignIn parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                
+                
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+
+
 - (void)addFollowWithUserBaseId:(NSString*)userBaseId andFollowedUserBaseId:(NSString*)followdUserBaseId callBack:(myCallback)completion
 {
     if ([self canConnectInternet]) {
@@ -919,10 +956,10 @@
         
         // 1. 将参数序列化
         NSDictionary* paramsDict = @{
-                                     @"cookbookID" : cookbookId,
+                                     @"cookbookID" : [NSNumber numberWithInt:[cookbookId intValue]],
                                      @"comment" : content,
                                      @"userBaseID" : userBaseId,
-                                     @"parentID" : parentId == nil ? [NSNull null] : parentId    //如果是回复某评论，则此字段为被回复的评论主键
+                                     @"parentID" : parentId == nil ? [NSNull null] : [NSNumber numberWithInt:[parentId intValue]]    //如果是回复某评论，则此字段为被回复的评论主键
                                     };
         
         // 2. 发送网络请求
@@ -1367,7 +1404,8 @@
         cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
         cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
         
-        NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
+        NSDictionary* paramsDict = @{@"cookbookID" : [NSNumber numberWithInt:[cookbookDetail.cookbookId intValue]],
+                                     @"cookbookName" : cookbookDetail.name,
                                      @"cookbookDesc" : cookbookDetail.desc,
                                      @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
                                      @"cookbookTip" : cookbookDetail.cookbookTip,
