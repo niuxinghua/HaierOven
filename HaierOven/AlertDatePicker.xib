@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="tHu-ux-Kyk" customClass="AlertDatePicker">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="242"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I35-Ie-FHJ">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="修改生日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="So3-qG-OwO">
+                            <rect key="frame" x="25" y="8" width="267" height="24"/>
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Gqi-Lx-aXG"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk.png" translatesAutoresizingMaskIntoConstraints="NO" id="A0X-67-lmn" customClass="tk">
+                    <rect key="frame" x="0.0" y="204" width="300" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="0Vd-xG-1iW"/>
+                        <constraint firstAttribute="width" constant="300" id="kfG-8b-1n4"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiC-YP-QW7">
+                    <rect key="frame" x="0.0" y="202" width="150" height="41"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="8WW-HJ-k1t"/>
+                    </constraints>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ChickDate:" destination="tHu-ux-Kyk" eventType="touchUpInside" id="3Aa-Px-J86"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ov0-ro-eqg">
+                    <rect key="frame" x="150" y="202" width="150" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ChickDate:" destination="tHu-ux-Kyk" eventType="touchUpInside" id="egQ-R8-5l8"/>
+                    </connections>
+                </button>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="S7p-hk-pot">
+                    <rect key="frame" x="0.0" y="39" width="300" height="162"/>
+                    <date key="date" timeIntervalSinceReferenceDate="442913259.34447497">
+                        <!--2015-01-14 07:27:39 +0000-->
+                    </date>
+                    <locale key="locale" localeIdentifier="zh"/>
+                </datePicker>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="A0X-67-lmn" secondAttribute="bottom" id="1xK-eE-Usl"/>
+                <constraint firstItem="S7p-hk-pot" firstAttribute="top" secondItem="tHu-ux-Kyk" secondAttribute="top" constant="39" id="ACg-Cd-FeT"/>
+                <constraint firstItem="Ov0-ro-eqg" firstAttribute="top" secondItem="S7p-hk-pot" secondAttribute="bottom" constant="1" id="ASP-mp-EsL"/>
+                <constraint firstItem="Ov0-ro-eqg" firstAttribute="width" secondItem="XiC-YP-QW7" secondAttribute="width" id="Izu-nl-7Fl"/>
+                <constraint firstItem="XiC-YP-QW7" firstAttribute="leading" secondItem="tHu-ux-Kyk" secondAttribute="leading" id="OAP-Ci-Pgg"/>
+                <constraint firstAttribute="trailing" secondItem="S7p-hk-pot" secondAttribute="trailing" id="OJm-uD-nR3"/>
+                <constraint firstItem="Ov0-ro-eqg" firstAttribute="top" secondItem="S7p-hk-pot" secondAttribute="bottom" constant="1" id="P1C-n6-bci"/>
+                <constraint firstItem="I35-Ie-FHJ" firstAttribute="top" secondItem="tHu-ux-Kyk" secondAttribute="top" id="R0O-3b-C89"/>
+                <constraint firstItem="A0X-67-lmn" firstAttribute="top" secondItem="S7p-hk-pot" secondAttribute="bottom" constant="3" id="UBj-kM-Znh"/>
+                <constraint firstItem="XiC-YP-QW7" firstAttribute="top" secondItem="S7p-hk-pot" secondAttribute="bottom" constant="1" id="avb-sS-UB4"/>
+                <constraint firstItem="I35-Ie-FHJ" firstAttribute="leading" secondItem="tHu-ux-Kyk" secondAttribute="leading" id="c1A-QB-CHU"/>
+                <constraint firstItem="A0X-67-lmn" firstAttribute="leading" secondItem="tHu-ux-Kyk" secondAttribute="leading" id="cG8-0J-RiD"/>
+                <constraint firstItem="S7p-hk-pot" firstAttribute="leading" secondItem="tHu-ux-Kyk" secondAttribute="leading" id="h6X-wI-46G"/>
+                <constraint firstAttribute="trailing" secondItem="I35-Ie-FHJ" secondAttribute="trailing" id="oJx-ub-tyB"/>
+                <constraint firstItem="Ov0-ro-eqg" firstAttribute="height" secondItem="XiC-YP-QW7" secondAttribute="height" constant="-1" id="odH-rm-Icc"/>
+                <constraint firstAttribute="trailing" secondItem="Ov0-ro-eqg" secondAttribute="trailing" id="qih-0S-xsX"/>
+                <constraint firstItem="Ov0-ro-eqg" firstAttribute="leading" secondItem="XiC-YP-QW7" secondAttribute="trailing" id="qoV-Jk-alY"/>
+                <constraint firstAttribute="trailing" secondItem="A0X-67-lmn" secondAttribute="trailing" id="zCx-Da-ziA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="myDatePickerView" destination="S7p-hk-pot" id="K2j-4s-Zt9"/>
+            </connections>
+            <point key="canvasLocation" x="113" y="135"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tk.png" width="898" height="123"/>
+    </resources>
+</document>

@@ -482,6 +482,8 @@
 }
 
 -(void)ChickAlert:(UILabel *)label andTextFailed:(UITextField *)textfield{
+    label.text = textfield.text;
+    label.textColor = [UIColor blackColor];
     self.myWindow.hidden = YES;
     [textfield resignFirstResponder];
     

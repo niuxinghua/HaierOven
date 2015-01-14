@@ -20,7 +20,9 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([ChooseCoverView class]) owner:self options:nil] firstObject];
-    self.frame = frame;
+    self.frame = CGRectMake(0, PageH, PageW, PageW*0.58);
+    
+    
     return self;
 }
 

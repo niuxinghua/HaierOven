@@ -65,6 +65,10 @@
 		457A777E1A42CA4500E422D0 /* RecommendTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457A777D1A42CA4500E422D0 /* RecommendTagView.xib */; };
 		457A77811A42DBBC00E422D0 /* FoodListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A77801A42DBBC00E422D0 /* FoodListViewController.m */; };
 		457A77881A42EC3400E422D0 /* FoodListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 457A77871A42EC3400E422D0 /* FoodListCell.m */; };
+		4586329B1A66382C0083C2FF /* GenderAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4586329A1A66382C0083C2FF /* GenderAlertView.m */; };
+		4586329D1A6638470083C2FF /* GenderAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4586329C1A6638470083C2FF /* GenderAlertView.xib */; };
+		458632A31A66509A0083C2FF /* AlertDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632A21A66509A0083C2FF /* AlertDatePicker.m */; };
+		458632A51A6650B30083C2FF /* AlertDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458632A41A6650B30083C2FF /* AlertDatePicker.xib */; };
 		458952AD1A493C05009B5DD1 /* wifilianjie01.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952951A493C05009B5DD1 /* wifilianjie01.png */; };
 		458952AE1A493C05009B5DD1 /* wifilianjie01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952961A493C05009B5DD1 /* wifilianjie01@2x.png */; };
 		458952AF1A493C05009B5DD1 /* wifilianjie01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952971A493C05009B5DD1 /* wifilianjie01@3x.png */; };
@@ -920,6 +924,12 @@
 		457A77801A42DBBC00E422D0 /* FoodListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodListViewController.m; sourceTree = "<group>"; };
 		457A77861A42EC3400E422D0 /* FoodListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodListCell.h; sourceTree = "<group>"; };
 		457A77871A42EC3400E422D0 /* FoodListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodListCell.m; sourceTree = "<group>"; };
+		458632991A66382B0083C2FF /* GenderAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderAlertView.h; sourceTree = "<group>"; };
+		4586329A1A66382C0083C2FF /* GenderAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderAlertView.m; sourceTree = "<group>"; };
+		4586329C1A6638470083C2FF /* GenderAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderAlertView.xib; sourceTree = "<group>"; };
+		458632A11A66509A0083C2FF /* AlertDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertDatePicker.h; sourceTree = "<group>"; };
+		458632A21A66509A0083C2FF /* AlertDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertDatePicker.m; sourceTree = "<group>"; };
+		458632A41A6650B30083C2FF /* AlertDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertDatePicker.xib; sourceTree = "<group>"; };
 		458952951A493C05009B5DD1 /* wifilianjie01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifilianjie01.png; sourceTree = "<group>"; };
 		458952961A493C05009B5DD1 /* wifilianjie01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifilianjie01@2x.png"; sourceTree = "<group>"; };
 		458952971A493C05009B5DD1 /* wifilianjie01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifilianjie01@3x.png"; sourceTree = "<group>"; };
@@ -2058,11 +2068,34 @@
 			name = LeftMenuCellView;
 			sourceTree = "<group>";
 		};
-		458632951A6616330083C2FF /* AlertView */ = {
+		4586329E1A66441C0083C2FF /* alertPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				45A5E8111A4FF25600FCD2BD /* ChooseCoverView.h */,
+				45A5E8121A4FF25600FCD2BD /* ChooseCoverView.m */,
+				45A5E8141A4FF26B00FCD2BD /* ChooseCoverView.xib */,
 			);
-			name = AlertView;
+			name = alertPhoto;
+			sourceTree = "<group>";
+		};
+		4586329F1A66442B0083C2FF /* alertGender */ = {
+			isa = PBXGroup;
+			children = (
+				458632991A66382B0083C2FF /* GenderAlertView.h */,
+				4586329A1A66382C0083C2FF /* GenderAlertView.m */,
+				4586329C1A6638470083C2FF /* GenderAlertView.xib */,
+			);
+			name = alertGender;
+			sourceTree = "<group>";
+		};
+		458632A01A6650690083C2FF /* alertDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				458632A11A66509A0083C2FF /* AlertDatePicker.h */,
+				458632A21A66509A0083C2FF /* AlertDatePicker.m */,
+				458632A41A6650B30083C2FF /* AlertDatePicker.xib */,
+			);
+			name = alertDatePicker;
 			sourceTree = "<group>";
 		};
 		458952941A493C05009B5DD1 /* wifilianjie0 */ = {
@@ -2299,8 +2332,6 @@
 				45A5E81A1A50007300FCD2BD /* MenuDraftController.m */,
 				45A5E81F1A5002D600FCD2BD /* MenuDraftTableViewCell.h */,
 				45A5E8201A5002D600FCD2BD /* MenuDraftTableViewCell.m */,
-				45A5E8111A4FF25600FCD2BD /* ChooseCoverView.h */,
-				45A5E8121A4FF25600FCD2BD /* ChooseCoverView.m */,
 				45A9995B1A510A880008AFE3 /* UploadingMneuCell */,
 			);
 			name = UpLoadingMenuController;
@@ -2362,7 +2393,6 @@
 				45A9996F1A513EE60008AFE3 /* AddFoodCell.xib */,
 				45A999741A5149400008AFE3 /* AddFoodLastCell.xib */,
 				45A5E8211A5002D600FCD2BD /* MenuDraftTableViewCell.xib */,
-				45A5E8141A4FF26B00FCD2BD /* ChooseCoverView.xib */,
 			);
 			name = UpLoadingMneu;
 			sourceTree = "<group>";
@@ -2415,6 +2445,9 @@
 		45B650C71A47F9BF00A6376D /* DeviceView */ = {
 			isa = PBXGroup;
 			children = (
+				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
+				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
+				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
 				45B650DD1A4816A500A6376D /* MyDeviceAddView.xib */,
 				45B650C51A47F65500A6376D /* MyDeviceView.xib */,
 				45BB13671A49116A00FA44F4 /* DeviceConnectProgressView.xib */,
@@ -2997,7 +3030,6 @@
 			isa = PBXGroup;
 			children = (
 				45D9FEB81A5285F500023B9D /* AlertView */,
-				458632951A6616330083C2FF /* AlertView */,
 				45422DC51A63B70C001A7223 /* BakeHouse */,
 				459E8BAA1A5D2604009D4ADA /* ShoppingList */,
 				459E8BA61A5D08DF009D4ADA /* CookStar */,
@@ -3151,26 +3183,26 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
-				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
-				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
-				45D9FEBA1A52863900023B9D /* 添加步骤描述alertview */,
-				45D9FEB91A52861C00023B9D /* 添加食材alertview */,
+				458632A01A6650690083C2FF /* alertDatePicker */,
+				4586329F1A66442B0083C2FF /* alertGender */,
+				4586329E1A66441C0083C2FF /* alertPhoto */,
+				45D9FEBA1A52863900023B9D /* alertreview */,
+				45D9FEB91A52861C00023B9D /* alertInport */,
 			);
 			name = AlertView;
 			sourceTree = "<group>";
 		};
-		45D9FEB91A52861C00023B9D /* 添加食材alertview */ = {
+		45D9FEB91A52861C00023B9D /* alertInport */ = {
 			isa = PBXGroup;
 			children = (
 				45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */,
 				45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */,
 				45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */,
 			);
-			name = "添加食材alertview";
+			name = alertInport;
 			sourceTree = "<group>";
 		};
-		45D9FEBA1A52863900023B9D /* 添加步骤描述alertview */ = {
+		45D9FEBA1A52863900023B9D /* alertreview */ = {
 			isa = PBXGroup;
 			children = (
 				45D9FEBB1A52866900023B9D /* YIPopupTextView.h */,
@@ -3178,7 +3210,7 @@
 				45D9FEBD1A52866900023B9D /* YISSTextView.h */,
 				45D9FEBE1A52866900023B9D /* YISSTextView.m */,
 			);
-			name = "添加步骤描述alertview";
+			name = alertreview;
 			sourceTree = "<group>";
 		};
 		8401414E1A4BC9C20050615F /* Frameworks */ = {
@@ -4257,6 +4289,7 @@
 				45A5E8071A4FCACC00FCD2BD /* CGXDJ.png in Resources */,
 				45D907151A47CAAB00B97D92 /* xinzengkaoxiang@3x.png in Resources */,
 				45BB36521A4A9615000EE3C4 /* zm-xz@2x.png in Resources */,
+				4586329D1A6638470083C2FF /* GenderAlertView.xib in Resources */,
 				45D906E51A47CAAB00B97D92 /* mrqd.png in Resources */,
 				45A546C61A5A4EC200BE62EC /* arrow_phone_initial.png in Resources */,
 				45D907051A47CAAB00B97D92 /* sousuo@3x.png in Resources */,
@@ -4441,6 +4474,7 @@
 				45D906A11A47CAAB00B97D92 /* aixin@3x.png in Resources */,
 				45BB362C1A4A8E6E000EE3C4 /* fs-wxz@3x.png in Resources */,
 				45D907081A47CAAB00B97D92 /* tongzhi@2x.png in Resources */,
+				458632A51A6650B30083C2FF /* AlertDatePicker.xib in Resources */,
 				45422DEE1A64C2C2001A7223 /* ww@2x.png in Resources */,
 				45BB362A1A4A8E6E000EE3C4 /* fs-wxz.png in Resources */,
 				458952D11A49428D009B5DD1 /* dui@3x.png in Resources */,
@@ -4797,6 +4831,7 @@
 				45C01C161A4D68F400B54941 /* CompleteCookController.m in Sources */,
 				45C7E58A1A3FE25A000B086B /* RESideMenu.m in Sources */,
 				45BA02DE1A4408E7003810C7 /* PersonalCenterSectionView.m in Sources */,
+				458632A31A66509A0083C2FF /* AlertDatePicker.m in Sources */,
 				8447CB881A5FC73700FADF9D /* JSQMessagesToolbarContentView.m in Sources */,
 				452A6E681A5A90DE00ABFE75 /* CookStarDetailController.m in Sources */,
 				8447CAED1A5FAF2100FADF9D /* ShoppingOrder.m in Sources */,
@@ -4876,6 +4911,7 @@
 				45C7E5601A3FD9AE000B086B /* BaseTableViewController.m in Sources */,
 				8447CB7A1A5FC73700FADF9D /* JSQVideoMediaItem.m in Sources */,
 				45A999611A510ABE0008AFE3 /* ChooseTagsCell.m in Sources */,
+				4586329B1A66382C0083C2FF /* GenderAlertView.m in Sources */,
 				45A5469C1A592E2C00BE62EC /* EmailRegisterView.m in Sources */,
 				8441178C1A4BB8AF00628A64 /* UIRefreshControl+AFNetworking.m in Sources */,
 				458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */,
