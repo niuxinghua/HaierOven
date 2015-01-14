@@ -9,12 +9,39 @@
 #import "ShoppingListTableViewController.h"
 #import "CookListCell.h"
 #import "DeleteCookViewController.h"
-@interface ShoppingListTableViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *cookCount;
+#import "CookbookDetailControllerViewController.h"
+@interface ShoppingListTableViewController () <CookListCellDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *shoppingListCountLabel;
+
+@property (strong, nonatomic) NSArray* shoppingList;
 
 @end
 
 @implementation ShoppingListTableViewController
+
+#pragma mark - 获取购物清单列表
+
+- (void)loadShoppingList
+{
+    [super showProgressHUDWithLabelText:@"获取购物清单" dimBackground:NO];
+    
+    NSString* userBaseId = @"5";
+    
+    [[InternetManager sharedManager] getShoppingListWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            self.shoppingList = obj;
+            self.shoppingListCountLabel.text = [NSString stringWithFormat:@"已添加%d个菜谱",self.shoppingList.count];
+            [self.tableView reloadData];
+        } else {
+            [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
+        }
+    }];
+    
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +53,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadShoppingList];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -33,33 +66,67 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 3;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return self.shoppingList.count;
+}
+
+
+
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50+(2*40);
+    ShoppingOrder* shoppingOder = self.shoppingList[indexPath.section];
+    return 50+(shoppingOder.foods.count*40);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CookListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookListCell" forIndexPath:indexPath];
-    cell.foods = @[@"123",@"123"];
+    cell.delegate = self;
+    ShoppingOrder* shoppingOrder = self.shoppingList[indexPath.section];
+    cell.foods = shoppingOrder.foods;
+    [cell.cookbookNameBtn setTitle:shoppingOrder.cookbookName forState:UIControlStateNormal];
     // Configure the cell...
     
     return cell;
 }
 
+#pragma mark - CookListCellDelegate
+
+- (void)turnCookDetailView:(UITableViewCell *)cell
+{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    ShoppingOrder* selectedOrder = self.shoppingList[indexPath.section];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+    CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    detailController.cookbook = [[Cookbook alloc] init];
+    detailController.cookbook.ID = selectedOrder.cookbookID;
+    [self.navigationController pushViewController:detailController animated:YES];
+}
+
+- (void)purchaseFood:(PurchaseFood *)food inCell:(CookListCell *)cell isPurchased:(BOOL)isPurchased
+{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    ShoppingOrder* changedOrder = self.shoppingList[indexPath.section];
+    [[InternetManager sharedManager] saveShoppingOrderWithShoppingOrder:changedOrder callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"成功");
+        } else {
+            [super showProgressErrorWithLabelText:@"保存失败" afterDelay:1];
+        }
+    }];
+}
 
 
 #pragma mark-  跳至删除页面
 - (IBAction)turnDeleteCookView:(id)sender {
     DeleteCookViewController *deleteCook = [self.storyboard instantiateViewControllerWithIdentifier:@"DeleteCookViewController"];
+    deleteCook.shoppingList = [self.shoppingList mutableCopy];
     [self.navigationController pushViewController:deleteCook animated:YES];
 }
 

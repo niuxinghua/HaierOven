@@ -10,12 +10,10 @@
 #import "DeleteCookCell.h"
 @interface DeleteCookViewController ()<DeleteCookCellDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *shoppingListCountLabel;
+
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
-/**
- *  菜谱数据源
- */
-@property (strong, nonatomic) NSMutableArray *cooks;
 /**
  *  纪录删除菜谱数组
  */
@@ -26,15 +24,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cooks = [NSMutableArray new];
-    [self.cooks addObjectsFromArray:@[@"1",@"2",@"3"]];
+    
     
     self.deleteArr = [NSMutableArray new];
+    
+    self.shoppingListCountLabel.text = [NSString stringWithFormat:@"已添加%d个菜谱", self.shoppingList.count];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)reload
+{
+    [self.tableView reloadData];
+    self.shoppingListCountLabel.text = [NSString stringWithFormat:@"已添加%d个菜谱", self.shoppingList.count];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +57,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.cooks.count;
+    return self.shoppingList.count;
 }
 
 
@@ -60,7 +66,8 @@
     DeleteCookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeleteCookCell" forIndexPath:indexPath];
     cell.delegate = self;
     cell.isAllselected = self.deleteBtn.selected;
-    cell.cookString = self.cooks[indexPath.row];
+    ShoppingOrder* shoppingOrder = self.shoppingList[indexPath.row];
+    cell.cookString = shoppingOrder.cookbookName;
     // Configure the cell...
     
     return cell;
@@ -71,17 +78,34 @@
 - (IBAction)DeleteFoods:(UIButton *)sender {
     if (sender.selected==NO) {
         sender.selected = YES;
-        self.deleteArr = [self.cooks mutableCopy];
-        [self.tableView reloadData];
+        self.deleteArr = [self.shoppingList mutableCopy];
+        [self reload];
         
     }else if (sender.selected ==YES){
         NSLog(@"我要删除了");
         sender.selected = NO;
         
-        [self.cooks removeObjectsInArray:self.deleteArr];
+        [self.shoppingList removeObjectsInArray:self.deleteArr];
+        
+        [self deleteShoppingList];
 
-        [self.tableView reloadData];
+        [self reload];
     }
+}
+
+- (void)deleteShoppingList
+{
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] deleteShoppingOrderWithUserBaseId:userBaseId
+                                                           cookbooks:self.deleteArr
+                                                              callBack:^(BOOL success, id obj, NSError *error) {
+                                                                  if (success) {
+                                                                      NSLog(@"删除成功");
+                                                                  } else {
+                                                                      NSLog(@"保存失败");
+                                                                      [super showProgressErrorWithLabelText:@"保存失败" afterDelay:1];
+                                                                  }
+                                                              }];
 }
 
 
@@ -90,9 +114,9 @@
     NSIndexPath *index = [self.tableView indexPathForCell:cell];
     
     if (btn.selected == NO) {
-        [self.deleteArr removeObject:self.cooks[index.row]];
+        [self.deleteArr removeObject:self.shoppingList[index.row]];
     }else{
-        [self.deleteArr addObject:self.cooks[index.row]];
+        [self.deleteArr addObject:self.shoppingList[index.row]];
     }
     
     self.deleteBtn.selected = self.deleteArr.count > 0?YES:NO;

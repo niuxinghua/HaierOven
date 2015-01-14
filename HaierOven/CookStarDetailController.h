@@ -10,4 +10,6 @@
 
 @interface CookStarDetailController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
+@property (strong, nonatomic) CookerStar* cookerStar;
+
 @end

@@ -14,6 +14,7 @@
 #import "CookbookDetail.h"
 #import "Tag.h"
 #import "ShoppingOrder.h"
+#import "CookerStar.h"
 
 typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeConnectInternetFailed      = -100,      //网络连接失败
@@ -370,11 +371,10 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 /**
  *  保存购物清单
  *
- *  @param creatorId     用户ID
- *  @param shoppingOrder 购物清单
+ *  @param shoppingOrder 购物清单, 包括creatorId
  *  @param completion    结果回调
  */
-- (void)saveShoppingOrderWithCreatorId:(NSString*)creatorId shoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion;
+- (void)saveShoppingOrderWithShoppingOrder:(ShoppingOrder*)shoppingOrder callBack:(myCallback)completion;
 
 /**
  *  删除购物清单
@@ -383,7 +383,7 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param cookbookIds 删除的购物清单列表
  *  @param completion  结果回调
  */
-- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbookIds:(NSArray*)cookbookIds callBack:(myCallback)completion;
+- (void)deleteShoppingOrderWithUserBaseId:(NSString*)userBaseId cookbooks:(NSArray*)cookbooks callBack:(myCallback)completion;
 
 /**
  *  获取购物清单详情
@@ -401,6 +401,109 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)getShoppingListWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+
+#pragma mark - 烘焙圈
+
+/**
+ *  获取未关注、推荐厨师列表
+ *
+ *  @param userBaseId 用户ID
+ *  @param pageIndex  请求页面
+ *  @param completion 结果回调
+ */
+- (void)getRecommentCookersWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+
+#pragma mark - 厨神名人堂
+
+/**
+ *  获取厨神列表
+ *
+ *  @param userBaseId 用户id
+ *  @param pageIndex  请求的页面
+ *  @param completion 结果回调
+ */
+- (void)getCookerStarsWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+
+#pragma mark - 私信
+
+/**
+ *  发送站内消息
+ *
+ *  @param message    消息内容
+ *  @param userBaseId 消息接受者
+ *  @param fromUser   发送者
+ *  @param completion 结果回调
+ */
+- (void)sendMessage:(NSString*)message toUser:(NSString*)userBaseId fromUser:(NSString*)fromUser callBack:(myCallback)completion;
+
+/**
+ * 	更新指定用户消息为已读
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)updateReadStatusWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
+ *  获取未读消息数量
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)getMessageCountWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
+ *  获取指定消息接受者的消息列表
+ *
+ *  @param userBaseId 用户ID
+ *  @param status     -1:获取所有，0：未读，1：已读
+ *  @param pageIndex  请求页面
+ *  @param completion 结果回调
+ */
+- (void)getMessagesListWithUserBaseId:(NSString*)userBaseId status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+/**
+ *  获取指定消息接受者和指定发送者互相发送的消息列表
+ *
+ *  @param fromUser   发送者ID, 自己
+ *  @param toUser     接受者ID
+ *  @param status     -1:获取所有，0：未读，1：已读
+ *  @param pageIndex  请求页面
+ *  @param completion 结果回调
+ */
+- (void)getChatMessagesFromUser:(NSString*)fromUser toUser:(NSString*)toUser status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+#pragma mark - 通知
+
+/**
+ *  更新指定用户ID所有通知状态为已读
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)updateNotificationReadStatusWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
+ *  获取指定用户未读通知数量
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)getNotificationCountWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
+ *  获取指定接受者通知列表
+ *
+ *  @param userBaseId 用户ID
+ *  @param status     是否已读；-1获取所有；0获取未读；1获取已读
+ *  @param pageIndex  请求页面
+ *  @param completion 结果回调
+ */
+- (void)getNotificationListWithUserBaseId:(NSString*)userBaseId status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
 
 
 

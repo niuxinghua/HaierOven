@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Cooker.h"
 @class BakeGroupAdviceCell;
 @protocol BackGroupAdviceCellDelegate <NSObject>
 
--(void)followed:(UIButton*)sender;
+-(void)bakeGroupAdviceCell:(BakeGroupAdviceCell*)cell followed:(UIButton*)sender;
 
 @end
 @interface BakeGroupAdviceCell : UITableViewCell
 @property (weak, nonatomic)id<BackGroupAdviceCellDelegate>delegate;
+
+@property (strong, nonatomic) Cooker* cooker;
+
 @end

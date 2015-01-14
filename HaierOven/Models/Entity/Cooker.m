@@ -1,0 +1,13 @@
+//
+//  Cooker.m
+//  HaierOven
+//
+//  Created by 刘康 on 15/1/12.
+//  Copyright (c) 2015年 edaysoft. All rights reserved.
+//
+
+#import "Cooker.h"
+
+@implementation Cooker
+
+@end

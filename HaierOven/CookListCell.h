@@ -11,10 +11,14 @@
 @class CookListCell;
 @protocol CookListCellDelegate <NSObject>
 
+@required
 -(void)turnCookDetailView:(UITableViewCell*)cell;
 
+- (void)purchaseFood:(PurchaseFood*)food inCell:(CookListCell*)cell isPurchased:(BOOL)isPurchased;
+
 @end
-@interface CookListCell : UITableViewCell
+@interface CookListCell : UITableViewCell <CookListFoodViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *cookbookNameBtn;
 @property (strong, nonatomic) NSArray *foods;
 @property (weak, nonatomic) id<CookListCellDelegate>delegate;
 @end

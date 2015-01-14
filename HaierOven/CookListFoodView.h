@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CookListFoodViewDelegate <NSObject>
+
+@required
+
+- (void)purchaseFood:(PurchaseFood*)food purchased:(BOOL)isPurchase;
+
+@end
+
 @interface CookListFoodView : UIView
 /**
- *  食材名称
+ *  食材对象
  */
-@property (strong, nonatomic) NSString *foodName;
+@property (strong, nonatomic) PurchaseFood* food;
+
+@property (weak, nonatomic) id<CookListFoodViewDelegate> delegate;
+
 @end

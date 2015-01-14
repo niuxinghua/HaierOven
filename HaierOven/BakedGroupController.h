@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 typedef NS_ENUM(NSUInteger, BackGroupType) {
     BackGroupTypeFollowed = 1,
     BackGroupTypeAdvice   = 2,
 };
-@interface BakedGroupController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface BakedGroupController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic) BackGroupType backGroupType;
 @end

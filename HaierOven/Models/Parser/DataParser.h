@@ -70,6 +70,46 @@
  */
 + (CookbookDetail*)parseCookbookDetailWithDict:(NSDictionary*)dict;
 
+/**
+ *  解析购物清单
+ *
+ *  @param dict json
+ *
+ *  @return 购物清单列表
+ */
++ (NSMutableArray*)parseShoppingListWithDict:(NSDictionary*)dict;
+
+/**
+ *  解析推荐厨师列表
+ *
+ *  @param dict        json
+ *  @param hadNextPage 是否有下一页
+ *
+ *  @return 推荐厨师列表
+ */
++ (NSMutableArray*)parseCookersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage;
+
+/**
+ *  解析厨神列表
+ *
+ *  @param dict        json
+ *  @param hadNextPage 是否有下一页
+ *
+ *  @return 厨神列表
+ */
++ (NSMutableArray*)parseCookerStarsWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage;
+
+/**
+ *  解析聊天信息
+ *
+ *  @param dict json
+ *
+ *  @return 返回聊天列表
+ */
++ (NSMutableArray*)parseMessagesWithDict:(NSDictionary*)dict;
+
+
+
 @end
 
 

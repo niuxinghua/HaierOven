@@ -10,4 +10,12 @@
 
 @implementation ShoppingOrder
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.foods = [NSArray array];
+    }
+    return self;
+}
+
 @end

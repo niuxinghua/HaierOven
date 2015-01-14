@@ -69,6 +69,34 @@
     self.tagsView.tags = tags;
 }
 
+- (void)setCookerStar:(CookerStar *)cookerStar
+{
+    _cookerStar = cookerStar;
+    
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    switch (cookerStar.userLevel) {
+        case 1:
+            self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            break;
+        case 2:
+            self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            break;
+        case 3:
+            self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            break;
+            
+        default:
+            self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            break;
+    }
+    self.nameLabel.text = cookerStar.userName;
+    self.signatureLabel.text = cookerStar.signature;
+    self.followButton.selected = cookerStar.isFollowed;
+    self.descriptionLabel.text = cookerStar.introduction;
+    self.cookBookLabel.text = [NSString stringWithFormat:@"%@ 的菜谱", cookerStar.userName];
+    
+}
+
 -(void)chooseTags:(UIButton *)btn{
     [self.delegate chickTags:btn];
 }

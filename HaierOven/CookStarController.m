@@ -10,16 +10,62 @@
 #import "CookStarCell.h"
 #import "CookStarDetailController.h"
 #import "MJRefresh.h"
-@interface CookStarController ()
+@interface CookStarController () <CookStarCellDelegate>
+
+@property (strong, nonatomic) NSMutableArray* cookerStars;
+
+@property (nonatomic)NSInteger pageIndex;
 
 @end
 
 @implementation CookStarController
 
+#pragma mark - 网络请求
+
+- (void)loadCookerStars
+{
+    NSString* userBaseId = @"5";
+    
+    [super showProgressHUDWithLabelText:@"请稍后" dimBackground:NO];
+    [[InternetManager sharedManager] getCookerStarsWithUserBaseId:userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.cookerStars = obj;
+            } else {
+                [self.cookerStars addObjectsFromArray:arr];
+            }
+            
+            [self.tableView reloadData];
+            
+            
+        } else {
+            
+        }
+    }];
+}
+
+#pragma mark - 初始化和加载
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.pageIndex = 1;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addFooter];
     [self addHeader];
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    [self loadCookerStars];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return self.cookerStars.count;
 }
 
 
@@ -49,6 +95,9 @@
     CookStarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookStarCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    cell.delegate = self;
+    cell.cookerStar = self.cookerStars[indexPath.row];
+    
     
     return cell;
 }
@@ -56,9 +105,39 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CookStarDetailController *csd = [self.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
+    csd.cookerStar = self.cookerStars[indexPath.row];
     [self.navigationController pushViewController:csd animated:YES];
 }
 
+#pragma mark - CookStarCellDelegate
+
+- (void)cookStarCell:(CookStarCell *)cell followButtonTapped:(UIButton *)sender
+{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    CookerStar* selectedCooker = self.cookerStars[indexPath.row];
+    NSString* userBaseId = @"5";
+    if (sender.selected) {
+        // 已关注，取消关注
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"取消关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+            }
+        }];
+    } else {
+        // 未关注，添加关注
+        [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSLog(@"关注成功");
+            } else {
+                [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+            }
+        }];
+    }
+    
+    sender.selected = !sender.selected;
+}
 
 - (void)addHeader
 {
@@ -69,8 +148,8 @@
         // 进入刷新状态就会回调这个Block
         
         // 增加根据pageIndex加载数据
-//        vc.pageIndex = 1;
-//        [vc loadCookbooks];
+        vc.pageIndex = 1;
+        [vc loadCookerStars];
         
         // 加载数据，0.5秒后执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -96,8 +175,8 @@
         
         // 增加根据pageIndex加载数据
         
-//        vc.pageIndex++;
-//        [vc loadCookbooks];
+        vc.pageIndex++;
+        [vc loadCookerStars];
         
         // 加载数据，0.5秒后执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

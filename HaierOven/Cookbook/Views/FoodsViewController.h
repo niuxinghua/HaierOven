@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddShoppingListCell.h"
 
 @interface FoodsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithFoods:(NSArray*)foods;
+- (instancetype)initWithFoods:(NSArray*)foods delegate:(id<AddShoppingListCellDelegate>) delegate;
 
 @end

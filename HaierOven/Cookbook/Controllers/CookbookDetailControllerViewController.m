@@ -14,9 +14,10 @@
 #import "StepsViewController.h"
 #import "CommentViewController.h"
 #import "DAKeyboardControl.h"
+#import "AddShoppingListCell.h"
 
 
-@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate>
+@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate>
 {
     CGFloat _lastContentOffsetY;
 }
@@ -159,7 +160,7 @@
     if (self.stepsTableView == nil) {
         [self initTableViewWithContentType:CurrentContentTypeMethods];
     }
-    NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbook.coverPhoto;
+    NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbookDetail.coverPhoto;
 
     [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataImage.png")];
     
@@ -170,9 +171,9 @@
     }
     self.tagsView.tags = [tagNames copy];
     
-    self.creatorNameLabel.text = self.cookbook.creator.userName;
+    self.creatorNameLabel.text = self.cookbookDetail.creator.userName;
     
-    self.cookbookNameLabel.text = self.cookbook.name;
+    self.cookbookNameLabel.text = self.cookbookDetail.name;
     
     self.cookbookDescLabel.text = self.cookbookDetail.desc;
     
@@ -194,7 +195,7 @@
             self.foodsTableView = tableView;
             tableView.frame = CGRectMake(0, 0, Main_Screen_Width, MAX(Main_Screen_Height - 64 - 50, 50 + self.cookbookDetail.foods.count * 44));
             tableView.tag = 5;
-            FoodsViewController* controller = [[FoodsViewController alloc] initWithFoods:self.cookbookDetail.foods];
+            FoodsViewController* controller = [[FoodsViewController alloc] initWithFoods:self.cookbookDetail.foods delegate:self];
             self.foodsTableViewDataSource = controller;
             tableView.delegate = controller;
             tableView.dataSource = controller;
@@ -765,7 +766,7 @@
 
 - (IBAction)follow:(UIButton *)sender
 {
-    sender.selected = !sender.selected;
+    
     NSString* userID = @"5";
     if (!sender.selected) {
         [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
@@ -785,6 +786,7 @@
         }];
     }
     
+    sender.selected = !sender.selected;
     
     
 }
@@ -804,6 +806,40 @@
 - (IBAction)shareCookbookTapped:(UIButton *)sender
 {
     [self shareCookbook];
+}
+
+#pragma mark - AddShoppingListCellDelegate
+
+- (void)AddShoppingListWithCell:(AddShoppingListCell *)cell
+{
+    NSLog(@"保存到购物清单");
+    //构建购物清单对象
+    NSString* userId = @"5";
+    ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
+    shoppingOrder.cookbookID = self.cookbook.ID;
+    shoppingOrder.cookbookName = self.cookbook.name;
+    shoppingOrder.creatorId = userId;
+    
+    NSMutableArray* foods = [NSMutableArray array];
+    for (Food* food in self.cookbookDetail.foods) {
+        PurchaseFood* purchaseFood = [[PurchaseFood alloc] init];
+        purchaseFood.index = food.index;
+        purchaseFood.name = food.name;
+        purchaseFood.desc = food.desc;
+        purchaseFood.isPurchase = NO;
+        [foods addObject:purchaseFood];
+    }
+    shoppingOrder.foods = foods;
+    
+    // 发送网络请求
+    [[InternetManager sharedManager] saveShoppingOrderWithShoppingOrder:shoppingOrder callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            [super showProgressCompleteWithLabelText:@"添加成功" afterDelay:1];
+        } else {
+            [super showProgressErrorWithLabelText:@"添加失败" afterDelay:1];
+        }
+    }];
+    
 }
 
 #pragma mark - 点赞和分享

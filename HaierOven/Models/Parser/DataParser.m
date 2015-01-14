@@ -10,8 +10,11 @@
 #import "Tag.h"
 #import "Comment.h"
 #import "Cookbook.h"
+#import "Cooker.h"
+#import "CookerStar.h"
+#import "Message.h"
 
-@class Food, Creator, Step;
+@class Food, Creator, Step, CookerStar;
 
 @implementation DataParser
 
@@ -275,6 +278,143 @@
     cookbookDetail.creator          = [DataParser parseCreatorWithDict:detailDict[@"creator"]];
     
     return cookbookDetail;
+}
+
++ (NSMutableArray*)parseShoppingListWithDict:(NSDictionary*)dict
+{
+    NSMutableArray* shoppingList = [NSMutableArray array];
+    
+    NSArray* shoppingListArr = dict[@"data"];
+    for (NSDictionary* shoppingListDict in shoppingListArr) {
+        ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
+        shoppingOrder.cookbookID = [shoppingListDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"cookbookID"]];
+        shoppingOrder.cookbookName = [shoppingListDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"cookbookName"]];
+//        shoppingOrder.createdTime = [shoppingListDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"createdTime"]];
+        shoppingOrder.creatorId = [shoppingListDict[@"creatorID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"creatorID"]];
+        
+        NSArray* foodArr = shoppingListDict[@"foods"];
+        NSMutableArray* purchaseFoods = [NSMutableArray array];
+        for (NSDictionary* foodDict in foodArr) {
+            PurchaseFood* purchaseFood = [[PurchaseFood alloc] init];
+            purchaseFood.desc = [foodDict[@"foodDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", foodDict[@"foodDesc"]];
+            purchaseFood.index = [foodDict[@"foodIndex"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", foodDict[@"foodIndex"]];
+            purchaseFood.name = [foodDict[@"foodName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", foodDict[@"foodName"]];
+            purchaseFood.isPurchase = [foodDict[@"isPurchase"] integerValue] == 0 ? NO : YES;
+            [purchaseFoods addObject:purchaseFood];
+        }
+        shoppingOrder.foods = purchaseFoods;
+        
+        [shoppingList addObject:shoppingOrder];
+    }
+    
+    
+    return shoppingList;
+}
+
++ (NSMutableArray*)parseCookersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
+{
+    NSMutableArray* cookers = [NSMutableArray array];
+    
+    NSDictionary* dataDict = dict[@"data"];
+    *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
+    
+    NSArray* cookerArr = dataDict[@"items"];
+    
+    for (NSDictionary* cookerDict in cookerArr) {
+        
+        Cooker* recommentCooker = [[Cooker alloc] init];
+        
+        NSArray* cookbookArr = cookerDict[@"cookbooks"];
+        NSMutableArray* cookbooks = [NSMutableArray array];
+        for (NSDictionary* cookbookDict in cookbookArr) {
+            Cookbook* cookbook = [[Cookbook alloc] init];
+            
+            cookbook.ID             = [cookbookDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookID"]];
+            cookbook.name           = [cookbookDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookName"]];
+            cookbook.desc           = [cookbookDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookDesc"]];
+            NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
+            cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
+            cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
+            NSDictionary* creatDict = cookbookDict[@"creator"];
+            cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
+            cookbook.praises        = [cookbookDict[@"praises"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praises"]];
+            
+            [cookbooks addObject:cookbook];
+        }
+        
+        recommentCooker.cookbooks = cookbooks;
+        
+        recommentCooker.fansAmount = [cookerDict[@"fansAmount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"fansAmount"]];
+        recommentCooker.isFollowed = [cookerDict[@"isFollowed"] integerValue] == 0 ? NO : YES;
+        recommentCooker.signature = [cookerDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"signature"]];
+        NSString* avatar     = [cookerDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userAvatar"]];
+        recommentCooker.avatar     = [DataParser parseImageUrlWithString:avatar];
+        recommentCooker.userBaseId = [cookerDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userBaseID"]];
+        recommentCooker.userLevel = [cookerDict[@"userLevel"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"userLevel"] integerValue];
+        recommentCooker.userName = [cookerDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userName"]];
+        
+        
+        [cookers addObject:recommentCooker];
+        
+    }
+    
+    
+    return cookers;
+}
+
++ (NSMutableArray*)parseCookerStarsWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
+{
+    NSMutableArray* cookerStars = [NSMutableArray array];
+    
+    NSDictionary* dataDict = dict[@"data"];
+    *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
+    
+    NSArray* cookerArr = dataDict[@"items"];
+    
+    for (NSDictionary* cookerDict in cookerArr) {
+        CookerStar* cookerStar = [[CookerStar alloc] init];
+        cookerStar.avatar = [cookerDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userAvatar"]];
+        cookerStar.avatar = [DataParser parseImageUrlWithString:cookerStar.avatar];
+        cookerStar.userName = [cookerDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userName"]];
+        cookerStar.signature = [cookerDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"signature"]];
+        cookerStar.introduction = [cookerDict[@"introduction"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"introduction"]];
+        cookerStar.videoPath = [cookerDict[@"vedioPath"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"vedioPath"]];
+        cookerStar.cookbookAmount = [cookerDict[@"cookbookAmount"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"cookbookAmount"] integerValue];
+        cookerStar.userLevel = [cookerDict[@"userLevel"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"userLevel"] integerValue];
+        cookerStar.isFollowed = [cookerDict[@"isFollowed"] integerValue] == 0 ? NO : YES;
+        cookerStar.userBaseId = [cookerDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userBaseID"]];
+        
+        [cookerStars addObject:cookerStar];
+    }
+    
+    
+    return cookerStars;
+}
+
++ (NSMutableArray*)parseMessagesWithDict:(NSDictionary*)dict
+{
+    NSMutableArray* messages = [NSMutableArray array];
+    
+    NSDictionary* dataDict = dict[@"data"];
+    
+    NSArray* messageArr = dataDict[@"items"];
+    
+    for (NSDictionary* messageDict in messageArr) {
+        
+        Message* message = [[Message alloc] init];
+        message.ID = [messageDict[@"messageID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageID"]];
+        message.createdTime = [messageDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"createdTime"]];
+        message.isRead = [messageDict[@"isRead"] integerValue] == 0 ? NO : YES;
+        message.content = [messageDict[@"messageContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageContent"]];
+        
+        message.fromUser = [DataParser parseCommentUserWithDict:messageDict[@"messageFrom"]];
+        message.toUser = [DataParser parseCommentUserWithDict:messageDict[@"messageTo"]];
+        
+        [messages addObject:message];
+    }
+    
+    
+    return messages;
 }
 
 @end

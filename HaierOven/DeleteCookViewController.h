@@ -10,4 +10,6 @@
 #import "BaseTableViewController.h"
 @interface DeleteCookViewController : BaseTableViewController
 
+@property (strong, nonatomic) NSMutableArray* shoppingList;
+
 @end
