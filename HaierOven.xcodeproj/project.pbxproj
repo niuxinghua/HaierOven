@@ -661,6 +661,7 @@
 		842A86ED1A527DC700C75EE4 /* StepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86EB1A527DC700C75EE4 /* StepCell.m */; };
 		842A86EE1A527DC700C75EE4 /* StepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86EC1A527DC700C75EE4 /* StepCell.xib */; };
 		8438F6EF1A660DE900E1436C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6EE1A660DE900E1436C /* Message.m */; };
+		8438F6F01A667FC600E1436C /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
@@ -791,7 +792,6 @@
 		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
 		84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84855F2B1A64F7D600830B75 /* MediaPlayer.framework */; };
 		84855F301A65062400830B75 /* product-design-animation-cn-20130712_848x480.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */; };
-		84855F311A6509C300830B75 /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
 		849F916A1A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow.png */; };
 		849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@2x.png */; };
 		849F916C1A513981006234B9 /* icon_followd-.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd-.png */; };
@@ -4766,6 +4766,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8438F6F01A667FC600E1436C /* CookerStar.m in Sources */,
 				458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */,
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,

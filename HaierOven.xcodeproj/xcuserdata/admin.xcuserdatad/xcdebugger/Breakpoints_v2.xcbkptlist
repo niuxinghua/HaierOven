@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Cookbook/Controllers/CookbookDetailControllerViewController.m"
-            timestampString = "442909038.111187"
+            timestampString = "442925039.948838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "454"
-            endingLineNumber = "454"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "-didTapSend:"
             landmarkType = "5">
          </BreakpointContent>
