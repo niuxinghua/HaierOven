@@ -218,13 +218,13 @@
 #pragma mark - alertEditDelegate
 -(void)ChickAlert:(UILabel*)label andTextFailed:(UITextField*)textfield{
     if (label.tag==2){
-        if ([MyTool validateEmail:label.text]) {
+        if ([MyTool validateEmail:textfield.text]) {
             label.text = textfield.text;
         }else
             [super showProgressErrorWithLabelText:@"请输入正确邮箱" afterDelay:1.0];
     }
     else if (label.tag ==3){
-        if ([MyTool validateTelephone:label.text]) {
+        if ([MyTool validateTelephone:textfield.text]) {
             label.text = textfield.text;
         }else
             [super showProgressErrorWithLabelText:@"请输入正确手机号" afterDelay:1.0];

@@ -69,6 +69,9 @@
 		4586329D1A6638470083C2FF /* GenderAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4586329C1A6638470083C2FF /* GenderAlertView.xib */; };
 		458632A31A66509A0083C2FF /* AlertDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632A21A66509A0083C2FF /* AlertDatePicker.m */; };
 		458632A51A6650B30083C2FF /* AlertDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458632A41A6650B30083C2FF /* AlertDatePicker.xib */; };
+		458632A61A6670590083C2FF /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
+		458632AA1A6672520083C2FF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632A91A6672520083C2FF /* SettingViewController.m */; };
+		458632AD1A667B560083C2FF /* SuggestPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632AC1A667B560083C2FF /* SuggestPostViewController.m */; };
 		458952AD1A493C05009B5DD1 /* wifilianjie01.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952951A493C05009B5DD1 /* wifilianjie01.png */; };
 		458952AE1A493C05009B5DD1 /* wifilianjie01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952961A493C05009B5DD1 /* wifilianjie01@2x.png */; };
 		458952AF1A493C05009B5DD1 /* wifilianjie01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952971A493C05009B5DD1 /* wifilianjie01@3x.png */; };
@@ -935,6 +938,10 @@
 		458632A11A66509A0083C2FF /* AlertDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertDatePicker.h; sourceTree = "<group>"; };
 		458632A21A66509A0083C2FF /* AlertDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertDatePicker.m; sourceTree = "<group>"; };
 		458632A41A6650B30083C2FF /* AlertDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertDatePicker.xib; sourceTree = "<group>"; };
+		458632A81A6672520083C2FF /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		458632A91A6672520083C2FF /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		458632AB1A667B560083C2FF /* SuggestPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestPostViewController.h; sourceTree = "<group>"; };
+		458632AC1A667B560083C2FF /* SuggestPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestPostViewController.m; sourceTree = "<group>"; };
 		458952951A493C05009B5DD1 /* wifilianjie01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifilianjie01.png; sourceTree = "<group>"; };
 		458952961A493C05009B5DD1 /* wifilianjie01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifilianjie01@2x.png"; sourceTree = "<group>"; };
 		458952971A493C05009B5DD1 /* wifilianjie01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifilianjie01@3x.png"; sourceTree = "<group>"; };
@@ -2112,6 +2119,17 @@
 			name = alertDatePicker;
 			sourceTree = "<group>";
 		};
+		458632A71A6671D40083C2FF /* SettingController */ = {
+			isa = PBXGroup;
+			children = (
+				458632A81A6672520083C2FF /* SettingViewController.h */,
+				458632A91A6672520083C2FF /* SettingViewController.m */,
+				458632AB1A667B560083C2FF /* SuggestPostViewController.h */,
+				458632AC1A667B560083C2FF /* SuggestPostViewController.m */,
+			);
+			name = SettingController;
+			sourceTree = "<group>";
+		};
 		458952941A493C05009B5DD1 /* wifilianjie0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3063,6 +3081,7 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				458632A71A6671D40083C2FF /* SettingController */,
 				459E8BCB1A5E83C5009D4ADA /* BakedHouseController */,
 				459E8BBB1A5E327B009D4ADA /* BakedGroup */,
 				452A6E4F1A5A7A2C00ABFE75 /* ShoppingList */,
@@ -4766,7 +4785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8438F6F01A667FC600E1436C /* CookerStar.m in Sources */,
+				458632A61A6670590083C2FF /* CookerStar.m in Sources */,
 				458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */,
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
@@ -4825,6 +4844,7 @@
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
+				458632AD1A667B560083C2FF /* SuggestPostViewController.m in Sources */,
 				45A546CB1A5A4EC200BE62EC /* UIScrollView+Extension.m in Sources */,
 				452A6E581A5A7F9800ABFE75 /* CookListFoodView.m in Sources */,
 				459E8BBE1A5E32FB009D4ADA /* BakedGroupController.m in Sources */,
@@ -4943,6 +4963,7 @@
 				458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */,
 				8447CB941A5FC89500FADF9D /* MessagesModel.m in Sources */,
 				844117821A4BB8AF00628A64 /* AFURLResponseSerialization.m in Sources */,
+				458632AA1A6672520083C2FF /* SettingViewController.m in Sources */,
 				45D9FEBF1A52866900023B9D /* YIPopupTextView.m in Sources */,
 				457A777C1A42CA2C00E422D0 /* RecommendTagView.m in Sources */,
 				45A9995E1A510AAB0008AFE3 /* CoverCell.m in Sources */,
