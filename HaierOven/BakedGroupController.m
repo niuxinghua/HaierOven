@@ -290,6 +290,9 @@
         }];
     }
     
+    
+    
+    
     sender.selected = !sender.selected;
 }
 
