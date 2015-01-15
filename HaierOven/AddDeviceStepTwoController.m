@@ -144,4 +144,9 @@
     self.myWindow.hidden = YES;
     [self.deviceConnectProgressView.progressView setProgress:0 andTimeInterval:0.03];
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

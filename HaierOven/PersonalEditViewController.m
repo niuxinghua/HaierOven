@@ -51,7 +51,12 @@
     
     
     NSRange range = [self.user.userAvatar rangeOfString:[BaseOvenUrl lastPathComponent]];
-    self.userAvatar = [self.user.userAvatar substringFromIndex:range.location+range.length];
+    if (range.length == 0) {
+        self.userAvatar = self.user.userAvatar;
+    } else {
+        self.userAvatar = [self.user.userAvatar substringFromIndex:range.location+range.length];
+    }
+    
     
     alertShowRect = CGRectMake(PageW/2-(PageW-30)/2, PageH/3.2,PageW-30, 138);
     alertHiddenRect = CGRectMake(PageW/2, PageH/2, 0, 0);

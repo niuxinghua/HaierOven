@@ -42,24 +42,36 @@
         textfield.layer.borderWidth = 1;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWillShow:)
-     
-                                                 name:UIKeyboardWillShowNotification
-     
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWillHide:)
-     
-                                                 name:UIKeyboardWillHideNotification
-     
-                                               object:nil];
-
+    @try {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+         
+                                                 selector:@selector(keyboardWillShow:)
+         
+                                                     name:UIKeyboardWillShowNotification
+         
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+         
+                                                 selector:@selector(keyboardWillHide:)
+         
+                                                     name:UIKeyboardWillHideNotification
+         
+                                                   object:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"收听键盘通知异常");
+    }
+    @finally {
+        NSLog(@"");
+    }
     
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)chickPsd:(UIButton*)sender {

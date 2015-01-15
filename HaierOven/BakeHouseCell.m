@@ -10,6 +10,7 @@
 @interface BakeHouseCell()
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end
 @implementation BakeHouseCell
