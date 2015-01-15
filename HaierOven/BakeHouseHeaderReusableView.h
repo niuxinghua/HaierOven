@@ -19,5 +19,6 @@
 @end
 @interface BakeHouseHeaderReusableView : UICollectionReusableView
 @property (weak, nonatomic)id<BakeHouseHeaderReusableViewDelegate>delegate;
+@property (weak, nonatomic) UITextField* searchTextField;
 
 @end

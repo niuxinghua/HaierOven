@@ -39,6 +39,7 @@
 
 @property (copy, nonatomic) NSString* userAvatar;
 
+@property (strong, nonatomic) AlertPsdView *alertPsd;
 @end
 
 @implementation PersonalEditViewController
