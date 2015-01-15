@@ -47,8 +47,14 @@
     [self.view addSubview:self.tableView];
     
     [self loadUserInfo];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
     // Do any additional setup after loading the view.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadUserInfo

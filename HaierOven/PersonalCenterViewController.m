@@ -129,13 +129,20 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     
     [self loadPublishedCookbooks];
     [self loadPraisedCookbooks];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateUI
 {
     [self.personalAvater setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
     self.myDessertCountLabel.text = self.currentUser.points;
-    self.personalNameLabel.text = self.currentUser.userName;
+    self.personalNameLabel.text = self.currentUser.nickName;
     self.personDescriptionLabel.text = self.currentUser.note;
     [self.watchBtn setTitle:[NSString stringWithFormat:@"%@关注", self.currentUser.followCount] forState:UIControlStateNormal];
     [self.followBtn setTitle:[NSString stringWithFormat:@"粉丝%@", self.currentUser.focusCount] forState:UIControlStateNormal];
@@ -305,6 +312,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 }
 - (IBAction)Edit:(id)sender {
     PersonalEditViewController *personalEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonalEditViewController"];
+    personalEdit.user = self.currentUser;
     [self.navigationController pushViewController:personalEdit animated:YES];
 }
 
