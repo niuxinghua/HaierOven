@@ -200,6 +200,24 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)signInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
 
 /**
+ *  增加积分
+ *
+ *  @param score      增加的积分
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)addPoints:(NSInteger)score userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
+ *  用户绑定设备
+ *
+ *  @param userBaseId 用户ID
+ *  @param mac        设备MAC地址
+ *  @param completion 结果回调
+ */
+- (void)bindOvenWithUserBaseId:(NSString*)userBaseId deviceMac:(NSString*)mac callBack:(myCallback)completion;
+
+/**
  *  添加关注
  *
  *  @param userBaseId 用户Id
@@ -313,6 +331,15 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param completion 结果回调
  */
 - (void)getFriendCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+/**
+ *  获取我赞过的菜谱
+ *
+ *  @param userBaseId 用户ID
+ *  @param pageIndex  获取的页数
+ *  @param completion 结果回调
+ */
+- (void)getMyPraisedCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 /**
  *  根据标签获取菜谱

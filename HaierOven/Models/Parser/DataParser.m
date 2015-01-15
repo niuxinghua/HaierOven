@@ -22,7 +22,7 @@
 {
     NSDictionary* userDict = dict[@"data"];
     
-    User* user = [DataParser parseUserWithDict:userDict];
+    User* user = [DataParser parseUserInfoWithDict:userDict];
     
     return user;
 }

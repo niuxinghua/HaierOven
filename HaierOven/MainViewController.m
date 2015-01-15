@@ -13,6 +13,7 @@
 #import "CookbookDetailControllerViewController.h"
 #import "Tag.h"
 #import "Cookbook.h"
+#import "MJRefresh.h"
 
 #define AdvRate         0.5
 #define ScrRate         0.1388888
@@ -107,6 +108,8 @@
     
     // Do any additional setup after loading the view.
 }
+
+
 
 
 - (void)setupSubviews

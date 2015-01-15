@@ -18,5 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *siginBtn;
 @property (weak, nonatomic) id<FirstTableViewCellDelegate>delegate;
+
+@property (strong, nonatomic) User* user;
+
 - (IBAction)Sginin:(UIButton *)sender;
 @end

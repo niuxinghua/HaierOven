@@ -16,6 +16,7 @@
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
 @property BOOL hadDevice;
+@property (strong, nonatomic) User* currentUser;
 @end
 
 @implementation LeftMenuViewController
@@ -45,9 +46,21 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecDeviceTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"SecDeviceTableViewCell"];
     [self.view addSubview:self.tableView];
     
-    
+    [self loadUserInfo];
 
     // Do any additional setup after loading the view.
+}
+
+- (void)loadUserInfo
+{
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] getUserInfoWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.currentUser = obj;
+            [self.tableView reloadData];
+            
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,6 +169,8 @@
         
         cell.siginBtn.selected = [[DataCenter sharedInstance] getSignInFlag];
         
+        cell.user = self.currentUser;
+        
         return cell;
     }else if (indexPath.row==1){
         if (hadDevice) {
@@ -197,9 +212,16 @@
     NSString* userBaseId = @"5";
     [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
-            btn.selected = !btn.selected;
-            [super showProgressCompleteWithLabelText:@"点心＋2" afterDelay:1.0];
-            [[DataCenter sharedInstance] saveSignInFlag];
+            
+            [[InternetManager sharedManager] addPoints:SignInScore userBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+                
+                if (success) {
+                    btn.selected = !btn.selected;
+                    [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
+                    [[DataCenter sharedInstance] saveSignInFlag];
+                }
+                
+            }];
             
         }
     }];

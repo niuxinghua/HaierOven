@@ -28,4 +28,13 @@
     // Configure the view for the selected state
 }
 
+- (void)setUser:(User *)user
+{
+    _user = user;
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    self.nameLabel.text = user.userName;
+    self.descriptionLabel.text = user.note;
+    
+}
+
 @end

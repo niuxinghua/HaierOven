@@ -14,4 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UIButton *watchingBtn;
 
+@property (strong, nonatomic) User* user;
+
 @end

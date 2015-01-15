@@ -48,6 +48,9 @@
 
 @property (copy, nonatomic) NSString* accessToken;
 
+/**
+ *  简介
+ */
 @property (copy, nonatomic) NSString* note;
 
 /**
@@ -80,7 +83,9 @@
  */
 @property (copy, nonatomic) NSString* followCount;
 
-
+/**
+ *  积分/点心数
+ */
 @property (copy, nonatomic) NSString* points;
 
 
