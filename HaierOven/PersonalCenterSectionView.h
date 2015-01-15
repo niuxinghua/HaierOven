@@ -11,7 +11,7 @@ typedef NS_ENUM(NSInteger, SectionType) {
     sectionPersonalCenter   =1,
     sectionFollow           =2,
     sectionBakeHouse        =3,
-
+    sectionNotification     =4
 };
 
 
@@ -28,5 +28,6 @@ typedef NS_ENUM(NSInteger, SectionType) {
 @property (strong, nonatomic) IBOutlet UIButton *pushedButton;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet UIImageView *orangeLine;
+@property (strong, nonatomic) IBOutlet UIImageView *middleLine;
 @property (weak, nonatomic)id<PersonalCenterSectionViewDelegate>delegate;
 @end

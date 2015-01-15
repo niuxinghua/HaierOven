@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhp-vm-yPy">
-                            <rect key="frame" x="25" y="8" width="267" height="24"/>
+                            <rect key="frame" x="20" y="8" width="267" height="24"/>
                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -36,8 +36,8 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="uhp-vm-yPy" secondAttribute="trailing" constant="8" id="QvO-N0-122"/>
-                        <constraint firstItem="uhp-vm-yPy" firstAttribute="leading" secondItem="fpL-Am-vvg" secondAttribute="leading" constant="25" id="SkA-zj-WzZ"/>
+                        <constraint firstAttribute="trailing" secondItem="uhp-vm-yPy" secondAttribute="trailing" constant="13" id="QvO-N0-122"/>
+                        <constraint firstItem="uhp-vm-yPy" firstAttribute="leading" secondItem="fpL-Am-vvg" secondAttribute="leading" constant="20" id="SkA-zj-WzZ"/>
                         <constraint firstAttribute="bottom" secondItem="uhp-vm-yPy" secondAttribute="bottom" constant="8" id="gb1-1B-3TO"/>
                         <constraint firstItem="uhp-vm-yPy" firstAttribute="top" secondItem="fpL-Am-vvg" secondAttribute="top" constant="8" id="vN9-6e-Z8z"/>
                         <constraint firstAttribute="width" secondItem="fpL-Am-vvg" secondAttribute="height" multiplier="15:2" id="ypr-lA-tTh"/>

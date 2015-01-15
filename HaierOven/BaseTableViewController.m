@@ -21,6 +21,17 @@
     
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = YES;
+    if (self.navigationController.viewControllers.count > 1 && self.isBackButton) {
+        UIButton *backButton = [[UIButton alloc] init];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateNormal];
+        [backButton setImage:IMAGENAMED(@"back.png") forState:UIControlStateHighlighted];
+        backButton.showsTouchWhenHighlighted = YES;
+        [backButton setFrame:CGRectMake(0, 0, 26, 26)];
+        [backButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    }
+    
+    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -210,5 +221,8 @@
     [titleLabel setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = titleLabel;
 }
-
+- (void)backButtonClicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

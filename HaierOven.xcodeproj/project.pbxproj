@@ -69,7 +69,6 @@
 		4586329D1A6638470083C2FF /* GenderAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4586329C1A6638470083C2FF /* GenderAlertView.xib */; };
 		458632A31A66509A0083C2FF /* AlertDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632A21A66509A0083C2FF /* AlertDatePicker.m */; };
 		458632A51A6650B30083C2FF /* AlertDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458632A41A6650B30083C2FF /* AlertDatePicker.xib */; };
-		458632A61A6670590083C2FF /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
 		458632AA1A6672520083C2FF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632A91A6672520083C2FF /* SettingViewController.m */; };
 		458632AD1A667B560083C2FF /* SuggestPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 458632AC1A667B560083C2FF /* SuggestPostViewController.m */; };
 		458952AD1A493C05009B5DD1 /* wifilianjie01.png in Resources */ = {isa = PBXBuildFile; fileRef = 458952951A493C05009B5DD1 /* wifilianjie01.png */; };
@@ -196,6 +195,12 @@
 		45A5E8261A50081200FCD2BD /* xcqr.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8241A50081200FCD2BD /* xcqr.png */; };
 		45A5E8271A50081200FCD2BD /* xcqr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8251A50081200FCD2BD /* xcqr@2x.png */; };
 		45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A5E8281A50082400FCD2BD /* xcqr@3x.png */; };
+		45A661511A67664700FC9B90 /* AlertPsdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A661501A67664700FC9B90 /* AlertPsdView.m */; };
+		45A661531A67666200FC9B90 /* AlertPsdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A661521A67666200FC9B90 /* AlertPsdView.xib */; };
+		45A6615B1A6786FB00FC9B90 /* NotificationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A6615A1A6786FB00FC9B90 /* NotificationTableViewController.m */; };
+		45A6615E1A678DFA00FC9B90 /* SystemNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A6615D1A678DFA00FC9B90 /* SystemNotificationCell.m */; };
+		45A661611A6799BF00FC9B90 /* NotificationSectionHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A661601A6799BF00FC9B90 /* NotificationSectionHeadView.m */; };
+		45A661631A6799D300FC9B90 /* NotificationSectionHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A661621A6799D300FC9B90 /* NotificationSectionHeadView.xib */; };
 		45A6A3CA1A5F7BC1004DD28A /* BakeHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */; };
 		45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */; };
 		45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */; };
@@ -1100,6 +1105,16 @@
 		45A5E8241A50081200FCD2BD /* xcqr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xcqr.png; sourceTree = "<group>"; };
 		45A5E8251A50081200FCD2BD /* xcqr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@2x.png"; sourceTree = "<group>"; };
 		45A5E8281A50082400FCD2BD /* xcqr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xcqr@3x.png"; sourceTree = "<group>"; };
+		45A6614F1A67664700FC9B90 /* AlertPsdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPsdView.h; sourceTree = "<group>"; };
+		45A661501A67664700FC9B90 /* AlertPsdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPsdView.m; sourceTree = "<group>"; };
+		45A661521A67666200FC9B90 /* AlertPsdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertPsdView.xib; sourceTree = "<group>"; };
+		45A661591A6786FB00FC9B90 /* NotificationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewController.h; sourceTree = "<group>"; };
+		45A6615A1A6786FB00FC9B90 /* NotificationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewController.m; sourceTree = "<group>"; };
+		45A6615C1A678DFA00FC9B90 /* SystemNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemNotificationCell.h; sourceTree = "<group>"; };
+		45A6615D1A678DFA00FC9B90 /* SystemNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemNotificationCell.m; sourceTree = "<group>"; };
+		45A6615F1A6799BF00FC9B90 /* NotificationSectionHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSectionHeadView.h; sourceTree = "<group>"; };
+		45A661601A6799BF00FC9B90 /* NotificationSectionHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSectionHeadView.m; sourceTree = "<group>"; };
+		45A661621A6799D300FC9B90 /* NotificationSectionHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationSectionHeadView.xib; sourceTree = "<group>"; };
 		45A6A3C81A5F7BC1004DD28A /* BakeHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeHouseCell.h; sourceTree = "<group>"; };
 		45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeHouseCell.m; sourceTree = "<group>"; };
 		45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodAlertView.h; sourceTree = "<group>"; };
@@ -2403,6 +2418,40 @@
 			name = UploadingMneu;
 			sourceTree = "<group>";
 		};
+		45A6614E1A67660F00FC9B90 /* alertEditPsd */ = {
+			isa = PBXGroup;
+			children = (
+				45A6614F1A67664700FC9B90 /* AlertPsdView.h */,
+				45A661501A67664700FC9B90 /* AlertPsdView.m */,
+				45A661521A67666200FC9B90 /* AlertPsdView.xib */,
+			);
+			name = alertEditPsd;
+			sourceTree = "<group>";
+		};
+		45A661541A676B3100FC9B90 /* SectionView */ = {
+			isa = PBXGroup;
+			children = (
+				45BA02DC1A4408E7003810C7 /* PersonalCenterSectionView.h */,
+				45BA02DD1A4408E7003810C7 /* PersonalCenterSectionView.m */,
+				45BA02DF1A4408FB003810C7 /* PersonalCenterSectionView.xib */,
+			);
+			name = SectionView;
+			sourceTree = "<group>";
+		};
+		45A661551A67848C00FC9B90 /* NotificationController */ = {
+			isa = PBXGroup;
+			children = (
+				45A661591A6786FB00FC9B90 /* NotificationTableViewController.h */,
+				45A6615A1A6786FB00FC9B90 /* NotificationTableViewController.m */,
+				45A6615C1A678DFA00FC9B90 /* SystemNotificationCell.h */,
+				45A6615D1A678DFA00FC9B90 /* SystemNotificationCell.m */,
+				45A6615F1A6799BF00FC9B90 /* NotificationSectionHeadView.h */,
+				45A661601A6799BF00FC9B90 /* NotificationSectionHeadView.m */,
+				45A661621A6799D300FC9B90 /* NotificationSectionHeadView.xib */,
+			);
+			name = NotificationController;
+			sourceTree = "<group>";
+		};
 		45A7E6721A519C800075E2C1 /* 添加材料Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2492,8 +2541,6 @@
 			children = (
 				454916B71A403993005503C8 /* PersonalCenterViewController.h */,
 				454916B81A403993005503C8 /* PersonalCenterViewController.m */,
-				45BA02DC1A4408E7003810C7 /* PersonalCenterSectionView.h */,
-				45BA02DD1A4408E7003810C7 /* PersonalCenterSectionView.m */,
 				45BA02C41A43D807003810C7 /* PersonalEditViewController.h */,
 				45BA02C51A43D807003810C7 /* PersonalEditViewController.m */,
 				45D906151A47C01900B97D92 /* RelationshipListViewController.h */,
@@ -2507,7 +2554,6 @@
 		45BA02E51A441386003810C7 /* PersonCenterView */ = {
 			isa = PBXGroup;
 			children = (
-				45BA02DF1A4408FB003810C7 /* PersonalCenterSectionView.xib */,
 			);
 			name = PersonCenterView;
 			sourceTree = "<group>";
@@ -3062,6 +3108,7 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45A661541A676B3100FC9B90 /* SectionView */,
 				45D9FEB81A5285F500023B9D /* AlertView */,
 				45422DC51A63B70C001A7223 /* BakeHouse */,
 				459E8BAA1A5D2604009D4ADA /* ShoppingList */,
@@ -3081,6 +3128,7 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45A661551A67848C00FC9B90 /* NotificationController */,
 				458632A71A6671D40083C2FF /* SettingController */,
 				459E8BCB1A5E83C5009D4ADA /* BakedHouseController */,
 				459E8BBB1A5E327B009D4ADA /* BakedGroup */,
@@ -3217,6 +3265,7 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				45A6614E1A67660F00FC9B90 /* alertEditPsd */,
 				458632A01A6650690083C2FF /* alertDatePicker */,
 				4586329F1A66442B0083C2FF /* alertGender */,
 				4586329E1A66441C0083C2FF /* alertPhoto */,
@@ -4364,6 +4413,7 @@
 				45BC57781A4B08380052F520 /* wendu cx@3x.png in Resources */,
 				45D907121A47CAAB00B97D92 /* xinzeng@3x.png in Resources */,
 				45D907171A47CAAB00B97D92 /* yiqiandao@2x.png in Resources */,
+				45A661531A67666200FC9B90 /* AlertPsdView.xib in Resources */,
 				45422DED1A64C2C2001A7223 /* ww.png in Resources */,
 				45B88E411A4BD7A100722EF6 /* ksyr-cxz.png in Resources */,
 				8447CACE1A5B7FEE00FADF9D /* ios-social-sdk-shake.html in Resources */,
@@ -4558,6 +4608,7 @@
 				45D9FEC51A52902000023B9D /* xts@2x.png in Resources */,
 				45BBA69E1A5257010066C143 /* YJTP@3x.png in Resources */,
 				45D906C81A47CAAB00B97D92 /* gouwuqindan@2x.png in Resources */,
+				45A661631A6799D300FC9B90 /* NotificationSectionHeadView.xib in Resources */,
 				45D9069C1A47CAAB00B97D92 /* aixin.png in Resources */,
 				849F91721A513981006234B9 /* icon_gfcp_s-.png in Resources */,
 				849F917D1A513981006234B9 /* icon_like_navi_s@2x.png in Resources */,
@@ -4785,7 +4836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				458632A61A6670590083C2FF /* CookerStar.m in Sources */,
+				8438F6F01A667FC600E1436C /* CookerStar.m in Sources */,
 				458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */,
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
@@ -4795,6 +4846,7 @@
 				8447CB831A5FC73700FADF9D /* JSQMessagesInputToolbar.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
 				45A546961A59119000BE62EC /* UnderLineButton.m in Sources */,
+				45A661611A6799BF00FC9B90 /* NotificationSectionHeadView.m in Sources */,
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				458DD0681A651A4B006E84DD /* PECropRectView.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
@@ -4820,6 +4872,7 @@
 				45BBA6971A52552F0066C143 /* AddStepDetailCell.m in Sources */,
 				459E8BBA1A5D2B95009D4ADA /* DeleteCookCell.m in Sources */,
 				45A546841A58E56500BE62EC /* LoginViewController.m in Sources */,
+				45A6615E1A678DFA00FC9B90 /* SystemNotificationCell.m in Sources */,
 				844117711A4BB8AF00628A64 /* Comment.m in Sources */,
 				8447CB8F1A5FC80800FADF9D /* ChatViewController.m in Sources */,
 				45BB36701A4AA0A4000EE3C4 /* LineProgressLayer.m in Sources */,
@@ -4882,6 +4935,7 @@
 				8447CAED1A5FAF2100FADF9D /* ShoppingOrder.m in Sources */,
 				45A5E81B1A50007300FCD2BD /* MenuDraftController.m in Sources */,
 				452A6E821A5BA53300ABFE75 /* CookStarDetailTopView.m in Sources */,
+				45A6615B1A6786FB00FC9B90 /* NotificationTableViewController.m in Sources */,
 				457A773E1A418EF200E422D0 /* ContainerView.m in Sources */,
 				8447CB871A5FC73700FADF9D /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				45C7E56F1A3FDA43000B086B /* MyUtils.m in Sources */,
@@ -4980,6 +5034,7 @@
 				459E8BCE1A5E85F2009D4ADA /* BakedHouseViewController.m in Sources */,
 				45C7E58B1A3FE25A000B086B /* UIViewController+RESideMenu.m in Sources */,
 				45A5E8221A5002D600FCD2BD /* MenuDraftTableViewCell.m in Sources */,
+				45A661511A67664700FC9B90 /* AlertPsdView.m in Sources */,
 				45A546CC1A5A4EC200BE62EC /* UIScrollView+MJRefresh.m in Sources */,
 				45A546C71A5A4EC200BE62EC /* MJRefreshBaseView.m in Sources */,
 				45A999751A5149400008AFE3 /* AddFoodLastCell.m in Sources */,

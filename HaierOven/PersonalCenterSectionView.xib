@@ -19,7 +19,7 @@
             <subviews>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1M3-Cm-wDS">
                     <rect key="frame" x="0.0" y="0.0" width="160" height="46"/>
-                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                     <state key="normal" title="发布的">
                         <color key="titleColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -30,7 +30,7 @@
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOq-OJ-6wl">
                     <rect key="frame" x="160" y="0.0" width="160" height="46"/>
-                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                     <state key="normal" title="赞过的">
                         <color key="titleColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.93725490199999995" green="0.59607843140000005" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,6 +39,12 @@
                         <action selector="TurnLikeController:" destination="iN0-l3-epB" eventType="touchUpInside" id="VlO-OG-2wA"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="garyline.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oiy-S4-L4A">
+                    <rect key="frame" x="160" y="0.0" width="1" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="ubV-Xu-PRa"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -48,17 +54,24 @@
                 <constraint firstAttribute="bottom" secondItem="WOq-OJ-6wl" secondAttribute="bottom" id="QBz-58-6os"/>
                 <constraint firstItem="WOq-OJ-6wl" firstAttribute="width" secondItem="1M3-Cm-wDS" secondAttribute="width" id="TsK-Oy-JcW"/>
                 <constraint firstItem="WOq-OJ-6wl" firstAttribute="leading" secondItem="1M3-Cm-wDS" secondAttribute="trailing" id="ezi-vQ-2gy"/>
+                <constraint firstItem="Oiy-S4-L4A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fDO-a8-xgu"/>
+                <constraint firstAttribute="bottom" secondItem="Oiy-S4-L4A" secondAttribute="bottom" id="ibS-h7-Wvz"/>
                 <constraint firstItem="1M3-Cm-wDS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l9H-LH-Z5N"/>
                 <constraint firstItem="1M3-Cm-wDS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oqw-oX-429"/>
                 <constraint firstItem="WOq-OJ-6wl" firstAttribute="height" secondItem="1M3-Cm-wDS" secondAttribute="height" id="ujE-Or-lhJ"/>
+                <constraint firstAttribute="centerX" secondItem="Oiy-S4-L4A" secondAttribute="centerX" id="wV9-xt-MBS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="likeButton" destination="WOq-OJ-6wl" id="5nL-0u-rYv"/>
+                <outlet property="middleLine" destination="Oiy-S4-L4A" id="Wmb-Gg-V5C"/>
                 <outlet property="pushedButton" destination="1M3-Cm-wDS" id="7i6-C5-YvQ"/>
             </connections>
             <point key="canvasLocation" x="174" y="224"/>
         </view>
     </objects>
+    <resources>
+        <image name="garyline.png" width="90" height="15"/>
+    </resources>
 </document>

@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改性别" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUW-P2-b2K">
-                            <rect key="frame" x="25" y="8" width="267" height="24"/>
+                            <rect key="frame" x="20" y="8" width="267" height="24"/>
                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -32,9 +32,9 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="UUW-P2-b2K" secondAttribute="bottom" constant="8" id="7iM-Ko-Aas"/>
                         <constraint firstAttribute="height" constant="40" id="ej5-B4-b1q"/>
-                        <constraint firstAttribute="trailing" secondItem="UUW-P2-b2K" secondAttribute="trailing" constant="8" id="tix-UU-V4E"/>
+                        <constraint firstAttribute="trailing" secondItem="UUW-P2-b2K" secondAttribute="trailing" constant="13" id="tix-UU-V4E"/>
                         <constraint firstItem="UUW-P2-b2K" firstAttribute="top" secondItem="LaK-Ba-KM4" secondAttribute="top" constant="8" id="vNO-OP-nEH"/>
-                        <constraint firstItem="UUW-P2-b2K" firstAttribute="leading" secondItem="LaK-Ba-KM4" secondAttribute="leading" constant="25" id="wTL-NM-KLv"/>
+                        <constraint firstItem="UUW-P2-b2K" firstAttribute="leading" secondItem="LaK-Ba-KM4" secondAttribute="leading" constant="20" id="wTL-NM-KLv"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lix-rk-Ymk" customClass="tk">

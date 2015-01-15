@@ -89,7 +89,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
             endingLineNumber = "109"
-            landmarkName = "-followed:"
+            landmarkName = "-addHeader"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,12 +132,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/PersonalEditViewController.m"
-            timestampString = "442919708.14293"
+            timestampString = "442991550.438303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "-Cancel"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "-CancelChangePsd"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -147,13 +147,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/SuggestPostViewController.m"
-            timestampString = "442935224.857966"
+            filePath = "HaierOven/AlertPsdView.m"
+            timestampString = "442991587.758518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "-chickPsd:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

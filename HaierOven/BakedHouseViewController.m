@@ -37,7 +37,7 @@
 
 
 -(void)setUpSubviews{
-    self.equipments =@[@"烘焙器材",@"烘焙食材",@"飞机",@"坦克",@"航空母舰"];
+    self.equipments =@[@"全部",@"烘焙器材",@"烘焙食材",@"烘焙磨具"];
     fiexViewHegih = 10+20+(LABEL_H*self.equipments.count);
     self.fiexView = [[FiexibleView alloc]initWithFrame:CGRectZero];
     self.fiexView.equipments = self.equipments;
