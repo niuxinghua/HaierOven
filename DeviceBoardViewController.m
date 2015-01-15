@@ -30,6 +30,8 @@
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) DeviceAlertView *deviceAlertView;
 
+@property (weak, nonatomic) IBOutlet UIButton *deviceNameButton;
+
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *deviceStatusBtns;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *allbtns;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *controlBtns;
@@ -50,7 +52,11 @@
 @property (strong, nonatomic) NSString *timeString;
 @property (strong, nonatomic) NSString *warmUpString;
 
-//@property (strong, nonatomic) uSDKDevice* myOven;
+/**
+ *  烘焙模式命令value，与烘焙模式按钮一一对应
+ */
+@property (strong, nonatomic) NSArray* bakeModeValues;
+
 
 @end
 
@@ -124,7 +130,9 @@
 
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
-
+    
+    self.bakeModeValues = @[@"30v0M6", @"30v0M8", @"30v0M5", @"30v0Mf"/*应该是焙烤，这里是传统烧烤*/, @"30v0Me"];
+    
     NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
     NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
     NSArray *wxz = @[@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz"];
@@ -142,6 +150,8 @@
         [self.workModelBtns addObject:btn];
     }
     
+    [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
+    [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，关机中", self.currentOven.name] forState:UIControlStateNormal];
     
 #warning 调试PageView
     self.pageView.numberOfPages = 4;
@@ -199,6 +209,19 @@
     sender.selected = sender.selected==YES?NO:YES;
     _tempBtn = sender;
     self.deviceBoardStatus = DeviceBoardStatusChoseModel;
+    
+    //点击了工作模式
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
+                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+    
+    
 }
 #pragma mark - 
 
@@ -321,6 +344,9 @@
     
 
 }
+
+#pragma mark - 开始运行 & 结束运行
+
 -(void)StartWorking{
     
     self.deviceBoardStatus = DeviceBoardStatusStart;
@@ -333,6 +359,15 @@
     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
     
     self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
 
 }
 -(void)StopWorking{
@@ -340,6 +375,16 @@
     [self.timeable invalidate];
     self.timeable = nil;
     self.deviceBoardStatus = DeviceBoardStatusOpen;
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kPause commandAttrValue:kPause];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+    
 
 }
 
@@ -364,37 +409,32 @@
     switch (sender.tag) {
         case 1:     //风扇
         {
-//            command = sender.selected ?
-//            [[OvenManager sharedManager] structureWithCommandName:kCloseAirFan commandAttrValue:kCloseAirFan] :
-//            [[OvenManager sharedManager] structureWithCommandName:kOpenAirFan commandAttrValue:kOpenAirFan];
-            command = [[OvenManager sharedManager] structureWithCommandName:kBakeTime commandAttrValue:@"00:01"];
+            command = sender.selected ?
+            [[OvenManager sharedManager] structureWithCommandName:kCloseAirFan commandAttrValue:kCloseAirFan] :
+            [[OvenManager sharedManager] structureWithCommandName:kOpenAirFan commandAttrValue:kOpenAirFan];
             
             break;
         }
         case 2:     //旋转
         {
-//            command = sender.selected ?
-//            [[OvenManager sharedManager] structureWithCommandName:kCloseChassisRotation commandAttrValue:kCloseChassisRotation] :
-//            [[OvenManager sharedManager] structureWithCommandName:kOpenChassisRotation commandAttrValue:kOpenChassisRotation];
-            command = [[OvenManager sharedManager] structureWithCommandName:kBakeTemperature commandAttrValue:@"80"];
+            command = sender.selected ?
+            [[OvenManager sharedManager] structureWithCommandName:kCloseChassisRotation commandAttrValue:kCloseChassisRotation] :
+            [[OvenManager sharedManager] structureWithCommandName:kOpenChassisRotation commandAttrValue:kOpenChassisRotation];
             break;
         }
         case 3:     //照明
         {
-//            command = sender.selected ?
-//            [[OvenManager sharedManager] structureWithCommandName:kOffLighting commandAttrValue:kOffLighting] :
-//            [[OvenManager sharedManager] structureWithCommandName:kLighting commandAttrValue:kLighting];
-            command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode commandAttrValue:@"30v0Me"];
+            command = sender.selected ?
+            [[OvenManager sharedManager] structureWithCommandName:kOffLighting commandAttrValue:kOffLighting] :
+            [[OvenManager sharedManager] structureWithCommandName:kLighting commandAttrValue:kLighting];
             break;
         }
         case 4:     //锁定
         {
-//            commands = sender.selected ? @[kUnlock] : @[kLock];
-//            command = sender.selected ?
-//            [[OvenManager sharedManager] structureWithCommandName:kUnlock commandAttrValue:kUnlock] :
-//            [[OvenManager sharedManager] structureWithCommandName:kLock commandAttrValue:kLock];
+            command = sender.selected ?
+            [[OvenManager sharedManager] structureWithCommandName:kUnlock commandAttrValue:kUnlock] :
+            [[OvenManager sharedManager] structureWithCommandName:kLock commandAttrValue:kLock];
             
-            command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
             
             break;
         }
@@ -415,10 +455,11 @@
 
 
 #pragma mark - 开机关机
-- (IBAction)onoff:(id)sender {
+- (IBAction)onoff:(UIButton*)sender {
     for (UIButton *btn in self.deviceStatusBtns) {
-        btn.selected = btn.selected ==YES?NO:YES;
+        btn.selected = !btn.selected;
     }
+    
     UIButton *btn = [self.deviceStatusBtns firstObject];
     self.deviceBoardStatus = btn.selected ==NO?DeviceBoardStatusClose:DeviceBoardStatusOpen;
     
@@ -525,6 +566,89 @@
 
 #pragma mark -
 
+// 设置烘焙时间
+- (void)setBakeTime:(NSString*)timeString
+{
+    NSRange range = [timeString rangeOfString:@" 分钟"];
+    NSString* timeStr = [timeString substringToIndex:range.location];
+    NSInteger minutes = [timeStr integerValue];
+    NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeTime commandAttrValue:timeValue];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+}
+
+// 设置烘焙温度
+- (void)setBakeTemperature:(NSString*)temperatureString
+{
+    NSRange range = [temperatureString rangeOfString:@"°"];
+    NSString* temperatureValue = [temperatureString substringToIndex:range.location];
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeTemperature
+                                                                        commandAttrValue:temperatureValue];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+}
+
+// 闹钟
+- (void)setClockTime:(NSString*)clockString
+{
+    
+    NSRange range = [clockString rangeOfString:@" 分钟"];
+    NSString* timeStr = [clockString substringToIndex:range.location];
+    NSInteger minutes = [timeStr integerValue];
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    NSInteger seconds = minutes * 60;
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.alertBody = [NSString stringWithFormat:@"您设置的闹钟%@时间已到哦", clockString];
+    localNotification.alertAction = @"alertAction";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+}
+
+// 预约
+- (void)setOrderTime:(NSString*)timeString
+{
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kOrderTime
+                                                                        commandAttrValue:timeString];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+    
+}
+
+// 温度探针
+- (void)setNeedleTemperature:(NSString*)temperatureString
+{
+    
+    
+    
+}
+
+// 预热
+- (void)setWarmUpTemperature:(NSString*)temperatureString
+{
+    
+}
+
 #pragma mark- 提示框显示deviceAlertView
 -(void)cancel{
     self.myWindow.hidden = YES;
@@ -536,21 +660,27 @@
     switch (self.alertType) {
         case alertTime:
             self.timeString = string;
+            [self setBakeTime:string];
             break;
         case alertTempture:
             self.tempString = string;
+            [self setBakeTemperature:string];
             break;
         case alertClock:
             self.clockString = string;
+            [self setClockTime:string];
             break;
-        case alertOrder:
+        case alertOrder:    //预约
             self.orderString = string;
+            [self setOrderTime:string];
             break;
-        case alertNeedle:
+        case alertNeedle:   //温度探针
             self.neddleString = string;
+            [self setNeedleTemperature:string];
             break;
         case alertWormUp:
             self.warmUpString = string;
+            [self setWarmUpTemperature:string];
             ksyr.selected = ksyr.selected==YES?NO:YES;
             break;
             
@@ -560,6 +690,7 @@
     self.myWindow.hidden = YES;
 
 }
+
 - (IBAction)alertView:(UIButton *)sender {
     if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
         self.deviceAlertView.alertType = sender.tag;

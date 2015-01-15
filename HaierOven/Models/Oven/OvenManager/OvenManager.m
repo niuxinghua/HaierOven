@@ -83,13 +83,23 @@
 
 - (NSString*)fetchSSID
 {
-    CFArrayRef myArray = CNCopySupportedInterfaces();
-    CFDictionaryRef myDict = CNCopyCurrentNetworkInfo(CFArrayGetValueAtIndex(myArray, 0));
-    NSLog(@"Connected at:%@",myDict);
-    NSDictionary *myDictionary = (__bridge_transfer NSDictionary*)myDict;
-    NSString * BSSID = [myDictionary objectForKey:@"BSSID"];
-    NSLog(@"bssid is %@",BSSID);
-    return myDictionary[@"SSID"];
+    @try {
+        CFArrayRef myArray = CNCopySupportedInterfaces();
+        CFDictionaryRef myDict = CNCopyCurrentNetworkInfo(CFArrayGetValueAtIndex(myArray, 0));
+        NSLog(@"Connected at:%@",myDict);
+        NSDictionary *myDictionary = (__bridge_transfer NSDictionary*)myDict;
+        NSString * BSSID = [myDictionary objectForKey:@"BSSID"];
+        NSLog(@"bssid is %@",BSSID);
+        return myDictionary[@"SSID"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"获取SSID出错");
+        NSLog(@"我的WIFI");
+    }
+    @finally {
+        
+    }
+    
 }
 
 /**
