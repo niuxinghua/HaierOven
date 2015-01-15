@@ -402,6 +402,13 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     return _myOvens;
 }
 
-
+- (NSString *)currentUserBaseId
+{
+    NSString* userId = [[NSUserDefaults standardUserDefaults] valueForKey:@"userBaseId"];
+    if (userId == nil) {
+        userId = @"";
+    }
+    return userId;
+}
 
 @end

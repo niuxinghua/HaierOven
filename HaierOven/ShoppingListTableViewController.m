@@ -24,9 +24,14 @@
 
 - (void)loadShoppingList
 {
+    if (!IsLogin) {
+//        [super openLoginController];
+        return;
+    }
+    
     [super showProgressHUDWithLabelText:@"获取购物清单" dimBackground:NO];
     
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     
     [[InternetManager sharedManager] getShoppingListWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];

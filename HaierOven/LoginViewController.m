@@ -22,6 +22,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.navigationController.viewControllers.count == 1) {
+        UIButton* leftButton = [[UIButton alloc] init];
+//        [leftButton addTarget:self action:@selector(turnLeftMenu) forControlEvents:UIControlEventTouchUpInside];
+//        [super setLeftBarButtonItemWithImageName:@"liebieo.png" andTitle:nil andCustomView:leftButton];
+        
+        [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
+        
+    }
+    
+    
+}
+
+- (void)turnLeftMenu
+{
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+- (void)close
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,22 +65,61 @@
 
 - (IBAction)Login:(id)sender {
     
-    [[InternetManager sharedManager] testLoginWithSequenceId:@"1234"
-                                                  andAccType:AccTypeHaier
-                                                  andloginId:self.userNameTextFailed.text
-                                                 andPassword:self.psdTextfailed.text
-                                          andThirdpartyAppId:nil
-                                    andThirdpartyAccessToken:nil
-                                                andLoginType:LoginTypeMobile 
-                                                    callBack:^(BOOL success, id obj, NSError *error) {
-                                                        if (success) {
-                                                            NSLog(@"登录成功");
-                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                        } else {
-                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
-                                                        }
-                                                        
-                                                    }];
+//    [[InternetManager sharedManager] testLoginWithSequenceId:@"1234"
+//                                                  andAccType:AccTypeHaier
+//                                                  andloginId:self.userNameTextFailed.text
+//                                                 andPassword:self.psdTextfailed.text
+//                                          andThirdpartyAppId:nil
+//                                    andThirdpartyAccessToken:nil
+//                                                andLoginType:LoginTypeMobile 
+//                                                    callBack:^(BOOL success, id obj, NSError *error) {
+//                                                        if (success) {
+//                                                            NSLog(@"登录成功");
+//                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+//                                                        } else {
+//                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+//                                                        }
+//                                                        
+//                                                    }];
+    if (![MyTool validateTelephone:self.userNameTextFailed.text]) {
+        if (![MyTool validateEmail:self.userNameTextFailed.text]) {
+            [super showProgressErrorWithLabelText:@"请填写正确的手机号或邮箱" afterDelay:1];
+            return;
+        }
+    }
+    
+    LoginType loginType;
+    if ([MyTool validateEmail:self.userNameTextFailed.text]) {
+        loginType = LoginTypeEmail;
+    } else {
+        loginType = LoginTypeMobile;
+    }
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyyMMddhhmmss";
+    NSString* sequence = [formatter stringFromDate:[NSDate date]];
+    sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
+    
+    
+    [[InternetManager sharedManager] loginWithSequenceId:sequence
+                                              andAccType:AccTypeHaier
+                                              andloginId:self.userNameTextFailed.text
+                                             andPassword:self.psdTextfailed.text
+                                      andThirdpartyAppId:nil
+                                andThirdpartyAccessToken:nil
+                                            andLoginType:loginType
+                                                callBack:^(BOOL success, id obj, NSError *error) {
+                                                    
+                                                    if (success) {
+                                                        NSLog(@"登录成功");
+                                                        [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                                    } else {
+                                                        [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                    }
+                                                    
+                                                    
+                                                }];
     
     
 }
@@ -81,8 +141,14 @@
 
 - (IBAction)SinawbLogin:(id)sender {
     
-    RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-    [self presentViewController:root animated:YES completion:nil];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        NSLog(@"response is %@",response);
+        [self loginWithSina];
+    });
+    
+//    RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//    [self presentViewController:root animated:YES completion:nil];
     
 }
 - (IBAction)Register:(id)sender {
@@ -107,10 +173,15 @@
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
         NSLog(@"SnsInformation is %@",response.data);
         
-        [[InternetManager sharedManager] testLoginWithSequenceId:@"20150107102633000001"
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddhhmmss";
+        NSString* sequence = [formatter stringFromDate:[NSDate date]];
+        sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
+        
+        [[InternetManager sharedManager] loginWithSequenceId:sequence
                                                       andAccType:AccTypeQQ
                                                       andloginId:response.data[@"openid"]
-                                                     andPassword:@"13524lk"
+                                                     andPassword:@""
                                               andThirdpartyAppId:@"100424468"
                                         andThirdpartyAccessToken:response.data[@"access_token"]
                                                     andLoginType:LoginTypeUserName
@@ -119,12 +190,51 @@
                                                             if (success) {
                                                                 NSLog(@"登录成功");
                                                                 [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                                [self dismissViewControllerAnimated:YES completion:nil];
                                                             } else {
                                                                 [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                             }
                                                             
                                                             
                                                         }];
+        
+        
+    }];
+}
+
+- (void)loginWithSina
+{
+    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToSina  completion:^(UMSocialResponseEntity *response){
+        NSLog(@"SnsInformation is %@",response.data);
+        
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddhhmmss";
+        NSString* sequence = [formatter stringFromDate:[NSDate date]];
+        sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
+        
+        if (response.data[@"openid"] == nil) {
+            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+            return;
+        }
+        
+        [[InternetManager sharedManager] loginWithSequenceId:sequence
+                                                  andAccType:AccTypeSina
+                                                  andloginId:response.data[@"openid"]
+                                                 andPassword:@""
+                                          andThirdpartyAppId:@"1162620904"
+                                    andThirdpartyAccessToken:response.data[@"access_token"]
+                                                andLoginType:LoginTypeUserName
+                                                    callBack:^(BOOL success, id obj, NSError *error) {
+                                                        
+                                                        if (success) {
+                                                            NSLog(@"登录成功");
+                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                        } else {
+                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                        }
+                                                        
+                                                        
+                                                    }];
         
         
     }];

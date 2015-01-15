@@ -15,6 +15,10 @@
 #import "Tag.h"
 #import "ShoppingOrder.h"
 #import "CookerStar.h"
+#import "NoticeInfo.h"
+
+#define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
+#define LoginSuccussNotification        @"Login successfully"
 
 typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeConnectInternetFailed      = -100,      //网络连接失败
@@ -26,7 +30,7 @@ typedef NS_ENUM(NSInteger, InternetErrorCode) {
 
 typedef NS_ENUM(NSInteger, ValidateType) {
     ValidateTypeNormal,      //
-
+    
 };
 
 typedef NS_ENUM(NSInteger, ValidateScene) {

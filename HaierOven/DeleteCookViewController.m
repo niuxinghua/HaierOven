@@ -95,7 +95,7 @@
 
 - (void)deleteShoppingList
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] deleteShoppingOrderWithUserBaseId:userBaseId
                                                            cookbooks:self.deleteArr
                                                               callBack:^(BOOL success, id obj, NSError *error) {

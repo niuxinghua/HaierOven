@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "442986771.009959"
+            timestampString = "443028824.657397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1735"
-            endingLineNumber = "1735"
+            startingLineNumber = "1737"
+            endingLineNumber = "1737"
             landmarkName = "-getShoppingOrderWithUserBaseId:cookbookId:callBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,9 +88,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "-setUpSubviews"
-            landmarkType = "5">
+            endingLineNumber = "68">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -180,11 +178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "442999216.233993"
+            timestampString = "443028824.657397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
             landmarkName = "-updateUserInfo:callBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -196,75 +194,155 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443004079.411119"
+            timestampString = "443028824.657397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1891"
-            endingLineNumber = "1891"
-            landmarkName = "-getProductsWithCategory:sortType:pageIndex:keyword:callBack:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443004079.411119"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1906"
-            endingLineNumber = "1906"
-            landmarkName = "-getProductsWithCategory:sortType:pageIndex:keyword:callBack:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443004079.411119"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1888"
-            endingLineNumber = "1888"
-            landmarkName = "-getProductsWithCategory:sortType:pageIndex:keyword:callBack:"
+            startingLineNumber = "2259"
+            endingLineNumber = "2259"
+            landmarkName = "-getNotificationListWithUserBaseId:status:pageIndex:callBack:"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[InternetManager getProductsWithCategory:sortType:pageIndex:keyword:callBack:]"
+                  symbolName = "-[InternetManager getNotificationListWithUserBaseId:status:pageIndex:callBack:]"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "443005777.97491"
+                  timestampString = "443028824.825167"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1888"
-                  endingLineNumber = "1888"
-                  offsetFromSymbolStart = "600">
+                  startingLineNumber = "2259"
+                  endingLineNumber = "2259"
+                  offsetFromSymbolStart = "486">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__79-[InternetManager getProductsWithCategory:sortType:pageIndex:keyword:callBack:]_block_invoke"
+                  symbolName = "__79-[InternetManager getNotificationListWithUserBaseId:status:pageIndex:callBack:]_block_invoke"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "443005777.975045"
+                  timestampString = "443028824.825313"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1888"
-                  endingLineNumber = "1888"
+                  startingLineNumber = "2259"
+                  endingLineNumber = "2259"
                   offsetFromSymbolStart = "90">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443028824.657397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2264"
+            endingLineNumber = "2264"
+            landmarkName = "-getNotificationListWithUserBaseId:status:pageIndex:callBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443028824.657397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2276"
+            endingLineNumber = "2276"
+            landmarkName = "-getNotificationListWithUserBaseId:status:pageIndex:callBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/LeftMenuViewController.m"
+            timestampString = "443025912.446394"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/LeftMenuViewController.m"
+            timestampString = "443025914.212682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443028824.657397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
+            landmarkName = "-loginWithSequenceId:andAccType:andloginId:andPassword:andThirdpartyAppId:andThirdpartyAccessToken:andLoginType:callBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443028887.276934"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
+            landmarkName = "-loginWithSequenceId:andAccType:andloginId:andPassword:andThirdpartyAppId:andThirdpartyAccessToken:andLoginType:callBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443028889.416852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "-loginWithSequenceId:andAccType:andloginId:andPassword:andThirdpartyAppId:andThirdpartyAccessToken:andLoginType:callBack:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

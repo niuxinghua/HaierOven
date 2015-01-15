@@ -26,7 +26,7 @@
 @property (copy, nonatomic) NSString* nickName;
 
 /**
- *  真是姓名
+ *  真实姓名
  */
 @property (copy, nonatomic) NSString* userName;
 

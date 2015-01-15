@@ -219,10 +219,10 @@
     }
     
     // 2. 将密码进行MD5加密
-    NSString* md5Password = [MyTool stringToMD5:password];
+//    NSString* md5Password = [MyTool stringToMD5:password];
     
     // 3. 序列化为字典
-    NSDictionary* userDict = @{@"password":md5Password,
+    NSDictionary* userDict = @{@"password":password,
                                @"user":@{
                                         @"userBase":@{
                                                 @"loginName":@"",
@@ -333,7 +333,7 @@
     
     if ([self canConnectInternet]) {
         
-        NSString* md5Password = [MyTool stringToMD5:password];
+//        NSString* md5Password = [MyTool stringToMD5:password];
         
         // 1. 将参数序列化
         NSNumber* acctp = [NSNumber numberWithInteger:accType];
@@ -342,7 +342,7 @@
                                      @"sequenceId" : sequenceId,
                                      @"accType": acctp,
                                      @"loginId" : loginId,
-                                     @"password" : md5Password,
+                                     @"password" : password,
                                      @"thirdpartyAppId" : thirdPartyAppId,
                                      @"thirdpartyAccessToken" : thirdPartyAccessToken,
                                      @"loginType" : logintp
@@ -352,6 +352,7 @@
         [[self manager] POST:UserLogin parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            NSLog(@"%@", responseObject[@"err"]);
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 保存登录信息
@@ -359,9 +360,10 @@
                 [userDefaults setObject:responseObject[@"userBaseID"] forKey:@"userBaseId"];
                 [userDefaults setObject:responseObject[@"accessToken"] forKey:@"accessToken"];
                 [userDefaults setObject:password forKey:@"password"];
+                [userDefaults setBool:YES forKey:@"isLogin"];
                 [userDefaults synchronize];
-                
                 completion(YES, responseObject, nil);
+                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
@@ -1881,7 +1883,7 @@
                                      @"page" : [NSNumber numberWithInteger:pageIndex],
                                      @"category" : [NSNumber numberWithInteger:category],
                                      @"sortType" : [NSNumber numberWithInteger:sortType],
-                                     @"keyword" :  @"1" //keyword == nil ? [NSNull null] : keyword
+                                     @"keyword" :  keyword == nil ? @"" : keyword
                                     };
         
         // 2. 发送网络请求
@@ -2260,8 +2262,8 @@
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 解析
-                
-                completion(YES, responseObject, nil);
+                NSMutableArray* notificationList = [DataParser parseNotificationListWithDict:responseObject];
+                completion(YES, notificationList, nil);
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);

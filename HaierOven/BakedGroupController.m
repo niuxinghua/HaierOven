@@ -41,8 +41,12 @@
 
 - (void)loadFollowedCookbooks
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     [super showProgressHUDWithLabelText:@"请稍后" dimBackground:NO];
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
@@ -66,10 +70,13 @@
 }
 
 
-- (void)loadRecommendCookders
+- (void)loadRecommendCookers
 {
-    
-    NSString* userBaseId = @"5";
+    if (!IsLogin) {
+//        [super openLoginController];
+        return;
+    }
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getRecommentCookersWithUserBaseId:userBaseId pageIndex:self.recommentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* arr = obj;
@@ -96,7 +103,7 @@
     [self SetUpSubviews];
     
     [self loadFollowedCookbooks];
-    [self loadRecommendCookders];
+    [self loadRecommendCookers];
     
     [self addHeader];
     [self addFooter];
@@ -117,7 +124,7 @@
         if (vc.backGroupType == BackGroupTypeAdvice) {
             // 推荐
             vc.recommentPageIndex = 1;
-            [vc loadRecommendCookders];
+            [vc loadRecommendCookers];
         } else {
             vc.followPageIndex = 1;
             [vc loadFollowedCookbooks];
@@ -150,7 +157,7 @@
         if (vc.backGroupType == BackGroupTypeAdvice) {
             // 推荐
             vc.recommentPageIndex++;
-            [vc loadRecommendCookders];
+            [vc loadRecommendCookers];
         } else {
             vc.followPageIndex++;
             [vc loadFollowedCookbooks];
@@ -266,10 +273,13 @@
 
 - (void)bakeGroupAdviceCell:(BakeGroupAdviceCell *)cell followed:(UIButton *)sender
 {
-    
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     NSIndexPath* indexPath = [self.tableview indexPathForCell:cell];
     Cooker* selectedCooker = self.recommendCookers[indexPath.row];
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     if (sender.selected) {
         // 已关注，取消关注
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {

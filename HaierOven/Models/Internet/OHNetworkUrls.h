@@ -11,8 +11,10 @@
 
 
 // Base url
-#define BaseUrl         @"http://115.29.8.251:8080/haieroven/app"
-#define BaseOvenUrl     @"http://115.29.8.251:8080/haieroven"
+//#define BaseUrl         @"http://115.29.8.251:8080/haieroven/app"
+//#define BaseOvenUrl     @"http://115.29.8.251:8080/haieroven"
+#define BaseUrl         @"http://115.29.8.251:8081/app"
+#define BaseOvenUrl     @"http://115.29.8.251:8081"
 
 //#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
 #define BaseUhomeUrl    @"http://uhome.haier.net:6000/commonapp"

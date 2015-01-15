@@ -10,6 +10,7 @@
 #import "User.h"
 #import "CookbookDetail.h"
 #import "Equipment.h"
+#import "NoticeInfo.h"
 
 @interface DataParser : NSObject
 
@@ -118,6 +119,15 @@
  *  @return 返回设备列表
  */
 + (NSMutableArray*)parseEquipmentsWithDict:(NSDictionary*)dict;
+
+/**
+ *  解析通知列表
+ *
+ *  @param dict json
+ *
+ *  @return 返回通知列表
+ */
++ (NSMutableArray*)parseNotificationListWithDict:(NSDictionary*)dict;
 
 @end
 

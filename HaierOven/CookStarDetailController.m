@@ -54,7 +54,7 @@
 
 - (void)loadMessages
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     self.messages = [NSMutableArray array];
     [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.cookerStar.userBaseId status:-1 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         
@@ -253,7 +253,7 @@
 
 -(void)follow:(UIButton *)sender{
   
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     if (sender.selected) {
         // 已关注，取消关注
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
@@ -285,7 +285,8 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
     chatViewController.toUserId = self.cookerStar.userBaseId;
-    chatViewController.messages = self.messages;
+//    chatViewController.messages = self.messages;
+    chatViewController.toUserName = self.cookerStar.userName;
     [self.navigationController pushViewController:chatViewController animated:YES];
     
     

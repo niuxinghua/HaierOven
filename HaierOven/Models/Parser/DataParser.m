@@ -446,6 +446,33 @@
     return equipments;
 }
 
++ (NSMutableArray*)parseNotificationListWithDict:(NSDictionary*)dict
+{
+    NSMutableArray* notificationList = [NSMutableArray array];
+    
+    NSDictionary* jsonData = dict[@"data"];
+    
+    NSArray* notificationArr = jsonData[@"items"];
+    
+    for (NSDictionary* notificationDict in notificationArr) {
+        
+        NoticeInfo* notice = [[NoticeInfo alloc] init];
+        
+        notice.createdTime = [notificationDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"createdTime"]];
+        notice.ID = [notificationDict[@"noticficationID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"noticficationID"]];
+        notice.type = [notificationDict[@"noticficationType"] integerValue];
+        notice.objectID = [notificationDict[@"objectID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"objectID"]];
+        notice.promoter = [DataParser parseCommentUserWithDict:notificationDict[@"promoter"]];
+        notice.relatedDesc = [notificationDict[@"relatedDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"relatedDesc"]];
+        notice.relatedId = [notificationDict[@"relatedID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"relatedID"]];
+        
+        [notificationList addObject:notice];
+    }
+    
+    
+    return notificationList;
+}
+
 @end
 
 

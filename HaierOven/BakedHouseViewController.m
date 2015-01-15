@@ -11,7 +11,7 @@
 #import "BakeHouseHeaderReusableView.h"
 #import "FiexibleView.h"
 #import "MJRefresh.h"
-
+#import "WebViewController.h"
 
 typedef NS_ENUM(NSInteger, ProductCategory) {
     ProductCategoryAll    = 0,  //所有
@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 
 -(void)setUpSubviews{
-    self.equipments =@[@"全部",@"烘焙器材",@"烘焙食材",@"烘焙磨具"];
+    self.equipments =@[@"全部",@"烘焙模具",@"烘焙食材",@"烘焙成品"];
     fiexViewHegih = 10+20+(LABEL_H*self.equipments.count);
     self.fiexView = [[FiexibleView alloc]initWithFrame:CGRectZero];
     self.fiexView.equipments = self.equipments;
@@ -216,6 +216,18 @@ typedef NS_ENUM(NSInteger, SortType) {
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
+    
+    Equipment* selectedProduct = self.products[indexPath.row];
+    
+    webViewController.titleText = selectedProduct.name;
+    webViewController.webPath = selectedProduct.url;
+    
+    [self.navigationController pushViewController:webViewController animated:YES];
+}
+
 -(void)GetfiexibleBtnSelected:(UIButton *)sender andUIView:(SectionFiexibleView *)sectionFiexibleView{
 
     CGPoint location = sectionFiexibleView.frame.origin;
@@ -238,19 +250,42 @@ typedef NS_ENUM(NSInteger, SortType) {
 #pragma mark - 获取点击label
 -(void)tapLabel:(UILabel *)label{
     NSLog(@"%@",self.equipments[label.tag]);
+    NSString* categoryName = self.equipments[label.tag];
     [self.tempFiexibleBtn setTitle:label.text forState:UIControlStateNormal];
     [self.tempFiexibleBtn setTitle:label.text forState:UIControlStateHighlighted];
     [self fiexViewUp];
+    
+    if ([categoryName isEqualToString:@"全部"]) {
+        self.productCategory = ProductCategoryAll;
+    } else if ([categoryName isEqualToString:@"烘焙模具"]) {
+        self.productCategory = ProductCategoryModel;
+    } else if ([categoryName isEqualToString:@"烘焙食材"]) {
+        self.productCategory = ProductCategoryFood;
+    } else if ([categoryName isEqualToString:@"烘焙成品"]) {
+        self.productCategory = ProductCategoryProduct;
+    }
+    self.pageIndex = 1;
+    [self loadProducts];
 }
 
 #pragma mark - BakeHouseHeaderReusableViewDelegate
 -(void)GetNeedEquipmentType:(NSInteger)type{
     NSLog(@"%d",type);
     [self fiexViewUp];
+    
+    if (type == 1) {
+        self.sortType = SortTypeHot;
+    } else {
+        self.sortType = SortTypeTime;
+    }
+    self.pageIndex = 1;
+    [self loadProducts];
 }
 
 -(void)GetSearchKeyWord:(NSString *)string{
     NSLog(@"%@",string);
+    self.pageIndex = 1;
+    [self loadProducts];
 }
 
 

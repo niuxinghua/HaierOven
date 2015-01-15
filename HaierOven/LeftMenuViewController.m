@@ -15,17 +15,15 @@
 @interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
-@property BOOL hadDevice;
+
 @property (strong, nonatomic) User* currentUser;
 @end
 
 @implementation LeftMenuViewController
 @synthesize tempView;
-@synthesize hadDevice;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
-    hadDevice = [accountDefaults boolForKey:@"hadDevice"];
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, PageW, PageH-20) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
@@ -59,7 +57,7 @@
 
 - (void)loadUserInfo
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getUserInfoWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.currentUser = obj;
@@ -93,12 +91,24 @@
     switch (indexPath.row) {
             
         case 0:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
-                                                         animated:YES];
-            [self.sideMenuViewController hideMenuViewController];
+            if (IsLogin) {
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
+                                                             animated:YES];
+                [self.sideMenuViewController hideMenuViewController];
+            } else {
+                
+//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]
+//                                                             animated:YES];
+//                [self.sideMenuViewController hideMenuViewController];
+                
+                [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
+                
+            }
+            
+            
             break;
         case 1:
-            if (!hadDevice) {
+            if ([DataCenter sharedInstance].myOvens.count == 0) {
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
                                                              animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
@@ -185,11 +195,14 @@
         
         cell.siginBtn.selected = [[DataCenter sharedInstance] getSignInFlag];
         
+        
         cell.user = self.currentUser;
+        
+        
         
         return cell;
     }else if (indexPath.row==1){
-        if (hadDevice) {
+        if ([DataCenter sharedInstance].myOvens.count != 0) {
             NSString *cellIdentifier =@"SecDeviceTableViewCell";
             SecDeviceTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             cell.backgroundColor = GlobalGrayColor;
@@ -222,10 +235,17 @@
 
 -(void)signIn:(UIButton *)btn{
     
+    if (!IsLogin) {
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
+    }
+    
     if (btn.selected) {
         return;
     }
-    NSString* userBaseId = @"5";
+    
+    
+    
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             

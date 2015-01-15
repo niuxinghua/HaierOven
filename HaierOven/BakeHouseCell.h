@@ -15,4 +15,5 @@
 
 @property (strong, nonatomic) Equipment* product;
 
+@property (copy, nonatomic) NSString *kitPrice;
 @end

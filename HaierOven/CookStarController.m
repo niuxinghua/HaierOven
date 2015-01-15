@@ -24,7 +24,12 @@
 
 - (void)loadCookerStars
 {
-    NSString* userBaseId = @"5";
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
+    
+    NSString* userBaseId = CurrentUserBaseId;
     
     [super showProgressHUDWithLabelText:@"请稍后" dimBackground:NO];
     [[InternetManager sharedManager] getCookerStarsWithUserBaseId:userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
@@ -115,7 +120,7 @@
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     CookerStar* selectedCooker = self.cookerStars[indexPath.row];
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     if (sender.selected) {
         // 已关注，取消关注
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
