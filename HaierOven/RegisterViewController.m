@@ -69,6 +69,10 @@
 
     
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)setRegisterType:(RegisterType)registerType{
     _registerType = registerType;

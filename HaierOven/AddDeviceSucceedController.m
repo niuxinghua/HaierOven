@@ -24,21 +24,30 @@
 }
 -(void)SetUpSubViews{
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWillShow:)
-     
-                                                 name:UIKeyboardWillShowNotification
-     
-                                               object:nil];
+    @try {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+         
+                                                 selector:@selector(keyboardWillShow:)
+         
+                                                     name:UIKeyboardWillShowNotification
+         
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+         
+                                                 selector:@selector(keyboardWillHide:)
+         
+                                                     name:UIKeyboardWillHideNotification
+         
+                                                   object:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"收听键盘通知异常");
+    }
+    @finally {
+        NSLog(@"");
+    }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWillHide:)
-     
-                                                 name:UIKeyboardWillHideNotification
-     
-                                               object:nil];
     
     self.deviceTextFailed.delegate = self;
     self.chickBtn.layer.masksToBounds = YES;
@@ -128,4 +137,8 @@
     }];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

@@ -67,4 +67,6 @@
     _label   = label;
     self.alertTextFailed.text = label.text;
 }
+
+
 @end
