@@ -10,6 +10,23 @@
 #import "BakeHouseCell.h"
 #import "BakeHouseHeaderReusableView.h"
 #import "FiexibleView.h"
+#import "MJRefresh.h"
+
+
+typedef NS_ENUM(NSInteger, ProductCategory) {
+    ProductCategoryAll    = 0,  //所有
+    ProductCategoryModel,       //模具
+    ProductCategoryFood,        //食材
+    ProductCategoryProduct,     //成品
+    
+};
+
+typedef NS_ENUM(NSInteger, SortType) {
+    SortTypeTime    = 0,    //时间
+    SortTypeHot,            //热度
+   
+    
+};
 
 @interface BakedHouseViewController ()<BakeHouseHeaderReusableViewDelegate,FiexibleViewDelegate>
 {
@@ -19,16 +36,59 @@
 @property (strong, nonatomic)FiexibleView *fiexView;
 @property (strong, nonatomic)NSArray *equipments;
 @property (strong, nonatomic)UIButton *tempFiexibleBtn;
+
+@property (nonatomic) NSInteger pageIndex;
+@property (nonatomic) ProductCategory productCategory;
+@property (nonatomic) SortType sortType;
+
+@property (weak, nonatomic) UITextField* searchTextField;
+
 @end
 
 #define LABEL_H    38   //标签high
 
 @implementation BakedHouseViewController
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.pageIndex = 1;
+        self.productCategory = ProductCategoryAll;
+        self.sortType = SortTypeHot;
+    }
+    return self;
+}
+
+- (void)loadProductsWithKeyword:(NSString*)keyword
+{
+    
+    [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
+                                                    sortType:self.sortType
+                                                   pageIndex:_pageIndex
+                                                     keyword:keyword
+                                                    callBack:^(BOOL success, id obj, NSError *error) {
+                                                        
+                                                        if (success) {
+                                                            
+                                                            
+                                                            
+                                                        } else {
+                                                            NSLog(@"获取失败");
+                                                        }
+                                                        
+                                                        
+                                                    }];
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpSubviews];
+    
+    [self loadProductsWithKeyword:self.searchTextField.text];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +125,8 @@
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         BakeHouseHeaderReusableView* header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"Bake house header view" forIndexPath:indexPath];
+        self.searchTextField = header.searchTextField;
+        
         header.delegate = self;
         return header;
     } else {

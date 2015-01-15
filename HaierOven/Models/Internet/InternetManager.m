@@ -1858,6 +1858,60 @@
 }
 
 
+#pragma mark - 烘焙屋
+
+/**
+ *  获取商品分页列表
+ *
+ *  @param category   0：所有；1：模具；2食材；3成品
+ *  @param sortType   1:按时间；2按热度；
+ *  @param pageIndex  请求页面
+ *  @param keyword    产品名称模糊查找
+ *  @param completion 结果回调
+ */
+- (void)getProductsWithCategory:(NSInteger)category sortType:(NSInteger)sortType pageIndex:(NSInteger)pageIndex keyword:(NSString*)keyword callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : [NSNumber numberWithInteger:pageIndex],
+                                     @"category" : [NSNumber numberWithInteger:category],
+                                     @"sortType" : [NSNumber numberWithInteger:sortType],
+                                     @"keyword" : keyword
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetCookerStars parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* cookers = [DataParser parseCookerStarsWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, cookers, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+
 #pragma mark - 厨神名人堂
 
 - (void)getCookerStarsWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion

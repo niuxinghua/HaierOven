@@ -36,6 +36,9 @@
 @property (strong, nonatomic) ChooseCoverView *alertPhoto;
 @property (strong, nonatomic) UIImage *tempAvatar;
 @property (strong, nonatomic) AlertDatePicker *alertDate;
+
+@property (copy, nonatomic) NSString* userAvatar;
+
 @property (strong, nonatomic) AlertPsdView *alertPsd;
 @end
 
@@ -44,9 +47,30 @@
     [super viewDidLoad];
     [self setUpSubviews];
     
+    [self updateUI];
+    
+    
+    NSRange range = [self.user.userAvatar rangeOfString:[BaseOvenUrl lastPathComponent]];
+    self.userAvatar = [self.user.userAvatar substringFromIndex:range.location+range.length];
+    
     alertShowRect = CGRectMake(PageW/2-(PageW-30)/2, PageH/3.2,PageW-30, 138);
     alertHiddenRect = CGRectMake(PageW/2, PageH/2, 0, 0);
     // Do any additional setup after loading the view.
+}
+
+- (void)updateUI
+{
+    [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    self.nikeNameLabel.text = self.user.nickName;
+    self.genderLabel.text = [self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
+    self.genderImage.image = [self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    self.placeLabel.text = @"";
+    self.descriptionLabel.text = self.user.note;
+    self.birthdayLabel.text = self.user.birthday;
+    self.emailLabel.text = self.user.email;
+    self.phoneNumberLabel.text = self.user.phone;
+    [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +98,7 @@
     self.descrString = @"闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏闲暇之时，写写美食专栏";
     self.descriptionLabel.textColor = [UIColor darkGrayColor];
     self.descriptionLabel.numberOfLines = 0;
-    self.descriptionLabel.tag = 1;
+    self.descriptionLabel.tag = 4;
     [self.descriptionCell addSubview:self.descriptionLabel];
     
     
@@ -227,32 +251,111 @@
     }];
 }
 
+- (void)modifyUserInfo
+{
+    self.user.userAvatar = self.userAvatar;
+    [[InternetManager sharedManager] updateUserInfo:self.user callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"修改成功");
+            [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedUserInfoNotification object:nil];
+        } else {
+            NSLog(@"修改失败");
+            [super showProgressErrorWithLabelText:@"修改失败" afterDelay:1];
+        }
+    }];
+}
+
+- (void)modifyPhone:(NSString*)phone
+{
+    self.user.userAvatar = self.userAvatar;
+    [[InternetManager sharedManager] updatePhoneUserBaseId:self.user.userBaseId andPhone:phone callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"修改成功");
+        } else {
+            NSLog(@"修改失败");
+            [super showProgressErrorWithLabelText:@"修改失败" afterDelay:1];
+        }
+    }];
+}
+
+- (void)modifyEmail:(NSString*)email
+{
+    [[InternetManager sharedManager] updateEmailUserBaseId:self.user.userBaseId andEmail:email callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSLog(@"修改成功");
+        } else {
+            NSLog(@"修改失败");
+            [super showProgressErrorWithLabelText:@"修改失败" afterDelay:1];
+        }
+    }];
+}
+
 
 #pragma mark - alertEditDelegate
 -(void)ChickAlert:(UILabel*)label andTextFailed:(UITextField*)textfield{
-    if (label.tag==2){
-        if ([MyTool validateEmail:textfield.text]) {
+    
+    NSLog(@"%d", label.tag);
+   
+    
+    switch (label.tag) {
+        case 0: // 昵称
+        {
+            self.user.nickName = textfield.text;
             label.text = textfield.text;
-        }else
-            [super showProgressErrorWithLabelText:@"请输入正确邮箱" afterDelay:1.0];
-    }
-    else if (label.tag ==3){
-        if ([MyTool validateTelephone:textfield.text]) {
-            label.text = textfield.text;
-        }else
-            [super showProgressErrorWithLabelText:@"请输入正确手机号" afterDelay:1.0];
-        
-    }else if (label.tag==1) {
-        self.descrString = textfield.text;
-        [self.tableView reloadData];
-    }
 
+            [self modifyUserInfo];
+            break;
+            
+        }
+        case 1: // 所在地
+        {
+            label.text = textfield.text;
+
+            break;
+            
+        }
+        case 2: // 邮箱
+        {
+            if ([MyTool validateEmail:textfield.text]) {
+                label.text = textfield.text;
+                [self modifyEmail:textfield.text];
+            }else
+                [super showProgressErrorWithLabelText:@"请输入正确邮箱" afterDelay:1.0];
+            
+            break;
+            
+        }
+        case 3: // 电话
+        {
+            if ([MyTool validateTelephone:textfield.text]) {
+                label.text = textfield.text;
+                [self modifyPhone:textfield.text];
+            }else
+                [super showProgressErrorWithLabelText:@"请输入正确手机号" afterDelay:1.0];
+            break;
+            
+        }
+        case 4: // 简介
+        {
+            self.descrString = textfield.text;
+            label.text = textfield.text;
+            self.user.note = textfield.text;
+            [self modifyUserInfo];
+            [self.tableView reloadData];
+            break;
+            
+        }
+            
+        default:
+            break;
+    }
     self.alertEdit.hidden = YES;
     self.alertEdit.frame = alertHiddenRect;
     self.myWindow.hidden = YES;
     textfield.text = @"";
     
     [textfield resignFirstResponder];
+    
 }
 -(void)Cancel{
     self.alertEdit.hidden = YES;
@@ -279,6 +382,12 @@
     self.alertGender.hidden = YES;
     self.myWindow.hidden = YES;
     self.alertGender.frame =alertHiddenRect;
+    
+    // 修改性别
+    
+    self.user.sex = gender == 1 ? @"1" : @"0";
+    [self modifyUserInfo];
+    
 }
 
 
@@ -360,6 +469,19 @@
 {
     [controller dismissViewControllerAnimated:YES completion:NULL];
     self.userAvater.image = croppedImage;
+    
+    // 修改头像
+    NSData* imageData = UIImageJPEGRepresentation(croppedImage, 0.6);
+    [[InternetManager sharedManager] uploadFile:imageData callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSDictionary* objDict = [obj firstObject];
+            self.userAvatar = objDict[@"name"];
+            
+            [self modifyUserInfo];
+            
+        }
+    }];
+    
 }
 
 - (void)cropViewControllerDidCancel:(PECropViewController *)controller
@@ -374,6 +496,12 @@
     self.alertDate.hidden = YES;
     self.myWindow.hidden = YES;
     self.alertDate.frame =alertHiddenRect;
+    
+    // 修改生日
+    
+    self.user.birthday = birthday;
+    [self modifyUserInfo];
+    
 }
 -(void)UnEdit{
     self.alertDate.hidden = YES;

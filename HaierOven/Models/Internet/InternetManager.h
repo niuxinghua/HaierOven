@@ -450,6 +450,22 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getRecommentCookersWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 
+
+#pragma mark - 烘焙屋
+
+/**
+ *  获取商品分页列表
+ *
+ *  @param category   0：所有；1：模具；2食材；3成品
+ *  @param sortType   1:按时间；2按热度；
+ *  @param pageIndex  请求页面
+ *  @param keyword    产品名称模糊查找
+ *  @param completion 结果回调
+ */
+- (void)getProductsWithCategory:(NSInteger)category sortType:(NSInteger)sortType pageIndex:(NSInteger)pageIndex keyword:(NSString*)keyword callBack:(myCallback)completion;
+
+
+
 #pragma mark - 厨神名人堂
 
 /**

@@ -10,4 +10,6 @@
 
 @interface PersonalEditViewController : BaseTableViewController
 
+@property (strong, nonatomic) User* user;
+
 @end

@@ -11,6 +11,8 @@
 
 #define MyOvensInfoHadChangedNotificatin    @"My ovens info had changed"
 
+#define ModifiedUserInfoNotification    @"Had modified user info"
+
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径
 #define DOWNLOAD_DATA_PATH  ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/DownloadData"])  //保存下载数据的路径
 

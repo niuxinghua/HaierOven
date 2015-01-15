@@ -45,6 +45,7 @@
 //    PageW-25, 35
     SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0, 0, self.sectionSearchView.width-25, 30)];
     search.searchTextFailed.placeholder = @"请搜索你的烘焙装备....";
+    self.searchTextField = search.searchTextFailed;
     search.delegate = self;
     search.center = self.sectionSearchView.center;
     [self.sectionSearchView addSubview:search];
