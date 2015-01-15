@@ -12,7 +12,8 @@
 #import "ChooseCoverView.h"
 #import "PECropViewController.h"
 #import "AlertDatePicker.h"
-@interface PersonalEditViewController ()<AddFoodAlertViewDelegate,GenderAlertViewDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PECropViewControllerDelegate,AlertDatePickerDelegate>{
+#import "AlertPsdView.h"
+@interface PersonalEditViewController ()<AddFoodAlertViewDelegate,GenderAlertViewDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PECropViewControllerDelegate,AlertDatePickerDelegate,AlertPsdViewDelegate>{
     CGRect alertShowRect;
     CGRect alertHiddenRect;
     CGSize size;
@@ -35,6 +36,7 @@
 @property (strong, nonatomic) ChooseCoverView *alertPhoto;
 @property (strong, nonatomic) UIImage *tempAvatar;
 @property (strong, nonatomic) AlertDatePicker *alertDate;
+@property (strong, nonatomic) AlertPsdView *alertPsd;
 @end
 
 @implementation PersonalEditViewController
@@ -108,6 +110,13 @@
     self.alertDate.delegate = self;
     self.alertDate.hidden = YES;
     [self.myWindow addSubview:self.alertDate];
+    
+    
+    self.alertPsd = [[AlertPsdView alloc]initWithFrame:CGRectZero];
+    self.alertPsd.center = self.myWindow.center;
+    self.alertPsd.delegate = self;
+    self.alertPsd.hidden = YES;
+    [self.myWindow addSubview:self.alertPsd];
 }
 #pragma mark tableviewDelegate
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -204,6 +213,10 @@
                 self.alertEdit.hidden = NO;
 
                 break;
+            case 17:
+                self.alertPsd.frame = CGRectMake(alertShowRect.origin.x,100, alertShowRect.size.width, 320);
+                self.alertPsd.hidden = NO;
+
             default:
                 break;
         }
@@ -366,5 +379,26 @@
     self.alertDate.hidden = YES;
     self.myWindow.hidden = YES;
     self.alertDate.frame =alertHiddenRect;
+}
+
+
+#pragma mark - alertChangePsdDelegate
+-(void)ChangeWithOldPsd:(NSString *)oldpsd andNewPsd:(NSString *)newpsd{
+    NSLog(@"旧密码是 :%@\n新密码是 :%@",oldpsd,newpsd);
+    self.alertPsd.hidden = YES;
+    self.myWindow.hidden = YES;
+    self.alertPsd.frame =alertHiddenRect;
+}
+-(void)ChangePsdError:(NSString *)error{
+    [super showProgressErrorWithLabelText:error afterDelay:0.8];
+    self.alertPsd.hidden = YES;
+    self.myWindow.hidden = YES;
+    self.alertPsd.frame =alertHiddenRect;
+}
+-(void)CancelChangePsd{
+    self.alertPsd.hidden = YES;
+    self.myWindow.hidden = YES;
+    self.alertPsd.frame =alertHiddenRect;
+
 }
 @end
