@@ -43,6 +43,8 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 @property (weak, nonatomic) UITextField* searchTextField;
 
+@property (strong, nonatomic) NSMutableArray* products;
+
 @end
 
 #define LABEL_H    38   //标签high
@@ -56,22 +58,33 @@ typedef NS_ENUM(NSInteger, SortType) {
         self.pageIndex = 1;
         self.productCategory = ProductCategoryAll;
         self.sortType = SortTypeHot;
+        self.products = [NSMutableArray array];
     }
     return self;
 }
 
-- (void)loadProductsWithKeyword:(NSString*)keyword
+- (void)loadProducts
 {
     
     [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
                                                     sortType:self.sortType
                                                    pageIndex:_pageIndex
-                                                     keyword:keyword
+                                                     keyword:self.searchTextField.text
                                                     callBack:^(BOOL success, id obj, NSError *error) {
                                                         
                                                         if (success) {
                                                             
+                                                            NSArray* arr = obj;
+                                                            if (arr.count < PageLimit && _pageIndex != 1) {
+//                                                                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                                                            }
+                                                            if (_pageIndex == 1) {
+                                                                self.products = obj;
+                                                            } else {
+                                                                [self.products addObjectsFromArray:arr];
+                                                            }
                                                             
+                                                            [self.collectionView reloadData];
                                                             
                                                         } else {
                                                             NSLog(@"获取失败");
@@ -87,9 +100,66 @@ typedef NS_ENUM(NSInteger, SortType) {
     [super viewDidLoad];
     [self setUpSubviews];
     
-    [self loadProductsWithKeyword:self.searchTextField.text];
+     [self addHeader];
+     [self addFooter];
+    
+    [self loadProducts];
     
 }
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.collectionView addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        vc.pageIndex = 1;
+        [vc loadProducts];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.collectionView headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.collectionView addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        
+        
+        vc.pageIndex ++;
+        [vc loadProducts];
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.collectionView footerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -117,7 +187,7 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.products.count;
 }
 
 
@@ -140,6 +210,9 @@ typedef NS_ENUM(NSInteger, SortType) {
 //    cell.kitImage = IMAGENAMED(@"QQQ.png");
 //    cell.kitName = @"16寸面包摸具";
 //    cell.backgroundColor = [UIColor yellowColor];
+    
+    cell.product = self.products[indexPath.row];
+    
     return cell;
 }
 

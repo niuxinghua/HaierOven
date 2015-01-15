@@ -670,6 +670,7 @@
 		842A86EE1A527DC700C75EE4 /* StepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86EC1A527DC700C75EE4 /* StepCell.xib */; };
 		8438F6EF1A660DE900E1436C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6EE1A660DE900E1436C /* Message.m */; };
 		8438F6F01A667FC600E1436C /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
+		8438F6F31A67B7A200E1436C /* Equipment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F21A67B7A200E1436C /* Equipment.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
@@ -1650,6 +1651,8 @@
 		842A86EC1A527DC700C75EE4 /* StepCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCell.xib; sourceTree = "<group>"; };
 		8438F6ED1A660DE900E1436C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		8438F6EE1A660DE900E1436C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		8438F6F11A67B7A200E1436C /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equipment.h; sourceTree = "<group>"; };
+		8438F6F21A67B7A200E1436C /* Equipment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Equipment.m; sourceTree = "<group>"; };
 		8441171E1A4BB8AF00628A64 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		8441171F1A4BB8AF00628A64 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		844117211A4BB8AF00628A64 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -3422,6 +3425,8 @@
 				844117301A4BB8AF00628A64 /* User.m */,
 				844D0F561A4D2FE10018D79C /* LocalOven.h */,
 				844D0F571A4D2FE10018D79C /* LocalOven.m */,
+				8438F6F11A67B7A200E1436C /* Equipment.h */,
+				8438F6F21A67B7A200E1436C /* Equipment.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -4946,6 +4951,7 @@
 				45BEED731A412AED003000AD /* MyPageControl.m in Sources */,
 				45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */,
 				45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */,
+				8438F6F31A67B7A200E1436C /* Equipment.m in Sources */,
 				8447CB681A5FC73700FADF9D /* JSQMessagesKeyboardController.m in Sources */,
 				45422DE71A64BEA4001A7223 /* FiexibleView.m in Sources */,
 				45BB13771A4914E500FA44F4 /* LDProgressView.m in Sources */,

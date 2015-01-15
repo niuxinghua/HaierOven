@@ -227,6 +227,14 @@
 #define GetRecommentCookerList  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookcircle/getunfollow"]
 
 
+#pragma mark = 烘焙屋
+
+/**
+ *  获取设备列表
+ */
+#define GetProducts     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"product/get"]
+
+
 #pragma mark - 厨神名人堂
 
 #define GetCookerStars      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"marvellouschef/get"]

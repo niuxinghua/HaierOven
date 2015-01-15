@@ -418,6 +418,34 @@
     return messages;
 }
 
++ (NSMutableArray*)parseEquipmentsWithDict:(NSDictionary*)dict
+{
+    NSMutableArray* equipments = [NSMutableArray array];
+    
+    NSDictionary* jsonData = dict[@"data"];
+    NSArray* equipmentArr = jsonData[@"items"];
+    
+    for (NSDictionary* equipmentDict in equipmentArr) {
+        
+        Equipment* equipment = [[Equipment alloc] init];
+        
+        equipment.category = [equipmentDict[@"category"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"category"]];
+        equipment.productId = [equipmentDict[@"productID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productID"]];
+        equipment.price = [equipmentDict[@"price"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"price"]];
+        equipment.name = [equipmentDict[@"productName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productName"]];
+        equipment.url = [equipmentDict[@"productURL"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productURL"]];
+        equipment.imagePath = [equipmentDict[@"productName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productName"]];
+        
+        
+        [equipments addObject:equipment];
+        
+    }
+    
+    
+    
+    return equipments;
+}
+
 @end
 
 

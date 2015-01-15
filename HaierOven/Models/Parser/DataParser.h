@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "CookbookDetail.h"
+#import "Equipment.h"
 
 @interface DataParser : NSObject
 
@@ -109,6 +110,14 @@
 + (NSMutableArray*)parseMessagesWithDict:(NSDictionary*)dict;
 
 
+/**
+ *  解析设备列表
+ *
+ *  @param dict json
+ *
+ *  @return 返回设备列表
+ */
++ (NSMutableArray*)parseEquipmentsWithDict:(NSDictionary*)dict;
 
 @end
 

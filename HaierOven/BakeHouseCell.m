@@ -21,4 +21,14 @@
     _kitName = kitName;
     self.label.text = kitName;
 }
+
+- (void)setProduct:(Equipment *)product
+{
+    _product = product;
+    
+    
+    
+    
+}
+
 @end

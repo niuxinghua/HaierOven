@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Equipment.h"
 
 @interface BakeHouseCell : UICollectionViewCell
 @property (strong, nonatomic) UIImage *kitImage;
 @property (copy, nonatomic) NSString *kitName;
+
+@property (strong, nonatomic) Equipment* product;
+
 @end

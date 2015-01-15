@@ -1875,26 +1875,25 @@
     if ([self canConnectInternet]) {
         
         // 1. 将参数序列化
+
         NSDictionary* paramsDict = @{
                                      @"limit" : @PageLimit,     //每页行数
                                      @"page" : [NSNumber numberWithInteger:pageIndex],
                                      @"category" : [NSNumber numberWithInteger:category],
                                      @"sortType" : [NSNumber numberWithInteger:sortType],
-                                     @"keyword" : keyword
+                                     @"keyword" :  @"1" //keyword == nil ? [NSNull null] : keyword
                                     };
         
         // 2. 发送网络请求
-        [[self manager] POST:GetCookerStars parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[self manager] POST:GetProducts parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
             
             if ([status isEqualToString:@"1"]) {
-                BOOL hadNextPage;
-                NSMutableArray* cookers = [DataParser parseCookerStarsWithDict:responseObject hadNextPage:&hadNextPage];
-                completion(YES, cookers, nil);
-                if (!hadNextPage) {
-                    NSLog(@"没有更多了");
-                }
+                
+                NSMutableArray* equipments = [DataParser parseEquipmentsWithDict:responseObject];
+                completion(YES, equipments, nil);
+                
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
