@@ -11,9 +11,14 @@
 @interface Creator : NSObject
 
 /**
- *  菜谱创建人ID
+ *  菜谱创建人
  */
 @property (copy, nonatomic) NSString* ID;
+
+/**
+ *  创建人ID
+ */
+@property (copy, nonatomic) NSString* userBaseId;
 
 /**
  *  姓名

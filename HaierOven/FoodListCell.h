@@ -14,4 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *foodImage;
 
+@property (strong, nonatomic) Cookbook* cookbook;
+
 @end

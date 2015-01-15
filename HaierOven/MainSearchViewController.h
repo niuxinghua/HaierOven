@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchView.h"
+#import "BaseViewController.h"
 
-@interface MainSearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, searchViewDelegate,UITextFieldDelegate>
+@interface MainSearchViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate, searchViewDelegate,UITextFieldDelegate>
 
 @end

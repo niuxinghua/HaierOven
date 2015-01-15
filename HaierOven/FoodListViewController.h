@@ -9,4 +9,7 @@
 #import "BaseTableViewController.h"
 
 @interface FoodListViewController : BaseTableViewController
+
+@property (copy, nonatomic) NSString* tagId;
+
 @end

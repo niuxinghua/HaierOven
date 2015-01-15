@@ -10,6 +10,8 @@
 #import "SearchTableCell.h"
 #import "RecommendTagView.h"
 #import "FoodListViewController.h"
+#import "CookbookDetailControllerViewController.h"
+
 @interface MainSearchViewController ()<RecommendTagViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic)  UILabel *notfFindLabel;
@@ -25,6 +27,8 @@
  */
 @property (nonatomic) BOOL searchedFlag;
 
+@property (strong, nonatomic) NSMutableArray* tags;
+
 @end
 
 @implementation MainSearchViewController
@@ -38,6 +42,13 @@
         [self.table reloadData];
         return;
     }
+    
+    //保存搜索关键字
+    [[DataCenter sharedInstance] saveSearchedKeyword:keyword];
+    
+    //重新拿关键字
+    self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
+    
     [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.searchedFlag = YES;
@@ -47,13 +58,66 @@
     }];
 }
 
+- (void)loadTags
+{
+//    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+    [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
+//        [super hiddenProgressHUD];
+        if (success) {
+            self.tags = obj;
+            [self setupRecommendView];
+            
+        } else {
+         
+        }
+    }];
+}
+
+- (void)setupRecommendView
+{
+    self.recommendTagsView  = [UIView new];
+    self.recommendTagsView.frame = CGRectMake(0, 0, PageW, PageH);
+    self.recommendTagsView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.recommendTagsView];
+    
+    CGFloat width = PageW/3;
+    CGFloat height = PageW/3/12*5;
+    
+    for (int i = 0; i < self.tags.count; i++) {
+        
+        RecommendTagView* tagView = [[RecommendTagView alloc] initWithFrame:CGRectMake(i%3*width, i/3*height, width, height)];
+        tagView.delegate = self;
+        tagView.tagbtn.tag = i;
+        Tag* tag = self.tags[i];
+        [tagView.tagbtn setTitle:tag.name forState:UIControlStateNormal];
+        [self.recommendTagsView addSubview:tagView];
+        
+    }
+    
+//    int x = 0; int y = 0;
+//    for (int i = 1; i<=self.tags.count; i++) {
+//        RecommendTagView *RTV = [[RecommendTagView alloc]initWithFrame:CGRectMake(PageW/3*x, PageW/3/12*5*y, PageW/3, PageW/3/12*5)];
+//        RTV.delegate = self;
+//        RTV.tagbtn.tag = i;
+//        x++;
+//        y=x==3?y+1:y;
+//        x=i%3==0&&i!=0?0:x;
+//        Tag* tag = self.tags[i-1];
+//        [RTV.tagbtn setTitle:tag.name forState:UIControlStateNormal];
+//        [self.recommendTagsView addSubview:RTV];
+//    }
+    
+}
+
 #pragma mark - 加载和初始化
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self initFakeData];
-        
+//        [self initFakeData];
+        self.searchedCookbooks = [NSMutableArray array];
+        self.tags = [NSMutableArray array];
+        self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
     }
     return self;
 }
@@ -63,7 +127,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self loadTags];
+    
     [self setUpSubView];
+    
         // Do any additional setup after loading the view.
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -95,22 +163,6 @@
     self.notfFindLabel.font = [UIFont fontWithName:GlobalTextFontName size:16];
     [self.view addSubview:self.notfFindLabel];
 
-//  构建推荐标签view
-    self.recommendTagsView  = [UIView new];
-    self.recommendTagsView.frame = CGRectMake(0, 0, PageW, PageH);
-    self.recommendTagsView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.recommendTagsView];
-    
-    int x = 0; int y = 0;
-    for (int i = 0; i<self.recommendTag.count; i++) {
-        RecommendTagView *RTV = [[RecommendTagView alloc]initWithFrame:CGRectMake(PageW/3*x, PageW/3/12*5*y, PageW/3, PageW/3/12*5)];
-        RTV.delegate = self;
-        x++;
-        y=x==3?y+1:y;
-        x=i%3==0&&i!=0?0:x;
-        [RTV.tagbtn setTitle:self.recommendTag[i] forState:UIControlStateNormal];
-        [self.recommendTagsView addSubview:RTV];
-    }
 
 }
 
@@ -150,7 +202,12 @@
 #pragma mark 点击推荐按钮delegate
 -(void)TouchUpTag:(id)tag{
     FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
+    UIButton* button = tag;
+    Tag* theTag = self.tags[button.tag];
+    foodlist.tagId = theTag.ID;
+    foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
+    
 
     NSLog(@"跳跳跳");
 }
@@ -182,7 +239,7 @@
             NSString *cellIdentifier =@"SearchTableCell";
             SearchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             cell.backgroundColor = [UIColor clearColor];
-            
+            cell.cookbookNameLabel.text = self.recentSearchedKeywords[indexPath.row - 1];
             return cell;
         }
         
@@ -192,7 +249,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.searchedFlag ? self.searchedCookbooks.count : self.recentSearchedKeywords.count + 3;
+    return self.searchedFlag ? self.searchedCookbooks.count : self.recentSearchedKeywords.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -204,8 +261,28 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
-    [self.navigationController pushViewController:foodlist animated:YES];
+//    FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
+//    [self.navigationController pushViewController:foodlist animated:YES];
+    
+    
+    
+    if (!self.searchedFlag) {
+        self.searchedFlag = NO;
+        if (indexPath.row == 0) { //点击了“最近搜索记录”cell
+            return;
+        }
+        SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
+        self.tempTextField.text = cell.cookbookNameLabel.text;
+        [self searchCookbookWithKeyword:self.tempTextField.text];
+        
+        return;
+    }
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+    CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    detailController.cookbook = self.searchedCookbooks[indexPath.row];
+    [self.navigationController pushViewController:detailController animated:YES];
+    
 }
 #pragma mark-
 
@@ -227,6 +304,13 @@
 {
     [self removeObserver:self forKeyPath:@"self.table.hidden"];
 }
+
+
+- (void)TouchUpInsideDone:(NSString *)string
+{
+    [self searchCookbookWithKeyword:string];
+}
+
 
 #pragma mark-
 /*

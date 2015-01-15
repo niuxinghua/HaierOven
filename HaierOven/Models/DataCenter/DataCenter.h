@@ -67,8 +67,36 @@ extern NSString* const kRecommendProjectsFileName;
  **/
 - (void)testFileAttributeWithUrl:(NSURL*)fileUrl;
 
+#pragma mark - 用户签到信息
+
+/**
+ *  用户今日是否签到
+ *
+ *  @return 是否签到
+ */
+- (BOOL)getSignInFlag;
+
+/**
+ *  保存今日签到状态
+ */
+- (void)saveSignInFlag;
+
 
 #pragma mark - 缓存文件 读取缓存文件
+
+/**
+ *  保存搜索关键字
+ *
+ *  @param keyword 关键字
+ */
+- (void)saveSearchedKeyword:(NSString*)keyword;
+
+/**
+ *  获取本地搜索关键字
+ *
+ *  @return 返回关键字列表
+ */
+- (NSMutableArray*)getSearchedKeywords;
 
 /**
  *  缓存用户信息到本地

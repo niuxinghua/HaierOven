@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *chickBtn;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) DeviceConnectProgressView *deviceConnectProgressView;
+@property (weak, nonatomic) IBOutlet UILabel *wifiNameLabel;
 @end
 
 @implementation AddDeviceStepTwoController
@@ -27,6 +28,7 @@
     [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         
     }];
+    
     
 }
 -(void)setUpSubviews{
@@ -45,6 +47,8 @@
     
     self.deviceConnectProgressView = [[DeviceConnectProgressView alloc]initWithFrame:CGRectMake(0, 0, 220, 220)];
     [self.myWindow addSubview:self.deviceConnectProgressView];
+    
+    self.wifiNameLabel.text = [[OvenManager sharedManager] fetchSSID];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
      

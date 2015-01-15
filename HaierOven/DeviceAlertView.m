@@ -110,6 +110,7 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在预约时间开始工作";
             [self.pickview reloadAllComponents];
+#warning bug!!!!
             [self.pickview selectRow:10 inComponent:0 animated:NO];
             [self.pickview selectRow:15 inComponent:1 animated:NO];
             self.colonLabel.hidden = NO;

@@ -20,7 +20,8 @@ NSString* const kLocalUserInfoFileName          = @"currentUser.data";
 NSString* const kLocalTagsFileName              = @"tags.data";
 NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
 NSString* const kLocalOvensFileName             = @"myOvens.data";
-
+NSString* const kLocalSearchedKeywordsFileName  = @"searchedKeywords.plist";
+NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
 
 @interface DataCenter ()
 
@@ -122,7 +123,87 @@ NSString* const kLocalOvensFileName             = @"myOvens.data";
     NSLog (@"NSURLIsExcludedFromBackupKey flag value is %@", flag);
 }
 
+#pragma mark - 用户签到信息
+
+
+- (BOOL)getSignInFlag
+{
+    NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSignInMessageFileName];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSMutableArray* signedDates = [NSMutableArray array];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        return NO;
+    } else {
+        NSDate* date = [NSDate date];
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd";
+        NSString* strDate = [formatter stringFromDate:date];
+        signedDates = [NSMutableArray arrayWithContentsOfFile:filePath];
+        for (NSString* signedDate in signedDates) {
+            if ([signedDate isEqualToString:strDate]) {
+                return YES;
+            }
+        }
+        
+    }
+    
+    
+    return NO;
+}
+
+- (void)saveSignInFlag
+{
+    NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSignInMessageFileName];
+    
+    NSMutableArray* signedDates = [NSMutableArray array];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString* strDate = [formatter stringFromDate:[NSDate date]];
+    [signedDates addObject:strDate];
+    
+    [signedDates writeToFile:filePath atomically:YES];
+    
+    
+}
+
+
 #pragma mark - 缓存文件 读取缓存文件
+
+- (void)saveSearchedKeyword:(NSString*)keyword
+{
+    NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSearchedKeywordsFileName];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSMutableArray* keywords = [NSMutableArray array];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        [keywords addObject:keyword];
+        
+    } else {
+        //只保存10个关键词
+        keywords = [NSMutableArray arrayWithContentsOfFile:filePath];
+        if (keywords.count > 10) {
+            [keywords removeLastObject];
+        }
+        [keywords insertObject:keyword atIndex:0];
+    }
+    
+    
+    [keywords writeToFile:filePath atomically:YES];
+    
+}
+
+- (NSMutableArray*)getSearchedKeywords
+{
+    NSMutableArray* keywords = [NSMutableArray array];
+    
+    NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSearchedKeywordsFileName];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath]) {
+        keywords = [NSMutableArray arrayWithContentsOfFile:filePath];
+    }
+    
+    return keywords;
+}
 
 - (void)saveUserInfoWithObject:(id)jsonObj
 {

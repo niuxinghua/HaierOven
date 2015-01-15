@@ -10,7 +10,7 @@
 @class FirstTableViewCell;
 @protocol FirstTableViewCellDelegate <NSObject>
 @required
--(void)SignIn:(UIButton*)btn;
+-(void)signIn:(UIButton*)btn;
 
 @end
 @interface FirstTableViewCell : UITableViewCell

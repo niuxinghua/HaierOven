@@ -30,6 +30,6 @@
 }
 
 - (IBAction)Sginin:(UIButton *)sender {
-    [self.delegate SignIn:sender];
+    [self.delegate signIn:sender];
 }
 @end

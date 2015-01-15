@@ -192,6 +192,14 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)updateUserInfo:(User*)user callBack:(myCallback)completion;
 
 /**
+ *  每日签到
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)signInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
  *  添加关注
  *
  *  @param userBaseId 用户Id

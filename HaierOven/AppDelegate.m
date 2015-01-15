@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaHandler.h"
+
 @interface AppDelegate ()
 
 @end
@@ -61,7 +64,14 @@
     //设置友盟社会化组件appkey
     [UMSocialData setAppKey:UMengAppKey];
     
+    // QQ
     [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+    
+    // 微博
+    [UMSocialSinaHandler openSSOWithRedirectURL:@"https://api.weibo.com/oauth2/default.html"];
+    
+    // 微信 朋友圈
+    [UMSocialWechatHandler setWXAppId:@"wxd135c736264fd98d" appSecret:@"8296da588aa8e35ebf2ab09f0baf10ff" url:@"http://weibo.com/origheart"];
     
     
 }
@@ -78,6 +88,18 @@
         //调用其他SDK，例如新浪微博SDK等
     }
     return result;
+}
+
+- (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //程序没有被杀掉，用户点击通知时
+    NSLog(@"didReceiveLocalNotification");
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
+    
+    NSDictionary* userInfo = notification.userInfo;
+    NSLog(@"name:%@", userInfo[@"name"]);
+    NSLog(@"age:%@", userInfo[@"age"]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

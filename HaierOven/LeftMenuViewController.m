@@ -159,6 +159,9 @@
         cell.backgroundColor = GlobalGrayColor;
         cell.delegate = self;
         cell.userNameLabel.font = [UIFont fontWithName:GlobalTitleFontName size:15];
+        
+        cell.siginBtn.selected = [[DataCenter sharedInstance] getSignInFlag];
+        
         return cell;
     }else if (indexPath.row==1){
         if (hadDevice) {
@@ -192,10 +195,23 @@
 }
 
 
--(void)SignIn:(UIButton *)btn{
+-(void)signIn:(UIButton *)btn{
     
-    btn.selected = btn.selected==YES?NO:YES;
-    [super showProgressCompleteWithLabelText:@"点心＋2" afterDelay:1.0];
+    if (btn.selected) {
+        return;
+    }
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            btn.selected = !btn.selected;
+            [super showProgressCompleteWithLabelText:@"点心＋2" afterDelay:1.0];
+            [[DataCenter sharedInstance] saveSignInFlag];
+            
+        }
+    }];
+    
+    
+    
 }
 -(void)ChangeController:(UIView *)btn{
     tempView.hidden = YES;

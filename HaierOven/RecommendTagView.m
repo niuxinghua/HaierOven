@@ -11,11 +11,10 @@
 @implementation RecommendTagView
 
 -(instancetype)initWithFrame:(CGRect)frame{
-    //    if (self = [ super initWithFrame:frame]) {
+    
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([RecommendTagView class]) owner:self options:nil] firstObject];
     self.frame = frame;
     
-    //    }
     return self;
 }
 - (IBAction)TouUpTagbtn:(UIButton *)sender {

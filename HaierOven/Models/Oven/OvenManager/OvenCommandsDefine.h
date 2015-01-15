@@ -126,6 +126,10 @@
  */
 #define kBakeMode       @"20v00e"
 
+/**
+ *  预约时间：格式：小时:分钟
+ */
+#define kOrderTime      @"20v00h"
 
 
 #endif

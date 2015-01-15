@@ -104,6 +104,7 @@
         [super hiddenProgressHUD];
         if (success) {
             self.cookbookDetail = obj;
+            
             // 需要将图片完整的路径转换为服务器保存的图片的相对路径，也就是需要去掉图片的BaseOvenUrl
             
             NSRange range = [self.cookbookDetail.coverPhoto rangeOfString:[BaseOvenUrl lastPathComponent]];

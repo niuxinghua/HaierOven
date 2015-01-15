@@ -31,7 +31,7 @@
 {
     _cookbook = cookbook;
     [self resetCell];
-    // 这里应该判断我是否已赞过
+    
     self.goodCountLabel.text = cookbook.praises;
     
     [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto] placeholderImage:IMAGENAMED(@"fakedataImage.png")];

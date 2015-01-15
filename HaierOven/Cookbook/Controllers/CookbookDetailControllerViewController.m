@@ -17,7 +17,7 @@
 #import "AddShoppingListCell.h"
 
 
-@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate>
+@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate>
 {
     CGFloat _lastContentOffsetY;
 }
@@ -150,6 +150,16 @@
     }];
 }
 
+- (void)getFollowedList
+{
+    NSString* userBaseId = @"5";
+    [[InternetManager sharedManager] getFollowersWithUserBaseId:userBaseId andPageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            
+        }
+    }];
+}
+
 - (void)updateUI
 {
     // 设置第二个分区默认显示内容
@@ -179,6 +189,10 @@
     
     // reloadData
     [self.tableView reloadData];
+    
+    //如果已登录判断是否关注菜谱发布人
+    [self getFollowedList];
+    
 }
 
 - (void)initTableViewWithContentType:(CurrentContentType)type
@@ -454,7 +468,7 @@
         [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbook.ID
                                                     andUserBaseId:@"5"
                                                        andComment:self.commentTextField.text
-                                                         parentId:nil
+                                                         parentId:self.cookbook.creator.ID      //nil
                                                          callBack:^(BOOL success, id obj, NSError *error) {
                                                              if (success) {
                                                                  NSLog(@"评论成功");
@@ -769,7 +783,7 @@
     
     NSString* userID = @"5";
     if (!sender.selected) {
-        [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
+        [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 [super showProgressCompleteWithLabelText:@"关注成功" afterDelay:1];
             } else {
@@ -777,7 +791,7 @@
             }
         }];
     } else {
-        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userID andFollowedUserBaseId:userID/*self.cookbookDetail.creator.ID*/ callBack:^(BOOL success, id obj, NSError *error) {
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:userID andFollowedUserBaseId:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
             } else {
@@ -860,6 +874,59 @@
 - (void)shareCookbook
 {
     NSLog(@"分享");
+    //由于调试时QQ未安装也显示了，所以这里对QQ进行单独判断
+    NSArray* snsNames = [QQApi isQQInstalled] ? @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ] : @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline];
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:self.cookbook.name shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
+    
+}
+
+#pragma mark - UMSocialDataDelegate & UMSocialUIDelegate
+
+- (void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
+{
+    NSLog(@"%@", platformName);
+    
+    if ([platformName hasPrefix:@"wx"]) { //微信分享，只分享图片，分享到朋友圈时的连接为app下载地址
+        
+        socialData.shareImage = self.cookbookImageView.image;
+        
+        //在分享代码前设置微信分享应用类型，用户点击消息将跳转到应用，或者到下载页面
+        //UMSocialWXMessageTypeImage 为纯图片类型
+        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+        //分享图文样式到微信朋友圈显示字数比较少，只显示分享标题
+        
+        [UMSocialData defaultData].extConfig.title = self.cookbookDetail.desc;
+        //设置微信好友或者朋友圈的分享url,下面是微信好友，微信朋友圈对应wechatTimelineData
+//        [UMSocialData defaultData].extConfig.wechatSessionData.url = [DataCenter sharedInstance].remoteConfig.appUrl;
+        
+    } else if ([platformName hasPrefix:@"qq"]) {
+        socialData.shareImage = self.cookbookImageView.image;
+        
+        [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    }
+    
+//    [MobClick event:@"share" attributes:@{@"分享平台":platformName}];
+    
+}
+
+- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
+
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 
 @end

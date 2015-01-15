@@ -664,6 +664,7 @@
 		842A86ED1A527DC700C75EE4 /* StepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86EB1A527DC700C75EE4 /* StepCell.m */; };
 		842A86EE1A527DC700C75EE4 /* StepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86EC1A527DC700C75EE4 /* StepCell.xib */; };
 		8438F6EF1A660DE900E1436C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6EE1A660DE900E1436C /* Message.m */; };
+		8438F6F01A667FC600E1436C /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
