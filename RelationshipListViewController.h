@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface RelationshipListViewController : UITableViewController
+@interface RelationshipListViewController : BaseTableViewController
 @property BOOL iswathching;
+
+@property (copy, nonatomic) NSString* userBaseId;
+
 @end

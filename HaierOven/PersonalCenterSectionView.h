@@ -14,9 +14,11 @@ typedef NS_ENUM(NSInteger, SectionType) {
     sectionNotification     =4
 };
 
+
+
 @class PersonalCenterSectionView;
 @protocol PersonalCenterSectionViewDelegate <NSObject>
-
+@required
 -(void)SectionType:(NSInteger)type;
 
 @end

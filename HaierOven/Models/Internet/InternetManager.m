@@ -473,7 +473,7 @@
         
         // 2. 发送网络请求
         
-        [[self manager] GET:GetUserInfo parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[self manager] POST:GetUserInfo parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
             
@@ -680,7 +680,76 @@
     
 }
 
+- (void)addPoints:(NSInteger)score userBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,         //用户ID
+                                     @"points" : [NSNumber numberWithInteger:score]
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:AddPoints parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                
+                
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
 
+- (void)bindOvenWithUserBaseId:(NSString*)userBaseId deviceMac:(NSString*)mac callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,         //用户ID
+                                     @"deviceMac" : mac
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:BindDevice parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                
+                
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
 
 - (void)addFollowWithUserBaseId:(NSString*)userBaseId andFollowedUserBaseId:(NSString*)followdUserBaseId callBack:(myCallback)completion
 {
@@ -1134,6 +1203,47 @@
         
         // 2. 发送网络请求
         [[self manager] POST:GetFriendCookbooks parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* cookbooks = [DataParser parseCookbooksWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, cookbooks, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+- (void)getMyPraisedCookbooksWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,     //UsrId
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,     //当前请求的页数
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetPraisedCookbooks parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
             

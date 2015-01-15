@@ -68,5 +68,23 @@
 
 #define UMengAppKey                 @"54601e25fd98c51761002286"
 
+/**
+ *  用户积分定义
+ */
+#define SignInScore         2
+#define BindOvenScore       500
+#define ShareScore          5
+
+
+
+
+
+
+
+
+
+
+
+
 
 

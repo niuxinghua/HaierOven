@@ -87,14 +87,24 @@
 #define SignIn      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/signin"]
 
 /**
+ *  增加积分
+ */
+#define AddPoints       [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/addpoints"]
+
+/**
+ *  绑定设备
+ */
+#define BindDevice      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/devicebind"]
+
+/**
  *  获取关注列表
  */
-#define GetFollows  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/get"]
+#define GetFollows  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/get/userBaseID"]
 
 /**
  *  获取粉丝列表
  */
-#define GetFans  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/fans/get"]
+#define GetFans  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/fans/get/userBaseID"]
 
 
 #pragma mark - 标签
@@ -144,6 +154,11 @@
  *  获取我关注的人菜谱
  */
 #define GetFriendCookbooks      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/myfriends"]
+
+/**
+ *  获取我赞过的菜谱
+ */
+#define GetPraisedCookbooks     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/mypraise"]
 
 /**
  *  根据标签获取菜谱

@@ -8,19 +8,141 @@
 
 #import "RelationshipListViewController.h"
 #import "RelationshipCell.h"
+#import "MJRefresh.h"
 #define CellRate 0.167
 @interface RelationshipListViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
+@property (strong, nonatomic) NSMutableArray* friends;
+@property (nonatomic) NSInteger pageIndex;
 @end
 
 @implementation RelationshipListViewController
+
+- (void)loadMyFans // 粉丝
+{
+    [[InternetManager sharedManager] getFansWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.friends = obj;
+            } else {
+                [self.friends addObjectsFromArray:arr];
+            }
+            
+            [self.tableView reloadData];
+        }
+    }];
+    
+}
+
+- (void)loadMyFollowers //我关注的人
+{
+    [[InternetManager sharedManager] getFollowersWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.friends = obj;
+            } else {
+                [self.friends addObjectsFromArray:arr];
+            }
+            
+            [self.tableView reloadData];
+        }
+    }];
+    
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.friends = [NSMutableArray array];
+        self.pageIndex = 1;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLabel.text = self.iswathching?@"已关注列表":@"粉丝列表";
     
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    [self addHeader];
+    [self addFooter];
+    
+    if (self.iswathching) {
+        [self loadMyFollowers];
+    } else {
+        [self loadMyFans];
+    }
+    
 }
+
+- (void)addHeader
+{
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addHeaderWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        vc.pageIndex = 1;
+        if (vc.iswathching) {
+            [vc loadMyFollowers];
+        } else {
+            [vc loadMyFans];
+        }
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView headerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
+
+- (void)addFooter
+{
+    
+    __unsafe_unretained typeof(self) vc = self;
+    // 添加上拉刷新尾部控件
+    
+    [self.tableView addFooterWithCallback:^{
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加根据pageIndex加载数据
+        vc.pageIndex++;
+        if (vc.iswathching) {
+            [vc loadMyFollowers];
+        } else {
+            [vc loadMyFans];
+        }
+        
+        // 加载数据，0.5秒后执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 结束刷新
+            [vc.tableView footerEndRefreshing];
+            
+        });
+        
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -38,7 +160,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 10;
+    return self.friends.count;
 }
 
 
@@ -47,6 +169,7 @@
     RelationshipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelationshipCell" forIndexPath:indexPath];
     cell.watchingBtn.selected = self.iswathching;
     // Configure the cell...
+    cell.user = self.friends[indexPath.row];
     
     return cell;
 }
