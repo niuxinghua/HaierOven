@@ -11,4 +11,5 @@
 @interface BakeHouseCell : UICollectionViewCell
 @property (strong, nonatomic) UIImage *kitImage;
 @property (copy, nonatomic) NSString *kitName;
+@property (copy, nonatomic) NSString *kitPrice;
 @end

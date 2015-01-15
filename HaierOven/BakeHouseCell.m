@@ -10,6 +10,7 @@
 @interface BakeHouseCell()
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end
 @implementation BakeHouseCell
@@ -20,5 +21,10 @@
 -(void)setKitName:(NSString *)kitName{
     _kitName = kitName;
     self.label.text = kitName;
+}
+
+-(void)setKitPrice:(NSString *)kitPrice{
+    _kitPrice = kitPrice;
+    self.priceLabel.text = kitPrice;
 }
 @end
