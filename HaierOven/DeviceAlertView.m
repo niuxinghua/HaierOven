@@ -7,7 +7,10 @@
 //
 
 #import "DeviceAlertView.h"
-
+@interface DeviceAlertView()
+@property (strong, nonatomic)NSArray *arrHours;
+@property (strong, nonatomic)NSArray *arrMins;
+@end
 @implementation DeviceAlertView
 
 /*
@@ -21,7 +24,12 @@
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([DeviceAlertView class]) owner:self options:nil] firstObject];
     self.frame = frame;
-    self.center = CGPointMake(PageW/2, PageH/2);
+    self.arrHours = [self gethourArr];
+    self.arrMins = [self getMinute];
+    self.pickview.delegate = self;
+    self.pickview.dataSource = self;
+    [self.pickview selectRow:10 inComponent:0 animated:NO];
+    self.colonLabel.hidden = YES;
     return self;
 }
 
@@ -43,9 +51,7 @@
 }
 
 -(void)layoutSubviews{
-    self.string = @" ";
-    [super layoutSubviews];
-    
+    [super layoutSubviews];    
 }
 
 -(void)setAlertTitle:(NSString *)alertTitle{
@@ -58,10 +64,6 @@
 }
 
 -(void)setPickViewArr:(NSArray *)pickViewArr{
-    self.pickview.delegate = self;
-    self.pickview.dataSource = self;
-    [self.pickview selectRow:10 inComponent:0 animated:NO];
-    self.colonLabel.hidden = YES;
     _pickViewArr = pickViewArr;
     [self.pickview reloadAllComponents];
 }
@@ -75,20 +77,22 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, self.titleBg.height-8);
             self.alertDescription = @"";
             self.pickViewArr = [self getTimeArr];
+            [self.pickview selectRow:30 inComponent:0 animated:NO];
             break;
+            
         case alertTempture:
             self.alertTitle = @"设置烤箱温度";
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, self.titleBg.height-8);
             self.alertDescription = @"";
             self.pickViewArr = [self getTempArr];
-
+            [self.pickview selectRow:35 inComponent:0 animated:NO];
             break;
+            
         case alertClock:
             self.alertTitle = @"设置闹钟";
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在时间达到时提醒您";
             self.pickViewArr = [self getTimeArr];
-
             break;
             
         case alertNeedle:
@@ -96,8 +100,8 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在探针温度达到目标温度时提醒您";
             self.pickViewArr = [self getTempArr];
-
             break;
+            
         case alertWormUp:
             self.alertTitle = @"设置预热目标温度";
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
@@ -111,8 +115,8 @@
             self.alertDescription = @"将在预约时间开始工作";
             [self.pickview reloadAllComponents];
 #warning bug!!!!
-            [self.pickview selectRow:10 inComponent:0 animated:NO];
-            [self.pickview selectRow:15 inComponent:1 animated:NO];
+//            [self.pickview selectRow:10 inComponent:0 animated:NO];
+//            [self.pickview selectRow:15 inComponent:1 animated:NO];
             self.colonLabel.hidden = NO;
 
             break;
@@ -147,17 +151,12 @@
         myView.font = [UIFont fontWithName:GlobalTitleFontName size:17];         //用label来设置字体大小
         myView.backgroundColor = [UIColor clearColor];
         myView.textColor = [UIColor blackColor];
-        NSArray *arr = [NSArray new];
         if (component ==0) {
-            arr = [self gethourArr];
-            myView.text = [arr objectAtIndex:row];
+            myView.text = [self.arrHours objectAtIndex:row];
         }else {
-            arr = [self getMinute];
-            myView.text = [arr  objectAtIndex:row];
+            myView.text = [self.arrMins objectAtIndex:row];
         }
         return myView;
-
-
 
     }else{
     
@@ -205,7 +204,7 @@
 -(NSArray *)getTimeArr{
     NSString *minute;
     NSMutableArray *minutes = [NSMutableArray new];
-    for ( int i = 0; i<1440; i++) {
+    for ( int i = 0; i<240; i++) {
         minute = [NSString stringWithFormat:@"%d 分钟",i];
         [minutes addObject:minute];
     }

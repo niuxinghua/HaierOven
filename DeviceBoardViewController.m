@@ -14,6 +14,12 @@
 #import "MyPageView.h"
 
 @interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate,DeviceAlertViewDelegate>
+{
+    CGRect alertRectShow;
+    CGRect alertRectHidden;
+}
+
+
 @property (strong, nonatomic) IBOutlet DeviceWorkView *startStatusView;
 @property (strong, nonatomic) NSTimer *timeable;
 @property int time;
@@ -131,11 +137,28 @@
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
     
-    self.bakeModeValues = @[@"30v0M6", @"30v0M8", @"30v0M5", @"30v0Mf"/*应该是焙烤，这里是传统烧烤*/, @"30v0Me"];
+    self.bakeModeValues = @[@"30v0M6"/*传统烘焙*/,
+                            @"30v0M8"/*对流烘焙*/,
+                            @"30v0M5"/*热风烧烤*/,
+                            @"30v0Mf"/*应该是焙烤，这里是传统烧烤*/,
+                            @"30v0Me"/*烧烤*/,
+                            @"30v0Mc"/*3D热风*/,
+                            @"30v0M9"/*3D烧烤*/,
+                            @"30v0Md"/*披萨模式*/,
+                            @"30v0Ma"/*解冻功能*/,
+                            @"30v0Mb"/*发酵功能*/,
+                            @"30v0Mg"/*下烧烤*/,
+                            @"30V1Mh"/*上烧烤＋蒸汽*/,
+                            @"30v2Mi"/*上下烧烤＋蒸汽*/,
+                            @"30v3Mj"/*纯蒸汽*/,
+                            @"30v4Mk"/*消毒 1*/,
+                            @"30v5Ml"/*消毒 2*/,
+                            @"30v6Mm"/*全烧烤*/,
+                            @"30v7Mn"/*热分全烧烤*/];
     
-    NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
-    NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
-    NSArray *wxz = @[@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz"];
+    NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
+    NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
+    NSArray *wxz = @[@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz"];
     self.workModelBtns = [NSMutableArray new];
     for (int i = 0; i<cxz.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -160,6 +183,10 @@
     self.deviceScrollView.delegate = self;
 }
 -(void)SetUPAlertView{
+    alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
+    alertRectShow = CGRectMake(20, (PageH-((PageW-40)*1.167))/2, PageW-40, (PageW-40)*1.167);
+
+    
     self.myWindow = [UIWindow new];
     self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
     self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
@@ -168,7 +195,8 @@
     self.myWindow.userInteractionEnabled = YES;
     self.myWindow.hidden = YES;
 
-    self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-40, (PageW-40)*1.167)];
+    self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:alertRectHidden];
+//    self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-40, (PageW-40)*1.167)];
     self.deviceAlertView.delegate = self;
     [self.myWindow addSubview:self.deviceAlertView];
 }
@@ -209,6 +237,7 @@
     sender.selected = sender.selected==YES?NO:YES;
     _tempBtn = sender;
     self.deviceBoardStatus = DeviceBoardStatusChoseModel;
+    
     
     //点击了工作模式
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
@@ -297,20 +326,7 @@
 }
 
 
-#pragma mark - tableviewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    if (indexPath.row == 0) {
-//        self.deviceAlertView.alertType = alertTime;
-//
-//    }else if (indexPath.row==3){
-//        self.deviceAlertView.alertType = alertNeedle;
-//
-//    }
-//
-//    self.myWindow.hidden = NO;
-    
-}
+
 
 #pragma mark - 设备指令
 
@@ -338,6 +354,12 @@
 -(void)StartWarmUp:(UIButton*)sender{
     self.myWindow.hidden = NO;
     if (sender.selected==NO) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.deviceAlertView.frame = alertRectShow;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
         self.deviceAlertView.alertType = alertWormUp;
     }
 //    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
@@ -652,6 +674,8 @@
 #pragma mark- 提示框显示deviceAlertView
 -(void)cancel{
     self.myWindow.hidden = YES;
+    self.deviceAlertView.frame = alertRectHidden;
+   
 }
 
 -(void)confirm:(NSString *)string andAlertTye:(NSInteger)type andbtn:(UIButton *)btn{
@@ -688,14 +712,31 @@
             break;
     }
     self.myWindow.hidden = YES;
+    self.deviceAlertView.frame = alertRectHidden;
 
 }
 
 - (IBAction)alertView:(UIButton *)sender {
+    NSLog(@"%d",sender.tag);
     if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
         self.myWindow.hidden = NO;
+        switch (sender.tag) {
+            case 1:
+                self.deviceAlertView.string = @"180°";
+                break;
+            case 2:
+                self.deviceAlertView.string = @"30 分钟";
+                break;
+            default:
+                break;
+        }
+        [UIView animateWithDuration:0.2 animations:^{
+            self.deviceAlertView.frame = alertRectShow;
+        } completion:^(BOOL finished) {
+            
+        }];
     }else sender.selected = NO;
 
 }
