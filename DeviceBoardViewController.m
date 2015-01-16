@@ -79,12 +79,14 @@
     [self SetUPAlertView];
     [self setupToolbarItems];
     self.deviceBoardStatus = DeviceBoardStatusClose;
-    
     [self loadMyOvenInstance];
 
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.toolbarHidden = NO;
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
