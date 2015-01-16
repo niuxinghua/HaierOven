@@ -306,7 +306,7 @@
 
 #define DownloadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Download"]
 
-#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8080/haieroven/file/upload"]
+#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8081/file/upload"]
 
 
 

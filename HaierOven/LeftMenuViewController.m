@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) User* currentUser;
 
-@property (copy, nonatomic) NSString* notificationCount;
+@property (nonatomic) NSInteger notificationCount;
 @end
 
 @implementation LeftMenuViewController
@@ -79,7 +79,7 @@
 {
     [[InternetManager sharedManager] getNotificationCountWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
-            self.notificationCount = [NSString stringWithFormat:@"%@", obj[@"data"]];
+            self.notificationCount = [obj[@"data"] integerValue];
             
             [self.tableView reloadData];
         }
@@ -243,7 +243,10 @@
         NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
         if (indexPath.row ==7) {
-            cell.notificationCount = @"  12  ";
+            if (self.notificationCount > 0) {
+                cell.notificationCount = [NSString stringWithFormat:@" %d ", self.notificationCount];
+            }
+            
         }
         cell.titleLabel.text = titles[indexPath.row-2];
         cell.titleLabel.font = [UIFont fontWithName:GlobalTitleFontName size:14];

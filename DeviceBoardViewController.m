@@ -21,6 +21,14 @@
 
 
 @property (strong, nonatomic) IBOutlet DeviceWorkView *startStatusView;
+
+@property (weak, nonatomic) IBOutlet UILabel *bakeModeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *bakeTimeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *bakeTemperatureLabel;
+
+
 @property (strong, nonatomic) NSTimer *timeable;
 @property int time;
 @property (strong, nonatomic) IBOutlet UIScrollView *deviceScrollView;
@@ -43,8 +51,27 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *controlBtns;
 @property (strong, nonatomic) IBOutlet UITableViewCell *actionCell;
 @property (strong, nonatomic) UIButton *tempBtn;//记录模版上一个点击按钮
+
+/**
+ *  烘焙温度
+ */
 @property (strong, nonatomic) IBOutlet UIButton *temputure;
+
+/**
+ *  烘焙时间
+ */
 @property (strong, nonatomic) IBOutlet UIButton *howlong;
+
+/**
+ *  烘焙模式
+ */
+@property (strong, nonatomic) NSDictionary* bakeMode;
+
+/**
+ *  烤完了的本地通知
+ */
+@property (strong, nonatomic) UILocalNotification* bakeTimeNotification;
+
 /**
  *  Oven实例
  */
@@ -137,24 +164,24 @@
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
     
-    self.bakeModeValues = @[@"30v0M6"/*传统烘焙*/,
-                            @"30v0M8"/*对流烘焙*/,
-                            @"30v0M5"/*热风烧烤*/,
-                            @"30v0Mf"/*应该是焙烤，这里是传统烧烤*/,
-                            @"30v0Me"/*烧烤*/,
-                            @"30v0Mc"/*3D热风*/,
-                            @"30v0M9"/*3D烧烤*/,
-                            @"30v0Md"/*披萨模式*/,
-                            @"30v0Ma"/*解冻功能*/,
-                            @"30v0Mb"/*发酵功能*/,
-                            @"30v0Mg"/*下烧烤*/,
-                            @"30V1Mh"/*上烧烤＋蒸汽*/,
-                            @"30v2Mi"/*上下烧烤＋蒸汽*/,
-                            @"30v3Mj"/*纯蒸汽*/,
-                            @"30v4Mk"/*消毒 1*/,
-                            @"30v5Ml"/*消毒 2*/,
-                            @"30v6Mm"/*全烧烤*/,
-                            @"30v7Mn"/*热分全烧烤*/];
+    self.bakeModeValues = @[@{@"30v0M6" :@"传统烘焙"},
+                            @{@"30v0M8" :@"对流烘焙"} /*对流烘焙*/,
+                            @{@"30v0M5" :@"热风烧烤" }/*热风烧烤*/,
+                            @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
+                            @{@"30v0Me" :@"烧烤" }/*烧烤*/,
+                            @{@"30v0Mc" :@"3D热风"} /*3D热风*/,
+                            @{@"30v0M9" :@"3D烧烤" }/*3D烧烤*/,
+                            @{@"30v0Md" :@"披萨模式" }/*披萨模式*/,
+                            @{@"30v0Ma" :@"解冻功能" }/*解冻功能*/,
+                            @{@"30v0Mb" :@"发酵功能" }/*发酵功能*/,
+                            @{@"30v0Mg" :@"下烧烤" }/*下烧烤*/,
+                            @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
+                            @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
+                            @{@"30v3Mj" :@"上下烧烤＋蒸汽"} /*纯蒸汽*/,
+                            @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
+                            @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
+                            @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
+                            @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/];
     
     NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
     NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
@@ -232,23 +259,25 @@
 
 
 #pragma mark -选择工作模式
+
 -(void)WorkModelChick:(UIButton*)sender{
     _tempBtn.selected = _tempBtn.selected==YES?NO:YES;
     sender.selected = sender.selected==YES?NO:YES;
     _tempBtn = sender;
     self.deviceBoardStatus = DeviceBoardStatusChoseModel;
     
+    self.bakeMode = self.bakeModeValues[sender.tag];
     
     //点击了工作模式
-    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
-                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
-    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
-                                        toDevice:self.myOven
-                                    andCommandSN:0
-                             andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+//    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
+//                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
+//    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+//                                        toDevice:self.myOven
+//                                    andCommandSN:0
+//                             andGroupCommandName:@""
+//                                       andResult:^(BOOL result) {
+//                                           
+//                                       }];
     
     
 }
@@ -260,7 +289,7 @@
         self.timeable = nil;
     }
     self.time = self.time==0? 0:self.time-1;
-    self.startStatusView.leftTime = [NSString stringWithFormat:@"%i s",self.time];
+    self.startStatusView.leftTime = [NSString stringWithFormat:@"%i:%i",self.time/60, self.time%60];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -375,14 +404,37 @@
     
     //点击运行后显示
     self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
-    self.time = 30;
-    float animateDueation = 30;
+    
+    NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
+    NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
+    
+    self.time = [timeStr integerValue] * 60;
+    float animateDueation = [timeStr integerValue] * 60;
     self.startStatusView.animationDuration = animateDueation;
     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
     
     self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
     
-    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+    
+    
+    self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", [[self.bakeMode allValues] firstObject]];
+    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@", self.howlong.currentTitle];
+    self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
+    
+    
+    
+    if (!self.temputure.selected) {
+        [self setBakeTemperature:self.temputure.currentTitle];
+    }
+    
+    if (!self.howlong.selected) {
+        [self setBakeTime:self.howlong.currentTitle];
+    }
+    
+    
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
+                                                                        commandAttrValue:[[self.bakeMode allKeys] firstObject]];
     [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
                                         toDevice:self.myOven
                                     andCommandSN:0
@@ -391,7 +443,33 @@
                                            
                                        }];
 
+    
+    command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
+    
+    if (self.bakeTimeNotification != nil) {
+        [[UIApplication sharedApplication] cancelLocalNotification:self.bakeTimeNotification];
+    }
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    self.bakeTimeNotification = localNotification;
+    NSInteger seconds = [timeStr integerValue] * 60;
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.alertBody = [NSString stringWithFormat:@"您的食物已经烤好了"];
+    localNotification.alertAction = @"alertAction";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
 }
+
 -(void)StopWorking{
     self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     [self.timeable invalidate];
