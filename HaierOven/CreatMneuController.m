@@ -593,7 +593,10 @@
 
 - (void)submitCookbook
 {
-    
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     
     self.cookbookDetail.tags = self.selectedTags;
     self.cookbookDetail.steps = self.steps;

@@ -100,6 +100,26 @@
  */
 + (NSAttributedString*)getAttributedStringWithHTMLString:(NSString *)htmlString;
 
+/**
+ *  转换时间为距离现在多久
+ *
+ *  @param date NSDate
+ *
+ *  @return 返回转换结果
+ */
++ (NSString *)formattedDateDescription:(NSDate*)date;
+
+
+/**
+ *  转换时间为距离现在多久
+ *
+ *  @param date NSDate
+ *
+ *  @return 返回转换结果
+ */
++ (NSString *)intervalSinceNow:(NSDate *)theDate;
+
+
 @end
 
 

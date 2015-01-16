@@ -404,10 +404,7 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
 
 - (NSString *)currentUserBaseId
 {
-    NSString* userId = [[NSUserDefaults standardUserDefaults] valueForKey:@"userBaseId"];
-    if (userId == nil) {
-        userId = @"";
-    }
+    NSString* userId = IsLogin ? [[NSUserDefaults standardUserDefaults] valueForKey:@"userBaseId"] : @"0";
     return userId;
 }
 

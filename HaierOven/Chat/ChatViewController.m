@@ -111,7 +111,7 @@
     self.senderDisplayName = @"刘康";
     
     /**
-     *  设置聊天假数据
+     *  设置聊天数据
      */
     self.messagesModel = [[MessagesModel alloc] init];
     
@@ -123,7 +123,7 @@
     
     User* currentUser = [[User alloc] init];
     currentUser.userId = CurrentUserBaseId;
-    currentUser.userName = @"刘康";
+    currentUser.userName = @"我";
     User* her = [[User alloc] init];
     her.userName = self.toUserName;
     her.userId = self.toUserId;

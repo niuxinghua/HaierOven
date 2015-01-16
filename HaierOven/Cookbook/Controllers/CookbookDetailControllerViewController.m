@@ -99,7 +99,7 @@
         [self updateUI];
     } else {
         [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-        [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbookId userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
             [super hiddenProgressHUD];
             if (success) {
                 self.cookbookDetail = obj;
@@ -120,7 +120,7 @@
 - (void)loadComments
 {
 //    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-    [[InternetManager sharedManager] getCommentsWithCookbookId:self.cookbook.ID andPageIndex:_commentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] getCommentsWithCookbookId:self.cookbookId andPageIndex:_commentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
 //        [super hiddenProgressHUD];
         if (success) {
           
@@ -443,6 +443,10 @@
 
 - (void)didTapSend:(id)sender
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     
     if (self.commentTextField.text.length == 0) {
         [super showProgressErrorWithLabelText:@"评论不能为空" afterDelay:1];
@@ -466,10 +470,10 @@
         self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
     } completion:^(BOOL finished) {
         
-        [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbook.ID
+        [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbookId
                                                     andUserBaseId:CurrentUserBaseId
                                                        andComment:self.commentTextField.text
-                                                         parentId:self.cookbook.creator.ID      //nil
+                                                         parentId:self.cookbookDetail.creator.ID      //nil
                                                          callBack:^(BOOL success, id obj, NSError *error) {
                                                              if (success) {
                                                                  NSLog(@"评论成功");
@@ -840,8 +844,8 @@
     //构建购物清单对象
     NSString* userId = CurrentUserBaseId;
     ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
-    shoppingOrder.cookbookID = self.cookbook.ID;
-    shoppingOrder.cookbookName = self.cookbook.name;
+    shoppingOrder.cookbookID = self.cookbookDetail.cookbookId;
+    shoppingOrder.cookbookName = self.cookbookDetail.name;
     shoppingOrder.creatorId = userId;
     
     NSMutableArray* foods = [NSMutableArray array];
@@ -870,8 +874,12 @@
 
 - (void)praiseCookbook
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     NSString* userID = CurrentUserBaseId;
-    [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbook.ID userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             [super showProgressCompleteWithLabelText:@"已赞" afterDelay:1];
         } else {
@@ -886,7 +894,7 @@
     NSLog(@"分享");
     //由于调试时QQ未安装也显示了，所以这里对QQ进行单独判断
     NSArray* snsNames = [QQApi isQQInstalled] ? @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ] : @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline];
-    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:self.cookbook.name shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:self.cookbookDetail.name shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
     
 }
 

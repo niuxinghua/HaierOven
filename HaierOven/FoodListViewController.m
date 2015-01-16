@@ -157,7 +157,8 @@
 {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-    cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
+    Cookbook* cookbook = self.cookbooks[indexPath.row];
+    cookbookDetailController.cookbookId = cookbook.ID;
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
 

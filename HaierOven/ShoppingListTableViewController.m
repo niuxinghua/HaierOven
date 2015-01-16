@@ -26,7 +26,7 @@
 {
     if (!IsLogin) {
 //        [super openLoginController];
-        return;
+//        return;
     }
     
     [super showProgressHUDWithLabelText:@"获取购物清单" dimBackground:NO];
@@ -109,8 +109,7 @@
     ShoppingOrder* selectedOrder = self.shoppingList[indexPath.section];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-    detailController.cookbook = [[Cookbook alloc] init];
-    detailController.cookbook.ID = selectedOrder.cookbookID;
+    detailController.cookbookId = selectedOrder.cookbookID;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

@@ -127,6 +127,7 @@
         comment.toUser              = [DataParser parseCommentUserWithDict:commentDict[@"toUser"]];
         
         comment.commentTime        = [commentDict[@"commentTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", commentDict[@"commentTime"]];
+        comment.commentTime         = [DataParser parseTime:comment.commentTime];
         
         [comments addObject:comment];
     }
@@ -197,15 +198,26 @@
         NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
         cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
         cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
+        
+        cookbook.modifiedTime = [DataParser parseTime:cookbook.modifiedTime];
+        
         NSDictionary* creatDict = cookbookDict[@"creator"];
         cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
-        cookbook.praises        = [cookbookDict[@"praises"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praises"]];
+        cookbook.praises        = [cookbookDict[@"praiseCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praiseCount"]];
         
         [cookbooks addObject:cookbook];
     }
     
     return cookbooks;
 }
+
++ (NSString*)parseTime:(NSString*)timeStr
+{
+    long long seconds = [timeStr longLongValue]/1000;
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:seconds];
+    return [MyTool intervalSinceNow:date];
+}
+
 
 + (Step*)parseStepWithStepDict:(NSDictionary*)stepDict
 {
@@ -246,6 +258,7 @@
     cookbookDetail.status           = [detailDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"status"]];
     cookbookDetail.praised          = [detailDict[@"praised"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"praised"]];
     cookbookDetail.modifiedTime     = [detailDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"modifiedTime"]];
+    cookbookDetail.modifiedTime     = [DataParser parseTime:cookbookDetail.modifiedTime];
     
     NSMutableArray* tags            = [NSMutableArray array];
     NSMutableArray* tagArr          = detailDict[@"tags"];
@@ -336,6 +349,7 @@
             NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
             cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
             cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
+            cookbook.modifiedTime   = [DataParser parseTime:cookbook.modifiedTime];
             NSDictionary* creatDict = cookbookDict[@"creator"];
             cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
             cookbook.praises        = [cookbookDict[@"praises"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praises"]];
@@ -405,6 +419,7 @@
         Message* message = [[Message alloc] init];
         message.ID = [messageDict[@"messageID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageID"]];
         message.createdTime = [messageDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"createdTime"]];
+        message.createdTime = [DataParser parseTime:message.createdTime];
         message.isRead = [messageDict[@"isRead"] integerValue] == 0 ? NO : YES;
         message.content = [messageDict[@"messageContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageContent"]];
         
@@ -459,6 +474,7 @@
         NoticeInfo* notice = [[NoticeInfo alloc] init];
         
         notice.createdTime = [notificationDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"createdTime"]];
+        notice.createdTime = [DataParser parseTime:notice.createdTime];
         notice.ID = [notificationDict[@"noticficationID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"noticficationID"]];
         notice.type = [notificationDict[@"noticficationType"] integerValue];
         notice.objectID = [notificationDict[@"objectID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", notificationDict[@"objectID"]];

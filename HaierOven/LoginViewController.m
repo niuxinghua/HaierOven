@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "RootViewController.h"
+#import "WebViewController.h"
+
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *textborder;
 @property (strong, nonatomic) IBOutlet UIButton *loginBtn;
@@ -124,6 +126,11 @@
     
 }
 - (IBAction)forgetPsd:(id)sender {
+    
+    WebViewController* webController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
+    webController.titleText = @"忘记密码";
+    webController.webPath = ResetPasswordUrl;
+    [self.navigationController pushViewController:webController animated:YES];
     
 }
 - (IBAction)TencentLogin:(id)sender {

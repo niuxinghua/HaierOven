@@ -14,6 +14,7 @@
 #import "Tag.h"
 #import "Cookbook.h"
 #import "MJRefresh.h"
+#import "CookStarDetailController.h"
 
 #define AdvRate         0.5
 #define ScrRate         0.1388888
@@ -28,6 +29,8 @@
 @property NSInteger pageIndex;
 @property (strong, nonatomic) NSMutableArray* cookbooks;
 
+@property (strong, nonatomic) NSArray* recommendCookerStars;
+
 @end
 //@synthesize pageIndex;
 
@@ -36,9 +39,7 @@
 
 - (void)loadTags
 {
-    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
     [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
-        [super hiddenProgressHUD];
         if (success) {
             self.tags = obj;
             [self setupTagsScrollView];
@@ -54,7 +55,9 @@
 
 - (void)loadCookbooks
 {
+    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
     [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -78,6 +81,69 @@
     
 }
 
+- (void)loadRecommendCookerStars
+{
+    [[InternetManager sharedManager] getRecommendCookerStarsCallback:^(BOOL success, id obj, NSError *error) {
+        self.recommendCookerStars = obj;
+        NSMutableArray *viewsArray = [@[] mutableCopy];
+        if (self.recommendCookerStars.count == 0) { // 假数据
+            NSArray *colorArray = @[[UIColor cyanColor],[UIColor blueColor],[UIColor greenColor],[UIColor yellowColor],[UIColor purpleColor]];
+            for (int i = 0; i < 5; ++i) {
+                UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
+                tempLabel.backgroundColor = [(UIColor *)[colorArray objectAtIndex:i] colorWithAlphaComponent:0.5];
+                tempLabel.text = [NSString stringWithFormat:@"第%d页", i+1];
+                tempLabel.textAlignment = NSTextAlignmentCenter;
+                tempLabel.font = [UIFont italicSystemFontOfSize:35];
+                tempLabel.textColor = [UIColor whiteColor];
+                [viewsArray addObject:tempLabel];
+            }
+        } else {
+            
+            for (int i = 0; i < self.recommendCookerStars.count; ++i) {
+                CookerStar* cooker = self.recommendCookerStars[i];
+                UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
+                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar]];
+                cookerImage.backgroundColor = GlobalOrangeColor;
+                [viewsArray addObject:cookerImage];
+            }
+            
+        }
+        self.adCycleView.totalPagesCount = ^NSInteger(void){
+            return viewsArray.count;
+        };
+        self.adCycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+            //            NSLog(@"fetchContentViewAtIndex");
+            
+            return viewsArray[pageIndex];
+        };
+        __unsafe_unretained typeof(self) vc = self;
+        self.adCycleView.TapActionBlock = ^(NSInteger pageIndex){
+            NSLog(@"点击了第%ld个",(long)pageIndex);
+            
+            if (vc.recommendCookerStars.count == 0) {
+                [super showProgressErrorWithLabelText:@"推荐厨神无数据" afterDelay:1];
+            } else {
+                
+                CookerStar* cooker = vc.recommendCookerStars[pageIndex];
+                
+                CookStarDetailController* cookerController = [vc.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
+                cookerController.cookerStar = cooker;
+                [vc.navigationController pushViewController:cookerController animated:YES];
+                
+            }
+            
+            
+        };
+    }];
+    
+    
+    
+    
+    
+    
+    
+}
+
 #pragma mark - 加载系列
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -85,6 +151,7 @@
     if (self = [super initWithCoder:aDecoder]) {
         _pageIndex = 1;
         self.cookbooks = [NSMutableArray array];
+        self.recommendCookerStars = [NSMutableArray array];
     }
     return self;
 }
@@ -96,12 +163,14 @@
     
     [self loadTags];
     
-    [self loadAds];
+//    [self loadAds];
     
     self.maintable.dataSource = self;
     self.maintable.delegate = self;
     
     [self loadCookbooks];
+    
+    [self loadRecommendCookerStars];
     
     [self addHeader];
     [self addFooter];
@@ -175,18 +244,18 @@
         [viewsArray addObject:tempLabel];
     }
     
-
-        self.adCycleView.totalPagesCount = ^NSInteger(void){
-            return viewsArray.count;
-        };
-        self.adCycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-            //            NSLog(@"fetchContentViewAtIndex");
-
-            return viewsArray[pageIndex];
-        };
-        self.adCycleView.TapActionBlock = ^(NSInteger pageIndex){
-            NSLog(@"点击了第%ld个",(long)pageIndex);
-        };
+    
+    self.adCycleView.totalPagesCount = ^NSInteger(void){
+        return viewsArray.count;
+    };
+    self.adCycleView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        //            NSLog(@"fetchContentViewAtIndex");
+        
+        return viewsArray[pageIndex];
+    };
+    self.adCycleView.TapActionBlock = ^(NSInteger pageIndex){
+        NSLog(@"点击了第%ld个",(long)pageIndex);
+    };
     
 }
 
@@ -234,7 +303,8 @@
 {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-    cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
+    Cookbook* cookbook = self.cookbooks[indexPath.row];
+    cookbookDetailController.cookbookId = cookbook.ID;
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
 

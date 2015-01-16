@@ -481,6 +481,12 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)getCookerStarsWithUserBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
+/**
+ *  获取推荐厨神
+ *
+ *  @param completion 结果回调
+ */
+- (void)getRecommendCookerStarsCallback:(myCallback)completion;
 
 #pragma mark - 私信
 

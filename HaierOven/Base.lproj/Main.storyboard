@@ -1691,7 +1691,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="x65-Bz-REc">
-                            <rect key="frame" x="101" y="6" width="118" height="33"/>
+                            <rect key="frame" x="101" y="5.5" width="118" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJz-J4-7r7">
@@ -5688,7 +5688,7 @@
         <!--Navigation Controller-->
         <scene sceneID="9d0-1O-O7t">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eVu-0e-avz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Login view controller" automaticallyAdjustsScrollViewInsets="NO" id="eVu-0e-avz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EqK-g1-1Re">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

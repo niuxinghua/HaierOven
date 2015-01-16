@@ -228,7 +228,8 @@
 
 - (void)openLoginController
 {
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self presentViewController:[storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
 }
 
 #pragma mark - override

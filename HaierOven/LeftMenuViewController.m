@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UIView *tempView;
 
 @property (strong, nonatomic) User* currentUser;
+
+@property (copy, nonatomic) NSString* notificationCount;
 @end
 
 @implementation LeftMenuViewController
@@ -46,7 +48,10 @@
     
     [self loadUserInfo];
     
+    [self updateNotificationCount];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -57,12 +62,26 @@
 
 - (void)loadUserInfo
 {
+    if (!IsLogin) {
+        return;
+    }
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getUserInfoWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.currentUser = obj;
             [self.tableView reloadData];
             
+        }
+    }];
+}
+
+- (void)updateNotificationCount
+{
+    [[InternetManager sharedManager] getNotificationCountWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.notificationCount = [NSString stringWithFormat:@"%@", obj[@"data"]];
+            
+            [self.tableView reloadData];
         }
     }];
 }
@@ -101,7 +120,7 @@
 //                                                             animated:YES];
 //                [self.sideMenuViewController hideMenuViewController];
                 
-                [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
+                [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
                 
             }
             
@@ -242,15 +261,17 @@
 
 -(void)signIn:(UIButton *)btn{
     
-    if (!IsLogin) {
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
-    }
     
     if (btn.selected) {
         return;
     }
     
     
+    if (!IsLogin) {
+        [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
+        return;
+        
+    }
     
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {

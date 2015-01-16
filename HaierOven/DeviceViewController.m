@@ -67,9 +67,9 @@
                 deviceView.deviceStatusLabel.text = @"已连接";
             } else {
                 deviceView.connectStatusImage.image = IMAGENAMED(@"tuolian.png");
-#warning 这里是在调试！！！！！！！一定要改回来！！！！！！！！！！！！！！！！！！
-//                deviceView.deviceStatusLabel.text = @"脱机中";
-                deviceView.deviceStatusLabel.text = @"已连接";
+//#warning 这里是在调试！！！！！！！一定要改回来！！！！！！！！！！！！！！！！！！
+                deviceView.deviceStatusLabel.text = @"脱机中";
+//                deviceView.deviceStatusLabel.text = @"已连接";
             }
             
             deviceView.frame = CGRectMake(x, y, (PageW-2*self.mainScrollView.left)/2, (PageW-2*self.mainScrollView.left)/2);
