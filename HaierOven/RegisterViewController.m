@@ -11,7 +11,7 @@
 #import "RootViewController.h"
 #import "PhoneRegisterView.h"
 #import "PersonalCenterSectionView.h"
-@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
+@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate,PersonalCenterSectionViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
 @property (strong, nonatomic) IBOutlet UIButton *PhoneBtn;
@@ -46,6 +46,7 @@
 
     PersonalCenterSectionView *head = [[PersonalCenterSectionView alloc]initWithFrame:CGRectMake(0, 0, self.headview.width, self.headview.height)];
     head.sectionType = sectionRegister;
+    head.delegate = self;
     [self.headview addSubview:head];
     
     self.emailRegisterView = [[EmailRegisterView alloc]initWithFrame:CGRectMake(0, self.headview.bottom, PageW, PageH-self.headview.height)];
@@ -100,6 +101,11 @@
         self.phoneRegisterView.hidden = NO;
         self.y = self.phoneRegisterView.tempHight.bottom+64+43;
     }
+}
+
+
+-(void)SectionType:(NSInteger)type{
+    self.registerType = type;
 }
 
 - (IBAction)RegisterType:(UIButton*)sender {

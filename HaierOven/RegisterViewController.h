@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 typedef NS_ENUM(NSInteger, RegisterType) {
-    RegisterTypeEmail = 0,
-    RegisterTypePhone = 1,
+    RegisterTypeEmail = 1,
+    RegisterTypePhone = 2,
 
 };
 
