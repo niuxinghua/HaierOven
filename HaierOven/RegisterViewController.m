@@ -12,8 +12,7 @@
 #import "PhoneRegisterView.h"
 #import "PersonalCenterSectionView.h"
 #import "WebViewController.h"
-#import "PersonalCenterSectionView.h"
-@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
+@interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate,PersonalCenterSectionViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
 @property (strong, nonatomic) IBOutlet UIButton *PhoneBtn;

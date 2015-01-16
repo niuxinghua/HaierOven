@@ -163,7 +163,7 @@
     
     
     alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
-    alertRectShow = CGRectMake(30, (PageH-138)/2, PageW-30, 138);
+    alertRectShow = CGRectMake(15, (PageH-138)/2, PageW-30, 138);
     
     self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:alertRectHidden];
     self.addFoodAlertView.delegate = self;
@@ -401,6 +401,7 @@
     [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH, PageW, PageW*0.58)];
     }completion:^(BOOL finished) {
         self.myWindow.hidden = YES;
+        self.addFoodAlertView.frame = alertRectHidden;
         self.addFoodAlertView.hidden = NO;
         if (tag == 1) {
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -498,12 +499,14 @@
 #pragma mark- AddFoodAlertView 弹出框delegate
 -(void)Cancel{
     self.myWindow.hidden = YES;
+    self.addFoodAlertView.frame = alertRectHidden;
 }
 
 -(void)ChickAlert:(UILabel *)label andTextFailed:(UITextField *)textfield{
     label.text = textfield.text;
     label.textColor = [UIColor blackColor];
     self.myWindow.hidden = YES;
+    self.addFoodAlertView.frame = alertRectHidden;
     [textfield resignFirstResponder];
     
     if (label.tag == 2) {
