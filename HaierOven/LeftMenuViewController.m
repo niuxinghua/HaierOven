@@ -164,10 +164,13 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            break;
+
         case 7:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            break;
 
         case 8:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
@@ -233,11 +236,15 @@
             return cell;
         }
     }else{
+        
         NSString *cellIdentifier = @"normalMenuCell";
         NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈", @"烘焙屋", @"购物清单",@"通知", @"设置"];
         NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
+        if (indexPath.row ==7) {
+            cell.notificationCount = @"  12  ";
+        }
         cell.titleLabel.text = titles[indexPath.row-2];
         cell.titleLabel.font = [UIFont fontWithName:GlobalTitleFontName size:14];
         cell.titleImage.image = images[indexPath.row-2];

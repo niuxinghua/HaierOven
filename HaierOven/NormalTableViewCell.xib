@@ -46,6 +46,17 @@
                             <constraint firstAttribute="height" constant="1" id="fH7-sk-HJh"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukt-4u-fQr">
+                        <rect key="frame" x="209" y="17" width="35" height="21"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="uCi-ea-imI"/>
+                        </constraints>
+                        <state key="normal" title="  12  ">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ZZm-Zk-92b" secondAttribute="trailing" id="BTf-SM-OTb"/>
@@ -54,8 +65,10 @@
                     <constraint firstAttribute="centerY" secondItem="cbt-HA-mRZ" secondAttribute="centerY" id="TUF-PF-iaf"/>
                     <constraint firstItem="EMc-mO-Esn" firstAttribute="top" secondItem="yWf-1h-4WQ" secondAttribute="top" id="d6C-fT-Ye3"/>
                     <constraint firstItem="EMc-mO-Esn" firstAttribute="leading" secondItem="yWf-1h-4WQ" secondAttribute="leading" id="fZa-dh-1a6"/>
+                    <constraint firstAttribute="trailing" secondItem="Ukt-4u-fQr" secondAttribute="trailing" constant="76" id="iwf-cd-2pz"/>
                     <constraint firstAttribute="bottom" secondItem="ZZm-Zk-92b" secondAttribute="bottom" id="k6j-nD-5Fr"/>
                     <constraint firstItem="cbt-HA-mRZ" firstAttribute="leading" secondItem="7LR-nu-BIt" secondAttribute="trailing" constant="21" id="kLq-iV-U44"/>
+                    <constraint firstItem="cbt-HA-mRZ" firstAttribute="centerY" secondItem="Ukt-4u-fQr" secondAttribute="centerY" id="mfw-zz-KX8"/>
                     <constraint firstItem="7LR-nu-BIt" firstAttribute="leading" secondItem="EMc-mO-Esn" secondAttribute="trailing" constant="16" id="rue-Wh-TrF"/>
                     <constraint firstItem="ZZm-Zk-92b" firstAttribute="leading" secondItem="yWf-1h-4WQ" secondAttribute="leading" id="zRe-W6-MPC"/>
                 </constraints>
@@ -64,10 +77,11 @@
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="cellSelectedView" destination="EMc-mO-Esn" id="uVS-LM-Su5"/>
+                <outlet property="notificationbtn" destination="Ukt-4u-fQr" id="5ob-J0-Ya8"/>
                 <outlet property="titleImage" destination="7LR-nu-BIt" id="5QK-Tp-Yw8"/>
                 <outlet property="titleLabel" destination="cbt-HA-mRZ" id="Cv6-oB-avo"/>
             </connections>
-            <point key="canvasLocation" x="249" y="61"/>
+            <point key="canvasLocation" x="249" y="59"/>
         </tableViewCell>
     </objects>
     <resources>
