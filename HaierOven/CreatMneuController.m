@@ -21,6 +21,11 @@
 #import "PECropViewController.h"
 
 @interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate>
+{
+    CGRect alertRectShow;
+    CGRect alertRectHidden;
+}
+
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
@@ -156,7 +161,11 @@
     self.myWindow.userInteractionEnabled = YES;
     self.myWindow.hidden = YES;
     
-    self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-30, 138)];
+    
+    alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
+    alertRectShow = CGRectMake(30, (PageH-138)/2, PageW-30, 138);
+    
+    self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:alertRectHidden];
     self.addFoodAlertView.delegate = self;
     [self.myWindow addSubview:self.addFoodAlertView];
     
@@ -293,6 +302,14 @@
     self.addFoodAlertView.addFoodAlertType = label.tag;
     self.addFoodAlertView.label = label;
     self.myWindow.hidden = NO;
+
+    [UIView animateWithDuration:0.2 animations:^{
+        self.addFoodAlertView.frame = alertRectShow;
+    } completion:^(BOOL finished) {
+        
+    }];
+
+    
 }
 #pragma mark - 
 
@@ -374,6 +391,7 @@
     NSLog(@"添加图片");
     self.myWindow.hidden = NO;
     self.addFoodAlertView.hidden = YES;
+    self.addFoodAlertView.frame = alertRectHidden;
     self.tempImageView = imageView;
     [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH-PageW*0.58, PageW, PageW*0.58)];
     }completion:nil];
@@ -665,6 +683,7 @@
     self.ischangeCover = YES;
     self.myWindow.hidden = NO;
     self.addFoodAlertView.hidden = YES;
+    self.addFoodAlertView.frame = alertRectHidden;
     [UIView animateWithDuration:0.3 animations:^{[self.chooseCoverView setFrame:CGRectMake(0, PageH-PageW*0.58, PageW, PageW*0.58)];
     }completion:nil];
     
