@@ -291,7 +291,7 @@
         self.timeable = nil;
     }
     self.time = self.time==0? 0:self.time-1;
-    self.startStatusView.leftTime = [NSString stringWithFormat:@"%i:%i",self.time/60, self.time%60];
+    self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d",self.time/60, self.time%60];
     
 }
 - (void)didReceiveMemoryWarning {

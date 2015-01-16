@@ -102,6 +102,7 @@
     NSString* sequence = [formatter stringFromDate:[NSDate date]];
     sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
     
+    [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
     
     [[InternetManager sharedManager] loginWithSequenceId:sequence
                                               andAccType:AccTypeHaier
@@ -111,7 +112,7 @@
                                 andThirdpartyAccessToken:nil
                                             andLoginType:loginType
                                                 callBack:^(BOOL success, id obj, NSError *error) {
-                                                    
+                                                    [super hiddenProgressHUD];
                                                     if (success) {
                                                         NSLog(@"登录成功");
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
@@ -188,6 +189,8 @@
         NSString* sequence = [formatter stringFromDate:[NSDate date]];
         sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
         
+        [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
+        
         [[InternetManager sharedManager] loginWithSequenceId:sequence
                                                       andAccType:AccTypeQQ
                                                       andloginId:response.data[@"openid"]
@@ -196,7 +199,7 @@
                                         andThirdpartyAccessToken:response.data[@"access_token"]
                                                     andLoginType:LoginTypeUserName
                                                         callBack:^(BOOL success, id obj, NSError *error) {
-                                                            
+                                                            [super hiddenProgressHUD];
                                                             if (success) {
                                                                 NSLog(@"登录成功");
                                                                 [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];

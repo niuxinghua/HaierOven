@@ -174,14 +174,19 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e9d-yT-7My" id="pm4-0I-hCh">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="已150度烘烤约70分钟出炉晾凉后脱模，冷藏4小时以上可切开食用。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-OC-Whd">
-                                                    <rect key="frame" x="22" y="9" width="290" height="53"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已150度烘烤约70分钟出炉晾凉后脱模，冷藏4小时以上可切开食用。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-OC-Whd">
+                                                    <rect key="frame" x="15" y="8" width="290" height="35"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="hKg-OC-Whd" firstAttribute="leading" secondItem="pm4-0I-hCh" secondAttribute="leading" constant="15" id="R2A-i4-bPR"/>
+                                                <constraint firstAttribute="trailing" secondItem="hKg-OC-Whd" secondAttribute="trailing" constant="15" id="SGu-JD-oPK"/>
+                                                <constraint firstItem="hKg-OC-Whd" firstAttribute="top" secondItem="pm4-0I-hCh" secondAttribute="top" constant="8" id="vZG-rn-Kbf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>

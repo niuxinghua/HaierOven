@@ -175,6 +175,8 @@
 
     [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataImage.png")];
     
+    [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    
     // 其他显示的内容
     NSMutableArray* tagNames = [NSMutableArray array];
     for (Tag* tag in self.cookbookDetail.tags) {
@@ -656,7 +658,8 @@
                 return 92;
                 break;
             case 1:
-                return 70;
+                // 获取描述的高度
+                return [self getDescCellHeight];
                 break;
             case 2:
                 return 45;
@@ -692,6 +695,15 @@
     
     return 0;
     
+}
+
+- (CGFloat)getDescCellHeight
+{
+    CGFloat height = 17;
+    
+    height += [MyUtils getTextSizeWithText:self.cookbookDetail.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:15.0f]} andTextWidth:Main_Screen_Width - 30].height;
+    
+    return height;
 }
 
 - (CGFloat)getStepsViewHeight
