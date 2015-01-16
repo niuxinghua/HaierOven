@@ -43,6 +43,8 @@
     self.foodMakeFunction.text = cookbook.desc;
     self.cookerName.text = cookbook.creator.userName;
     
+    self.timeLabel.text = cookbook.modifiedTime;
+    
 }
 
 - (void)resetCell

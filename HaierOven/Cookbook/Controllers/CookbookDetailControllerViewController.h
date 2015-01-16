@@ -11,7 +11,9 @@
 
 @interface CookbookDetailControllerViewController : BaseTableViewController
 
-@property (strong, nonatomic) Cookbook* cookbook;
+//@property (strong, nonatomic) Cookbook* cookbook;
+
+@property (copy, nonatomic) NSString* cookbookId;
 
 /**
  *  是否是菜谱预览

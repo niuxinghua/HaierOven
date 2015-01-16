@@ -24,10 +24,10 @@
 
 - (void)loadCookerStars
 {
-    if (!IsLogin) {
-        [super openLoginController];
-        return;
-    }
+//    if (!IsLogin) {
+//        [super openLoginController];
+//        return;
+//    }
     
     NSString* userBaseId = CurrentUserBaseId;
     
@@ -118,6 +118,10 @@
 
 - (void)cookStarCell:(CookStarCell *)cell followButtonTapped:(UIButton *)sender
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     CookerStar* selectedCooker = self.cookerStars[indexPath.row];
     NSString* userBaseId = CurrentUserBaseId;

@@ -42,14 +42,16 @@
 
 - (void)loadNotifications
 {
-    if (!IsLogin) {
+//    if (!IsLogin) {
 //        [super openLoginController];
-        return;
-    }
-    NSString* userBaseId = CurrentUserBaseId;
+//        return;
+//    }
+    NSString* userBaseId = @"5";
     [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
+            // 设置为已读
+//            [self updateReadStatus];
             
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -65,6 +67,15 @@
         
     }];
     
+}
+
+- (void)updateReadStatus
+{
+    [[InternetManager sharedManager] updateNotificationReadStatusWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsHadReadNotification object:nil];
+        }
+    }];
 }
 
 - (void)reload
@@ -228,14 +239,15 @@
 {
     
     if (indexPath.section == 0) {
-#warning   // 跳转到菜谱详情
+        
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
         CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
 //        cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
+        NoticeInfo* selectedNotice = self.cookbookNotifications[indexPath.row];
+        cookbookDetailController.cookbookId = selectedNotice.relatedId;
         
         
-        
-//        [self.navigationController pushViewController:cookbookDetailController animated:YES];
+        [self.navigationController pushViewController:cookbookDetailController animated:YES];
         
     } else {
         // 跳转到聊天界面
@@ -244,6 +256,7 @@
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
         ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
         chatViewController.toUserId = selectedNotice.promoter.userBaseId;
+        chatViewController.toUserName = selectedNotice.promoter.nickName;
         [self.navigationController pushViewController:chatViewController animated:YES];
         
     }

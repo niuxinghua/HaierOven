@@ -20,6 +20,10 @@
 #define BaseUhomeUrl    @"http://uhome.haier.net:6000/commonapp"
 
 
+#define ResetPasswordUrl    @"http://user.haier.com/ids/cn/forget_password.jsp"
+
+#define HaierPolicyUrl      @"http://user.haier.com/cn/hdyy/fwtk/201107/t20110730_27774.shtml"
+
 
 
 #pragma mark - 登录注册
@@ -239,8 +243,15 @@
 
 #pragma mark - 厨神名人堂
 
+/**
+ *  获取厨神列表
+ */
 #define GetCookerStars      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"marvellouschef/get"]
 
+/**
+ *  获取推荐厨神
+ */
+#define GetRecommendCooker      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"marvellouschef/recommend"]
 
 #pragma mark - 私信
 

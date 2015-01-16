@@ -13,6 +13,8 @@
 
 #define ModifiedUserInfoNotification    @"Had modified user info"
 
+#define NotificationsHadReadNotification    @"Notifications had read"
+
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
 
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径

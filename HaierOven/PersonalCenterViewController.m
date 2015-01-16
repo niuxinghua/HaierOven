@@ -292,7 +292,13 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-    cookbookDetailController.cookbook = self.cookbookType == CurrentCookbookTypePublished ? self.publishedCookbooks[indexPath.row] : self.praisedCookbooks[indexPath.row];
+    if (self.cookbookType == CurrentCookbookTypePublished) {
+        Cookbook* cookbook = self.publishedCookbooks[indexPath.row];
+        cookbookDetailController.cookbookId = cookbook.ID;
+    } else {
+        Cookbook* cookbook = self.praisedCookbooks[indexPath.row];
+        cookbookDetailController.cookbookId = cookbook.ID;
+    }
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
 

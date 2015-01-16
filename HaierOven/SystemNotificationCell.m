@@ -42,7 +42,22 @@
 {
     _notice = notice;
     [self.nameBtn setTitle:notice.promoter.userName forState:UIControlStateNormal];
-    self.descLabel.text = notice.relatedDesc;
+    NSString* desc = @"";
+    switch (notice.type) {
+        case 1:
+            desc = [NSString stringWithFormat:@"赞了我的菜谱%@", notice.relatedDesc];
+            break;
+        case 2:
+            desc = [NSString stringWithFormat:@"评论了我的菜谱%@", notice.relatedDesc];
+            break;
+        case 3:
+            desc = [NSString stringWithFormat:@"回复了我的私信"];
+            break;
+            
+        default:
+            break;
+    }
+    self.descLabel.text = desc;
     self.timeLabel.text = notice.createdTime;
     
 }

@@ -33,9 +33,14 @@
 
 @property (strong, nonatomic) CommentUser* promoter;
 
-
+/**
+ *  如果评论类型为1、2，则此字段为菜谱名称
+ */
 @property (copy, nonatomic) NSString* relatedDesc;
 
+/**
+ *  如果通知类型为1、2，则此字段为菜谱ID
+ */
 @property (copy, nonatomic) NSString* relatedId;
 
 

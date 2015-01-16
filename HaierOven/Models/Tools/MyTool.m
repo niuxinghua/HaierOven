@@ -318,6 +318,80 @@
     return [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
 }
 
++ (NSString *)formattedDateDescription:(NSDate*)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *theDay = [dateFormatter stringFromDate:date];//日期的年月日
+    NSString *currentDay = [dateFormatter stringFromDate:[NSDate date]];//当前年月日
+    
+    NSInteger timeInterval = -[date timeIntervalSinceNow];
+    if (timeInterval < 60) {
+        return @"1分钟内";
+    } else if (timeInterval < 3600) {//1小时内
+        return [NSString stringWithFormat:@"%ld分钟前", timeInterval / 60];
+    } else if (timeInterval < 21600) {//6小时内
+        return [NSString stringWithFormat:@"%ld小时前", timeInterval / 3600];
+    } else if ([theDay isEqualToString:currentDay]) {//当天
+        [dateFormatter setDateFormat:@"HH:mm"];
+        return [NSString stringWithFormat:@"今天"];
+    } else if ([[dateFormatter dateFromString:currentDay] timeIntervalSinceDate:[dateFormatter dateFromString:theDay]] == 86400) {//昨天
+        [dateFormatter setDateFormat:@"HH:mm"];
+        return [NSString stringWithFormat:@"昨天"];
+    } else {//以前
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        return [dateFormatter stringFromDate:date];
+    }
+}
+
++ (NSString *)intervalSinceNow: (NSDate *)theDate
+{
+    NSString *timeString=@"";
+//    NSDateFormatter *format=[[NSDateFormatter alloc] init];
+//    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *fromdate=[format dateFromString:theDate];
+    NSTimeZone *fromzone = [NSTimeZone systemTimeZone];
+    NSInteger frominterval = [fromzone secondsFromGMTForDate: theDate];
+    NSDate *fromDate = [theDate dateByAddingTimeInterval: frominterval];
+    //获取当前时间
+    NSDate *adate = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: adate];
+    NSDate *localeDate = [adate dateByAddingTimeInterval: interval];
+    
+    double intervalTime = [fromDate timeIntervalSinceReferenceDate] - [localeDate timeIntervalSinceReferenceDate];
+    long lTime = fabs((long)intervalTime);
+    NSInteger iSeconds = lTime % 60;
+    NSInteger iMinutes = (lTime / 60) % 60;
+    NSInteger iHours = fabs(lTime/3600);
+    NSInteger iDays = lTime/60/60/24;
+    NSInteger iMonth =lTime/60/60/24/12;
+    NSInteger iYears = lTime/60/60/24/384;
+    
+//    NSLog(@"相差%d年%d月 或者 %d日%d时%d分%d秒", iYears,iMonth,iDays,iHours,iMinutes,iSeconds);
+    
+    if (iHours<1 && iMinutes>0)
+    {
+        timeString=[NSString stringWithFormat:@"%d分前",iMinutes];
+        
+    }else if (iHours>0&&iDays<1 && iMinutes>0) {
+        timeString=[NSString stringWithFormat:@"%d小时前",iHours/*,iMinutes*/];
+    }
+    else if (iHours>0&&iDays<1) {
+        timeString=[NSString stringWithFormat:@"%d小时前",iHours];
+    }else if (iDays>0 && iHours>0)
+    {
+        timeString=[NSString stringWithFormat:@"%d天前",iDays/*iHours*/];
+    }
+    else if (iDays>0)
+    {
+        timeString=[NSString stringWithFormat:@"%d天",iDays];
+    }
+    return timeString;
+}
+
+
 @end
 
 

@@ -232,7 +232,7 @@
     Cookbook* selectedCookbook = self.cookbooks[indexPath.row];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-    detailController.cookbook = selectedCookbook;
+    detailController.cookbookId = selectedCookbook.ID;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -253,6 +253,10 @@
 
 -(void)follow:(UIButton *)sender{
   
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     NSString* userBaseId = CurrentUserBaseId;
     if (sender.selected) {
         // 已关注，取消关注

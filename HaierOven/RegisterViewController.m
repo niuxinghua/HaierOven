@@ -10,6 +10,8 @@
 #import "EmailRegisterView.h"
 #import "RootViewController.h"
 #import "PhoneRegisterView.h"
+#import "WebViewController.h"
+
 @interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
@@ -113,6 +115,12 @@
 
 -(void)turnDeal{
     NSLog(@"跳转至用户隐私合约");
+    
+    WebViewController* webController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
+    webController.titleText = @"忘记密码";
+    webController.webPath = HaierPolicyUrl;
+    [self.navigationController pushViewController:webController animated:YES];
+    
 }
 
 -(void)RegisterWithPhone:(NSString *)phone andVerifyCode:(NSString *)code andPassword:(NSString *)password
@@ -157,6 +165,10 @@
 
 -(void)turnDealEmail{
     NSLog(@"跳转至用户隐私合约");
+    WebViewController* webController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
+    webController.titleText = @"忘记密码";
+    webController.webPath = HaierPolicyUrl;
+    [self.navigationController pushViewController:webController animated:YES];
 }
 
 - (void)getVerifyCodeWithPhone:(NSString *)phone

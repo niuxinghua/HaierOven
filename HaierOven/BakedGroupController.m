@@ -245,7 +245,7 @@
         Cookbook* selectedCookbook = self.followedCookbooks[indexPath.row];
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
         CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-        detailController.cookbook = selectedCookbook;
+        detailController.cookbookId = selectedCookbook.ID;
         [self.navigationController pushViewController:detailController animated:YES];
     } else {
         //推荐厨师
