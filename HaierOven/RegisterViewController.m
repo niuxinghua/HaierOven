@@ -10,6 +10,7 @@
 #import "EmailRegisterView.h"
 #import "RootViewController.h"
 #import "PhoneRegisterView.h"
+#import "PersonalCenterSectionView.h"
 @interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIView *registerView;
 @property (strong, nonatomic) EmailRegisterView *emailRegisterView;
 @property (strong, nonatomic) PhoneRegisterView *phoneRegisterView;
+@property (strong, nonatomic) IBOutlet UIView *headview;
 @property CGFloat y;
 @end
 
@@ -35,21 +37,27 @@
 
 -(void)SetUpSubView{
     
-    self.orangeLine = [UIImageView new];
-    self.orangeLine.image = [MyTool createImageWithColor:GlobalOrangeColor];
-    self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.bottom-7, self.emailBtn.width-40, 2);
-    [self.view addSubview:self.orangeLine];
+//    self.orangeLine = [UIImageView new];
+//    self.orangeLine.image = [MyTool createImageWithColor:GlobalOrangeColor];
+//    self.orangeLine.frame = CGRectMake(self.emailBtn.left+20, self.emailBtn.height-7, self.emailBtn.width-40, 2);
+//    [self.view addSubview:self.orangeLine];
+//    
+//    
+
+    PersonalCenterSectionView *head = [[PersonalCenterSectionView alloc]initWithFrame:CGRectMake(0, 0, self.headview.width, self.headview.height)];
+    head.sectionType = sectionRegister;
+    [self.headview addSubview:head];
     
-    
-    self.emailRegisterView = [[EmailRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
+    self.emailRegisterView = [[EmailRegisterView alloc]initWithFrame:CGRectMake(0, self.headview.bottom, PageW, PageH-self.headview.height)];
     self.emailRegisterView.delegate = self;
     
-    self.phoneRegisterView = [[PhoneRegisterView alloc]initWithFrame:CGRectMake(0, self.emailBtn.bottom, PageW, PageH-self.emailBtn.bottom)];
+    self.phoneRegisterView = [[PhoneRegisterView alloc]initWithFrame:CGRectMake(0, self.headview.bottom, PageW, PageH-self.headview.bottom)];
     self.phoneRegisterView.delegate = self;
     self.registerType = RegisterTypeEmail;
     [self.view addSubview:self.emailRegisterView];
     [self.view addSubview:self.phoneRegisterView];
 
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
      
