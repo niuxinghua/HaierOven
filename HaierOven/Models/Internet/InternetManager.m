@@ -222,23 +222,53 @@
 //    NSString* md5Password = [MyTool stringToMD5:password];
     
     // 3. 序列化为字典
-    NSDictionary* userDict = @{@"password":password,
-                               @"user":@{
-                                        @"userBase":@{
-                                                @"loginName":@"",
-                                                @"email":email == nil ? @"" : email,
-                                                @"mobile":phone == nil ? @"" : phone,
-                                                @"accType":@0
-                                                },
-                                        @"userProfile":@{
-                                                @"nickName":@"",
-                                                @"userName":@"",
-                                                @"points":@"0",
-                                                @"focusCount":@"0",
-                                                @"followCount":@"0"
-                                                }
-                                        }
-                               };
+//    NSDictionary* userDict = @{@"password":password,
+//                               @"user":@{
+//                                        @"userBase":@{
+//                                                @"loginName":@"",
+//                                                @"email":email == nil ? @"" : email,
+//                                                @"mobile":phone == nil ? @"" : phone,
+//                                                @"accType":@0
+//                                                },
+//                                        @"userProfile":@{
+//                                                @"nickName":@"",
+//                                                @"userName":@"",
+//                                                @"points":@"0",
+//                                                @"focusCount":@"0",
+//                                                @"followCount":@"0"
+//                                                }
+//                                        }
+//                               };
+    
+    NSDictionary* userDict;
+    if (email == nil) {
+        userDict = @{@"password":password,
+                     @"sequenceId" : @"1234",
+                     @"user":@{
+                             @"userBase":@{
+                                     @"mobile":phone == nil ? @"" : phone,
+                                     @"accType":@0
+                                     },
+                             @"userProfile":@{
+                                     
+                                     }
+                             }
+                     };
+    } else {
+        userDict = @{@"password":password,
+                     @"sequenceId" : @"1234",
+                     @"user":@{
+                             @"userBase":@{
+                                     @"email":email == nil ? @"" : email,
+                                     @"accType":@0
+                                     },
+                             @"userProfile":@{
+                                     
+                                     }
+                             }
+                     };
+    }
+    
     
     // 4. 发送网络请求
     if ([self canConnectInternet]) {
@@ -343,12 +373,13 @@
                                      @"accType": acctp,
                                      @"loginId" : loginId,
                                      @"password" : password,
-                                     @"thirdpartyAppId" : thirdPartyAppId,
-                                     @"thirdpartyAccessToken" : thirdPartyAccessToken,
+                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId ,
+                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAppId,
                                      @"loginType" : logintp
                                     };
         
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
+        
         [[self manager] POST:UserLogin parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
@@ -356,11 +387,19 @@
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 保存登录信息
+                NSDictionary* dataDict = responseObject[@"data"];
                 NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-                [userDefaults setObject:responseObject[@"userBaseID"] forKey:@"userBaseId"];
-                [userDefaults setObject:responseObject[@"accessToken"] forKey:@"accessToken"];
+                NSString* baseId = [NSString stringWithFormat:@"%@", dataDict[@"userBaseID"]];
+                [userDefaults setObject:baseId forKey:@"userBaseId"];
+                
+                NSString* accToken = [NSString stringWithFormat:@"%@", dataDict[@"accessToken"]];
+                [userDefaults setObject:accToken forKey:@"accessToken"];
+                
+                [userDefaults setObject:loginId forKey:@"loginId"];
                 [userDefaults setObject:password forKey:@"password"];
+                
                 [userDefaults setBool:YES forKey:@"isLogin"];
+                
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
@@ -443,6 +482,8 @@
             
             if ([status isEqualToString:@"1"]) {
                 
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 completion(YES, responseObject, nil);
             } else {

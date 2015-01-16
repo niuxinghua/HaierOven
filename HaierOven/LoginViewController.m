@@ -102,6 +102,7 @@
     NSString* sequence = [formatter stringFromDate:[NSDate date]];
     sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
     
+    [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
     
     [[InternetManager sharedManager] loginWithSequenceId:sequence
                                               andAccType:AccTypeHaier
@@ -111,7 +112,7 @@
                                 andThirdpartyAccessToken:nil
                                             andLoginType:loginType
                                                 callBack:^(BOOL success, id obj, NSError *error) {
-                                                    
+                                                    [super hiddenProgressHUD];
                                                     if (success) {
                                                         NSLog(@"登录成功");
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
@@ -175,6 +176,9 @@
 
 #pragma mark - QQ登录
 
+/**
+ *  QQ登录密码同QQ openid
+ */
 - (void)loginWithQQ
 {
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
@@ -185,15 +189,17 @@
         NSString* sequence = [formatter stringFromDate:[NSDate date]];
         sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
         
+        [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
+        
         [[InternetManager sharedManager] loginWithSequenceId:sequence
                                                       andAccType:AccTypeQQ
                                                       andloginId:response.data[@"openid"]
-                                                     andPassword:@""
+                                                     andPassword:response.data[@"openid"]
                                               andThirdpartyAppId:@"100424468"
                                         andThirdpartyAccessToken:response.data[@"access_token"]
                                                     andLoginType:LoginTypeUserName
                                                         callBack:^(BOOL success, id obj, NSError *error) {
-                                                            
+                                                            [super hiddenProgressHUD];
                                                             if (success) {
                                                                 NSLog(@"登录成功");
                                                                 [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
@@ -227,7 +233,7 @@
         [[InternetManager sharedManager] loginWithSequenceId:sequence
                                                   andAccType:AccTypeSina
                                                   andloginId:response.data[@"openid"]
-                                                 andPassword:@""
+                                                 andPassword:response.data[@"openid"]
                                           andThirdpartyAppId:@"1162620904"
                                     andThirdpartyAccessToken:response.data[@"access_token"]
                                                 andLoginType:LoginTypeUserName

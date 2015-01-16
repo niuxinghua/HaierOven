@@ -46,7 +46,7 @@
 //        [super openLoginController];
 //        return;
 //    }
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId; //@"5";
     [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {

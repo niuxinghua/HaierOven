@@ -10,6 +10,7 @@
 #import "EmailRegisterView.h"
 #import "RootViewController.h"
 #import "PhoneRegisterView.h"
+#import "PersonalCenterSectionView.h"
 #import "WebViewController.h"
 #import "PersonalCenterSectionView.h"
 @interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate>
@@ -151,11 +152,11 @@
 //        
 //        
 //    }];
-
+    [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
     [[InternetManager sharedManager] registerWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
-            
+            [super hiddenProgressHUD];
             RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
             [self presentViewController:root animated:YES completion:nil];
         } else {
@@ -191,7 +192,7 @@
 
 -(void)RegisterWithEmail:(NSString *)email andPassword:(NSString *)password
 {
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] registerWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {

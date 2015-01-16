@@ -45,6 +45,18 @@
 }
 - (IBAction)VersionChick:(id)sender {
     NSLog(@"版本确认");
+    
+    [super showProgressCompleteWithLabelText:@"这里暂时用作退出登录" afterDelay:2];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[InternetManager sharedManager] logoutWithLoginName:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginId"] callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            
+            
+        }
+    }];
+    
 }
 - (IBAction)PostMark:(id)sender {
     NSLog(@"app打分");
