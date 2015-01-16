@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *cellSelectedView;
 @property (weak, nonatomic) IBOutlet UIImageView *titleImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) NSString *notificationCount;
 @property (weak, nonatomic) id<NormalTableViewCellDelegate>delegate;
 @end

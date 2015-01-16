@@ -7,10 +7,14 @@
 //
 
 #import "NormalTableViewCell.h"
+@interface NormalTableViewCell()
+@property (strong, nonatomic) IBOutlet UIButton *notificationbtn;
 
+@end
 @implementation NormalTableViewCell
 
 - (void)awakeFromNib {
+    self.notificationbtn.hidden = YES;
     // Initialization code
 }
 
@@ -54,5 +58,17 @@
         self.backgroundColor = UnSelectedColor;
     }
 
+}
+
+-(void)setNotificationCount:(NSString *)notificationCount{
+    _notificationCount = notificationCount;
+    [self.notificationbtn setTitle:notificationCount forState:UIControlStateNormal];
+    [self.notificationbtn setTitle:notificationCount forState:UIControlStateHighlighted];
+    self.notificationbtn.layer.cornerRadius = self.notificationbtn.height/3;
+    self.notificationbtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.notificationbtn.layer.borderWidth = 1.5f;
+    self.notificationbtn.layer.masksToBounds = YES;
+    self.notificationbtn.hidden = NO;
+    
 }
 @end
