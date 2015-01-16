@@ -12,6 +12,11 @@
 
 @interface ChatViewController () <UIActionSheetDelegate>
 
+/**
+ *  留言
+ */
+@property (strong, nonatomic) NSMutableArray* messages;
+
 @property (strong, nonatomic) MessagesModel* messagesModel;
 
 @property (nonatomic) NSInteger pageIndex;
@@ -24,7 +29,7 @@
 
 - (void)loadMessages
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.toUserId status:-1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
@@ -50,7 +55,7 @@
 
 - (void)parseMessagesToJSQMessages
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     for (Message* message in self.messages) {
         
         if ([message.fromUser.userBaseId isEqualToString:userBaseId]) {
@@ -91,6 +96,8 @@
     [self loadMessages];
 //    [self parseMessagesToJSQMessages];
     
+    self.title = self.toUserName;
+    
 }
 
 - (void)setupSubviews
@@ -100,7 +107,7 @@
     /**
      *  设置聊天信息
      */
-    self.senderId = @"5";
+    self.senderId = CurrentUserBaseId;
     self.senderDisplayName = @"刘康";
     
     /**
@@ -115,11 +122,11 @@
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     User* currentUser = [[User alloc] init];
-    currentUser.userId = @"5";
+    currentUser.userId = CurrentUserBaseId;
     currentUser.userName = @"刘康";
     User* her = [[User alloc] init];
-    her.userName = @"绣春刀";
-    her.userId = @"2";
+    her.userName = self.toUserName;
+    her.userId = self.toUserId;
     
     
 //    JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:her.userId
@@ -185,7 +192,7 @@
     [self.messagesModel.messages addObject:message];
     [self finishSendingMessage];
     
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] sendMessage:text toUser:self.toUserId fromUser:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSLog(@"发送成功");

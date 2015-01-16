@@ -99,7 +99,7 @@
         [self updateUI];
     } else {
         [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-        [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:@"5" callBack:^(BOOL success, id obj, NSError *error) {
+        [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
             [super hiddenProgressHUD];
             if (success) {
                 self.cookbookDetail = obj;
@@ -152,7 +152,8 @@
 
 - (void)getFollowedList
 {
-    NSString* userBaseId = @"5";
+    
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFollowersWithUserBaseId:userBaseId andPageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             
@@ -466,7 +467,7 @@
     } completion:^(BOOL finished) {
         
         [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbook.ID
-                                                    andUserBaseId:@"5"
+                                                    andUserBaseId:CurrentUserBaseId
                                                        andComment:self.commentTextField.text
                                                          parentId:self.cookbook.creator.ID      //nil
                                                          callBack:^(BOOL success, id obj, NSError *error) {
@@ -780,8 +781,12 @@
 
 - (IBAction)follow:(UIButton *)sender
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     
-    NSString* userID = @"5";
+    NSString* userID = CurrentUserBaseId;
     if (!sender.selected) {
         [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
@@ -827,8 +832,13 @@
 - (void)AddShoppingListWithCell:(AddShoppingListCell *)cell
 {
     NSLog(@"保存到购物清单");
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
+    
     //构建购物清单对象
-    NSString* userId = @"5";
+    NSString* userId = CurrentUserBaseId;
     ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
     shoppingOrder.cookbookID = self.cookbook.ID;
     shoppingOrder.cookbookName = self.cookbook.name;
@@ -860,7 +870,7 @@
 
 - (void)praiseCookbook
 {
-    NSString* userID = @"5";
+    NSString* userID = CurrentUserBaseId;
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbook.ID userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             [super showProgressCompleteWithLabelText:@"已赞" afterDelay:1];

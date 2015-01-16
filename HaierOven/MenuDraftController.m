@@ -24,7 +24,7 @@
 - (void)loadCookbookDrafts
 {
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    [[InternetManager sharedManager] getCookbooksWithUserBaseId:@"5" cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] getCookbooksWithUserBaseId:CurrentUserBaseId cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             

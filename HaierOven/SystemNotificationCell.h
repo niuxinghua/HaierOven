@@ -12,4 +12,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSString *time;
+
+@property (strong, nonatomic) NoticeInfo* notice;
+
 @end

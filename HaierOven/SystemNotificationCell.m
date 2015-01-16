@@ -37,4 +37,26 @@
     _time = time;
     self.timeLabel.text = time;
 }
+
+- (void)setNotice:(NoticeInfo *)notice
+{
+    _notice = notice;
+    [self.nameBtn setTitle:notice.promoter.userName forState:UIControlStateNormal];
+    self.descLabel.text = notice.relatedDesc;
+    self.timeLabel.text = notice.createdTime;
+    
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+

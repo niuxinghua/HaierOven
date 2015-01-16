@@ -44,7 +44,11 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)loadUserInfo
 {
-    NSString* userBaseId = @"5";
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getUserInfoWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.currentUser = obj;
@@ -58,7 +62,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)loadPublishedCookbooks
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:userBaseId cookbookStatus:1 pageIndex:_publishedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* arr = obj;
@@ -80,7 +84,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)loadPraisedCookbooks
 {
-    NSString* userBaseId = @"5";
+    NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getMyPraisedCookbooksWithUserBaseId:userBaseId pageIndex:_praisedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* arr = obj;
@@ -299,14 +303,14 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 - (IBAction)TurnWatchList:(id)sender {
     RelationshipListViewController *relation = [self.storyboard instantiateViewControllerWithIdentifier:@"RelationshipListViewController"];
     relation.iswathching = YES;
-    relation.userBaseId = @"5";
+    relation.userBaseId = CurrentUserBaseId;
     [self.navigationController pushViewController:relation animated:YES];
     NSLog(@"关注列表");
 }
 - (IBAction)TurnFollowsList:(id)sender {
     RelationshipListViewController *relation = [self.storyboard instantiateViewControllerWithIdentifier:@"RelationshipListViewController"];
     relation.iswathching = NO;
-    relation.userBaseId = @"5";
+    relation.userBaseId = CurrentUserBaseId;
     [self.navigationController pushViewController:relation animated:YES];
     NSLog(@"粉丝列表");
 }

@@ -68,6 +68,7 @@
     [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
     
     // 微博
+    //追爱行动 AppKey:1162620904 App Secret:08006bb891e3d8b8a4e303399f61dbe4
     [UMSocialSinaHandler openSSOWithRedirectURL:@"https://api.weibo.com/oauth2/default.html"];
     
     // 微信 朋友圈

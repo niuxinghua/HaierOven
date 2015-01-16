@@ -13,6 +13,8 @@
 
 #define ModifiedUserInfoNotification    @"Had modified user info"
 
+#define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
+
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径
 #define DOWNLOAD_DATA_PATH  ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/DownloadData"])  //保存下载数据的路径
 
@@ -29,6 +31,11 @@ extern NSString* const kRecommendProjectsFileName;
  *  手机唯一标识，海尔格式是IMEI+MAC，这里我用deviceUUID代替
  */
 @property (copy, nonatomic) NSString* clientId;
+
+/**
+ *  获取当前登录用户ID
+ */
+@property (copy, nonatomic) NSString* currentUserBaseId;
 
 /**
  *  我已绑定的烤箱列表

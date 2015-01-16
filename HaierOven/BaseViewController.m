@@ -226,6 +226,11 @@
     _tipWindow = nil;
 }
 
+- (void)openLoginController
+{
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]] animated:YES completion:nil];
+}
+
 #pragma mark - override
 
 - (void)setTitle:(NSString *)title

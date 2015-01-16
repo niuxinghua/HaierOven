@@ -670,6 +670,9 @@
 		842A86EE1A527DC700C75EE4 /* StepCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86EC1A527DC700C75EE4 /* StepCell.xib */; };
 		8438F6EF1A660DE900E1436C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6EE1A660DE900E1436C /* Message.m */; };
 		8438F6F01A667FC600E1436C /* CookerStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F291A64CA9900830B75 /* CookerStar.m */; };
+		8438F6F31A67B7A200E1436C /* Equipment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F21A67B7A200E1436C /* Equipment.m */; };
+		8438F6F71A67C89A00E1436C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F61A67C89A00E1436C /* WebViewController.m */; };
+		8438F6FA1A67CFA500E1436C /* NoticeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F91A67CFA500E1436C /* NoticeInfo.m */; };
 		844117701A4BB8AF00628A64 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441171F1A4BB8AF00628A64 /* DataCenter.m */; };
 		844117711A4BB8AF00628A64 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117221A4BB8AF00628A64 /* Comment.m */; };
 		844117721A4BB8AF00628A64 /* Cookbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117241A4BB8AF00628A64 /* Cookbook.m */; };
@@ -1648,8 +1651,14 @@
 		842A86EA1A527DC700C75EE4 /* StepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepCell.h; sourceTree = "<group>"; };
 		842A86EB1A527DC700C75EE4 /* StepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepCell.m; sourceTree = "<group>"; };
 		842A86EC1A527DC700C75EE4 /* StepCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCell.xib; sourceTree = "<group>"; };
-		8438F6ED1A660DE900E1436C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		8438F6EE1A660DE900E1436C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		8438F6ED1A660DE900E1436C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = ../../Chat/Message.h; sourceTree = "<group>"; };
+		8438F6EE1A660DE900E1436C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = ../../Chat/Message.m; sourceTree = "<group>"; };
+		8438F6F11A67B7A200E1436C /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equipment.h; sourceTree = "<group>"; };
+		8438F6F21A67B7A200E1436C /* Equipment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Equipment.m; sourceTree = "<group>"; };
+		8438F6F51A67C89A00E1436C /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		8438F6F61A67C89A00E1436C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		8438F6F81A67CFA500E1436C /* NoticeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeInfo.h; sourceTree = "<group>"; };
+		8438F6F91A67CFA500E1436C /* NoticeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeInfo.m; sourceTree = "<group>"; };
 		8441171E1A4BB8AF00628A64 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		8441171F1A4BB8AF00628A64 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		844117211A4BB8AF00628A64 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -3128,6 +3137,7 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8438F6F41A67C86C00E1436C /* WebViewController */,
 				45A661551A67848C00FC9B90 /* NotificationController */,
 				458632A71A6671D40083C2FF /* SettingController */,
 				459E8BCB1A5E83C5009D4ADA /* BakedHouseController */,
@@ -3365,6 +3375,15 @@
 			name = StepsView;
 			sourceTree = "<group>";
 		};
+		8438F6F41A67C86C00E1436C /* WebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8438F6F51A67C89A00E1436C /* WebViewController.h */,
+				8438F6F61A67C89A00E1436C /* WebViewController.m */,
+			);
+			name = WebViewController;
+			sourceTree = "<group>";
+		};
 		8441171C1A4BB8AF00628A64 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -3410,6 +3429,10 @@
 				8447CAEC1A5FAF2100FADF9D /* ShoppingOrder.m */,
 				8447CAE81A5FAEF700FADF9D /* PurchaseFood.h */,
 				8447CAE91A5FAEF700FADF9D /* PurchaseFood.m */,
+				8438F6ED1A660DE900E1436C /* Message.h */,
+				8438F6EE1A660DE900E1436C /* Message.m */,
+				8438F6F81A67CFA500E1436C /* NoticeInfo.h */,
+				8438F6F91A67CFA500E1436C /* NoticeInfo.m */,
 				84855F221A63B71200830B75 /* Cooker.h */,
 				84855F231A63B71200830B75 /* Cooker.m */,
 				84855F281A64CA9900830B75 /* CookerStar.h */,
@@ -3422,6 +3445,8 @@
 				844117301A4BB8AF00628A64 /* User.m */,
 				844D0F561A4D2FE10018D79C /* LocalOven.h */,
 				844D0F571A4D2FE10018D79C /* LocalOven.m */,
+				8438F6F11A67B7A200E1436C /* Equipment.h */,
+				8438F6F21A67B7A200E1436C /* Equipment.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -4009,8 +4034,6 @@
 			children = (
 				8447CB921A5FC89500FADF9D /* MessagesModel.h */,
 				8447CB931A5FC89500FADF9D /* MessagesModel.m */,
-				8438F6ED1A660DE900E1436C /* Message.h */,
-				8438F6EE1A660DE900E1436C /* Message.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4889,6 +4912,7 @@
 				8441178A1A4BB8AF00628A64 /* UIImageView+AFNetworking.m in Sources */,
 				45A546CD1A5A4EC200BE62EC /* UIView+Extension.m in Sources */,
 				45A999701A513EE60008AFE3 /* AddFoodCell.m in Sources */,
+				8438F6FA1A67CFA500E1436C /* NoticeInfo.m in Sources */,
 				45B650EA1A48211C00A6376D /* AddDeviceStepOneController.m in Sources */,
 				45BEED721A412AED003000AD /* CycleScrollView.m in Sources */,
 				45A5E8131A4FF25600FCD2BD /* ChooseCoverView.m in Sources */,
@@ -4946,6 +4970,7 @@
 				45BEED731A412AED003000AD /* MyPageControl.m in Sources */,
 				45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */,
 				45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */,
+				8438F6F31A67B7A200E1436C /* Equipment.m in Sources */,
 				8447CB681A5FC73700FADF9D /* JSQMessagesKeyboardController.m in Sources */,
 				45422DE71A64BEA4001A7223 /* FiexibleView.m in Sources */,
 				45BB13771A4914E500FA44F4 /* LDProgressView.m in Sources */,
@@ -5046,6 +5071,7 @@
 				452A6E6B1A5A921800ABFE75 /* CookStarCell.m in Sources */,
 				8447CB661A5FC73700FADF9D /* UIImage+JSQMessages.m in Sources */,
 				8447CB781A5FC73700FADF9D /* JSQMessagesBubbleImage.m in Sources */,
+				8438F6F71A67C89A00E1436C /* WebViewController.m in Sources */,
 				454916BC1A403A18005503C8 /* DeviceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

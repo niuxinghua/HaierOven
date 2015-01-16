@@ -82,4 +82,9 @@
  */
 - (void)showStatusTip:(BOOL)show title:(NSString *)title;
 
+/**
+ *  打开登录界面
+ */
+- (void)openLoginController;
+
 @end

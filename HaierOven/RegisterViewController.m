@@ -118,7 +118,20 @@
 -(void)RegisterWithPhone:(NSString *)phone andVerifyCode:(NSString *)code andPassword:(NSString *)password
 {
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    [[InternetManager sharedManager] testRegisterWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
+//    [[InternetManager sharedManager] testRegisterWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
+//        [super hiddenProgressHUD];
+//        if (success) {
+//            
+//            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//            [self presentViewController:root animated:YES completion:nil];
+//        } else {
+//            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+//        }
+//        
+//        
+//    }];
+
+    [[InternetManager sharedManager] registerWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             
@@ -127,10 +140,7 @@
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }
-        
-        
     }];
-    
     
     
 }
@@ -157,7 +167,7 @@
 -(void)RegisterWithEmail:(NSString *)email andPassword:(NSString *)password
 {
     [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    [[InternetManager sharedManager] testRegisterWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] registerWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
@@ -166,8 +176,6 @@
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }
     }];
-    
-    
     
 }
 
