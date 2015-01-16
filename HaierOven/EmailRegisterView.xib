@@ -105,7 +105,7 @@
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrq-Lq-mf9" customClass="UnderLineButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrq-Lq-mf9" customClass="UnderLineButton">
                     <rect key="frame" x="138" y="218" width="140" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="112" id="3no-GY-aUf"/>
@@ -115,6 +115,11 @@
                     <state key="normal" title="海尔注册用户服务条款">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3no-GY-aUf"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="turnDeal:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Sx-i4-1On"/>
                     </connections>
