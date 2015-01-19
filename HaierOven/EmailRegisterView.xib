@@ -49,7 +49,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4Y-Uv-aYS">
-                    <rect key="frame" x="16" y="133" width="288" height="41"/>
+                    <rect key="frame" x="16" y="100" width="288" height="41"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你的密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-3A-Tb9">
                             <rect key="frame" x="8" y="3" width="272" height="35"/>
@@ -67,7 +67,7 @@
                         <constraint firstAttribute="trailing" secondItem="qmt-3A-Tb9" secondAttribute="trailing" constant="8" id="wbI-5I-fgi"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDf-q2-wlk">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDf-q2-wlk">
                     <rect key="frame" x="16" y="79" width="163" height="41"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ta-sF-Sqg">
@@ -87,7 +87,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码为6～16位数字或字母" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufy-ak-vOU">
-                    <rect key="frame" x="16" y="195" width="288" height="21"/>
+                    <rect key="frame" x="16" y="169" width="288" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="N4D-OB-yDs"/>
                     </constraints>
@@ -95,7 +95,7 @@
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已阅读并同意:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOR-Yz-a6t">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="已阅读并同意:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOR-Yz-a6t">
                     <rect key="frame" x="41" y="224" width="89" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="5Ll-CV-jFv"/>
@@ -105,7 +105,7 @@
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrq-Lq-mf9" customClass="UnderLineButton">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrq-Lq-mf9" customClass="UnderLineButton">
                     <rect key="frame" x="138" y="218" width="140" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="112" id="3no-GY-aUf"/>
@@ -124,7 +124,7 @@
                         <action selector="turnDeal:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Sx-i4-1On"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLH-ds-Lap">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLH-ds-Lap">
                     <rect key="frame" x="25" y="264" width="270" height="31"/>
                     <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -138,7 +138,7 @@
                         <action selector="regist:" destination="iN0-l3-epB" eventType="touchUpInside" id="HF2-Ea-LAa"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzc-m1-Pq8">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzc-m1-Pq8">
                     <rect key="frame" x="95" y="313" width="131" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="131" id="gDk-Gy-139"/>
@@ -152,7 +152,7 @@
                         <action selector="turnBack:" destination="iN0-l3-epB" eventType="touchUpInside" id="VWY-nZ-bPx"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHp-21-0Cs">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHp-21-0Cs">
                     <rect key="frame" x="187" y="79" width="117" height="41"/>
                     <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
@@ -163,7 +163,7 @@
                         <action selector="getPassCode:" destination="iN0-l3-epB" eventType="touchUpInside" id="cYV-MV-TPw"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJc-TP-S3x">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJc-TP-S3x">
                     <rect key="frame" x="16" y="224" width="17" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="17" id="c7L-cN-KEc"/>
@@ -182,7 +182,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vRS-54-kDa" secondAttribute="trailing" constant="16" id="1G6-DA-rmk"/>
                 <constraint firstItem="vRS-54-kDa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="3Xi-oC-Nah"/>
-                <constraint firstItem="ufy-ak-vOU" firstAttribute="top" secondItem="L4Y-Uv-aYS" secondAttribute="bottom" constant="21" id="55d-Gg-Szy"/>
+                <constraint firstItem="ufy-ak-vOU" firstAttribute="top" secondItem="L4Y-Uv-aYS" secondAttribute="bottom" constant="28" id="55d-Gg-Szy"/>
                 <constraint firstAttribute="centerX" secondItem="Tzc-m1-Pq8" secondAttribute="centerX" id="AHe-8V-9vJ"/>
                 <constraint firstItem="L4Y-Uv-aYS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="D6y-yD-VgA"/>
                 <constraint firstItem="vRS-54-kDa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="DNI-yq-Uxk"/>
@@ -191,7 +191,7 @@
                 <constraint firstItem="dJc-TP-S3x" firstAttribute="centerY" secondItem="yOR-Yz-a6t" secondAttribute="centerY" id="Gdd-ud-Ke4"/>
                 <constraint firstItem="mrq-Lq-mf9" firstAttribute="centerY" secondItem="yOR-Yz-a6t" secondAttribute="centerY" id="Gpc-ua-dKP"/>
                 <constraint firstItem="dJc-TP-S3x" firstAttribute="top" secondItem="ufy-ak-vOU" secondAttribute="bottom" constant="8" id="HWF-Oj-L08"/>
-                <constraint firstItem="L4Y-Uv-aYS" firstAttribute="top" secondItem="sDf-q2-wlk" secondAttribute="bottom" constant="13" id="Hs6-cM-IPr"/>
+                <constraint firstItem="L4Y-Uv-aYS" firstAttribute="top" secondItem="sDf-q2-wlk" secondAttribute="bottom" constant="-20" id="Hs6-cM-IPr"/>
                 <constraint firstItem="vRS-54-kDa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="JfF-2J-xhb"/>
                 <constraint firstAttribute="trailing" secondItem="L4Y-Uv-aYS" secondAttribute="trailing" constant="16" id="KSK-Wk-z28"/>
                 <constraint firstItem="Tzc-m1-Pq8" firstAttribute="top" secondItem="nLH-ds-Lap" secondAttribute="bottom" constant="18" id="LZh-Ny-fnK"/>

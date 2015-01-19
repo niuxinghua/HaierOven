@@ -51,13 +51,22 @@
     [self updateNotificationCount];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:LoginSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BindDeviceSuccussNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)reload
+{
+    [self.tableView reloadData];
 }
 
 - (void)loadUserInfo

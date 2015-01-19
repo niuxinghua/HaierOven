@@ -133,6 +133,7 @@
             oven.typeIdentifier = device.typeIdentifier;
             oven.attribute = device.attributeDict;
             [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
         }
     }];
 }

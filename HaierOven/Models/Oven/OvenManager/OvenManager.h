@@ -17,6 +17,9 @@
 #import <uSDKFramework/uSDKManager.h>
 #import <uSDKFramework/uSDKNotificationCenter.h>
 
+#define BindDeviceSuccussNotification  @"Bind device success"
+#define DeleteLocalOvenSuccessNotification @"Delete local oven success"
+
 @interface OvenManager : NSObject
 
 typedef void (^completion) (BOOL success, id obj, NSError* error);

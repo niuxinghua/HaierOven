@@ -243,7 +243,7 @@
     NSDictionary* userDict;
     if (email == nil) {
         userDict = @{@"password":password,
-                     @"sequenceId" : @"1234",
+//                     @"sequenceId" : @"1234",
                      @"user":@{
                              @"userBase":@{
                                      @"mobile":phone == nil ? @"" : phone,
@@ -256,7 +256,7 @@
                      };
     } else {
         userDict = @{@"password":password,
-                     @"sequenceId" : @"1234",
+//                     @"sequenceId" : @"1234",
                      @"user":@{
                              @"userBase":@{
                                      @"email":email == nil ? @"" : email,
@@ -2441,24 +2441,53 @@
 //    NSString* md5Password = [MyTool stringToMD5:password];
     
     // 3. 序列化为字典
-    NSDictionary* userDict = @{@"password":password,
-                               @"sequenceId" : @"1234",
-                               @"user":@{
-                                       @"userBase":@{
-//                                               @"loginName":null,
-//                                               @"email":email == nil ? @"" : email,
-                                               @"mobile":phone == nil ? @"" : phone,
-                                               @"accType":@0
-                                               },
-                                       @"userProfile":@{
-//                                               @"nickName":@"origheart",
-//                                               @"userName":@"kenny",
-//                                               @"points":@"0",
-//                                               @"focusCount":@"0",
-//                                               @"followCount":@"0"
-                                               }
-                                       }
-                               };
+//    NSDictionary* userDict = @{@"password":password,
+//                               @"sequenceId" : @"1234",
+//                               @"user":@{
+//                                       @"userBase":@{
+////                                               @"loginName":null,
+////                                               @"email":email == nil ? @"" : email,
+//                                               @"mobile":phone == nil ? @"" : phone,
+//                                               @"accType":@0
+//                                               },
+//                                       @"userProfile":@{
+////                                               @"nickName":@"origheart",
+////                                               @"userName":@"kenny",
+////                                               @"points":@"0",
+////                                               @"focusCount":@"0",
+////                                               @"followCount":@"0"
+//                                               }
+//                                       }
+//                               };
+    
+    NSDictionary* userDict;
+    if (email == nil) {
+        userDict = @{@"password":password,
+                     @"sequenceId" : @"1234",
+                     @"user":@{
+                             @"userBase":@{
+                                     @"mobile":phone == nil ? @"" : phone,
+                                     @"accType":@0
+                                     },
+                             @"userProfile":@{
+                                     
+                                     }
+                             }
+                     };
+    } else {
+        userDict = @{@"password":password,
+                     @"sequenceId" : @"1234",
+                     @"user":@{
+                             @"userBase":@{
+                                     @"email":email == nil ? @"" : email,
+                                     @"accType":@0
+                                     },
+                             @"userProfile":@{
+                                     
+                                     }
+                             }
+                     };
+    }
     
     // 4. 发送网络请求
     

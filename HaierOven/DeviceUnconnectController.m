@@ -35,6 +35,7 @@
 }
 - (IBAction)DeleteDevice:(id)sender {
     [[DataCenter sharedInstance] removeOvenInLocal:self.currentOven];
+    [[NSNotificationCenter defaultCenter] postNotificationName:DeleteLocalOvenSuccessNotification object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)ConnectDevice:(id)sender {
