@@ -41,7 +41,7 @@
 - (void)startSdkWithResult:(result)result
 {
     uSDKManager* sdkManager = [uSDKManager getSingleInstance];
-//    [sdkManager initLog:USDK_LOG_NONE withWriteToFile:NO];  //日志级别
+    [sdkManager initLog:USDK_LOG_DEBUG withWriteToFile:NO];  //日志级别
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -346,7 +346,7 @@
 
 - (void)operationAplied:(NSNotification*)notification
 {
-    NSLog(@"设备操作应答消息通知：%@", notification.userInfo);
+    NSLog(@"设备操作应答消息通知：%@", notification.object);
 }
 
 - (void)bootupToDevice:(uSDKDevice*)device result:(result)success

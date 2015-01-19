@@ -425,7 +425,7 @@
     [window addSubview:sendButton];
 
     
-    window.hidden = !IsLogin;
+    window.hidden = YES;
     
     self.tableView.keyboardTriggerOffset = window.bounds.size.height;
     
@@ -517,6 +517,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
     [self.cookbookDetailCell.contentView removeKeyboardControl];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -552,11 +553,11 @@
         
         if (scrollView.contentOffset.y > self.cookbookImageView.height - 64) {
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
-            
+            self.navigationController.navigationBar.translucent = NO;
             
         } else {
             [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
-
+            self.navigationController.navigationBar.translucent = YES;
         }
         
         if (scrollView.contentOffset.y < _lastContentOffsetY)

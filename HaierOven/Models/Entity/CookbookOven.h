@@ -33,6 +33,17 @@
  */
 @property (strong, nonatomic) NSDictionary* ovenInfo;
 
+/**
+ *  初始化使用烤箱信息
+ *
+ *  @param roastStyle  烘焙模式
+ *  @param temperature 温度
+ *  @param time        时间
+ *  @param ovenInfo    烤箱信息 {“name”:”OBT600-10G”}
+ *
+ *  @return CookbookOven
+ */
+- (instancetype)initWithRoastStyle:(NSString*)roastStyle roastTemperature:(NSString*)temperature roastTime:(NSString*)time ovenInfo:(NSDictionary*)ovenInfo;
 
 @end
 

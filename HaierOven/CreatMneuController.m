@@ -596,6 +596,12 @@
             return NO;
         }
     }
+    
+    if (self.cookbookDetail.oven == nil) {
+        [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
+        return NO;
+    }
+    
     for (Step* step in self.steps) {
         if (step.photo.length == 0) {
             [super showProgressErrorWithLabelText:@"请选择步骤图片" afterDelay:1];
@@ -625,7 +631,7 @@
 
     self.cookbookDetail.foods = self.foods;
     self.cookbookDetail.cookbookTip = self.myPs_String;
-    self.cookbookDetail.oven = [[CookbookOven alloc] init];
+//    self.cookbookDetail.oven = [[CookbookOven alloc] init];
     self.cookbookDetail.creator = [[Creator alloc] init];
     self.cookbookDetail.creator.ID = CurrentUserBaseId;
     
@@ -790,5 +796,13 @@
 
 -(void)getUseDeviceDataWithWorkModel:(NSString *)workmodel andTime:(NSString *)time andTemperature:(NSString *)temperature{
     NSLog(@"%@ ,%@ ,%@",workmodel,time,temperature);
+    useBake = !useBake;
+    [self.tableView reloadData];
+#warning 补全烤箱型号
+    self.cookbookDetail.oven = [[CookbookOven alloc] initWithRoastStyle:workmodel
+                                                       roastTemperature:temperature
+                                                              roastTime:time
+                                                               ovenInfo:@{@"name" : @"HaierOven"}];
+    
 }
 @end

@@ -21,13 +21,13 @@
     // Override point for customization after application launch.
         
     [[UINavigationBar appearance] setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor]  forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:IMAGENAMED(@"clear.png")];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
-    [accountDefaults setBool:YES forKey:@"hadDevice"];
-    [accountDefaults synchronize];
-//    
     [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    
     
     [self startUSdk];
     
