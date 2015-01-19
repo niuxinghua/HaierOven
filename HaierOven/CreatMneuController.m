@@ -20,10 +20,11 @@
 #import "CookbookDetailControllerViewController.h"
 #import "PECropViewController.h"
 
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
+    BOOL useBake;
 }
 
 @property (strong, nonatomic) NSMutableArray *foods;
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) NSMutableArray*  tagsForTagsView;
 @property (strong, nonatomic) NSMutableArray* selectedTags;
 @property (strong, nonatomic) UIImage *peTempImage;//剪切暂存图片
+@property (strong, nonatomic) YIPopupTextView* popupTextView;
 @property BOOL ischangeCover;
 
 /**
@@ -63,7 +65,7 @@
 #define LABEL_H    20   //标签high
 
 @implementation CreatMneuController
-
+@synthesize popupTextView;
 #pragma mark - 加载系列
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -188,6 +190,11 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [popupTextView resignFirstResponder];
+    
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -204,16 +211,6 @@
         if (indexPath.row ==0) {
             CoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CoverCell" forIndexPath:indexPath];
             cell.delegate = self;
-//            if (self.isDraft) {
-//                NSString* coverPath = [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
-//                [cell.coverImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
-//            } else {
-//                cell.coverImage = self.cookbookCoverPhoto;
-//            }
-            
-            //区分是否是全路径
-//            NSString* imagePath = [self.cookbookDetail.coverPhoto hasPrefix:@"http"] ? self.cookbookDetail.coverPhoto : [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto];
-//            [cell.coverImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"fakedataimage.png")];
             cell.coverImage = self.cookbookCoverPhoto;
             return cell;
             
@@ -240,6 +237,7 @@
             return cell;
         }else if(indexPath.row ==3){
             UseDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UseDeviceCell" forIndexPath:indexPath];
+            cell.delegate = self;
             return cell;
         }else if(indexPath.row == 4){
             AddStepCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddStepCell" forIndexPath:indexPath];
@@ -271,7 +269,7 @@
             return (PageW-16)*0.13*(self.foods.count+1)+51;
             break;
         case 3:
-            return 80;
+            return useBake?311:71;
             break;
         case 4:
             return (PageW - 60)*0.58*(self.steps.count)+80;
@@ -342,7 +340,7 @@
 -(void)ImportStepDescription:(UILabel *)label withStepIndex:(NSInteger)index{
     self.edittingStep = self.steps[index];
     //添加表述
-    YIPopupTextView* popupTextView =
+    popupTextView =
     [[YIPopupTextView alloc] initWithPlaceHolder:nil
                                         maxCount:120
                                      buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
@@ -521,7 +519,10 @@
 #pragma mark -
 
 #pragma mark - 我使用了烤箱
-- (IBAction)UseDevice:(id)sender {
+- (IBAction)UseDevice:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    useBake = !useBake;
+    [self.tableView reloadData];
     NSLog(@"我使用了烤箱");
 }
 
@@ -530,7 +531,7 @@
 
 - (IBAction)modifyCookbookName:(UIButton *)sender
 {
-    YIPopupTextView* popupTextView =
+    popupTextView =
     [[YIPopupTextView alloc] initWithPlaceHolder:nil
                                         maxCount:120
                                      buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
@@ -545,7 +546,7 @@
 
 
 - (IBAction)AddPS:(id)sender {
-    YIPopupTextView* popupTextView =
+    popupTextView =
     [[YIPopupTextView alloc] initWithPlaceHolder:nil
                                         maxCount:120
                                      buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
@@ -785,4 +786,9 @@
     [controller dismissViewControllerAnimated:YES completion:NULL];
 }
 
+
+
+-(void)getUseDeviceDataWithWorkModel:(NSString *)workmodel andTime:(NSString *)time andTemperature:(NSString *)temperature{
+    NSLog(@"%@ ,%@ ,%@",workmodel,time,temperature);
+}
 @end
