@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UseBakeView.h"
 
-@interface UseDeviceCell : UITableViewCell
-
+@interface UseDeviceCell : UITableViewCell<UseBakeViewDelegate>
+@property(weak, nonatomic)id <UseBakeViewDelegate> delegate;
 @end
