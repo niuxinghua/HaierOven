@@ -629,42 +629,51 @@
     self.cookbookDetail.creator.ID = CurrentUserBaseId;
     
     if (self.isDraft) {
-        
-        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
-        [[InternetManager sharedManager] modifyCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
-            [super hiddenProgressHUD];
-            if (success) {
-                NSLog(@"发布成功");
-                [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
-            } else {
-                if (error.code == InternetErrorCodeConnectInternetFailed) {
-                    [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
+        if ([self.cookbookDetail.status isEqualToString:@"0"]) {
+            [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+            [[InternetManager sharedManager] modifyCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+                [super hiddenProgressHUD];
+                if (success) {
+                    NSLog(@"发布成功");
+                    [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
                 } else {
-                    [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                    if (error.code == InternetErrorCodeConnectInternetFailed) {
+                        [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
+                    } else {
+                        [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                    }
                 }
-            }
-        }];
+            }];
+        } else {
+            [self addCookbook];
+        }
+        
         
     } else {
         
-        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
-        [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
-            [super hiddenProgressHUD];
-            if (success) {
-                NSLog(@"发布成功");
-                [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
-            } else {
-                if (error.code == InternetErrorCodeConnectInternetFailed) {
-                    [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
-                } else {
-                    [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
-                }
-            }
-        }];
+        [self addCookbook];
         
     }
     
     
+}
+
+- (void)addCookbook
+{
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[InternetManager sharedManager] addCookbookWithCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            NSLog(@"发布成功");
+            [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
+        } else {
+            if (error.code == InternetErrorCodeConnectInternetFailed) {
+                [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
+            } else {
+                [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+            }
+        }
+    }];
 }
 
 #pragma mark - 预览菜谱

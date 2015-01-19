@@ -156,14 +156,24 @@
         [super hiddenProgressHUD];
         if (success) {
             [super hiddenProgressHUD];
-            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-            [self presentViewController:root animated:YES completion:nil];
+//            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//            [self presentViewController:root animated:YES completion:nil];
+            
+            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
+            
+            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
+            
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }
     }];
     
     
+}
+
+- (void)popController
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)alertError:(NSString *)string{
@@ -195,8 +205,10 @@
     [[InternetManager sharedManager] registerWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
-            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-            [self presentViewController:root animated:YES completion:nil];
+//            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+//            [self presentViewController:root animated:YES completion:nil];
+            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
+            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }

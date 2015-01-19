@@ -77,8 +77,8 @@
         [self.delegate alertError:@"输入手机号不能为空"];
     else if(![MyTool validateTelephone:self.phoneTextfailed.text])
         [self.delegate alertError:@"输入手机号有误"];
-    else if (!self.passCodeTextfailed.text.length)
-        [self.delegate alertError:@"输入验证码不能为空"];
+//    else if (!self.passCodeTextfailed.text.length)
+//        [self.delegate alertError:@"输入验证码不能为空"];
     else if(self.psdTextFailed.text.length<6)
         [self.delegate alertError:@"请输入6～16位数字和字母"];
     else if(self.psdTextFailed.text.length>16)

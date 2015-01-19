@@ -36,7 +36,7 @@ typedef void (^result) (BOOL success);
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [super showStatusTip:YES title:@"烤箱已连接！！"];
+//    [super showStatusTip:YES title:@"烤箱已连接！！"];
 }
 
 - (void)viewDidLoad {

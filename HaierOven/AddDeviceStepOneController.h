@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface AddDeviceStepOneController : UIViewController
+@interface AddDeviceStepOneController : BaseViewController
 
 @end

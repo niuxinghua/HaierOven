@@ -112,6 +112,12 @@
         [super showProgressErrorWithLabelText:@"请用WiFi连接喔" afterDelay:1];
         return;
     }
+    
+    if (self.psdTextField.text.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写您的WiFi密码" afterDelay:1];
+        return;
+    }
+    
     self.myWindow.hidden = NO;
     [self.deviceConnectProgressView.progressView setProgress:0.8 andTimeInterval:0.03];
     
