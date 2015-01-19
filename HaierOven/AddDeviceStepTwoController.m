@@ -74,7 +74,6 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
-
 {
     //获取键盘的高度
     NSDictionary *userInfo = [aNotification userInfo];
@@ -91,7 +90,6 @@
 
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
-
 {
     self.view.frame = CGRectMake(0,0, PageW, PageH);
 }
@@ -117,6 +115,8 @@
         [super showProgressErrorWithLabelText:@"请填写您的WiFi密码" afterDelay:1];
         return;
     }
+    
+    [self.psdTextField resignFirstResponder];
     
     self.myWindow.hidden = NO;
     [self.deviceConnectProgressView.progressView setProgress:0.8 andTimeInterval:0.03];

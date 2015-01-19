@@ -267,9 +267,9 @@
             [tableView registerNib:[UINib nibWithNibName:@"CommentCountCell" bundle:nil] forCellReuseIdentifier:@"Comment count cell"];
             [tableView registerNib:[UINib nibWithNibName:@"CommentListCell" bundle:nil] forCellReuseIdentifier:@"Comment list cell"];
             
-            if (IsLogin) {
+//            if (IsLogin) {
                 [self setupInputView];
-            }
+//            }
             
             
             [self.tableView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
@@ -425,7 +425,7 @@
     [window addSubview:sendButton];
 
     
-    window.hidden = YES;
+    window.hidden = !IsLogin;
     
     self.tableView.keyboardTriggerOffset = window.bounds.size.height;
     
@@ -462,15 +462,16 @@
     [self hideKeyboard];
     Comment* comment = [[Comment alloc] init];
     comment.content = self.commentTextField.text;
+#warning 假数据
     comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
-    comment.commentTime = @"2015-01-4 21:07";
+    comment.commentTime = @"刚刚";
     comment.fromUser.loginName = @"刘康";
     [self.comments addObject:comment];
     CGPoint point = self.commentsTableView.contentOffset;
     [UIView animateWithDuration:0.3 animations:^{
         self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
     }
-    completion:nil];
+                     completion:nil];
     [UIView animateWithDuration:0.3 animations:^{
         self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
     } completion:^(BOOL finished) {
@@ -540,7 +541,10 @@
         if (self.contentType == CurrentContentTypeComment) {
             
             CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
-            self.window.hidden = scrollView.contentOffset.y >= height ? NO : YES;
+            if (IsLogin) {
+                self.window.hidden = scrollView.contentOffset.y >= height ? NO : YES;
+            }
+            
             
             
             
@@ -549,16 +553,10 @@
         if (scrollView.contentOffset.y > self.cookbookImageView.height - 64) {
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
             
-//            if (self.contentType == CurrentContentTypeComment) {
-//                self.window.hidden = NO;
-//            }
-            
             
         } else {
             [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
-//            if (self.contentType == CurrentContentTypeComment) {
-//                self.window.hidden = YES;
-//            }
+
         }
         
         if (scrollView.contentOffset.y < _lastContentOffsetY)
@@ -740,7 +738,7 @@
     
     CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
     
-    if (_lastContentOffsetY >= height && self.contentType == CurrentContentTypeComment) {
+    if (_lastContentOffsetY >= height && self.contentType == CurrentContentTypeComment && IsLogin) {
         self.window.hidden = NO;
     }
     
@@ -768,8 +766,12 @@
             
         case CurrentContentTypeComment:
         {
+            if (!IsLogin) {
+                self.commentsTableView.frame = CGRectMake(0, 0, Main_Screen_Width, self.cookbookDetailCell.contentView.height);
+            } else {
+                self.commentsTableView.frame = CGRectMake(0, 0, Main_Screen_Width, self.cookbookDetailCell.contentView.height - 40);
+            }
             
-            self.commentsTableView.frame = CGRectMake(0, 0, Main_Screen_Width, self.cookbookDetailCell.contentView.height - 40);
             [self.cookbookDetailCell.contentView addSubview:self.commentsTableView];
             
             break;
