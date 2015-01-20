@@ -27,6 +27,14 @@ extern NSString* const kCurrentLoginUserName;
 extern NSString* const kRecommendProjectsFileName;
 
 
+typedef NS_ENUM(NSInteger, LocalNotificationType) {
+    LocalNotificationTypeWarmUp,      // 预热完成
+    LocalNotificationTypeBakeComplete,  // 烘焙完成
+    LocalNotificationTypeClockTimeUp    // 闹钟时间到
+    
+};
+
+
 @interface DataCenter : NSObject
 
 /**
@@ -91,6 +99,19 @@ extern NSString* const kRecommendProjectsFileName;
  *  保存今日签到状态
  */
 - (void)saveSignInFlag;
+
+#pragma mark - 烤箱通知定义
+
+
+
+/**
+ *  发送本地通知
+ *
+ *  @param type      通知类型
+ *  @param seconds   通知时间
+ *  @param alertBody 通知内容
+ */
+- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody;
 
 
 #pragma mark - 缓存文件 读取缓存文件

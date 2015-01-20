@@ -41,7 +41,7 @@
 - (void)startSdkWithResult:(result)result
 {
     uSDKManager* sdkManager = [uSDKManager getSingleInstance];
-//    [sdkManager initLog:USDK_LOG_NONE withWriteToFile:NO];  //日志级别
+    [sdkManager initLog:USDK_LOG_DEBUG withWriteToFile:NO];  //日志级别
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -196,13 +196,9 @@
 
 #pragma mark - 取消订阅通知
 
-- (void)unSubscribeDevice
+- (void)unSubscribeDevice:(uSDKDevice*)device;
 {
-    for (uSDKDevice* device in [[uSDKDeviceManager getSingleInstance] getDeviceList]) {
-        NSArray* deviceMacs = @[device.mac];
-        [[uSDKNotificationCenter defaultCenter] unSubscribeDevice:self withMacList:deviceMacs];
-    }
-    
+    [[uSDKNotificationCenter defaultCenter] unSubscribeDevice:self withMacList:@[device.mac]];
 }
 
 - (void)unSubscribeDeviceListChanged
@@ -220,9 +216,9 @@
     [[uSDKNotificationCenter defaultCenter] unSubscribeBusinessMessage:self];
 }
 
-- (void)unSubscribeAllNotifications
+- (void)unSubscribeAllNotifications:(uSDKDevice*)device
 {
-    [self unSubscribeDevice];
+    [self unSubscribeDevice:device];
     [self unSubscribeDeviceListChanged];
     [self unSubscribeInnerError];
     [self unSubscribeBusinessMeassage];
@@ -346,7 +342,7 @@
 
 - (void)operationAplied:(NSNotification*)notification
 {
-    NSLog(@"设备操作应答消息通知：%@", notification.userInfo);
+    NSLog(@"设备操作应答消息通知：%@", notification.object);
 }
 
 - (void)bootupToDevice:(uSDKDevice*)device result:(result)success
@@ -379,6 +375,46 @@
                         success(NO);
                     }
                 }];
+}
+
+- (NSError*)errorWithCode:(InternetErrorCode)errorCode andDescription:(NSString*)errorMsg
+{
+    if (errorMsg == nil) {
+        errorMsg = [NSString stringWithFormat:@"Request error with code: %d", errorCode];
+    }
+    NSDictionary *userInfo = @{NSLocalizedDescriptionKey : errorMsg};
+    NSError *error = [NSError errorWithDomain:@"com.haier.usdk" code:errorCode userInfo:userInfo];
+    return error;
+}
+
+#pragma mark - 获取订阅设备的状态
+
+/**
+ *  获取当前订阅设备的设备温度
+ *
+ *  @param completion 结果回调
+ */
+- (void)getDeviceCallback:(completion)completion
+{
+    if (self.subscribedDevice == nil) {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"尚未订阅设备"]);
+        return;
+    }
+    
+    [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        
+        uSDKDevice* currentDevice;
+        for (uSDKDevice* device in obj) {
+            if ([self.subscribedDevice.mac isEqualToString:device.mac]) {
+                currentDevice = device;
+                break;
+            }
+        }
+        NSMutableDictionary* statusDict = currentDevice.attributeDict;
+        
+        
+    }];
+    
 }
 
 @end

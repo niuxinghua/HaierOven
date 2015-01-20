@@ -13,7 +13,7 @@
 #import "DeviceAlertView.h"
 #import "MyPageView.h"
 
-@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate,DeviceAlertViewDelegate>
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -68,11 +68,6 @@
 @property (strong, nonatomic) NSDictionary* bakeMode;
 
 /**
- *  烤完了的本地通知
- */
-@property (strong, nonatomic) UILocalNotification* bakeTimeNotification;
-
-/**
  *  Oven实例
  */
 @property (strong, nonatomic) uSDKDevice* myOven;
@@ -106,13 +101,16 @@
     [self SetUPAlertView];
     [self setupToolbarItems];
     self.deviceBoardStatus = DeviceBoardStatusClose;
-    [self loadMyOvenInstance];
+//    [self loadMyOvenInstance];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.navigationController.toolbarHidden = NO;
+    
+    [self loadMyOvenInstance];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -258,8 +256,6 @@
 #pragma mark - Actions
 
 
-
-
 #pragma mark -选择工作模式
 
 -(void)WorkModelChick:(UIButton*)sender{
@@ -271,18 +267,19 @@
     self.bakeMode = self.bakeModeValues[sender.tag];
     
     //点击了工作模式
-//    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
-//                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
-//    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
-//                                        toDevice:self.myOven
-//                                    andCommandSN:0
-//                             andGroupCommandName:@""
-//                                       andResult:^(BOOL result) {
-//                                           
-//                                       }];
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
+                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                       andResult:^(BOOL result) {
+                                           
+                                       }];
     
     
 }
+
 #pragma mark - 
 
 -(void)timerAction:(NSTimer *)time{
@@ -301,25 +298,32 @@
 
 - (void)loadMyOvenInstance
 {
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
-        [super hiddenProgressHUD];
-        if (success) {
-            //找到Wifi下烤箱列表，并获取指定烤箱对象
-            NSArray* ovenList = obj;
-            for (uSDKDevice* oven in ovenList) {
-                if ([self.currentOven.mac isEqualToString:oven.mac]) {
-                    self.myOven = oven;
-                    //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
-//                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
-                    [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
-                    
+    if (self.myOven != nil && [self.currentOven.mac isEqualToString:self.myOven.mac]) {
+        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
+    } else {
+        
+        [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+        [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+            [super hiddenProgressHUD];
+            if (success) {
+                //找到Wifi下烤箱列表，并获取指定烤箱对象
+                NSArray* ovenList = obj;
+                for (uSDKDevice* oven in ovenList) {
+                    if ([self.currentOven.mac isEqualToString:oven.mac]) {
+                        self.myOven = oven;
+                        //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
+                        //                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
+                        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
+                        
+                    }
                 }
+            } else {
+                [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
             }
-        } else {
-            [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
-        }
-    }];
+        }];
+        
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -455,20 +459,24 @@
                                            
                                        }];
     
-    if (self.bakeTimeNotification != nil) {
-        [[UIApplication sharedApplication] cancelLocalNotification:self.bakeTimeNotification];
-    }
+//    if (self.bakeTimeNotification != nil) {
+//        [[UIApplication sharedApplication] cancelLocalNotification:self.bakeTimeNotification];
+//    }
+//    
+//    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+//    self.bakeTimeNotification = localNotification;
+//    NSInteger seconds = [timeStr integerValue] * 60;
+//    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+//    localNotification.alertBody = [NSString stringWithFormat:@"您的食物已经烤好了"];
+//    localNotification.alertAction = @"alertAction";
+//    localNotification.soundName = UILocalNotificationDefaultSoundName;
+//    localNotification.applicationIconBadgeNumber = 1;
+//    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
+//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    self.bakeTimeNotification = localNotification;
     NSInteger seconds = [timeStr integerValue] * 60;
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
-    localNotification.alertBody = [NSString stringWithFormat:@"您的食物已经烤好了"];
-    localNotification.alertAction = @"alertAction";
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.applicationIconBadgeNumber = 1;
-    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:seconds alertBody:@"烤箱烘焙完成了"];
+    
     
 }
 

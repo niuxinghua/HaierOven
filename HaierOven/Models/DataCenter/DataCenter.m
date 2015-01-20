@@ -25,6 +25,20 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
 
 @interface DataCenter ()
 
+/**
+ *  预热完成通知
+ */
+@property (strong, nonatomic) UILocalNotification* warmUpNotification;
+
+/**
+ *  烘焙完成的通知
+ */
+@property (strong, nonatomic) UILocalNotification* bakeCompleteNotification;
+
+/**
+ *  闹钟时间到了通知
+ */
+@property (strong, nonatomic) UILocalNotification* clockTimeUpNotification;
 
 @end
 
@@ -164,6 +178,56 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     
     [signedDates writeToFile:filePath atomically:YES];
     
+    
+}
+
+#pragma mark - 烤箱通知定义
+
+/**
+ *  发送本地通知
+ *
+ *  @param localNotification 本地通知
+ */
+- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody
+{
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.alertBody = alertBody;
+    localNotification.alertAction = @"alertAction";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
+    
+    switch (type) {
+        case LocalNotificationTypeWarmUp:
+        {
+            if (self.warmUpNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.warmUpNotification = localNotification;
+            break;
+        }
+        case LocalNotificationTypeBakeComplete:
+        {
+            if (self.bakeCompleteNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.bakeCompleteNotification = localNotification;
+            break;
+        }
+        case LocalNotificationTypeClockTimeUp:
+        {
+            if (self.clockTimeUpNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.clockTimeUpNotification = localNotification;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
 }
 

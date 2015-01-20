@@ -473,7 +473,7 @@
 
         NSDictionary* paramsDict = @{
                                      @"loginName" : loginName
-                                     };
+                                    };
         
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
         [[self manager] POST:UserLogout parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {

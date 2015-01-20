@@ -192,7 +192,7 @@
     NSString *temp;
     NSMutableArray *temps = [NSMutableArray new];
     int t = 0 ;
-    for ( int i = 0; i<50; i++) {
+    for ( int i = 0; i < 60; i++) {   //烘烤温度上限是300°，调整单位是5°
         t = t+5;
         temp = [NSString stringWithFormat:@"%d°",t];
         [temps addObject:temp];
@@ -204,7 +204,7 @@
 -(NSArray *)getTimeArr{
     NSString *minute;
     NSMutableArray *minutes = [NSMutableArray new];
-    for ( int i = 0; i<240; i++) {
+    for ( int i = 1; i <= 150; i++) {  //烘烤时间上限是150分钟，调整单位是1分钟，从1分钟开始
         minute = [NSString stringWithFormat:@"%d 分钟",i];
         [minutes addObject:minute];
     }

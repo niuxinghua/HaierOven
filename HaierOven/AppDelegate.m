@@ -10,6 +10,8 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaHandler.h"
 
+#define SUPPORT_IOS8 1
+
 @interface AppDelegate ()
 
 @end
@@ -21,19 +23,34 @@
     // Override point for customization after application launch.
         
     [[UINavigationBar appearance] setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor]  forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:IMAGENAMED(@"clear.png")];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
-    [accountDefaults setBool:YES forKey:@"hadDevice"];
-    [accountDefaults synchronize];
-//    
     [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    
     
     [self startUSdk];
     
     [self initUmengSdk];
     
+    [self initNotification];
+    
     return YES;
+}
+
+- (void)initNotification
+{
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    NSInteger seconds = 10;
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.alertBody = @"hello";
+    localNotification.alertAction = @"alertAction";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+//    localNotification.applicationIconBadgeNumber = 1;
+//    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 - (void)startUSdk
@@ -103,9 +120,43 @@
     NSLog(@"age:%@", userInfo[@"age"]);
 }
 
+#if SUPPORT_IOS8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+    
+    NSLog(@"didRegisterUserNotificationSettings");
+    
+}
+#endif
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
+    
+}
+
+// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
+- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+    NSLog(@"didReceiveRemoteNotification");
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    OvenManager* ovenManager = [OvenManager sharedManager];
+    if (ovenManager.subscribedDevice != nil) {
+        [ovenManager unSubscribeAllNotifications:ovenManager.subscribedDevice];
+//        ovenManager.subscribedDevice = nil;
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
