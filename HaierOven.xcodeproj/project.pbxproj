@@ -814,6 +814,7 @@
 		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
 		84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84855F2B1A64F7D600830B75 /* MediaPlayer.framework */; };
 		84855F301A65062400830B75 /* product-design-animation-cn-20130712_848x480.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */; };
+		849392521A6E0CE700D78106 /* KKProgressTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392511A6E0CE700D78106 /* KKProgressTimer.m */; };
 		849F916A1A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow.png */; };
 		849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@2x.png */; };
 		849F916C1A513981006234B9 /* icon_followd-.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd-.png */; };
@@ -1949,6 +1950,8 @@
 		84855F291A64CA9900830B75 /* CookerStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookerStar.m; sourceTree = "<group>"; };
 		84855F2B1A64F7D600830B75 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "product-design-animation-cn-20130712_848x480.mp4"; sourceTree = "<group>"; };
+		849392501A6E0CE700D78106 /* KKProgressTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKProgressTimer.h; sourceTree = "<group>"; };
+		849392511A6E0CE700D78106 /* KKProgressTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKProgressTimer.m; sourceTree = "<group>"; };
 		849F91481A513981006234B9 /* icon_follow-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow-.png"; sourceTree = "<group>"; };
 		849F91491A513981006234B9 /* icon_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_follow.png; sourceTree = "<group>"; };
 		849F914A1A513981006234B9 /* icon_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow@2x.png"; sourceTree = "<group>"; };
@@ -2212,6 +2215,7 @@
 		458952C51A493FAF009B5DD1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8493924F1A6E0CE700D78106 /* KKProgressTimer */,
 				45B650C21A47F64000A6376D /* MyDeviceView.h */,
 				45B650C31A47F64000A6376D /* MyDeviceView.m */,
 				45B650DA1A48169000A6376D /* MyDeviceAddView.h */,
@@ -4082,6 +4086,15 @@
 			name = DescCell;
 			sourceTree = "<group>";
 		};
+		8493924F1A6E0CE700D78106 /* KKProgressTimer */ = {
+			isa = PBXGroup;
+			children = (
+				849392501A6E0CE700D78106 /* KKProgressTimer.h */,
+				849392511A6E0CE700D78106 /* KKProgressTimer.m */,
+			);
+			path = KKProgressTimer;
+			sourceTree = "<group>";
+		};
 		849F91471A512D21006234B9 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -4929,6 +4942,7 @@
 				457A77881A42EC3400E422D0 /* FoodListCell.m in Sources */,
 				45B650ED1A48213200A6376D /* AddDeviceStepTwoController.m in Sources */,
 				842A86E41A52772000C75EE4 /* MethodCell.m in Sources */,
+				849392521A6E0CE700D78106 /* KKProgressTimer.m in Sources */,
 				8447CB7B1A5FC73700FADF9D /* JSQMessagesCellTextView.m in Sources */,
 				84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */,
 				842A86E11A52767300C75EE4 /* StepsViewController.m in Sources */,

@@ -13,7 +13,7 @@
 #import "DeviceAlertView.h"
 #import "MyPageView.h"
 
-@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate,DeviceAlertViewDelegate>
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;

@@ -25,6 +25,20 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
 
 @interface DataCenter ()
 
+/**
+ *  预热完成通知
+ */
+@property (strong, nonatomic) UILocalNotification* warmUpNotification;
+
+/**
+ *  烘焙完成的通知
+ */
+@property (strong, nonatomic) UILocalNotification* bakeCompleteNotification;
+
+/**
+ *  闹钟时间到了通知
+ */
+@property (strong, nonatomic) UILocalNotification* clockTimeUpNotification;
 
 @end
 
@@ -163,6 +177,20 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     [signedDates addObject:strDate];
     
     [signedDates writeToFile:filePath atomically:YES];
+    
+    
+}
+
+#pragma mark - 烤箱通知定义
+
+/**
+ *  发送本地通知
+ *
+ *  @param localNotification 本地通知
+ */
+- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody
+{
+    
     
     
 }
