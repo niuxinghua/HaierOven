@@ -27,6 +27,12 @@ typedef void (^completion) (BOOL success, id obj, NSError* error);
 typedef void (^result) (BOOL result);
 
 /**
+ *  当前订阅的烤箱
+ */
+@property (strong, nonatomic)uSDKDevice* subscribedDevice;
+
+
+/**
  *  管理烤箱工具的单例
  *
  *  @return 烤箱管理实例
@@ -69,6 +75,11 @@ typedef void (^result) (BOOL result);
 
 #pragma mark - 获取设备列表和设备信息
 
+/**
+ *  获取烤箱设备列表
+ *
+ *  @param callback 结果回调
+ */
 - (void)getDevicesCompletion:(completion)callback;
 
 
@@ -104,7 +115,7 @@ typedef void (^result) (BOOL result);
 /**
  *  取消订阅设备
  */
-- (void)unSubscribeDevice;
+- (void)unSubscribeDevice:(uSDKDevice*)device;
 
 /**
  *  取消订阅设备列表变化
@@ -124,7 +135,7 @@ typedef void (^result) (BOOL result);
 /**
  *  取消订阅所有通知，应该与subscribeAllNotifications成对出现
  */
-- (void)unSubscribeAllNotifications;
+- (void)unSubscribeAllNotifications:(uSDKDevice*)device;
 
 #pragma mark - 命令执行流程
 
@@ -169,7 +180,14 @@ typedef void (^result) (BOOL result);
 
 
 
-#pragma mark -
+#pragma mark - 获取订阅设备的状态
+
+/**
+ *  获取当前订阅设备的设备温度
+ *
+ *  @param completion 结果回调
+ */
+- (void)getDeviceCallback:(completion)completion;
 
 
 

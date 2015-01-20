@@ -190,8 +190,44 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
  */
 - (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody
 {
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.alertBody = alertBody;
+    localNotification.alertAction = @"alertAction";
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
     
+    switch (type) {
+        case LocalNotificationTypeWarmUp:
+        {
+            if (self.warmUpNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.warmUpNotification = localNotification;
+            break;
+        }
+        case LocalNotificationTypeBakeComplete:
+        {
+            if (self.bakeCompleteNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.bakeCompleteNotification = localNotification;
+            break;
+        }
+        case LocalNotificationTypeClockTimeUp:
+        {
+            if (self.clockTimeUpNotification != nil) {
+                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+            }
+            self.clockTimeUpNotification = localNotification;
+            break;
+        }
+        default:
+            break;
+    }
     
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
 }
 
