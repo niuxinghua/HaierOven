@@ -132,16 +132,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/UseDeviceCell.m"
-            timestampString = "443349213.74052"
+            filePath = "HaierOven/StudyCookCell.m"
+            timestampString = "443430261.975322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-layoutSubviews"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-setDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
