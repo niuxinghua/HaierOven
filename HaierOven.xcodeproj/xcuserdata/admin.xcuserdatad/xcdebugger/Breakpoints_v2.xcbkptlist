@@ -99,22 +99,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DeviceBoardViewController.m"
-            timestampString = "443514845.571777"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "800"
-            endingLineNumber = "800"
-            landmarkName = "-setOrderTime:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
             timestampString = "443096745.163832"
             startingColumnNumber = "9223372036854775807"
@@ -211,7 +195,7 @@
                   symbolName = "-[InternetManager testRegisterWithEmail:andPhone:andPassword:callBack:]"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "443515846.820726"
+                  timestampString = "443522000.69194"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2519"
@@ -225,7 +209,7 @@
                   symbolName = "__71-[InternetManager testRegisterWithEmail:andPhone:andPassword:callBack:]_block_invoke"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "443515846.820863"
+                  timestampString = "443522000.692143"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2519"
@@ -289,13 +273,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DeviceBoardViewController.m"
-            timestampString = "443514972.872718"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "443516931.440508"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
-            landmarkName = "-completeBake"
+            startingLineNumber = "1490"
+            endingLineNumber = "1490"
+            landmarkName = "-addCookbookWithCookbook:callBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DeviceBoardViewController.m"
+            timestampString = "443522000.63282"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "802"
+            endingLineNumber = "802"
+            landmarkName = "-setClockTime:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DeviceBoardViewController.m"
+            timestampString = "443522000.63282"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "847"
+            endingLineNumber = "847"
+            landmarkName = "-setWarmUpTemperature:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

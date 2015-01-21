@@ -19,6 +19,15 @@
 
 @implementation CompleteCookController
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.isBackButton = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -48,7 +57,53 @@
         default:
             break;
     }
+    
+    OvenManager* ovenManager = [OvenManager sharedManager];
+   
+    for (UIButton* button in self.on_offBtn) {
+        button.selected = ovenManager.currentStatus.opened;
+    }
+    
 }
+
+
+- (IBAction)onOffBtnsTapped:(UIButton *)sender
+{
+    
+    if (sender.selected) {
+        [self bootup];
+    } else {
+        [self shutdown];
+    }
+    
+    OvenManager* ovenManager = [OvenManager sharedManager];
+    for (UIButton* button in self.on_offBtn) {
+        button.selected = ovenManager.currentStatus.opened;
+    }
+    
+}
+
+
+#pragma mark - 设备指令
+
+- (void)bootup //开机
+{
+    [[OvenManager sharedManager] bootupToDevice:self.myOven result:^(BOOL result) {
+        if (!result) {
+//            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
+        }
+    }];
+}
+
+- (void)shutdown
+{
+    [[OvenManager sharedManager] shutdownToDevice:self.myOven result:^(BOOL result) {
+        if (!result) {
+//            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
+        }
+    }];
+}
+
 
 /*
 #pragma mark - Navigation

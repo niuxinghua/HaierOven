@@ -13,9 +13,13 @@
 #import "DeviceAlertView.h"
 #import "MyPageView.h"
 #import "CompleteCookController.h"
+#import "KKProgressTimer.h"
+#import "TimeProgressAlertView.h"
+#import "TimeOutView.h"
+#import "OrderAlertView.h"
 
 
-@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate>
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate,KKProgressTimerDelegate,TimeProgressAlertViewDelegate,TimeOutViewDelegate,OrderAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -92,11 +96,6 @@
 @property (strong, nonatomic) NSString *timeString;
 @property (strong, nonatomic) NSString *warmUpString;
 
-/**
- *  烘焙模式命令value，与烘焙模式按钮一一对应
- */
-@property (strong, nonatomic) NSArray* bakeModeValues;
-
 @property (strong, nonatomic) OvenManager* ovenManager;
 
 @end
@@ -127,6 +126,8 @@
     // 监控设备开机状态
     [self addObserver:self forKeyPath:@"self.ovenManager.currentStatus.opened" options:NSKeyValueObservingOptionNew context:NULL];
     
+    [self addObserver:self forKeyPath:@"self.clockIcon.selected" options:NSKeyValueObservingOptionNew context:NULL];
+    
 }
 
 #pragma mark - 监听烤箱状态并作出反应
@@ -154,6 +155,10 @@
         }
         
         
+    } else if ([keyPath isEqualToString:@"self.clockIcon.selected"]) {
+        self.cookTimeView.hidden = !self.clockIcon.selected;
+        self.clockIcon.hidden = self.clockIcon.selected;
+        
     }
     
     
@@ -164,6 +169,7 @@
     [self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.isReady" context:NULL];
     [self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.temperature" context:NULL];
     [self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.opened" context:NULL];
+    [self removeObserver:self forKeyPath:@"self.clockIcon.selected"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -179,19 +185,6 @@
     self.navigationController.toolbarHidden = YES;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    if ([keyPath isEqualToString:@"self.clockIcon.selected"]) {
-        self.cookTimeView.hidden = !self.clockIcon.selected;
-        self.clockIcon.hidden = self.clockIcon.selected;
-        
-    }
-}
-
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"self.clockIcon.selected"];
-}
 
 - (void)setupToolbarItems
 {
@@ -239,25 +232,6 @@
 
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
-    
-    self.bakeModeValues = @[@{@"30v0M6" :@"传统烘焙"},
-                            @{@"30v0M8" :@"对流烘焙"} /*对流烘焙*/,
-                            @{@"30v0M5" :@"热风烧烤" }/*热风烧烤*/,
-                            @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
-                            @{@"30v0Me" :@"烧烤" }/*烧烤*/,
-                            @{@"30v0Mc" :@"3D热风"} /*3D热风*/,
-                            @{@"30v0M9" :@"3D烧烤" }/*3D烧烤*/,
-                            @{@"30v0Md" :@"披萨模式" }/*披萨模式*/,
-                            @{@"30v0Ma" :@"解冻功能" }/*解冻功能*/,
-                            @{@"30v0Mb" :@"发酵功能" }/*发酵功能*/,
-                            @{@"30v0Mg" :@"下烧烤" }/*下烧烤*/,
-                            @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
-                            @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
-                            @{@"30v3Mj" :@"上下烧烤＋蒸汽"} /*纯蒸汽*/,
-                            @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
-                            @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
-                            @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
-                            @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/];
     
     NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
     NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
@@ -378,19 +352,7 @@
     self.howlong.selected = NO;
     self.temputure.selected = NO;
     
-    self.bakeMode = self.bakeModeValues[sender.tag];
-    
-    //点击了工作模式
-//    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
-//                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
-//    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
-//                                        toDevice:self.myOven
-//                                    andCommandSN:0
-//                             andGroupCommandName:@""
-//                                       andResult:^(BOOL result) {
-//                                           
-//                                       }];
-    
+    self.bakeMode = self.ovenManager.bakeModes[sender.tag];
     
 }
 
@@ -484,7 +446,7 @@
 {
     [[OvenManager sharedManager] bootupToDevice:self.myOven result:^(BOOL result) {
         if (!result) {
-            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
+//            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
         }
     }];
 }
@@ -493,7 +455,7 @@
 {
     [[OvenManager sharedManager] shutdownToDevice:self.myOven result:^(BOOL result) {
         if (!result) {
-            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
+//            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
         }
     }];
 }
@@ -543,8 +505,11 @@
     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
     
     
-    //调用顺序：设置模式 - 启动 - 设置温度 - 设置时间
+    //调用顺序：检测是否已开机 - 设置模式 - 启动 - 设置温度 - 设置时间
     
+    if (!self.ovenManager.currentStatus.opened) {
+        [self bootup];
+    }
     
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
                                                                         commandAttrValue:[[self.bakeMode allKeys] firstObject]];
@@ -576,10 +541,10 @@
     [self setBakeTime:self.howlong.currentTitle];
 
     
-    NSTimeInterval seconds = [timeStr integerValue] * 60.0;
-    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:seconds alertBody:@"您的食物烘焙完成了"];
+    NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:@"您的食物烘焙完成了"];
     
-    [self performSelector:@selector(completeBake) withObject:nil afterDelay:seconds];
+    [self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
     self.cancelBakeFlag = NO;
 }
 
@@ -588,10 +553,13 @@
     if (!self.cancelBakeFlag) {
         self.cancelBakeFlag = NO;
         
-        self.deviceBoardStatus = DeviceBoardStatusStart;
+        self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+        
+        self.deviceBoardStatus = DeviceBoardStatusOpen;
         
         CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
         completeController.completeTye = CompleteTyeCook;
+        completeController.myOven = self.myOven;
         [self.navigationController pushViewController:completeController animated:YES];
         
     }
@@ -708,13 +676,16 @@
         case DeviceBoardStatusClose:
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = NO;
+                btn.selected = NO;
             }
             
             for (UIButton *btn in self.controlBtns) {
                 btn.enabled = NO;
+                btn.selected = NO;
             }
             for (UIButton *btn in self.workModelBtns) {
                 btn.enabled = NO;
+                btn.selected = NO;
             }
             
             for (UIBarButtonItem *btn in self.toolbarItems) {
@@ -727,14 +698,17 @@
         case DeviceBoardStatusOpen:
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = NO;
+                btn.selected = NO;
             }
             
             for (UIButton *btn in self.controlBtns) {
                 btn.enabled = YES;
+                btn.selected = NO;
             }
             
             for (UIButton *btn in self.workModelBtns) {
                 btn.enabled =YES;
+                btn.selected = NO;
             }
             
             for (UIBarButtonItem *btn in self.toolbarItems) {
@@ -747,7 +721,7 @@
 
         case DeviceBoardStatusStart:
             for (UIButton* btn in self.allbtns) {
-                btn.enabled = YES;
+                btn.enabled = NO;
             }
             
             for (UIButton *btn in self.controlBtns) {
@@ -755,13 +729,14 @@
             }
             
             for (UIButton *btn in self.workModelBtns) {
-                btn.enabled =YES;
+                btn.enabled = NO;
             }
             
             for (UIBarButtonItem *btn in self.toolbarItems) {
                 btn.enabled = YES;
             }
             self.actionCell.hidden = NO;
+            
             [self.tableView reloadData];
             break;
             
@@ -846,15 +821,7 @@
     self.clockAlert.seconds = seconds;
     self.clockAlert.start = YES;
     
-    
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
-    localNotification.alertBody = [NSString stringWithFormat:@"您设置的闹钟%@时间已到哦", clockString];
-    localNotification.alertAction = @"alertAction";
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.applicationIconBadgeNumber = 1;
-    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeClockTimeUp fireTime:seconds alertBody:@"您设定的闹钟时间到了。"];
     
 }
 
@@ -1009,6 +976,7 @@
 
 
 #pragma  mark- TimeAlertDelegate
+
 -(void)HiddenClockAlert{
     self.myWindow.hidden = YES;
     self.clockAlert.frame = alertRectHidden;

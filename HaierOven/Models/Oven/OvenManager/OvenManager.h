@@ -38,6 +38,11 @@ typedef void (^result) (BOOL result);
  */
 @property (strong, nonatomic) OvenStatus* currentStatus;
 
+/**
+ *  烤箱的烘焙模式, 必须与烤箱控制面板顺序一一对应
+ */
+@property (strong, nonatomic) NSArray* bakeModes;
+
 
 /**
  *  管理烤箱工具的单例
