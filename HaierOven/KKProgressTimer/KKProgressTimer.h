@@ -29,12 +29,12 @@
 //    self.timerView.progressColor = [UIColor redColor];
 //    self.timerView.progressBackgroundColor = [UIColor greenColor];
 //    self.timerView.circleBackgroundColor = [UIColor blueColor];
-//    
+//
 //    __block CGFloat i = 0;
 //    [self.timerView startWithBlock:^CGFloat{
 //        return i++ / self.seconds;
 //    }];
-//    
+//
 //}
 //
 //

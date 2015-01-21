@@ -19,7 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="j68-tS-ArJ" customClass="AddFoodAlertView">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="138"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="214"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpL-Am-vvg">
@@ -44,18 +44,18 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk.png" translatesAutoresizingMaskIntoConstraints="NO" id="a2f-Jy-GHs" customClass="tk">
-                    <rect key="frame" x="0.0" y="98" width="300" height="40"/>
+                    <rect key="frame" x="0.0" y="174" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="nch-Aj-l1p"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a87-79-sFN">
-                    <rect key="frame" x="0.0" y="98" width="150" height="40"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a87-79-sFN">
+                    <rect key="frame" x="0.0" y="174" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Bud-mu-krt"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
-                    <state key="normal" title="确认">
+                    <state key="normal" title="取消">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -63,13 +63,13 @@
                         <action selector="ChickAlert:" destination="j68-tS-ArJ" eventType="touchUpInside" id="Uqt-7U-rkv"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fc3-j5-OUl">
-                    <rect key="frame" x="150" y="98" width="150" height="40"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fc3-j5-OUl">
+                    <rect key="frame" x="150" y="174" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="JJA-FY-fNv"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
-                    <state key="normal" title="取消">
+                    <state key="normal" title="完成">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -78,14 +78,14 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cgq-pq-wBe">
-                    <rect key="frame" x="8" y="48" width="284" height="42"/>
+                    <rect key="frame" x="8" y="48" width="284" height="118"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="fc3-j5-OUl" secondAttribute="bottom" id="4Ks-9A-0OC"/>
                 <constraint firstAttribute="trailing" secondItem="Cgq-pq-wBe" secondAttribute="trailing" constant="8" id="A9P-a5-IRY"/>
@@ -111,7 +111,7 @@
                 <outlet property="alertTextFailed" destination="Cgq-pq-wBe" id="sqM-RC-xha"/>
                 <outlet property="alertTitle" destination="uhp-vm-yPy" id="gi7-r3-j1w"/>
             </connections>
-            <point key="canvasLocation" x="113" y="91"/>
+            <point key="canvasLocation" x="113" y="129"/>
         </view>
     </objects>
     <resources>

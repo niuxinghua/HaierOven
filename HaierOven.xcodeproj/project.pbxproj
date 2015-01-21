@@ -43,6 +43,12 @@
 		452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */; };
 		45332B701A6E4DAA0014E8AA /* StudyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B6F1A6E4DAA0014E8AA /* StudyDetailController.m */; };
 		45332B731A6E4DC90014E8AA /* StudyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B721A6E4DC90014E8AA /* StudyDetailCell.m */; };
+		45332B761A6F4F080014E8AA /* TimeProgressAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */; };
+		45332B781A6F4F1D0014E8AA /* TimeProgressAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */; };
+		45332B7C1A6F66820014E8AA /* TimeOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B7B1A6F66820014E8AA /* TimeOutView.xib */; };
+		45332B7F1A6F669C0014E8AA /* TimeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B7E1A6F669C0014E8AA /* TimeOutView.m */; };
+		45332B831A6F79270014E8AA /* OrderAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B821A6F79270014E8AA /* OrderAlertView.m */; };
+		45332B851A6F79460014E8AA /* OrderAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B841A6F79460014E8AA /* OrderAlertView.xib */; };
 		45422DC41A638D97001A7223 /* BakeHouseHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45422DC31A638D97001A7223 /* BakeHouseHeaderReusableView.m */; };
 		45422DC81A63B764001A7223 /* SectionFiexibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45422DC71A63B764001A7223 /* SectionFiexibleView.m */; };
 		45422DCA1A63B776001A7223 /* SectionFiexibleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45422DC91A63B776001A7223 /* SectionFiexibleView.xib */; };
@@ -941,6 +947,15 @@
 		45332B6F1A6E4DAA0014E8AA /* StudyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyDetailController.m; sourceTree = "<group>"; };
 		45332B711A6E4DC90014E8AA /* StudyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyDetailCell.h; sourceTree = "<group>"; };
 		45332B721A6E4DC90014E8AA /* StudyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyDetailCell.m; sourceTree = "<group>"; };
+		45332B741A6F4F080014E8AA /* TimeProgressAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeProgressAlertView.h; sourceTree = "<group>"; };
+		45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeProgressAlertView.m; sourceTree = "<group>"; };
+		45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeProgressAlertView.xib; sourceTree = "<group>"; };
+		45332B7B1A6F66820014E8AA /* TimeOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeOutView.xib; sourceTree = "<group>"; };
+		45332B7D1A6F669C0014E8AA /* TimeOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeOutView.h; sourceTree = "<group>"; };
+		45332B7E1A6F669C0014E8AA /* TimeOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeOutView.m; sourceTree = "<group>"; };
+		45332B811A6F79270014E8AA /* OrderAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderAlertView.h; sourceTree = "<group>"; };
+		45332B821A6F79270014E8AA /* OrderAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderAlertView.m; sourceTree = "<group>"; };
+		45332B841A6F79460014E8AA /* OrderAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderAlertView.xib; sourceTree = "<group>"; };
 		45422DC21A638D97001A7223 /* BakeHouseHeaderReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeHouseHeaderReusableView.h; sourceTree = "<group>"; };
 		45422DC31A638D97001A7223 /* BakeHouseHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeHouseHeaderReusableView.m; sourceTree = "<group>"; };
 		45422DC61A63B764001A7223 /* SectionFiexibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionFiexibleView.h; sourceTree = "<group>"; };
@@ -2161,6 +2176,26 @@
 			name = CookStarController;
 			sourceTree = "<group>";
 		};
+		45332B791A6F4FFB0014E8AA /* alertTimeProgress */ = {
+			isa = PBXGroup;
+			children = (
+				45332B741A6F4F080014E8AA /* TimeProgressAlertView.h */,
+				45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */,
+				45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */,
+			);
+			name = alertTimeProgress;
+			sourceTree = "<group>";
+		};
+		45332B7A1A6F66600014E8AA /* alertnormal */ = {
+			isa = PBXGroup;
+			children = (
+				45332B7D1A6F669C0014E8AA /* TimeOutView.h */,
+				45332B7E1A6F669C0014E8AA /* TimeOutView.m */,
+				45332B7B1A6F66820014E8AA /* TimeOutView.xib */,
+			);
+			name = alertnormal;
+			sourceTree = "<group>";
+		};
 		45422DC51A63B70C001A7223 /* BakeHouse */ = {
 			isa = PBXGroup;
 			children = (
@@ -2681,6 +2716,9 @@
 		45B650C71A47F9BF00A6376D /* DeviceView */ = {
 			isa = PBXGroup;
 			children = (
+				45332B811A6F79270014E8AA /* OrderAlertView.h */,
+				45332B821A6F79270014E8AA /* OrderAlertView.m */,
+				45332B841A6F79460014E8AA /* OrderAlertView.xib */,
 				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
 				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
 				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
@@ -3412,6 +3450,8 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				45332B7A1A6F66600014E8AA /* alertnormal */,
+				45332B791A6F4FFB0014E8AA /* alertTimeProgress */,
 				45A6614E1A67660F00FC9B90 /* alertEditPsd */,
 				458632A01A6650690083C2FF /* alertDatePicker */,
 				4586329F1A66442B0083C2FF /* alertGender */,
@@ -4347,7 +4387,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = CWG9EF242Q;
+						DevelopmentTeam = AEPFFMR544;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -4734,6 +4774,7 @@
 				450850B51A6CD845003559FE /* xls@2x.png in Resources */,
 				8447CB891A5FC73700FADF9D /* JSQMessagesToolbarContentView.xib in Resources */,
 				45D9070E1A47CAAB00B97D92 /* xiaoxituisong@2x.png in Resources */,
+				45332B781A6F4F1D0014E8AA /* TimeProgressAlertView.xib in Resources */,
 				849F916F1A513981006234B9 /* icon_gfcp_n-.png in Resources */,
 				849F91711A513981006234B9 /* icon_gfcp_n@2x.png in Resources */,
 				45B88E131A4BCC8B00722EF6 /* yy-xz@3x.png in Resources */,
@@ -4880,8 +4921,10 @@
 				45BA02F91A442B31003810C7 /* MainViewNormalCell.xib in Resources */,
 				45D906AB1A47CAAB00B97D92 /* bofang.png in Resources */,
 				45BB36511A4A9615000EE3C4 /* zm-xz.png in Resources */,
+				45332B851A6F79460014E8AA /* OrderAlertView.xib in Resources */,
 				45B650D91A4815B400A6376D /* tianjiashebei@3x.png in Resources */,
 				45BC57361A4AF27C0052F520 /* dlfp-xz@3x.png in Resources */,
+				45332B7C1A6F66820014E8AA /* TimeOutView.xib in Resources */,
 				45B650D31A4814CA00A6376D /* lianjie@3x.png in Resources */,
 				45D906B21A47CAAB00B97D92 /* edit.png in Resources */,
 				45B88E511A4BE2A300722EF6 /* tzyx-cxz@3x.png in Resources */,
@@ -5093,6 +5136,7 @@
 				45A5E8131A4FF25600FCD2BD /* ChooseCoverView.m in Sources */,
 				845B33991A590FA800DD8887 /* CommentUser.m in Sources */,
 				450850AB1A6CD728003559FE /* UseBakeView.m in Sources */,
+				45332B831A6F79270014E8AA /* OrderAlertView.m in Sources */,
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -5198,6 +5242,7 @@
 				8447CB6C1A5FC73700FADF9D /* JSQMessagesBubbleImageFactory.m in Sources */,
 				8447CB6B1A5FC73700FADF9D /* JSQMessagesAvatarImageFactory.m in Sources */,
 				8447CB711A5FC73700FADF9D /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
+				45332B761A6F4F080014E8AA /* TimeProgressAlertView.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
 				84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */,
 				45A5469F1A592E4200BE62EC /* PhoneRegisterView.m in Sources */,
@@ -5220,6 +5265,7 @@
 				8441178C1A4BB8AF00628A64 /* UIRefreshControl+AFNetworking.m in Sources */,
 				458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */,
 				8447CB941A5FC89500FADF9D /* MessagesModel.m in Sources */,
+				45332B7F1A6F669C0014E8AA /* TimeOutView.m in Sources */,
 				844117821A4BB8AF00628A64 /* AFURLResponseSerialization.m in Sources */,
 				458632AA1A6672520083C2FF /* SettingViewController.m in Sources */,
 				45D9FEBF1A52866900023B9D /* YIPopupTextView.m in Sources */,

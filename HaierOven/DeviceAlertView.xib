@@ -58,13 +58,13 @@
                         <constraint firstAttribute="height" constant="40" id="KBf-o1-cvc"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cND-Z2-DHd">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cND-Z2-DHd">
                     <rect key="frame" x="0.0" y="310" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="lFn-2a-bWl"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
-                    <state key="normal" title="确认">
+                    <state key="normal" title="取消">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -72,13 +72,13 @@
                         <action selector="chickAlert:" destination="iN0-l3-epB" eventType="touchUpInside" id="HLy-ob-vWw"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQv-9U-dTZ">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQv-9U-dTZ">
                     <rect key="frame" x="150" y="310" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="W0n-Wj-CbG"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
-                    <state key="normal" title="取消">
+                    <state key="normal" title="完成">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -97,7 +97,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="WQv-9U-dTZ" secondAttribute="trailing" id="1Sb-KJ-OzF"/>
                 <constraint firstAttribute="centerY" secondItem="iyg-C7-SA2" secondAttribute="centerY" id="1mm-53-Xim"/>

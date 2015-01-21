@@ -12,11 +12,15 @@
 #import "DeviceWorkView.h"
 #import "DeviceAlertView.h"
 #import "MyPageView.h"
-
-@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate>
+#import "KKProgressTimer.h"
+#import "TimeProgressAlertView.h"
+#import "TimeOutView.h"
+#import "OrderAlertView.h"
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate,KKProgressTimerDelegate,TimeProgressAlertViewDelegate,TimeOutViewDelegate,OrderAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
+    NSInteger seconds;
 }
 
 
@@ -51,7 +55,11 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *controlBtns;
 @property (strong, nonatomic) IBOutlet UITableViewCell *actionCell;
 @property (strong, nonatomic) UIButton *tempBtn;//记录模版上一个点击按钮
-
+@property (weak, nonatomic) IBOutlet UIButton *clockIcon;
+@property (weak, nonatomic) IBOutlet KKProgressTimer *cookTimeView;
+@property (strong, nonatomic) TimeProgressAlertView *clockAlert;
+@property (strong, nonatomic) TimeOutView *timeOutAlert;
+@property (strong, nonatomic) OrderAlertView *orderAlert;
 /**
  *  烘焙温度
  */
@@ -101,6 +109,7 @@
     [self SetUPAlertView];
     [self setupToolbarItems];
     self.deviceBoardStatus = DeviceBoardStatusClose;
+    [self addObserver:self forKeyPath:@"self.clockIcon.selected" options:NSKeyValueObservingOptionNew context:NULL];
 //    [self loadMyOvenInstance];
 
 }
@@ -117,6 +126,21 @@
     [super viewWillDisappear:YES];
     self.navigationController.toolbarHidden = YES;
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"self.clockIcon.selected"]) {
+        self.cookTimeView.hidden = !self.clockIcon.selected;
+        self.clockIcon.hidden = self.clockIcon.selected;
+        
+    }
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"self.clockIcon.selected"];
+}
+
 - (void)setupToolbarItems
 {
     // 设置工具栏颜色 这里的图片需要黑色半透明图片
@@ -208,6 +232,27 @@
     self.deviceScrollView.contentSize = CGSizeMake(_deviceScrollView.frame.size.width * 4, _deviceScrollView.frame.size.height);
     self.deviceScrollView.pagingEnabled = YES;
     self.deviceScrollView.delegate = self;
+    
+    
+    self.cookTimeView.delegate = self;
+    self.cookTimeView.progressColor = GlobalOrangeColor;
+    self.cookTimeView.progressBackgroundColor = [UIColor whiteColor];
+    self.cookTimeView.circleBackgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TouchTimeView)];
+    [self.cookTimeView addGestureRecognizer:tap];
+    
+}
+
+-(void)TouchTimeView{
+    self.myWindow.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+//        self.deviceAlertView.frame = alertRectShow;
+//        self.clockAlert.frame = CGRectMake(alertRectShow.origin.x, alertRectShow.origin.y, alertRectShow.size.width, 200);
+        self.clockAlert.frame = alertRectShow;
+    } completion:^(BOOL finished) {
+        
+    }];
+
 }
 -(void)SetUPAlertView{
     alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
@@ -223,9 +268,20 @@
     self.myWindow.hidden = YES;
 
     self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:alertRectHidden];
-//    self.deviceAlertView = [[DeviceAlertView alloc]initWithFrame:CGRectMake(0, 0, PageW-40, (PageW-40)*1.167)];
     self.deviceAlertView.delegate = self;
     [self.myWindow addSubview:self.deviceAlertView];
+    
+    self.clockAlert = [[TimeProgressAlertView alloc]initWithFrame:alertRectHidden];
+    self.clockAlert.delegate = self;
+    [self.myWindow addSubview:self.clockAlert];
+    
+    self.timeOutAlert = [[TimeOutView alloc]initWithFrame:alertRectHidden];
+    self.timeOutAlert.delegate = self;
+    [self.myWindow addSubview:self.timeOutAlert];
+    
+    self.orderAlert = [[OrderAlertView alloc]initWithFrame:alertRectHidden];
+    self.orderAlert.delegate = self;
+    [self.myWindow addSubview:self.orderAlert];
 }
 
 #pragma mark - PageView&DeviceScrollView setting
@@ -234,6 +290,9 @@
 {
     self.pageView.page = floorf(_deviceScrollView.contentOffset.x / _deviceScrollView.frame.size.width);
 }
+
+
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView
 {
@@ -267,15 +326,15 @@
     self.bakeMode = self.bakeModeValues[sender.tag];
     
     //点击了工作模式
-    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
-                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
-    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
-                                        toDevice:self.myOven
-                                    andCommandSN:0
-                             andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+//    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
+//                                                                        commandAttrValue:self.bakeModeValues[sender.tag]];
+//    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+//                                        toDevice:self.myOven
+//                                    andCommandSN:0
+//                             andGroupCommandName:@""
+//                                       andResult:^(BOOL result) {
+//                                           
+//                                       }];
     
     
 }
@@ -474,8 +533,8 @@
 //    localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
 //    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
-    NSInteger seconds = [timeStr integerValue] * 60;
-    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:seconds alertBody:@"烤箱烘焙完成了"];
+    NSInteger secondss = [timeStr integerValue] * 60;
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:secondss alertBody:@"烤箱烘焙完成了"];
     
     
 }
@@ -712,13 +771,22 @@
 // 闹钟
 - (void)setClockTime:(NSString*)clockString
 {
+    clockString = clockString?clockString:@"1 分钟";
     
     NSRange range = [clockString rangeOfString:@" 分钟"];
     NSString* timeStr = [clockString substringToIndex:range.location];
     NSInteger minutes = [timeStr integerValue];
+    seconds = minutes*60;
+    __block CGFloat i = 0;
+    [self.cookTimeView startWithBlock:^CGFloat{
+        return i++ / seconds;
+    }];
+    
+    self.clockAlert.seconds = seconds;
+    self.clockAlert.start = YES;
+    
     
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    NSInteger seconds = minutes * 60;
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
     localNotification.alertBody = [NSString stringWithFormat:@"您设置的闹钟%@时间已到哦", clockString];
     localNotification.alertAction = @"alertAction";
@@ -782,10 +850,10 @@
             self.clockString = string;
             [self setClockTime:string];
             break;
-        case alertOrder:    //预约
-            self.orderString = string;
-            [self setOrderTime:string];
-            break;
+//        case alertOrder:    //预约
+//            self.orderString = string;
+//            [self setOrderTime:string];
+//            break;
         case alertNeedle:   //温度探针
             self.neddleString = string;
             [self setNeedleTemperature:string];
@@ -799,6 +867,7 @@
         default:
             break;
     }
+    
     self.myWindow.hidden = YES;
     self.deviceAlertView.frame = alertRectHidden;
 
@@ -806,10 +875,17 @@
 
 - (IBAction)alertView:(UIButton *)sender {
     NSLog(@"%d",sender.tag);
-    if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
+    self.myWindow.hidden = NO;
+    if (sender.tag ==5) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.orderAlert.frame = alertRectShow;
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }else if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
-        self.myWindow.hidden = NO;
         switch (sender.tag) {
             case 1:
                 self.deviceAlertView.string = @"180°";
@@ -828,7 +904,15 @@
     }else sender.selected = NO;
 
 }
+-(void)SettingOrder:(NSDate *)date{
+    
+    [self OrderAlertViewHidden];
+}
 
+-(void)OrderAlertViewHidden{
+    self.orderAlert.frame = alertRectHidden;
+    self.myWindow.hidden = YES;
+}
 #pragma mark-
 
 -(void)setTempString:(NSString *)tempString{
@@ -839,5 +923,61 @@
 -(void)setTimeString:(NSString *)timeString{
     _timeString = timeString;
     [self.howlong setTitle:_timeString forState:UIControlStateNormal];
+}
+
+
+
+#pragma kkprogressTimerDelegate
+- (void)didUpdateProgressTimer:(KKProgressTimer *)progressTimer percentage:(CGFloat)percentage {
+    
+    if (percentage >= 1) {
+        [progressTimer stop];
+    }
+//    NSInteger remainSeconds = (long)(self.seconds - self.seconds * percentage);
+//    self.remainLabel.text = [NSString stringWithFormat:@"%02d:%02d", remainSeconds/60, remainSeconds%60];
+    
+}
+
+- (void)didStopProgressTimer:(KKProgressTimer *)progressTimer percentage:(CGFloat)percentage {
+    NSLog(@"%s %f", __PRETTY_FUNCTION__, percentage);
+    if (self.myWindow.hidden) {
+        [self StopClock];
+        [self TimeOutAlertShow];
+    }
+}
+
+
+#pragma  mark- TimeAlertDelegate
+-(void)HiddenClockAlert{
+    self.myWindow.hidden = YES;
+    self.clockAlert.frame = alertRectHidden;
+}
+
+-(void)StopClock{
+    self.myWindow.hidden = YES;
+    self.clockAlert.frame = alertRectHidden;
+    self.clockIcon.selected = NO;
+    self.clockAlert.start = NO;
+}
+
+
+
+-(void)timeOutAlertHidden{
+    self.myWindow.hidden = YES;
+    self.timeOutAlert.frame = alertRectHidden;
+    self.clockIcon.selected = NO;
+}
+
+-(void)TimeOutAlertShow{
+    self.clockAlert.frame = alertRectHidden;
+    self.myWindow.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        //        self.deviceAlertView.frame = alertRectShow;
+        //        self.clockAlert.frame = CGRectMake(alertRectShow.origin.x, alertRectShow.origin.y, alertRectShow.size.width, 200);
+    self.timeOutAlert.frame = CGRectMake(alertRectShow.origin.x,PageH/2-40, alertRectShow.size.width, 81);
+    } completion:^(BOOL finished) {
+        
+    }];
+
 }
 @end
