@@ -41,6 +41,14 @@
 		452A6E7F1A5B8A4D00ABFE75 /* ly@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E7C1A5B8A4D00ABFE75 /* ly@3x.png */; };
 		452A6E821A5BA53300ABFE75 /* CookStarDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */; };
 		452A6E841A5BA54D00ABFE75 /* CookStarDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */; };
+		45332B701A6E4DAA0014E8AA /* StudyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B6F1A6E4DAA0014E8AA /* StudyDetailController.m */; };
+		45332B731A6E4DC90014E8AA /* StudyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B721A6E4DC90014E8AA /* StudyDetailCell.m */; };
+		45332B761A6F4F080014E8AA /* TimeProgressAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */; };
+		45332B781A6F4F1D0014E8AA /* TimeProgressAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */; };
+		45332B7C1A6F66820014E8AA /* TimeOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B7B1A6F66820014E8AA /* TimeOutView.xib */; };
+		45332B7F1A6F669C0014E8AA /* TimeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B7E1A6F669C0014E8AA /* TimeOutView.m */; };
+		45332B831A6F79270014E8AA /* OrderAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45332B821A6F79270014E8AA /* OrderAlertView.m */; };
+		45332B851A6F79460014E8AA /* OrderAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45332B841A6F79460014E8AA /* OrderAlertView.xib */; };
 		45422DC41A638D97001A7223 /* BakeHouseHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45422DC31A638D97001A7223 /* BakeHouseHeaderReusableView.m */; };
 		45422DC81A63B764001A7223 /* SectionFiexibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45422DC71A63B764001A7223 /* SectionFiexibleView.m */; };
 		45422DCA1A63B776001A7223 /* SectionFiexibleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45422DC91A63B776001A7223 /* SectionFiexibleView.xib */; };
@@ -215,6 +223,24 @@
 		45A6A3CA1A5F7BC1004DD28A /* BakeHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A6A3C91A5F7BC1004DD28A /* BakeHouseCell.m */; };
 		45A7E66F1A517F620075E2C1 /* AddFoodAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */; };
 		45A7E6711A517F780075E2C1 /* AddFoodAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */; };
+		45A97B7C1A6DFCFC0094F9BA /* AboutAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B7B1A6DFCFC0094F9BA /* AboutAppViewController.m */; };
+		45A97B841A6E00720094F9BA /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B7E1A6E00720094F9BA /* left.png */; };
+		45A97B851A6E00720094F9BA /* left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B7F1A6E00720094F9BA /* left@2x.png */; };
+		45A97B861A6E00720094F9BA /* left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B801A6E00720094F9BA /* left@3x.png */; };
+		45A97B871A6E00720094F9BA /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B811A6E00720094F9BA /* right.png */; };
+		45A97B881A6E00720094F9BA /* right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B821A6E00720094F9BA /* right@2x.png */; };
+		45A97B891A6E00720094F9BA /* right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B831A6E00720094F9BA /* right@3x.png */; };
+		45A97B8C1A6E03520094F9BA /* AboutAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B8B1A6E03520094F9BA /* AboutAppCell.m */; };
+		45A97B901A6E1FDD0094F9BA /* StudyCookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B8F1A6E1FDD0094F9BA /* StudyCookViewController.m */; };
+		45A97B931A6E1FFD0094F9BA /* StudyCookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A97B921A6E1FFD0094F9BA /* StudyCookCell.m */; };
+		45A97B9B1A6E238D0094F9BA /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B951A6E238D0094F9BA /* down.png */; };
+		45A97B9C1A6E238D0094F9BA /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B961A6E238D0094F9BA /* down@2x.png */; };
+		45A97B9D1A6E238D0094F9BA /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B971A6E238D0094F9BA /* down@3x.png */; };
+		45A97B9E1A6E238D0094F9BA /* UP_p.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B981A6E238D0094F9BA /* UP_p.png */; };
+		45A97B9F1A6E238D0094F9BA /* UP_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B991A6E238D0094F9BA /* UP_p@2x.png */; };
+		45A97BA01A6E238D0094F9BA /* UP_p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A97B9A1A6E238D0094F9BA /* UP_p@3x.png */; };
+		45A97BA31A6E29100094F9BA /* StudyCookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A97BA21A6E29100094F9BA /* StudyCookView.m */; };
+		45A97BA51A6E292B0094F9BA /* StudyCookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A97BA41A6E292B0094F9BA /* StudyCookView.xib */; };
 		45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A9994A1A50FB710008AFE3 /* CreatMneuController.m */; };
 		45A9994F1A50FD640008AFE3 /* pzy.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A9994C1A50FD640008AFE3 /* pzy.png */; };
 		45A999501A50FD640008AFE3 /* pzy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A9994D1A50FD640008AFE3 /* pzy@2x.png */; };
@@ -918,6 +944,19 @@
 		452A6E801A5BA53300ABFE75 /* CookStarDetailTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarDetailTopView.h; sourceTree = "<group>"; };
 		452A6E811A5BA53300ABFE75 /* CookStarDetailTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarDetailTopView.m; sourceTree = "<group>"; };
 		452A6E831A5BA54D00ABFE75 /* CookStarDetailTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookStarDetailTopView.xib; sourceTree = "<group>"; };
+		45332B6E1A6E4DAA0014E8AA /* StudyDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyDetailController.h; sourceTree = "<group>"; };
+		45332B6F1A6E4DAA0014E8AA /* StudyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyDetailController.m; sourceTree = "<group>"; };
+		45332B711A6E4DC90014E8AA /* StudyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyDetailCell.h; sourceTree = "<group>"; };
+		45332B721A6E4DC90014E8AA /* StudyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyDetailCell.m; sourceTree = "<group>"; };
+		45332B741A6F4F080014E8AA /* TimeProgressAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeProgressAlertView.h; sourceTree = "<group>"; };
+		45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeProgressAlertView.m; sourceTree = "<group>"; };
+		45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeProgressAlertView.xib; sourceTree = "<group>"; };
+		45332B7B1A6F66820014E8AA /* TimeOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeOutView.xib; sourceTree = "<group>"; };
+		45332B7D1A6F669C0014E8AA /* TimeOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeOutView.h; sourceTree = "<group>"; };
+		45332B7E1A6F669C0014E8AA /* TimeOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeOutView.m; sourceTree = "<group>"; };
+		45332B811A6F79270014E8AA /* OrderAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderAlertView.h; sourceTree = "<group>"; };
+		45332B821A6F79270014E8AA /* OrderAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderAlertView.m; sourceTree = "<group>"; };
+		45332B841A6F79460014E8AA /* OrderAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderAlertView.xib; sourceTree = "<group>"; };
 		45422DC21A638D97001A7223 /* BakeHouseHeaderReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakeHouseHeaderReusableView.h; sourceTree = "<group>"; };
 		45422DC31A638D97001A7223 /* BakeHouseHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakeHouseHeaderReusableView.m; sourceTree = "<group>"; };
 		45422DC61A63B764001A7223 /* SectionFiexibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionFiexibleView.h; sourceTree = "<group>"; };
@@ -1148,6 +1187,29 @@
 		45A7E66D1A517F620075E2C1 /* AddFoodAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFoodAlertView.h; sourceTree = "<group>"; };
 		45A7E66E1A517F620075E2C1 /* AddFoodAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFoodAlertView.m; sourceTree = "<group>"; };
 		45A7E6701A517F780075E2C1 /* AddFoodAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFoodAlertView.xib; sourceTree = "<group>"; };
+		45A97B7A1A6DFCFC0094F9BA /* AboutAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutAppViewController.h; sourceTree = "<group>"; };
+		45A97B7B1A6DFCFC0094F9BA /* AboutAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutAppViewController.m; sourceTree = "<group>"; };
+		45A97B7E1A6E00720094F9BA /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
+		45A97B7F1A6E00720094F9BA /* left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@2x.png"; sourceTree = "<group>"; };
+		45A97B801A6E00720094F9BA /* left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@3x.png"; sourceTree = "<group>"; };
+		45A97B811A6E00720094F9BA /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
+		45A97B821A6E00720094F9BA /* right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@2x.png"; sourceTree = "<group>"; };
+		45A97B831A6E00720094F9BA /* right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@3x.png"; sourceTree = "<group>"; };
+		45A97B8A1A6E03520094F9BA /* AboutAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutAppCell.h; sourceTree = "<group>"; };
+		45A97B8B1A6E03520094F9BA /* AboutAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutAppCell.m; sourceTree = "<group>"; };
+		45A97B8E1A6E1FDD0094F9BA /* StudyCookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyCookViewController.h; sourceTree = "<group>"; };
+		45A97B8F1A6E1FDD0094F9BA /* StudyCookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyCookViewController.m; sourceTree = "<group>"; };
+		45A97B911A6E1FFC0094F9BA /* StudyCookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyCookCell.h; sourceTree = "<group>"; };
+		45A97B921A6E1FFD0094F9BA /* StudyCookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyCookCell.m; sourceTree = "<group>"; };
+		45A97B951A6E238D0094F9BA /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
+		45A97B961A6E238D0094F9BA /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
+		45A97B971A6E238D0094F9BA /* down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@3x.png"; sourceTree = "<group>"; };
+		45A97B981A6E238D0094F9BA /* UP_p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UP_p.png; sourceTree = "<group>"; };
+		45A97B991A6E238D0094F9BA /* UP_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UP_p@2x.png"; sourceTree = "<group>"; };
+		45A97B9A1A6E238D0094F9BA /* UP_p@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UP_p@3x.png"; sourceTree = "<group>"; };
+		45A97BA11A6E29100094F9BA /* StudyCookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyCookView.h; sourceTree = "<group>"; };
+		45A97BA21A6E29100094F9BA /* StudyCookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyCookView.m; sourceTree = "<group>"; };
+		45A97BA41A6E292B0094F9BA /* StudyCookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudyCookView.xib; sourceTree = "<group>"; };
 		45A999491A50FB710008AFE3 /* CreatMneuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatMneuController.h; sourceTree = "<group>"; };
 		45A9994A1A50FB710008AFE3 /* CreatMneuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatMneuController.m; sourceTree = "<group>"; };
 		45A9994C1A50FD640008AFE3 /* pzy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pzy.png; sourceTree = "<group>"; };
@@ -2117,6 +2179,26 @@
 			name = CookStarController;
 			sourceTree = "<group>";
 		};
+		45332B791A6F4FFB0014E8AA /* alertTimeProgress */ = {
+			isa = PBXGroup;
+			children = (
+				45332B741A6F4F080014E8AA /* TimeProgressAlertView.h */,
+				45332B751A6F4F080014E8AA /* TimeProgressAlertView.m */,
+				45332B771A6F4F1D0014E8AA /* TimeProgressAlertView.xib */,
+			);
+			name = alertTimeProgress;
+			sourceTree = "<group>";
+		};
+		45332B7A1A6F66600014E8AA /* alertnormal */ = {
+			isa = PBXGroup;
+			children = (
+				45332B7D1A6F669C0014E8AA /* TimeOutView.h */,
+				45332B7E1A6F669C0014E8AA /* TimeOutView.m */,
+				45332B7B1A6F66820014E8AA /* TimeOutView.xib */,
+			);
+			name = alertnormal;
+			sourceTree = "<group>";
+		};
 		45422DC51A63B70C001A7223 /* BakeHouse */ = {
 			isa = PBXGroup;
 			children = (
@@ -2179,6 +2261,10 @@
 				458632A91A6672520083C2FF /* SettingViewController.m */,
 				458632AB1A667B560083C2FF /* SuggestPostViewController.h */,
 				458632AC1A667B560083C2FF /* SuggestPostViewController.m */,
+				45A97B7A1A6DFCFC0094F9BA /* AboutAppViewController.h */,
+				45A97B7B1A6DFCFC0094F9BA /* AboutAppViewController.m */,
+				45A97B8A1A6E03520094F9BA /* AboutAppCell.h */,
+				45A97B8B1A6E03520094F9BA /* AboutAppCell.m */,
 			);
 			name = SettingController;
 			sourceTree = "<group>";
@@ -2504,9 +2590,75 @@
 			name = "添加材料Cell";
 			sourceTree = "<group>";
 		};
+		45A97B7D1A6E005F0094F9BA /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				45A97B7E1A6E00720094F9BA /* left.png */,
+				45A97B7F1A6E00720094F9BA /* left@2x.png */,
+				45A97B801A6E00720094F9BA /* left@3x.png */,
+				45A97B811A6E00720094F9BA /* right.png */,
+				45A97B821A6E00720094F9BA /* right@2x.png */,
+				45A97B831A6E00720094F9BA /* right@3x.png */,
+				450850BD1A6CDF7C003559FE /* hbg.png */,
+				450850BE1A6CDF7C003559FE /* hbg@2x.png */,
+				450850BF1A6CDF7C003559FE /* hbg@3x.png */,
+				450850AE1A6CD845003559FE /* xls.png */,
+				450850AF1A6CD845003559FE /* xls@2x.png */,
+				450850B01A6CD845003559FE /* xls@3x.png */,
+				450850B11A6CD845003559FE /* xlx.png */,
+				450850B21A6CD845003559FE /* xlx@2x.png */,
+				450850B31A6CD845003559FE /* xlx@3x.png */,
+				45422DEA1A64C2C2001A7223 /* ww.png */,
+				45422DEB1A64C2C2001A7223 /* ww@2x.png */,
+				45422DEC1A64C2C2001A7223 /* ww@3x.png */,
+				45422DD11A63BA89001A7223 /* xlqbww.png */,
+				45422DD21A63BA89001A7223 /* xlqbww@2x.png */,
+				45422DD31A63BA89001A7223 /* xlqbww@3x.png */,
+				45422DCB1A63B98B001A7223 /* xlqbwwz.png */,
+				45422DCC1A63B98B001A7223 /* xlqbwwz@2x.png */,
+				45422DCD1A63B98B001A7223 /* xlqbwwz@3x.png */,
+				456402261A5FB5B50091CDFD /* mj.png */,
+				456402271A5FB5B50091CDFD /* mj@2x.png */,
+				456402281A5FB5B50091CDFD /* mj@3x.png */,
+			);
+			name = setting;
+			sourceTree = "<group>";
+		};
+		45A97B8D1A6E17320094F9BA /* StudyCook */ = {
+			isa = PBXGroup;
+			children = (
+				45A97B8E1A6E1FDD0094F9BA /* StudyCookViewController.h */,
+				45A97B8F1A6E1FDD0094F9BA /* StudyCookViewController.m */,
+				45A97B911A6E1FFC0094F9BA /* StudyCookCell.h */,
+				45A97B921A6E1FFD0094F9BA /* StudyCookCell.m */,
+				45A97BA11A6E29100094F9BA /* StudyCookView.h */,
+				45A97BA21A6E29100094F9BA /* StudyCookView.m */,
+				45A97BA41A6E292B0094F9BA /* StudyCookView.xib */,
+				45332B6E1A6E4DAA0014E8AA /* StudyDetailController.h */,
+				45332B6F1A6E4DAA0014E8AA /* StudyDetailController.m */,
+				45332B711A6E4DC90014E8AA /* StudyDetailCell.h */,
+				45332B721A6E4DC90014E8AA /* StudyDetailCell.m */,
+			);
+			name = StudyCook;
+			sourceTree = "<group>";
+		};
+		45A97B941A6E23220094F9BA /* studycook */ = {
+			isa = PBXGroup;
+			children = (
+				45A97B951A6E238D0094F9BA /* down.png */,
+				45A97B961A6E238D0094F9BA /* down@2x.png */,
+				45A97B971A6E238D0094F9BA /* down@3x.png */,
+				45A97B981A6E238D0094F9BA /* UP_p.png */,
+				45A97B991A6E238D0094F9BA /* UP_p@2x.png */,
+				45A97B9A1A6E238D0094F9BA /* UP_p@3x.png */,
+			);
+			name = studycook;
+			sourceTree = "<group>";
+		};
 		45A999481A50FA960008AFE3 /* UpLoadingMneu */ = {
 			isa = PBXGroup;
 			children = (
+				450850AC1A6CD740003559FE /* UseBakeView.xib */,
 				45BBA6911A524DB90066C143 /* AddStepCell.xib */,
 				45BBA6961A52552F0066C143 /* AddStepDetailCell.xib */,
 				45A9996A1A51307C0008AFE3 /* CellOfAddFoodTable.xib */,
@@ -2528,7 +2680,6 @@
 				45BBA68C1A524BED0066C143 /* UseDeviceCell.m */,
 				450850A91A6CD728003559FE /* UseBakeView.h */,
 				450850AA1A6CD728003559FE /* UseBakeView.m */,
-				450850AC1A6CD740003559FE /* UseBakeView.xib */,
 				45BBA68E1A524D800066C143 /* 步骤Cell */,
 				45A7E6721A519C800075E2C1 /* 添加材料Cell */,
 			);
@@ -2568,6 +2719,9 @@
 		45B650C71A47F9BF00A6376D /* DeviceView */ = {
 			isa = PBXGroup;
 			children = (
+				45332B811A6F79270014E8AA /* OrderAlertView.h */,
+				45332B821A6F79270014E8AA /* OrderAlertView.m */,
+				45332B841A6F79460014E8AA /* OrderAlertView.xib */,
 				45B88E5E1A4BF19500722EF6 /* DeviceAlertView.h */,
 				45B88E5F1A4BF19500722EF6 /* DeviceAlertView.m */,
 				45B88E611A4BF1B900722EF6 /* DeviceAlertView.xib */,
@@ -3170,6 +3324,7 @@
 		45C7E5561A3FD8FE000B086B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45A97B8D1A6E17320094F9BA /* StudyCook */,
 				8438F6F41A67C86C00E1436C /* WebViewController */,
 				45A661551A67848C00FC9B90 /* NotificationController */,
 				458632A71A6671D40083C2FF /* SettingController */,
@@ -3280,27 +3435,8 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				450850BD1A6CDF7C003559FE /* hbg.png */,
-				450850BE1A6CDF7C003559FE /* hbg@2x.png */,
-				450850BF1A6CDF7C003559FE /* hbg@3x.png */,
-				450850AE1A6CD845003559FE /* xls.png */,
-				450850AF1A6CD845003559FE /* xls@2x.png */,
-				450850B01A6CD845003559FE /* xls@3x.png */,
-				450850B11A6CD845003559FE /* xlx.png */,
-				450850B21A6CD845003559FE /* xlx@2x.png */,
-				450850B31A6CD845003559FE /* xlx@3x.png */,
-				45422DEA1A64C2C2001A7223 /* ww.png */,
-				45422DEB1A64C2C2001A7223 /* ww@2x.png */,
-				45422DEC1A64C2C2001A7223 /* ww@3x.png */,
-				45422DD11A63BA89001A7223 /* xlqbww.png */,
-				45422DD21A63BA89001A7223 /* xlqbww@2x.png */,
-				45422DD31A63BA89001A7223 /* xlqbww@3x.png */,
-				45422DCB1A63B98B001A7223 /* xlqbwwz.png */,
-				45422DCC1A63B98B001A7223 /* xlqbwwz@2x.png */,
-				45422DCD1A63B98B001A7223 /* xlqbwwz@3x.png */,
-				456402261A5FB5B50091CDFD /* mj.png */,
-				456402271A5FB5B50091CDFD /* mj@2x.png */,
-				456402281A5FB5B50091CDFD /* mj@3x.png */,
+				45A97B941A6E23220094F9BA /* studycook */,
+				45A97B7D1A6E005F0094F9BA /* setting */,
 				459E8BC41A5E80AC009D4ADA /* hpds */,
 				459E8BAB1A5D2A8B009D4ADA /* ShoppingList */,
 				452A6E5B1A5A8FDC00ABFE75 /* HallFame */,
@@ -3317,6 +3453,8 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				45332B7A1A6F66600014E8AA /* alertnormal */,
+				45332B791A6F4FFB0014E8AA /* alertTimeProgress */,
 				45A6614E1A67660F00FC9B90 /* alertEditPsd */,
 				458632A01A6650690083C2FF /* alertDatePicker */,
 				4586329F1A66442B0083C2FF /* alertGender */,
@@ -4254,7 +4392,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = CWG9EF242Q;
+						DevelopmentTeam = AEPFFMR544;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -4312,6 +4450,7 @@
 				45BB36531A4A9615000EE3C4 /* zm-xz@3x.png in Resources */,
 				8447CAD01A5B7FEE00FADF9D /* ios-social-sdk-shake.html in Resources */,
 				45A5E8151A4FF26B00FCD2BD /* ChooseCoverView.xib in Resources */,
+				45A97BA51A6E292B0094F9BA /* StudyCookView.xib in Resources */,
 				45C01C051A4D653600B54941 /* yrwc.png in Resources */,
 				450850C21A6CDF7C003559FE /* hbg@3x.png in Resources */,
 				45D907201A47EBE900B97D92 /* SecDeviceTableViewCell.xib in Resources */,
@@ -4324,6 +4463,7 @@
 				849F91701A513981006234B9 /* icon_gfcp_n.png in Resources */,
 				45BC57241A4AF20A0052F520 /* cthp-xz@3x.png in Resources */,
 				45B88E3B1A4BD7A100722EF6 /* kaishi-xz.png in Resources */,
+				45A97B9C1A6E238D0094F9BA /* down@2x.png in Resources */,
 				45B650C61A47F65500A6376D /* MyDeviceView.xib in Resources */,
 				45A5E8051A4FCACC00FCD2BD /* CGX.png in Resources */,
 				45D906E31A47CAAB00B97D92 /* mingrentang@2x.png in Resources */,
@@ -4379,6 +4519,7 @@
 				45B88E501A4BE2A300722EF6 /* tzyx-cxz@2x.png in Resources */,
 				849F917F1A513981006234B9 /* icon_share_n.png in Resources */,
 				45D906D51A47CAAB00B97D92 /* huisousuo@3x.png in Resources */,
+				45A97B841A6E00720094F9BA /* left.png in Resources */,
 				45D906DB1A47CAAB00B97D92 /* l3.png in Resources */,
 				8447CAB61A5B7FEE00FADF9D /* UMFeedbackLocalizable.strings in Resources */,
 				849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */,
@@ -4424,6 +4565,7 @@
 				45C7E5BD1A3FFDCD000B086B /* FirstTableViewCell.xib in Resources */,
 				45A546AD1A593E9C00BE62EC /* yty@2x.png in Resources */,
 				45A546931A58F08B00BE62EC /* wbdlwdj@3x.png in Resources */,
+				45A97B9F1A6E238D0094F9BA /* UP_p@2x.png in Resources */,
 				458952F11A496876009B5DD1 /* tuolian@2x.png in Resources */,
 				45D906EF1A47CAAB00B97D92 /* orangel@2x.png in Resources */,
 				8447CB6A1A5FC73700FADF9D /* JSQMessagesViewController.xib in Resources */,
@@ -4436,6 +4578,7 @@
 				45D906BB1A47CAAB00B97D92 /* femail.png in Resources */,
 				45BC57221A4AF20A0052F520 /* cthp-xz.png in Resources */,
 				458952B21A493C05009B5DD1 /* wifilianjie02@3x.png in Resources */,
+				45A97BA01A6E238D0094F9BA /* UP_p@3x.png in Resources */,
 				45BC579B1A4B0B0B0052F520 /* xiaji-xz@2x.png in Resources */,
 				45B88E0F1A4BCC8B00722EF6 /* yy-wxz@2x.png in Resources */,
 				458952B61A493C05009B5DD1 /* wifilianjie04.png in Resources */,
@@ -4459,6 +4602,7 @@
 				45D907151A47CAAB00B97D92 /* xinzengkaoxiang@3x.png in Resources */,
 				45BB36521A4A9615000EE3C4 /* zm-xz@2x.png in Resources */,
 				4586329D1A6638470083C2FF /* GenderAlertView.xib in Resources */,
+				45A97B871A6E00720094F9BA /* right.png in Resources */,
 				45D906E51A47CAAB00B97D92 /* mrqd.png in Resources */,
 				45A546C61A5A4EC200BE62EC /* arrow_phone_initial.png in Resources */,
 				45D907051A47CAAB00B97D92 /* sousuo@3x.png in Resources */,
@@ -4570,6 +4714,7 @@
 				45B88E111A4BCC8B00722EF6 /* yy-xz.png in Resources */,
 				458952AD1A493C05009B5DD1 /* wifilianjie01.png in Resources */,
 				45BB36291A4A8E6E000EE3C4 /* fs-cxz@3x.png in Resources */,
+				45A97B891A6E00720094F9BA /* right@3x.png in Resources */,
 				45BC57AA1A4B0DDB0052F520 /* shijian-wxz@2x.png in Resources */,
 				45BC57351A4AF27C0052F520 /* dlfp-xz@2x.png in Resources */,
 				45D857CF1A401134007B7AB7 /* SecTableViewCell.xib in Resources */,
@@ -4634,9 +4779,11 @@
 				450850B51A6CD845003559FE /* xls@2x.png in Resources */,
 				8447CB891A5FC73700FADF9D /* JSQMessagesToolbarContentView.xib in Resources */,
 				45D9070E1A47CAAB00B97D92 /* xiaoxituisong@2x.png in Resources */,
+				45332B781A6F4F1D0014E8AA /* TimeProgressAlertView.xib in Resources */,
 				849F916F1A513981006234B9 /* icon_gfcp_n-.png in Resources */,
 				849F91711A513981006234B9 /* icon_gfcp_n@2x.png in Resources */,
 				45B88E131A4BCC8B00722EF6 /* yy-xz@3x.png in Resources */,
+				45A97B861A6E00720094F9BA /* left@3x.png in Resources */,
 				45BB363F1A4A953A000EE3C4 /* xz-xz.png in Resources */,
 				45BC57B41A4B107A0052F520 /* lx-ybx@3x.png in Resources */,
 				45B88E3E1A4BD7A100722EF6 /* kashi.png in Resources */,
@@ -4670,10 +4817,12 @@
 				45B88E011A4BCBF300722EF6 /* nz-xz@3x.png in Resources */,
 				849F91761A513981006234B9 /* icon_like_n.png in Resources */,
 				45BC57571A4AF3AF0052F520 /* pk-wxz@3x.png in Resources */,
+				45A97B851A6E00720094F9BA /* left@2x.png in Resources */,
 				458952B01A493C05009B5DD1 /* wifilianjie02.png in Resources */,
 				45B650F81A482D6B00A6376D /* 1-2@2x.png in Resources */,
 				8447CAC21A5B7FEE00FADF9D /* UMSnsAccountViewController.xib in Resources */,
 				45A5E80A1A4FCACC00FCD2BD /* CGXDJ@3x.png in Resources */,
+				45A97B9D1A6E238D0094F9BA /* down@3x.png in Resources */,
 				45BC571D1A4AF20A0052F520 /* cthp-cxz@2x.png in Resources */,
 				45BB136C1A49124400FA44F4 /* progressBorder.png in Resources */,
 				45D906B61A47CAAB00B97D92 /* edit@2x.png in Resources */,
@@ -4684,6 +4833,7 @@
 				45A9994F1A50FD640008AFE3 /* pzy.png in Resources */,
 				45B650CC1A4813DC00A6376D /* kaxiang@2x.png in Resources */,
 				45BC578C1A4B08C00052F520 /* naozhong-wxz@2x.png in Resources */,
+				45A97B9E1A6E238D0094F9BA /* UP_p.png in Resources */,
 				45B88E5D1A4BE9AD00722EF6 /* tk-xz@3x.png in Resources */,
 				45BC57971A4B0B0B0052F520 /* xiaji-wxz.png in Resources */,
 				450850B61A6CD845003559FE /* xls@3x.png in Resources */,
@@ -4696,6 +4846,7 @@
 				849F91721A513981006234B9 /* icon_gfcp_s-.png in Resources */,
 				849F917D1A513981006234B9 /* icon_like_navi_s@2x.png in Resources */,
 				45BC57601A4AF3AF0052F520 /* rfpk-wxz@3x.png in Resources */,
+				45A97B881A6E00720094F9BA /* right@2x.png in Resources */,
 				45D907141A47CAAB00B97D92 /* xinzengkaoxiang@2x.png in Resources */,
 				45D906B81A47CAAB00B97D92 /* fakebg.png in Resources */,
 				45B88DFD1A4BCBF300722EF6 /* nz-wxz@2x.png in Resources */,
@@ -4775,8 +4926,10 @@
 				45BA02F91A442B31003810C7 /* MainViewNormalCell.xib in Resources */,
 				45D906AB1A47CAAB00B97D92 /* bofang.png in Resources */,
 				45BB36511A4A9615000EE3C4 /* zm-xz.png in Resources */,
+				45332B851A6F79460014E8AA /* OrderAlertView.xib in Resources */,
 				45B650D91A4815B400A6376D /* tianjiashebei@3x.png in Resources */,
 				45BC57361A4AF27C0052F520 /* dlfp-xz@3x.png in Resources */,
+				45332B7C1A6F66820014E8AA /* TimeOutView.xib in Resources */,
 				45B650D31A4814CA00A6376D /* lianjie@3x.png in Resources */,
 				45D906B21A47CAAB00B97D92 /* edit.png in Resources */,
 				45B88E511A4BE2A300722EF6 /* tzyx-cxz@3x.png in Resources */,
@@ -4860,6 +5013,7 @@
 				45B88E4B1A4BDDBF00722EF6 /* toolbarbg.png in Resources */,
 				458952BB1A493C05009B5DD1 /* wifilianjie05@3x.png in Resources */,
 				45D906FF1A47CAAB00B97D92 /* shijian@3x.png in Resources */,
+				45A97B9B1A6E238D0094F9BA /* down.png in Resources */,
 				C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */,
 				45BB36031A4A73E1000EE3C4 /* sectionbg.png in Resources */,
 				45C7E5781A3FDAB0000B086B /* 37x-Checkmark@2x.png in Resources */,
@@ -4929,6 +5083,7 @@
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
 				8447CB631A5FC73700FADF9D /* NSString+JSQMessages.m in Sources */,
+				45A97BA31A6E29100094F9BA /* StudyCookView.m in Sources */,
 				8447CB7E1A5FC73700FADF9D /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				8447CB831A5FC73700FADF9D /* JSQMessagesInputToolbar.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
@@ -4939,6 +5094,7 @@
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
 				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
+				45332B701A6E4DAA0014E8AA /* StudyDetailController.m in Sources */,
 				45B88E601A4BF19500722EF6 /* DeviceAlertView.m in Sources */,
 				452A6E521A5A7AAA00ABFE75 /* ShoppingListTableViewController.m in Sources */,
 				45A9994B1A50FB710008AFE3 /* CreatMneuController.m in Sources */,
@@ -4951,6 +5107,8 @@
 				8447CB7B1A5FC73700FADF9D /* JSQMessagesCellTextView.m in Sources */,
 				84E113821A52A46B00D16DDB /* CommentListCell.m in Sources */,
 				842A86E11A52767300C75EE4 /* StepsViewController.m in Sources */,
+				45A97B931A6E1FFD0094F9BA /* StudyCookCell.m in Sources */,
+				45332B731A6E4DC90014E8AA /* StudyDetailCell.m in Sources */,
 				458DD0691A651A4B006E84DD /* PECropView.m in Sources */,
 				C43BFB1F1A57E87B00FB00B6 /* DAKeyboardControl.m in Sources */,
 				45A546C81A5A4EC200BE62EC /* MJRefreshConst.m in Sources */,
@@ -4983,6 +5141,7 @@
 				45A5E8131A4FF25600FCD2BD /* ChooseCoverView.m in Sources */,
 				845B33991A590FA800DD8887 /* CommentUser.m in Sources */,
 				450850AB1A6CD728003559FE /* UseBakeView.m in Sources */,
+				45332B831A6F79270014E8AA /* OrderAlertView.m in Sources */,
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -5049,7 +5208,9 @@
 				45A546C91A5A4EC200BE62EC /* MJRefreshFooterView.m in Sources */,
 				8447CB761A5FC73700FADF9D /* JSQMessage.m in Sources */,
 				844117881A4BB8AF00628A64 /* UIAlertView+AFNetworking.m in Sources */,
+				45A97B8C1A6E03520094F9BA /* AboutAppCell.m in Sources */,
 				458952C81A493FF2009B5DD1 /* AddDeviceSucceedController.m in Sources */,
+				45A97B7C1A6DFCFC0094F9BA /* AboutAppViewController.m in Sources */,
 				8447CB851A5FC73700FADF9D /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				8441177A1A4BB8AF00628A64 /* UICKeyChainStore.m in Sources */,
 				8447CB741A5FC73700FADF9D /* JSQLocationMediaItem.m in Sources */,
@@ -5066,6 +5227,7 @@
 				8447CB701A5FC73700FADF9D /* JSQSystemSoundPlayer.m in Sources */,
 				8441178B1A4BB8AF00628A64 /* UIProgressView+AFNetworking.m in Sources */,
 				8441177B1A4BB8AF00628A64 /* AFHTTPRequestOperation.m in Sources */,
+				45A97B901A6E1FDD0094F9BA /* StudyCookViewController.m in Sources */,
 				8447CB6E1A5FC73700FADF9D /* JSQMessagesTimestampFormatter.m in Sources */,
 				452A6E651A5A90BE00ABFE75 /* CookStarController.m in Sources */,
 				457A77641A4294AB00E422D0 /* SearchView.m in Sources */,
@@ -5085,6 +5247,7 @@
 				8447CB6C1A5FC73700FADF9D /* JSQMessagesBubbleImageFactory.m in Sources */,
 				8447CB6B1A5FC73700FADF9D /* JSQMessagesAvatarImageFactory.m in Sources */,
 				8447CB711A5FC73700FADF9D /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
+				45332B761A6F4F080014E8AA /* TimeProgressAlertView.m in Sources */,
 				844117921A4BB8AF00628A64 /* MyTool.m in Sources */,
 				84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */,
 				45A5469F1A592E4200BE62EC /* PhoneRegisterView.m in Sources */,
@@ -5107,6 +5270,7 @@
 				8441178C1A4BB8AF00628A64 /* UIRefreshControl+AFNetworking.m in Sources */,
 				458952FE1A497F10009B5DD1 /* DeviceMessageCell.m in Sources */,
 				8447CB941A5FC89500FADF9D /* MessagesModel.m in Sources */,
+				45332B7F1A6F669C0014E8AA /* TimeOutView.m in Sources */,
 				844117821A4BB8AF00628A64 /* AFURLResponseSerialization.m in Sources */,
 				458632AA1A6672520083C2FF /* SettingViewController.m in Sources */,
 				45D9FEBF1A52866900023B9D /* YIPopupTextView.m in Sources */,

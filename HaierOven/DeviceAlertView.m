@@ -23,6 +23,8 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     //    if (self = [ super initWithFrame:frame]) {
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([DeviceAlertView class]) owner:self options:nil] firstObject];
+    self.layer.cornerRadius = 5;
+    self.layer.masksToBounds = YES;
     self.frame = frame;
     self.arrHours = [self gethourArr];
     self.arrMins = [self getMinute];
@@ -114,9 +116,7 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在预约时间开始工作";
             [self.pickview reloadAllComponents];
-#warning bug!!!!
-//            [self.pickview selectRow:10 inComponent:0 animated:NO];
-//            [self.pickview selectRow:15 inComponent:1 animated:NO];
+            
             self.colonLabel.hidden = NO;
 
             break;

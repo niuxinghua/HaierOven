@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="FZLTXHK.TTF">
+            <string>FZLTXHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="jIj-F9-tGa" customClass="TimeOutView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="81"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYu-67-B6P">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闹钟时间已到" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mh0-ol-FET">
+                            <rect key="frame" x="20" y="8" width="267" height="24"/>
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="JYu-67-B6P" secondAttribute="height" multiplier="15:2" id="3B2-mg-w5l"/>
+                        <constraint firstAttribute="trailing" secondItem="Mh0-ol-FET" secondAttribute="trailing" constant="13" id="Cec-UH-4g1"/>
+                        <constraint firstItem="Mh0-ol-FET" firstAttribute="top" secondItem="JYu-67-B6P" secondAttribute="top" constant="8" id="KYn-ua-x2q"/>
+                        <constraint firstItem="Mh0-ol-FET" firstAttribute="leading" secondItem="JYu-67-B6P" secondAttribute="leading" constant="20" id="cbU-p0-gaz"/>
+                        <constraint firstAttribute="bottom" secondItem="Mh0-ol-FET" secondAttribute="bottom" constant="8" id="gqj-Nh-smq"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oM-hW-STy">
+                    <rect key="frame" x="0.0" y="41" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="LyE-2J-chc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                    <state key="normal" title="好的">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="timeOut:" destination="jIj-F9-tGa" eventType="touchUpInside" id="ed6-fA-LcS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="1oM-hW-STy" secondAttribute="bottom" id="B0p-2W-17N"/>
+                <constraint firstItem="JYu-67-B6P" firstAttribute="top" secondItem="jIj-F9-tGa" secondAttribute="top" id="ROf-Ww-dZJ"/>
+                <constraint firstItem="JYu-67-B6P" firstAttribute="leading" secondItem="jIj-F9-tGa" secondAttribute="leading" id="Uqs-5X-0I0"/>
+                <constraint firstAttribute="trailing" secondItem="1oM-hW-STy" secondAttribute="trailing" id="Wcg-76-M4x"/>
+                <constraint firstItem="1oM-hW-STy" firstAttribute="leading" secondItem="jIj-F9-tGa" secondAttribute="leading" id="aXv-U4-rfb"/>
+                <constraint firstAttribute="trailing" secondItem="JYu-67-B6P" secondAttribute="trailing" id="ss3-6Q-YTZ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="113" y="62.5"/>
+        </view>
+    </objects>
+</document>
