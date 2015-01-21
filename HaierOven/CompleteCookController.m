@@ -29,9 +29,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)setCompleteTye:(CompleteTye)completeTye{
-    _completeTye = completeTye;
-    switch (completeTye) {
+- (void)viewWillAppear:(BOOL)animated
+{
+    switch (_completeTye) {
         case CompleteTyeCook:
             self.completeTitleLabel.text = @"烹饪已完成";
             self.completeDescription.text = @"烹饪已完成";
@@ -43,12 +43,13 @@
             self.completeDescription.text = @"预热已完成";
             self.completeSentence.text = @"烤箱预热已完成，请将食物放入烤箱";
             self.completeImage.image = [UIImage imageNamed:@"yrwc"];
-
+            
             break;
         default:
             break;
     }
 }
+
 /*
 #pragma mark - Navigation
 

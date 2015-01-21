@@ -27,6 +27,7 @@
 {
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationAplied:) name:DEVICE_OPERATION_ACK_NOTIFICATION object:nil];
+        _currentStatus = [[OvenStatus alloc] init];
     }
     return self;
 }
@@ -165,7 +166,7 @@
 {
     uSDKNotificationCenter* sdkNotificationCenter = [uSDKNotificationCenter defaultCenter];
     
-    [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
+    [sdkNotificationCenter subscribeDevice:self selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
     
 }
 
@@ -237,9 +238,11 @@
     
     if ([notification.name isEqualToString:DEVICE_ONLINE_CHANGED_NOTIFICATION]) {
         NSLog(@"设备在线状态改变了");
+        [self updateCurrentOvenStatus];
         
     } else if ([notification.name isEqualToString:DEVICE_STATUS_CHANGED_NOTIFICATION]) {
         NSLog(@"设备状态上报通知");
+        [self updateCurrentOvenStatus];
         
     } else if ([notification.name isEqualToString:DEVICE_ALARM_NOTIFICATION]) {
         NSLog(@"设备报警");
@@ -389,15 +392,10 @@
 
 #pragma mark - 获取订阅设备的状态
 
-/**
- *  获取当前订阅设备的设备温度
- *
- *  @param completion 结果回调
- */
-- (void)getDeviceCallback:(completion)completion
+- (void)updateCurrentOvenStatus
 {
+    
     if (self.subscribedDevice == nil) {
-        completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"尚未订阅设备"]);
         return;
     }
     
@@ -410,12 +408,36 @@
                 break;
             }
         }
-        NSMutableDictionary* statusDict = currentDevice.attributeDict;
+        // 更新连线状态
+        _currentStatus.isReady = currentDevice.status == STATUS_READY ? YES : NO;
         
+        NSMutableDictionary* attrDict = currentDevice.attributeDict;
+        uSDKDeviceAttribute* statusAttr;
+        
+        // 是否开机
+        statusAttr = attrDict[@"20v001"];
+        _currentStatus.opened = [statusAttr.attrValue isEqualToString:@"20v001"] ? YES : NO;
+        
+        // 是否已关机
+        statusAttr = attrDict[@"20v002"];
+        _currentStatus.closed = [statusAttr.attrValue isEqualToString:@"20v002"] ? YES : NO;
+        
+        // 是否已启动
+        statusAttr = attrDict[@"20v003"];
+        _currentStatus.isWorking = [statusAttr.attrValue isEqualToString:@"20v003"] ? YES : NO;
+        
+        // 烤箱温度
+        statusAttr = attrDict[@"20v00g"];
+        _currentStatus.temperature = [statusAttr.attrValue integerValue];
+        
+        // 烘焙时间
+        statusAttr = attrDict[@"20v00f"];
+        _currentStatus.bakeTime = statusAttr.attrValue;
         
     }];
     
 }
+
 
 @end
 

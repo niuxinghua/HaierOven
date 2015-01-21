@@ -17,6 +17,8 @@
 #import <uSDKFramework/uSDKManager.h>
 #import <uSDKFramework/uSDKNotificationCenter.h>
 
+#import "OvenStatus.h"
+
 #define BindDeviceSuccussNotification  @"Bind device success"
 #define DeleteLocalOvenSuccessNotification @"Delete local oven success"
 
@@ -30,6 +32,11 @@ typedef void (^result) (BOOL result);
  *  当前订阅的烤箱
  */
 @property (strong, nonatomic)uSDKDevice* subscribedDevice;
+
+/**
+ *  当前烤箱的状态，当接收到设备状态变化时会更新此属性
+ */
+@property (strong, nonatomic) OvenStatus* currentStatus;
 
 
 /**
@@ -181,13 +188,6 @@ typedef void (^result) (BOOL result);
 
 
 #pragma mark - 获取订阅设备的状态
-
-/**
- *  获取当前订阅设备的设备温度
- *
- *  @param completion 结果回调
- */
-- (void)getDeviceCallback:(completion)completion;
 
 
 

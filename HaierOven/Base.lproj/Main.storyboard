@@ -3361,7 +3361,7 @@
         <!--Complete Cook Controller-->
         <scene sceneID="aqV-Q7-HwZ">
             <objects>
-                <viewController id="GFE-rj-cVM" customClass="CompleteCookController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Complete cook controller" id="GFE-rj-cVM" customClass="CompleteCookController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWm-6K-tyD"/>
                         <viewControllerLayoutGuide type="bottom" id="GzJ-3j-P50"/>

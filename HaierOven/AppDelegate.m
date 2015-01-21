@@ -42,6 +42,19 @@
 
 - (void)initNotification
 {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    }
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     NSInteger seconds = 10;
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
@@ -151,11 +164,10 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    OvenManager* ovenManager = [OvenManager sharedManager];
-    if (ovenManager.subscribedDevice != nil) {
-        [ovenManager unSubscribeAllNotifications:ovenManager.subscribedDevice];
-//        ovenManager.subscribedDevice = nil;
-    }
+//    OvenManager* ovenManager = [OvenManager sharedManager];
+//    if (ovenManager.subscribedDevice != nil) {
+//        [ovenManager unSubscribeAllNotifications:ovenManager.subscribedDevice];
+//    }
     
 }
 
