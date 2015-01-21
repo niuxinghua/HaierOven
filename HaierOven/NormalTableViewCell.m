@@ -68,7 +68,6 @@
     self.notificationbtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.notificationbtn.layer.borderWidth = 1.5f;
     self.notificationbtn.layer.masksToBounds = YES;
-    self.notificationbtn.hidden = NO;
-    
+    self.notificationbtn.hidden = [notificationCount integerValue] == 0;
 }
 @end
