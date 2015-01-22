@@ -107,7 +107,7 @@
     //                                                                                             font:[UIFont systemFontOfSize:14.0f]
     //                                                                                         diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
-    JSQMessagesAvatarImage *meImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"QQQ.png"]
+    JSQMessagesAvatarImage *meImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     JSQMessagesAvatarImage *herImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Vcs"]
@@ -144,7 +144,7 @@
     currentUser.userId = @"5";
     currentUser.userName = @"刘康";
     
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"QQQ.png"]];
+    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"default_avatar.png"]];
     JSQMessage *photoMessage = [JSQMessage messageWithSenderId:currentUser.userId
                                                    displayName:currentUser.userName
                                                          media:photoItem];

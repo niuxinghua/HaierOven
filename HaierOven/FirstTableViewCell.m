@@ -36,7 +36,7 @@
 - (void)setUser:(User *)user
 {
     _user = user;
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar]  placeholderImage:IMAGENAMED(@"QQQ.png")];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar]];
     self.userNameLabel.text = user.nickName == nil ? @"点击登录" : user.userName;
     
     

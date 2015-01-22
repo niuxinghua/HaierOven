@@ -39,7 +39,7 @@
                             <action selector="Sginin:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vHg-eM-ZHY"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="13E-tk-MKG">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="13E-tk-MKG">
                         <rect key="frame" x="28" y="24" width="75" height="75"/>
                     </imageView>
                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx1-7T-TZj">
@@ -65,7 +65,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
+        <image name="default_avatar.png" width="127" height="127"/>
         <image name="logo.png" width="26" height="26"/>
         <image name="mrqd.png" width="72" height="16"/>
         <image name="yqd.png" width="72" height="16"/>

@@ -29,7 +29,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-IQ-WUJ">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-IQ-WUJ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="9OH-IQ-WUJ" secondAttribute="height" multiplier="5:4" id="IO5-uJ-07r"/>
@@ -41,7 +41,7 @@
                                         <constraint firstAttribute="height" constant="88" id="Q7R-Cn-lRK"/>
                                     </constraints>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="7RA-72-NEa">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="7RA-72-NEa">
                                     <rect key="frame" x="20" y="201" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="8rr-tC-a5a"/>
@@ -319,9 +319,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
         <image name="back.png" width="26" height="26"/>
-        <image name="fakedataImage.png" width="600" height="469"/>
+        <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
+        <image name="default_avatar.png" width="127" height="127"/>
         <image name="icon_follow.png" width="93" height="39"/>
         <image name="icon_followd.png" width="93" height="39"/>
         <image name="icon_gfcp_n.png" width="113" height="30"/>

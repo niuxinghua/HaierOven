@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,7 +24,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OUd-eZ-CUo" id="Vm4-zh-08R">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZR-sU-xhL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZR-sU-xhL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="211"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VT-Kj-Qfw">
@@ -81,7 +81,7 @@
                             <constraint firstAttribute="height" constant="27" id="p19-Er-WOa"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-PN-aSo">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-PN-aSo">
                         <rect key="frame" x="0.0" y="118" width="320" height="97"/>
                         <subviews>
                             <view alpha="0.85000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgX-NX-fC0" customClass="ContainerView">
@@ -126,7 +126,7 @@
                                     <constraint firstAttribute="height" constant="41" id="tWP-0W-ugZ"/>
                                     <constraint firstAttribute="width" constant="41" id="twX-LK-8Rv"/>
                                 </constraints>
-                                <state key="normal" image="QQQ.png">
+                                <state key="normal" image="default_avatar.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -213,11 +213,11 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
         <image name="aixin.png" width="24" height="24"/>
         <image name="aixin2.png" width="24" height="24"/>
         <image name="bofang.png" width="41" height="41"/>
-        <image name="fakedataImage.png" width="600" height="469"/>
+        <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
+        <image name="default_avatar.png" width="127" height="127"/>
         <image name="gfcp.png" width="76" height="27"/>
         <image name="shijian.png" width="24" height="24"/>
         <image name="v.png" width="14" height="14"/>

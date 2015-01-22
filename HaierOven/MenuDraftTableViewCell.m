@@ -43,7 +43,7 @@
 {
     _cookbook = cookbook;
     NSURL* imageUrl = [NSURL URLWithString:cookbook.coverPhoto];
-    [self.coverImage setImageWithURL:imageUrl placeholderImage:IMAGENAMED(@"fakedataImage.png")];
+    [self.coverImage setImageWithURL:imageUrl];
     self.foodNameLabel.text = cookbook.name;
     self.descriptionLabel.text = cookbook.desc;
 }

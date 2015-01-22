@@ -29,45 +29,56 @@
 
 + (User*)parseUserInfoWithDict:(NSDictionary*)userDict
 {
-    User* user = [[User alloc] init];
     
-    user.userBaseId     = [userDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userBaseID"]];
-    user.userId         = [userDict[@"userID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userID"]];
-    user.userType       = [userDict[@"userType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userType"]];
-    user.loginName      = [userDict[@"loginName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"loginName"]];
-    
-    NSString* password  = [[NSUserDefaults standardUserDefaults] valueForKey:@"password"];
-    if (password != nil) {
-        user.password   = password;
+    @try {
+        User* user = [[User alloc] init];
+        
+        user.userBaseId     = [userDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userBaseID"]];
+        user.userId         = [userDict[@"userID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userID"]];
+        user.userType       = [userDict[@"userType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userType"]];
+        user.loginName      = [userDict[@"loginName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"loginName"]];
+        
+        NSString* password  = [[NSUserDefaults standardUserDefaults] valueForKey:@"password"];
+        if (password != nil) {
+            user.password   = password;
+        }
+        user.email          = [userDict[@"email"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"email"]];
+        user.phone          = [userDict[@"mobile"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"mobile"]];
+        user.accType        = [userDict[@"accType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"accType"]];
+        user.status         = [userDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"status"]];
+        user.isDeleted      = [userDict[@"IsDeleted"] isKindOfClass:[NSNull class]] ? NO : [userDict[@"IsDeleted"] boolValue];
+        
+        NSDictionary* profileDict = userDict[@"userProfile"];
+        
+        user.userProfileId      = [profileDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"id"]];
+        user.nickName           = [profileDict[@"nickName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"nickName"]];
+        user.userName           = [profileDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userName"]];
+        user.sex                = [profileDict[@"sex"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"sex"]];
+        user.birthday           = [profileDict[@"birthday"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"birthday"]];
+        user.accessToken        = [profileDict[@"accessToken"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"accessToken"]];
+        user.note               = [profileDict[@"note"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"note"]];
+        user.maritalStatus      = [profileDict[@"maritalStatus"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"maritalStatus"]];
+        user.occupation         = [profileDict[@"occupation"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"occupation"]];
+        user.monthlyIncome      = [profileDict[@"monthlyIncome"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"monthlyIncome"]];
+        NSString* userAvatar    = [profileDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userAvatar"]];
+        user.userAvatar         = [DataParser parseImageUrlWithString:userAvatar];
+        user.focusCount         = [profileDict[@"focusCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"focusCount"]];
+        user.followCount        = [profileDict[@"followCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"followCount"]];
+        user.points             = [profileDict[@"points"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"points"]];
+        
+        user.userAttribute      = [userDict[@"userAttribute"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userAttribute"]];
+        user.marvellouschefInfo = [userDict[@"marvellouschefInfo"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"marvellouschefInfo"]];
+        
+        return user;
     }
-    user.email          = [userDict[@"email"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"email"]];
-    user.phone          = [userDict[@"mobile"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"mobile"]];
-    user.accType        = [userDict[@"accType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"accType"]];
-    user.status         = [userDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"status"]];
-    user.isDeleted      = [userDict[@"IsDeleted"] isKindOfClass:[NSNull class]] ? NO : [userDict[@"IsDeleted"] boolValue];
+    @catch (NSException *exception) {
+        NSLog(@"解析用户信息失败");
+    }
+    @finally {
+        
+    }
     
-    NSDictionary* profileDict = userDict[@"userProfile"];
     
-    user.userProfileId      = [profileDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"id"]];
-    user.nickName           = [profileDict[@"nickName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"nickName"]];
-    user.userName           = [profileDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userName"]];
-    user.sex                = [profileDict[@"sex"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"sex"]];
-    user.birthday           = [profileDict[@"birthday"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"birthday"]];
-    user.accessToken        = [profileDict[@"accessToken"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"accessToken"]];
-    user.note               = [profileDict[@"note"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"note"]];
-    user.maritalStatus      = [profileDict[@"maritalStatus"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"maritalStatus"]];
-    user.occupation         = [profileDict[@"occupation"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"occupation"]];
-    user.monthlyIncome      = [profileDict[@"monthlyIncome"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"monthlyIncome"]];
-    NSString* userAvatar    = [profileDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userAvatar"]];
-    user.userAvatar         = [DataParser parseImageUrlWithString:userAvatar];
-    user.focusCount         = [profileDict[@"focusCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"focusCount"]];
-    user.followCount        = [profileDict[@"followCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"followCount"]];
-    user.points             = [profileDict[@"points"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"points"]];
-    
-    user.userAttribute      = [userDict[@"userAttribute"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"userAttribute"]];
-    user.marvellouschefInfo = [userDict[@"marvellouschefInfo"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", userDict[@"marvellouschefInfo"]];
-    
-    return user;
 }
 
 + (NSMutableArray*)parseUsersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage

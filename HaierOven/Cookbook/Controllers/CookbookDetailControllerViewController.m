@@ -173,9 +173,9 @@
     }
     NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbookDetail.coverPhoto;
 
-    [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath] placeholderImage:IMAGENAMED(@"fakedataImage.png")];
+    [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath]];
     
-    [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath]];
     
     // 其他显示的内容
     NSMutableArray* tagNames = [NSMutableArray array];
