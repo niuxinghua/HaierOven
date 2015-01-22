@@ -79,22 +79,6 @@
 
 - (IBAction)Login:(id)sender {
     
-//    [[InternetManager sharedManager] testLoginWithSequenceId:@"1234"
-//                                                  andAccType:AccTypeHaier
-//                                                  andloginId:self.userNameTextFailed.text
-//                                                 andPassword:self.psdTextfailed.text
-//                                          andThirdpartyAppId:nil
-//                                    andThirdpartyAccessToken:nil
-//                                                andLoginType:LoginTypeMobile 
-//                                                    callBack:^(BOOL success, id obj, NSError *error) {
-//                                                        if (success) {
-//                                                            NSLog(@"登录成功");
-//                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-//                                                        } else {
-//                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
-//                                                        }
-//                                                        
-//                                                    }];
     if (![MyTool validateTelephone:self.userNameTextFailed.text]) {
         if (![MyTool validateEmail:self.userNameTextFailed.text]) {
             [super showProgressErrorWithLabelText:@"请填写正确的手机号或邮箱" afterDelay:1];

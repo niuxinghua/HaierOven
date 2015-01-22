@@ -28,29 +28,92 @@ typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeDefaultFailed,                          //其他错误
 };
 
+/**
+ *  验证方式
+ */
 typedef NS_ENUM(NSInteger, ValidateType) {
-    ValidateTypeNormal,      //
-    
+    /**
+     *  手机号
+     */
+    ValidateTypePhone   = 1,
+    /**
+     *  邮箱
+     */
+    ValidateTypeEmail
 };
 
+/**
+ *  验证场景
+ */
 typedef NS_ENUM(NSInteger, ValidateScene) {
-    ValidateSceneNormal,      //
-    
+    /**
+     *  激活用户
+     */
+    ValidateSceneActiveUser     = 1,
+    /**
+     *  密码重置
+     */
+    ValidateSceneResetPassword,
+    /**
+     *  修改邮箱
+     */
+    ValidateSceneChangeEmail,
+    /**
+     *  修改手机号
+     */
+    ValidateScenePhone
 };
 
+/**
+ *  登录ID类型
+ */
 typedef NS_ENUM(NSInteger, AccType) {
-    AccTypeHaier    = 0,    //官网
-    AccTypeQQ,      //QQ
-    AccTypeWeixin,  //微信
-    AccTypeSina,    //新浪
-    
+    /**
+     *  海尔官网
+     */
+    AccTypeHaier    = 0,
+    /**
+     *  QQ
+     */
+    AccTypeQQ,
+    /**
+     *  微信
+     */
+    AccTypeWeixin,
+    /**
+     *  新浪
+     */
+    AccTypeSina,
+    /**
+     *  豆瓣
+     */
+    AccTypeDouban,
+    /**
+     *  人人
+     */
+    AccTypeRenRen,
+    /**
+     *  uHome用户
+     */
+    AccTypeUhome    = 99
 };
 
+/**
+ *  海尔官网用户的登录类型
+ */
 typedef NS_ENUM(NSInteger, LoginType) {
-    LoginTypeUserName = 0,  //用户名登录
-    LoginTypeMobile,      //手机号登录
-    LoginTypeEmail,         //邮箱登录
-    
+    /**
+     *  用户名登录
+     */
+    LoginTypeUserName = 0,
+    /**
+     *  手机号登录
+     */
+    LoginTypeMobile,
+    /**
+     *  邮箱登录
+     */
+    LoginTypeEmail
 };
 
 
@@ -95,13 +158,13 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 /**
  *  激活用户, 注册成功后海尔会发个验证码到注册的手机，然后需要通过app激活，app只需要传入收到的uvc（验证码）和用户名(注册用户名、手机号或邮箱)
  *
- *  @param loginName     <#loginName description#>
- *  @param validateType  <#validateType description#>
- *  @param scene         <#scene description#>
- *  @param accType       <#accType description#>
- *  @param transactionId <#transactionId description#>
- *  @param uvc           <#uvc description#>
- *  @param completion    <#completion description#>
+ *  @param loginName     手机号、邮箱
+ *  @param validateType  验证方式：手机号/邮箱
+ *  @param scene         验证场景：激活，密码重置等
+ *  @param accType       登录ID类型
+ *  @param transactionId 获取激活码回传的事件id
+ *  @param uvc           验证码信息
+ *  @param completion    结果回调
  */
 - (void)activateUserWithLoginName:(NSString*)loginName
                   andValidateType:(ValidateType)validateType
@@ -140,14 +203,12 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param validateType  <#validateType description#>
  *  @param validateScene <#validateScene description#>
  *  @param accType       <#accType description#>
- *  @param transactionId <#transactionId description#>
  *  @param completion    结果回调
  */
 - (void)getVerCodeWithLoginName:(NSString*)loginName
                 andValidateType:(ValidateType)validateType
                andValidateScene:(ValidateScene)scene
                      andAccType:(AccType)accType
-               andTransactionId:(NSString*)transactionId
                        callBack:(myCallback)completion;
 
 /**

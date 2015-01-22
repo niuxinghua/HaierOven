@@ -107,6 +107,7 @@
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
         <mutableArray key="FZLTXHK.TTF">
             <string>FZLTXHK--GBK1-0</string>
@@ -6128,13 +6129,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKe-XE-OjN">
-                                <rect key="frame" x="16" y="119" width="288" height="41"/>
+                                <rect key="frame" x="16" y="92" width="157" height="38"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入你收到的验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FfB-5k-UpK">
-                                        <rect key="frame" x="8" y="3" width="272" height="35"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FfB-5k-UpK">
+                                        <rect key="frame" x="8" y="1" width="141" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                                         <connections>
                                             <outlet property="delegate" destination="d6U-53-3yT" id="Ykb-3f-WyH"/>
                                         </connections>
@@ -6142,46 +6143,53 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="FfB-5k-UpK" secondAttribute="bottom" constant="3" id="L8g-AA-ugr"/>
-                                    <constraint firstItem="FfB-5k-UpK" firstAttribute="leading" secondItem="rKe-XE-OjN" secondAttribute="leading" constant="8" id="ZL3-nD-Aes"/>
-                                    <constraint firstAttribute="trailing" secondItem="FfB-5k-UpK" secondAttribute="trailing" constant="8" id="qUH-4a-bcV"/>
-                                    <constraint firstAttribute="height" constant="41" id="rGp-iR-lzB"/>
-                                    <constraint firstItem="FfB-5k-UpK" firstAttribute="top" secondItem="rKe-XE-OjN" secondAttribute="top" constant="3" id="xeb-cd-vYA"/>
+                                    <constraint firstItem="FfB-5k-UpK" firstAttribute="top" secondItem="rKe-XE-OjN" secondAttribute="top" constant="1" id="9vR-Jf-tgM"/>
+                                    <constraint firstAttribute="width" constant="157" id="Abs-Ad-Lwe"/>
+                                    <constraint firstAttribute="bottom" secondItem="FfB-5k-UpK" secondAttribute="bottom" constant="2" id="UIP-i4-SdA"/>
+                                    <constraint firstAttribute="trailing" secondItem="FfB-5k-UpK" secondAttribute="trailing" constant="8" id="Uh1-jK-8oL"/>
+                                    <constraint firstItem="FfB-5k-UpK" firstAttribute="leading" secondItem="rKe-XE-OjN" secondAttribute="leading" constant="8" id="kQo-pU-4n9"/>
+                                    <constraint firstAttribute="height" constant="38" id="pJ3-Sf-zL3"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="headTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7u-Zd-ytm">
-                                <rect key="frame" x="87" y="168" width="146" height="30"/>
+                                <rect key="frame" x="181" y="98" width="123" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.66162247910000005" blue="0.22306243340000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Poj-ff-RDM"/>
-                                    <constraint firstAttribute="width" constant="146" id="hvj-MV-MPs"/>
+                                    <constraint firstAttribute="width" constant="123" id="Dfc-xR-Yk2"/>
+                                    <constraint firstAttribute="height" constant="30" id="Y0O-P6-PtK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                                 <state key="normal" title="重新获取验证码">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="forgetPsd:" destination="d6U-53-3yT" eventType="touchUpInside" id="PLy-nB-bgl"/>
+                                    <action selector="getVerifyCodeTapped:" destination="d6U-53-3yT" eventType="touchUpInside" id="tFU-Yz-7c2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olB-pW-YD3">
-                                <rect key="frame" x="25" y="206" width="270" height="31"/>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" restorationIdentifier="Active user controller" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olB-pW-YD3">
+                                <rect key="frame" x="25" y="156" width="270" height="31"/>
                                 <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="CWG-D0-ceD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
-                                <state key="normal" title=" 确定">
+                                <state key="normal" title="激活">
                                     <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="ActiveTapped:" destination="d6U-53-3yT" eventType="touchUpInside" id="4Um-30-Yxs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="olB-pW-YD3" firstAttribute="leading" secondItem="tKK-Gu-27g" secondAttribute="leading" constant="25" id="5id-zn-fpQ"/>
-                            <constraint firstAttribute="trailing" secondItem="rKe-XE-OjN" secondAttribute="trailing" constant="16" id="7XD-hg-NDE"/>
-                            <constraint firstItem="rKe-XE-OjN" firstAttribute="top" secondItem="iTf-rx-boR" secondAttribute="bottom" constant="55" id="7d4-hE-33J"/>
-                            <constraint firstItem="olB-pW-YD3" firstAttribute="top" secondItem="y7u-Zd-ytm" secondAttribute="bottom" constant="8" id="ddQ-mu-2Lo"/>
-                            <constraint firstItem="rKe-XE-OjN" firstAttribute="leading" secondItem="tKK-Gu-27g" secondAttribute="leading" constant="16" id="eIr-zN-QGb"/>
-                            <constraint firstAttribute="centerX" secondItem="y7u-Zd-ytm" secondAttribute="centerX" id="fht-sC-4PI"/>
-                            <constraint firstAttribute="trailing" secondItem="olB-pW-YD3" secondAttribute="trailing" constant="25" id="rhL-HX-GHU"/>
-                            <constraint firstItem="y7u-Zd-ytm" firstAttribute="top" secondItem="rKe-XE-OjN" secondAttribute="bottom" constant="8" id="y4g-jM-vVl"/>
+                            <constraint firstItem="rKe-XE-OjN" firstAttribute="centerY" secondItem="y7u-Zd-ytm" secondAttribute="centerY" constant="-2" id="0Pc-Pt-R12"/>
+                            <constraint firstItem="y7u-Zd-ytm" firstAttribute="leading" secondItem="rKe-XE-OjN" secondAttribute="trailing" constant="8" id="4lT-Ej-p8N"/>
+                            <constraint firstItem="olB-pW-YD3" firstAttribute="top" secondItem="rKe-XE-OjN" secondAttribute="bottom" constant="26" id="bKU-ib-ZQC"/>
+                            <constraint firstAttribute="trailing" secondItem="olB-pW-YD3" secondAttribute="trailing" constant="25" id="cCU-7u-Fe0"/>
+                            <constraint firstItem="olB-pW-YD3" firstAttribute="leading" secondItem="tKK-Gu-27g" secondAttribute="leading" constant="25" id="dly-MI-HOz"/>
+                            <constraint firstItem="rKe-XE-OjN" firstAttribute="leading" secondItem="tKK-Gu-27g" secondAttribute="leading" constant="16" id="rv3-Hp-wgy"/>
+                            <constraint firstItem="rKe-XE-OjN" firstAttribute="top" secondItem="iTf-rx-boR" secondAttribute="bottom" constant="28" id="vvO-Gz-8zS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cpc-Kl-KNQ">
@@ -6203,7 +6211,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="olB-pW-YD3" id="896-Q2-BZt"/>
                         <outlet property="getVefifyCodeButton" destination="y7u-Zd-ytm" id="u2X-LN-QE6"/>
-                        <outlet property="userNameTextFailed" destination="FfB-5k-UpK" id="JmB-sb-1Ld"/>
+                        <outlet property="textfieldContainerView" destination="rKe-XE-OjN" id="FqN-E5-HUg"/>
                         <outlet property="verifyCodeTextField" destination="FfB-5k-UpK" id="Adr-mM-X0W"/>
                     </connections>
                 </viewController>

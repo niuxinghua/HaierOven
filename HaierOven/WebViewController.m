@@ -40,16 +40,19 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    _loadingIndicator.hidden = NO;
     [_loadingIndicator startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    _loadingIndicator.hidden = YES;
     [_loadingIndicator stopAnimating];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    _loadingIndicator.hidden = YES;
     [_loadingIndicator stopAnimating];
 }
 
