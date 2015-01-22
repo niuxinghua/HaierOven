@@ -12,13 +12,14 @@
 #import "SecTableViewCell.h"
 #import "SecDeviceTableViewCell.h"
 #import "NormalTableViewCell.h"
-@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate>
+#import "LeftMenuAlert.h"
+@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate,LeftMenuAlertDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
-
 @property (strong, nonatomic) User* currentUser;
-
 @property (nonatomic) NSInteger notificationCount;
+@property (strong, nonatomic) UIWindow *myWindow;
+@property (strong, nonatomic) LeftMenuAlert *leftMenuAlert;
 @end
 
 @implementation LeftMenuViewController
@@ -56,12 +57,28 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
     
+    self.myWindow = [UIWindow new];
+    self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
+    self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = YES;
+    
+    self.leftMenuAlert = [[LeftMenuAlert alloc]initWithFrame:alert_RectHidden];
+    self.leftMenuAlert.delegate = self;
+    [self.myWindow addSubview:self.leftMenuAlert];
     // Do any additional setup after loading the view.
 }
 
+-(void)isGoingToLogin:(BOOL)goLogin{
+    self.myWindow.hidden = YES;
+    self.leftMenuAlert.frame = alert_RectHidden;
+}
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.tempView = nil;
 }
 
 - (void)reload
@@ -119,35 +136,44 @@
     switch (indexPath.row) {
             
         case 0:
-            if (IsLogin) {
-                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
-                                                             animated:YES];
-                [self.sideMenuViewController hideMenuViewController];
-            } else {
+            
+//            if (IsLogin) {
+//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
+//                                                             animated:YES];
+//                [self.sideMenuViewController hideMenuViewController];
+//            } else {
                 
 //                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]
 //                                                             animated:YES];
 //                [self.sideMenuViewController hideMenuViewController];
                 
-                [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
-                
-            }
+//                [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
+//                
+//            }
             
             
             break;
         case 1:
-            if ([DataCenter sharedInstance].myOvens.count == 0) {
-                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
-                                                             animated:YES];
-                [self.sideMenuViewController hideMenuViewController];
-                break;
-            }else{
-                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
-                                                             animated:YES];
-                [self.sideMenuViewController hideMenuViewController];
-                break;
-            }
-
+        {
+            self.myWindow.hidden= NO;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+            
+            }];
+            break;
+//            if ([DataCenter sharedInstance].myOvens.count == 0) {
+//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+//                                                             animated:YES];
+//                [self.sideMenuViewController hideMenuViewController];
+//                break;
+//            }else{
+//      
+//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+//                                                             animated:YES];
+//                [self.sideMenuViewController hideMenuViewController];
+//                break;
+//            }
+        }
         case 2:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"]]
                                                          animated:YES];
@@ -259,7 +285,7 @@
         cell.titleImage.image = images[indexPath.row-2];
         cell.cellSelectedView.backgroundColor = UIColorFromRGB(0xb06206);
         cell.backgroundColor = GlobalOrangeColor;
-        if (indexPath.row ==2) {
+        if (indexPath.row ==2&&!self.tempView) {
             self.tempView = cell.cellSelectedView;
             self.tempView.hidden = NO;
         }
@@ -298,9 +324,6 @@
             
         }
     }];
-    
-    
-    
 }
 -(void)ChangeController:(UIView *)btn{
     tempView.hidden = YES;

@@ -23,7 +23,7 @@
 @property (nonatomic) NSInteger recommentPageIndex;
 @end
 #define HeaderViewRate         0.1388888
-#define CellImageRate   0.6
+#define CellImageRate   0.8
 @implementation BakedGroupController
 
 - (id)initWithCoder:(NSCoder *)aDecoder

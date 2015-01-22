@@ -18,7 +18,7 @@
 
 #define AdvRate         0.5
 #define ScrRate         0.1388888
-#define CellImageRate   0.6
+#define CellImageRate   0.8
 @interface MainViewController () <MainViewNormalCellDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
@@ -104,6 +104,7 @@
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
                 [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
                 cookerImage.backgroundColor = GlobalOrangeColor;
+                cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
             }
             
@@ -213,6 +214,9 @@
         btn.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size: 15.0];
         
         [btn addTarget:self action:@selector(SelectTagBtn:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.tags.count<5) {
+            btn.frame = CGRectMake((PageW-8)/self.tags.count*loop+8,0,(PageW-8)/self.tags.count, self.tagsScrollView.height);
+        }else
         btn.frame = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
         [self.tagsScrollView addSubview:btn];
     }
