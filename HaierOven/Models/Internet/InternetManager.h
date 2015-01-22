@@ -151,6 +151,18 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
                        callBack:(myCallback)completion;
 
 /**
+ *  第三方登录信息补全
+ *
+ *  @param phone      手机号
+ *  @param email      邮箱
+ *  @param userName   姓名
+ *  @param nickName   昵称
+ *  @param completion 结果回调
+ */
+- (void)completeThirdPartyWithPassword:(NSString*)password phone:(NSString*)phone email:(NSString*)email userName:(NSString*)userName nickName:(NSString*)nickName callBack:(myCallback)completion;
+
+
+/**
  *  退出登录
  *
  *  @param loginName  登录名

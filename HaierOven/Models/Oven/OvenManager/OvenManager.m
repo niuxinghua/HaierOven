@@ -434,6 +434,13 @@
         statusAttr = attrDict[@"20v00f"];
         _currentStatus.bakeTime = statusAttr.attrValue;
         
+        // 是否有感肉温度探针
+        statusAttr = attrDict[@"60v003"];
+        _currentStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
+        
+        
+        
+        
     }];
     
 }

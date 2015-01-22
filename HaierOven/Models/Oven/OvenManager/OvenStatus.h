@@ -40,6 +40,10 @@
  */
 @property (copy, nonatomic) NSString* bakeTime;
 
+/**
+ *  是否有感肉温度探针
+ */
+@property (nonatomic) BOOL hadTemperatureDetector;
 
 
 

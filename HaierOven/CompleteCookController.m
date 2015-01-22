@@ -72,14 +72,17 @@
     
     if (sender.selected) {
         [self bootup];
+        for (UIButton* button in self.on_offBtn) {
+            button.selected = NO;
+        }
     } else {
         [self shutdown];
+        for (UIButton* button in self.on_offBtn) {
+            button.selected = YES;
+        }
     }
+
     
-    OvenManager* ovenManager = [OvenManager sharedManager];
-    for (UIButton* button in self.on_offBtn) {
-        button.selected = ovenManager.currentStatus.opened;
-    }
     
 }
 

@@ -159,15 +159,23 @@
 //            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
 //            [self presentViewController:root animated:YES completion:nil];
             
-            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
+//            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
             
-            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
+//            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
+            
+            [self goToActiveUser];  //跳转到激活用户页面
+            
             
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }
     }];
     
+    
+}
+
+- (void)goToActiveUser
+{
     
 }
 

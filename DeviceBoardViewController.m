@@ -57,7 +57,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *allbtns;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *controlBtns;
 @property (strong, nonatomic) IBOutlet UITableViewCell *actionCell;
-@property (strong, nonatomic) UIButton *tempBtn;//记录模版上一个点击按钮
 @property (weak, nonatomic) IBOutlet UIButton *clockIcon;
 @property (weak, nonatomic) IBOutlet KKProgressTimer *cookTimeView;
 @property (strong, nonatomic) TimeProgressAlertView *clockAlert;
@@ -113,7 +112,7 @@
     [self SetUpSubviews];
     [self SetUPAlertView];
     [self setupToolbarItems];
-    self.deviceBoardStatus = DeviceBoardStatusClose;
+    self.deviceBoardStatus = DeviceBoardStatusClosed;
     [self loadMyOvenInstance];
     
     self.ovenManager = [OvenManager sharedManager];
@@ -150,7 +149,7 @@
         
     } else if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.opened"]) {
         
-        if (self.deviceBoardStatus == DeviceBoardStatusOpen && !_ovenManager.currentStatus.opened) {
+        if (self.deviceBoardStatus == DeviceBoardStatusOpened && !_ovenManager.currentStatus.opened) {
             [self bootup];
         }
         
@@ -344,10 +343,18 @@
 #pragma mark -选择工作模式
 
 -(void)WorkModelChick:(UIButton*)sender{
-    _tempBtn.selected = !_tempBtn.selected;
-    sender.selected = !sender.selected;
-    _tempBtn = sender;
-    self.deviceBoardStatus = DeviceBoardStatusChoseModel;
+    if (self.deviceBoardStatus == DeviceBoardStatusWorking) {
+        [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
+        return;
+    }
+    
+    for (UIButton* button in self.workModelBtns) {
+        button.selected = NO;
+    }
+
+    sender.selected = YES;
+
+    self.deviceBoardStatus = DeviceBoardStatusSelectMode;
     
     self.howlong.selected = NO;
     self.temputure.selected = NO;
@@ -414,7 +421,7 @@
          return   PageW*0.278;
             break;
         case 2:
-            return  self.deviceBoardStatus ==DeviceBoardStatusStart? PageW*0.33:0;
+            return  self.deviceBoardStatus ==DeviceBoardStatusWorking? PageW*0.33:0;
             break;
         case 4:
             return  PageW*0.1528;
@@ -483,7 +490,7 @@
 
 -(void)StartWorking{
     
-    self.deviceBoardStatus = DeviceBoardStatusStart;
+    self.deviceBoardStatus = DeviceBoardStatusWorking;
     
     //点击运行后显示
     self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
@@ -555,7 +562,7 @@
         
         self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
         
-        self.deviceBoardStatus = DeviceBoardStatusOpen;
+        self.deviceBoardStatus = DeviceBoardStatusOpened;
         
         CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
         completeController.completeTye = CompleteTyeCook;
@@ -572,7 +579,7 @@
     self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     [self.timeable invalidate];
     self.timeable = nil;
-    self.deviceBoardStatus = DeviceBoardStatusOpen;
+    self.deviceBoardStatus = DeviceBoardStatusOpened;
     
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kPause commandAttrValue:kPause];
     [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
@@ -659,7 +666,7 @@
     }
     
     UIButton *btn = [self.deviceStatusBtns firstObject];
-    self.deviceBoardStatus = btn.selected ==NO?DeviceBoardStatusClose:DeviceBoardStatusOpen;
+    self.deviceBoardStatus = btn.selected ==NO?DeviceBoardStatusClosed:DeviceBoardStatusOpened;
     
     UIButton* button = sender;
     if (button.selected) {
@@ -673,7 +680,7 @@
 -(void)setDeviceBoardStatus:(DeviceBoardStatus)deviceBoardStatus{
     _deviceBoardStatus = deviceBoardStatus;
     switch (_deviceBoardStatus) {
-        case DeviceBoardStatusClose:
+        case DeviceBoardStatusClosed:
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = NO;
                 btn.selected = NO;
@@ -695,7 +702,7 @@
             [self.tableView reloadData];
             break;
             
-        case DeviceBoardStatusOpen:
+        case DeviceBoardStatusOpened:
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = NO;
                 btn.selected = NO;
@@ -715,13 +722,17 @@
                 btn.enabled = NO;
             }
             
+            //初始状态下闹钟按钮和快速预热可点击
+            self.clockIcon.enabled = YES;
+            self.ksyrTab.enabled = YES;
+            
             self.actionCell.hidden = YES;
             [self.tableView reloadData];
             break;
 
-        case DeviceBoardStatusStart:
+        case DeviceBoardStatusWorking:
             for (UIButton* btn in self.allbtns) {
-                btn.enabled = NO;
+                btn.enabled = YES;
             }
             
             for (UIButton *btn in self.controlBtns) {
@@ -729,7 +740,7 @@
             }
             
             for (UIButton *btn in self.workModelBtns) {
-                btn.enabled = NO;
+                btn.enabled = YES;
             }
             
             for (UIBarButtonItem *btn in self.toolbarItems) {
@@ -741,7 +752,7 @@
             break;
             
             
-        case DeviceBoardStatusChoseModel:
+        case DeviceBoardStatusSelectMode:
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = YES;
             }
@@ -846,7 +857,6 @@
 {
     
     
-    
 }
 
 // 预热
@@ -901,24 +911,50 @@
 
 }
 
+#pragma mark - 弹出设定窗口
+
 - (IBAction)alertView:(UIButton *)sender {
     NSLog(@"%d",sender.tag);
-    self.myWindow.hidden = NO;
-    if (sender.tag ==5) {
+    if (sender.tag ==5) {   // 预约按钮按下
+        
+        if (!self.howlong.selected) {
+            [super showProgressErrorWithLabelText:@"请先设定预约的烘焙时长" afterDelay:2];
+            return;
+        }
+        
+        NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
+        NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
+
+        self.orderAlert.minimumInteval = [timeStr integerValue] * 60.0;
+        
         [UIView animateWithDuration:0.2 animations:^{
             self.orderAlert.frame = alertRectShow;
+            
+            self.myWindow.hidden = NO;
+
         } completion:^(BOOL finished) {
             
         }];
 
-    }else if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
+    } else if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
+        self.myWindow.hidden = NO;
+
         switch (sender.tag) {
+                
             case 1:
+                if (self.deviceBoardStatus == DeviceBoardStatusWorking) {
+                    [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
+                    return;
+                }
                 self.deviceAlertView.string = @"180°";
                 break;
             case 2:
+                if (self.deviceBoardStatus == DeviceBoardStatusWorking) {
+                    [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
+                    return;
+                }
                 self.deviceAlertView.string = @"30 分钟";
                 break;
             default:
@@ -932,9 +968,24 @@
     }else sender.selected = NO;
 
 }
+
+#pragma mark - 选择了预约时间
+
 -(void)SettingOrder:(NSDate *)date{
     
     [self OrderAlertViewHidden];
+    
+    // 计算开始烘焙时间，已确保在预约时间之前完成烘焙：开始烘焙时间 = 预约完成时间 - 烘焙所需时间间隔
+    
+    // 1. 得到预约完成时间距离现在的秒数
+    NSTimeInterval inteval = [date timeIntervalSinceNow];
+    // 2. 得到开始烘焙的时间距离现在的秒数
+    inteval = inteval - self.orderAlert.minimumInteval;
+    
+    // 3. inteval时间后发送预约指令
+#warning 这里需要补全
+    
+    
 }
 
 -(void)OrderAlertViewHidden{

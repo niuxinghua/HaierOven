@@ -10,12 +10,18 @@
 #import "RegisterViewController.h"
 #import "RootViewController.h"
 #import "WebViewController.h"
+#import "CompleteController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *textborder;
 @property (strong, nonatomic) IBOutlet UIButton *loginBtn;
 @property (strong, nonatomic) IBOutlet UITextField *userNameTextFailed;
 @property (strong, nonatomic) IBOutlet UITextField *psdTextfailed;
+
+/**
+ *  第三方登录时的loginId, 若是第一次授权登录，补全信息需要此值作为password
+ */
+@property (copy, nonatomic) NSString* loginId;
 
 @end
 
@@ -34,7 +40,13 @@
         
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:LoginSuccussNotification object:nil];
     
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)turnLeftMenu
@@ -116,7 +128,7 @@
                                                     if (success) {
                                                         NSLog(@"登录成功");
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                     } else {
                                                         [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                     }
@@ -202,8 +214,14 @@
                                                             [super hiddenProgressHUD];
                                                             if (success) {
                                                                 NSLog(@"登录成功");
+                                                                
                                                                 [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                                [self dismissViewControllerAnimated:YES completion:nil];
+                                                                
+                                                                 // 如果是第一次第三方登录，需补全用户信息
+                                                                
+                                                                self.loginId = response.data[@"openid"];
+                                                                [self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+//
                                                             } else {
                                                                 [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                             }
@@ -214,6 +232,8 @@
         
     }];
 }
+
+#pragma mark - 微博登录
 
 - (void)loginWithSina
 {
@@ -242,6 +262,9 @@
                                                         if (success) {
                                                             NSLog(@"登录成功");
                                                             [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                            // 如果是第一次第三方登录，需补全用户信息
+                                                            self.loginId = response.data[@"openid"];
+                                                            [self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
                                                         } else {
                                                             [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                         }
@@ -251,6 +274,28 @@
         
         
     }];
+}
+
+#pragma mark - 跳转资料补全页面
+
+- (void)jumpToEditController
+{
+    
+    CompleteController* editController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete view controller"];
+    
+    editController.loginId = self.loginId;
+
+    [self.navigationController pushViewController:editController animated:YES];
+    
+    
+
+}
+
+#pragma mark - 关闭登录界面
+
+- (void)dismiss
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

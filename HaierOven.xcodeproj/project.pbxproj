@@ -693,6 +693,7 @@
 		840141501A4BDAE60050615F /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 8401414F1A4BDAE60050615F /* clear.png */; };
 		840141521A4BDD470050615F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 840141511A4BDD470050615F /* Icon.png */; };
 		840141911A4C0B7A0050615F /* MyPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840141901A4C0B7A0050615F /* MyPageView.m */; };
+		842388171A706CF8007AB206 /* CompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842388161A706CF8007AB206 /* CompleteController.m */; };
 		842A86CD1A52457300C75EE4 /* FoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86CC1A52457300C75EE4 /* FoodsViewController.m */; };
 		842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */; };
 		842A86D51A5248F700C75EE4 /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D41A5248F700C75EE4 /* FoodCell.xib */; };
@@ -842,6 +843,7 @@
 		84855F301A65062400830B75 /* product-design-animation-cn-20130712_848x480.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */; };
 		849392521A6E0CE700D78106 /* KKProgressTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392511A6E0CE700D78106 /* KKProgressTimer.m */; };
 		849392551A6F3ECB00D78106 /* OvenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392541A6F3ECB00D78106 /* OvenStatus.m */; };
+		849392BC1A6FE95C00D78106 /* ActiveUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392BB1A6FE95C00D78106 /* ActiveUserController.m */; };
 		849F916A1A513981006234B9 /* icon_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91491A513981006234B9 /* icon_follow.png */; };
 		849F916B1A513981006234B9 /* icon_follow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914A1A513981006234B9 /* icon_follow@2x.png */; };
 		849F916C1A513981006234B9 /* icon_followd-.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F914B1A513981006234B9 /* icon_followd-.png */; };
@@ -1719,6 +1721,8 @@
 		840141511A4BDD470050615F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8401418F1A4C0B7A0050615F /* MyPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageView.h; sourceTree = "<group>"; };
 		840141901A4C0B7A0050615F /* MyPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageView.m; sourceTree = "<group>"; };
+		842388151A706CF8007AB206 /* CompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteController.h; sourceTree = "<group>"; };
+		842388161A706CF8007AB206 /* CompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteController.m; sourceTree = "<group>"; };
 		842A86CB1A52457300C75EE4 /* FoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodsViewController.h; sourceTree = "<group>"; };
 		842A86CC1A52457300C75EE4 /* FoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodsViewController.m; sourceTree = "<group>"; };
 		842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddShoppingListCell.xib; sourceTree = "<group>"; };
@@ -2017,6 +2021,8 @@
 		849392511A6E0CE700D78106 /* KKProgressTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKProgressTimer.m; sourceTree = "<group>"; };
 		849392531A6F3ECB00D78106 /* OvenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvenStatus.h; sourceTree = "<group>"; };
 		849392541A6F3ECB00D78106 /* OvenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvenStatus.m; sourceTree = "<group>"; };
+		849392BA1A6FE95C00D78106 /* ActiveUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveUserController.h; sourceTree = "<group>"; };
+		849392BB1A6FE95C00D78106 /* ActiveUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveUserController.m; sourceTree = "<group>"; };
 		849F91481A513981006234B9 /* icon_follow-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow-.png"; sourceTree = "<group>"; };
 		849F91491A513981006234B9 /* icon_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_follow.png; sourceTree = "<group>"; };
 		849F914A1A513981006234B9 /* icon_follow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow@2x.png"; sourceTree = "<group>"; };
@@ -2416,10 +2422,14 @@
 			children = (
 				45A546821A58E56500BE62EC /* LoginViewController.h */,
 				45A546831A58E56500BE62EC /* LoginViewController.m */,
+				842388151A706CF8007AB206 /* CompleteController.h */,
+				842388161A706CF8007AB206 /* CompleteController.m */,
 				45A546941A59119000BE62EC /* UnderLineButton.h */,
 				45A546951A59119000BE62EC /* UnderLineButton.m */,
 				45A546971A591BFE00BE62EC /* RegisterViewController.h */,
 				45A546981A591BFE00BE62EC /* RegisterViewController.m */,
+				849392BA1A6FE95C00D78106 /* ActiveUserController.h */,
+				849392BB1A6FE95C00D78106 /* ActiveUserController.m */,
 				45A5469A1A592E2C00BE62EC /* EmailRegisterView.h */,
 				45A5469B1A592E2C00BE62EC /* EmailRegisterView.m */,
 				45A5469D1A592E4200BE62EC /* PhoneRegisterView.h */,
@@ -5078,6 +5088,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8438F6F01A667FC600E1436C /* CookerStar.m in Sources */,
+				842388171A706CF8007AB206 /* CompleteController.m in Sources */,
 				458DD06D1A651A4B006E84DD /* UIImage+PECrop.m in Sources */,
 				45A546991A591BFE00BE62EC /* RegisterViewController.m in Sources */,
 				45BB13781A4914E500FA44F4 /* UIColor+RGBValues.m in Sources */,
@@ -5209,6 +5220,7 @@
 				8447CB761A5FC73700FADF9D /* JSQMessage.m in Sources */,
 				844117881A4BB8AF00628A64 /* UIAlertView+AFNetworking.m in Sources */,
 				45A97B8C1A6E03520094F9BA /* AboutAppCell.m in Sources */,
+				849392BC1A6FE95C00D78106 /* ActiveUserController.m in Sources */,
 				458952C81A493FF2009B5DD1 /* AddDeviceSucceedController.m in Sources */,
 				45A97B7C1A6DFCFC0094F9BA /* AboutAppViewController.m in Sources */,
 				8447CB851A5FC73700FADF9D /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
