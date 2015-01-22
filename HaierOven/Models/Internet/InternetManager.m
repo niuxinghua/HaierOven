@@ -402,7 +402,7 @@
                 
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
-                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
@@ -437,7 +437,7 @@
                                      @"validateType" : validateTp,
                                      @"validateScene" : validateScene,
                                      @"accType" : acctp,
-                                     @"transactionId" : transactionId
+                                     @"sendTo" : loginName      //loginName是手机号
                                      };
         
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
@@ -462,6 +462,51 @@
     } else {
         completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
+}
+
+- (void)completeThirdPartyWithPassword:(NSString*)password phone:(NSString*)phone email:(NSString*)email userName:(NSString*)userName nickName:(NSString*)nickName callBack:(myCallback)completion
+{
+//    {"userBaseID":25,"passWord":"","email":"cjsyclt@163.com","mobile":"13621640580","userProfile":{"nickName":"cjsyclt","userName":"litao"}}
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : CurrentUserBaseId,
+                                     @"password" : password,
+                                     @"email" : email,
+                                     @"mobile" : phone,
+                                     @"userProfile" :
+                                        @{
+                                             @"nickName" : nickName,
+                                             @"userName" : userName
+                                         }
+                                     };
+        
+        // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
+        [[self manager] POST:GetVerifyCode parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                
+                
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
 }
 
 - (void)logoutWithLoginName:(NSString*)loginName callBack:(myCallback)completion

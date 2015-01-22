@@ -27,6 +27,7 @@
 {
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationAplied:) name:DEVICE_OPERATION_ACK_NOTIFICATION object:nil];
+        _currentStatus = [[OvenStatus alloc] init];
     }
     return self;
 }
@@ -165,7 +166,7 @@
 {
     uSDKNotificationCenter* sdkNotificationCenter = [uSDKNotificationCenter defaultCenter];
     
-    [sdkNotificationCenter subscribeDevice:device selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
+    [sdkNotificationCenter subscribeDevice:self selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
     
 }
 
@@ -237,9 +238,11 @@
     
     if ([notification.name isEqualToString:DEVICE_ONLINE_CHANGED_NOTIFICATION]) {
         NSLog(@"设备在线状态改变了");
+        [self updateCurrentOvenStatus];
         
     } else if ([notification.name isEqualToString:DEVICE_STATUS_CHANGED_NOTIFICATION]) {
         NSLog(@"设备状态上报通知");
+        [self updateCurrentOvenStatus];
         
     } else if ([notification.name isEqualToString:DEVICE_ALARM_NOTIFICATION]) {
         NSLog(@"设备报警");
@@ -389,15 +392,10 @@
 
 #pragma mark - 获取订阅设备的状态
 
-/**
- *  获取当前订阅设备的设备温度
- *
- *  @param completion 结果回调
- */
-- (void)getDeviceCallback:(completion)completion
+- (void)updateCurrentOvenStatus
 {
+    
     if (self.subscribedDevice == nil) {
-        completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"尚未订阅设备"]);
         return;
     }
     
@@ -410,12 +408,70 @@
                 break;
             }
         }
-        NSMutableDictionary* statusDict = currentDevice.attributeDict;
+        // 更新连线状态
+        _currentStatus.isReady = currentDevice.status == STATUS_READY ? YES : NO;
+        
+        NSMutableDictionary* attrDict = currentDevice.attributeDict;
+        uSDKDeviceAttribute* statusAttr;
+        
+        // 是否开机
+        statusAttr = attrDict[@"20v001"];
+        _currentStatus.opened = [statusAttr.attrValue isEqualToString:@"20v001"] ? YES : NO;
+        
+        // 是否已关机
+        statusAttr = attrDict[@"20v002"];
+        _currentStatus.closed = [statusAttr.attrValue isEqualToString:@"20v002"] ? YES : NO;
+        
+        // 是否已启动
+        statusAttr = attrDict[@"20v003"];
+        _currentStatus.isWorking = [statusAttr.attrValue isEqualToString:@"20v003"] ? YES : NO;
+        
+        // 烤箱温度
+        statusAttr = attrDict[@"20v00g"];
+        _currentStatus.temperature = [statusAttr.attrValue integerValue];
+        
+        // 烘焙时间
+        statusAttr = attrDict[@"20v00f"];
+        _currentStatus.bakeTime = statusAttr.attrValue;
+        
+        // 是否有感肉温度探针
+        statusAttr = attrDict[@"60v003"];
+        _currentStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
+        
+        
         
         
     }];
     
 }
+
+#pragma mark - getters
+
+- (NSArray *)bakeModes
+{
+    if (_bakeModes == nil) {
+        _bakeModes = @[@{@"30v0M6" :@"传统烘焙"},
+                       @{@"30v0M8" :@"对流烘焙"} /*对流烘焙*/,
+                       @{@"30v0M5" :@"热风烧烤" }/*热风烧烤*/,
+                       @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
+                       @{@"30v0Me" :@"烧烤" }/*烧烤*/,
+                       @{@"30v0Mc" :@"3D热风"} /*3D热风*/,
+                       @{@"30v0M9" :@"3D烧烤" }/*3D烧烤*/,
+                       @{@"30v0Md" :@"披萨模式" }/*披萨模式*/,
+                       @{@"30v0Ma" :@"解冻功能" }/*解冻功能*/,
+                       @{@"30v0Mb" :@"发酵功能" }/*发酵功能*/,
+                       @{@"30v0Mg" :@"下烧烤" }/*下烧烤*/,
+                       @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
+                       @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
+                       @{@"30v3Mj" :@"上下烧烤＋蒸汽"} /*纯蒸汽*/,
+                       @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
+                       @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
+                       @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
+                       @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/];
+    }
+    return _bakeModes;
+}
+
 
 @end
 

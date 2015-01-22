@@ -31,6 +31,19 @@
     return self;
 }
 
+#pragma mark - DatePicker响应事件
+
+- (IBAction)pickViewValueChanged:(UIDatePicker *)sender
+{
+    NSDate* minimumDate = [[NSDate date] dateByAddingTimeInterval:self.minimumInteval];
+    if ([sender.date compare:minimumDate] == NSOrderedAscending) {
+        [sender setDate:minimumDate animated:YES];
+    }
+}
+
+
+
+#pragma mark - 回调方法
 
 - (IBAction)OrderChick:(UIButton *)sender {
     if (sender.tag ==1) {

@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  *  @param seconds   通知时间
  *  @param alertBody 通知内容
  */
-- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody;
+- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSTimeInterval)seconds alertBody:(NSString*)alertBody;
 
 
 #pragma mark - 缓存文件 读取缓存文件

@@ -50,8 +50,8 @@
     [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
-            // 设置为已读
-//            [self updateReadStatus];
+            // 15秒后设置为已读
+            [self performSelector:@selector(updateReadStatus) withObject:nil afterDelay:10];
             
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -59,6 +59,9 @@
             }
             if (_pageIndex == 1) {
                 self.allNotifications = obj;
+                if (self.allNotifications.count == 0) {
+                    [super showProgressErrorWithLabelText:@"您没有未读消息" afterDelay:1];
+                }
             } else {
                 [self.allNotifications addObjectsFromArray:arr];
             }
@@ -68,6 +71,7 @@
     }];
     
 }
+
 
 - (void)updateReadStatus
 {
@@ -191,7 +195,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
-    
+    if (self.allNotifications.count == 0) {
+        return [[UIView alloc] init];
+    }
     if (section == 0) {
         sectionview.sectionTitleLabel.text = @"菜谱";
     } else {

@@ -597,7 +597,7 @@
         }
     }
     
-    if (self.cookbookDetail.oven == nil) {
+    if (self.cookbookDetail.oven.roastStyle.length == 0 || self.cookbookDetail.oven.roastTemperature.length == 0 || self.cookbookDetail.oven.roastTime.length == 0) {
         [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
         return NO;
     }

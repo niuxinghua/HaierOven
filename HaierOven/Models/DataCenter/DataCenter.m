@@ -188,10 +188,11 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
  *
  *  @param localNotification 本地通知
  */
-- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSInteger)seconds alertBody:(NSString*)alertBody
+- (void)sendLocalNotification:(LocalNotificationType)type fireTime:(NSTimeInterval)seconds alertBody:(NSString*)alertBody
 {
+    
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
+    localNotification.fireDate =  [[NSDate date] dateByAddingTimeInterval:seconds]; //[NSDate dateWithTimeIntervalSinceNow:seconds];
     localNotification.alertBody = alertBody;
     localNotification.alertAction = @"alertAction";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -210,7 +211,7 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
         case LocalNotificationTypeBakeComplete:
         {
             if (self.bakeCompleteNotification != nil) {
-                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+                [[UIApplication sharedApplication] cancelLocalNotification:self.bakeCompleteNotification];
             }
             self.bakeCompleteNotification = localNotification;
             break;
@@ -218,7 +219,7 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
         case LocalNotificationTypeClockTimeUp:
         {
             if (self.clockTimeUpNotification != nil) {
-                [[UIApplication sharedApplication] cancelLocalNotification:self.warmUpNotification];
+                [[UIApplication sharedApplication] cancelLocalNotification:self.clockTimeUpNotification];
             }
             self.clockTimeUpNotification = localNotification;
             break;

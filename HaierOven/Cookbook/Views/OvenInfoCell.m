@@ -30,7 +30,11 @@
 - (void)setOven:(CookbookOven *)oven
 {
     _oven = oven;
-    self.ovenInfoLabel.text = [oven.ovenInfo isKindOfClass:[NSNull class]] ? @"" : oven.ovenInfo[@"name"];
+    NSString* ovenInfo = [oven.ovenInfo isKindOfClass:[NSNull class]] ? @"" : oven.ovenInfo[@"name"];
+    
+    ovenInfo = [ovenInfo stringByAppendingFormat:@" %@ %@ %@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
+
+    self.ovenInfoLabel.text = ovenInfo;
     
 }
 

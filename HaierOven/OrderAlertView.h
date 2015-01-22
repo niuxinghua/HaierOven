@@ -16,5 +16,11 @@
 @end
 @interface OrderAlertView : UIView
 @property (weak, nonatomic)id<OrderAlertViewDelegate>delegate;
-@property (strong, nonatomic) NSDate *orderDate;
+
+/**
+ *  烘焙时长，根据此参数计算最小预约时间点
+ */
+@property (nonatomic) NSTimeInterval minimumInteval;
+
+
 @end

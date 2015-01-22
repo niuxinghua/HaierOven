@@ -10,7 +10,7 @@
 @interface UseBakeView()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *submitBakeBtn;
 @property (weak, nonatomic) IBOutlet UIPickerView *dataPickView;
-@property (strong, nonatomic) NSArray *workModels;
+@property (strong, nonatomic) NSMutableArray *workModels;
 @property (strong, nonatomic) NSArray *temputure;
 @property (strong, nonatomic) NSArray *times;
 @property (strong, nonatomic) NSString *workmodel;
@@ -34,7 +34,10 @@
 }
 
 -(void)initData{
-    self.workModels = @[@"功能1",@"功能2",@"功能3",@"功能4",@"功能5",@"功能6",@"功能7",@"功能8",@"功能9"];
+    self.workModels = [NSMutableArray array];
+    for (NSDictionary* bakeMode in [OvenManager sharedManager].bakeModes) {
+        [self.workModels addObject:[[bakeMode allValues] firstObject]];
+    }
     self.temputure = [self getTempArr];
     self.times = [self getMinute];
     

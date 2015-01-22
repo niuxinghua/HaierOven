@@ -251,10 +251,7 @@
         NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
         if (indexPath.row ==7) {
-            if (self.notificationCount > 0) {
-                cell.notificationCount = [NSString stringWithFormat:@" %d ", self.notificationCount];
-            }
-            
+            cell.notificationCount = [NSString stringWithFormat:@" %d ", self.notificationCount];
         }
         cell.titleLabel.text = titles[indexPath.row-2];
         cell.titleLabel.font = [UIFont fontWithName:GlobalTitleFontName size:14];
