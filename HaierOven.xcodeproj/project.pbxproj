@@ -78,6 +78,8 @@
 		456402291A5FB5B50091CDFD /* mj.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402261A5FB5B50091CDFD /* mj.png */; };
 		4564022A1A5FB5B50091CDFD /* mj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402271A5FB5B50091CDFD /* mj@2x.png */; };
 		4564022B1A5FB5B50091CDFD /* mj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402281A5FB5B50091CDFD /* mj@3x.png */; };
+		457662281A70A7A900B29E3A /* LeftMenuAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 457662271A70A7A900B29E3A /* LeftMenuAlert.m */; };
+		4576622A1A70A7C500B29E3A /* LeftMenuAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457662291A70A7C500B29E3A /* LeftMenuAlert.xib */; };
 		457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CA1A4158C800E422D0 /* page_state_normal.png */; };
 		457A76CF1A4158C800E422D0 /* page_state_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */; };
 		457A76D21A41592600E422D0 /* page_state_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76D01A41592600E422D0 /* page_state_highlight.png */; };
@@ -1004,6 +1006,9 @@
 		456402261A5FB5B50091CDFD /* mj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mj.png; sourceTree = "<group>"; };
 		456402271A5FB5B50091CDFD /* mj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@2x.png"; sourceTree = "<group>"; };
 		456402281A5FB5B50091CDFD /* mj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@3x.png"; sourceTree = "<group>"; };
+		457662261A70A7A900B29E3A /* LeftMenuAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuAlert.h; sourceTree = "<group>"; };
+		457662271A70A7A900B29E3A /* LeftMenuAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuAlert.m; sourceTree = "<group>"; };
+		457662291A70A7C500B29E3A /* LeftMenuAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuAlert.xib; sourceTree = "<group>"; };
 		457A76CA1A4158C800E422D0 /* page_state_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_normal.png; sourceTree = "<group>"; };
 		457A76CB1A4158C800E422D0 /* page_state_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_state_normal@2x.png"; sourceTree = "<group>"; };
 		457A76D01A41592600E422D0 /* page_state_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page_state_highlight.png; sourceTree = "<group>"; };
@@ -3454,6 +3459,9 @@
 				45C7E5821A3FE25A000B086B /* RESideMenu */,
 				45C7E5B51A3FE9D2000B086B /* LeftMenuViewController.h */,
 				45C7E5B61A3FE9D2000B086B /* LeftMenuViewController.m */,
+				457662261A70A7A900B29E3A /* LeftMenuAlert.h */,
+				457662271A70A7A900B29E3A /* LeftMenuAlert.m */,
+				457662291A70A7C500B29E3A /* LeftMenuAlert.xib */,
 				45D857D51A401631007B7AB7 /* LeftMenuCell */,
 			);
 			name = LeftMenuViewController;
@@ -4898,6 +4906,7 @@
 				45BC57601A4AF3AF0052F520 /* rfpk-wxz@3x.png in Resources */,
 				45A97B881A6E00720094F9BA /* right@2x.png in Resources */,
 				45D907141A47CAAB00B97D92 /* xinzengkaoxiang@2x.png in Resources */,
+				4576622A1A70A7C500B29E3A /* LeftMenuAlert.xib in Resources */,
 				45D906B81A47CAAB00B97D92 /* fakebg.png in Resources */,
 				45B88DFD1A4BCBF300722EF6 /* nz-wxz@2x.png in Resources */,
 				45BC57AC1A4B0DDB0052F520 /* shijian-xz.png in Resources */,
@@ -5183,6 +5192,7 @@
 				45422DC81A63B764001A7223 /* SectionFiexibleView.m in Sources */,
 				45BB36681A4A9A70000EE3C4 /* DeviceWorkView.m in Sources */,
 				45BEED831A412E29003000AD /* MainViewNormalCell.m in Sources */,
+				457662281A70A7A900B29E3A /* LeftMenuAlert.m in Sources */,
 				45B650DC1A48169000A6376D /* MyDeviceAddView.m in Sources */,
 				8441178A1A4BB8AF00628A64 /* UIImageView+AFNetworking.m in Sources */,
 				45A546CD1A5A4EC200BE62EC /* UIView+Extension.m in Sources */,

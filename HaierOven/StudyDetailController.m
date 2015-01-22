@@ -9,7 +9,7 @@
 #import "StudyDetailController.h"
 #import "StudyDetailCell.h"
 #import "StudyDetailFiexView.h"
-@interface StudyDetailController ()
+@interface StudyDetailController ()<StudyDetailFiexViewDelegate>
 {
     CGFloat fiexViewHeight;
 }
@@ -35,9 +35,11 @@
     [self addObserver:self forKeyPath:@"self.myWindow.hidden" options:NSKeyValueObservingOptionNew context:NULL];
     
     self.fiexView = [StudyDetailFiexView new];
-    self.fiexView.backgroundColor    = [UIColor yellowColor];
+    self.fiexView.backgroundColor    = [UIColor whiteColor];
     fiexViewHeight = self.tools.count*44+16;
     self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+    self.fiexView.tools = self.tools;
+    self.fiexView.delegate = self;
     [self.myWindow addSubview:self.fiexView];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -139,9 +141,9 @@
     self.myWindow.hidden = sender.selected;
     sender.selected = !sender.selected;
     if (self.myWindow.hidden) {
-        CGRectMake(25, 0, PageW-50, 0);
+       self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
     }else{
-    [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
         self.fiexView.frame = CGRectMake(25, 0, PageW-50, fiexViewHeight);
     }];
     }
@@ -150,5 +152,9 @@
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)reloadViewWithToolsIndex:(NSInteger)index{
+    NSLog(@"%d",index);
 }
 @end

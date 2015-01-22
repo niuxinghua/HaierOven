@@ -214,6 +214,9 @@
         btn.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size: 15.0];
         
         [btn addTarget:self action:@selector(SelectTagBtn:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.tags.count<5) {
+            btn.frame = CGRectMake((PageW-8)/self.tags.count*loop+8,0,(PageW-8)/self.tags.count, self.tagsScrollView.height);
+        }else
         btn.frame = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
         [self.tagsScrollView addSubview:btn];
     }

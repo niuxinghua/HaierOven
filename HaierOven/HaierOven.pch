@@ -74,7 +74,7 @@
 #define SignInScore         2
 #define BindOvenScore       500
 #define ShareScore          5
-
+#define alert_RectHidden   (CGRectMake(PageW/2, PageH/2, 0, 0))
 
 
 

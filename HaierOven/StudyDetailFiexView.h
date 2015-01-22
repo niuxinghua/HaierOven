@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class StudyDetailFiexView;
+@protocol StudyDetailFiexViewDelegate <NSObject>
 
+-(void)reloadViewWithToolsIndex:(NSInteger)index;
+
+@end
 @interface StudyDetailFiexView : UIView
 @property (strong, nonatomic) NSArray *tools;
+@property (weak, nonatomic) id<StudyDetailFiexViewDelegate>delegate;
 @end
