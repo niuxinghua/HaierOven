@@ -175,6 +175,7 @@
 }
 -(void)SectionType:(NSInteger)type{
     NSLog(@"%d",type);
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
