@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fakedataImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Ln-L1l">
-                        <rect key="frame" x="0.0" y="1" width="320" height="185"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Ln-L1l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
                     </imageView>
                     <view alpha="0.85000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aac-C2-aa9" customClass="ContainerView">
                         <rect key="frame" x="0.0" y="134" width="320" height="53"/>
@@ -51,7 +51,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="mv9-Xu-3KX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="mv9-Xu-3KX">
                                 <rect key="frame" x="279" y="12" width="41" height="41"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -128,8 +128,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
-        <image name="fakedataImage.png" width="600" height="469"/>
+        <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
+        <image name="default_avatar.png" width="127" height="127"/>
         <image name="xcqr.png" width="26" height="26"/>
     </resources>
 </document>

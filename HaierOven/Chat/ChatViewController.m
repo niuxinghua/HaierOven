@@ -115,7 +115,7 @@
      */
     self.messagesModel = [[MessagesModel alloc] init];
     
-    JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"QQQ.png"]
+    JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Vcs"]

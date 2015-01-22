@@ -73,7 +73,7 @@
 {
     _cookerStar = cookerStar;
     
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar]];
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");

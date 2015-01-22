@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)updateUI
 {
-    [self.personalAvater setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    [self.personalAvater setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar]];
     self.myDessertCountLabel.text = self.currentUser.points;
     self.personalNameLabel.text = self.currentUser.nickName;
     self.personDescriptionLabel.text = self.currentUser.note;

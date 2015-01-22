@@ -65,7 +65,7 @@
 
 - (void)updateUI
 {
-    [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar] placeholderImage:IMAGENAMED(@"QQQ.png")];
+    [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar]];
     self.nikeNameLabel.text = self.user.nickName;
     self.genderLabel.text = [self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
     self.genderImage.image = [self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
@@ -87,7 +87,7 @@
     self.userAvater = [UIImageView new];
     self.userAvater.frame = CGRectMake(22, (PageW/6-PageW/8)/2, PageW/8, PageW/8);
     self.userAvater.layer.cornerRadius = self.userAvater.height/2;
-    self.userAvater.image = IMAGENAMED(@"QQQ.png");
+    self.userAvater.image = IMAGENAMED(@"default_avatar.png");
     self.userAvater.layer.masksToBounds = YES;
     self.userAvater.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeAvatar)];
@@ -516,6 +516,7 @@
 
 
 #pragma mark - alertChangePsdDelegate
+
 -(void)ChangeWithOldPsd:(NSString *)oldpsd andNewPsd:(NSString *)newpsd{
     NSLog(@"旧密码是 :%@\n新密码是 :%@",oldpsd,newpsd);
     self.alertPsd.hidden = YES;

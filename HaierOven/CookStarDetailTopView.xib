@@ -29,7 +29,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fla-pX-FH2">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakebg.png" translatesAutoresizingMaskIntoConstraints="NO" id="iaY-80-a6e">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chef_bg_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="iaY-80-a6e">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="180" id="K9g-UL-b1T"/>
@@ -49,7 +49,7 @@
                                 <action selector="follow:" destination="JsE-Wa-isZ" eventType="touchUpInside" id="htt-TN-zJn"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQQ.png" translatesAutoresizingMaskIntoConstraints="NO" id="n4e-WA-n2a">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="n4e-WA-n2a">
                             <rect key="frame" x="120" y="8" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="ELU-gG-VVm"/>
@@ -273,10 +273,10 @@
         </panGestureRecognizer>
     </objects>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
         <image name="Vcs.png" width="26" height="26"/>
         <image name="bofang.png" width="41" height="41"/>
-        <image name="fakebg.png" width="360" height="180"/>
+        <image name="chef_bg_img.png" width="360" height="319"/>
+        <image name="default_avatar.png" width="127" height="127"/>
         <image name="follow.png" width="112" height="31"/>
         <image name="followed.png" width="112" height="31"/>
         <image name="ly.png" width="112" height="31"/>

@@ -102,7 +102,7 @@
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar]];
+                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
                 cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];

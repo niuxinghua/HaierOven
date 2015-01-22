@@ -57,7 +57,7 @@
                             <constraint firstAttribute="height" constant="50" id="8zF-Wp-IaV"/>
                             <constraint firstAttribute="width" constant="50" id="sW4-U3-c7I"/>
                         </constraints>
-                        <state key="normal" image="QQQ.png">
+                        <state key="normal" image="default_avatar.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -149,6 +149,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="QQQ.png" width="480" height="640"/>
+        <image name="default_avatar.png" width="127" height="127"/>
     </resources>
 </document>
