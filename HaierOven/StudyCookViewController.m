@@ -16,6 +16,7 @@
     
 }
 @property (strong, nonatomic) NSArray *arr;
+@property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) UIButton *tempBtn;
 @end
 
@@ -24,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.arr=@[@"123",@"123",@"123",@"123",@"123"];
-
+    self.images = @[IMAGENAMED(@"fresh-group-1.png"),IMAGENAMED(@"fresh-group-2.png"),IMAGENAMED(@"fresh-group-3.png")];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -55,7 +56,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StudyCookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudyCookCell" forIndexPath:indexPath];
     cell.details=self.arr;
-
+    cell.bkImage = self.images[indexPath.row];
     cell.title = @"标题";
     cell.delegate = self;
     // Configure the cell...

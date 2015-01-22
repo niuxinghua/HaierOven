@@ -15,9 +15,7 @@
 @interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
-
 @property (strong, nonatomic) User* currentUser;
-
 @property (nonatomic) NSInteger notificationCount;
 @end
 
@@ -62,6 +60,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.tempView = nil;
 }
 
 - (void)reload
@@ -262,7 +261,7 @@
         cell.titleImage.image = images[indexPath.row-2];
         cell.cellSelectedView.backgroundColor = UIColorFromRGB(0xb06206);
         cell.backgroundColor = GlobalOrangeColor;
-        if (indexPath.row ==2) {
+        if (indexPath.row ==2&&!self.tempView) {
             self.tempView = cell.cellSelectedView;
             self.tempView.hidden = NO;
         }
@@ -301,9 +300,6 @@
             
         }
     }];
-    
-    
-    
 }
 -(void)ChangeController:(UIView *)btn{
     tempView.hidden = YES;

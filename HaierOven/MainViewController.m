@@ -18,7 +18,7 @@
 
 #define AdvRate         0.5
 #define ScrRate         0.1388888
-#define CellImageRate   0.6
+#define CellImageRate   0.8
 @interface MainViewController () <MainViewNormalCellDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
@@ -104,6 +104,7 @@
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
                 [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar]];
                 cookerImage.backgroundColor = GlobalOrangeColor;
+                cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
             }
             

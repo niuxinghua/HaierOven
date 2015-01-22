@@ -8,22 +8,61 @@
 
 #import "StudyDetailController.h"
 #import "StudyDetailCell.h"
+#import "StudyDetailFiexView.h"
 @interface StudyDetailController ()
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
+{
+    CGFloat fiexViewHeight;
+}
+@property (weak, nonatomic) IBOutlet UIButton *titleBtn;
+@property (strong, nonatomic) UIWindow *myWindow;
+@property (strong, nonatomic) NSArray *tools;
+@property (strong, nonatomic) StudyDetailFiexView *fiexView;
 @end
 
 @implementation StudyDetailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self fakeData];
+    self.myWindow = [UIWindow new];
+    self.myWindow.frame = CGRectMake(0, 64, PageW, PageH);
+    self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
+    self.myWindow.windowLevel = UIWindowLevelAlert;
+    [self.myWindow makeKeyAndVisible];
+    self.myWindow.userInteractionEnabled = YES;
+    self.myWindow.hidden = YES;
+
+    [self addObserver:self forKeyPath:@"self.myWindow.hidden" options:NSKeyValueObservingOptionNew context:NULL];
     
+    self.fiexView = [StudyDetailFiexView new];
+    self.fiexView.backgroundColor    = [UIColor yellowColor];
+    fiexViewHeight = self.tools.count*44+16;
+    self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+    [self.myWindow addSubview:self.fiexView];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+-(void)fakeData{
+    self.tools = @[@"123",@"123",@"123",@"123",@"123"];
+}
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"self.myWindow.hidden"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"self.myWindow.hidden"]) {
+
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -33,13 +72,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 3;
 }
@@ -98,6 +135,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)fiexViewShow:(UIButton*)sender {
+    self.myWindow.hidden = sender.selected;
+    sender.selected = !sender.selected;
+    if (self.myWindow.hidden) {
+        CGRectMake(25, 0, PageW-50, 0);
+    }else{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.fiexView.frame = CGRectMake(25, 0, PageW-50, fiexViewHeight);
+    }];
+    }
+    
+}
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

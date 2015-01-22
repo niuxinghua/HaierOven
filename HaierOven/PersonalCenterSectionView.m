@@ -9,7 +9,7 @@
 #import "PersonalCenterSectionView.h"
 #define AdvRate         0.5
 #define ScrRate         0.1388888
-#define CellImageRate   0.6
+#define CellImageRate   0.8
 @implementation PersonalCenterSectionView
 
 -(instancetype)initWithFrame:(CGRect)frame{
