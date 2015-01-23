@@ -43,11 +43,13 @@
 
 -(void)setBirthLabel:(UILabel *)birthLabel{
     _birthLabel = birthLabel;
+    NSString* dateStr = birthLabel.text.length == 0 ? @"1990-12-03" : birthLabel.text;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *date = [dateFormatter dateFromString:birthLabel.text];
+    NSDate *date = [dateFormatter dateFromString:dateStr];
     
     [self.myDatePickerView setDate:date animated:YES];
+    
 }
 
 @end

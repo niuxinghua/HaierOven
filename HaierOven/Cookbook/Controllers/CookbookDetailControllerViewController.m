@@ -15,6 +15,7 @@
 #import "CommentViewController.h"
 #import "DAKeyboardControl.h"
 #import "AddShoppingListCell.h"
+#import "StudyCookViewController.h"
 
 
 @interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate>
@@ -462,10 +463,10 @@
     [self hideKeyboard];
     Comment* comment = [[Comment alloc] init];
     comment.content = self.commentTextField.text;
-#warning 假数据
-    comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
+
+    comment.fromUser.userAvatar = [DataCenter sharedInstance].currentUser.userAvatar;
     comment.commentTime = @"刚刚";
-    comment.fromUser.loginName = @"刘康";
+    comment.fromUser.loginName = [DataCenter sharedInstance].currentUser.userName;
     [self.comments addObject:comment];
     CGPoint point = self.commentsTableView.contentOffset;
     [UIView animateWithDuration:0.3 animations:^{
@@ -483,6 +484,7 @@
                                                          callBack:^(BOOL success, id obj, NSError *error) {
                                                              if (success) {
                                                                  NSLog(@"评论成功");
+                                                                 self.commentTextField.text = @"";
                                                              } else {
                                                                  NSLog(@"评论失败");
                                                              }
@@ -518,6 +520,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
     [self.cookbookDetailCell.contentView removeKeyboardControl];
     self.navigationController.navigationBar.translucent = NO;
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -887,6 +890,15 @@
     }];
     
 }
+
+- (IBAction)studyCookTapped:(UIButton *)sender
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    StudyCookViewController* studyController = [storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
+    [self.navigationController pushViewController:studyController animated:YES];
+    
+}
+
 
 #pragma mark - 点赞和分享
 

@@ -714,6 +714,7 @@
 		842388261A70A256007AB206 /* default_avatar@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8423881E1A70A256007AB206 /* default_avatar@x.png */; };
 		842388271A70A256007AB206 /* home_banner_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8423881F1A70A256007AB206 /* home_banner_default.png */; };
 		842388281A70A256007AB206 /* home_banner_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842388201A70A256007AB206 /* home_banner_default@2x.png */; };
+		8423882A1A70FA26007AB206 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842388291A70FA26007AB206 /* StoreKit.framework */; };
 		842A86CD1A52457300C75EE4 /* FoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86CC1A52457300C75EE4 /* FoodsViewController.m */; };
 		842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */; };
 		842A86D51A5248F700C75EE4 /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D41A5248F700C75EE4 /* FoodCell.xib */; };
@@ -1765,6 +1766,7 @@
 		8423881E1A70A256007AB206 /* default_avatar@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_avatar@x.png"; sourceTree = "<group>"; };
 		8423881F1A70A256007AB206 /* home_banner_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_banner_default.png; sourceTree = "<group>"; };
 		842388201A70A256007AB206 /* home_banner_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_banner_default@2x.png"; sourceTree = "<group>"; };
+		842388291A70FA26007AB206 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		842A86CB1A52457300C75EE4 /* FoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodsViewController.h; sourceTree = "<group>"; };
 		842A86CC1A52457300C75EE4 /* FoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodsViewController.m; sourceTree = "<group>"; };
 		842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddShoppingListCell.xib; sourceTree = "<group>"; };
@@ -2132,6 +2134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8423882A1A70FA26007AB206 /* StoreKit.framework in Frameworks */,
 				84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */,
 				8447CAE61A5B98EE00FADF9D /* libz.dylib in Frameworks */,
 				8447CAE41A5B98E200FADF9D /* libstdc++.dylib in Frameworks */,
@@ -3556,6 +3559,7 @@
 		8401414E1A4BC9C20050615F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				842388291A70FA26007AB206 /* StoreKit.framework */,
 				84855F2B1A64F7D600830B75 /* MediaPlayer.framework */,
 				8447CAE51A5B98EE00FADF9D /* libz.dylib */,
 				8447CAE31A5B98E200FADF9D /* libstdc++.dylib */,
@@ -4474,7 +4478,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = AEPFFMR544;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;

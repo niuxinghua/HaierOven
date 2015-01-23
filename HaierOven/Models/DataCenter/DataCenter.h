@@ -48,6 +48,11 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
 @property (copy, nonatomic) NSString* currentUserBaseId;
 
 /**
+ *  当前登录用户
+ */
+@property (strong, nonatomic) User* currentUser;
+
+/**
  *  我已绑定的烤箱列表
  */
 @property (strong, nonatomic) NSMutableArray* myOvens;

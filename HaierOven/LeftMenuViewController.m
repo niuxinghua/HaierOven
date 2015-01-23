@@ -74,7 +74,20 @@
 -(void)isGoingToLogin:(BOOL)goLogin{
     self.myWindow.hidden = YES;
     self.leftMenuAlert.frame = alert_RectHidden;
+    
+    if (goLogin) {
+        [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
+    } else {
+        
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+                                                     animated:YES];
+        [self.sideMenuViewController hideMenuViewController];
+        
+    }
+    
+    
 }
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -137,42 +150,50 @@
             
         case 0:
             
-//            if (IsLogin) {
-//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
-//                                                             animated:YES];
-//                [self.sideMenuViewController hideMenuViewController];
-//            } else {
+            if (IsLogin) {
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"]]
+                                                             animated:YES];
+                [self.sideMenuViewController hideMenuViewController];
+            } else {
                 
 //                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]
 //                                                             animated:YES];
 //                [self.sideMenuViewController hideMenuViewController];
                 
-//                [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
-//                
-//            }
+                [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
+                
+            }
             
             
             break;
         case 1:
         {
-            self.myWindow.hidden= NO;
-            [UIView animateWithDuration:0.3 animations:^{
-                self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+            if (IsLogin) {
+                if ([DataCenter sharedInstance].myOvens.count == 0) {
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+                                                                 animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
+                    break;
+                }else{
+                    
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+                                                                 animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
+                    
+                }
+            } else {
+                
+                self.myWindow.hidden= NO;
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+                    
+                }];
+                break;
+                
+            }
             
-            }];
             break;
-//            if ([DataCenter sharedInstance].myOvens.count == 0) {
-//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
-//                                                             animated:YES];
-//                [self.sideMenuViewController hideMenuViewController];
-//                break;
-//            }else{
-//      
-//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
-//                                                             animated:YES];
-//                [self.sideMenuViewController hideMenuViewController];
-//                break;
-//            }
+            
         }
         case 2:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"]]

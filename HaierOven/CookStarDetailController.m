@@ -14,6 +14,7 @@
 #import "MJRefresh.h"
 #import "CookbookDetailControllerViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "StudyCookViewController.h"
 
 @interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
 {
@@ -329,6 +330,8 @@
 
 -(void)studyCook{
     NSLog(@"新手学烘焙");
+    StudyCookViewController* studyController = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
+    [self.navigationController pushViewController:studyController animated:YES];
 }
 
 -(void)chickTags:(UIButton*)btn{

@@ -560,6 +560,7 @@
                 
                 // 4. 解析Json字典
                 id user = [DataParser parseUserWithDict:responseObject];
+                [DataCenter sharedInstance].currentUser = user;
                 completion(YES, user, nil);
                 
             } else {
@@ -576,6 +577,7 @@
         // 如果没有网络，从本地缓存读取用户信息
         id userDict = [[DataCenter sharedInstance] getUserInfoObject];
         id user = [DataParser parseUserWithDict:userDict];
+        [DataCenter sharedInstance].currentUser = user;
         completion(YES, user, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
 }

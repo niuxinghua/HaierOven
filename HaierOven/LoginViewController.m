@@ -180,6 +180,11 @@
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToQQ  completion:^(UMSocialResponseEntity *response){
         NSLog(@"SnsInformation is %@",response.data);
         
+        if (response.responseCode != UMSResponseCodeSuccess) {
+            [super showProgressErrorWithLabelText:@"授权失败" afterDelay:1];
+            return;
+        }
+        
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddhhmmss";
         NSString* sequence = [formatter stringFromDate:[NSDate date]];
@@ -205,7 +210,7 @@
                                                                 
                                                                 self.loginId = response.data[@"openid"];
                                                                 [self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
-//
+
                                                             } else {
                                                                 [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                             }
@@ -224,20 +229,25 @@
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToSina  completion:^(UMSocialResponseEntity *response){
         NSLog(@"SnsInformation is %@",response.data);
         
+        if (response.responseCode != UMSResponseCodeSuccess) {
+            [super showProgressErrorWithLabelText:@"授权失败" afterDelay:1];
+            return;
+        }
+        
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddhhmmss";
         NSString* sequence = [formatter stringFromDate:[NSDate date]];
         sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
         
-        if (response.data[@"openid"] == nil) {
+        if (response.data[@"uid"] == nil) {
             [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
             return;
         }
         
         [[InternetManager sharedManager] loginWithSequenceId:sequence
                                                   andAccType:AccTypeSina
-                                                  andloginId:response.data[@"openid"]
-                                                 andPassword:response.data[@"openid"]
+                                                  andloginId:response.data[@"uid"]
+                                                 andPassword:response.data[@"uid"]
                                           andThirdpartyAppId:@"1162620904"
                                     andThirdpartyAccessToken:response.data[@"access_token"]
                                                 andLoginType:LoginTypeUserName
