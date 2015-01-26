@@ -79,7 +79,8 @@
         [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
     } else {
         
-        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+        
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
                                                      animated:YES];
         [self.sideMenuViewController hideMenuViewController];
         
@@ -190,7 +191,7 @@
             } else {
                 
                 self.myWindow.hidden= NO;
-                [UIView animateWithDuration:0.3 animations:^{
+                [UIView animateWithDuration:0.2 animations:^{
                     self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
                     
                 }];

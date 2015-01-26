@@ -72,6 +72,11 @@
             [self.likeButton setTitle:@"手机注册" forState:UIControlStateNormal];
             self.middleLine.hidden = NO;
             break;
+        case sectionHowToUse:
+            [self.pushedButton setTitle:@"基本操作" forState:UIControlStateNormal];
+            [self.likeButton setTitle:@"辅助功能" forState:UIControlStateNormal];
+            self.middleLine.hidden = NO;
+            break;
         default:
             break;
     }

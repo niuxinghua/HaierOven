@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, SectionType) {
     sectionFollow           =2,
     sectionBakeHouse        =3,
     sectionNotification     =4,
-    sectionRegister         =5
+    sectionRegister         =5,
+    sectionHowToUse         =6,
 };
 
 

@@ -45,10 +45,10 @@
     NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
     hadDevice = [accountDefaults boolForKey:@"hadDevice"];
     
-    if (hadDevice)
-        [self.backIcon setImage:IMAGENAMED(@"back") forState:UIControlStateNormal];
-    else
-        [self.backIcon setImage:IMAGENAMED(@"liebieo") forState:UIControlStateNormal];
+//    if (hadDevice)
+//        [self.backIcon setImage:IMAGENAMED(@"back") forState:UIControlStateNormal];
+//    else
+//        [self.backIcon setImage:IMAGENAMED(@"liebieo") forState:UIControlStateNormal];
     
     self.bottomBtn.layer.cornerRadius = 12;
     self.bottomBtn.layer.masksToBounds = YES;
@@ -59,11 +59,11 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)TurnBack:(id)sender {
-    if (hadDevice)
+//    if (hadDevice)
         [self.navigationController popViewControllerAnimated:YES];
-    else
-        [self presentLeftMenuViewController:sender];
-        
+//    else
+//        [self presentLeftMenuViewController:sender];
+    
 
 }
 - (IBAction)TurnStepTwo:(id)sender {
