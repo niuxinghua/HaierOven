@@ -99,6 +99,8 @@
     int k = PageH - tempFloat;
     if (k<height) {
         self.view.frame = CGRectMake(0,-(height - k), PageW, PageH);
+    }else{
+        self.view.frame = CGRectMake(0,64, PageW, PageH);
     }
 }
 
@@ -112,7 +114,7 @@
     
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    tempFloat = textField.bottom;
+    tempFloat = textField.bottom+64;
     return YES;
 }
 
@@ -123,7 +125,7 @@
 
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    tempFloat = textView.bottom;
+    tempFloat = textView.bottom+64;
     return YES;
 }
 
