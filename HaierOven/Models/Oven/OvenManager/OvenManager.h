@@ -178,18 +178,28 @@ typedef void (^result) (BOOL result);
               callback:(run)completion;
 
 /**
- *  设备开机
+ *  设置烘焙模式
  *
- *  @param device 设备对象
+ *  @param mode       烘焙模式指令
+ *  @param completion 结果回调
  */
-//- (void)bootupToDevice:(uSDKDevice*)device result:(result)success;
-//
-///**
-// *  设备关机
-// *
-// *  @param device 设备对象
-// */
-//- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success;
+- (void)setBakeMode:(NSString*)mode callback:(run)completion;
+
+/**
+ *  设置烘焙时间
+ *
+ *  @param time       烘焙时长
+ *  @param completion 结果回调
+ */
+- (void)setBakeTime:(NSString*)time callback:(run)completion;
+
+/**
+ *  设置烘焙温度
+ *
+ *  @param temperature 烘焙温度
+ *  @param completion  结果回调
+ */
+- (void)setBakeTemperature:(NSString*)temperature callback:(run)completion;
 
 
 

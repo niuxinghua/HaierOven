@@ -130,7 +130,7 @@
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:YES deviceConfigInfo:configInfo];
+        uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (errorConst == RET_USDK_OK) {
                 result(YES);
@@ -347,6 +347,135 @@
     
 }
 
+- (void)setBakeMode:(NSString*)mode callback:(run)completion
+{
+    
+    uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeMode commandAttrValue:mode];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        uSDKErrorConst errorConst = [self.subscribedDevice execDeviceOperation:[@[command] mutableCopy]
+                                                                     withCmdSN:0
+                                                              withGroupCmdName:@""];
+        
+        BOOL runSuccess = NO;
+        for (int loop = 0; loop < 10; loop++) {
+            if ([self.currentStatus.bakeMode isEqualToString:mode]) {
+                NSLog(@"**********指令执行成功**********");
+                runSuccess = YES;
+                break;
+            }
+            [NSThread sleepForTimeInterval:1];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (runSuccess) {
+                completion(YES, errorConst);
+            } else {
+                NSLog(@"**********发送失败, errorCode:%d**********", errorConst);
+                completion(NO, errorConst);
+            }
+        });
+        
+        
+//        if (errorConst == RET_USDK_OK) {
+//            NSLog(@"发送成功");
+//            
+//            BOOL runSuccess = NO;
+//            for (int loop = 0; loop < 10; loop++) {
+//                if ([self.currentStatus.bakeMode isEqualToString:mode]) {
+//                    NSLog(@"**********指令执行成功**********");
+//                    runSuccess = YES;
+//                    break;
+//                }
+//                [NSThread sleepForTimeInterval:1];
+//            }
+//            if (runSuccess) {
+//                completion(YES, errorConst);
+//            } else {
+//                NSLog(@"**********发送失败, errorCode:%d**********", errorConst);
+//            }
+//            
+//            
+//        } else {
+//            NSLog(@"**********发送失败, errorCode:%d**********", errorConst);
+//            completion(NO, errorConst);
+//        }
+        
+        
+        
+    });
+    
+}
+
+
+- (void)setBakeTime:(NSString*)time callback:(run)completion
+{
+    
+    uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeTime commandAttrValue:time];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        uSDKErrorConst errorConst = [self.subscribedDevice execDeviceOperation:[@[command] mutableCopy]
+                                                                     withCmdSN:0
+                                                              withGroupCmdName:@""];
+        
+        BOOL runSuccess = NO;
+        for (int loop = 0; loop < 10; loop++) {
+            if ([self.currentStatus.bakeTime isEqualToString:time]) {
+                NSLog(@"**********指令执行成功**********");
+                runSuccess = YES;
+                break;
+            }
+            [NSThread sleepForTimeInterval:1];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (runSuccess) {
+                completion(YES, errorConst);
+            } else {
+                NSLog(@"**********发送失败, errorCode:%d**********", errorConst);
+                completion(NO, errorConst);
+            }
+        });
+        
+    });
+    
+}
+
+- (void)setBakeTemperature:(NSString*)temperature callback:(run)completion
+{
+    
+    uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeTemperature commandAttrValue:temperature];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        uSDKErrorConst errorConst = [self.subscribedDevice execDeviceOperation:[@[command] mutableCopy]
+                                                                     withCmdSN:0
+                                                              withGroupCmdName:@""];
+        
+        BOOL runSuccess = NO;
+        for (int loop = 0; loop < 10; loop++) {
+            if (self.currentStatus.temperature == [temperature integerValue]) {
+                NSLog(@"**********指令执行成功**********");
+                runSuccess = YES;
+                break;
+            }
+            [NSThread sleepForTimeInterval:1];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (runSuccess) {
+                completion(YES, errorConst);
+            } else {
+                NSLog(@"**********发送失败, errorCode:%d**********", errorConst);
+                completion(NO, errorConst);
+            }
+        });
+        
+    });
+    
+}
+
+
+
 - (void)operationAplied:(NSNotification*)notification
 {
     NSLog(@"设备操作应答消息通知：%@", notification.object);
@@ -423,6 +552,10 @@
         statusAttr = attrDict[@"20v003"];
         _currentStatus.isWorking = [statusAttr.attrValue isEqualToString:@"20v003"] ? YES : NO;
         
+        // 烘焙模式
+        statusAttr = attrDict[@"20v00e"];
+        _currentStatus.bakeMode = statusAttr.attrValue;
+        
         // 烤箱温度
         statusAttr = attrDict[@"20v00g"];
         _currentStatus.temperature = [statusAttr.attrValue integerValue];
@@ -444,27 +577,36 @@
 
 #pragma mark - getters
 
+//NSArray *xz = @[@"icon_ssk_s", @"icon_sxsk_s", @"icon_xsk_s", @"icon_fj_s", @"icon_jd_s", @"icon_3Dhb_s",
+//                @"icon_3Dsk_s", @"icon_psms_s", @"icon_cthb_s", @"icon_rfsk_s", @"icon_dlhb_s", @"icon_rfqsk_s"];
 - (NSArray *)bakeModes
 {
     if (_bakeModes == nil) {
-        _bakeModes = @[@{@"30v0M6" :@"传统烘焙"},
-                       @{@"30v0M8" :@"对流烘焙"} /*对流烘焙*/,
-                       @{@"30v0M5" :@"热风烧烤" }/*热风烧烤*/,
-                       @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
-                       @{@"30v0Me" :@"烧烤" }/*烧烤*/,
+        _bakeModes = @[@{@"30v0Me" :@"烧烤" }/*烧烤*/,
+                       @{@"30v3Mj" :@"上下烧烤＋蒸汽"} /*纯蒸汽*/,
+                       @{@"30v0Mg" :@"下烧烤" }/*下烧烤*/,
+                       @{@"30v0Mb" :@"发酵功能" }/*发酵功能*/,
+                       @{@"30v0Ma" :@"解冻功能" }/*解冻功能*/,
                        @{@"30v0Mc" :@"3D热风"} /*3D热风*/,
                        @{@"30v0M9" :@"3D烧烤" }/*3D烧烤*/,
                        @{@"30v0Md" :@"披萨模式" }/*披萨模式*/,
-                       @{@"30v0Ma" :@"解冻功能" }/*解冻功能*/,
-                       @{@"30v0Mb" :@"发酵功能" }/*发酵功能*/,
-                       @{@"30v0Mg" :@"下烧烤" }/*下烧烤*/,
-                       @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
-                       @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
-                       @{@"30v3Mj" :@"上下烧烤＋蒸汽"} /*纯蒸汽*/,
-                       @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
-                       @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
-                       @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
-                       @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/];
+                       @{@"30v0M6" :@"传统烘焙"},
+                       @{@"30v0M5" :@"热风烧烤" }/*热风烧烤*/,
+                       @{@"30v0M8" :@"对流烘焙"} /*对流烘焙*/,
+                       @{@"30v7Mn" :@"热分全烧烤"}
+                       
+                       
+                       
+                       
+                       
+//                       @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
+//                       @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
+//                       @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
+//                       @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
+//                       @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
+//                       @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
+//                       @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/
+                       ];
     }
     return _bakeModes;
 }

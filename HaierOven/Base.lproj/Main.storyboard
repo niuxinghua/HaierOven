@@ -3555,12 +3555,27 @@
                                                         <constraint firstAttribute="width" constant="45" id="eDm-T2-ve4"/>
                                                     </constraints>
                                                 </view>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBS-s2-IoG">
+                                                    <rect key="frame" x="251" y="34" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="gSc-zW-BMt"/>
+                                                        <constraint firstAttribute="width" constant="50" id="yMD-XD-pGT"/>
+                                                    </constraints>
+                                                    <state key="normal" image="sz-b.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="sz-c.png"/>
+                                                    <connections>
+                                                        <action selector="syncronizeTime:" destination="ev3-io-dBY" eventType="touchUpInside" id="FCp-yb-jNM"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="QjD-T2-N5r" firstAttribute="leading" secondItem="tVu-Jn-UGj" secondAttribute="leading" id="0J6-2u-Uo5"/>
                                                 <constraint firstAttribute="trailing" secondItem="89l-2V-5eI" secondAttribute="trailing" id="8Bv-Cq-RgP"/>
                                                 <constraint firstItem="XNB-3b-Ytf" firstAttribute="width" secondItem="AdG-ih-YLk" secondAttribute="height" multiplier="13:24" id="K42-ID-Sdr"/>
+                                                <constraint firstAttribute="trailing" secondItem="qBS-s2-IoG" secondAttribute="trailing" constant="19" id="LiD-Dt-lej"/>
                                                 <constraint firstItem="XNB-3b-Ytf" firstAttribute="leading" secondItem="AdG-ih-YLk" secondAttribute="trailing" constant="47" id="PAs-qk-E6m"/>
                                                 <constraint firstItem="XNB-3b-Ytf" firstAttribute="centerY" secondItem="0UL-0j-uZ5" secondAttribute="centerY" id="T3I-Pk-uZ0"/>
                                                 <constraint firstItem="XNB-3b-Ytf" firstAttribute="centerX" secondItem="0UL-0j-uZ5" secondAttribute="centerX" constant="-0.5" id="Y9l-si-3tx"/>
@@ -3572,6 +3587,7 @@
                                                 <constraint firstItem="AdG-ih-YLk" firstAttribute="leading" secondItem="tVu-Jn-UGj" secondAttribute="leading" constant="26" id="mqQ-3j-DQL"/>
                                                 <constraint firstAttribute="trailing" secondItem="QjD-T2-N5r" secondAttribute="trailing" id="oDb-5W-i1E"/>
                                                 <constraint firstItem="y0X-cb-pdQ" firstAttribute="leading" secondItem="XNB-3b-Ytf" secondAttribute="trailing" constant="47" id="v7E-Sw-Kz9"/>
+                                                <constraint firstItem="qBS-s2-IoG" firstAttribute="top" secondItem="89l-2V-5eI" secondAttribute="bottom" constant="12" id="vay-nH-FN7"/>
                                                 <constraint firstAttribute="centerY" secondItem="y0X-cb-pdQ" secondAttribute="centerY" constant="-12" id="z8D-nx-arl"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -3611,7 +3627,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="wpK-WS-z7o">
-                            <rect key="frame" x="120" y="6" width="80" height="33"/>
+                            <rect key="frame" x="120" y="5.5" width="80" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itx-8j-Sqc">
@@ -3701,6 +3717,7 @@
                         <outletCollection property="controlBtns" destination="qeh-9b-Edw" id="LXU-Sq-RSC"/>
                         <outletCollection property="controlBtns" destination="sLK-48-f7S" id="w7t-zE-UR0"/>
                         <outletCollection property="controlBtns" destination="CYu-Wv-y77" id="9dw-Qt-83L"/>
+                        <outletCollection property="allbtns" destination="qBS-s2-IoG" id="2hX-9j-o8l"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Da9-tT-iIM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6449,6 +6466,8 @@
         <image name="shijian-wxz.png" width="33" height="33"/>
         <image name="shijian-xz.png" width="33" height="33"/>
         <image name="sousuo.png" width="26" height="26"/>
+        <image name="sz-b.png" width="26" height="48"/>
+        <image name="sz-c.png" width="26" height="48"/>
         <image name="textline.png" width="332" height="6"/>
         <image name="tuolian.png" width="21" height="21"/>
         <image name="txdlwdj.png" width="149" height="35"/>
