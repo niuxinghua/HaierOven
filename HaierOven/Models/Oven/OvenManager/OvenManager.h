@@ -26,6 +26,8 @@
 
 typedef void (^completion) (BOOL success, id obj, NSError* error);
 
+typedef void (^run) (BOOL success, uSDKErrorConst errorCode);
+
 typedef void (^result) (BOOL result);
 
 /**
@@ -173,21 +175,21 @@ typedef void (^result) (BOOL result);
                toDevice:(uSDKDevice*)device
            andCommandSN:(int)cmdsn
     andGroupCommandName:(NSString*)groupCmdName
-              andResult:(result)result;
+              callback:(run)completion;
 
 /**
  *  设备开机
  *
  *  @param device 设备对象
  */
-- (void)bootupToDevice:(uSDKDevice*)device result:(result)success;
-
-/**
- *  设备关机
- *
- *  @param device 设备对象
- */
-- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success;
+//- (void)bootupToDevice:(uSDKDevice*)device result:(result)success;
+//
+///**
+// *  设备关机
+// *
+// *  @param device 设备对象
+// */
+//- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success;
 
 
 

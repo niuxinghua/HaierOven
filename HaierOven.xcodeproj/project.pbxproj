@@ -859,9 +859,9 @@
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
+		847594061A720C7F0085229E /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 847594051A720C7F0085229E /* Friend.m */; };
 		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
 		84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84855F2B1A64F7D600830B75 /* MediaPlayer.framework */; };
-		84855F301A65062400830B75 /* product-design-animation-cn-20130712_848x480.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */; };
 		849392521A6E0CE700D78106 /* KKProgressTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392511A6E0CE700D78106 /* KKProgressTimer.m */; };
 		849392551A6F3ECB00D78106 /* OvenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392541A6F3ECB00D78106 /* OvenStatus.m */; };
 		849392BC1A6FE95C00D78106 /* ActiveUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392BB1A6FE95C00D78106 /* ActiveUserController.m */; };
@@ -2055,12 +2055,13 @@
 		845B33951A58EB4300DD8887 /* DescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescCell.m; sourceTree = "<group>"; };
 		845B33971A590FA800DD8887 /* CommentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentUser.h; sourceTree = "<group>"; };
 		845B33981A590FA800DD8887 /* CommentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentUser.m; sourceTree = "<group>"; };
+		847594041A720C7F0085229E /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		847594051A720C7F0085229E /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		84855F221A63B71200830B75 /* Cooker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cooker.h; sourceTree = "<group>"; };
 		84855F231A63B71200830B75 /* Cooker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cooker.m; sourceTree = "<group>"; };
 		84855F281A64CA9900830B75 /* CookerStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookerStar.h; sourceTree = "<group>"; };
 		84855F291A64CA9900830B75 /* CookerStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookerStar.m; sourceTree = "<group>"; };
 		84855F2B1A64F7D600830B75 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "product-design-animation-cn-20130712_848x480.mp4"; sourceTree = "<group>"; };
 		849392501A6E0CE700D78106 /* KKProgressTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKProgressTimer.h; sourceTree = "<group>"; };
 		849392511A6E0CE700D78106 /* KKProgressTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKProgressTimer.m; sourceTree = "<group>"; };
 		849392531A6F3ECB00D78106 /* OvenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvenStatus.h; sourceTree = "<group>"; };
@@ -3339,7 +3340,6 @@
 			isa = PBXGroup;
 			children = (
 				840141511A4BDD470050615F /* Icon.png */,
-				84855F2F1A6505F500830B75 /* product-design-animation-cn-20130712_848x480.mp4 */,
 				457A775A1A427B1800E422D0 /* FZLTHJW.ttf */,
 				457A775C1A427E2200E422D0 /* FZLTXHK.TTF */,
 				45BA02EE1A441C30003810C7 /* BLOD.TTF */,
@@ -3713,6 +3713,8 @@
 				844D0F571A4D2FE10018D79C /* LocalOven.m */,
 				8438F6F11A67B7A200E1436C /* Equipment.h */,
 				8438F6F21A67B7A200E1436C /* Equipment.m */,
+				847594041A720C7F0085229E /* Friend.h */,
+				847594051A720C7F0085229E /* Friend.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -4524,7 +4526,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84855F301A65062400830B75 /* product-design-animation-cn-20130712_848x480.mp4 in Resources */,
 				45BB362B1A4A8E6E000EE3C4 /* fs-wxz@2x.png in Resources */,
 				45BB360A1A4A771F000EE3C4 /* boardbg@2x.png in Resources */,
 				45D906FA1A47CAAB00B97D92 /* shezhi.png in Resources */,
@@ -5384,6 +5385,7 @@
 				45D9FEBF1A52866900023B9D /* YIPopupTextView.m in Sources */,
 				849392551A6F3ECB00D78106 /* OvenStatus.m in Sources */,
 				457A777C1A42CA2C00E422D0 /* RecommendTagView.m in Sources */,
+				847594061A720C7F0085229E /* Friend.m in Sources */,
 				45A9995E1A510AAB0008AFE3 /* CoverCell.m in Sources */,
 				45D9FEC01A52866900023B9D /* YISSTextView.m in Sources */,
 				457A77811A42DBBC00E422D0 /* FoodListViewController.m in Sources */,
@@ -5608,7 +5610,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1fee2dc-6959-4c40-a934-11a7c6ccf6e4";
 			};
 			name = Debug;
 		};
@@ -5650,7 +5652,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1fee2dc-6959-4c40-a934-11a7c6ccf6e4";
 			};
 			name = Release;
 		};

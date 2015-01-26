@@ -116,11 +116,17 @@
 
 - (void)updateNotificationCount
 {
+    if (!IsLogin) {
+        return;
+    }
     [[InternetManager sharedManager] getNotificationCountWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.notificationCount = [obj[@"data"] integerValue];
             
             [self.tableView reloadData];
+            
+            // 每隔2分钟获取一次未读通知数量
+            [self performSelector:@selector(updateNotificationCount) withObject:nil afterDelay:2*60];
         }
     }];
 }

@@ -13,6 +13,8 @@
 #import "Cooker.h"
 #import "CookerStar.h"
 #import "Message.h"
+#import "Friend.h"
+
 
 @class Food, Creator, Step, CookerStar;
 
@@ -81,6 +83,22 @@
     
 }
 
++ (Friend*)parseFriendWithDict:(NSDictionary*)dict
+{
+    Friend* friend = [[Friend alloc] init];
+    
+    friend.cookbookAmount = [dict[@"cookbookAmount"] isKindOfClass:[NSNull class]] ? 0 : [dict[@"cookbookAmount"] integerValue];
+    friend.fansAmount = [dict[@"fansAmount"] isKindOfClass:[NSNull class]] ? 0 : [dict[@"fansAmount"] integerValue];
+    friend.isFollowed = [dict[@"isFollowed"] isKindOfClass:[NSNull class]] ? NO : [dict[@"isFollowed"] integerValue];
+    friend.signature = [dict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"signature"]];
+    NSString* userAvatar      = [dict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"userAvatar"]];
+    friend.avatar = [DataParser parseImageUrlWithString:userAvatar];
+    friend.userBaseId = [dict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"userBaseID"]];
+    friend.userName = [dict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"userName"]];
+    
+    return friend;
+}
+
 + (NSMutableArray*)parseUsersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
 {
     NSDictionary* dataDict = dict[@"data"];
@@ -90,8 +108,9 @@
     
     NSArray* followsArr = dataDict[@"items"];
     for (NSDictionary* userDict in followsArr) {
-        User* user = [DataParser parseUserWithDict:userDict];
-        [follows addObject:user];
+//        User* user = [DataParser parseUserInfoWithDict:userDict];
+        Friend* friend = [DataParser parseFriendWithDict:userDict];
+        [follows addObject:friend];
     }
     
     return follows;

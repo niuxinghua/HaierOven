@@ -10,7 +10,7 @@
 #import "RelationshipCell.h"
 #import "MJRefresh.h"
 #define CellRate 0.167
-@interface RelationshipListViewController ()
+@interface RelationshipListViewController () <RelationshipCellDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) NSMutableArray* friends;
 @property (nonatomic) NSInteger pageIndex;
@@ -151,24 +151,13 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return self.friends.count;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RelationshipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelationshipCell" forIndexPath:indexPath];
-    cell.watchingBtn.selected = self.iswathching;
-    // Configure the cell...
+    cell.delegate = self;
     cell.user = self.friends[indexPath.row];
     
     return cell;
@@ -176,6 +165,40 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return PageW*CellRate;
+}
+
+#pragma mark - RelationshipCellDelegate
+
+- (void)RelationshipCell:(RelationshipCell *)cell watchingButtonTapped:(UIButton *)sender
+{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    Friend* friend = self.friends[indexPath.row];
+    
+    if (sender.selected) {
+        [[InternetManager sharedManager] deleteFollowWithUserBaseId:CurrentUserBaseId andFollowedUserBaseId:friend.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (!success) {
+                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+                sender.selected = YES;
+            } else {
+                //更新个人中心显示
+                sender.selected = !sender.selected;
+                [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedUserInfoNotification object:nil];
+            }
+        }];
+    } else {
+        [[InternetManager sharedManager] addFollowWithUserBaseId:CurrentUserBaseId andFollowedUserBaseId:friend.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (!success) {
+                [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+                sender.selected = NO;
+            } else {
+                //更新个人中心显示
+                sender.selected = !sender.selected;
+                [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedUserInfoNotification object:nil];
+            }
+        }];
+    }
+    
+    
 }
 
 /*

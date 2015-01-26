@@ -300,7 +300,9 @@
    
 #warning 暂用视频
     
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
+//    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
+    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
+//    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];

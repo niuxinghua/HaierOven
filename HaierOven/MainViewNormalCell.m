@@ -54,6 +54,8 @@
 - (void)resetCell
 {
     self.chickGoodBtn.selected = NO;
+    self.avater.imageView.image = [UIImage imageNamed:@"default_avatar"];
+    self.MainCellFoodBackground.image = [UIImage imageNamed:@"cookbook_list_item_bg_default"];
 }
 
 -(void)setHadVideo:(BOOL)hadVideo{

@@ -199,9 +199,9 @@
         return [[UIView alloc] init];
     }
     if (section == 0) {
-        sectionview.sectionTitleLabel.text = @"菜谱";
+        sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
     } else {
-        sectionview.sectionTitleLabel.text = @"厨神";
+        sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
     }
     
     return sectionview;

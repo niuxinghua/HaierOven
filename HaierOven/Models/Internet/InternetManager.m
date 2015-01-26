@@ -91,9 +91,17 @@
     if (status == NotReachable) {
         NSLog(@"无法连接到网络");
         self.canConnectToInternetFlag = NO;
+        self.isWiFiConnected = NO;
     } else {
         NSLog(@"网络已连接");
         self.canConnectToInternetFlag = YES;
+        
+        if (status == ReachableViaWiFi) {
+            self.isWiFiConnected = YES;
+        } else {
+            self.isWiFiConnected = NO;
+        }
+        
     }
     
 }
