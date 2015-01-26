@@ -91,20 +91,26 @@
 
 - (void)bootup //开机
 {
-    [[OvenManager sharedManager] bootupToDevice:self.myOven result:^(BOOL result) {
-        if (!result) {
-//            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
-        }
-    }];
+    uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kBootUp commandAttrValue:kBootUp];
+    [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 - (void)shutdown
 {
-    [[OvenManager sharedManager] shutdownToDevice:self.myOven result:^(BOOL result) {
-        if (!result) {
-//            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
-        }
-    }];
+    uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kShutDown commandAttrValue:kShutDown];
+    [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 

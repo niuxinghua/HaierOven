@@ -12,6 +12,8 @@
 #import "PhoneRegisterView.h"
 #import "PersonalCenterSectionView.h"
 #import "WebViewController.h"
+#import "ActiveUserController.h"
+
 @interface RegisterViewController ()<EmailRegisterViewDelegate,PhoneRegisterViewDelegate,PersonalCenterSectionViewDelegate>
 @property (strong, nonatomic) UIImageView *orangeLine;
 @property (strong, nonatomic) IBOutlet UIButton *emailBtn;
@@ -138,44 +140,37 @@
 
 -(void)RegisterWithPhone:(NSString *)phone andVerifyCode:(NSString *)code andPassword:(NSString *)password
 {
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
-//    [[InternetManager sharedManager] testRegisterWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
-//        [super hiddenProgressHUD];
-//        if (success) {
-//            
-//            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-//            [self presentViewController:root animated:YES completion:nil];
-//        } else {
-//            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
-//        }
-//        
-//        
-//    }];
-    [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
+//#warning 调试
+//    [self goToActiveUser:phone];    // 调试用的
+//    return;
+    
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] registerWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             [super hiddenProgressHUD];
-//            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
-//            [self presentViewController:root animated:YES completion:nil];
             
-//            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
-            
-//            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
-            
-            [self goToActiveUser];  //跳转到激活用户页面
+            [self goToActiveUser:phone password:password];  //跳转到激活用户页面
             
             
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+
         }
     }];
     
     
 }
 
-- (void)goToActiveUser
+- (void)goToActiveUser:(NSString*)activeMethod password:(NSString*)password
 {
+    ActiveUserController* activeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Active user controller"];
+    activeController.activeMethod = activeMethod;
+    activeController.accType = AccTypeHaier;
+    activeController.registerFlag = YES;
+    activeController.password = password;
+    [self.navigationController pushViewController:activeController
+                                         animated:YES];
     
 }
 
@@ -215,8 +210,10 @@
         if (success) {
 //            RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
 //            [self presentViewController:root animated:YES completion:nil];
-            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
-            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
+//            [super showProgressCompleteWithLabelText:@"注册成功，请登录" afterDelay:2];
+//            [self performSelector:@selector(popController) withObject:nil afterDelay:2];
+            [self loginWithUserName:email password:password];
+            
         } else {
             [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
         }
@@ -228,9 +225,46 @@
     [super showProgressErrorWithLabelText:string afterDelay:1];
 }
 
-#pragma mark - email注册
+#pragma mark - 登录
 
-
+- (void)loginWithUserName:(NSString*)userName password:(NSString*)password
+{
+    LoginType loginType;
+    if ([MyTool validateEmail:userName]) {
+        loginType = LoginTypeEmail;
+    } else {
+        loginType = LoginTypeMobile;
+    }
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyyMMddhhmmss";
+    NSString* sequence = [formatter stringFromDate:[NSDate date]];
+    sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
+    
+    [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
+    
+    [[InternetManager sharedManager] loginWithSequenceId:sequence
+                                              andAccType:AccTypeHaier
+                                              andloginId:userName
+                                             andPassword:password
+                                      andThirdpartyAppId:nil
+                                andThirdpartyAccessToken:nil
+                                            andLoginType:loginType
+                                                callBack:^(BOOL success, id obj, NSError *error) {
+                                                    [super hiddenProgressHUD];
+                                                    if (success) {
+                                                        NSLog(@"登录成功");
+                                                        [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                    } else {
+                                                        [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                    }
+                                                    
+                                                    
+                                                }];
+    
+    
+}
 
 
 /*

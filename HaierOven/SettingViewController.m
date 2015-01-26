@@ -7,8 +7,9 @@
 //
 
 #import "SettingViewController.h"
+#import <StoreKit/StoreKit.h>
 
-@interface SettingViewController ()
+@interface SettingViewController () <SKStoreProductViewControllerDelegate>
 
 @end
 
@@ -58,7 +59,34 @@
 //    }];
     
 }
+
+
 - (IBAction)PostMark:(id)sender {
     NSLog(@"app打分");
+    
+    SKStoreProductViewController *skVC=[SKStoreProductViewController new];
+    skVC.delegate = self;
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:AppStoreID forKey:SKStoreProductParameterITunesItemIdentifier];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [skVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error) {
+        [super hiddenProgressHUD];
+    }];
+    [self presentViewController:skVC animated:YES completion:nil];
+    
 }
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"dismiss");
+    }];
+    
+}
+
 @end
+
+
+
+

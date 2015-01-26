@@ -26,6 +26,15 @@
     
     [[UINavigationBar appearance] setShadowImage:IMAGENAMED(@"clear.png")];
     
+    NSDictionary* textAttributes = @{
+                                UITextAttributeTextColor : [UIColor whiteColor],
+                                UITextAttributeFont : [UIFont fontWithName:GlobalTitleFontName size:15],
+                                UITextAttributeTextShadowColor : [UIColor clearColor],
+                                UITextAttributeTextShadowOffset : [NSValue valueWithCGSize:CGSizeMake(1, 1)]
+                                };
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
     [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];

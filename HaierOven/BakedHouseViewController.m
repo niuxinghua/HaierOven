@@ -65,7 +65,6 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 - (void)loadProducts
 {
-    
     [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
                                                     sortType:self.sortType
                                                    pageIndex:_pageIndex

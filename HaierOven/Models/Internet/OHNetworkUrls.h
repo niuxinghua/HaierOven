@@ -43,7 +43,8 @@
 /**
  *  用户激活
  */
-#define UserActivate    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/activate"]
+//#define UserActivate    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/activate"]
+//#define UserActivate    根据GetVerifyCode拼字符串，例如:http://103.8.220.166:40000/commonapp/uvcs/123456/verify
 
 /**
  *  用户登录

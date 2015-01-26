@@ -451,20 +451,26 @@
 
 - (void)bootup //开机
 {
-    [[OvenManager sharedManager] bootupToDevice:self.myOven result:^(BOOL result) {
-        if (!result) {
-//            [super showProgressErrorWithLabelText:@"开机失败" afterDelay:1];
-        }
-    }];
+    uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kBootUp commandAttrValue:kBootUp];
+    [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 - (void)shutdown
 {
-    [[OvenManager sharedManager] shutdownToDevice:self.myOven result:^(BOOL result) {
-        if (!result) {
-//            [super showProgressErrorWithLabelText:@"关机失败" afterDelay:1];
-        }
-    }];
+    uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kShutDown commandAttrValue:kShutDown];
+    [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 
@@ -520,22 +526,36 @@
     
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kBakeMode
                                                                         commandAttrValue:[[self.bakeMode allKeys] firstObject]];
+   
     [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+        
+    }];
+    
     
     command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+    
     [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+        
+    }];
+    
+    //运行
+    command = [[OvenManager sharedManager] structureWithCommandName:@"60v0002" commandAttrValue:@"30v0002"];
+    
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
     if (!self.temputure.selected) {
         self.temputure.selected = YES;
@@ -582,13 +602,14 @@
     self.deviceBoardStatus = DeviceBoardStatusOpened;
     
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kPause commandAttrValue:kPause];
+    
     [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+        
+    }];
     
 
 }
@@ -651,9 +672,10 @@
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
+
     
     sender.selected = !sender.selected;
 }
@@ -794,9 +816,9 @@
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 // 设置烘焙温度
@@ -810,9 +832,9 @@
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
 }
 
 // 闹钟
@@ -846,9 +868,9 @@
                                         toDevice:self.myOven
                                     andCommandSN:0
                              andGroupCommandName:@""
-                                       andResult:^(BOOL result) {
-                                           
-                                       }];
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
 }
 
@@ -939,8 +961,7 @@
     } else if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
-        self.myWindow.hidden = NO;
-
+        
         switch (sender.tag) {
                 
             case 1:
@@ -960,6 +981,10 @@
             default:
                 break;
         }
+        
+        self.myWindow.hidden = NO;
+
+        
         [UIView animateWithDuration:0.2 animations:^{
             self.deviceAlertView.frame = alertRectShow;
         } completion:^(BOOL finished) {

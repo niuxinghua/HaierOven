@@ -28,13 +28,22 @@
     // Configure the view for the selected state
 }
 
-- (void)setUser:(User *)user
+- (void)setUser:(Friend *)user
 {
     _user = user;
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar]];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.avatar]];
     self.nameLabel.text = user.userName;
-    self.descriptionLabel.text = user.note;
+    self.descriptionLabel.text = user.signature;
+    
+    self.watchingBtn.selected = user.isFollowed;
     
 }
+
+
+- (IBAction)watchingButtonTapped:(UIButton *)sender
+{
+    [self.delegate RelationshipCell:self watchingButtonTapped:sender];
+}
+
 
 @end

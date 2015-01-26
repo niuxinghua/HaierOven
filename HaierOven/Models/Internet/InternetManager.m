@@ -91,9 +91,17 @@
     if (status == NotReachable) {
         NSLog(@"无法连接到网络");
         self.canConnectToInternetFlag = NO;
+        self.isWiFiConnected = NO;
     } else {
         NSLog(@"网络已连接");
         self.canConnectToInternetFlag = YES;
+        
+        if (status == ReachableViaWiFi) {
+            self.isWiFiConnected = YES;
+        } else {
+            self.isWiFiConnected = NO;
+        }
+        
     }
     
 }
@@ -183,7 +191,9 @@
         [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"accessToken"];
     }
     
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", nil];
+    
+//    [NSSet setWithObject:@"application/json"];
     
     return manager;
 }
@@ -222,23 +232,6 @@
 //    NSString* md5Password = [MyTool stringToMD5:password];
     
     // 3. 序列化为字典
-//    NSDictionary* userDict = @{@"password":password,
-//                               @"user":@{
-//                                        @"userBase":@{
-//                                                @"loginName":@"",
-//                                                @"email":email == nil ? @"" : email,
-//                                                @"mobile":phone == nil ? @"" : phone,
-//                                                @"accType":@0
-//                                                },
-//                                        @"userProfile":@{
-//                                                @"nickName":@"",
-//                                                @"userName":@"",
-//                                                @"points":@"0",
-//                                                @"focusCount":@"0",
-//                                                @"followCount":@"0"
-//                                                }
-//                                        }
-//                               };
     
     NSDictionary* userDict;
     if (email == nil) {
@@ -324,15 +317,17 @@
                                     @"validateScene" : validateScene,
                                     @"accType" : acctp,
                                     @"transactionId" : transactionId,
-                                    @"uvc" : uvc
+//                                    @"uvc" : uvc
                                     };
         
         // 2. 发送网络请求
-        [[self manager] POST:UserActivate parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString* path = [[GetVerifyCode stringByAppendingPathComponent:uvc] stringByAppendingPathComponent:@"verify"];
+        [[self manager] POST:path parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
+            NSLog(@"%@", responseObject[@"retInfo"]);
             
-            if ([status isEqualToString:@"1"]) {
+            if ([status isEqualToString:@"00000"]) {
                 completion(YES, responseObject, nil);
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
@@ -423,7 +418,6 @@
                 andValidateType:(ValidateType)validateType
                andValidateScene:(ValidateScene)scene
                      andAccType:(AccType)accType
-               andTransactionId:(NSString*)transactionId
                        callBack:(myCallback)completion
 {
     if ([self canConnectInternet]) {
@@ -443,12 +437,14 @@
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
         [[self manager] POST:GetVerifyCode parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"retCode"]];
             
-            if ([status isEqualToString:@"1"]) {
+            if ([status isEqualToString:@"00000"]) {
                 
+                // 3. 保存登录信息
                 
                 completion(YES, responseObject, nil);
+                
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
@@ -572,6 +568,7 @@
                 
                 // 4. 解析Json字典
                 id user = [DataParser parseUserWithDict:responseObject];
+                [DataCenter sharedInstance].currentUser = user;
                 completion(YES, user, nil);
                 
             } else {
@@ -588,6 +585,7 @@
         // 如果没有网络，从本地缓存读取用户信息
         id userDict = [[DataCenter sharedInstance] getUserInfoObject];
         id user = [DataParser parseUserWithDict:userDict];
+        [DataCenter sharedInstance].currentUser = user;
         completion(YES, user, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
 }

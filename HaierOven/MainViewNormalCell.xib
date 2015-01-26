@@ -28,7 +28,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="211"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VT-Kj-Qfw">
-                        <rect key="frame" x="265" y="42" width="53" height="21"/>
+                        <rect key="frame" x="254" y="42" width="53" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="53" id="RKA-0A-GpY"/>
                             <constraint firstAttribute="height" constant="21" id="o5b-9g-GWT"/>
@@ -39,9 +39,9 @@
                         <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRg-8d-2Ux">
-                        <rect key="frame" x="265" y="84" width="53" height="21"/>
+                        <rect key="frame" x="241" y="84" width="78" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="53" id="OUk-iO-52E"/>
+                            <constraint firstAttribute="width" constant="78" id="OUk-iO-52E"/>
                             <constraint firstAttribute="height" constant="21" id="WFE-Oj-pqm"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
@@ -50,7 +50,7 @@
                         <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYG-7I-dNy">
-                        <rect key="frame" x="279" y="63" width="24" height="24"/>
+                        <rect key="frame" x="268" y="63" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="CDN-Gs-ewd"/>
                             <constraint firstAttribute="width" constant="24" id="YRf-nn-RQj"/>
@@ -60,7 +60,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGW-sZ-8v5">
-                        <rect key="frame" x="279" y="22" width="24" height="24"/>
+                        <rect key="frame" x="268" y="22" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="Iil-H7-Si8"/>
                             <constraint firstAttribute="height" constant="24" id="tuf-PN-WDM"/>
@@ -178,19 +178,19 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="v1a-PN-aSo" secondAttribute="trailing" id="5Ch-Iz-DVo"/>
-                    <constraint firstAttribute="trailing" secondItem="SGW-sZ-8v5" secondAttribute="trailing" constant="17" id="8KK-Yx-GeT"/>
+                    <constraint firstAttribute="trailing" secondItem="SGW-sZ-8v5" secondAttribute="trailing" constant="28" id="8KK-Yx-GeT"/>
                     <constraint firstItem="oRg-8d-2Ux" firstAttribute="top" secondItem="9VT-Kj-Qfw" secondAttribute="bottom" constant="21" id="FIx-KX-9nA"/>
                     <constraint firstItem="9VT-Kj-Qfw" firstAttribute="top" secondItem="Vm4-zh-08R" secondAttribute="topMargin" constant="34" id="FvB-4S-tff"/>
                     <constraint firstItem="UZR-sU-xhL" firstAttribute="leading" secondItem="Vm4-zh-08R" secondAttribute="leading" id="HU7-We-hDT"/>
                     <constraint firstItem="v1a-PN-aSo" firstAttribute="leading" secondItem="Vm4-zh-08R" secondAttribute="leading" id="KTa-12-xMe"/>
                     <constraint firstItem="VTs-LX-iVh" firstAttribute="top" secondItem="Vm4-zh-08R" secondAttribute="topMargin" constant="24" id="PGY-lI-lLx"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9VT-Kj-Qfw" secondAttribute="trailing" constant="-6" id="Vtp-57-vsB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9VT-Kj-Qfw" secondAttribute="trailing" constant="5" id="Vtp-57-vsB"/>
                     <constraint firstItem="VTs-LX-iVh" firstAttribute="leading" secondItem="Vm4-zh-08R" secondAttribute="leadingMargin" constant="-8" id="WNc-29-ncS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="oRg-8d-2Ux" secondAttribute="trailing" constant="-6" id="Ww5-HO-dXD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oRg-8d-2Ux" secondAttribute="trailing" constant="-7" id="Ww5-HO-dXD"/>
                     <constraint firstAttribute="trailing" secondItem="UZR-sU-xhL" secondAttribute="trailing" id="Yxg-Kp-aFb"/>
                     <constraint firstAttribute="bottom" secondItem="v1a-PN-aSo" secondAttribute="bottom" id="Zfb-UN-IwP"/>
                     <constraint firstAttribute="bottom" secondItem="UZR-sU-xhL" secondAttribute="bottom" constant="4" id="aSY-vi-DjB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="UYG-7I-dNy" secondAttribute="trailing" constant="9" id="kZx-KH-C3U"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="UYG-7I-dNy" secondAttribute="trailing" constant="20" id="kZx-KH-C3U"/>
                     <constraint firstItem="SGW-sZ-8v5" firstAttribute="top" secondItem="Vm4-zh-08R" secondAttribute="top" constant="22" id="mh4-fN-c2M"/>
                     <constraint firstItem="UZR-sU-xhL" firstAttribute="top" secondItem="Vm4-zh-08R" secondAttribute="top" id="trq-Ac-YgY"/>
                     <constraint firstItem="UYG-7I-dNy" firstAttribute="top" secondItem="9VT-Kj-Qfw" secondAttribute="bottom" id="uwc-kt-KX1"/>

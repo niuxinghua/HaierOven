@@ -315,7 +315,11 @@
     return [[uSDKDeviceAttribute alloc] initWithAttrName:cmdName withAttrValue:cmdValue];
 }
 
-- (void)executeCommands:(NSMutableArray*)commands toDevice:(uSDKDevice*)device andCommandSN:(int)cmdsn andGroupCommandName:(NSString*)groupCmdName andResult:(result)result
+- (void)executeCommands:(NSMutableArray*)commands
+               toDevice:(uSDKDevice*)device
+           andCommandSN:(int)cmdsn
+    andGroupCommandName:(NSString*)groupCmdName
+               callback:(run)completion
 {
 //    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     
@@ -332,10 +336,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (errorConst == RET_USDK_OK) {
                 NSLog(@"发送成功");
-                result(YES);
+                completion(YES, RET_USDK_OK);
             } else {
                 NSLog(@"发送失败, errorCode:%d", errorConst);
-                result(NO);
+                completion(NO, errorConst);
             }
         });
     });
@@ -348,37 +352,30 @@
     NSLog(@"设备操作应答消息通知：%@", notification.object);
 }
 
-- (void)bootupToDevice:(uSDKDevice*)device result:(result)success
-{
-    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kBootUp commandAttrValue:kBootUp];
-    [self executeCommands: [@[cmd] mutableCopy]
-                 toDevice:device
-             andCommandSN:0
-      andGroupCommandName:@""
-                andResult:^(BOOL result) {
-                    if(result) {
-                        success(YES);
-                    } else {
-                        success(NO);
-                    }
-                }];
-}
-
-- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success
-{
-    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kShutDown commandAttrValue:kShutDown];
-    [self executeCommands:[@[cmd] mutableCopy]
-                 toDevice:device
-             andCommandSN:0
-      andGroupCommandName:@""
-                andResult:^(BOOL result) {
-                    if(result) {
-                        success(YES);
-                    } else {
-                        success(NO);
-                    }
-                }];
-}
+//- (void)bootupToDevice:(uSDKDevice*)device result:(result)success
+//{
+//    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kBootUp commandAttrValue:kBootUp];
+// 
+//    [self executeCommands:[@[cmd] mutableCopy] toDevice:device andCommandSN:0 andGroupCommandName:@"" callback:^(BOOL success, NSInteger errorCode) {
+//        
+//    }];
+//}
+//
+//- (void)shutdownToDevice:(uSDKDevice*)device result:(result)success
+//{
+//    uSDKDeviceAttribute* cmd = [self structureWithCommandName:kShutDown commandAttrValue:kShutDown];
+//    [self executeCommands:[@[cmd] mutableCopy]
+//                 toDevice:device
+//             andCommandSN:0
+//      andGroupCommandName:@""
+//                andResult:^(BOOL result) {
+//                    if(result) {
+//                        success(YES);
+//                    } else {
+//                        success(NO);
+//                    }
+//                }];
+//}
 
 - (NSError*)errorWithCode:(InternetErrorCode)errorCode andDescription:(NSString*)errorMsg
 {

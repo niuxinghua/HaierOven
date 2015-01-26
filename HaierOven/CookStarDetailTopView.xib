@@ -117,7 +117,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vdx-MB-Bft">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="vdx-MB-Bft">
                     <rect key="frame" x="35" y="249" width="250" height="150"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.63137254899999995" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -276,6 +276,7 @@
         <image name="Vcs.png" width="26" height="26"/>
         <image name="bofang.png" width="41" height="41"/>
         <image name="chef_bg_img.png" width="360" height="319"/>
+        <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
         <image name="default_avatar.png" width="127" height="127"/>
         <image name="follow.png" width="112" height="31"/>
         <image name="followed.png" width="112" height="31"/>

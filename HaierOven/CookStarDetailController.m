@@ -14,6 +14,7 @@
 #import "MJRefresh.h"
 #import "CookbookDetailControllerViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "StudyCookViewController.h"
 
 @interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
 {
@@ -299,7 +300,9 @@
    
 #warning 暂用视频
     
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
+//    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
+    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
+//    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];
@@ -329,6 +332,8 @@
 
 -(void)studyCook{
     NSLog(@"新手学烘焙");
+    StudyCookViewController* studyController = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
+    [self.navigationController pushViewController:studyController animated:YES];
 }
 
 -(void)chickTags:(UIButton*)btn{

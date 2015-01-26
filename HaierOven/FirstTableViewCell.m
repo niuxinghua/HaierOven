@@ -37,7 +37,7 @@
 {
     _user = user;
     [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar]];
-    self.userNameLabel.text = user.nickName == nil ? @"点击登录" : user.userName;
+    self.userNameLabel.text = user.nickName == nil ? @"点击登录" : user.nickName;
     
     
 }
