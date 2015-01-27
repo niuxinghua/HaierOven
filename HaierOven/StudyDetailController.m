@@ -9,21 +9,29 @@
 #import "StudyDetailController.h"
 #import "StudyDetailCell.h"
 #import "StudyDetailFiexView.h"
+#import "StudyCookPartOne.h"
 @interface StudyDetailController ()<StudyDetailFiexViewDelegate>
 {
     CGFloat fiexViewHeight;
 }
 @property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 @property (strong, nonatomic) UIWindow *myWindow;
-@property (strong, nonatomic) NSArray *tools;
 @property (strong, nonatomic) StudyDetailFiexView *fiexView;
+@property (strong, nonatomic) NSMutableArray *datas;
+@property (strong, nonatomic) StudyCookPartOne *partOne;
 @end
 
 @implementation StudyDetailController
-
+@synthesize toolIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fakeData];
+    [self setUpSubviews];
+    
+}
+
+
+
+-(void)setUpSubviews{
     self.myWindow = [UIWindow new];
     self.myWindow.frame = CGRectMake(0, 64, PageW, PageH);
     self.myWindow.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.3];
@@ -31,38 +39,19 @@
     [self.myWindow makeKeyAndVisible];
     self.myWindow.userInteractionEnabled = YES;
     self.myWindow.hidden = YES;
-
-    [self addObserver:self forKeyPath:@"self.myWindow.hidden" options:NSKeyValueObservingOptionNew context:NULL];
     
     self.fiexView = [StudyDetailFiexView new];
     self.fiexView.backgroundColor    = [UIColor whiteColor];
-    fiexViewHeight = self.tools.count*44+16;
+    fiexViewHeight = self.datas.count*44+16;
     self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
-    self.fiexView.tools = self.tools;
+    self.fiexView.tools = self.datas;
     self.fiexView.delegate = self;
     [self.myWindow addSubview:self.fiexView];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    self.partOne = self.datas[toolIndex];
+    [self.titleBtn setTitle:self.partOne.title forState:UIControlStateNormal];
 }
 
-
--(void)fakeData{
-    self.tools = @[@"123",@"123",@"123",@"123",@"123"];
-}
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"self.myWindow.hidden"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    if ([keyPath isEqualToString:@"self.myWindow.hidden"]) {
-
-    }
-}
 
 
 
@@ -80,74 +69,35 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+    return self.partOne.tools.count;
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    StudyCookTools *tool = self.partOne.tools[indexPath.row];
+    return [tool getHeight];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StudyDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudyDetailCell" forIndexPath:indexPath];
-    
+    cell.tools = self.partOne.tools[indexPath.row];
     // Configure the cell...
     
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)fiexViewShow:(UIButton*)sender {
-    self.myWindow.hidden = sender.selected;
-    sender.selected = !sender.selected;
-    if (self.myWindow.hidden) {
-       self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+    if (sender.selected) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+        }];
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.35 animations:^{
         self.fiexView.frame = CGRectMake(25, 0, PageW-50, fiexViewHeight);
     }];
     }
-    
+    self.myWindow.hidden = sender.selected;
+    sender.selected = !sender.selected;
 }
 
 - (IBAction)TurnBack:(id)sender {
@@ -155,6 +105,56 @@
 }
 
 -(void)reloadViewWithToolsIndex:(NSInteger)index{
-    NSLog(@"%d",index);
+    self.partOne = self.datas[index];
+    [self.titleBtn setTitle:self.partOne.title forState:UIControlStateNormal];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+
+    }completion:^(BOOL finished) {
+        self.myWindow.hidden = YES;
+    }];
+
+    toolIndex = index;
+    [self.tableView reloadData];
 }
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
+    }];
+}
+
+
+
+
+
+-(void)setStudyType:(StudyType)studyType{
+    _studyType = studyType;
+    switch (studyType) {
+        case StudyTypeTools:
+            [self initToolsDatas];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)initToolsDatas{
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"StudyCookPart_1" ofType:@"plist"];
+    NSArray* arr = [NSArray arrayWithContentsOfFile:plistPath];
+    
+    self.datas = [NSMutableArray new];
+    
+    for (int i = 0; i<arr.count; i++) {
+        StudyCookPartOne *study = [StudyCookPartOne new];
+        study = [study GetStudyCookPartOne:arr[i]];
+        [self.datas addObject:study];
+    }    
+}
+
 @end

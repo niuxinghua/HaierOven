@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "StudyCookPartOne.h"
+#import "StudyCookTools.h"
 @interface StudyDetailCell : UITableViewCell
+@property (strong, nonatomic)StudyCookTools *tools;
 
 @end

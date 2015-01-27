@@ -65,7 +65,7 @@ const CGFloat kTimeLabelWidth = 150.0;
     
     self.replyButton = [DrawedButton buttonWithType:UIButtonTypeCustom];
     self.replyButton.frame = CGRectMake(self.width - kReplyButtonWidth - 16, self.commentTimeLabel.top, kReplyButtonWidth, 21);
-    [self.replyButton setTitle:@"回复" forState:UIControlStateNormal];
+    [self.replyButton setTitle:@"发送" forState:UIControlStateNormal];
     [self.replyButton setTitleColor:GlobalRedColor forState:UIControlStateNormal];
     [self.replyButton addTarget:self action:@selector(replyCommentTapped) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.replyButton];
