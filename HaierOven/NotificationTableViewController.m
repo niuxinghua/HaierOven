@@ -14,6 +14,12 @@
 #import "CookbookDetailControllerViewController.h"
 #import "ChatViewController.h"
 
+typedef NS_ENUM(NSInteger, NotificationType)
+{
+    NotificationTypeOven    = 1,
+    NotificationTypeSystem,
+};
+
 @interface NotificationTableViewController ()<PersonalCenterSectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *headView;
 
@@ -23,6 +29,10 @@
 @property (strong, nonatomic) NSMutableArray* cookbookNotifications;
 
 @property (strong, nonatomic) NSMutableArray* messagesNotifications;
+
+@property (strong, nonatomic) NSMutableArray* ovenNotifications;
+
+@property (nonatomic) NotificationType notificationType;
 
 @end
 
@@ -36,6 +46,11 @@
         self.allNotifications = [NSMutableArray array];
         self.cookbookNotifications = [NSMutableArray array];
         self.messagesNotifications = [NSMutableArray array];
+        self.ovenNotifications = [NSMutableArray array];
+        self.notificationType = NotificationTypeOven;
+        
+        
+        
     }
     return self;
 }
@@ -46,29 +61,46 @@
 //        [super openLoginController];
 //        return;
 //    }
-    NSString* userBaseId = CurrentUserBaseId; //@"5";
-    [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+    
+    if (self.notificationType == NotificationTypeSystem) {
         
-        if (success) {
-            // 15秒后设置为已读
-            [self performSelector:@selector(updateReadStatus) withObject:nil afterDelay:10];
+        NSString* userBaseId = CurrentUserBaseId; //@"5";
+        [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
             
-            NSArray* arr = obj;
-            if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
-            }
-            if (_pageIndex == 1) {
-                self.allNotifications = obj;
-                if (self.allNotifications.count == 0) {
-                    [super showProgressErrorWithLabelText:@"您没有未读消息" afterDelay:1];
+            if (success) {
+                // 15秒后设置为已读
+                [self performSelector:@selector(updateReadStatus) withObject:nil afterDelay:10];
+                
+                NSArray* arr = obj;
+                if (arr.count < PageLimit && _pageIndex != 1) {
+                    [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 }
-            } else {
-                [self.allNotifications addObjectsFromArray:arr];
+                if (_pageIndex == 1) {
+                    self.allNotifications = obj;
+                    if (self.allNotifications.count == 0) {
+                        [super showProgressErrorWithLabelText:@"您没有未读消息" afterDelay:1];
+                    }
+                } else {
+                    [self.allNotifications addObjectsFromArray:arr];
+                }
+                [self reload];
             }
-            [self reload];
-        }
+            
+        }];
         
-    }];
+    } else {
+        // 获取设备信息
+        
+        // 假数据
+        NSDictionary* ovenMessage = @{@"time" : [MyTool getCurrentTime],
+                                      @"content" : @"烤箱已就绪"};
+        self.ovenNotifications = [NSMutableArray array];
+        [self.ovenNotifications addObject:ovenMessage];
+        
+        [self.tableView reloadData];
+    }
+    
+    
     
 }
 
@@ -84,15 +116,20 @@
 
 - (void)reload
 {
-    self.cookbookNotifications = [NSMutableArray array];
-    self.messagesNotifications = [NSMutableArray array];
-    for (NoticeInfo* notice in self.allNotifications) {
-        if (notice.type == 3) { //私信
-            [self.messagesNotifications addObject:notice];
-        } else { // 1赞菜谱 2评论菜谱
-            [self.cookbookNotifications addObject:notice];
+    if (self.notificationType == NotificationTypeSystem) {
+        self.cookbookNotifications = [NSMutableArray array];
+        self.messagesNotifications = [NSMutableArray array];
+        for (NoticeInfo* notice in self.allNotifications) {
+            if (notice.type == 3) { //私信
+                [self.messagesNotifications addObject:notice];
+            } else { // 1赞菜谱 2评论菜谱
+                [self.cookbookNotifications addObject:notice];
+            }
         }
+    } else {
+        
     }
+    
     [self.tableView reloadData];
 }
 
@@ -147,8 +184,10 @@
         // 进入刷新状态就会回调这个Block
         
         // 增加根据pageIndex加载数据
+        if (vc.notificationType == NotificationTypeSystem) {
+            vc.pageIndex++;
+        }
         
-        vc.pageIndex++;
         [vc loadNotifications];
         
         // 加载数据，0.5秒后执行
@@ -173,9 +212,12 @@
     [self.headView addSubview:head];
     
 }
+
 -(void)SectionType:(NSInteger)type{
     NSLog(@"%d",type);
-    
+    self.notificationType = type;
+    _pageIndex = 1;
+    [self loadNotifications];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -185,9 +227,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 2;
+    return self.notificationType == NotificationTypeSystem ? 2 : 1;
 }
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectio{
@@ -195,48 +235,63 @@
 //}    // fixed font style. use custom view (UILabel) if you want something different
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
-    if (self.allNotifications.count == 0) {
+    
+    if (self.notificationType == NotificationTypeSystem) {
+        NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
+        if (self.allNotifications.count == 0) {
+            return [[UIView alloc] init];
+        }
+        if (section == 0) {
+            sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
+        } else {
+            sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
+        }
+        
+        return sectionview;
+    } else {
         return [[UIView alloc] init];
     }
-    if (section == 0) {
-        sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
-    } else {
-        sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
-    }
     
-    return sectionview;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
+    return self.notificationType == NotificationTypeSystem ? 44 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    if (section == 0) {
-        return self.cookbookNotifications.count;
+    if (self.notificationType == NotificationTypeSystem) {
+        if (section == 0) {
+            return self.cookbookNotifications.count;
+        }
+        return self.messagesNotifications.count;
+    } else {
+        return self.ovenNotifications.count;
     }
-    return self.messagesNotifications.count;
+    
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     SystemNotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemNotificationCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
-    if (indexPath.section == 0) {
-        
-        cell.notice = self.cookbookNotifications[indexPath.row];
-        
+    if (self.notificationType == NotificationTypeSystem) {
+        if (indexPath.section == 0) {
+            
+            cell.notice = self.cookbookNotifications[indexPath.row];
+            
+        } else {
+            
+            cell.notice = self.messagesNotifications[indexPath.row];
+            
+        }
     } else {
-        
-        cell.notice = self.messagesNotifications[indexPath.row];
-        
+        cell.ovenNotification = self.ovenNotifications[indexPath.row];
     }
+    
     
     return cell;
 }
@@ -244,29 +299,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.section == 0) {
+    if (self.notificationType == NotificationTypeSystem) {
         
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
-        CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
-//        cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
-        NoticeInfo* selectedNotice = self.cookbookNotifications[indexPath.row];
-        cookbookDetailController.cookbookId = selectedNotice.relatedId;
-        
-        
-        [self.navigationController pushViewController:cookbookDetailController animated:YES];
+        if (indexPath.section == 0) {
+            
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+            CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+            //        cookbookDetailController.cookbook = self.cookbooks[indexPath.row];
+            NoticeInfo* selectedNotice = self.cookbookNotifications[indexPath.row];
+            cookbookDetailController.cookbookId = selectedNotice.relatedId;
+            
+            
+            [self.navigationController pushViewController:cookbookDetailController animated:YES];
+            
+        } else {
+            // 跳转到聊天界面
+            
+            NoticeInfo* selectedNotice = self.messagesNotifications[indexPath.row];
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
+            ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
+            chatViewController.toUserId = selectedNotice.promoter.userBaseId;
+            chatViewController.toUserName = selectedNotice.promoter.nickName;
+            [self.navigationController pushViewController:chatViewController animated:YES];
+            
+        }
         
     } else {
-        // 跳转到聊天界面
-        
-        NoticeInfo* selectedNotice = self.messagesNotifications[indexPath.row];
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
-        ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
-        chatViewController.toUserId = selectedNotice.promoter.userBaseId;
-        chatViewController.toUserName = selectedNotice.promoter.nickName;
-        [self.navigationController pushViewController:chatViewController animated:YES];
+        //烤箱信息
         
     }
+    
     
     
 }

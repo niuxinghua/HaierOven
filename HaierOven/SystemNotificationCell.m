@@ -62,6 +62,23 @@
     
 }
 
+- (void)setOvenNotification:(NSDictionary *)ovenNotification
+{
+    _ovenNotification = ovenNotification;
+    
+    [self.nameBtn setTitle:@"" forState:UIControlStateNormal];
+    self.descLabel.text = ovenNotification[@"content"];
+    
+    NSString* dateStr = ovenNotification[@"time"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+    NSDate *date = [dateFormatter dateFromString:dateStr];
+ 
+    self.timeLabel.text = [MyTool intervalSinceNow:date];
+    
+    
+}
+
 @end
 
 

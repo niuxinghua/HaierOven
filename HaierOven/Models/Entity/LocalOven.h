@@ -38,7 +38,7 @@
 /**
  *  烤箱属性
  */
-@property (strong, nonatomic) NSDictionary* attribute;
+//@property (strong, nonatomic) NSDictionary* attribute;
 
 /**
  *  转为字典保存本地

@@ -15,4 +15,6 @@
 
 @property (strong, nonatomic) NoticeInfo* notice;
 
+@property (strong, nonatomic) NSDictionary* ovenNotification;
+
 @end

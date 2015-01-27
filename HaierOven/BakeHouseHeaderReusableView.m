@@ -68,7 +68,7 @@
 
 #pragma mark - 搜索栏回调方法
 -(void)TouchUpInsideCancelBtn{
-
+    [self.delegate cancelSearch];
 }
 
 -(void)StartReach:(UITextField*)searchTextFailed{

@@ -850,6 +850,7 @@
 		842643051A765037004B2513 /* sz-c.png in Resources */ = {isa = PBXBuildFile; fileRef = 842642FF1A765037004B2513 /* sz-c.png */; };
 		842643061A765037004B2513 /* sz-c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842643001A765037004B2513 /* sz-c@2x.png */; };
 		842643071A765037004B2513 /* sz-c@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842643011A765037004B2513 /* sz-c@3x.png */; };
+		8426430A1A773C95004B2513 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842643091A773C95004B2513 /* BaseCollectionViewController.m */; };
 		842A86CD1A52457300C75EE4 /* FoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A86CC1A52457300C75EE4 /* FoodsViewController.m */; };
 		842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */; };
 		842A86D51A5248F700C75EE4 /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A86D41A5248F700C75EE4 /* FoodCell.xib */; };
@@ -2040,6 +2041,8 @@
 		842642FF1A765037004B2513 /* sz-c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sz-c.png"; sourceTree = "<group>"; };
 		842643001A765037004B2513 /* sz-c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sz-c@2x.png"; sourceTree = "<group>"; };
 		842643011A765037004B2513 /* sz-c@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sz-c@3x.png"; sourceTree = "<group>"; };
+		842643081A773C95004B2513 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
+		842643091A773C95004B2513 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewController.m; sourceTree = "<group>"; };
 		842A86CB1A52457300C75EE4 /* FoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodsViewController.h; sourceTree = "<group>"; };
 		842A86CC1A52457300C75EE4 /* FoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodsViewController.m; sourceTree = "<group>"; };
 		842A86D21A52473400C75EE4 /* AddShoppingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddShoppingListCell.xib; sourceTree = "<group>"; };
@@ -3718,6 +3721,8 @@
 				45C7E55B1A3FD9AE000B086B /* BaseTableViewController.m */,
 				45C7E55C1A3FD9AE000B086B /* BaseViewController.h */,
 				45C7E55D1A3FD9AE000B086B /* BaseViewController.m */,
+				842643081A773C95004B2513 /* BaseCollectionViewController.h */,
+				842643091A773C95004B2513 /* BaseCollectionViewController.m */,
 			);
 			name = BaseControllers;
 			sourceTree = "<group>";
@@ -4899,7 +4904,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = AEPFFMR544;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -5103,6 +5108,7 @@
 				45A546AD1A593E9C00BE62EC /* yty@2x.png in Resources */,
 				45A546931A58F08B00BE62EC /* wbdlwdj@3x.png in Resources */,
 				8426429D1A764052004B2513 /* icon_bk_s@3x.png in Resources */,
+				45E61AB71A761B6A009DF3FC /* device_how2add_warn_red@2x.png in Resources */,
 				45A97B9F1A6E238D0094F9BA /* UP_p@2x.png in Resources */,
 				458952F11A496876009B5DD1 /* tuolian@2x.png in Resources */,
 				45D906EF1A47CAAB00B97D92 /* orangel@2x.png in Resources */,
@@ -5478,6 +5484,7 @@
 				842388251A70A256007AB206 /* default_avatar.png in Resources */,
 				45D906CD1A47CAAB00B97D92 /* hongbeiquan.png in Resources */,
 				842642A51A764052004B2513 /* icon_cz_n@2x.png in Resources */,
+				45E61AC41A7629CA009DF3FC /* use2@3x.png in Resources */,
 				45D906D91A47CAAB00B97D92 /* l.png in Resources */,
 				45BA02EF1A441C30003810C7 /* BLOD.TTF in Resources */,
 				45D906E81A47CAAB00B97D92 /* mydessertcount.png in Resources */,
@@ -5583,6 +5590,7 @@
 				45B88E0C1A4BCC8B00722EF6 /* yy-cxz@2x.png in Resources */,
 				459E8BB31A5D2AA7009D4ADA /* qrd@2x.png in Resources */,
 				842642D81A764052004B2513 /* icon_rfbk_s@2x.png in Resources */,
+				45E61ABD1A762697009DF3FC /* use@2x.png in Resources */,
 				45B651161A48448500A6376D /* wodeWIFI@2x.png in Resources */,
 				459E8BA51A5CDC1D009D4ADA /* deletec@3x.png in Resources */,
 				45BC57201A4AF20A0052F520 /* cthp-wxz@2x.png in Resources */,
@@ -5669,6 +5677,7 @@
 				842642B11A764052004B2513 /* icon_fj_n@2x.png in Resources */,
 				45BB362D1A4A8E6E000EE3C4 /* fs-xz.png in Resources */,
 				842642AD1A764052004B2513 /* icon_dlhb_s.png in Resources */,
+				45E61A9B1A760F7E009DF3FC /* wh.png in Resources */,
 				C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */,
 				45D907021A47CAAB00B97D92 /* shouye@3x.png in Resources */,
 				45B6510B1A482EDB00A6376D /* n1@3x.png in Resources */,
@@ -5812,6 +5821,7 @@
 				844117841A4BB8AF00628A64 /* InternetManager.m in Sources */,
 				842A86DB1A52493F00C75EE4 /* FoodCell.m in Sources */,
 				458952F51A49692C009B5DD1 /* DeviceUnconnectController.m in Sources */,
+				8426430A1A773C95004B2513 /* BaseCollectionViewController.m in Sources */,
 				45B650C41A47F64000A6376D /* MyDeviceView.m in Sources */,
 				458DD06C1A651A4B006E84DD /* PEResizeControl.m in Sources */,
 				45D857CE1A401134007B7AB7 /* SecTableViewCell.m in Sources */,

@@ -19,7 +19,7 @@
 #import "OrderAlertView.h"
 
 
-@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate,KKProgressTimerDelegate,TimeProgressAlertViewDelegate,TimeOutViewDelegate,OrderAlertViewDelegate>
+@interface DeviceBoardViewController () <MyPageViewDelegate, UIScrollViewDelegate, DeviceAlertViewDelegate,KKProgressTimerDelegate,TimeProgressAlertViewDelegate,TimeOutViewDelegate,OrderAlertViewDelegate, CompleteCookControllerDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -514,8 +514,8 @@
     self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@", self.howlong.currentTitle];
     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
     
-    range = [self.bakeTemperatureLabel.text rangeOfString:@"°"];
-    NSString* temperatureValue = [self.bakeTemperatureLabel.text substringToIndex:range.location];
+    range = [self.temputure.currentTitle rangeOfString:@"°"];
+    NSString* temperatureValue = [self.temputure.currentTitle substringToIndex:range.location];
     
     NSInteger minutes = [timeStr integerValue];
     NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
@@ -602,13 +602,13 @@
         
         CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
         completeController.completeTye = CompleteTyeCook;
+        completeController.delegate = self;
         completeController.myOven = self.myOven;
         [self.navigationController pushViewController:completeController animated:YES];
         
     }
     
 }
-
 
 -(void)StopWorking{
     self.cancelBakeFlag = YES;
@@ -628,6 +628,17 @@
     }];
     
 
+}
+
+#pragma mark - CompleteCookControllerDelegate
+
+- (void)cookCompleteToShutdown:(BOOL)shutdown
+{
+    if (shutdown) {
+        self.deviceBoardStatus = DeviceBoardStatusClosed;
+    } else {
+        self.deviceBoardStatus = DeviceBoardStatusOpened;
+    }
 }
 
 #pragma mark - 按钮响应事件

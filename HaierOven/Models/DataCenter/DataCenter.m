@@ -244,8 +244,13 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
         [keywords addObject:keyword];
         
     } else {
-        //只保存10个关键词
+        //只保存10个关键词 不保存已有关键词
         keywords = [NSMutableArray arrayWithContentsOfFile:filePath];
+        for (NSString* existKeyword in keywords) {
+            if ([existKeyword isEqualToString:keyword]) {
+                return;
+            }
+        }
         if (keywords.count > 10) {
             [keywords removeLastObject];
         }

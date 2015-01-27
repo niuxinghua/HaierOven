@@ -644,6 +644,18 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getNotificationListWithUserBaseId:(NSString*)userBaseId status:(NSInteger)status pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 
+#pragma mark - 设置
+
+/**
+ *  意见反馈
+ *
+ *  @param content    反馈内容
+ *  @param phone      联系电话
+ *  @param completion 结果回调
+ */
+- (void)feedbackWithContent:(NSString*)content phone:(NSString*)phone callBack:(myCallback)completion;
+
+
 
 
 

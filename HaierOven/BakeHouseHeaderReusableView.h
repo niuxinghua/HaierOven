@@ -16,6 +16,9 @@
 -(void)GetSearchKeyWord:(NSString*)string;
 
 -(void)GetNeedEquipmentType:(NSInteger)type;
+
+- (void)cancelSearch;
+
 @end
 @interface BakeHouseHeaderReusableView : UICollectionReusableView
 @property (weak, nonatomic)id<BakeHouseHeaderReusableViewDelegate>delegate;

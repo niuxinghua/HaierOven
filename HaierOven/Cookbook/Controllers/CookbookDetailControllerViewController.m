@@ -88,6 +88,10 @@
 
 @property (weak, nonatomic) UITextField * commentTextField;
 
+@property (nonatomic)NSInteger shoppingListCount;
+
+@property (strong, nonatomic) NSDate* lastCommentTime;
+
 @end
 
 @implementation CookbookDetailControllerViewController
@@ -357,7 +361,7 @@
     if (!self.isPreview) {
         [self loadComments];
     }
-    
+    [self getShoppinglist];
     
 }
 
@@ -459,6 +463,12 @@
         return;
     }
     
+    NSTimeInterval inteval = [[NSDate date] timeIntervalSinceDate:self.lastCommentTime];
+    if (inteval < 2) {
+        [super showProgressErrorWithLabelText:@"您评论的太频繁了" afterDelay:1];
+        return;
+    }
+    
     NSLog(@"添加评论:%@", self.commentTextField.text);
     [self hideKeyboard];
     Comment* comment = [[Comment alloc] init];
@@ -485,8 +495,12 @@
                                                              if (success) {
                                                                  NSLog(@"评论成功");
                                                                  self.commentTextField.text = @"";
+                                                                 
+                                                                 self.lastCommentTime = [NSDate date];
+                                                                 
                                                              } else {
                                                                  NSLog(@"评论失败");
+                                                                 [super showProgressErrorWithLabelText:@"评论失败" afterDelay:1];
                                                              }
                                                          }];
         
@@ -854,11 +868,32 @@
 
 #pragma mark - AddShoppingListCellDelegate
 
+- (void)getShoppinglist
+{
+    [[InternetManager sharedManager] getShoppingListWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+     
+        if (success) {
+            
+            NSArray* arr = obj;
+            self.shoppingListCount = arr.count;
+            
+        } else {
+            [super showProgressErrorWithLabelText:@"添加失败" afterDelay:1];
+        }
+    }];
+}
+
 - (void)AddShoppingListWithCell:(AddShoppingListCell *)cell
 {
     NSLog(@"保存到购物清单");
     if (!IsLogin) {
         [super openLoginController];
+        return;
+    }
+    
+    //获取购物清单，保存数量不能超过10条
+    if (self.shoppingListCount >= 10) {
+        [super showProgressErrorWithLabelText:@"清单里菜谱太多啦，删掉一些吧！" afterDelay:2];
         return;
     }
     
@@ -922,9 +957,12 @@
 - (void)shareCookbook
 {
     NSLog(@"分享");
+    // 构建分享内容
+    NSString* shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName];
+    
     //由于调试时QQ未安装也显示了，所以这里对QQ进行单独判断
     NSArray* snsNames = [QQApi isQQInstalled] ? @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ] : @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline];
-    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:self.cookbookDetail.name shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:shareText shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
     
 }
 
@@ -932,7 +970,10 @@
 
 - (void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
 {
-    NSLog(@"%@", platformName);
+    
+    NSString* shareUrl = [BaseShareUrl stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
+    
+    NSLog(@"platform: %@, shareUrl: %@", platformName, shareUrl);
     
     if ([platformName hasPrefix:@"wx"]) { //微信分享，只分享图片，分享到朋友圈时的连接为app下载地址
         
@@ -940,17 +981,25 @@
         
         //在分享代码前设置微信分享应用类型，用户点击消息将跳转到应用，或者到下载页面
         //UMSocialWXMessageTypeImage 为纯图片类型
-        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
         //分享图文样式到微信朋友圈显示字数比较少，只显示分享标题
         
-        [UMSocialData defaultData].extConfig.title = self.cookbookDetail.desc;
+//        [UMSocialData defaultData].extConfig.title = self.cookbookDetail.desc;
         //设置微信好友或者朋友圈的分享url,下面是微信好友，微信朋友圈对应wechatTimelineData
-//        [UMSocialData defaultData].extConfig.wechatSessionData.url = [DataCenter sharedInstance].remoteConfig.appUrl;
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = shareUrl;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
         
     } else if ([platformName hasPrefix:@"qq"]) {
-        socialData.shareImage = self.cookbookImageView.image;
+//        socialData.shareImage = self.cookbookImageView.image;
+        [UMSocialData defaultData].extConfig.qqData.url = shareUrl;
+        [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
+    } else if ([platformName hasPrefix:@"sina"]) {
         
-        [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+        NSString* sharePath = [@"http://115.29.8.251:8082/cookbook/detail" stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
+        sharePath = [sharePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [UMSocialData defaultData].shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@。\n%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName, sharePath];
+        
     }
     
 //    [MobClick event:@"share" attributes:@{@"分享平台":platformName}];

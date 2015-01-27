@@ -79,14 +79,37 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)PostSuggest:(id)sender {
-    if (![MyTool validateTelephone:self.phoneTextField.text]) {
-        [super showProgressErrorWithLabelText:@"请输入正确手机号" afterDelay:0.8];
-    }else{
     
-        NSLog(@"提交建议");
-
-    
+    if (self.descriptionTextView.text.length == 0) {
+        [super showProgressErrorWithLabelText:@"请填写您的意见" afterDelay:1];
+        return;
     }
+    
+    if (![MyTool validateTelephone:self.phoneTextField.text]) {
+        [super showProgressErrorWithLabelText:@"请输入正确手机号" afterDelay:1];
+        return;
+    }
+    
+    NSLog(@"提交建议");
+
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[InternetManager sharedManager] feedbackWithContent:self.descriptionTextView.text phone:self.phoneTextField.text callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            [super showProgressCompleteWithLabelText:@"谢谢反馈" afterDelay:1];
+            [self performSelector:@selector(close) withObject:nil afterDelay:1.5];
+        } else {
+            [super showProgressCompleteWithLabelText:@"反馈失败" afterDelay:1];
+        }
+        
+        
+    }];
+    
+}
+
+- (void)close
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification

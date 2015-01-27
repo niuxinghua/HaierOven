@@ -65,7 +65,7 @@
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm"];
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     return dateString;
 }
@@ -370,8 +370,10 @@
     NSInteger iYears = lTime/60/60/24/384;
     
 //    NSLog(@"相差%d年%d月 或者 %d日%d时%d分%d秒", iYears,iMonth,iDays,iHours,iMinutes,iSeconds);
-    
-    if (iHours<1 && iMinutes>0)
+    if (iMinutes < 1 && iSeconds >0) {
+        timeString = @"刚刚";
+    }
+    else if (iHours<1 && iMinutes>0)
     {
         timeString=[NSString stringWithFormat:@"%d分前",iMinutes];
         
