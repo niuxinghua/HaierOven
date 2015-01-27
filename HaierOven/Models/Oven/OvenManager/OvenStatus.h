@@ -31,6 +31,11 @@
 @property (nonatomic) BOOL isWorking;
 
 /**
+ *  当前设置的烘焙模式
+ */
+@property (copy, nonatomic) NSString* bakeMode;
+
+/**
  *  烤箱当前温度
  */
 @property (nonatomic) NSInteger temperature;

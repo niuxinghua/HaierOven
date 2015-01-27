@@ -306,6 +306,7 @@
         case 0: // 昵称
         {
             self.user.nickName = textfield.text;
+            self.user.userName = textfield.text;
             label.text = textfield.text;
 
             [self modifyUserInfo];
