@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSInteger, StudyType) {
+    StudyTypeTools      = 0,
+    StudyTypeMaterial   = 1,
+    StudyTypeSkill      = 2,
+    
+};
 @interface StudyDetailController : UITableViewController
 
+@property (nonatomic) StudyType studyType;
+@property (nonatomic) NSInteger toolIndex;
 @end

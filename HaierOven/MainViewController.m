@@ -15,7 +15,7 @@
 #import "Cookbook.h"
 #import "MJRefresh.h"
 #import "CookStarDetailController.h"
-
+#import "UpLoadingMneuController.h"
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.8
@@ -425,6 +425,15 @@
 //    }
 //
 //}
+- (IBAction)addCookMenu:(id)sender {
+    if (!IsLogin) {
+        [super openLoginController];
+    }else{
+        UpLoadingMneuController *uploading = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadingMneuController"];
+        [self.navigationController pushViewController:uploading animated:YES];
+    }
+    
+}
 
 @end
 

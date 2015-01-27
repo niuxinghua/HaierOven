@@ -491,7 +491,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="nD3-7B-XhH" kind="push" id="GbM-5z-4yK"/>
+                                            <action selector="addCookMenu:" destination="eQs-Ci-ghV" eventType="touchUpInside" id="jcG-Vh-EpR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -991,7 +991,7 @@
         <!--Up Loading Mneu Controller-->
         <scene sceneID="xdO-hx-YcH">
             <objects>
-                <viewController id="nD3-7B-XhH" customClass="UpLoadingMneuController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpLoadingMneuController" id="nD3-7B-XhH" customClass="UpLoadingMneuController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UiW-t9-a3o"/>
                         <viewControllerLayoutGuide type="bottom" id="jSn-s6-ecV"/>
@@ -1122,6 +1122,7 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="cover" destination="qtv-Jw-C4D" id="nsa-sB-B2U"/>
                         <outlet property="createBtn" destination="sRh-k5-bD7" id="YXg-tX-nD9"/>
@@ -2703,7 +2704,7 @@
                                     <constraint firstAttribute="height" constant="38" id="TWb-p0-c63"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBo-qK-G6c">
                                 <rect key="frame" x="25" y="340" width="270" height="31"/>
@@ -3150,7 +3151,7 @@
         <scene sceneID="XE2-Kq-N6U">
             <objects>
                 <tableViewController storyboardIdentifier="StudyDetailController" id="vr6-7q-zBj" customClass="StudyDetailController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="243" sectionHeaderHeight="22" sectionFooterHeight="22" id="46d-2I-DUG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="243" sectionHeaderHeight="22" sectionFooterHeight="22" id="46d-2I-DUG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3160,21 +3161,15 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IEa-wS-AUe" id="q6J-FV-7AI">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.蛋糕模" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTG-6B-7ar">
-                                            <rect key="frame" x="19" y="9" width="55" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.蛋糕模" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTG-6B-7ar">
+                                            <rect key="frame" x="19" y="9" width="282" height="17"/>
                                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakebg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y7m-bt-U6a">
-                                            <rect key="frame" x="19" y="29" width="282" height="181"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="Y7m-bt-U6a" secondAttribute="height" multiplier="282:181" id="Etm-do-dQq"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="描述描述" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHl-54-wVx">
-                                            <rect key="frame" x="19" y="219" width="82" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述描述" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHl-54-wVx">
+                                            <rect key="frame" x="19" y="220" width="282" height="17"/>
                                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -3183,14 +3178,17 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="wTG-6B-7ar" firstAttribute="top" secondItem="q6J-FV-7AI" secondAttribute="top" constant="9" id="0Dx-F8-EqL"/>
-                                        <constraint firstItem="Y7m-bt-U6a" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="7IC-fX-OAH"/>
-                                        <constraint firstItem="Y7m-bt-U6a" firstAttribute="top" secondItem="wTG-6B-7ar" secondAttribute="bottom" constant="3" id="BhH-Zn-e2x"/>
+                                        <constraint firstAttribute="trailing" secondItem="dHl-54-wVx" secondAttribute="trailing" constant="19" id="LzH-0I-hZ1"/>
                                         <constraint firstItem="dHl-54-wVx" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="Mtj-tE-eEt"/>
-                                        <constraint firstItem="dHl-54-wVx" firstAttribute="top" secondItem="Y7m-bt-U6a" secondAttribute="bottom" constant="9" id="NCc-fL-761"/>
+                                        <constraint firstAttribute="trailing" secondItem="wTG-6B-7ar" secondAttribute="trailing" constant="19" id="Ndw-5E-gTU"/>
                                         <constraint firstItem="wTG-6B-7ar" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="Wjy-UP-CHS"/>
-                                        <constraint firstAttribute="trailing" secondItem="Y7m-bt-U6a" secondAttribute="trailing" constant="19" id="vdh-v8-r3S"/>
+                                        <constraint firstAttribute="bottom" secondItem="dHl-54-wVx" secondAttribute="bottom" constant="6" id="lqf-x8-ooD"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="dHl-54-wVx" id="gY7-OB-LCf"/>
+                                    <outlet property="titleLabel" destination="wTG-6B-7ar" id="tGF-Jp-TBf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -3238,7 +3236,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBQ-TK-xRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2682" y="2117"/>
+            <point key="canvasLocation" x="2682" y="2112"/>
         </scene>
         <!--Device Board View Controller-->
         <scene sceneID="YxA-oc-eSW">
