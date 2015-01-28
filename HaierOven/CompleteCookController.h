@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+@protocol CompleteCookControllerDelegate <NSObject>
+
+@required
+- (void)cookCompleteToShutdown:(BOOL)shutdown;
+
+@end
+
 typedef NS_ENUM(NSInteger, CompleteTye) {
     CompleteTyeCook   = 1,
     CompleteTyeWarmUp = 2,
@@ -17,5 +24,7 @@ typedef NS_ENUM(NSInteger, CompleteTye) {
 @property (nonatomic) CompleteTye completeTye;
 
 @property (strong, nonatomic)uSDKDevice* myOven;
+
+@property (weak, nonatomic) id <CompleteCookControllerDelegate> delegate;
 
 @end

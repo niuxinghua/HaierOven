@@ -65,17 +65,18 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 - (void)loadProducts
 {
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
                                                     sortType:self.sortType
                                                    pageIndex:_pageIndex
                                                      keyword:self.searchTextField.text
                                                     callBack:^(BOOL success, id obj, NSError *error) {
-                                                        
+                                                        [super hiddenProgressHUD];
                                                         if (success) {
                                                             
                                                             NSArray* arr = obj;
                                                             if (arr.count < PageLimit && _pageIndex != 1) {
-//                                                                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                                                                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                                                             }
                                                             if (_pageIndex == 1) {
                                                                 self.products = obj;
@@ -87,6 +88,7 @@ typedef NS_ENUM(NSInteger, SortType) {
                                                             
                                                         } else {
                                                             NSLog(@"获取失败");
+                                                            [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
                                                         }
                                                         
                                                         
@@ -268,6 +270,7 @@ typedef NS_ENUM(NSInteger, SortType) {
 }
 
 #pragma mark - BakeHouseHeaderReusableViewDelegate
+
 -(void)GetNeedEquipmentType:(NSInteger)type{
     NSLog(@"%d",type);
     [self fiexViewUp];
@@ -287,6 +290,12 @@ typedef NS_ENUM(NSInteger, SortType) {
     [self loadProducts];
 }
 
+- (void)cancelSearch
+{
+    self.searchTextField.text = @"";
+    [self.searchTextField resignFirstResponder];
+    [self loadProducts];
+}
 
 #pragma mark- 动画
 

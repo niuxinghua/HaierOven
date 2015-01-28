@@ -104,9 +104,9 @@
         
         if (self.style == AutoSizeLabelViewStyleCreatMenu) {
             
-            [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+            [title setBackgroundImage:[MyTool createImageWithColor:RGB(160, 100, 110)] forState:UIControlStateNormal];
             [title setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forState:UIControlStateSelected];
-            title.layer.cornerRadius  = 5;
+            title.layer.cornerRadius  = LABEL_H / 2;
             
 
         } else if (self.style == AutoSizeLabelViewStyleMenuDetail) {

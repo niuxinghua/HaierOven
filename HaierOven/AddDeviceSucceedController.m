@@ -131,9 +131,11 @@
             oven.mac = device.mac;
             oven.ssid = [[OvenManager sharedManager] fetchSSID];
             oven.typeIdentifier = device.typeIdentifier;
-            oven.attribute = device.attributeDict;
+//            oven.attribute = device.attributeDict;
             [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
             [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
+        } else {
+            [super showProgressErrorWithLabelText:@"发生错误" afterDelay:1];
         }
     }];
 }

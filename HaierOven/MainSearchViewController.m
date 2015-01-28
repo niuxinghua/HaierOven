@@ -39,20 +39,24 @@
 {
     if (keyword.length == 0) {
         self.searchedFlag = NO;
+        self.notfFindLabel.text = @"";
         [self.table reloadData];
         return;
     }
     
-    //保存搜索关键字
-    [[DataCenter sharedInstance] saveSearchedKeyword:keyword];
-    
-    //重新拿关键字
-    self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
-    
     [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.searchedFlag = YES;
-            [self.searchedCookbooks addObjectsFromArray:obj];
+            self.searchedCookbooks = obj;
+            if (self.searchedCookbooks.count > 0) {
+                // 当有搜索结果时，保存搜索关键字
+                [[DataCenter sharedInstance] saveSearchedKeyword:keyword];
+                //重新拿关键字
+                self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
+                self.notfFindLabel.text = @"";
+            } else {
+                self.notfFindLabel.text = [NSString stringWithFormat:@"没有找到“%@”的相关菜谱", keyword];
+            }
             [self.table reloadData];
         }
     }];
@@ -158,9 +162,10 @@
     
 //  构建搜索无结果label
     self.notfFindLabel = [UILabel new];
-    self.notfFindLabel.frame = CGRectMake(20, 30, PageW-40, 30);
+    self.notfFindLabel.frame = CGRectMake(20, 20, PageW-40, 30);
     self.notfFindLabel.numberOfLines = 0;
     self.notfFindLabel.font = [UIFont fontWithName:GlobalTextFontName size:16];
+    
     [self.view addSubview:self.notfFindLabel];
 
 
@@ -185,6 +190,7 @@
 }
 
 -(void)StartReach:(UITextField *)searchTextFailed{
+    self.notfFindLabel.text = @"";
     self.table.hidden = NO;
     self.searchedFlag = NO;
 }

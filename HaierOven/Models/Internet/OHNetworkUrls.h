@@ -19,6 +19,7 @@
 
 #define BaseUrl         @"http://115.29.8.251:8082/app"
 #define BaseOvenUrl     @"http://115.29.8.251:8082"
+#define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
 
 //#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
 
@@ -310,6 +311,16 @@
  *  获取指定接受者的通知列表
  */
 #define NotificationList     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"noticfication/get"]
+
+
+#pragma mark - 通知
+
+/**
+ *  意见反馈
+ */
+#define Feedback     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/feedback"]
+
+
 
 
 

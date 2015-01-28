@@ -204,7 +204,7 @@
     
     creator.ID              = [creatorDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"id"]];
     creator.userBaseId      = [creatorDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userBaseID"]];
-    creator.userName        = [creatorDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userName"]];
+    creator.userName        = [creatorDict[@"userName"] isKindOfClass:[NSNull class]] || creatorDict[@"userName"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userName"]];
     NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
     creator.avatarPath      = [DataParser parseImageUrlWithString:avatarPath];
     
@@ -224,7 +224,7 @@
         
         cookbook.ID             = [cookbookDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookID"]];
         cookbook.name           = [cookbookDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookName"]];
-        cookbook.desc           = [cookbookDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookDesc"]];
+        cookbook.desc           = [cookbookDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] || cookbookDict[@"cookbookDesc"] == nil ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookDesc"]];
         NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
         cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
         cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
@@ -282,7 +282,7 @@
     cookbookDetail.cookbookId       = [detailDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookID"]];
     cookbookDetail.name             = [detailDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookName"]];
     cookbookDetail.desc             = [detailDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookDesc"]];
-    NSString* coverPhoto       = [detailDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookCoverPhoto"]];
+    NSString* coverPhoto       = [detailDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] || detailDict[@"cookbookCoverPhoto"] == nil? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookCoverPhoto"]];
     cookbookDetail.coverPhoto       = [DataParser parseImageUrlWithString:coverPhoto];
     cookbookDetail.cookbookTip      = [detailDict[@"cookbookTip"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookTip"]];
     cookbookDetail.status           = [detailDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"status"]];
@@ -479,7 +479,8 @@
         equipment.price = [equipmentDict[@"price"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"price"]];
         equipment.name = [equipmentDict[@"productName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productName"]];
         equipment.url = [equipmentDict[@"productURL"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productURL"]];
-        equipment.imagePath = [equipmentDict[@"productName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productName"]];
+        equipment.imagePath = [equipmentDict[@"productImage"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", equipmentDict[@"productImage"]];
+        equipment.imagePath = [DataParser parseImageUrlWithString:equipment.imagePath];
         
         
         [equipments addObject:equipment];

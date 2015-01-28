@@ -2408,6 +2408,60 @@
 }
 
 
+#pragma mark - 设置
+
+/**
+ *  意见反馈
+ *
+ *  @param content    反馈内容
+ *  @param phone      联系电话
+ *  @param completion 结果回调
+ */
+- (void)feedbackWithContent:(NSString*)content phone:(NSString*)phone callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        
+        NSDictionary* paramsDict = @{
+                                     @"mobile" : phone,
+                                     @"feedback" : content,     //每页行数
+                                     @"osType" : @"iOS",
+                                     @"appVersion" : version
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:Feedback parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+
+
 
 
 

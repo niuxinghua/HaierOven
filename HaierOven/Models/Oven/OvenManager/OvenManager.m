@@ -131,13 +131,43 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (errorConst == RET_USDK_OK) {
-                result(YES);
+        [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+            
+            if (success) {
+                
+                uSDKDevice* device = [obj firstObject];
+                [self subscribeAllNotificationsWithDevice:device];
+                self.subscribedDevice = device;
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    BOOL runSuccess = NO;
+                    for (int loop = 0; loop < 10; loop++) {
+                        if (self.currentStatus.isReady) {
+                            NSLog(@"**********绑定成功**********");
+                            runSuccess = YES;
+                            break;
+                        }
+                        [NSThread sleepForTimeInterval:1];
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (errorConst == RET_USDK_OK && runSuccess) {
+                            
+                            result(YES);
+                        } else {
+                            result(NO);
+                        }
+                    });
+                    
+                });
+                
             } else {
                 result(NO);
             }
-        });
+            
+        }];
+        
     });
 }
 
@@ -151,7 +181,12 @@
         NSArray* devices = [deviceManager getDeviceList:OVEN];     //获取烤箱列表
         dispatch_async(dispatch_get_main_queue(), ^{
 //            uSDKDevice* device = [devices firstObject];
-            callback(YES, devices, nil);
+            if (devices.count == 0) {
+                callback(NO, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"获取失败"], nil);
+            } else {
+                callback(YES, devices, nil);
+            }
+            
         });
     });
     

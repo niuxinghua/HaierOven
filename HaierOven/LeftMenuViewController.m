@@ -95,6 +95,12 @@
     self.tempView = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateNotificationCount];
+}
+
 - (void)reload
 {
     [self.tableView reloadData];

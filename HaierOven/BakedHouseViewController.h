@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseCollectionViewController.h"
 
-@interface BakedHouseViewController : UICollectionViewController
+@interface BakedHouseViewController : BaseCollectionViewController
 
 @end

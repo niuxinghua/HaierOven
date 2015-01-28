@@ -31,6 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.completeImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
+    [self.completeImage addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,15 +78,25 @@
         for (UIButton* button in self.on_offBtn) {
             button.selected = NO;
         }
+        [self.delegate cookCompleteToShutdown:NO];
     } else {
         [self shutdown];
         for (UIButton* button in self.on_offBtn) {
             button.selected = YES;
         }
+        [self.delegate cookCompleteToShutdown:YES];
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+}
 
-    
-    
+- (void)close
+{
+    [self.delegate cookCompleteToShutdown:YES];
+    [self shutdown];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

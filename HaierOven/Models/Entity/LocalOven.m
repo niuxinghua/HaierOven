@@ -27,7 +27,7 @@
     oven.mac            = dict[@"mac"];
     oven.ssid           = dict[@"ssid"];
     oven.typeIdentifier = dict[@"typeIdentifier"];
-    oven.attribute      = dict[@"attribute"];
+//    oven.attribute      = dict[@"attribute"];
     
     return oven;
 }
@@ -41,7 +41,7 @@
     dict[@"mac"]            = self.mac;
     dict[@"ssid"]           = self.ssid;
     dict[@"typeIdentifier"] = self.typeIdentifier;
-    dict[@"attribute"]      = self.attribute;
+//    dict[@"attribute"]      = self.attribute;
     
     return dict;
 }
