@@ -134,27 +134,36 @@
 -(void)setStudyType:(StudyType)studyType{
     _studyType = studyType;
     switch (studyType) {
-        case StudyTypeTools:
-            [self initToolsDatas];
+        case StudyTypeTools:{
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"StudyCookPart_1" ofType:@"plist"];
+            [self initDatas:plistPath];
             break;
+        }
+        case StudyTypeMaterial:{
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"StudyCookPart_2" ofType:@"plist"];
+            [self initDatas:plistPath];
+            break;
+        }
+        case StudyTypeSkill:{
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"StudyCookPart_3" ofType:@"plist"];
+            [self initDatas:plistPath];
+            break;
+        }
             
         default:
             break;
     }
 }
 
--(void)initToolsDatas{
-    
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"StudyCookPart_1" ofType:@"plist"];
+-(void)initDatas:(NSString *)plistPath{
     NSArray* arr = [NSArray arrayWithContentsOfFile:plistPath];
-    
     self.datas = [NSMutableArray new];
-    
     for (int i = 0; i<arr.count; i++) {
         StudyCookPartOne *study = [StudyCookPartOne new];
         study = [study GetStudyCookPartOne:arr[i]];
         [self.datas addObject:study];
     }    
 }
+
 
 @end

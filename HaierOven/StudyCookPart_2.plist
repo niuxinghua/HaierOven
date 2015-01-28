@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>1.粉类材料</string>
+		<dict>
+			<key>descriptions</key>
+			<string>面粉中蛋白质含量在12.5%以上，多用来制作面包，又叫“面包面粉”。 </string>
+			<key>name</key>
+			<string>1.1高筋面粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>又称糕粉或薄力粉，面粉中蛋白质含量7%~9%左右，筋性低，一般用来制作蛋糕及饼干等口感酥脆的点心。可以按1：4的比例用玉米淀粉和中筋面粉混合代替。 </string>
+			<key>name</key>
+			<string>1.2低筋面粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>是用连同麸皮和胚芽与胚乳的整粒小麦碾磨而成，常用来制作全麦面包、馒头、饼干。含丰富的维生素，营养价值较高；因面粉中含麸皮，其口感较粗，不适合单独使用。 </string>
+			<key>name</key>
+			<string>1.3全麦面粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>又称粟粉，玉米粉，可作为勾芡稠化的材料，有胶冻能力，经加水调开后，加热至65度时，即可产生胶凝作用，多用于派馅，布丁馅，还可在蛋糕的配方中加入，以适当降低面粉的筋度。 </string>
+			<key>name</key>
+			<string>1.4玉米淀粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>由杏仁研磨而成，蛋黄色，碎屑状，一般用于添加在饼干、蛋糕中以增加口感。 </string>
+			<key>name</key>
+			<string>1.5杏仁粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>去除巧克力中的油脂研磨制成的粉状，可混合在饼干、蛋糕或撒在西点蛋糕表面增加风味及装饰。 </string>
+			<key>name</key>
+			<string>1.6可可粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>是采用幼嫩茶叶经脱水干燥后，在低温状态下将茶叶瞬间粉碎成200目以上的纯天然茶叶超微细粉，常用在蛋糕、面包、饼干或冰淇淋中以增加产品的风味。 </string>
+			<key>name</key>
+			<string>1.7绿茶粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>也称卡士达粉，是一种预拌粉，在糕点制作中起到提香的作用。吉士粉并不是必备原料，可用全脂奶粉替代。</string>
+			<key>name</key>
+			<string>1.8吉士粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+	</array>
+	<array>
+		<string>2.膨大剂</string>
+		<dict>
+			<key>descriptions</key>
+			<string>酵母是西点常用膨大剂之一，但非化学膨大剂。在发酵过程中，酵母使面团膨大，糖份的加入可以增加酵母的活动力。酵母的活动力同時也取决于温度，在摄氏35度时，活动力最旺盛。酵母在低温时呈休眠状态，温度升高活动力愈强，但温度若高于40C，酵母细胞受到破坏而死亡。       酵母的种类：	（1）新鲜酵母又称湿酵母--有粉状和块状两种，其中块状酵母最为常见。可直接使用。新鲜酵母需放冷藏室保存，但是最好在2星期內使用完。表面如果出现斑霉就不应再使用了。　　  	（2）快速酵母／速溶酵母--白色粉状，可直接使用。发酵活力介于新鲜酵母与干酵母之间。应储存于阴凉干燥的地方（常温25C以下），可保存半年，开封后立即使用。它的用量是新鮮酵母的1/3。 	（3）一般干酵母--米黃色粉状，新鲜酵母经干燥而成休眠状态的干酵母。干酵母加入面团前，摄氏41至43度的温水进行水合作用，使用4~5倍酵母的水量溶解，放置5~10分，让酵母重新恢复原来新鲜状态時的活力，才能与新鲜酵母保持相同的发酵時间，而不影响品质。发酵耐力较新鲜酵母为佳，但发酵時間需较久。应储存于阴凉干燥的地方，可保存半年。开封后应紧密封盖同時放冰箱冷藏，开封后三至四个月用完效果最佳。它的用量是新鲜酵母的1/2。面包烘焙中经常使用的品种。 </string>
+			<key>name</key>
+			<string>2.1酵母</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>　经常用于蛋糕及西饼的制作。它是由苏打粉配合其它酸性材料，并以玉米粉为填充剂的白色粉末。泡打粉虽然有苏打粉的成分，但是是经过精密检测后加入酸性粉（如塔塔粉）来平衡它的酸碱度，所以，基本上，虽然苏打粉是带碱物质，但是市售的泡打粉却是中性粉，因此，苏打粉和泡打粉是不能任意替换的。泡打粉在保存时也应尽量避免受潮而提早失效。</string>
+			<key>name</key>
+			<string>2.2泡打粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>它是一种易溶于水的白色碱性粉末，在与水结合后开始起作用释出二氧化碳，在酸性液体中（如果汁）反应更快，而随着环境温度升高，释出气体的作用愈快。苏打粉在作用后会残留重碳酸钠，使用过多会使成品有碱味。苏打粉与油脂直接混合时，也会产生皂化，强烈的肥皂味会影响西点的香气和品质，使用时需留意。苏打粉也经常被用来做为中和剂，例如巧克力蛋糕。巧克力为酸性，大量使用时会使西点带有酸味，因此可使用少量的苏打粉做为膨大剂并且也中和其酸性，同时，苏打粉也有使巧克力加深颜色的效果，使它看起来更黑亮。　　西点中加入过量的苏打粉，除了使西点有上述破坏风味或导致碱味太重的结果，食用后会使人有心悸、嘴唇发麻、短暂失去味觉等征状。</string>
+			<key>name</key>
+			<string>2.3苏打粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>它是制作戚风蛋糕必不可少的原材料之一.戚风蛋糕它是利用蛋清来起发的，蛋清是偏碱性，PH值达到7.6，而蛋清在偏酸的环境下也就是PH值在4.6—4.8时才能形成膨松安定的泡沫，起发后才能添加大量的其它配料下去。戚风蛋糕正是将蛋清和蛋黄分开搅拌，蛋清搅拌起发后需要拌入蛋黄部分的面糊下去，如果没有添加塔塔粉的蛋清虽然能打发，但是要加入蛋黄面糊下去则会下陷，不能成型。所以可以利用塔塔粉的这一特性来达到最佳效果。它的添加量是全蛋的0.6—1.5%，与蛋清部份的砂糖一起拌匀加入。</string>
+			<key>name</key>
+			<string>2.4塔塔粉</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+	</array>
+	<array>
+		<string>3.油脂、芝士材料</string>
+		<dict>
+			<key>descriptions</key>
+			<string>又称奶油，由牛奶提炼而成，色泽微黄，带淡淡奶香。是制作饼干、蛋糕、面包不可缺少的油脂。（保存方式：密封冷冻）</string>
+			<key>name</key>
+			<string>3.1黄油</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>白色固体，为植物性油脂。多用于饼干或派皮制作，能使成品口感更酥松。（保存方式：密封冷藏）</string>
+			<key>name</key>
+			<string>3.2白油</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>一种淡味奶酪，由水年乳制成，色泽淡黄，是制作披萨的重要原料之一。制作时要先刨成细丝状，经高温烘烤即会化开，并产生拉丝效果。（保存方式：密封冷冻）</string>
+			<key>name</key>
+			<string>3.3马苏里拉芝士</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>牛奶制成的半发酵乳酪，常用来制作芝士蛋糕及慕斯蛋糕。（保存方式：密封冷藏，并在一周内用完）</string>
+			<key>name</key>
+			<string>3.4奶油奶酪芝士</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>也称淡奶油，由牛奶提炼出来的，本身不含糖份，白色如牛奶状，较牛奶浓稠。用来制作甜点可增加润滑口感及奶香味，打发前需提前放冰箱冷藏8小时以上。（保存方式：密封冷藏，打开后需一周内用完）</string>
+			<key>name</key>
+			<string>3.5动物淡奶油</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>也称人造奶油，多数含糖份，白色如牛奶状，较牛奶浓稠，通常用来打发后装饰在糕点上。（保存方式：冷冻保存，打发前提前取出回温成液态）</string>
+			<key>name</key>
+			<string>3.6植脂鲜奶油</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>意大利式的奶油乳酪Italian Cream Cheese。是一种将新鲜牛奶发酵凝结，继而取出部分水分后所形成的“新鲜奶酪”。其固形物种乳酪脂肪成分80%。软硬程度介于鲜奶油与奶油乳酪creame cheese之间，带有轻微的甜味及浓郁的口感。严格来说不能算是奶酪——因为它既非菌种发酵，也不是由凝乳霉制得的。应该归类为凝结奶油，而非奶酪，就是因为它并非传统奶酪，以至于保质期短，难以保存，所以市售的价格一直很高昂。很多人都用奶油奶酪+柠檬汁来代替马斯卡彭，但毕竟两者本质不同，因为制成的成品口感会差别很大。是制作提拉米苏必备的材料。</string>
+			<key>name</key>
+			<string>3.7马斯卡彭奶酪</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+	</array>
+	<array>
+		<string>4.糖类材料</string>
+		<dict>
+			<key>descriptions</key>
+			<string>粗粒糖，即一般家用的糖，使用较少,可用在面包和西饼类的制作或撒在饼干表面之用</string>
+			<key>name</key>
+			<string>4.1 白砂糖(sugar)</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>幼砂糖为白色颗粒状结晶, 纯度高, 蔗糖含量在 99% 以上, 是食糖中质量较好的一种, 水份, 杂质及转化糖的含量很低,较易储存.是烘焙食品制作中常用的一种糖，使用范围较广.除了少数品种外，其它都适用，用于饼干时,糖份多则脆,少则松.</string>
+			<key>name</key>
+			<string>4.2幼砂糖(caster sugar/granulated sugar)</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>糖粉为洁白的粉末状，糖颗粒非常细，市售糖粉同时有约 3~10% 左右的淀粉填充物（一般为玉米淀粉），做为防潮及防止糖粒纠结的作用。糖粉一般用于糖霜或奶油霜饰和产品含水较少的品种中使用，也可直接筛在西点成品上做表面装饰。买不到的可以自己用果汁机将粗粒糖磨成粉状再加入玉米淀粉拌匀.</string>
+			<key>name</key>
+			<string>4.3 糖粉(icing sugar)</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>主要用于蛋糕或小西饼中增加产品的风味和色泽。</string>
+			<key>name</key>
+			<string>4.4 蜂蜜</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>砂糖经加水和加酸煮至一定的时间和合适温度冷却后即成。此糖浆可长时间保存而不结晶，多数用在中式月饼皮内、萨其马和各种代替砂糖的产品中。</string>
+			<key>name</key>
+			<string>4.5 转化糖浆</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>砂糖加热溶化后使之成棕黑色，用于香味或代替色素使用。</string>
+			<key>name</key>
+			<string>4.6 焦糖</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>descriptions</key>
+			<string>由转化糖浆再予以搅拌使之凝结成块状，用于蛋糕和西点的表面装饰</string>
+			<key>name</key>
+			<string>4.7 翻糖</string>
+			<key>imageRect</key>
+			<integer>0</integer>
+			<key>imageName</key>
+			<array/>
+		</dict>
+	</array>
+</array>
+</plist>

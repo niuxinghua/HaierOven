@@ -8,6 +8,7 @@
 
 #import "StudyCookPartOne.h"
 #import "StudyCookTools.h"
+#import "StudyCookImages.h"
 @implementation StudyCookPartOne
 -(StudyCookPartOne*)GetStudyCookPartOne:(NSArray*)data{
     self.title = data[0];
@@ -17,12 +18,16 @@
         tool.desc           = data[i][@"descriptions"];
         tool.name           = data[i][@"name"];
         tool.images         = [NSMutableArray new];
-        NSArray  *arr       = data[i][@"imageName"];
+        NSArray  *arr       = data[i][@"images"];
         for (int j= 0; j<arr.count; j++) {
-            [tool.images addObject:arr[j]];
+            StudyCookImages *images = [StudyCookImages new];
+            images.imageName = arr[j][@"image"];
+             NSNumber *rect = arr[j][@"imageRect"];
+            images.imageRect = [rect floatValue];
+            [tool.images addObject:images];
         }
-        NSNumber *rect      = data[i][@"imageRect"];
-        tool.imageRect      = [rect floatValue];
+//        NSNumber *rect      = data[i][@"imageRect"];
+//        tool.imageRect      = [rect floatValue];
         
         [tempArr addObject:tool];
     }

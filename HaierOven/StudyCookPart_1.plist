@@ -11,9 +11,14 @@
 			<string>1.电子计量秤</string>
 			<key>imageRect</key>
 			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_1_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_1_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -21,11 +26,14 @@
 			<string>称量少于10克的干性及液态材料。</string>
 			<key>name</key>
 			<string>2.量匙</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_1_2_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_1_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -35,11 +43,14 @@
 			<key>name</key>
 			<string>3.量杯 
 4.温度计</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_1_3_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_1_3_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -50,11 +61,14 @@
 			<string>用于过筛面粉及其他粉类。适用于少量粉类。</string>
 			<key>name</key>
 			<string>1.面粉筛</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_2_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_2_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -62,11 +76,14 @@
 			<string>用于分离蛋白和蛋黄。</string>
 			<key>name</key>
 			<string>2.分蛋器</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_2_2_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_2_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -77,11 +94,14 @@
 			<string>配有打蛋头(两个规格)、搅面棍(两个规格)等配件。其中打蛋头多用来打发蛋白、全蛋、鲜奶油、黄油等，搅面棍用来搅拌含水量65%左右的湿性面团。</string>
 			<key>name</key>
 			<string>1.电动打蛋器</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_3_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_3_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -89,11 +109,14 @@
 			<string>可进行简单的搅拌。</string>
 			<key>name</key>
 			<string>2.手动打蛋器</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_3_2_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_3_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -101,11 +124,14 @@
 			<string>用于拌匀混合面团。</string>
 			<key>name</key>
 			<string>3.橡皮刮刀</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_3_3_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_3_3_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -116,11 +142,14 @@
 			<string>擀制面包时，可以帮助面团排气，也可用于擀制面皮。</string>
 			<key>name</key>
 			<string>1.擀面杖</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_4_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_4_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -131,11 +160,14 @@
 			<string>乳酪模、重磅蛋糕模等</string>
 			<key>name</key>
 			<string>1.蛋糕模</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_5_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_5_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -143,12 +175,20 @@
 			<string>土司模、长条形模、甜甜圈印模。</string>
 			<key>name</key>
 			<string>2.面包模</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_5_2_1</string>
-				<string>1_5_2_2</string>
+				<dict>
+					<key>image</key>
+					<string>1_5_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
+				<dict>
+					<key>image</key>
+					<string>1_5_2_2</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -156,11 +196,14 @@
 			<string>面包纸模、蛋糕、马芬纸模。</string>
 			<key>name</key>
 			<string>3.纸模</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_5_3_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_5_3_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -168,11 +211,14 @@
 			<string>各式裱花嘴、一次性裱花袋、裱花嘴转换头、糯米花托、铁制花托。</string>
 			<key>name</key>
 			<string>4.各式裱花工具</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_5_4_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_5_4_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -183,11 +229,14 @@
 			<string>宜选购容量20-35L，层数2-5层，可调节上下火温度及时间的烤箱。现在买烤箱里基本上都会附带烤盘、烤网和烤盘手柄。</string>
 			<key>name</key>
 			<string>1.家用烤箱</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_6_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_6_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -195,11 +244,14 @@
 			<string>可用于铺垫烤盘，防止粘连。</string>
 			<key>name</key>
 			<string>2.烘培油纸</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_6_2_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_6_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -207,11 +259,14 @@
 			<string>可用于铺盖面团，防止水分流失。</string>
 			<key>name</key>
 			<string>3.保鲜膜</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_6_3_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_6_3_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -219,11 +274,14 @@
 			<string>可用于铺垫烤盘，防止粘连。在烘烤过程中给蛋糕或面包加盖锡纸可放置烤焦及上色过深。</string>
 			<key>name</key>
 			<string>4.锡纸</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_6_4_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_6_4_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
@@ -234,11 +292,14 @@
 			<string>做装饰蛋糕时用于涂抹奶油及给蛋糕脱模。</string>
 			<key>name</key>
 			<string>1.奶油抹刀</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_7_1_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_7_1_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -246,11 +307,14 @@
 			<string>用于切割面皮及披萨。</string>
 			<key>name</key>
 			<string>2.轮刀</string>
-			<key>imageRect</key>
-			<real>0.64</real>
-			<key>imageName</key>
+			<key>images</key>
 			<array>
-				<string>1_7_2_1</string>
+				<dict>
+					<key>image</key>
+					<string>1_7_2_1</string>
+					<key>imageRect</key>
+					<real>0.64</real>
+				</dict>
 			</array>
 		</dict>
 	</array>
