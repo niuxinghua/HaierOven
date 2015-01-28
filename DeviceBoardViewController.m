@@ -396,7 +396,7 @@
         [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
     } else {
         
-        [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
         [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
             [super hiddenProgressHUD];
             if (success) {
@@ -487,25 +487,24 @@
 
 
 #pragma mark - toolbarAction
+
 -(void)StartWarmUp:(UIButton*)sender{
-    self.myWindow.hidden = NO;
-    if (sender.selected==NO) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.deviceAlertView.frame = alertRectShow;
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-        self.deviceAlertView.alertType = alertWormUp;
-    }
-//    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
     
+    self.myWindow.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.deviceAlertView.frame = alertRectShow;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    self.deviceAlertView.alertType = alertWormUp;
 
 }
 
 #pragma mark - 开始运行 & 结束运行
 
--(void)StartWorking{
+-(void)StartWorking
+{
     
     NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
     NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
@@ -610,6 +609,25 @@
     
 }
 
+- (void)completeWarmUp
+{
+    if (!self.cancelBakeFlag) {
+        self.cancelBakeFlag = NO;
+        
+        self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+        
+        self.deviceBoardStatus = DeviceBoardStatusOpened;
+        
+        CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
+        completeController.completeTye = CompleteTyeWarmUp;
+        completeController.delegate = self;
+        completeController.myOven = self.myOven;
+        [self.navigationController pushViewController:completeController animated:YES];
+        
+    }
+    
+}
+
 -(void)StopWorking{
     self.cancelBakeFlag = YES;
     self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
@@ -636,8 +654,14 @@
 {
     if (shutdown) {
         self.deviceBoardStatus = DeviceBoardStatusClosed;
+        for (UIButton* button in self.deviceStatusBtns) {
+            button.selected = NO;
+        }
     } else {
         self.deviceBoardStatus = DeviceBoardStatusOpened;
+        for (UIButton* button in self.deviceStatusBtns) {
+            button.selected = YES;
+        }
     }
 }
 
@@ -933,6 +957,88 @@
 // 预热
 - (void)setWarmUpTemperature:(NSString*)temperatureString
 {
+  
+    NSString* timeStr = @"5";   //设置默认预热5分钟
+    
+    self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", @"快速预热"];
+    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@ 分钟", timeStr];
+    self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", temperatureString];
+    
+    NSRange range = [temperatureString rangeOfString:@"°"];
+    NSString* temperatureValue = [temperatureString substringToIndex:range.location];
+    
+    NSInteger minutes = [timeStr integerValue];
+    NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
+    
+    //    调用顺序：检测是否已开机 - 设置模式 - 启动 - 设置温度 - 设置时间
+    //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
+    
+    if (!self.ovenManager.currentStatus.opened) {
+        [self bootup];
+    }
+    
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [[OvenManager sharedManager] setBakeMode:@"30v0M1" callback:^(BOOL success, uSDKErrorConst errorCode) {     //快速预热模式
+        [super hiddenProgressHUD];
+        if (success) {
+            [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+            [[OvenManager sharedManager] setBakeTime:timeValue callback:^(BOOL success, uSDKErrorConst errorCode) {
+                [super hiddenProgressHUD];
+                if (success) {
+                    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+                    [[OvenManager sharedManager] setBakeTemperature:temperatureValue callback:^(BOOL success, uSDKErrorConst errorCode) {
+                        [super hiddenProgressHUD];
+                        if (success) {
+                            
+                            uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+                            [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+                            [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                                                toDevice:self.myOven
+                                                            andCommandSN:0
+                                                     andGroupCommandName:@""
+                                                                callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                                                    [super hiddenProgressHUD];
+                                                                    self.deviceBoardStatus = DeviceBoardStatusWorking;
+                                                                    
+                                                                    //点击运行后显示
+                                                                    self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+                                                                    
+                                                                    self.time = [timeStr integerValue] * 60;
+                                                                    float animateDueation = [timeStr integerValue] * 60;
+                                                                    self.startStatusView.animationDuration = animateDueation;
+                                                                    [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
+                                                                    
+                                                                    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
+                                                                    
+                                                                    NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
+                                                                    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeWarmUp fireTime:bakeSeconds alertBody:@"您的烤箱预热完成了"];
+                                                                    
+                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
+                                                                    self.cancelBakeFlag = NO;
+                                                                    
+                                                                }];
+                            
+                        } else {
+                            
+                            [super showProgressErrorWithLabelText:@"设置烘焙温度失败" afterDelay:1];
+                            
+                        }
+                        
+                    }];
+                    
+                } else {
+                    [super showProgressErrorWithLabelText:@"设置烘焙时间失败" afterDelay:1];
+                }
+                
+                
+            }];
+            
+        } else {
+            [super showProgressErrorWithLabelText:@"设置烘焙模式失败" afterDelay:1];
+        }
+        
+    }];
+
     
 }
 
@@ -969,8 +1075,9 @@
             break;
         case alertWormUp:
             self.warmUpString = string;
+            ksyr.selected = !ksyr.selected;
             [self setWarmUpTemperature:string];
-            ksyr.selected = ksyr.selected==YES?NO:YES;
+            
             break;
             
         default:
@@ -1039,7 +1146,7 @@
         } completion:^(BOOL finished) {
             
         }];
-    }else sender.selected = NO;
+    } else sender.selected = NO;
 
 }
 

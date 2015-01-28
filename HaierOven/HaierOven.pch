@@ -71,9 +71,12 @@
 /**
  *  用户积分定义
  */
-#define SignInScore         2
-#define BindOvenScore       500
-#define ShareScore          5
+#define SignInScore         2       //签到积分  后台加积分
+
+#define BindOvenScore       500     //绑定设备积分 这里是后台加积分，但需要调用设备绑定接口
+#define ShareScore          20       //分享积分
+#define ActiveUserScore     50      //激活用户积分
+
 #define alert_RectHidden   (CGRectMake(PageW/2, PageH/2, 0, 0))
 
 /**

@@ -449,6 +449,10 @@
 - (void)hideKeyboard
 {
     [self.cookbookDetailCell.contentView hideKeyboard];
+    self.window.frame = CGRectMake(0.0f,
+                                   Main_Screen_Height - 40.0f,
+                                   Main_Screen_Width,
+                                   40.0f);
 }
 
 - (void)didTapSend:(id)sender
@@ -463,11 +467,16 @@
         return;
     }
     
-    NSTimeInterval inteval = [[NSDate date] timeIntervalSinceDate:self.lastCommentTime];
-    if (inteval < 2) {
-        [super showProgressErrorWithLabelText:@"您评论的太频繁了" afterDelay:1];
-        return;
+    if (self.lastCommentTime != nil) {
+        
+        NSTimeInterval inteval = [[NSDate date] timeIntervalSinceDate:self.lastCommentTime];
+        if (inteval < 10) {
+            [super showProgressErrorWithLabelText:@"你可以休息一会" afterDelay:1];
+            return;
+        }
+        
     }
+    
     
     NSLog(@"添加评论:%@", self.commentTextField.text);
     [self hideKeyboard];
@@ -585,6 +594,9 @@
                 [self showRightNavigationView:NO];
             }
             
+            if (self.contentType == CurrentContentTypeComment) {
+                [self hideKeyboard];
+            }
             
         } else if (scrollView.contentOffset.y > _lastContentOffsetY)
         {
@@ -592,6 +604,7 @@
             //        NSLog(@"向上拉动");
             if (self.contentType == CurrentContentTypeComment) {
                 self.commentsTableView.scrollEnabled = YES;
+  
             }
             
         }
@@ -604,7 +617,6 @@
     
     
 }
-
 
 - (void)showRightNavigationView:(BOOL)show
 {
@@ -1013,6 +1025,7 @@
     {
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+
     }
 }
 
@@ -1023,6 +1036,18 @@
     {
         //得到分享到的微博平台名
         NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+        
+        //分享成功送积分
+        if (IsLogin) {
+            
+            [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+                if (success) {
+                    NSLog(@"分享成功送积分OK");
+                }
+            }];
+            
+        }
+        
     }
 }
 

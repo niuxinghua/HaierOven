@@ -21,6 +21,8 @@
 
 @property (nonatomic) NSInteger pageIndex;
 
+@property (strong, nonatomic) NSDate* lastChatTime;
+
 @end
 
 @implementation ChatViewController
@@ -174,6 +176,17 @@
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
 {
+    if (self.lastChatTime != nil) {
+        
+        NSTimeInterval inteval = [[NSDate date] timeIntervalSinceDate:self.lastChatTime];
+        if (inteval < 3) {
+            [super showProgressErrorWithLabelText:@"你可以休息一会" afterDelay:1];
+            return;
+        }
+        
+    }
+    
+    
     /**
      *  发送信息应该做以下几件事
      *
@@ -196,6 +209,7 @@
     [[InternetManager sharedManager] sendMessage:text toUser:self.toUserId fromUser:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSLog(@"发送成功");
+            self.lastChatTime = [NSDate date];
         } else {
             NSLog(@"发送失败");
             [super showProgressErrorWithLabelText:@"发送失败" afterDelay:1];

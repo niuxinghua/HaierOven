@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443693446.279845"
+            timestampString = "444118108.049114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1821"
-            endingLineNumber = "1821"
+            startingLineNumber = "1863"
+            endingLineNumber = "1863"
             landmarkName = "-getShoppingOrderWithUserBaseId:cookbookId:callBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443693446.279845"
+            timestampString = "444106082.752389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "725"
-            endingLineNumber = "725"
+            startingLineNumber = "726"
+            endingLineNumber = "726"
             landmarkName = "-updateUserInfo:callBack:"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "444036715.564754"
+            timestampString = "444125281.176526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "884"
-            endingLineNumber = "884"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
             landmarkName = "-setBakeTemperature:"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "444036715.564754"
+            timestampString = "444125281.176526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "868"
-            endingLineNumber = "868"
+            startingLineNumber = "899"
+            endingLineNumber = "899"
             landmarkName = "-setBakeTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Cookbook/Controllers/CookbookDetailControllerViewController.m"
-            timestampString = "444040279.099695"
+            timestampString = "444119338.106296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "921"
-            endingLineNumber = "921"
+            startingLineNumber = "933"
+            endingLineNumber = "933"
             landmarkName = "-AddShoppingListWithCell:"
             landmarkType = "5">
          </BreakpointContent>
@@ -179,46 +179,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Parser/DataParser.m"
-            timestampString = "444038226.998008"
+            filePath = "HaierOven/Models/Internet/InternetManager.m"
+            timestampString = "444106649.512241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "+parseUserInfoWithDict:"
+            startingLineNumber = "484"
+            endingLineNumber = "484"
+            landmarkName = "-completeThirdPartyWithPassword:phone:email:userName:nickName:callBack:"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Parser/DataParser.m"
-            timestampString = "444038757.515312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "+parseCreatorWithDict:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Parser/DataParser.m"
-            timestampString = "444038798.908418"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "+parseCookbooksWithDict:hadNextPage:"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[InternetManager completeThirdPartyWithPassword:phone:email:userName:nickName:callBack:]"
+                  moduleName = "HaierOven"
+                  urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
+                  timestampString = "444125281.298586"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "484"
+                  endingLineNumber = "484"
+                  offsetFromSymbolStart = "628">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__89-[InternetManager completeThirdPartyWithPassword:phone:email:userName:nickName:callBack:]_block_invoke"
+                  moduleName = "HaierOven"
+                  urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
+                  timestampString = "444125281.298729"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "484"
+                  endingLineNumber = "484"
+                  offsetFromSymbolStart = "90">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

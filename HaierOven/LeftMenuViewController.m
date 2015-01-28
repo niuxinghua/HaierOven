@@ -54,7 +54,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:LoginSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BindDeviceSuccussNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
     
     self.myWindow = [UIWindow new];
@@ -104,6 +104,15 @@
 - (void)reload
 {
     [self.tableView reloadData];
+}
+
+- (void)gotoDeviceListController
+{
+    [self.tableView reloadData];
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+                                                 animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+    
 }
 
 - (void)loadUserInfo
@@ -183,9 +192,14 @@
         {
             if (IsLogin) {
                 if ([DataCenter sharedInstance].myOvens.count == 0) {
-                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+                    
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
                                                                  animated:YES];
                     [self.sideMenuViewController hideMenuViewController];
+                    
+//                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+//                                                                 animated:YES];
+//                    [self.sideMenuViewController hideMenuViewController];
                     break;
                 }else{
                     
@@ -346,19 +360,14 @@
     [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             
-            [[InternetManager sharedManager] addPoints:SignInScore userBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
-                
-                if (success) {
-                    btn.selected = !btn.selected;
-                    [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
-                    [[DataCenter sharedInstance] saveSignInFlag];
-                }
-                
-            }];
+            btn.selected = !btn.selected;
+            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
+            [[DataCenter sharedInstance] saveSignInFlag];
             
         }
     }];
 }
+
 -(void)ChangeController:(UIView *)btn{
     tempView.hidden = YES;
     tempView = btn;

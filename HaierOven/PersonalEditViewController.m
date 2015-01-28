@@ -69,7 +69,7 @@
     self.nikeNameLabel.text = self.user.nickName;
     self.genderLabel.text = [self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
     self.genderImage.image = [self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
-    self.placeLabel.text = @"";
+    self.placeLabel.text = self.user.address;
     self.descriptionLabel.text = self.user.note;
     self.birthdayLabel.text = self.user.birthday;
     self.emailLabel.text = self.user.email;
@@ -316,7 +316,8 @@
         case 1: // 所在地
         {
             label.text = textfield.text;
-
+            self.user.address = textfield.text;
+            [self modifyUserInfo];
             break;
             
         }

@@ -693,6 +693,7 @@
                                          @"userName":user.userName,
                                          @"sex":user.sex,
                                          @"birthday":user.birthday,
+                                         @"address":user.address,
                                          @"accessToken":null,
                                          @"note":user.note,
                                          @"maritalStatus":null,
@@ -1511,24 +1512,46 @@
 //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
 //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
-        NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
-        cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
-        cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
-        cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
-        cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+        NSDictionary* paramsDict;
         
-        NSDictionary* paramsDict = @{@"cookbookName" : cookbookDetail.name,
-                                     @"cookbookDesc" : cookbookDetail.desc,
-                                     @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
-                                     @"cookbookTip" : cookbookDetail.cookbookTip,
-                                     @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
-                                     @"tags" : tags,
-                                     @"steps" : steps,
-                                     @"foods" : foods,
-                                     @"cookbookOven" : cookbookOvenDict,
-                                     @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
-                                     
-                                     };
+        if (cookbookDetail.oven != nil) {
+            NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
+            cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
+            cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
+            cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
+            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+            
+            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+                           @"cookbookDesc" : cookbookDetail.desc,
+                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+                           @"cookbookTip" : cookbookDetail.cookbookTip,
+                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+                           @"tags" : tags,
+                           @"steps" : steps,
+                           @"foods" : foods,
+                           @"cookbookOven" : cookbookOvenDict,
+                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                           
+                           };
+
+            
+        } else {
+            
+            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+                           @"cookbookDesc" : cookbookDetail.desc,
+                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+                           @"cookbookTip" : cookbookDetail.cookbookTip,
+                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+                           @"tags" : tags,
+                           @"steps" : steps,
+                           @"foods" : foods,
+                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                           
+                           };
+            
+        }
+        
+        
         
         NSData* data = [NSJSONSerialization dataWithJSONObject:paramsDict options:NSJSONWritingPrettyPrinted error:nil];
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
@@ -1594,25 +1617,44 @@
         //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
         //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
-        NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
-        cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
-        cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
-        cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
-        cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+        NSDictionary* paramsDict;
         
-        NSDictionary* paramsDict = @{@"cookbookID" : [NSNumber numberWithInt:[cookbookDetail.cookbookId intValue]],
-                                     @"cookbookName" : cookbookDetail.name,
-                                     @"cookbookDesc" : cookbookDetail.desc,
-                                     @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
-                                     @"cookbookTip" : cookbookDetail.cookbookTip,
-                                     @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
-                                     @"tags" : tags,
-                                     @"steps" : steps,
-                                     @"foods" : foods,
-                                     @"cookbookOven" : cookbookOvenDict,
-                                     @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
-                                     
-                                     };
+        if (cookbookDetail.oven != nil) {
+            NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
+            cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
+            cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
+            cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
+            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+            
+            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+                           @"cookbookDesc" : cookbookDetail.desc,
+                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+                           @"cookbookTip" : cookbookDetail.cookbookTip,
+                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+                           @"tags" : tags,
+                           @"steps" : steps,
+                           @"foods" : foods,
+                           @"cookbookOven" : cookbookOvenDict,
+                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                           
+                           };
+            
+            
+        } else {
+            
+            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+                           @"cookbookDesc" : cookbookDetail.desc,
+                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+                           @"cookbookTip" : cookbookDetail.cookbookTip,
+                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+                           @"tags" : tags,
+                           @"steps" : steps,
+                           @"foods" : foods,
+                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+                           
+                           };
+            
+        }
         
         NSData* data = [NSJSONSerialization dataWithJSONObject:paramsDict options:NSJSONWritingPrettyPrinted error:nil];
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);

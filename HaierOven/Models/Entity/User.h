@@ -48,6 +48,8 @@
 
 @property (copy, nonatomic) NSString* accessToken;
 
+@property (copy, nonatomic) NSString* address;
+
 /**
  *  简介
  */
@@ -87,6 +89,11 @@
  *  积分/点心数
  */
 @property (copy, nonatomic) NSString* points;
+
+/**
+ *  用户级别  1、天字一号厨神 2、官方厨神 3、推荐达人 4、达人 5、普通用户
+ */
+@property (nonatomic) NSInteger level;
 
 
 
