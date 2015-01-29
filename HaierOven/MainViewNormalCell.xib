@@ -209,6 +209,7 @@
                 <outlet property="avater" destination="k1N-i6-vdZ" id="uX1-qE-SSg"/>
                 <outlet property="bottomOrangeView" destination="OgX-NX-fC0" id="fRJ-qq-xnE"/>
                 <outlet property="chickGoodBtn" destination="SGW-sZ-8v5" id="eUr-Yt-76I"/>
+                <outlet property="cookStarImageView" destination="whh-XC-lml" id="QNj-Ms-4yX"/>
                 <outlet property="cookerName" destination="pFM-g6-WlQ" id="QFz-U7-27W"/>
                 <outlet property="foodMakeFunction" destination="t9x-aZ-s7r" id="sJo-p5-GKF"/>
                 <outlet property="foodName" destination="Qcm-dR-3B3" id="wBR-x4-vLG"/>

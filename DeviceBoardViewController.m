@@ -82,10 +82,6 @@
  */
 @property (strong, nonatomic) uSDKDevice* myOven;
 
-/**
- *  是否停止烘焙
- */
-@property (nonatomic) BOOL cancelBakeFlag;
 
 @property (nonatomic) AlertType alertType;
 @property (strong, nonatomic) NSString *orderString;
@@ -96,6 +92,8 @@
 @property (strong, nonatomic) NSString *warmUpString;
 
 @property (strong, nonatomic) OvenManager* ovenManager;
+
+@property (strong, nonatomic) NSTimer* bakeTimer;
 
 @end
 
@@ -169,6 +167,7 @@
     [self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.temperature" context:NULL];
     [self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.opened" context:NULL];
     [self removeObserver:self forKeyPath:@"self.clockIcon.selected"];
+    self.bakeTimer = nil;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -550,6 +549,7 @@
                                                                     self.deviceBoardStatus = DeviceBoardStatusWorking;
                                                                     
                                                                     //点击运行后显示
+                                                                    [self.timeable invalidate];
                                                                     self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
                                                                     
                                                                     self.time = [timeStr integerValue] * 60;
@@ -562,8 +562,13 @@
                                                                     NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
                                                                     [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:@"您的食物烘焙完成了"];
                                                                     
-                                                                    [self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
-                                                                    self.cancelBakeFlag = NO;
+                                                                    NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                                                                                           @"desc" : [NSString stringWithFormat:@"设备\"%@\"开始烘焙，模式：%@，时间：%@，温度：%@",self.currentOven.name, [[self.bakeMode allValues] firstObject], self.howlong.currentTitle,  self.temputure.currentTitle]};
+                                                                    
+                                                                    [[DataCenter sharedInstance] addOvenNotification:info];
+                                                                    
+                                                                    //[self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
+                                                                    self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeBake) userInfo:nil repeats:NO];
                                                                     
                                                                 }];
                             
@@ -592,44 +597,40 @@
 
 - (void)completeBake
 {
-    if (!self.cancelBakeFlag) {
-        self.cancelBakeFlag = NO;
-        
-        self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
-        
-        self.deviceBoardStatus = DeviceBoardStatusOpened;
-        
-        CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
-        completeController.completeTye = CompleteTyeCook;
-        completeController.delegate = self;
-        completeController.myOven = self.myOven;
-        [self.navigationController pushViewController:completeController animated:YES];
-        
-    }
+    self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+    
+    self.deviceBoardStatus = DeviceBoardStatusOpened;
+    
+    NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                           @"desc" : [NSString stringWithFormat:@"设备\"%@\"烘焙完成",self.currentOven.name]};
+    
+    [[DataCenter sharedInstance] addOvenNotification:info];
+    
+    CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
+    completeController.completeTye = CompleteTyeCook;
+    completeController.delegate = self;
+    completeController.myOven = self.myOven;
+    [self.navigationController pushViewController:completeController animated:YES];
+    
     
 }
 
 - (void)completeWarmUp
 {
-    if (!self.cancelBakeFlag) {
-        self.cancelBakeFlag = NO;
-        
-        self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
-        
-        self.deviceBoardStatus = DeviceBoardStatusOpened;
-        
-        CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
-        completeController.completeTye = CompleteTyeWarmUp;
-        completeController.delegate = self;
-        completeController.myOven = self.myOven;
-        [self.navigationController pushViewController:completeController animated:YES];
-        
-    }
+    self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+    
+    self.deviceBoardStatus = DeviceBoardStatusOpened;
+    
+    CompleteCookController* completeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Complete cook controller"];
+    completeController.completeTye = CompleteTyeWarmUp;
+    completeController.delegate = self;
+    completeController.myOven = self.myOven;
+    [self.navigationController pushViewController:completeController animated:YES];
     
 }
 
 -(void)StopWorking{
-    self.cancelBakeFlag = YES;
+    [self.bakeTimer invalidate];
     self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     [self.timeable invalidate];
     self.timeable = nil;
@@ -654,11 +655,23 @@
 {
     if (shutdown) {
         self.deviceBoardStatus = DeviceBoardStatusClosed;
+        
+        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                               @"desc" : [NSString stringWithFormat:@"设备\"%@\"关机了",self.currentOven.name]};
+        
+        [[DataCenter sharedInstance] addOvenNotification:info];
+        
         for (UIButton* button in self.deviceStatusBtns) {
             button.selected = NO;
         }
     } else {
         self.deviceBoardStatus = DeviceBoardStatusOpened;
+        
+        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                               @"desc" : [NSString stringWithFormat:@"设备\"%@\"开机了",self.currentOven.name]};
+        
+        [[DataCenter sharedInstance] addOvenNotification:info];
+        
         for (UIButton* button in self.deviceStatusBtns) {
             button.selected = YES;
         }
@@ -672,6 +685,9 @@
 }
 - (IBAction)TurnEdit:(id)sender {
     DeviceEditController *edit = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceEditController"];
+    
+    
+    
     [self.navigationController pushViewController:edit animated:YES];
 }
 - (IBAction)TurnMessage:(id)sender {
@@ -755,6 +771,7 @@
 
 
 #pragma mark - 开机关机
+
 - (IBAction)onoff:(UIButton*)sender {
     for (UIButton *btn in self.deviceStatusBtns) {
         btn.selected = !btn.selected;
@@ -766,8 +783,20 @@
     UIButton* button = sender;
     if (button.selected) {
         [self bootup];
+        
+        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                               @"desc" : [NSString stringWithFormat:@"设备\"%@\"开机了",self.currentOven.name]};
+        
+        [[DataCenter sharedInstance] addOvenNotification:info];
+        
     } else {
         [self shutdown];
+        
+        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                               @"desc" : [NSString stringWithFormat:@"设备\"%@\"关机了",self.currentOven.name]};
+        
+        [[DataCenter sharedInstance] addOvenNotification:info];
+        
     }
     
 }
@@ -1013,8 +1042,16 @@
                                                                     NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
                                                                     [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeWarmUp fireTime:bakeSeconds alertBody:@"您的烤箱预热完成了"];
                                                                     
-                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
-                                                                    self.cancelBakeFlag = NO;
+                                                                    NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                                                                                           @"desc" : [NSString stringWithFormat:@"设备\"%@\"开始烘焙，模式：快速预热，时间：%@，温度：%@",
+                                                                                                      self.currentOven.name,
+                                                                                                      timeStr,
+                                                                                                      temperatureString]};
+                                                                    
+                                                                    [[DataCenter sharedInstance] addOvenNotification:info];
+                                                                    
+//                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
+                                                                    self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeWarmUp) userInfo:nil repeats:NO];
                                                                     
                                                                 }];
                             

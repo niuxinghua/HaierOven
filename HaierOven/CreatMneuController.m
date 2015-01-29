@@ -522,7 +522,7 @@
 
     
 }
-#pragma mark -
+
 
 #pragma mark - 我使用了烤箱
 
@@ -557,6 +557,11 @@
     popupTextView.text = self.cookbook.name;
 }
 
+#pragma mark - 小贴士
+
+- (IBAction)tipLabelTapped:(UITapGestureRecognizer *)sender {
+    [self AddPS:nil];
+}
 
 - (IBAction)AddPS:(id)sender {
     popupTextView =

@@ -213,6 +213,8 @@
     NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
     creator.avatarPath      = [DataParser parseImageUrlWithString:avatarPath];
     
+    creator.userName        = [creatorDict[@"userLevel"] isKindOfClass:[NSNull class]] || creatorDict[@"userLevel"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userLevel"]];
+    
     return creator;
 }
 

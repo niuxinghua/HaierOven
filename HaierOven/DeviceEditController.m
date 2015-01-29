@@ -7,10 +7,11 @@
 //
 
 #import "DeviceEditController.h"
+#import "YIPopupTextView.h"
 
-@interface DeviceEditController ()
+@interface DeviceEditController () <YIPopupTextViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
-
+@property (strong, nonatomic) YIPopupTextView* popupTextView;
 @end
 
 @implementation DeviceEditController
@@ -49,11 +50,118 @@
 //}
 - (IBAction)DeleteBtn:(id)sender {
     NSLog(@"删除");
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[DataCenter sharedInstance] removeOvenInLocal:self.currentOven];
+    
+    [super showProgressErrorWithLabelText:@"设备已删除" afterDelay:1];
+    
+    [self performSelector:@selector(close) withObject:nil afterDelay:2];
+    [[NSNotificationCenter defaultCenter] postNotificationName:DeleteLocalOvenSuccessNotification object:nil];
+    
 }
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)close
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.popupTextView) {
+        [self.popupTextView resignFirstResponder];
+        self.popupTextView = nil;
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {   //重命名
+        
+        BOOL editable = YES;
+        
+        YIPopupTextView* popupTextView =
+        [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入留言内容"
+                                            maxCount:500
+                                         buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
+        popupTextView.delegate = self;
+        popupTextView.caretShiftGestureEnabled = YES;       // default = NO. using YISwipeShiftCaret is recommended.
+        popupTextView.editable = editable;                  // set editable=NO to show without keyboard
+        
+        popupTextView.outerBackgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        
+        [popupTextView showInViewController:self];
+        
+        popupTextView.text = self.currentOven.name;
+        
+        _popupTextView = popupTextView;
+        
+        
+#if defined(__IPHONE_7_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+        if (IS_IOS_AT_LEAST(@"7.0")) {
+            [self setNeedsStatusBarAppearanceUpdate];
+        }
+#endif
+        
+    } else {    //设置时间
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"hh:mm";
+        NSString* time = [formatter stringFromDate:[NSDate date]];
+        
+        uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kBootUp commandAttrValue:kBootUp];
+        [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
+                                            toDevice:self.myOven
+                                        andCommandSN:0
+                                 andGroupCommandName:@""
+                                            callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                                
+                                                uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:@"20v00i" commandAttrValue:time];
+                                                [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+                                                [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy] toDevice:self.myOven andCommandSN:0 andGroupCommandName:@"" callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                                    [super hiddenProgressHUD];
+                                                    [super showProgressCompleteWithLabelText:@"时间已同步" afterDelay:1];
+                                                }];
+                                                
+                                            }];
+        
+    }
+}
+
+#pragma mark YIPopupTextViewDelegate
+
+- (void)popupTextView:(YIPopupTextView *)textView willDismissWithText:(NSString *)text cancelled:(BOOL)cancelled
+{
+    _popupTextView = nil;
+    
+#if defined(__IPHONE_7_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+    if (IS_IOS_AT_LEAST(@"7.0")) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+#endif
+}
+
+- (void)popupTextView:(YIPopupTextView *)textView didDismissWithText:(NSString *)text cancelled:(BOOL)cancelled
+{
+    NSLog(@"did dismiss: cancelled=%d",cancelled);
+    if (!cancelled) {
+        if (text.length == 0) {
+            [super showProgressErrorWithLabelText:@"烤箱名称不能为空" afterDelay:1];
+        } else {
+            
+            
+            self.currentOven.name = text;
+            [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
+            [super showProgressCompleteWithLabelText:@"修改成功" afterDelay:1];
+            
+        }
+    }
+}
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

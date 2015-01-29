@@ -103,6 +103,7 @@
     if (self.isPreview) {
         [self updateUI];
     } else {
+        self.cookbookDescLabel.text = @"";
         [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
         [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbookId userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
             [super hiddenProgressHUD];
@@ -187,6 +188,7 @@
     for (Tag* tag in self.cookbookDetail.tags) {
         [tagNames addObject:tag.name];
     }
+    self.tagsView.style = AutoSizeLabelViewStyleMenuDetail;
     self.tagsView.tags = [tagNames copy];
     
     self.creatorNameLabel.text = self.cookbookDetail.creator.userName;
@@ -255,15 +257,15 @@
             
             // 这里应该从网络获取Comments
             
-            if (self.comments.count == 0) {
-                Comment* comment = [[Comment alloc] init];
-                comment.content = @"这个菜谱真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！";
-                comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
-                comment.commentTime = @"2014-12-31 10:47";
-                comment.fromUser.loginName = @"黄靖雯";
-                [self.comments addObject:comment];
-            
-            }
+//            if (self.comments.count == 0) {
+//                Comment* comment = [[Comment alloc] init];
+//                comment.content = @"这个菜谱真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！真好啊！";
+//                comment.fromUser.userAvatar = @"http://d.hiphotos.baidu.com/image/pic/item/09fa513d269759ee2ea448afb1fb43166c22dfd9.jpg";
+//                comment.commentTime = @"2014-12-31 10:47";
+//                comment.fromUser.loginName = @"黄靖雯";
+//                [self.comments addObject:comment];
+//            
+//            }
             
             CommentViewController* controller = [[CommentViewController alloc] initWithData:self.comments andController:self];
             self.commentsTableViewDataSource = controller;
@@ -372,8 +374,6 @@
 
 - (void)setupSubviews
 {
-    
-    
     // 设置其他
     self.creatorAvatar.layer.masksToBounds = YES;
     self.creatorAvatar.layer.cornerRadius = self.creatorAvatar.height / 2.0;
@@ -386,7 +386,7 @@
     self.learnButton.layer.masksToBounds = YES;
     self.learnButton.backgroundColor = GlobalOrangeColor;
     
-    
+    self.cookbookDescLabel.textColor = RGB(105, 84, 89);
 }
 
 - (void)setupInputView
@@ -692,8 +692,8 @@
                 // 获取描述的高度
                 return [self getDescCellHeight];
                 break;
-            case 2:
-                return 45;
+            case 2: // 新手学烘焙
+                return 50;
                 break;
             default:
                 break;
@@ -732,7 +732,7 @@
 {
     CGFloat height = 17;
     
-    height += [MyUtils getTextSizeWithText:self.cookbookDetail.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:15.0f]} andTextWidth:Main_Screen_Width - 30].height;
+    height += [MyUtils getTextSizeWithText:self.cookbookDetail.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:14.0f]} andTextWidth:Main_Screen_Width - 30].height;
     
     return height;
 }

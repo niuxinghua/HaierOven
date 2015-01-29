@@ -175,8 +175,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已150度烘烤约70分钟出炉晾凉后脱模，冷藏4小时以上可切开食用。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-OC-Whd">
-                                                    <rect key="frame" x="15" y="8" width="290" height="35"/>
-                                                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                                                    <rect key="frame" x="15" y="8" width="290" height="32.5"/>
+                                                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -190,7 +190,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="45" id="c82-Ad-rdX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="c82-Ad-rdX" customClass="LearnCookCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c82-Ad-rdX" id="idO-MH-XrF">
@@ -199,6 +199,10 @@
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3n-ws-fae">
                                                     <rect key="frame" x="18" y="7" width="285" height="31"/>
                                                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="fb0-51-MUi"/>
+                                                        <constraint firstAttribute="width" constant="285" id="gos-xG-Vyk"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
                                                     <state key="normal" title="新手学烘焙">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -211,10 +215,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="p3n-ws-fae" firstAttribute="leading" secondItem="idO-MH-XrF" secondAttribute="leading" constant="18" id="bQu-cy-UMW"/>
-                                                <constraint firstAttribute="trailing" secondItem="p3n-ws-fae" secondAttribute="trailing" constant="17" id="fMp-qM-OWr"/>
-                                                <constraint firstAttribute="bottom" secondItem="p3n-ws-fae" secondAttribute="bottom" constant="6" id="ibO-yx-H8P"/>
-                                                <constraint firstItem="p3n-ws-fae" firstAttribute="top" secondItem="idO-MH-XrF" secondAttribute="top" constant="7" id="wHZ-U2-NOb"/>
+                                                <constraint firstAttribute="centerX" secondItem="p3n-ws-fae" secondAttribute="centerX" id="Pcv-jr-7P0"/>
+                                                <constraint firstAttribute="centerY" secondItem="p3n-ws-fae" secondAttribute="centerY" id="V8O-i7-Bxe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

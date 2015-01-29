@@ -30,5 +30,10 @@
  */
 @property (copy, nonatomic) NSString* avatarPath;
 
+/**
+ *  用户级别
+ */
+@property (copy, nonatomic) NSString* userLevel;
+
 
 @end

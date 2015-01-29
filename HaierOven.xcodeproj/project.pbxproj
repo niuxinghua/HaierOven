@@ -1080,6 +1080,7 @@
 		8447CB8B1A5FC73700FADF9D /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8447CB5F1A5FC73700FADF9D /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		8447CB8F1A5FC80800FADF9D /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8447CB8E1A5FC80800FADF9D /* ChatViewController.m */; };
 		8447CB941A5FC89500FADF9D /* MessagesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8447CB931A5FC89500FADF9D /* MessagesModel.m */; };
+		844C356C1A79CE1800949F40 /* LearnCookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844C356B1A79CE1800949F40 /* LearnCookCell.m */; };
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
@@ -2514,6 +2515,8 @@
 		8447CB8E1A5FC80800FADF9D /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		8447CB921A5FC89500FADF9D /* MessagesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesModel.h; sourceTree = "<group>"; };
 		8447CB931A5FC89500FADF9D /* MessagesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesModel.m; sourceTree = "<group>"; };
+		844C356A1A79CE1800949F40 /* LearnCookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnCookCell.h; sourceTree = "<group>"; };
+		844C356B1A79CE1800949F40 /* LearnCookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnCookCell.m; sourceTree = "<group>"; };
 		844D0F561A4D2FE10018D79C /* LocalOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalOven.h; sourceTree = "<group>"; };
 		844D0F571A4D2FE10018D79C /* LocalOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalOven.m; sourceTree = "<group>"; };
 		845B33941A58EB4300DD8887 /* DescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescCell.h; sourceTree = "<group>"; };
@@ -5046,6 +5049,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		844C35691A79CDE100949F40 /* LearnCell */ = {
+			isa = PBXGroup;
+			children = (
+				844C356A1A79CE1800949F40 /* LearnCookCell.h */,
+				844C356B1A79CE1800949F40 /* LearnCookCell.m */,
+			);
+			name = LearnCell;
+			sourceTree = "<group>";
+		};
 		845B33931A58EB3200DD8887 /* DescCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -5149,6 +5161,7 @@
 		C4182E161A4E4A27006A44D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				844C35691A79CDE100949F40 /* LearnCell */,
 				845B33931A58EB3200DD8887 /* DescCell */,
 				C43BFB1C1A57E87B00FB00B6 /* DAKeyboardControl */,
 				84E113751A52A2E200D16DDB /* CommentView */,
@@ -5313,9 +5326,6 @@
 				842642D01A764052004B2513 /* icon_qsk_n@3x.png in Resources */,
 				849F916E1A513981006234B9 /* icon_followd@2x.png in Resources */,
 				45AC321E1A77734A004B1828 /* 1_5_1_1.png in Resources */,
-				842642B81A764052004B2513 /* icon_gwz_n@3x.png in Resources */,
-				8426429E1A764052004B2513 /* icon_cthb_n.png in Resources */,
-				842642A81A764052004B2513 /* icon_cz_s@2x.png in Resources */,
 				458952B41A493C05009B5DD1 /* wifilianjie03@2x.png in Resources */,
 				45422DCF1A63B98B001A7223 /* xlqbwwz@2x.png in Resources */,
 				849F91731A513981006234B9 /* icon_gfcp_s.png in Resources */,
@@ -5633,7 +5643,6 @@
 				45AC32AF1A77A5C4004B1828 /* 3-7-1-1.png in Resources */,
 				45BC571E1A4AF20A0052F520 /* cthp-cxz@3x.png in Resources */,
 				45AC32211A77734A004B1828 /* 1_5_3_1.png in Resources */,
-				842642ED1A764052004B2513 /* icon_sxsk_n@2x.png in Resources */,
 				45D9FECB1A5291A000023B9D /* textline@2x.png in Resources */,
 				849F91771A513981006234B9 /* icon_like_n@2x.png in Resources */,
 				45A5E8231A5002D600FCD2BD /* MenuDraftTableViewCell.xib in Resources */,
@@ -5660,7 +5669,6 @@
 				45332BAC1A6FAF430014E8AA /* fresh-group-3.png in Resources */,
 				45AC32181A77734A004B1828 /* 1_2_1_1.png in Resources */,
 				45AC321C1A77734A004B1828 /* 1_3_3_1.png in Resources */,
-				842642A71A764052004B2513 /* icon_cz_s.png in Resources */,
 				45D907181A47CAAB00B97D92 /* yiqiandao@3x.png in Resources */,
 				45B650D21A4814CA00A6376D /* lianjie@2x.png in Resources */,
 				45BC575C1A4AF3AF0052F520 /* rfpk-cxz@2x.png in Resources */,
@@ -5674,7 +5682,6 @@
 				45BC57211A4AF20A0052F520 /* cthp-wxz@3x.png in Resources */,
 				45B88DFB1A4BCBF300722EF6 /* nz-cxz@3x.png in Resources */,
 				45AC32231A77734A004B1828 /* 1_6_1_1.png in Resources */,
-				842642CF1A764052004B2513 /* icon_qsk_n@2x.png in Resources */,
 				458952BA1A493C05009B5DD1 /* wifilianjie05@2x.png in Resources */,
 				45AC32281A77734A004B1828 /* 1_7_2_1.png in Resources */,
 				45D9070A1A47CAAB00B97D92 /* v.png in Resources */,
@@ -5867,7 +5874,6 @@
 				842388251A70A256007AB206 /* default_avatar.png in Resources */,
 				45D906CD1A47CAAB00B97D92 /* hongbeiquan.png in Resources */,
 				842642A51A764052004B2513 /* icon_cz_n@2x.png in Resources */,
-				45E61AC41A7629CA009DF3FC /* use2@3x.png in Resources */,
 				45D906D91A47CAAB00B97D92 /* l.png in Resources */,
 				45BA02EF1A441C30003810C7 /* BLOD.TTF in Resources */,
 				45D906E81A47CAAB00B97D92 /* mydessertcount.png in Resources */,
@@ -5985,7 +5991,6 @@
 				45B88E0C1A4BCC8B00722EF6 /* yy-cxz@2x.png in Resources */,
 				459E8BB31A5D2AA7009D4ADA /* qrd@2x.png in Resources */,
 				842642D81A764052004B2513 /* icon_rfbk_s@2x.png in Resources */,
-				45E61ABD1A762697009DF3FC /* use@2x.png in Resources */,
 				45B651161A48448500A6376D /* wodeWIFI@2x.png in Resources */,
 				459E8BA51A5CDC1D009D4ADA /* deletec@3x.png in Resources */,
 				45BC57201A4AF20A0052F520 /* cthp-wxz@2x.png in Resources */,
@@ -6078,7 +6083,6 @@
 				842642B11A764052004B2513 /* icon_fj_n@2x.png in Resources */,
 				45BB362D1A4A8E6E000EE3C4 /* fs-xz.png in Resources */,
 				842642AD1A764052004B2513 /* icon_dlhb_s.png in Resources */,
-				45E61A9B1A760F7E009DF3FC /* wh.png in Resources */,
 				C4182E1F1A4E60E7006A44D0 /* CookbookSectionHeaderView.xib in Resources */,
 				45D907021A47CAAB00B97D92 /* shouye@3x.png in Resources */,
 				45B6510B1A482EDB00A6376D /* n1@3x.png in Resources */,
@@ -6218,6 +6222,7 @@
 				45C7E5B41A3FE7FB000B086B /* MainViewController.m in Sources */,
 				844117771A4BB8AF00628A64 /* Tag.m in Sources */,
 				844117871A4BB8AF00628A64 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				844C356C1A79CE1800949F40 /* LearnCookCell.m in Sources */,
 				45C7E5791A3FDAB0000B086B /* MBProgressHUD.m in Sources */,
 				458632AD1A667B560083C2FF /* SuggestPostViewController.m in Sources */,
 				45A546CB1A5A4EC200BE62EC /* UIScrollView+Extension.m in Sources */,

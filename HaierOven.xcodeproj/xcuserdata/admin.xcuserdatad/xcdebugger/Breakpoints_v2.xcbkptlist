@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "444129416.049606"
+            timestampString = "444201972.186856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "908"
-            endingLineNumber = "908"
+            startingLineNumber = "937"
+            endingLineNumber = "937"
             landmarkName = "-setBakeTemperature:"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "444129416.049606"
+            timestampString = "444201972.186856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "892"
-            endingLineNumber = "892"
+            startingLineNumber = "921"
+            endingLineNumber = "921"
             landmarkName = "-setBakeTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,7 +148,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Cookbook/Controllers/CookbookDetailControllerViewController.m"
-            timestampString = "444119338.106296"
+            timestampString = "444191937.655274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "933"

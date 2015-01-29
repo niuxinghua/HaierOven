@@ -204,6 +204,23 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  */
 - (void)updateOvenInLocal:(LocalOven*)oven;
 
+
+#pragma mark - 设备操作的通知
+
+/**
+ *  添加到本地通知列表
+ *
+ *  @param info 结构：@{@“time”:@"2015-01-29 12:09", @"desc":@"设备“xx”已开机"}
+ */
+- (void)addOvenNotification:(NSDictionary*)info;
+
+/**
+ *  获取设备通知
+ *
+ *  @return 通知
+ */
+- (NSMutableArray*)loadOvenNotifications;
+
 @end
 
 

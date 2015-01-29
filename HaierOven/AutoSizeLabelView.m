@@ -104,15 +104,15 @@
         
         if (self.style == AutoSizeLabelViewStyleCreatMenu) {
             
-            [title setBackgroundImage:[MyTool createImageWithColor:RGB(160, 100, 110)] forState:UIControlStateNormal];
+            [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
             [title setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forState:UIControlStateSelected];
             title.layer.cornerRadius  = LABEL_H / 2;
             
 
         } else if (self.style == AutoSizeLabelViewStyleMenuDetail) {
-            title.layer.cornerRadius  = 15;
-            [title setBackgroundImage:[MyTool createImageWithColor:[UIColor purpleColor]] forState:UIControlStateNormal];
-            title.enabled = NO;
+            title.layer.cornerRadius  = LABEL_H / 2;
+            [title setBackgroundImage:[MyTool createImageWithColor:RGB(161, 101, 111)] forState:UIControlStateNormal];
+            //title.enabled = NO;
         }else if (self.style == AutoSizeLabelViewStyleCookStarDetail){
             title.layer.cornerRadius  = 10;
             [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];

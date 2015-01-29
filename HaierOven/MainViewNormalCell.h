@@ -16,7 +16,16 @@
 @end
 @interface MainViewNormalCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *MainCellFoodBackground;
+/**
+ *  官方菜谱标签
+ */
 @property (strong, nonatomic) IBOutlet UIImageView *AuthorityLabel;
+
+/**
+ *  v标记
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *cookStarImageView;
+
 @property (strong, nonatomic) IBOutlet UIButton *chickGoodBtn;
 @property (strong, nonatomic) IBOutlet UILabel *goodCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
