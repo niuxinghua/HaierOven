@@ -182,7 +182,16 @@
                                                               if (self.registerFlag) {
                                                                   [self login];
                                                               } else { // 如果是其他页面跳进来激活则返回
-                                                                  [self.navigationController popViewControllerAnimated:YES];
+                                                                  
+                                                                  // 激活用户送积分
+                                                                  [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+                                                                      
+                                                                      if (success) {
+                                                                          NSLog(@"激活用户送积分OK");
+                                                                      }
+                                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                                  }];
+                                                                  
                                                               }
                                                           } else {
                                                               [super showProgressErrorWithLabelText:@"激活失败，请重试" afterDelay:1];
@@ -223,8 +232,20 @@
                                                     [super hiddenProgressHUD];
                                                     if (success) {
                                                         NSLog(@"登录成功");
-                                                        [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                        
+                                                        // 激活用户送积分
+                                                        [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+                                                            
+                                                            if (success) {
+                                                                NSLog(@"激活用户送积分OK");
+                                                            }
+                                                            
+                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                            [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                            
+                                                        }];
+                                                        
+                                                        
                                                     } else {
                                                         [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                     }

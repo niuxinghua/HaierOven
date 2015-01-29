@@ -106,7 +106,7 @@
 - (void)loadCookbookDetail
 {
     NSString* userId = CurrentUserBaseId;
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbook.ID userBaseId:userId callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
@@ -269,7 +269,13 @@
             return (PageW-16)*0.13*(self.foods.count+1)+51;
             break;
         case 3:
-            return useBake?311:71;
+            if ([DataCenter sharedInstance].currentUser.level != 1 || [DataCenter sharedInstance].currentUser.level != 2) {
+                //普通用户隐藏我使用了烤箱
+                return 0;
+            } else {
+                return useBake?311:71;
+            }
+            
             break;
         case 4:
             return (PageW - 60)*0.58*(self.steps.count)+80;
@@ -516,10 +522,17 @@
 
     
 }
-#pragma mark -
+
 
 #pragma mark - 我使用了烤箱
+
 - (IBAction)UseDevice:(UIButton*)sender {
+    DataCenter* dataCenter = [DataCenter sharedInstance];
+    if (dataCenter.currentUser.level != 1 || dataCenter.currentUser.level != 2) {
+        [super showProgressErrorWithLabelText:@"只有厨神才可选择烤箱模式哦" afterDelay:1];
+        return;
+    }
+    
     sender.selected = !sender.selected;
     useBake = !useBake;
     [self.tableView reloadData];
@@ -544,6 +557,11 @@
     popupTextView.text = self.cookbook.name;
 }
 
+#pragma mark - 小贴士
+
+- (IBAction)tipLabelTapped:(UITapGestureRecognizer *)sender {
+    [self AddPS:nil];
+}
 
 - (IBAction)AddPS:(id)sender {
     popupTextView =
@@ -597,10 +615,18 @@
         }
     }
     
-    if (self.cookbookDetail.oven.roastStyle.length == 0 || self.cookbookDetail.oven.roastTemperature.length == 0 || self.cookbookDetail.oven.roastTime.length == 0) {
-        [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
-        return NO;
+    DataCenter* dataCenter = [DataCenter sharedInstance];
+    if (dataCenter.currentUser.level == 1 || dataCenter.currentUser.level == 2) {
+        
+        if (self.cookbookDetail.oven.roastStyle.length == 0 || self.cookbookDetail.oven.roastTemperature.length == 0 || self.cookbookDetail.oven.roastTime.length == 0) {
+            [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
+            return NO;
+        }
+        
+    } else {
+        self.cookbookDetail.oven = nil;
     }
+    
     
     for (Step* step in self.steps) {
         if (step.photo.length == 0) {
@@ -743,7 +769,7 @@
 - (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage transform:(CGAffineTransform)transform cropRect:(CGRect)cropRect
 {
     NSData* imageData = UIImageJPEGRepresentation(croppedImage, 0.6);
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     
     if (self.ischangeCover) {
         self.ischangeCover = NO;

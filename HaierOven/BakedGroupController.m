@@ -45,7 +45,7 @@
         [super openLoginController];
         return;
     }
-    [super showProgressHUDWithLabelText:@"请稍后" dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];

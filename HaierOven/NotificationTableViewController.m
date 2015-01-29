@@ -90,12 +90,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
         
     } else {
         // 获取设备信息
-        
-        // 假数据
-        NSDictionary* ovenMessage = @{@"time" : [MyTool getCurrentTime],
-                                      @"content" : @"烤箱已就绪"};
-        self.ovenNotifications = [NSMutableArray array];
-        [self.ovenNotifications addObject:ovenMessage];
+        self.ovenNotifications = [[DataCenter sharedInstance] loadOvenNotifications];
         
         [self.tableView reloadData];
     }

@@ -113,6 +113,12 @@
                                                         NSLog(@"登录成功");
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
                                                         [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                        
+                                                        //保存手动登录的时间，超过20天后，需再次手动登录
+                                                        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                                                        [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+                                                        [userDefaults synchronize];
+                                                        
                                                     } else {
                                                         [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                     }
@@ -206,10 +212,15 @@
                                                                 
                                                                 [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
                                                                 
+                                                                //保存手动登录的时间，超过20天后，需再次手动登录
+                                                                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                                                                [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+                                                                [userDefaults synchronize];
+                                                                
                                                                  // 如果是第一次第三方登录，需补全用户信息
                                                                 
                                                                 self.loginId = response.data[@"openid"];
-                                                                [self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+                                                                //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
 
                                                             } else {
                                                                 [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
@@ -256,9 +267,15 @@
                                                         if (success) {
                                                             NSLog(@"登录成功");
                                                             [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+                                                            
+                                                            //保存手动登录的时间，超过20天后，需再次手动登录
+                                                            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                                                            [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+                                                            [userDefaults synchronize];
+                                                            
                                                             // 如果是第一次第三方登录，需补全用户信息
                                                             self.loginId = response.data[@"openid"];
-                                                            [self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+                                                            //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
                                                         } else {
                                                             [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                         }

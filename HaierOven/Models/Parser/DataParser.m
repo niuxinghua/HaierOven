@@ -56,6 +56,11 @@
         user.nickName           = [profileDict[@"nickName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"nickName"]];
         user.userName           = [profileDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"userName"]];
         user.sex                = [profileDict[@"sex"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"sex"]];
+        
+        user.address            = [profileDict[@"address"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"address"]];
+        
+        user.level              = [profileDict[@"userLevel"] isKindOfClass:[NSNull class]] ? 0 : [profileDict[@"userLevel"] integerValue];
+        
         user.birthday           = [profileDict[@"birthday"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"birthday"]];
         user.accessToken        = [profileDict[@"accessToken"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"accessToken"]];
         user.note               = [profileDict[@"note"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", profileDict[@"note"]];
@@ -207,6 +212,8 @@
     creator.userName        = [creatorDict[@"userName"] isKindOfClass:[NSNull class]] || creatorDict[@"userName"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userName"]];
     NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
     creator.avatarPath      = [DataParser parseImageUrlWithString:avatarPath];
+    
+    creator.userName        = [creatorDict[@"userLevel"] isKindOfClass:[NSNull class]] || creatorDict[@"userLevel"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userLevel"]];
     
     return creator;
 }

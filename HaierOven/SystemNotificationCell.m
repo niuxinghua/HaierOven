@@ -67,7 +67,7 @@
     _ovenNotification = ovenNotification;
     
     [self.nameBtn setTitle:@"" forState:UIControlStateNormal];
-    self.descLabel.text = ovenNotification[@"content"];
+    self.descLabel.text = ovenNotification[@"desc"];
     
     NSString* dateStr = ovenNotification[@"time"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

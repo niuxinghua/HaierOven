@@ -22,6 +22,7 @@ NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
 NSString* const kLocalOvensFileName             = @"myOvens.data";
 NSString* const kLocalSearchedKeywordsFileName  = @"searchedKeywords.plist";
 NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
+NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
 
 @interface DataCenter ()
 
@@ -153,8 +154,9 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
         formatter.dateFormat = @"yyyy-MM-dd";
         NSString* strDate = [formatter stringFromDate:date];
         signedDates = [NSMutableArray arrayWithContentsOfFile:filePath];
-        for (NSString* signedDate in signedDates) {
-            if ([signedDate isEqualToString:strDate]) {
+        NSString* userSignedMessage = [strDate stringByAppendingFormat:@":%@", CurrentUserBaseId];
+        for (NSString* signedMsg in signedDates) {
+            if ([signedMsg isEqualToString:userSignedMessage]) {
                 return YES;
             }
         }
@@ -165,6 +167,9 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     return NO;
 }
 
+/**
+ *  结构：NSArray -> NSString: yyyy-MM-dd:userBaseId
+ */
 - (void)saveSignInFlag
 {
     NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSignInMessageFileName];
@@ -174,7 +179,10 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString* strDate = [formatter stringFromDate:[NSDate date]];
-    [signedDates addObject:strDate];
+    
+    NSString* signMsg = [strDate stringByAppendingFormat:@":%@", CurrentUserBaseId];
+    
+    [signedDates addObject:signMsg];
     
     [signedDates writeToFile:filePath atomically:YES];
     
@@ -479,5 +487,48 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     NSString* userId = IsLogin ? [[NSUserDefaults standardUserDefaults] valueForKey:@"userBaseId"] : @"0";
     return userId;
 }
+
+
+#pragma mark - 设备操作的通知
+
+/**
+ *  添加到本地通知列表
+ *
+ *  @param info 结构：@{@“time”:@"2015-01-29 12:09", @"desc":@"设备“xx”已开机"}
+ */
+- (void)addOvenNotification:(NSDictionary*)info
+{
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvenInfosFileName];
+    NSMutableArray* notifications = [NSMutableArray array];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        notifications = [NSMutableArray arrayWithContentsOfFile:filePath];
+        if (notifications.count > 30) {
+            [notifications removeLastObject];
+        }
+    }
+    
+    [notifications insertObject:info atIndex:0];
+    
+    [notifications writeToFile:filePath atomically:YES];
+}
+
+/**
+ *  获取设备通知
+ *
+ *  @return 通知
+ */
+- (NSMutableArray*)loadOvenNotifications
+{
+    NSMutableArray* notifications = [NSMutableArray array];
+    
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvenInfosFileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        notifications = [NSMutableArray arrayWithContentsOfFile:filePath];
+    }
+    
+    return notifications;
+}
+
 
 @end

@@ -53,8 +53,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:LoginSuccussNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:LogoutSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BindDeviceSuccussNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
     
     self.myWindow = [UIWindow new];
@@ -69,6 +70,7 @@
     self.leftMenuAlert.delegate = self;
     [self.myWindow addSubview:self.leftMenuAlert];
     // Do any additional setup after loading the view.
+    self.sideMenuViewController.delegate = self;
 }
 
 -(void)isGoingToLogin:(BOOL)goLogin{
@@ -79,7 +81,6 @@
         [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
     } else {
         
-        
         [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
                                                      animated:YES];
         [self.sideMenuViewController hideMenuViewController];
@@ -89,21 +90,38 @@
     
 }
 
+- (void)cancelOperate
+{
+    self.myWindow.hidden = YES;
+    self.leftMenuAlert.frame = alert_RectHidden;
+    
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.tempView = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
-    [super viewWillAppear:animated];
     [self updateNotificationCount];
+    [self loadUserInfo];
+    [self reload];
 }
 
 - (void)reload
 {
     [self.tableView reloadData];
+}
+
+- (void)gotoDeviceListController
+{
+    [self.tableView reloadData];
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+                                                 animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+    
 }
 
 - (void)loadUserInfo
@@ -183,9 +201,14 @@
         {
             if (IsLogin) {
                 if ([DataCenter sharedInstance].myOvens.count == 0) {
-                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+                    
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
                                                                  animated:YES];
                     [self.sideMenuViewController hideMenuViewController];
+                    
+//                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
+//                                                                 animated:YES];
+//                    [self.sideMenuViewController hideMenuViewController];
                     break;
                 }else{
                     
@@ -284,14 +307,18 @@
         cell.delegate = self;
         cell.userNameLabel.font = [UIFont fontWithName:GlobalTitleFontName size:15];
         
-        cell.siginBtn.selected = [[DataCenter sharedInstance] getSignInFlag];
-        
-        
-        cell.user = self.currentUser;
-        
-        
-        
+        if (IsLogin) {
+            cell.siginBtn.selected = [[DataCenter sharedInstance] getSignInFlag];
+            
+            cell.user = self.currentUser;
+        } else {
+            cell.siginBtn.selected = NO;
+            cell.avaterImage.image = [UIImage imageNamed:@"default_avatar"];
+            cell.userNameLabel.text = @"未登录";
+            
+        }
         return cell;
+        
     }else if (indexPath.row==1){
         if ([DataCenter sharedInstance].myOvens.count != 0) {
             NSString *cellIdentifier =@"SecDeviceTableViewCell";
@@ -335,7 +362,6 @@
         return;
     }
     
-    
     if (!IsLogin) {
         [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
         return;
@@ -346,19 +372,23 @@
     [[InternetManager sharedManager] signInWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             
-            [[InternetManager sharedManager] addPoints:SignInScore userBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
-                
-                if (success) {
-                    btn.selected = !btn.selected;
-                    [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
-                    [[DataCenter sharedInstance] saveSignInFlag];
-                }
-                
-            }];
+            btn.selected = YES;
+            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
+            [[DataCenter sharedInstance] saveSignInFlag];
+            
+        } else {
+            NSString* errorMsg = error.userInfo[NSLocalizedDescriptionKey];
+            if ([errorMsg hasPrefix:@"您已签到！"]) {
+                [super showProgressErrorWithLabelText:@"您已签到！" afterDelay:1.0];
+                btn.selected = YES;
+                [[DataCenter sharedInstance] saveSignInFlag];
+            }
             
         }
+        
     }];
 }
+
 -(void)ChangeController:(UIView *)btn{
     tempView.hidden = YES;
     tempView = btn;

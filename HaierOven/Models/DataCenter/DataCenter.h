@@ -15,6 +15,12 @@
 
 #define NotificationsHadReadNotification    @"Notifications had read"
 
+#define LoginSuccussNotification        @"Login successfully"
+
+#define LogoutSuccussNotification       @"Logout successfully"
+
+#define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
+
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
 
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径
@@ -197,6 +203,23 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  *  @param oven 本地烤箱对象
  */
 - (void)updateOvenInLocal:(LocalOven*)oven;
+
+
+#pragma mark - 设备操作的通知
+
+/**
+ *  添加到本地通知列表
+ *
+ *  @param info 结构：@{@“time”:@"2015-01-29 12:09", @"desc":@"设备“xx”已开机"}
+ */
+- (void)addOvenNotification:(NSDictionary*)info;
+
+/**
+ *  获取设备通知
+ *
+ *  @return 通知
+ */
+- (NSMutableArray*)loadOvenNotifications;
 
 @end
 

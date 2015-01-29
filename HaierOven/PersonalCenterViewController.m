@@ -12,13 +12,14 @@
 #import "PersonalEditViewController.h"
 #import "RelationshipListViewController.h"
 #import "CookbookDetailControllerViewController.h"
+#import "ActiveUserController.h"
 
 typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     CurrentCookbookTypePublished,
     CurrentCookbookTypePraised
 };
 
-@interface PersonalCenterViewController ()<MainViewNormalCellDelegate, PersonalCenterSectionViewDelegate>
+@interface PersonalCenterViewController ()<MainViewNormalCellDelegate, PersonalCenterSectionViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic) IBOutlet UIImageView *personalAvater;
 @property (strong, nonatomic) IBOutlet UILabel *myDessertCountLabel;
@@ -152,6 +153,32 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     [self.watchBtn setTitle:[NSString stringWithFormat:@"%@关注", self.currentUser.focusCount] forState:UIControlStateNormal];
     [self.followBtn setTitle:[NSString stringWithFormat:@"粉丝%@", self.currentUser.followCount] forState:UIControlStateNormal];
     
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![self.currentUser.status isEqualToString:@"1"] && [userDefaults boolForKey:@"phoneLogin"]) {
+        
+        [[[UIAlertView alloc] initWithTitle:@"用户未激活" message:@"检测到您的账号还没激活，请激活账号吧" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"去激活", nil] show];
+        
+    }
+    
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) { //下次再说
+        
+    } else { //去激活
+        ActiveUserController* activeController = [self.storyboard instantiateViewControllerWithIdentifier:@"Active user controller"];
+        activeController.activeMethod = [[NSUserDefaults standardUserDefaults] valueForKey:@"loginId"];
+        activeController.accType = AccTypeHaier;
+        activeController.registerFlag = NO;
+        activeController.password = [[NSUserDefaults standardUserDefaults] valueForKey:@"password"];
+        [self.navigationController pushViewController:activeController
+                                             animated:YES];
+        
+    }
 }
 
 - (void)addHeader

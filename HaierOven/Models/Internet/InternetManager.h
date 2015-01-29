@@ -17,8 +17,6 @@
 #import "CookerStar.h"
 #import "NoticeInfo.h"
 
-#define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
-#define LoginSuccussNotification        @"Login successfully"
 
 typedef NS_ENUM(NSInteger, InternetErrorCode) {
     InternetErrorCodeConnectInternetFailed      = -100,      //网络连接失败

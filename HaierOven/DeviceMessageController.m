@@ -10,14 +10,25 @@
 #import "DeviceMessageCell.h"
 #import "MyUtils.h"
 @interface DeviceMessageController ()
-@property (strong, nonatomic) NSArray *messArr;
+@property (strong, nonatomic) NSMutableArray *messArr;
 @end
 
 @implementation DeviceMessageController
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.messArr = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.messArr = @[@"您的设备存在异常，将烤箱立即断电并联系海尔客服40069999999 进行检修",@"您的设备存在异常，将烤箱立即断电并联系海尔客服40069999999 进行检修",@"您的设备要炸了快逃！",@"您的设备存在异常，将烤箱立即断电并联系海尔客服40069999999 进行检修"];
+    
+    self.messArr = [[DataCenter sharedInstance] loadOvenNotifications];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -39,7 +50,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 4;
+    return self.messArr.count;
 }
 
 
@@ -47,6 +58,15 @@
     DeviceMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceMessageCell" forIndexPath:indexPath];
     [cell setContentLabel:self.messArr[indexPath.row]];
     // Configure the cell...
+    
+    NSDictionary* info = self.messArr[indexPath.row];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+    NSDate *date = [dateFormatter dateFromString:info[@"time"]];
+    
+    cell.messageTime.text = [MyTool intervalSinceNow:date];
+    cell.messageLabel.text = info[@"desc"];
     
     return cell;
 }

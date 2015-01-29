@@ -18,6 +18,7 @@
     [self.avater.layer setBorderWidth:1.5]; //边框宽度
     [self.avater.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
+    self.cookStarImageView.hidden = YES;
 // Initialization code
 }
 
@@ -38,6 +39,28 @@
 //    [self.MainCellFoodBackground setContentMode:UIViewContentModeScaleAspectFill];
     
     // 这里应该判断是否是官方菜谱
+    if (cookbook.creator.userLevel != nil) {
+        
+        if ([cookbook.creator.userLevel isEqualToString:@"1"]) {
+            self.cookStarImageView.hidden = NO;
+            self.AuthorityLabel.hidden = NO;
+        } else {
+            self.cookStarImageView.hidden = YES;
+            self.AuthorityLabel.hidden = YES;
+        }
+        
+        
+    } else {
+        //假数据
+        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
+            self.cookStarImageView.hidden = NO;
+            self.AuthorityLabel.hidden = NO;
+        } else {
+            self.cookStarImageView.hidden = YES;
+            self.AuthorityLabel.hidden = YES;
+        }
+        
+    }
     
     
     

@@ -254,6 +254,12 @@
                                                     [super hiddenProgressHUD];
                                                     if (success) {
                                                         NSLog(@"登录成功");
+                                                        
+                                                        //保存手动登录的时间，超过20天后，需再次手动登录
+                                                        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                                                        [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+                                                        [userDefaults synchronize];
+                                                        
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
                                                         [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                     } else {

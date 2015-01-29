@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface DeviceEditController : UITableViewController
+@interface DeviceEditController : BaseTableViewController
+
+@property (strong, nonatomic) LocalOven* currentOven;
+
+@property (strong, nonatomic) uSDKDevice* myOven;
 
 @end

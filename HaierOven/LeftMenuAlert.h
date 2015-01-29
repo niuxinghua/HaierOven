@@ -10,9 +10,13 @@
 @class LeftMenuAlert;
 @protocol LeftMenuAlertDelegate <NSObject>
 
--(void)isGoingToLogin:(BOOL)goLogin;
+@required
+- (void)isGoingToLogin:(BOOL)goLogin;
+- (void)cancelOperate;
 
 @end
+
 @interface LeftMenuAlert : UIView
+@property (strong, nonatomic) UIButton * closeButton;
 @property (weak, nonatomic)id<LeftMenuAlertDelegate>delegate;
 @end

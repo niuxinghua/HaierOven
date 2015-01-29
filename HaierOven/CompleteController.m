@@ -124,13 +124,13 @@
 
 - (IBAction)confirmTapped:(UIButton *)sender {
     if ([self validInputs]) {
-        [self completThirdParty];
+        [self completeThirdParty];
     }
 }
 
 #pragma mark - 请求发送
 
-- (void)completThirdParty
+- (void)completeThirdParty
 {
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] completeThirdPartyWithPassword:self.loginId

@@ -204,10 +204,6 @@ typedef void (^result) (BOOL result);
 
 
 
-#pragma mark - 获取订阅设备的状态
-
-
-
 
 #pragma mark -
 

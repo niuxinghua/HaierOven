@@ -27,7 +27,7 @@
         [super openLoginController];
         return;
     }
-    [super showProgressHUDWithLabelText:@"请稍后..." dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:CurrentUserBaseId cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {

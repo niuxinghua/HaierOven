@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +25,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OUd-eZ-CUo" id="Vm4-zh-08R">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZR-sU-xhL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZR-sU-xhL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="211"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VT-Kj-Qfw">
@@ -83,11 +83,32 @@
                             <constraint firstAttribute="height" constant="27" id="p19-Er-WOa"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-PN-aSo">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-PN-aSo">
                         <rect key="frame" x="0.0" y="118" width="320" height="97"/>
                         <subviews>
                             <view alpha="0.85000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgX-NX-fC0" customClass="ContainerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阿淇淇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFM-g6-WlQ">
+                                        <rect key="frame" x="8" y="71" width="57" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="57" id="HiO-Rn-5xO"/>
+                                            <constraint firstAttribute="width" constant="39" id="eQM-Pu-UXP"/>
+                                            <constraint firstAttribute="height" constant="15" id="iwg-Et-B8u"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="eQM-Pu-UXP"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="pFM-g6-WlQ" secondAttribute="bottom" constant="8" id="NXi-DB-WAe"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="芒果芝士蛋糕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcm-dR-3B3">
                                 <rect key="frame" x="67" y="24" width="196" height="16"/>
@@ -123,7 +144,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1N-i6-vdZ">
-                                <rect key="frame" x="18" y="28" width="41" height="41"/>
+                                <rect key="frame" x="17" y="28" width="41" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="tWP-0W-ugZ"/>
                                     <constraint firstAttribute="width" constant="41" id="twX-LK-8Rv"/>
@@ -132,21 +153,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阿淇淇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFM-g6-WlQ">
-                                <rect key="frame" x="20" y="70" width="36" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="9h7-f3-IY8"/>
-                                    <constraint firstAttribute="width" constant="39" id="eQM-Pu-UXP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="12"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="eQM-Pu-UXP"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v.png" translatesAutoresizingMaskIntoConstraints="NO" id="whh-XC-lml">
                                 <rect key="frame" x="47" y="27" width="18" height="18"/>
                                 <constraints>
@@ -156,25 +162,24 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="pFM-g6-WlQ" firstAttribute="centerX" secondItem="k1N-i6-vdZ" secondAttribute="centerX" id="3Zb-k7-D2U"/>
                             <constraint firstItem="t9x-aZ-s7r" firstAttribute="top" secondItem="Qcm-dR-3B3" secondAttribute="bottom" constant="8" id="4FA-ht-0pz"/>
                             <constraint firstItem="k1N-i6-vdZ" firstAttribute="top" secondItem="v1a-PN-aSo" secondAttribute="top" constant="28" id="8p6-ae-RMG"/>
-                            <constraint firstItem="k1N-i6-vdZ" firstAttribute="leading" secondItem="v1a-PN-aSo" secondAttribute="leading" constant="18" id="9lK-HQ-PGR"/>
+                            <constraint firstItem="k1N-i6-vdZ" firstAttribute="leading" secondItem="v1a-PN-aSo" secondAttribute="leading" constant="17" id="9lK-HQ-PGR"/>
                             <constraint firstItem="3hh-yy-YOe" firstAttribute="top" secondItem="v1a-PN-aSo" secondAttribute="top" constant="28" id="Ccs-9E-kvd"/>
                             <constraint firstItem="3hh-yy-YOe" firstAttribute="leading" secondItem="t9x-aZ-s7r" secondAttribute="trailing" constant="8" id="Jl2-gB-4fV"/>
+                            <constraint firstItem="pFM-g6-WlQ" firstAttribute="centerX" secondItem="k1N-i6-vdZ" secondAttribute="centerX" constant="-1" id="Khi-qk-QQB"/>
                             <constraint firstAttribute="height" constant="97" id="NVT-r5-QWE"/>
                             <constraint firstItem="Qcm-dR-3B3" firstAttribute="top" secondItem="v1a-PN-aSo" secondAttribute="top" constant="24" id="P9S-uN-rPb"/>
                             <constraint firstItem="OgX-NX-fC0" firstAttribute="leading" secondItem="v1a-PN-aSo" secondAttribute="leading" id="TBp-Mr-OwW"/>
                             <constraint firstItem="whh-XC-lml" firstAttribute="leading" secondItem="v1a-PN-aSo" secondAttribute="leading" constant="47" id="Td4-uI-JE1"/>
                             <constraint firstAttribute="bottom" secondItem="OgX-NX-fC0" secondAttribute="bottom" constant="3" id="Tgn-Hf-w3y"/>
-                            <constraint firstItem="t9x-aZ-s7r" firstAttribute="leading" secondItem="k1N-i6-vdZ" secondAttribute="trailing" constant="8" id="WCR-OP-3bw"/>
+                            <constraint firstItem="t9x-aZ-s7r" firstAttribute="leading" secondItem="k1N-i6-vdZ" secondAttribute="trailing" constant="9" id="WCR-OP-3bw"/>
                             <constraint firstAttribute="trailing" secondItem="OgX-NX-fC0" secondAttribute="trailing" id="dDC-w5-qzw"/>
                             <constraint firstItem="whh-XC-lml" firstAttribute="top" secondItem="v1a-PN-aSo" secondAttribute="top" constant="27" id="fx4-bw-YPz"/>
                             <constraint firstAttribute="trailing" secondItem="3hh-yy-YOe" secondAttribute="trailing" constant="8" id="gGu-TR-bes"/>
                             <constraint firstItem="3hh-yy-YOe" firstAttribute="leading" secondItem="Qcm-dR-3B3" secondAttribute="trailing" constant="8" id="mdM-HC-oAY"/>
-                            <constraint firstItem="pFM-g6-WlQ" firstAttribute="top" secondItem="k1N-i6-vdZ" secondAttribute="bottom" constant="1" id="nwb-Jl-9od"/>
                             <constraint firstItem="OgX-NX-fC0" firstAttribute="top" secondItem="v1a-PN-aSo" secondAttribute="top" id="uV4-3H-Oqm"/>
-                            <constraint firstItem="Qcm-dR-3B3" firstAttribute="leading" secondItem="k1N-i6-vdZ" secondAttribute="trailing" constant="8" id="xOH-Ni-eQ3"/>
+                            <constraint firstItem="Qcm-dR-3B3" firstAttribute="leading" secondItem="k1N-i6-vdZ" secondAttribute="trailing" constant="9" id="xOH-Ni-eQ3"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -204,6 +209,7 @@
                 <outlet property="avater" destination="k1N-i6-vdZ" id="uX1-qE-SSg"/>
                 <outlet property="bottomOrangeView" destination="OgX-NX-fC0" id="fRJ-qq-xnE"/>
                 <outlet property="chickGoodBtn" destination="SGW-sZ-8v5" id="eUr-Yt-76I"/>
+                <outlet property="cookStarImageView" destination="whh-XC-lml" id="QNj-Ms-4yX"/>
                 <outlet property="cookerName" destination="pFM-g6-WlQ" id="QFz-U7-27W"/>
                 <outlet property="foodMakeFunction" destination="t9x-aZ-s7r" id="sJo-p5-GKF"/>
                 <outlet property="foodName" destination="Qcm-dR-3B3" id="wBR-x4-vLG"/>
