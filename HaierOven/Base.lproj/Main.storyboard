@@ -3171,7 +3171,7 @@
         <scene sceneID="XE2-Kq-N6U">
             <objects>
                 <tableViewController storyboardIdentifier="StudyDetailController" id="vr6-7q-zBj" customClass="StudyDetailController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="243" sectionHeaderHeight="22" sectionFooterHeight="22" id="46d-2I-DUG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="243" sectionHeaderHeight="22" sectionFooterHeight="22" id="46d-2I-DUG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3188,25 +3188,14 @@
                                             <nil key="highlightedColor"/>
                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述描述" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHl-54-wVx">
-                                            <rect key="frame" x="19" y="220" width="282" height="17"/>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="wTG-6B-7ar" firstAttribute="top" secondItem="q6J-FV-7AI" secondAttribute="top" constant="9" id="0Dx-F8-EqL"/>
-                                        <constraint firstAttribute="trailing" secondItem="dHl-54-wVx" secondAttribute="trailing" constant="19" id="LzH-0I-hZ1"/>
-                                        <constraint firstItem="dHl-54-wVx" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="Mtj-tE-eEt"/>
-                                        <constraint firstAttribute="trailing" secondItem="wTG-6B-7ar" secondAttribute="trailing" constant="19" id="Ndw-5E-gTU"/>
-                                        <constraint firstItem="wTG-6B-7ar" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="Wjy-UP-CHS"/>
-                                        <constraint firstAttribute="bottom" secondItem="dHl-54-wVx" secondAttribute="bottom" constant="6" id="lqf-x8-ooD"/>
+                                        <constraint firstAttribute="trailing" secondItem="wTG-6B-7ar" secondAttribute="trailing" constant="19" id="0xW-G8-7P5"/>
+                                        <constraint firstItem="wTG-6B-7ar" firstAttribute="top" secondItem="q6J-FV-7AI" secondAttribute="top" constant="9" id="DHv-NA-ZXT"/>
+                                        <constraint firstItem="wTG-6B-7ar" firstAttribute="leading" secondItem="q6J-FV-7AI" secondAttribute="leading" constant="19" id="DZx-7M-2dG"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="descriptionLabel" destination="dHl-54-wVx" id="gY7-OB-LCf"/>
                                     <outlet property="titleLabel" destination="wTG-6B-7ar" id="tGF-Jp-TBf"/>
                                 </connections>
                             </tableViewCell>
