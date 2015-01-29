@@ -42,7 +42,7 @@
 
 - (IBAction)ChickFoodAdd:(UIButton*)sender {
     if (sender.selected == NO) {
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.15 animations:^{
             self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, self.FoodBtn.width/2, 1);
         } completion:^(BOOL finished) {
             sender.selected =YES;
@@ -50,7 +50,7 @@
             [self.delegate purchaseFood:self.food purchased:YES];
         }];
     }else
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.15 animations:^{
             self.deleteLine.frame = CGRectMake(10, self.FoodBtn.center.y, 0, 1);
         } completion:^(BOOL finished) {
             sender.selected =NO;

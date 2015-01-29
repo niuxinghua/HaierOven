@@ -97,6 +97,7 @@
     lineProgressView.layer.shouldRasterize = YES;
     lineProgressView.backgroundColor = [UIColor clearColor];
 
+//    lineProgressView.completed = 15;
     [self addSubview:lineProgressView];
 //    [lineProgressView setCompleted:1.0*lineProgressView.total animated:YES];
 }
