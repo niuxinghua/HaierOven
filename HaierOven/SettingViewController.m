@@ -11,6 +11,8 @@
 
 @interface SettingViewController () <SKStoreProductViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+
 @end
 
 @implementation SettingViewController
@@ -19,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.logoutButton.layer.cornerRadius = 10;
+    self.logoutButton.layer.masksToBounds = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -47,9 +50,7 @@
 - (IBAction)VersionChick:(id)sender {
     NSLog(@"版本确认");
     
-    [super showProgressCompleteWithLabelText:@"这里暂时用作退出登录" afterDelay:2];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
 //    [[InternetManager sharedManager] logoutWithLoginName:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginId"] callBack:^(BOOL success, id obj, NSError *error) {
 //        if (success) {
@@ -74,6 +75,18 @@
     [self presentViewController:skVC animated:YES completion:nil];
     
 }
+
+- (IBAction)logout:(UIButton *)sender
+{
+    
+    [super showProgressCompleteWithLabelText:@"您已退出登录" afterDelay:2];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
+    
+}
+
 
 #pragma mark - SKStoreProductViewControllerDelegate
 

@@ -46,6 +46,10 @@
     
     [self initNotification];
     
+    [self checkLoginExpired];
+    
+    [self autoLogin];
+    
     return YES;
 }
 
@@ -112,6 +116,68 @@
     
     // 微信 朋友圈
     [UMSocialWechatHandler setWXAppId:@"wxd135c736264fd98d" appSecret:@"8296da588aa8e35ebf2ab09f0baf10ff" url:@"http://weibo.com/origheart"];
+    
+    
+}
+
+- (void)checkLoginExpired
+{
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDate* lastLoginTime = [userDefaults valueForKey:@"lastLoginTime"];
+    if (lastLoginTime == nil) {
+        return;
+    }
+    NSTimeInterval inteval = [[NSDate date] timeIntervalSinceDate:lastLoginTime];
+    
+    if (inteval >  20 * 24 * 60 * 60 ) {  //是否超过20天
+        [userDefaults setBool:NO forKey:@"isLogin"];
+    }
+    
+}
+
+- (void)autoLogin
+{
+    if (IsLogin) {
+        
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString* loginId = [userDefaults valueForKey:@"loginId"];
+        NSString* password = [userDefaults valueForKey:@"password"];
+        
+        LoginType loginType;
+        if ([MyTool validateEmail:loginId]) {
+            loginType = LoginTypeEmail;
+        } else {
+            loginType = LoginTypeMobile;
+        }
+        
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddhhmmss";
+        NSString* sequence = [formatter stringFromDate:[NSDate date]];
+        sequence = [sequence stringByReplacingOccurrencesOfString:@":" withString:@""];
+        
+        [[InternetManager sharedManager] loginWithSequenceId:sequence
+                                                  andAccType:AccTypeHaier
+                                                  andloginId:loginId
+                                                 andPassword:password
+                                          andThirdpartyAppId:nil
+                                    andThirdpartyAccessToken:nil
+                                                andLoginType:loginType
+                                                    callBack:^(BOOL success, id obj, NSError *error) {
+                                                        
+                                                        if (success) {
+                                                            NSLog(@"自动登录成功");
+                                                        
+                                                            [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                            
+                                                            
+                                                        } else {
+                                                            NSLog(@"自动登录失败");
+                                                        }
+                                                        
+                                                        
+                                                    }];
+        
+    }
     
     
 }

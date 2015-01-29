@@ -382,6 +382,7 @@
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 保存登录信息
+                
                 NSDictionary* dataDict = responseObject[@"data"];
                 NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
                 NSString* baseId = [NSString stringWithFormat:@"%@", dataDict[@"userBaseID"]];
@@ -395,6 +396,9 @@
                 
                 [userDefaults setBool:YES forKey:@"isLogin"];
                 
+                // 是不是手机号登录
+                [userDefaults setBool:[MyTool validateTelephone:loginId] forKey:@"phoneLogin"];
+
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
 //                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];

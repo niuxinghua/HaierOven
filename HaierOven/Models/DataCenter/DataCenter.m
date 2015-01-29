@@ -153,8 +153,9 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
         formatter.dateFormat = @"yyyy-MM-dd";
         NSString* strDate = [formatter stringFromDate:date];
         signedDates = [NSMutableArray arrayWithContentsOfFile:filePath];
-        for (NSString* signedDate in signedDates) {
-            if ([signedDate isEqualToString:strDate]) {
+        NSString* userSignedMessage = [strDate stringByAppendingFormat:@":%@", CurrentUserBaseId];
+        for (NSString* signedMsg in signedDates) {
+            if ([signedMsg isEqualToString:userSignedMessage]) {
                 return YES;
             }
         }
@@ -165,6 +166,9 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     return NO;
 }
 
+/**
+ *  结构：NSArray -> NSString: yyyy-MM-dd:userBaseId
+ */
 - (void)saveSignInFlag
 {
     NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kLocalSignInMessageFileName];
@@ -174,7 +178,10 @@ NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString* strDate = [formatter stringFromDate:[NSDate date]];
-    [signedDates addObject:strDate];
+    
+    NSString* signMsg = [strDate stringByAppendingFormat:@":%@", CurrentUserBaseId];
+    
+    [signedDates addObject:signMsg];
     
     [signedDates writeToFile:filePath atomically:YES];
     

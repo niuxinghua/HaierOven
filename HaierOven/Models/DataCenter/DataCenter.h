@@ -15,6 +15,12 @@
 
 #define NotificationsHadReadNotification    @"Notifications had read"
 
+#define LoginSuccussNotification        @"Login successfully"
+
+#define LogoutSuccussNotification       @"Logout successfully"
+
+#define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
+
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
 
 #define USER_DATA_PATH      ([[self getLibraryPath] stringByAppendingPathComponent:@"DataCenter/UserData"])      //保存plist文件的路径
