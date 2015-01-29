@@ -163,13 +163,13 @@
 
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PageW, 10)];
+    UIView * footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PageW, 30)];
     footview.backgroundColor = UIColorFromRGB(0xb06206);
     return footview;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    return 5;
 }
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -283,7 +283,7 @@
     if (indexPath.row ==0) {
         return 115;
     }else
-    return (PageH-115-10-20)/8;
+    return (PageH-115-5-20)/8;
 //        return 56;
 }
 
