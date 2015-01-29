@@ -555,6 +555,8 @@
                                                                     self.time = [timeStr integerValue] * 60;
                                                                     float animateDueation = [timeStr integerValue] * 60;
                                                                     self.startStatusView.animationDuration = animateDueation;
+                                                                    
+                                                                    
                                                                     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
                                                                     
                                                                     self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];

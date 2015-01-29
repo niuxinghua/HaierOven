@@ -28,6 +28,11 @@
 
 -(void)setFoods:(NSArray *)foods{
     _foods = foods;
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[CookListFoodView class]]) {
+            [view removeFromSuperview];
+        }
+    }
     for (int i = 0; i<foods.count ; i++) {
         CookListFoodView *foodView = [[CookListFoodView alloc]initWithFrame:CGRectMake(0, Food_Height*i+50, PageW, Food_Height)];
         foodView.delegate = self;

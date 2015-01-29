@@ -18,7 +18,7 @@
     [self.avaterImage.layer setBorderWidth:2]; //边框宽度
     [self.avaterImage.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
-    self.siginBtn.layer.cornerRadius = 15;
+    self.siginBtn.layer.cornerRadius = 13;
     self.siginBtn.layer.masksToBounds = YES;
     // Initialization code
 }
