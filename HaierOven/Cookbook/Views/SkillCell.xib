@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Skill cell" rowHeight="168" id="KGk-i7-Jjw" customClass="SkillCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="技巧小贴士：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCU-J5-Yma">
+                        <rect key="frame" x="25" y="8" width="102" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="LEn-85-8kr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Cg-x3-eOH">
+                        <rect key="frame" x="25" y="106" width="278" height="31"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="HJ0-SG-Wn2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                        <state key="normal" title="开始烹饪">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="startCookTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sOB-Bu-rNS"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这一次的面包，只采用了一次发酵，大大节省了操作时间，但是做出来的效果却好的惊人！通过叠放的方式，使得烤好的面包自然分层，进而达到拉丝的效果，入口还很柔软" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogP-wL-EAj">
+                        <rect key="frame" x="25" y="36" width="278" height="60"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ogP-wL-EAj" secondAttribute="trailing" constant="17" id="L6E-s0-rDC"/>
+                    <constraint firstItem="ogP-wL-EAj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="LIk-oz-0Kq"/>
+                    <constraint firstItem="KCU-J5-Yma" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="RAg-wT-0OC"/>
+                    <constraint firstItem="6Cg-x3-eOH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="dRa-tf-zsq"/>
+                    <constraint firstItem="6Cg-x3-eOH" firstAttribute="top" secondItem="ogP-wL-EAj" secondAttribute="bottom" constant="10" id="miN-F0-J3O"/>
+                    <constraint firstItem="KCU-J5-Yma" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="rLf-SJ-ole"/>
+                    <constraint firstItem="ogP-wL-EAj" firstAttribute="top" secondItem="KCU-J5-Yma" secondAttribute="bottom" constant="8" id="whv-gf-u1p"/>
+                    <constraint firstAttribute="trailing" secondItem="6Cg-x3-eOH" secondAttribute="trailing" constant="17" id="xdo-9U-eaD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="skillLabel" destination="ogP-wL-EAj" id="Tmu-Eb-hlz"/>
+                <outlet property="startCookBtn" destination="6Cg-x3-eOH" id="Msu-vd-IQY"/>
+            </connections>
+            <point key="canvasLocation" x="233" y="276"/>
+        </tableViewCell>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

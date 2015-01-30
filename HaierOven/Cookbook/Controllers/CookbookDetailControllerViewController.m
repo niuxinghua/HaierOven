@@ -16,9 +16,10 @@
 #import "DAKeyboardControl.h"
 #import "AddShoppingListCell.h"
 #import "StudyCookViewController.h"
+#import "DeviceViewController.h"
 
 
-@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate>
+@interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate, SkillCellDelegate>
 {
     CGFloat _lastContentOffsetY;
 }
@@ -305,13 +306,14 @@
             self.stepsTableView = tableView;
             tableView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getStepsViewHeight]);
             tableView.tag = 6;
-            StepsViewController* controller = [[StepsViewController alloc] initWithCookbookDetail:self.cookbookDetail];
+            StepsViewController* controller = [[StepsViewController alloc] initWithCookbookDetail:self.cookbookDetail delegate:self];
             self.stepsTableViewDataSource = controller;
             tableView.delegate = controller;
             tableView.dataSource = controller;
             [tableView registerNib:[UINib nibWithNibName:@"StepCell" bundle:nil] forCellReuseIdentifier:@"Step cell"];
             [tableView registerNib:[UINib nibWithNibName:@"OvenInfoCell" bundle:nil] forCellReuseIdentifier:@"Oven info cell"];
             [tableView registerNib:[UINib nibWithNibName:@"MethodCell" bundle:nil] forCellReuseIdentifier:@"Method cell"];
+            [tableView registerNib:[UINib nibWithNibName:@"SkillCell" bundle:nil] forCellReuseIdentifier:@"Skill cell"];
             break;
 
         }
@@ -779,7 +781,7 @@
             }
             case CurrentContentTypeMethods:
             {
-                return MAX(minHeight, [self getStepsViewHeight]);
+                return MAX(minHeight, [self getStepsViewHeight] + [self getSkillCellHeight]);
                 break;
             }
             case CurrentContentTypeComment:
@@ -816,13 +818,23 @@
         height += 20; // 图片距离上边距
         height += (Main_Screen_Width - 54 - 26) * 7 / 12;   //图片宽高比位7:12
         height += 8; // 图片和Label的间距
-        height += [MyUtils getTextSizeWithText:step.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:12.0f]} andTextWidth:Main_Screen_Width - 54 - 26].height; // 文字高度
+        height += [MyUtils getTextSizeWithText:step.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 54 - 26].height; // 文字高度
         height += 8; //Label距离下边距
     }
+    
+    height += 36 + 49;
+    height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
     
     return height;
 }
 
+- (CGFloat)getSkillCellHeight
+{
+    // 技巧小贴士
+    CGFloat height = 36 + 71;
+    height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
+    return height;
+}
 
 #pragma mark - CookbookSectionHeaderDelegate
 
@@ -895,6 +907,13 @@
 }
 
 #pragma mark - 按钮响应事件
+
+- (void)startCook
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeviceViewController* devicesController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
+    [self.navigationController pushViewController:devicesController animated:YES];
+}
 
 - (IBAction)back:(id)sender
 {

@@ -32,9 +32,7 @@
     // Do any additional setup after loading the view.
     if (self.navigationController.viewControllers.count == 1) {
         UIButton* leftButton = [[UIButton alloc] init];
-//        [leftButton addTarget:self action:@selector(turnLeftMenu) forControlEvents:UIControlEventTouchUpInside];
-//        [super setLeftBarButtonItemWithImageName:@"liebieo.png" andTitle:nil andCustomView:leftButton];
-        
+
         [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
         

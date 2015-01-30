@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 edaysoft. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 #import "DeviceUnconnectController.h"
 
-@interface DeviceViewController : UIViewController <DeviceUnconnectControllerDelegate>
+@interface DeviceViewController : BaseViewController <DeviceUnconnectControllerDelegate>
 @property (strong, nonatomic) NSArray *myDevices;
 @end

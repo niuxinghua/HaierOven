@@ -25,6 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        UIButton* leftButton = [[UIButton alloc] init];
+        //        [leftButton addTarget:self action:@selector(turnLeftMenu) forControlEvents:UIControlEventTouchUpInside];
+        //        [super setLeftBarButtonItemWithImageName:@"liebieo.png" andTitle:nil andCustomView:leftButton];
+        
+        [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
+        
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalOvens) name:MyOvensInfoHadChangedNotificatin object:nil];
     
     [self loadOvenDevices];
@@ -57,6 +68,8 @@
         [self loadLocalOvens];
     }];
 }
+
+
 
 #pragma mark - 监听烤箱状态并作出反应
 
@@ -159,6 +172,11 @@
         
     }
 
+}
+
+- (void)close
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - DeviceUnconnectControllerDelegate

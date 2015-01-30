@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -38,15 +38,14 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一勺黄芥末酱 + 一勺意大利香醋 + 一勺柠檬汁 + 一勺蜂蜜 （您应该预热烤箱啦）" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ew-UU-aXr">
-                        <rect key="frame" x="54" y="168" width="240" height="49"/>
-                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="12"/>
+                        <rect key="frame" x="54" y="168" width="240" height="30"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cQK-9O-NjM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0XI-Os-A5D"/>
-                    <constraint firstAttribute="bottom" secondItem="3Ew-UU-aXr" secondAttribute="bottom" constant="7.5" id="7Rv-eP-YGw"/>
                     <constraint firstItem="cQK-9O-NjM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Dbw-LH-z5b"/>
                     <constraint firstItem="3Ew-UU-aXr" firstAttribute="leading" secondItem="AL6-ir-xNQ" secondAttribute="leading" id="EyF-9O-uPY"/>
                     <constraint firstAttribute="trailing" secondItem="3Ew-UU-aXr" secondAttribute="trailing" constant="26" id="J16-62-3Pc"/>

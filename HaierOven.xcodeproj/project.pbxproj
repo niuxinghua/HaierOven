@@ -1084,6 +1084,9 @@
 		844C35A01A7A012100949F40 /* go_forward_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 844C359F1A7A012100949F40 /* go_forward_white.png */; };
 		844C35A31A7A2DC000949F40 /* icon_like_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 844C35A11A7A2DC000949F40 /* icon_like_s.png */; };
 		844C35A41A7A2DC000949F40 /* icon_like_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 844C35A21A7A2DC000949F40 /* icon_like_s@2x.png */; };
+		844C35A81A7B563E00949F40 /* SkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844C35A61A7B563E00949F40 /* SkillCell.m */; };
+		844C35A91A7B563E00949F40 /* SkillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844C35A71A7B563E00949F40 /* SkillCell.xib */; };
+		844C35AC1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 844C35AB1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m */; };
 		844D0F581A4D2FE10018D79C /* LocalOven.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D0F571A4D2FE10018D79C /* LocalOven.m */; };
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
@@ -2523,6 +2526,11 @@
 		844C359F1A7A012100949F40 /* go_forward_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = go_forward_white.png; sourceTree = "<group>"; };
 		844C35A11A7A2DC000949F40 /* icon_like_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_like_s.png; sourceTree = "<group>"; };
 		844C35A21A7A2DC000949F40 /* icon_like_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_like_s@2x.png"; sourceTree = "<group>"; };
+		844C35A51A7B563E00949F40 /* SkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillCell.h; sourceTree = "<group>"; };
+		844C35A61A7B563E00949F40 /* SkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillCell.m; sourceTree = "<group>"; };
+		844C35A71A7B563E00949F40 /* SkillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SkillCell.xib; sourceTree = "<group>"; };
+		844C35AA1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
+		844C35AB1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
 		844D0F561A4D2FE10018D79C /* LocalOven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalOven.h; sourceTree = "<group>"; };
 		844D0F571A4D2FE10018D79C /* LocalOven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalOven.m; sourceTree = "<group>"; };
 		845B33941A58EB4300DD8887 /* DescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescCell.h; sourceTree = "<group>"; };
@@ -3993,6 +4001,8 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				844C35AA1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.h */,
+				844C35AB1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m */,
 				45A661541A676B3100FC9B90 /* SectionView */,
 				45D9FEB81A5285F500023B9D /* AlertView */,
 				45422DC51A63B70C001A7223 /* BakeHouse */,
@@ -4379,6 +4389,9 @@
 				842A86EA1A527DC700C75EE4 /* StepCell.h */,
 				842A86EB1A527DC700C75EE4 /* StepCell.m */,
 				842A86EC1A527DC700C75EE4 /* StepCell.xib */,
+				844C35A51A7B563E00949F40 /* SkillCell.h */,
+				844C35A61A7B563E00949F40 /* SkillCell.m */,
+				844C35A71A7B563E00949F40 /* SkillCell.xib */,
 				842A86E51A5277D000C75EE4 /* OvenInfoCell.h */,
 				842A86E61A5277D000C75EE4 /* OvenInfoCell.m */,
 				842A86E71A5277D000C75EE4 /* OvenInfoCell.xib */,
@@ -5639,6 +5652,7 @@
 				45BB35F31A4A6955000EE3C4 /* devicelogo@3x.png in Resources */,
 				45AC32811A77A5C4004B1828 /* 3-2-1-1.png in Resources */,
 				45D9FEC61A52902000023B9D /* xts@3x.png in Resources */,
+				844C35A91A7B563E00949F40 /* SkillCell.xib in Resources */,
 				459E8BA41A5CDC1D009D4ADA /* deletec@2x.png in Resources */,
 				849F91871A513981006234B9 /* step1.png in Resources */,
 				45BB35F71A4A6B4E000EE3C4 /* kaiji.png in Resources */,
@@ -6287,6 +6301,7 @@
 				45BEED731A412AED003000AD /* MyPageControl.m in Sources */,
 				45C7E5701A3FDA43000B086B /* NSString+MD5Addition.m in Sources */,
 				45C7E5341A3FD165000B086B /* AppDelegate.m in Sources */,
+				844C35A81A7B563E00949F40 /* SkillCell.m in Sources */,
 				8438F6F31A67B7A200E1436C /* Equipment.m in Sources */,
 				8447CB681A5FC73700FADF9D /* JSQMessagesKeyboardController.m in Sources */,
 				45422DE71A64BEA4001A7223 /* FiexibleView.m in Sources */,
@@ -6394,6 +6409,7 @@
 				45A999751A5149400008AFE3 /* AddFoodLastCell.m in Sources */,
 				8441178D1A4BB8AF00628A64 /* UIWebView+AFNetworking.m in Sources */,
 				844117761A4BB8AF00628A64 /* Step.m in Sources */,
+				844C35AC1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m in Sources */,
 				8447CB691A5FC73700FADF9D /* JSQMessagesViewController.m in Sources */,
 				459E8BC21A5E5AB3009D4ADA /* BakeGroupAdviceCell.m in Sources */,
 				844117731A4BB8AF00628A64 /* CookbookDetail.m in Sources */,
@@ -6598,7 +6614,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1fee2dc-6959-4c40-a934-11a7c6ccf6e4";
 			};
 			name = Debug;
 		};
@@ -6640,7 +6656,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1fee2dc-6959-4c40-a934-11a7c6ccf6e4";
 			};
 			name = Release;
 		};

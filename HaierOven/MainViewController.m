@@ -219,6 +219,7 @@
             btn.frame = CGRectMake((PageW-8)/self.tags.count*loop+8,0,(PageW-8)/self.tags.count, self.tagsScrollView.height);
         }else
         btn.frame = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
+        self.tagsScrollView.pagingEnabled = YES;
         [self.tagsScrollView addSubview:btn];
     }
 }
@@ -427,6 +428,7 @@
 //    }
 //
 //}
+
 - (IBAction)addCookMenu:(id)sender {
     if (!IsLogin) {
         [super openLoginController];
