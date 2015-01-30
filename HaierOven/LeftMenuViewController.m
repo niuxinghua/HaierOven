@@ -373,7 +373,7 @@
         if (success) {
             
             btn.selected = YES;
-            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
+            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"签到成功 点心＋%d", SignInScore] afterDelay:1.0];
             [[DataCenter sharedInstance] saveSignInFlag];
             
         } else {

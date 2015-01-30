@@ -213,7 +213,7 @@
     NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
     creator.avatarPath      = [DataParser parseImageUrlWithString:avatarPath];
     
-    creator.userName        = [creatorDict[@"userLevel"] isKindOfClass:[NSNull class]] || creatorDict[@"userLevel"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userLevel"]];
+    creator.userLevel        = [creatorDict[@"userLevel"] isKindOfClass:[NSNull class]] || creatorDict[@"userLevel"] == nil ? @"5" : [NSString stringWithFormat:@"%@", creatorDict[@"userLevel"]]; 
     
     return creator;
 }
@@ -240,6 +240,11 @@
         
         NSDictionary* creatDict = cookbookDict[@"creator"];
         cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
+        
+        if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
+            cookbook.isAuthority = YES;
+        }
+        
         cookbook.praises        = [cookbookDict[@"praiseCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praiseCount"]];
         
         [cookbooks addObject:cookbook];
@@ -293,7 +298,7 @@
     cookbookDetail.coverPhoto       = [DataParser parseImageUrlWithString:coverPhoto];
     cookbookDetail.cookbookTip      = [detailDict[@"cookbookTip"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookTip"]];
     cookbookDetail.status           = [detailDict[@"status"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"status"]];
-    cookbookDetail.praised          = [detailDict[@"praised"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"praised"]];
+    cookbookDetail.praised          = [detailDict[@"praises"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"praises"]];
     cookbookDetail.modifiedTime     = [detailDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"modifiedTime"]];
     cookbookDetail.modifiedTime     = [DataParser parseTime:cookbookDetail.modifiedTime];
     
@@ -456,7 +461,7 @@
         Message* message = [[Message alloc] init];
         message.ID = [messageDict[@"messageID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageID"]];
         message.createdTime = [messageDict[@"createdTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"createdTime"]];
-        message.createdTime = [DataParser parseTime:message.createdTime];
+        //message.createdTime = [DataParser parseTime:message.createdTime];
         message.isRead = [messageDict[@"isRead"] integerValue] == 0 ? NO : YES;
         message.content = [messageDict[@"messageContent"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", messageDict[@"messageContent"]];
         

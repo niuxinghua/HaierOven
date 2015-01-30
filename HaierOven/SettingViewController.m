@@ -42,6 +42,7 @@
 */
 - (IBAction)AboutHaier:(id)sender {
     NSLog(@"关于版本");
+    [super showProgressCompleteWithLabelText:@"目前已是最新版本！" afterDelay:2];
 }
 
 - (IBAction)SuggestPost:(id)sender {

@@ -47,6 +47,11 @@
     }
 }
 
+- (IBAction)beginEdit:(UITextField *)sender {
+    
+    [self.delegate beginEditFood:sender];
+    
+}
 
 -(void)setAlertTitleSting:(NSString *)alertTitleSting{
     _alertTitleSting = alertTitleSting;
@@ -54,6 +59,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.delegate endEditFood:textField];
     return [textField resignFirstResponder];
 }
 - (IBAction)ChickAlert:(UIButton*)sender {
@@ -61,6 +67,7 @@
         [self.delegate ChickAlert:self.label andTextFailed:self.alertTextFailed];
     }else
         [self.delegate Cancel];
+    [self.alertTextFailed resignFirstResponder];
 }
 
 -(void)setLabel:(UILabel *)label{

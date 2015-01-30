@@ -39,11 +39,19 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
+
+
 #pragma mark - section 0
+/**
+ *  是否是官方菜谱
+ */
+@property (weak, nonatomic) IBOutlet UIButton *authorityButton;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *cookbookTitleCell;
 
 @property (weak, nonatomic) IBOutlet UILabel *cookbookNameLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *praiseButton;
 
 
 @property (weak, nonatomic) IBOutlet AutoSizeLabelView *tagsView;
@@ -177,11 +185,18 @@
     if (self.stepsTableView == nil) {
         [self initTableViewWithContentType:CurrentContentTypeMethods];
     }
+ 
     NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbookDetail.coverPhoto;
 
     [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath]];
     
-    [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath]];
+    if (self.isPreview) {
+        [self.creatorAvatar setImageWithURL:[NSURL URLWithString:[DataCenter sharedInstance].currentUser.userAvatar]];
+        self.creatorNameLabel.text = [DataCenter sharedInstance].currentUser.userName;
+    } else {
+        [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath]];
+        self.creatorNameLabel.text = self.cookbookDetail.creator.userName;
+    }
     
     // 其他显示的内容
     NSMutableArray* tagNames = [NSMutableArray array];
@@ -191,7 +206,7 @@
     self.tagsView.style = AutoSizeLabelViewStyleMenuDetail;
     self.tagsView.tags = [tagNames copy];
     
-    self.creatorNameLabel.text = self.cookbookDetail.creator.userName;
+    
     
     self.cookbookNameLabel.text = self.cookbookDetail.name;
     
@@ -200,8 +215,65 @@
     // reloadData
     [self.tableView reloadData];
     
+    
+    // 是否是官方菜谱
+    self.authorityButton.hidden = !self.isAuthority;
+    
+//    if (self.cookbookDetail.creator.userLevel != nil) {
+//        
+//        if ([self.cookbookDetail.creator.userLevel isEqualToString:@"1"] || [self.cookbookDetail.creator.userLevel isEqualToString:@"2"]) {
+//            self.authorityButton.hidden = NO;
+//        } else {
+//            self.authorityButton.hidden = YES;
+//        }
+//        
+//        
+//    } else {
+////        //假数据
+////        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
+////            self.cookStarImageView.hidden = NO;
+////            self.AuthorityLabel.hidden = NO;
+////        } else {
+////            self.cookStarImageView.hidden = YES;
+////            self.AuthorityLabel.hidden = YES;
+////        }
+//        
+//    }
+
+    
+    // 如果是自己发布的菜谱不显示关注按钮
+    if ([self.cookbookDetail.creator.userBaseId isEqualToString:CurrentUserBaseId] || self.isPreview) {
+        self.followButton.hidden = YES;
+    }
+    
     //如果已登录判断是否关注菜谱发布人
-    [self getFollowedList];
+    //[self getFollowedList];
+    
+    [[InternetManager sharedManager] currentUser:CurrentUserBaseId followedUser:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            NSInteger status = [obj[@"data"] integerValue];
+            if (status == 1) {
+                self.followButton.selected = YES;
+            } else {
+                self.followButton.selected = NO;
+            }
+            
+            
+        } else {
+            self.followButton.selected = NO;
+        }
+        
+    }];
+    
+    //是否已赞
+    if ([self.cookbookDetail.praised isEqualToString:@"1"]) {
+        NSLog(@"赞过了");
+        self.praiseButton.selected = YES;
+    } else {
+        NSLog(@"未赞");
+        self.praiseButton.selected = NO;
+    }
     
 }
 
@@ -544,6 +616,8 @@
     [self.cookbookDetailCell.contentView removeKeyboardControl];
     self.navigationController.navigationBar.translucent = NO;
     
+    [self hideKeyboard];
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -559,7 +633,7 @@
     //    NSLog(@"%f", scrollView.contentOffset.y);
     if (scrollView.tag != 5) { // 不是滑动评论
         
-        if (scrollView.contentOffset.y < self.cookbookImageView.height) {
+        if (scrollView.contentOffset.y < self.cookbookImageView.height + self.praiseButton.center.y) {
             [self showRightNavigationView:NO];
         } else {
             [self showRightNavigationView:YES];
@@ -567,13 +641,10 @@
         
         if (self.contentType == CurrentContentTypeComment) {
             
-            CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
+            CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
             if (IsLogin) {
                 self.window.hidden = scrollView.contentOffset.y >= height ? NO : YES;
             }
-            
-            
-            
             
         }
         
@@ -766,7 +837,7 @@
         self.window.hidden = YES;
     }
     
-    CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 64 - 50 - 40;
+    CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
     
     if (_lastContentOffsetY >= height && self.contentType == CurrentContentTypeComment && IsLogin) {
         self.window.hidden = NO;
@@ -842,23 +913,24 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userID andFollowedUserBaseId:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 [super showProgressCompleteWithLabelText:@"关注成功" afterDelay:1];
+                sender.selected = YES;
             } else {
                 [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
+                sender.selected = NO;
             }
         }];
     } else {
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userID andFollowedUserBaseId:self.cookbookDetail.creator.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+                sender.selected = NO;
             } else {
-                [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
+                [super showProgressErrorWithLabelText:@"取消关注失败" afterDelay:1];
+                sender.selected = YES;
             }
         }];
     }
-    
-    sender.selected = !sender.selected;
-    
-    
+ 
 }
 
 
@@ -951,6 +1023,11 @@
 
 - (void)praiseCookbook
 {
+    if ([self.cookbookDetail.praised isEqualToString:@"1"]) {
+        [super showProgressErrorWithLabelText:@"您已赞过这个菜谱" afterDelay:1];
+        self.praiseButton.selected = YES;
+        return;
+    }
     if (!IsLogin) {
         [super openLoginController];
         return;
@@ -958,9 +1035,11 @@
     NSString* userID = CurrentUserBaseId;
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
-            [super showProgressCompleteWithLabelText:@"已赞" afterDelay:1];
+            [super showProgressCompleteWithLabelText:@"菜谱点赞成功" afterDelay:1];
+            self.praiseButton.selected = YES;
         } else {
-            [super showProgressErrorWithLabelText:@"点赞失败" afterDelay:1];
+            [super showProgressErrorWithLabelText:@"赞菜谱没有成功" afterDelay:1];
+            self.praiseButton.selected = NO;
         }
     }];
     
@@ -1043,6 +1122,7 @@
             [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
                 if (success) {
                     NSLog(@"分享成功送积分OK");
+                    [super showProgressCompleteWithLabelText:@"分享成功 +20点心" afterDelay:1];
                 }
             }];
             

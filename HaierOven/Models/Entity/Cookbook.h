@@ -51,6 +51,9 @@
 @property (copy, nonatomic) NSString* praises;
 
 
+@property (nonatomic) BOOL isAuthority;
+
+
 @end
 
 

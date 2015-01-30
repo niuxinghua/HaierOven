@@ -101,6 +101,8 @@
         [self loadCookbookDetail];
     }
     
+    
+    
 }
 
 - (void)loadCookbookDetail
@@ -165,8 +167,9 @@
     
     
     alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
-    alertRectShow = CGRectMake(15, (PageH-138)/2, PageW-30, 138);
-    
+ 
+    alertRectShow = CGRectMake(15, (PageH-138)/2, PageW-30, 138); //138
+
     self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:alertRectHidden];
     self.addFoodAlertView.delegate = self;
     [self.myWindow addSubview:self.addFoodAlertView];
@@ -502,6 +505,7 @@
 
 
 #pragma mark- AddFoodAlertView 弹出框delegate
+
 -(void)Cancel{
     self.myWindow.hidden = YES;
     self.addFoodAlertView.frame = alertRectHidden;
@@ -524,6 +528,25 @@
     
 }
 
+- (void)beginEditFood:(UITextField *)sender
+{
+    if (PageH- alertRectShow.origin.y-alertRectShow.size.height<256) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.addFoodAlertView.frame = CGRectMake(15, 90, PageW-30, 138); //138
+        }];
+
+    }
+    
+}
+
+- (void)endEditFood:(UITextField *)sender
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.addFoodAlertView.frame = alertRectShow;
+    }];
+    
+}
 
 #pragma mark - 我使用了烤箱
 
@@ -663,24 +686,28 @@
     self.cookbookDetail.creator.ID = CurrentUserBaseId;
     
     if (self.isDraft) {
-        if ([self.cookbookDetail.status isEqualToString:@"0"]) {
+//        if ([self.cookbookDetail.status isEqualToString:@"0"]) {
             [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
             [[InternetManager sharedManager] modifyCookbook:self.cookbookDetail callBack:^(BOOL success, id obj, NSError *error) {
                 [super hiddenProgressHUD];
                 if (success) {
                     NSLog(@"发布成功");
-                    [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
+                    NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布成功" : @"保存成功";
+                    [super showProgressCompleteWithLabelText:promptStr afterDelay:1];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
                 } else {
                     if (error.code == InternetErrorCodeConnectInternetFailed) {
                         [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
                     } else {
-                        [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                        NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布失败" : @"保存失败";
+                        [super showProgressErrorWithLabelText:promptStr afterDelay:1];
                     }
                 }
             }];
-        } else {
-            [self addCookbook];
-        }
+//        } else {
+//            [self addCookbook];
+//        }
         
         
     } else {
@@ -699,12 +726,15 @@
         [super hiddenProgressHUD];
         if (success) {
             NSLog(@"发布成功");
-            [super showProgressCompleteWithLabelText:@"发布成功" afterDelay:1];
+            NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布成功" : @"保存成功";
+            [super showProgressCompleteWithLabelText:promptStr afterDelay:1];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
                 [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
             } else {
-                [super showProgressErrorWithLabelText:@"发布失败..." afterDelay:1];
+                NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布失败" : @"保存失败";
+                [super showProgressErrorWithLabelText:promptStr afterDelay:1];
             }
         }
     }];
@@ -719,7 +749,6 @@
     detailController.cookbookDetail = self.cookbookDetail;
     detailController.isPreview = YES;
     [self.navigationController pushViewController:detailController animated:YES];
-    
 }
 
 

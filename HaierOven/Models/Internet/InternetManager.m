@@ -988,6 +988,45 @@
     }
 }
 
+- (void)currentUser:(NSString*)currentUserId followedUser:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : currentUserId,
+                                     @"followedUserBaseID" : userBaseId == nil ? @"0" : userBaseId
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:CheckFollowed parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+
+    
+}
 
 
 #pragma mark - 标签
@@ -1655,7 +1694,7 @@
                            @"steps" : steps,
                            @"foods" : foods,
                            @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
-                           
+                           @"cookbookID" : cookbookDetail.cookbookId
                            };
             
         }

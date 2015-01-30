@@ -102,7 +102,8 @@
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                //[cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                cookerImage.image = IMAGENAMED(@"home_banner_default.png");
                 cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
@@ -309,6 +310,7 @@
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     Cookbook* cookbook = self.cookbooks[indexPath.row];
     cookbookDetailController.cookbookId = cookbook.ID;
+    cookbookDetailController.isAuthority = cookbook.isAuthority;
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
 

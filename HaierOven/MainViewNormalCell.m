@@ -7,6 +7,13 @@
 //
 
 #import "MainViewNormalCell.h"
+#import "CookbookDetailControllerViewController.h"
+
+@interface MainViewNormalCell ()
+
+@property (strong, nonatomic) UIImage* placeholder;
+
+@end
 
 @implementation MainViewNormalCell
 
@@ -19,12 +26,12 @@
     [self.avater.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
     self.cookStarImageView.hidden = YES;
+    self.placeholder = [MyTool createImageWithColor:RGB(240, 240, 240)];
 // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -41,7 +48,7 @@
     // 这里应该判断是否是官方菜谱
     if (cookbook.creator.userLevel != nil) {
         
-        if ([cookbook.creator.userLevel isEqualToString:@"1"]) {
+        if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
             self.cookStarImageView.hidden = NO;
             self.AuthorityLabel.hidden = NO;
         } else {
@@ -78,7 +85,7 @@
 {
     self.chickGoodBtn.selected = NO;
     self.avater.imageView.image = [UIImage imageNamed:@"default_avatar"];
-    self.MainCellFoodBackground.image = [UIImage imageNamed:@"cookbook_list_item_bg_default"];
+    self.MainCellFoodBackground.image = self.placeholder; //[UIImage imageNamed:@"cookbook_list_item_bg_default"];
 }
 
 -(void)setHadVideo:(BOOL)hadVideo{

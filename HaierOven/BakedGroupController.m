@@ -13,6 +13,11 @@
 #import "Cooker.h"
 #import "MJRefresh.h"
 #import "CookbookDetailControllerViewController.h"
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
+
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
 
 @interface BakedGroupController ()<PersonalCenterSectionViewDelegate,BackGroupAdviceCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
@@ -246,6 +251,7 @@
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
         CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
         detailController.cookbookId = selectedCookbook.ID;
+        detailController.isAuthority = selectedCookbook.isAuthority;
         [self.navigationController pushViewController:detailController animated:YES];
     } else {
         //推荐厨师
@@ -306,6 +312,25 @@
     sender.selected = !sender.selected;
 }
 
+
+- (IBAction)search:(id)sender {
+    
+    MainSearchViewController* search = [self.storyboard instantiateViewControllerWithIdentifier:@"Search view controller"];
+    
+    [self.navigationController pushViewController:search animated:YES];
+    
+}
+
+- (IBAction)addCookbook:(id)sender {
+    
+    if (IsLogin) {
+        UpLoadingMneuController* upload = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadingMneuController"];
+        [self.navigationController pushViewController:upload animated:YES];
+    } else {
+        [super openLoginController];
+    }
+    
+}
 
 /*
 #pragma mark - Navigation

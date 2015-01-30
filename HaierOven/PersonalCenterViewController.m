@@ -14,6 +14,9 @@
 #import "CookbookDetailControllerViewController.h"
 #import "ActiveUserController.h"
 
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
+
 typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     CurrentCookbookTypePublished,
     CurrentCookbookTypePraised
@@ -323,9 +326,11 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     if (self.cookbookType == CurrentCookbookTypePublished) {
         Cookbook* cookbook = self.publishedCookbooks[indexPath.row];
         cookbookDetailController.cookbookId = cookbook.ID;
+        cookbookDetailController.isAuthority = cookbook.isAuthority;
     } else {
         Cookbook* cookbook = self.praisedCookbooks[indexPath.row];
         cookbookDetailController.cookbookId = cookbook.ID;
+        cookbookDetailController.isAuthority = cookbook.isAuthority;
     }
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
 }
@@ -382,6 +387,26 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
         self.cookbookType = CurrentCookbookTypePraised;
     }
     [self.table reloadData];
+}
+
+
+- (IBAction)search:(id)sender {
+    
+    MainSearchViewController* search = [self.storyboard instantiateViewControllerWithIdentifier:@"Search view controller"];
+    
+    [self.navigationController pushViewController:search animated:YES];
+    
+}
+
+- (IBAction)addCookbook:(id)sender {
+    
+    if (IsLogin) {
+        UpLoadingMneuController* upload = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadingMneuController"];
+        [self.navigationController pushViewController:upload animated:YES];
+    } else {
+        [super openLoginController];
+    }
+    
 }
 
 /*

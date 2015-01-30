@@ -13,6 +13,9 @@
 #import "MJRefresh.h"
 #import "WebViewController.h"
 
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
+
 typedef NS_ENUM(NSInteger, ProductCategory) {
     ProductCategoryAll    = 0,  //所有
     ProductCategoryModel,       //模具
@@ -326,5 +329,24 @@ typedef NS_ENUM(NSInteger, SortType) {
     }];
 }
 
+
+- (IBAction)search:(id)sender {
+    
+    MainSearchViewController* search = [self.storyboard instantiateViewControllerWithIdentifier:@"Search view controller"];
+    
+    [self.navigationController pushViewController:search animated:YES];
+    
+}
+
+- (IBAction)addCookbook:(id)sender {
+    
+    if (IsLogin) {
+        UpLoadingMneuController* upload = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadingMneuController"];
+        [self.navigationController pushViewController:upload animated:YES];
+    } else {
+        [super openLoginController];
+    }
+    
+}
 
 @end

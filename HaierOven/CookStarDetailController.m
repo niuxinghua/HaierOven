@@ -16,6 +16,9 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "StudyCookViewController.h"
 
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
+
 @interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
 {
     CGSize movesize;
@@ -90,7 +93,7 @@
 
 - (void)loadUserCookbooks
 {
-    [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+    [[InternetManager sharedManager] getCookbooksWithUserBaseId:self.cookerStar.userBaseId cookbookStatus:1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
             NSArray* arr = obj;
@@ -108,8 +111,28 @@
             [super showProgressErrorWithLabelText:@"获取菜谱失败" afterDelay:1];
         }
         
-        
     }];
+    
+//    [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+//        
+//        if (success) {
+//            NSArray* arr = obj;
+//            if (arr.count < PageLimit && _pageIndex != 1) {
+//                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+//            }
+//            if (_pageIndex == 1) {
+//                self.cookbooks = obj;
+//            } else {
+//                [self.cookbooks addObjectsFromArray:arr];
+//            }
+//            
+//            [self.mainTable reloadData];
+//        } else {
+//            [super showProgressErrorWithLabelText:@"获取菜谱失败" afterDelay:1];
+//        }
+//        
+//        
+//    }];
     
 }
 
@@ -367,6 +390,8 @@
     
     return (PADDING_HIGHT+LABEL_H)*line+455+movesize.height;
 }
+
+
 
 /*
 #pragma mark - Navigation

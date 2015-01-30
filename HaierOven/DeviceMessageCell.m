@@ -12,6 +12,11 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    self.messageLabel = [UILabel new];
+    self.messageLabel.numberOfLines = 0;
+    self.messageLabel.font = [UIFont fontWithName:GlobalTextFontName size:14];
+    [self addSubview:self.messageLabel];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -22,6 +27,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
+    
 
 }
 -(void)setContentLabel:(NSString *)string{

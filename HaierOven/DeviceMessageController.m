@@ -56,7 +56,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DeviceMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceMessageCell" forIndexPath:indexPath];
-    [cell setContentLabel:self.messArr[indexPath.row]];
+    
     // Configure the cell...
     
     NSDictionary* info = self.messArr[indexPath.row];
@@ -68,12 +68,20 @@
     cell.messageTime.text = [MyTool intervalSinceNow:date];
     cell.messageLabel.text = info[@"desc"];
     
+    CGSize size = CGSizeZero;
+    size = [MyUtils getTextSizeWithText:info[@"desc"] andTextAttribute:@{NSFontAttributeName :cell.messageLabel.font} andTextWidth:cell.width-80];
+    cell.messageLabel.frame = CGRectMake(20, cell.messageTime.bottom, size.width, size.height);
+    
+    //[cell setContentLabel:info[@"desc"]];
+    
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGSize size = CGSizeZero;
-    size = [MyUtils getTextSizeWithText:self.messArr[indexPath.row] andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTextFontName size:14]} andTextWidth:self.view.width-80];
+    NSDictionary* info = self.messArr[indexPath.row];
+    
+    size = [MyUtils getTextSizeWithText:info[@"desc"] andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTextFontName size:14]} andTextWidth:self.view.width-80];
 
     return size.height+35;
 }
