@@ -127,6 +127,9 @@
 #define GetFans  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/fans/get/userBaseID"]
 
 
+#define CheckFollowed   [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/check"]
+
+
 #pragma mark - 标签
 
 /**

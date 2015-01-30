@@ -86,8 +86,8 @@
         BOOL editable = YES;
         
         YIPopupTextView* popupTextView =
-        [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入留言内容"
-                                            maxCount:500
+        [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入烤箱名称"
+                                            maxCount:10
                                          buttonStyle:YIPopupTextViewButtonStyleRightCancelAndDone];
         popupTextView.delegate = self;
         popupTextView.caretShiftGestureEnabled = YES;       // default = NO. using YISwipeShiftCaret is recommended.
@@ -155,6 +155,7 @@
             
             
             self.currentOven.name = text;
+            [[DataCenter sharedInstance] updateOvenInLocal:self.currentOven];
             [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
             [super showProgressCompleteWithLabelText:@"修改成功" afterDelay:1];
             

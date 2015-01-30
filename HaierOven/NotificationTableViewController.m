@@ -13,6 +13,7 @@
 
 #import "CookbookDetailControllerViewController.h"
 #import "ChatViewController.h"
+#import "DeviceMessageCell.h"
 
 typedef NS_ENUM(NSInteger, NotificationType)
 {
@@ -237,14 +238,36 @@ typedef NS_ENUM(NSInteger, NotificationType)
             return [[UIView alloc] init];
         }
         if (section == 0) {
+            if (self.cookbookNotifications.count == 0) {
+                return [[UIView alloc] init];
+            }
             sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
         } else {
+            if (self.messagesNotifications.count == 0) {
+                return [[UIView alloc] init];
+            }
             sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
         }
         
         return sectionview;
     } else {
         return [[UIView alloc] init];
+    }
+    
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.notificationType == NotificationTypeOven) {
+        CGSize size = CGSizeZero;
+        NSDictionary* info = self.ovenNotifications[indexPath.row];
+        
+        size = [MyUtils getTextSizeWithText:info[@"desc"] andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTextFontName size:14]} andTextWidth:self.view.width-80];
+        
+        return size.height+35;
+    } else {
+        
+        return 53;
     }
     
     
@@ -270,10 +293,11 @@ typedef NS_ENUM(NSInteger, NotificationType)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SystemNotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemNotificationCell" forIndexPath:indexPath];
+    
     
     // Configure the cell...
     if (self.notificationType == NotificationTypeSystem) {
+        SystemNotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemNotificationCell" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             
             cell.notice = self.cookbookNotifications[indexPath.row];
@@ -283,12 +307,29 @@ typedef NS_ENUM(NSInteger, NotificationType)
             cell.notice = self.messagesNotifications[indexPath.row];
             
         }
+        
+        return cell;
     } else {
-        cell.ovenNotification = self.ovenNotifications[indexPath.row];
+        DeviceMessageCell* cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceMessageCell" forIndexPath:indexPath];
+        
+        NSDictionary* info = self.ovenNotifications[indexPath.row];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+        NSDate *date = [dateFormatter dateFromString:info[@"time"]];
+        
+        cell.messageTime.text = [MyTool intervalSinceNow:date];
+        cell.messageLabel.text = info[@"desc"];
+        
+        CGSize size = CGSizeZero;
+        size = [MyUtils getTextSizeWithText:info[@"desc"] andTextAttribute:@{NSFontAttributeName :cell.messageLabel.font} andTextWidth:cell.width-80];
+        cell.messageLabel.frame = CGRectMake(20, cell.messageTime.bottom, size.width, size.height);
+        
+        //cell.ovenNotification = self.ovenNotifications[indexPath.row];
+        
+        return cell;
     }
-    
-    
-    return cell;
+
 }
 
 

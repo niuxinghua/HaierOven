@@ -121,6 +121,7 @@
                                                     <state key="normal" image="icon_like_n.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="selected" image="icon_like_s.png"/>
                                                     <state key="highlighted" image="icon_like_s.png"/>
                                                     <connections>
                                                         <action selector="praiseCookbookTapped:" destination="nCF-pj-vsv" eventType="touchUpInside" id="6K4-Hm-JwL"/>
@@ -284,6 +285,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="authorityButton" destination="2ST-Cq-DTt" id="ZUa-MM-6ck"/>
                         <outlet property="cookbookDescCell" destination="e9d-yT-7My" id="tji-Z8-V3n"/>
                         <outlet property="cookbookDescLabel" destination="hKg-OC-Whd" id="HNj-fj-KFd"/>
                         <outlet property="cookbookDetailCell" destination="smK-F0-EMr" id="B8x-No-8Td"/>
@@ -296,6 +298,7 @@
                         <outlet property="headerView" destination="lqh-Rt-pqG" id="Ng0-fP-0s5"/>
                         <outlet property="learnButton" destination="p3n-ws-fae" id="hKl-NP-dpN"/>
                         <outlet property="learnCookBtnCell" destination="c82-Ad-rdX" id="sLx-Qm-nDj"/>
+                        <outlet property="praiseButton" destination="utr-qf-NeX" id="UZb-tF-XCt"/>
                         <outlet property="rightNavigationView" destination="Npu-jC-DnP" id="WAN-GX-KPw"/>
                         <outlet property="tagsView" destination="5Qz-0c-CFQ" id="bid-wu-X0s"/>
                     </connections>
@@ -333,7 +336,7 @@
         <image name="icon_gfcp_s.png" width="113" height="30"/>
         <image name="icon_like_n.png" width="48" height="48"/>
         <image name="icon_like_navi_n.png" width="48" height="48"/>
-        <image name="icon_like_s.png" width="26" height="26"/>
+        <image name="icon_like_s.png" width="48" height="48"/>
         <image name="icon_share_n.png" width="48" height="48"/>
         <image name="icon_share_navi_n.png" width="48" height="48"/>
         <image name="mask_bottom.png" width="640" height="138"/>

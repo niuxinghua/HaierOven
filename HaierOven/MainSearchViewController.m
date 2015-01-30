@@ -288,6 +288,7 @@
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     Cookbook* cookbook = self.searchedCookbooks[indexPath.row];
     detailController.cookbookId = cookbook.ID;
+    detailController.isAuthority = cookbook.isAuthority;
     [self.navigationController pushViewController:detailController animated:YES];
     
 }

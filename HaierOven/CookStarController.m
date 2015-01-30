@@ -10,6 +10,10 @@
 #import "CookStarCell.h"
 #import "CookStarDetailController.h"
 #import "MJRefresh.h"
+
+#import "MainSearchViewController.h"
+#import "UpLoadingMneuController.h"
+
 @interface CookStarController () <CookStarCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray* cookerStars;
@@ -198,6 +202,26 @@
     }];
     
 }
+
+- (IBAction)search:(id)sender {
+    
+    MainSearchViewController* search = [self.storyboard instantiateViewControllerWithIdentifier:@"Search view controller"];
+    
+    [self.navigationController pushViewController:search animated:YES];
+    
+}
+
+- (IBAction)addCookbook:(id)sender {
+    
+    if (IsLogin) {
+        UpLoadingMneuController* upload = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadingMneuController"];
+        [self.navigationController pushViewController:upload animated:YES];
+    } else {
+        [super openLoginController];
+    }
+    
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

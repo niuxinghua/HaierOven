@@ -25,4 +25,6 @@
  */
 @property (strong, nonatomic) CookbookDetail* cookbookDetail;
 
+@property (nonatomic) BOOL isAuthority;
+
 @end

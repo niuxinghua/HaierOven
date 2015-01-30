@@ -461,6 +461,10 @@
 
 - (void)bootup //开机
 {
+    if (self.myOven == nil) {
+        [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        return;
+    }
     uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kBootUp commandAttrValue:kBootUp];
     [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
                                         toDevice:self.myOven
@@ -473,6 +477,7 @@
 
 - (void)shutdown
 {
+    
     uSDKDeviceAttribute* cmd = [[OvenManager sharedManager] structureWithCommandName:kShutDown commandAttrValue:kShutDown];
     [[OvenManager sharedManager] executeCommands:[@[cmd] mutableCopy]
                                         toDevice:self.myOven
@@ -488,6 +493,10 @@
 #pragma mark - toolbarAction
 
 -(void)StartWarmUp:(UIButton*)sender{
+    if (self.myOven == nil) {
+        [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        return;
+    }
     
     self.myWindow.hidden = NO;
     [UIView animateWithDuration:0.2 animations:^{
@@ -504,6 +513,10 @@
 
 -(void)StartWorking
 {
+    if (self.myOven == nil) {
+        [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        return;
+    }
     
     NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
     NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
@@ -632,6 +645,11 @@
 }
 
 -(void)StopWorking{
+    if (self.myOven == nil) {
+        [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        return;
+    }
+    
     [self.bakeTimer invalidate];
     self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     [self.timeable invalidate];
@@ -688,7 +706,8 @@
 - (IBAction)TurnEdit:(id)sender {
     DeviceEditController *edit = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceEditController"];
     
-    
+    edit.currentOven = self.currentOven;
+    edit.myOven = self.myOven;
     
     [self.navigationController pushViewController:edit animated:YES];
 }
@@ -775,6 +794,11 @@
 #pragma mark - 开机关机
 
 - (IBAction)onoff:(UIButton*)sender {
+    if (self.myOven == nil) {
+        [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        return;
+    }
+    
     for (UIButton *btn in self.deviceStatusBtns) {
         btn.selected = !btn.selected;
     }
@@ -830,12 +854,12 @@
             
         case DeviceBoardStatusOpened:
             for (UIButton* btn in self.allbtns) {
-                btn.enabled = NO;
+                btn.enabled = YES;
                 btn.selected = NO;
             }
             
             for (UIButton *btn in self.controlBtns) {
-                btn.enabled = YES;
+                btn.enabled = btn.tag == 3 ? YES : NO;
                 btn.selected = NO;
             }
             

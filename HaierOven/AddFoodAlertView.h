@@ -15,8 +15,13 @@ typedef NS_ENUM(NSUInteger, AddFoodAlertType) {
 @class AddFoodAlertView;
 @protocol AddFoodAlertViewDelegate <NSObject>
 
+@required
 -(void)ChickAlert:(UILabel*)label andTextFailed:(UITextField*)textfield;
 -(void)Cancel;
+- (void)beginEditFood:(UITextField*)sender;
+- (void)endEditFood:(UITextField*)sender;
+
+
 @end
 
 @interface AddFoodAlertView : UIView    <UITextFieldDelegate>

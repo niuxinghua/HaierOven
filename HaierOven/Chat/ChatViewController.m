@@ -59,17 +59,22 @@
 {
     NSString* userBaseId = CurrentUserBaseId;
     for (Message* message in self.messages) {
+ 
+        long long seconds = [message.createdTime longLongValue]/1000;
+        NSDate* date = [NSDate dateWithTimeIntervalSince1970:seconds];
         
         if ([message.fromUser.userBaseId isEqualToString:userBaseId]) {
             JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:userBaseId
                                                          senderDisplayName:@"刘康"
-                                                                      date:[NSDate distantPast]
+                                                                      date:date
                                                                       text:message.content];
             [self.messagesModel.messages insertObject:jsqMessage atIndex:0];
         } else {
+            long long seconds = [message.createdTime longLongValue]/1000;
+            NSDate* date = [NSDate dateWithTimeIntervalSince1970:seconds];
             JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:self.toUserId
                                                          senderDisplayName:message.toUser.userName
-                                                                      date:[NSDate distantPast]
+                                                                      date:date
                                                                       text:message.content];
             [self.messagesModel.messages insertObject:jsqMessage atIndex:0];
             
@@ -117,10 +122,12 @@
      */
     self.messagesModel = [[MessagesModel alloc] init];
     
+    
+    
     JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
-    JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Vcs"]
+    JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     User* currentUser = [[User alloc] init];
@@ -129,13 +136,7 @@
     User* her = [[User alloc] init];
     her.userName = self.toUserName;
     her.userId = self.toUserId;
-    
-    
-//    JSQMessage* jsqMessage =  [[JSQMessage alloc] initWithSenderId:her.userId
-//                                                 senderDisplayName:her.userName
-//                                                              date:[NSDate distantPast]
-//                                                              text:@"hello"];
-//    [self.messagesModel.messages addObject:jsqMessage];
+ 
     [self parseMessagesToJSQMessages];
     
     self.messagesModel.avatars = @{ currentUser.userId : fromeImage,
@@ -186,30 +187,30 @@
         
     }
     
-    
-    /**
-     *  发送信息应该做以下几件事
-     *
-     *  1. 播放声音 (可选)
-     *  2. 添加新消息对象id<JSQMessageData>到MessagesModel数据源
-     *  3. 发送网络请求
-     *  4. 调用 `finishSendingMessage`
-     */
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
-                                             senderDisplayName:senderDisplayName
-                                                          date:date
-                                                          text:text];
-    
-    [self.messagesModel.messages addObject:message];
-    [self finishSendingMessage];
-    
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] sendMessage:text toUser:self.toUserId fromUser:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSLog(@"发送成功");
             self.lastChatTime = [NSDate date];
+            
+            /**
+             *  发送信息应该做以下几件事
+             *
+             *  1. 播放声音 (可选)
+             *  2. 添加新消息对象id<JSQMessageData>到MessagesModel数据源
+             *  3. 发送网络请求
+             *  4. 调用 `finishSendingMessage`
+             */
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            
+            JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
+                                                     senderDisplayName:senderDisplayName
+                                                                  date:date
+                                                                  text:text];
+            
+            [self.messagesModel.messages addObject:message];
+            [self finishSendingMessage];
+            
         } else {
             NSLog(@"发送失败");
             [super showProgressErrorWithLabelText:@"发送失败" afterDelay:1];

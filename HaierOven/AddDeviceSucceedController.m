@@ -121,6 +121,12 @@
         [super showProgressErrorWithLabelText:@"请输入烤箱名" afterDelay:1];
         return;
     }
+    
+    if (self.deviceTextFailed.text.length > 10) {
+        [super showProgressErrorWithLabelText:@"烤箱名不能超过10个字符" afterDelay:1];
+        return;
+    }
+    
     [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* ovens = obj;
@@ -133,7 +139,17 @@
             oven.typeIdentifier = device.typeIdentifier;
 //            oven.attribute = device.attributeDict;
             [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
-            [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
+            
+            if (IsLogin) {
+                [[InternetManager sharedManager] bindOvenWithUserBaseId:CurrentUserBaseId deviceMac:oven.mac callBack:^(BOOL success, id obj, NSError *error) {
+//                    if (success) {
+//                        [super showProgressCompleteWithLabelText:@"绑定成功 +500点心" afterDelay:1];
+//                    }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
+                }];
+            }
+            
+            
         } else {
             [super showProgressErrorWithLabelText:@"发生错误" afterDelay:1];
         }

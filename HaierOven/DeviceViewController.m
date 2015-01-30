@@ -17,6 +17,8 @@
 @interface DeviceViewController () <MyDeviceAddViewDelegate, MyDeviceViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
+@property (strong, nonatomic) NSMutableArray* devices;
+
 @end
 
 @implementation DeviceViewController
@@ -24,13 +26,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalOvens) name:MyOvensInfoHadChangedNotificatin object:nil];
-    [self loadLocalOvens];
+    
+    [self loadOvenDevices];
     // Do any additional setup after loading the view.
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //[self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.isReady" context:NULL];
 }
 
 - (void)loadLocalOvens
@@ -38,6 +42,56 @@
     self.myDevices = [DataCenter sharedInstance].myOvens;
     [self SetUpSubviews];
 }
+
+- (void)loadOvenDevices
+{
+    // 监控在线状态
+    //[self addObserver:self forKeyPath:@"self.ovenManager.currentStatus.isReady" options:NSKeyValueObservingOptionNew context:NULL];
+    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            self.devices = obj;
+            for (uSDKDevice* oven in self.devices) {
+                [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:oven];
+            }
+        }
+        [self loadLocalOvens];
+    }];
+}
+
+#pragma mark - 监听烤箱状态并作出反应
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+//    NSLog(@"******设备状态变化啦**********");
+//    NSLog(@"在线：%d, 开机：%d, 工作：%d, 温度：%d, 时间：%@", self.ovenManager.currentStatus.isReady, _ovenManager.currentStatus.opened, self.ovenManager.currentStatus.isWorking, _ovenManager.currentStatus.temperature, _ovenManager.currentStatus.bakeTime);
+//    
+//    if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.isReady"]) {
+//        if (_ovenManager.currentStatus.isReady) {
+//            [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateNormal];
+//        } else {
+//            [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接", self.currentOven.name] forState:UIControlStateNormal];
+//        }
+//        
+//    } else if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.temperature"]) {
+//        // 温度变化，如果设有温度探针，则当烤箱到达指定温度后弹窗通知
+//        
+//        
+//    } else if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.opened"]) {
+//        
+//        if (self.deviceBoardStatus == DeviceBoardStatusOpened && !_ovenManager.currentStatus.opened) {
+//            [self bootup];
+//        }
+//        
+//        
+//    } else if ([keyPath isEqualToString:@"self.clockIcon.selected"]) {
+//        self.cookTimeView.hidden = !self.clockIcon.selected;
+//        self.clockIcon.hidden = self.clockIcon.selected;
+//        
+//    }
+//    
+    
+}
+
 
 -(void)SetUpSubviews{
     
@@ -62,7 +116,7 @@
             deviceView.delegate = self;
             LocalOven* oven = self.myDevices[i];
             deviceView.deviceName.text = oven.name;
-            if ([oven.ssid isEqualToString:[[OvenManager sharedManager] fetchSSID]]) {
+            if ([oven.ssid isEqualToString:[[OvenManager sharedManager] fetchSSID]] && self.devices.count > 0) {
                 deviceView.connectStatusImage.image = IMAGENAMED(@"lianjie.png");
                 deviceView.deviceStatusLabel.text = @"已连接";
             } else {

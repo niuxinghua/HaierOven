@@ -169,7 +169,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    return 5;
 }
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -283,7 +283,7 @@
     if (indexPath.row ==0) {
         return 115;
     }else
-    return (PageH-115-10-20)/8;
+    return (PageH-115-5-20)/8;
 //        return 56;
 }
 
@@ -373,7 +373,7 @@
         if (success) {
             
             btn.selected = YES;
-            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"点心＋%d", SignInScore] afterDelay:1.0];
+            [super showProgressCompleteWithLabelText:[NSString stringWithFormat:@"签到成功 点心＋%d", SignInScore] afterDelay:1.0];
             [[DataCenter sharedInstance] saveSignInFlag];
             
         } else {

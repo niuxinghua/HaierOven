@@ -333,6 +333,15 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)getFansWithUserBaseId:(NSString*)userBaseId andPageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
+/**
+ *  获取是否关注
+ *
+ *  @param currentUserId 当前用户
+ *  @param userBaseId    对方用户
+ *  @param completion    结果回调
+ */
+- (void)currentUser:(NSString*)currentUserId followedUser:(NSString*)userBaseId callBack:(myCallback)completion;
+
 
 
 #pragma mark - 标签
