@@ -13,8 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    self.foodLabel.textColor = [UIColor blackColor];
-    self.foodCountLabel.textColor = [UIColor blackColor];
+//    self.foodLabel.textColor = [UIColor blackColor];
+//    self.foodCountLabel.textColor = [UIColor blackColor];
     
 }
 
@@ -50,7 +50,7 @@
     _food = food;
     
     self.foodLabel.text = food.name == nil ? @"请输入食材" : food.name;
-    self.foodCountLabel.text = food.desc == nil ? @"请输入分量" : food.desc;
+    self.foodCountLabel.text = food.desc == nil ? @"分量" : food.desc;
     
 }
 

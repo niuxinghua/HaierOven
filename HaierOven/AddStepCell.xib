@@ -26,17 +26,17 @@
                             <constraint firstAttribute="width" constant="68" id="Jam-e9-yaP"/>
                             <constraint firstAttribute="height" constant="20" id="XA8-Lp-LmR"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（必填）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFa-WS-stn">
-                        <rect key="frame" x="91" y="13" width="57" height="15"/>
+                        <rect key="frame" x="81" y="13" width="57" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Rr0-hn-mhJ"/>
                             <constraint firstAttribute="width" constant="57" id="ShQ-0q-P5P"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -56,7 +56,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="NSP-kD-LUE"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                         <state key="normal" title="＋添加制作步骤">
                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -65,7 +65,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rQ-M1-m4Y">
-                        <rect key="frame" x="268" y="7" width="22" height="22"/>
+                        <rect key="frame" x="290" y="7" width="22" height="22"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="Kcm-IF-Ix9"/>
@@ -87,7 +87,7 @@
                     <constraint firstItem="UPu-Cu-ETk" firstAttribute="top" secondItem="eO5-nU-MhF" secondAttribute="bottom" constant="8" id="CtL-nF-qzY"/>
                     <constraint firstItem="CF4-79-qZv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="N0F-o8-Sx6"/>
                     <constraint firstAttribute="bottom" secondItem="CF4-79-qZv" secondAttribute="bottom" constant="3" id="NXd-ub-Ut9"/>
-                    <constraint firstItem="KFa-WS-stn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="91" id="Ppy-Um-6T2"/>
+                    <constraint firstItem="KFa-WS-stn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="81" id="Ppy-Um-6T2"/>
                     <constraint firstItem="KFa-WS-stn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="QCE-6b-Dbc"/>
                     <constraint firstAttribute="trailing" secondItem="UPu-Cu-ETk" secondAttribute="trailing" constant="30" id="QEW-tG-QHo"/>
                     <constraint firstItem="CF4-79-qZv" firstAttribute="top" secondItem="UPu-Cu-ETk" secondAttribute="bottom" constant="8" id="QX1-Zw-NL0"/>
@@ -95,7 +95,7 @@
                     <constraint firstItem="UPu-Cu-ETk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="dLa-kK-yeL"/>
                     <constraint firstAttribute="trailing" secondItem="eO5-nU-MhF" secondAttribute="trailing" id="daV-q1-6hB"/>
                     <constraint firstItem="7rQ-M1-m4Y" firstAttribute="centerY" secondItem="y5M-NZ-7ma" secondAttribute="centerY" id="iai-ZD-6Pb"/>
-                    <constraint firstAttribute="trailing" secondItem="7rQ-M1-m4Y" secondAttribute="trailing" constant="30" id="rRv-9o-buY"/>
+                    <constraint firstAttribute="trailing" secondItem="7rQ-M1-m4Y" secondAttribute="trailing" constant="8" id="rRv-9o-buY"/>
                     <constraint firstItem="y5M-NZ-7ma" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="zbR-35-T6U"/>
                 </constraints>
                 <variation key="default">

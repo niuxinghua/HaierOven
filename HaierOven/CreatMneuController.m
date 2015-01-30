@@ -266,7 +266,8 @@
             return self.tagsCellHight;
             break;
         case 2:
-            return (PageW-16)*0.13*(self.foods.count+1)+51;
+            return 40*(self.foods.count+1)+42+2;
+//            return (PageW-16)*0.12*(self.foods.count+1)+45;
             break;
         case 3:
             if ([DataCenter sharedInstance].currentUser.level != 1 || [DataCenter sharedInstance].currentUser.level != 2) {
@@ -371,7 +372,7 @@
         }else{
             if (textView.tag ==1) { //步骤描述
                 self.tempLabel.text = text;
-                self.tempLabel.textColor = [UIColor blackColor];
+                self.tempLabel.textColor = [UIColor darkGrayColor];
                 self.edittingStep.desc = text;
             }else if (textView.tag==2){ //菜谱小贴士
                 self.myPs_String = text;
@@ -484,9 +485,9 @@
     int line = 1;
     int count = 0;
     for (int i = 0; i<self.tagsForTagsView.count; i++) {
-        float wide  =  [AutoSizeLabelView boolLabelLength:self.tagsForTagsView[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
+        float wide  =  [AutoSizeLabelView boolLabelLength:self.tagsForTagsView[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:12]}]+20;
         
-        if (leftpadding+wide+PADDING_WIDE*count>PageW-90) {
+        if (leftpadding+wide+PADDING_WIDE*count>PageW-46) {
             leftpadding=0;
             ++line;
             count = 0;
@@ -496,7 +497,7 @@
         count++;
     }
     
-    return (PADDING_HIGHT+LABEL_H)*line+75;
+    return (PADDING_HIGHT+LABEL_H)*line+76;
 }
 
 

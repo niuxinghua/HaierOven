@@ -12,17 +12,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFoodLastCell" id="KGk-i7-Jjw" customClass="AddFoodLastCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFoodLastCell" rowHeight="40" id="KGk-i7-Jjw" customClass="AddFoodLastCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-rw-s98">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="18"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-rw-s98">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.65000000000000002" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="13"/>
                         <state key="normal" title="+新增食材">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,16 +33,22 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="Wee-rw-s98" secondAttribute="bottom" id="6AO-Xg-6cX"/>
-                    <constraint firstItem="Wee-rw-s98" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HRO-M5-zx8"/>
-                    <constraint firstAttribute="trailing" secondItem="Wee-rw-s98" secondAttribute="trailing" id="ULa-Kz-UTU"/>
-                    <constraint firstItem="Wee-rw-s98" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hpM-Q0-cHH"/>
+                    <constraint firstAttribute="trailing" secondItem="Wee-rw-s98" secondAttribute="trailing" id="JiA-7M-3ml"/>
+                    <constraint firstItem="Wee-rw-s98" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LWY-bf-gzQ"/>
+                    <constraint firstAttribute="bottom" secondItem="Wee-rw-s98" secondAttribute="bottom" id="S96-rs-9dM"/>
+                    <constraint firstAttribute="bottom" secondItem="Wee-rw-s98" secondAttribute="bottom" id="gMa-V4-hmd"/>
+                    <constraint firstItem="Wee-rw-s98" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="poq-cD-v6s"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="S96-rs-9dM"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addFoodBtn" destination="Wee-rw-s98" id="xBf-Yh-G1W"/>
             </connections>
-            <point key="canvasLocation" x="295" y="222"/>
+            <point key="canvasLocation" x="295" y="217"/>
         </tableViewCell>
     </objects>
 </document>

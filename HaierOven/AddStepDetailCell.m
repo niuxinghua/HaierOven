@@ -39,6 +39,7 @@
     stepDescriptionLabel.layer.borderColor = GlobalOrangeColor.CGColor;
     stepDescriptionLabel.layer.borderWidth = 1;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(AddDescription)];
+    
     [stepDescriptionLabel addGestureRecognizer:tap];
 
   }
@@ -68,7 +69,9 @@
 
 -(void)setStep:(Step *)step{
     _step = step;
-    self.stepDescriptionLabel.text =  step.desc;
+    if (step.desc) {
+        self.stepDescriptionLabel.text =  step.desc;
+    }
     
     if (step.photo != nil) {
         NSString* imagePath = [BaseOvenUrl stringByAppendingPathComponent:step.photo];
