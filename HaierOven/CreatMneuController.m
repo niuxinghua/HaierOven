@@ -263,7 +263,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:
-            return PageW*0.598;
+            return PageW/6.0*5.0;
             break;
         case 1:
             return self.tagsCellHight;

@@ -58,6 +58,11 @@
 
 -(void)setTags:(NSArray *)tags{
     _tags = tags;
+    
+    for (UIButton* button in self.subviews) {
+        [button removeFromSuperview];
+    }
+    
     for (int i = 0; i<tags.count; i++) {
         float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:12]}]+20;
         UIButton *title = [UIButton buttonWithType:UIButtonTypeCustom];

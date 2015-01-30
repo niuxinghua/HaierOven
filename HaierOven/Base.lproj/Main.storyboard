@@ -978,7 +978,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Jnx-EA-4aR">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曲奇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR3-oJ-Zt0">
@@ -1104,7 +1104,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="eaw-J9-Gfg">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E06-Km-AnG">
@@ -1158,19 +1158,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CoverCell" rowHeight="190" id="19L-Tj-l3Z" customClass="CoverCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CoverCell" rowHeight="266" id="19L-Tj-l3Z" customClass="CoverCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19L-Tj-l3Z" id="lJ6-Rp-Dlh">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="w15-Ms-3u0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="266"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="w15-Ms-3u0" secondAttribute="height" multiplier="32:19" id="JXb-Mf-5w5"/>
+                                                <constraint firstAttribute="width" secondItem="w15-Ms-3u0" secondAttribute="height" multiplier="160:133" id="D2v-Iv-9aQ"/>
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLM-y2-CZt">
-                                            <rect key="frame" x="277" y="152" width="26" height="26"/>
+                                            <rect key="frame" x="277" y="228" width="26" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="5Fy-7n-cyw"/>
                                                 <constraint firstAttribute="width" constant="26" id="Jv2-lN-qyh"/>
@@ -1185,6 +1185,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="w15-Ms-3u0" firstAttribute="leading" secondItem="lJ6-Rp-Dlh" secondAttribute="leading" id="EF1-9W-hNN"/>
+                                        <constraint firstItem="w15-Ms-3u0" firstAttribute="top" secondItem="lJ6-Rp-Dlh" secondAttribute="top" id="Oyk-E4-Azc"/>
                                         <constraint firstAttribute="trailing" secondItem="w15-Ms-3u0" secondAttribute="trailing" id="fC2-CF-FEC"/>
                                         <constraint firstAttribute="bottom" secondItem="w15-Ms-3u0" secondAttribute="bottom" id="ob8-A6-wdc"/>
                                         <constraint firstAttribute="trailing" secondItem="BLM-y2-CZt" secondAttribute="trailing" constant="17" id="tuX-Q2-C5d"/>
@@ -1461,7 +1462,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="qcb-KP-toZ">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="652-EA-ZcK">
