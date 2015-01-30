@@ -53,6 +53,7 @@
 
 #import "AppDelegate.h"
 
+#import "UIButton+EnlargeTouchArea.h"
 
 /**
  *  海尔app信息

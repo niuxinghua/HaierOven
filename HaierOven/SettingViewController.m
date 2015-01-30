@@ -41,8 +41,8 @@
 }
 */
 - (IBAction)AboutHaier:(id)sender {
-    NSLog(@"关于版本");
-    [super showProgressCompleteWithLabelText:@"目前已是最新版本！" afterDelay:2];
+    NSLog(@"关于海尔烤箱APP");
+    
 }
 
 - (IBAction)SuggestPost:(id)sender {
@@ -51,7 +51,7 @@
 - (IBAction)VersionChick:(id)sender {
     NSLog(@"版本确认");
     
-    
+    [super showProgressCompleteWithLabelText:@"目前已是最新版本！" afterDelay:2];
     
 //    [[InternetManager sharedManager] logoutWithLoginName:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginId"] callBack:^(BOOL success, id obj, NSError *error) {
 //        if (success) {

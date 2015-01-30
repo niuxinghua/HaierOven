@@ -745,6 +745,16 @@
 {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
+    
+    self.cookbookDetail.tags = self.selectedTags;
+    self.cookbookDetail.steps = self.steps;
+    
+    self.cookbookDetail.foods = self.foods;
+    self.cookbookDetail.cookbookTip = self.myPs_String;
+    //    self.cookbookDetail.oven = [[CookbookOven alloc] init];
+    self.cookbookDetail.creator = [[Creator alloc] init];
+    self.cookbookDetail.creator.ID = CurrentUserBaseId;
+    
     detailController.cookbookDetail = self.cookbookDetail;
     detailController.isPreview = YES;
     [self.navigationController pushViewController:detailController animated:YES];

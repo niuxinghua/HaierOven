@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SkillCell.h"
 
 @interface StepsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithCookbookDetail:(CookbookDetail*)cookbookDetail;
+- (instancetype)initWithCookbookDetail:(CookbookDetail*)cookbookDetail delegate:(id<SkillCellDelegate>) delegate;
 
 @end
