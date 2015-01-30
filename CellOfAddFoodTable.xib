@@ -20,27 +20,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加食材" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-LN-XvN">
-                        <rect key="frame" x="30" y="17" width="68" height="20"/>
-                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                        <rect key="frame" x="26" y="11" width="56" height="17"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（必填）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieR-wD-oTo">
-                        <rect key="frame" x="91" y="22" width="57" height="15"/>
+                        <rect key="frame" x="76" y="13" width="57" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="57" id="FZ4-hQ-Fwd"/>
                             <constraint firstAttribute="height" constant="15" id="imA-Nq-fB2"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tOA-1X-VxE">
-                        <rect key="frame" x="8" y="46" width="304" height="161"/>
+                        <rect key="frame" x="8" y="37" width="304" height="170"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT2-O3-OZM">
-                        <rect key="frame" x="290" y="16" width="22" height="22"/>
+                        <rect key="frame" x="290" y="9" width="22" height="22"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="US3-lP-myk"/>
@@ -53,26 +53,36 @@
                             <action selector="deleteAddFood:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5BG-QO-YbA"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1n-yG-fOO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Z7N-Kf-XyQ"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="ieR-wD-oTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="91" id="5f5-9P-BPB"/>
+                    <constraint firstItem="ieR-wD-oTo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="76" id="5f5-9P-BPB"/>
                     <constraint firstItem="pT2-O3-OZM" firstAttribute="centerY" secondItem="12f-LN-XvN" secondAttribute="centerY" id="BSy-OC-FWt"/>
                     <constraint firstAttribute="trailing" secondItem="pT2-O3-OZM" secondAttribute="trailing" constant="8" id="Jl3-wK-9Q7"/>
                     <constraint firstAttribute="trailing" secondItem="tOA-1X-VxE" secondAttribute="trailing" constant="8" id="QgI-yI-0Ed"/>
-                    <constraint firstItem="12f-LN-XvN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="U3V-wn-Wqn"/>
+                    <constraint firstItem="12f-LN-XvN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="U3V-wn-Wqn"/>
                     <constraint firstAttribute="bottom" secondItem="tOA-1X-VxE" secondAttribute="bottom" constant="8" id="UY9-ZJ-aGx"/>
-                    <constraint firstItem="12f-LN-XvN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="Znl-Se-QBE"/>
+                    <constraint firstItem="12f-LN-XvN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Znl-Se-QBE"/>
                     <constraint firstItem="tOA-1X-VxE" firstAttribute="top" secondItem="ieR-wD-oTo" secondAttribute="bottom" constant="9" id="b1j-RB-WMJ"/>
+                    <constraint firstItem="l1n-yG-fOO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eHX-DL-HfD"/>
                     <constraint firstItem="ieR-wD-oTo" firstAttribute="bottom" secondItem="12f-LN-XvN" secondAttribute="bottom" id="iKM-RF-ox0"/>
                     <constraint firstItem="tOA-1X-VxE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="qd5-NV-hZ9"/>
+                    <constraint firstAttribute="trailing" secondItem="l1n-yG-fOO" secondAttribute="trailing" id="uNk-TU-eUp"/>
+                    <constraint firstItem="l1n-yG-fOO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uRk-Ng-oik"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addfoodTableView" destination="tOA-1X-VxE" id="MQu-0U-zdj"/>
                 <outlet property="deleteBtn" destination="pT2-O3-OZM" id="CAL-zf-DTp"/>
             </connections>
-            <point key="canvasLocation" x="295" y="303"/>
+            <point key="canvasLocation" x="295" y="299"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -163,7 +163,7 @@
 
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PageW, 10)];
+    UIView * footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, PageW, 30)];
     footview.backgroundColor = UIColorFromRGB(0xb06206);
     return footview;
 }

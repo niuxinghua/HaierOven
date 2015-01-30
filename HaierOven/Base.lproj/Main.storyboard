@@ -449,7 +449,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="aFV-4p-9FM">
-                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
+                            <rect key="frame" x="130" y="6" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="首 页" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8q-Qd-Ksm">
@@ -775,7 +775,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="R9J-ka-ZKw">
-                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
+                            <rect key="frame" x="130" y="6" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="烘焙屋" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibQ-RK-4tV">
@@ -978,7 +978,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Jnx-EA-4aR">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="曲奇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR3-oJ-Zt0">
@@ -1104,7 +1104,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="eaw-J9-Gfg">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E06-Km-AnG">
@@ -1153,7 +1153,7 @@
         <scene sceneID="ypC-cJ-pB7">
             <objects>
                 <tableViewController storyboardIdentifier="CreatMneuController" id="baN-OG-W6Y" customClass="CreatMneuController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="190" sectionHeaderHeight="22" sectionFooterHeight="22" id="EPm-aQ-5ZF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="190" sectionHeaderHeight="22" sectionFooterHeight="22" id="EPm-aQ-5ZF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1201,17 +1201,17 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Ll-Pd-bRt" id="mCt-mp-84E">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsg-K9-PnK">
-                                            <rect key="frame" x="30" y="13" width="34" height="20"/>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="菜名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsg-K9-PnK">
+                                            <rect key="frame" x="25" y="13" width="30" height="18"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JE-uX-iYI">
-                                            <rect key="frame" x="72" y="11" width="60" height="25"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2JE-uX-iYI">
+                                            <rect key="frame" x="59" y="9" width="57" height="22"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="LdC-6o-CJh"/>
-                                                <constraint firstAttribute="width" constant="60" id="lvN-pQ-EdF"/>
+                                                <constraint firstAttribute="height" constant="22" id="LdC-6o-CJh"/>
+                                                <constraint firstAttribute="width" constant="57" id="lvN-pQ-EdF"/>
                                             </constraints>
                                             <state key="normal" image="up_loading_edit.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1221,16 +1221,16 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为菜谱选择一个标签（最多三个）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Q8-ek-bxN">
-                                            <rect key="frame" x="30" y="43" width="260" height="21"/>
+                                            <rect key="frame" x="25" y="42" width="260" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="o0u-zO-7bo"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hK-3Z-XGi" customClass="AutoSizeLabelView">
-                                            <rect key="frame" x="30" y="74" width="260" height="138"/>
+                                            <rect key="frame" x="8" y="68" width="304" height="144"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="garyline.png" translatesAutoresizingMaskIntoConstraints="NO" id="cHo-n0-8Za">
@@ -1242,18 +1242,18 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="wsg-K9-PnK" firstAttribute="top" secondItem="mCt-mp-84E" secondAttribute="top" constant="13" id="0F6-Sg-LRy"/>
-                                        <constraint firstItem="2JE-uX-iYI" firstAttribute="leading" secondItem="wsg-K9-PnK" secondAttribute="trailing" constant="8" id="5Pe-ZN-2UY"/>
-                                        <constraint firstItem="8hK-3Z-XGi" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="30" id="78N-8f-4og"/>
-                                        <constraint firstAttribute="trailing" secondItem="1Q8-ek-bxN" secondAttribute="trailing" constant="30" id="L5x-w9-3Eb"/>
+                                        <constraint firstItem="2JE-uX-iYI" firstAttribute="leading" secondItem="wsg-K9-PnK" secondAttribute="trailing" constant="4" id="5Pe-ZN-2UY"/>
+                                        <constraint firstItem="8hK-3Z-XGi" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="8" id="78N-8f-4og"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Q8-ek-bxN" secondAttribute="trailing" constant="35" id="L5x-w9-3Eb"/>
                                         <constraint firstAttribute="bottom" secondItem="8hK-3Z-XGi" secondAttribute="bottom" constant="8" id="Noa-WH-HzB"/>
-                                        <constraint firstItem="1Q8-ek-bxN" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="30" id="OGA-77-1Ql"/>
-                                        <constraint firstItem="wsg-K9-PnK" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="30" id="Y0A-JW-bLx"/>
+                                        <constraint firstItem="1Q8-ek-bxN" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="25" id="OGA-77-1Ql"/>
+                                        <constraint firstItem="wsg-K9-PnK" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" constant="25" id="Y0A-JW-bLx"/>
                                         <constraint firstAttribute="bottom" secondItem="cHo-n0-8Za" secondAttribute="bottom" id="fFj-1t-z0P"/>
-                                        <constraint firstItem="8hK-3Z-XGi" firstAttribute="top" secondItem="1Q8-ek-bxN" secondAttribute="bottom" constant="10" id="i1s-QJ-OyJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="8hK-3Z-XGi" secondAttribute="trailing" constant="30" id="jYF-ge-raX"/>
-                                        <constraint firstItem="1Q8-ek-bxN" firstAttribute="top" secondItem="2JE-uX-iYI" secondAttribute="bottom" constant="7" id="mA3-SB-99s"/>
+                                        <constraint firstItem="8hK-3Z-XGi" firstAttribute="top" secondItem="1Q8-ek-bxN" secondAttribute="bottom" constant="5" id="i1s-QJ-OyJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="8hK-3Z-XGi" secondAttribute="trailing" constant="8" id="jYF-ge-raX"/>
+                                        <constraint firstItem="1Q8-ek-bxN" firstAttribute="top" secondItem="2JE-uX-iYI" secondAttribute="bottom" constant="11" id="mA3-SB-99s"/>
                                         <constraint firstAttribute="trailing" secondItem="cHo-n0-8Za" secondAttribute="trailing" id="uQt-lU-prN"/>
-                                        <constraint firstItem="wsg-K9-PnK" firstAttribute="centerY" secondItem="2JE-uX-iYI" secondAttribute="centerY" id="ysg-rr-8PG"/>
+                                        <constraint firstItem="wsg-K9-PnK" firstAttribute="centerY" secondItem="2JE-uX-iYI" secondAttribute="centerY" constant="2" id="ysg-rr-8PG"/>
                                         <constraint firstItem="cHo-n0-8Za" firstAttribute="leading" secondItem="mCt-mp-84E" secondAttribute="leading" id="ziH-nn-6za"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -1273,16 +1273,16 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="B82-pN-mll"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sp-c9-SgE">
                                             <rect key="frame" x="0.0" y="30" width="320" height="41"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5C-Oe-C3x">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5C-Oe-C3x">
                                                     <rect key="frame" x="28" y="5" width="102" height="32"/>
-                                                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
                                                     <state key="normal" title="我使用了烤箱">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1290,6 +1290,7 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FW6-Bf-pAc">
                                                     <rect key="frame" x="28" y="0.0" width="265" height="41"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" image="xls.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1345,17 +1346,17 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="JPp-jB-jed"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入我的小贴士" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zi9-YD-Aa5">
-                                            <rect key="frame" x="50" y="42" width="221" height="18"/>
+                                            <rect key="frame" x="50" y="42" width="221" height="15"/>
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="221" id="c75-Dh-65c"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                                             <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <connections>
@@ -1363,7 +1364,7 @@
                                             </connections>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIi-5R-Xa7">
-                                            <rect key="frame" x="274" y="39" width="20" height="21"/>
+                                            <rect key="frame" x="274" y="36" width="20" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="E5U-ND-ogg"/>
                                                 <constraint firstAttribute="width" constant="20" id="rja-F6-n20"/>
@@ -1376,12 +1377,12 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpN-nB-if0">
-                                            <rect key="frame" x="28" y="80" width="264" height="30"/>
+                                            <rect key="frame" x="28" y="77" width="264" height="30"/>
                                             <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="J88-qm-XMh"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                                             <state key="normal" title="保存至草稿箱">
                                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1390,12 +1391,12 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAL-9n-7iy">
-                                            <rect key="frame" x="28" y="123" width="264" height="30"/>
+                                            <rect key="frame" x="28" y="120" width="264" height="30"/>
                                             <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="vFr-jR-YV1"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
                                             <state key="normal" title="发布">
                                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1404,7 +1405,7 @@
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textline.png" translatesAutoresizingMaskIntoConstraints="NO" id="9QQ-kR-Nwv">
-                                            <rect key="frame" x="28" y="60" width="269" height="5"/>
+                                            <rect key="frame" x="28" y="57" width="269" height="5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="5" id="5Ir-dc-TT4"/>
                                             </constraints>
@@ -1532,7 +1533,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="5ei-0a-GmJ">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="草稿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDY-FA-vYM">
@@ -2838,7 +2839,7 @@
                     <navigationItem key="navigationItem" id="pmg-s3-JMG">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="gmz-QB-MH0">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="意见反馈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tR1-TW-yXb">

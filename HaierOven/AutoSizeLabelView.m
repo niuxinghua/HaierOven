@@ -59,7 +59,7 @@
 -(void)setTags:(NSArray *)tags{
     _tags = tags;
     for (int i = 0; i<tags.count; i++) {
-        float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
+        float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:12]}]+20;
         UIButton *title = [UIButton buttonWithType:UIButtonTypeCustom];
      
         if (i==0) {
@@ -84,7 +84,7 @@
         [title setTitle:tags[i] forState:UIControlStateSelected];
         [title setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [title setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        title.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        title.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         title.titleLabel.textAlignment = NSTextAlignmentCenter;
         title.tag = i;
         if (self.selectedTags != nil) {
@@ -106,7 +106,7 @@
             
             [title setBackgroundImage:[MyTool createImageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
             [title setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forState:UIControlStateSelected];
-            title.layer.cornerRadius  = LABEL_H / 2;
+            title.layer.cornerRadius  = 3;
             
 
         } else if (self.style == AutoSizeLabelViewStyleMenuDetail) {
