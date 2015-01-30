@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "792"
             endingLineNumber = "792"
-            landmarkName = "-cropViewController:didFinishCroppingImage:transform:cropRect:"
+            landmarkName = "-openEditor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
