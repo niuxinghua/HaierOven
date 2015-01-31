@@ -512,9 +512,6 @@
 }
 
 -(void)ChickAlert:(UILabel *)label andTextFailed:(UITextField *)textfield{
-    NSLog(@"%@",label.text);
-    NSLog(@"%@",textfield.text);
-    NSLog(@"%d",label.tag);
 
     if (![textfield.text isEqualToString:@"请输入食材"]&&label.tag == 2) {
         label.text = textfield.text;

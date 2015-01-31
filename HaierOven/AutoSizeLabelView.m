@@ -26,6 +26,15 @@
     // Drawing code
 }
 */
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.style = AutoSizeLabelViewStyleCreatMenu;
+
+    }
+    return self;
+}
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder
