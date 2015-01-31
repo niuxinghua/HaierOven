@@ -449,7 +449,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="aFV-4p-9FM">
-                            <rect key="frame" x="130" y="6" width="60" height="33"/>
+                            <rect key="frame" x="130" y="5.5" width="60" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="首 页" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8q-Qd-Ksm">
@@ -1033,7 +1033,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                     </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="菜谱名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7VE-YF-XPk">
                                         <rect key="frame" x="16" y="11" width="289" height="30"/>
@@ -1041,7 +1041,7 @@
                                             <constraint firstAttribute="height" constant="30" id="qXK-aS-SIz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1534,7 +1534,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="5ei-0a-GmJ">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="草稿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDY-FA-vYM">
@@ -6216,7 +6216,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="JBd-Fu-TvR">
-                            <rect key="frame" x="101" y="6" width="118" height="33"/>
+                            <rect key="frame" x="100" y="5.5" width="118" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="列表" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84P-LK-P49">
@@ -6235,11 +6235,11 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="0d8-XP-QIn">
                             <view key="customView" contentMode="scaleToFill" id="I8l-sn-Fgx">
-                                <rect key="frame" x="232" y="5" width="71" height="33"/>
+                                <rect key="frame" x="233" y="5" width="80" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmQ-GY-baF">
-                                        <rect key="frame" x="11" y="2" width="26" height="26"/>
+                                        <rect key="frame" x="8" y="2" width="26" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="25j-6e-jVw"/>
                                             <constraint firstAttribute="height" constant="26" id="iQV-5o-Z4B"/>
@@ -6251,10 +6251,11 @@
                                         </state>
                                         <connections>
                                             <action selector="TurnSearch:" destination="HLi-T6-HHv" eventType="touchUpInside" id="ufJ-cX-FSL"/>
+                                            <action selector="search:" destination="HLi-T6-HHv" eventType="touchUpInside" id="WqV-ir-Yxa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWP-Tq-xW0">
-                                        <rect key="frame" x="45" y="2" width="26" height="26"/>
+                                        <rect key="frame" x="50" y="2" width="26" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="bip-GY-bdJ"/>
                                             <constraint firstAttribute="width" constant="26" id="wJb-jF-iaV"/>
@@ -6266,14 +6267,15 @@
                                         </state>
                                         <connections>
                                             <action selector="TurnAdd:" destination="HLi-T6-HHv" eventType="touchUpInside" id="ZK9-Zo-kpE"/>
+                                            <action selector="addCookbook:" destination="HLi-T6-HHv" eventType="touchUpInside" id="bxj-tc-7fj"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="fWP-Tq-xW0" firstAttribute="leading" secondItem="mmQ-GY-baF" secondAttribute="trailing" constant="8" id="Sk5-Zp-cdF"/>
+                                    <constraint firstItem="fWP-Tq-xW0" firstAttribute="leading" secondItem="mmQ-GY-baF" secondAttribute="trailing" constant="16" id="Sk5-Zp-cdF"/>
                                     <constraint firstItem="fWP-Tq-xW0" firstAttribute="top" secondItem="I8l-sn-Fgx" secondAttribute="top" constant="2" id="fhx-3y-yb4"/>
                                     <constraint firstItem="mmQ-GY-baF" firstAttribute="top" secondItem="I8l-sn-Fgx" secondAttribute="top" constant="2" id="x0o-ff-FQ4"/>
-                                    <constraint firstAttribute="trailing" secondItem="fWP-Tq-xW0" secondAttribute="trailing" id="xgd-36-SBR"/>
+                                    <constraint firstAttribute="trailing" secondItem="fWP-Tq-xW0" secondAttribute="trailing" constant="4" id="xgd-36-SBR"/>
                                 </constraints>
                             </view>
                         </barButtonItem>

@@ -100,7 +100,7 @@
         
         SkillCell* skillCell = [tableView dequeueReusableCellWithIdentifier:@"Skill cell" forIndexPath:indexPath];
         skillCell.delegate = self.delegate;
-        skillCell.skillLabel.text = self.cookbookDetail.cookbookTip;
+        skillCell.skillLabel.text = [self.cookbookDetail.cookbookTip isEqualToString:@"(null)"] ? @"无" : self.cookbookDetail.cookbookTip;
         return skillCell;
     }
 }

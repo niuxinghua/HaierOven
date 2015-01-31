@@ -32,7 +32,7 @@
     _oven = oven;
     NSString* ovenInfo = [oven.ovenInfo isKindOfClass:[NSNull class]] ? @"" : oven.ovenInfo[@"name"];
     
-    ovenInfo = [ovenInfo stringByAppendingFormat:@" %@ %@ %@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
+    ovenInfo = [ovenInfo stringByAppendingFormat:@" %@ %@° %@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
 
     self.ovenInfoLabel.text = ovenInfo;
     

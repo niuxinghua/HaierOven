@@ -70,11 +70,17 @@
     skVC.delegate = self;
     NSDictionary *dict = [NSDictionary dictionaryWithObject:AppStoreID forKey:SKStoreProductParameterITunesItemIdentifier];
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [self performSelector:@selector(dismissHud) withObject:nil afterDelay:10];
     [skVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error) {
-        [super hiddenProgressHUD];
+        //[super hiddenProgressHUD];
     }];
     [self presentViewController:skVC animated:YES completion:nil];
     
+}
+
+- (void)dismissHud
+{
+    [super hiddenProgressHUD];
 }
 
 - (IBAction)logout:(UIButton *)sender
@@ -85,6 +91,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
+    
+    [super openLoginController];
     
 }
 

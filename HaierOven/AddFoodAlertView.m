@@ -49,7 +49,9 @@
 
 - (IBAction)beginEdit:(UITextField *)sender {
     
-    [self.delegate beginEditFood:sender];
+    if ([self.delegate respondsToSelector:@selector(beginEditFood:)]) {
+        [self.delegate beginEditFood:sender];
+    }
     
 }
 
@@ -59,7 +61,10 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.delegate endEditFood:textField];
+    if ([self.delegate respondsToSelector:@selector(endEditFood:)]) {
+        [self.delegate endEditFood:textField];
+    }
+   
     return [textField resignFirstResponder];
 }
 - (IBAction)ChickAlert:(UIButton*)sender {
