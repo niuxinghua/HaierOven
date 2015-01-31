@@ -51,7 +51,10 @@
     
     self.foodLabel.text = food.name == nil ? @"请输入食材" : food.name;
     self.foodCountLabel.text = food.desc == nil ? @"分量" : food.desc;
-    
+//    
+//    if ([self.foodLabel.text isEqualToString:@"请输入食材"]) {
+//        self.foodLabel.textColor = [UIColor lightGrayColor];
+//    }
 }
 
 -(void)import:(UITapGestureRecognizer*)tap{

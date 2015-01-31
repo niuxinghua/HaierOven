@@ -103,6 +103,7 @@
 
 -(void)addFoodCell:(AddFoodCell *)cell setLabelText:(UILabel *)label
 {
+ 
     NSIndexPath* indexPath = [self.addfoodTableView indexPathForCell:cell];
 //    self.myWindow.hidden = NO;
 //    self.addFoodAlertView.addFoodAlertType = label.tag;
