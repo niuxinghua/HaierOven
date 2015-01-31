@@ -34,6 +34,7 @@
         self.steps = cookbookDetail.steps;
         self.cookbookDetail = cookbookDetail;
         self.delegate = delegate;
+        
     }
     return self;
 }
