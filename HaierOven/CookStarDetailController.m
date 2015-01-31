@@ -83,8 +83,43 @@
         if (success) {
             for (Tag* tag in obj) {
                 [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+                [self.tags addObject:tag.name];
+
             }
             self.cookStarDetailTopView.tags = self.tags;
+            
+            
+            
+            //topViewHight = [self getHeight];
+            CGRect frameOfHeader = self.cookStarDetailTopView.frame;
+            frameOfHeader.size.height =[self getHeight];
+            self.cookStarDetailTopView.frame = frameOfHeader;
+            
+//            self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getHeight]);
+            self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+            
+            
+//            self.mainTable.tableHeaderView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getHeight]);
+//            self.mainTable.tableHeaderView.clipsToBounds = YES;
+//            self.cookStarDetailTopView.Frame=CGRectMake(0, 0, PageW, topViewHight-36);
+//            self.mainTable.tableHeaderView.frame=CGRectMake(0, 0, PageW, topViewHight-36);
+//           [self.mainTable reloadData];
         }else {
             [super showProgressErrorWithLabelText:@"获取标签失败" afterDelay:1];
         }
@@ -161,6 +196,7 @@
     topViewHight = [self getHeight];
     
     self.cookStarDetailTopView = [[CookStarDetailTopView alloc]initWithFrame:CGRectMake(0, 0, PageW, topViewHight-36)];
+    
     self.cookStarDetailTopView.delegate = self;
     self.mainTable.tableHeaderView = self.cookStarDetailTopView;
     
@@ -247,6 +283,8 @@
     return cell;
 }
 
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return PageW*0.8;
 }
@@ -270,9 +308,9 @@
         height=445+movesize.height;
     }
     self.cookStarDetailTopView.height = height;
-    self.mainTable.tableHeaderView = self.cookStarDetailTopView;
-
+//    self.mainTable.tableHeaderView = self.cookStarDetailTopView;
 }
+
 
 -(void)follow:(UIButton *)sender{
   
@@ -373,36 +411,78 @@
     self.tempBtn = btn;
     
 }
+
 #define PADDING_WIDE    15   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
 #define LABEL_H    20   //标签high
 
 
 -(float)getHeight{
-    float leftpadding = 0;
-    int line = 1;
-    int count = 0;
-    for (int i = 0; i<self.tags.count; i++) {
-        float wide  =  [AutoSizeLabelView boolLabelLength:self.tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:14]}]+20;
-        
-        if (leftpadding+wide+PADDING_WIDE*count>PageW-90) {
-            leftpadding=0;
-            ++line;
-            count = 0;
-        }
-        
-        leftpadding +=wide;
-        count++;
+    
+    float height = 0.0;
+    
+    if (self.cookStarDetailTopView.descriptionLabel.text.length==0) {
+        height -= 16;
     }
     
-//    if (line>1) {
-        return (PADDING_HIGHT+LABEL_H)*line+465+movesize.height;
-//    }else
-//        return (PADDING_HIGHT+LABEL_H)*line+455+movesize.height;
+    height += [MyUtils getTextSizeWithText:self.cookerStar.introduction andTextAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:11.5]} andTextWidth:Main_Screen_Width - 32].height;
+    
+    self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 20+8+8, Main_Screen_Width - 30, (LABEL_H + PADDING_HIGHT));
+    
+    height += 188 + 8;
+    
+    height += (Main_Screen_Width - 70) / 5 * 3;
+    
+    height += 8 + 31 + 8;
+    
+    //height += 35;   //额外添加
+    
+    height += 8  + 20 + 8;   //出身姓名高度
+    
+    height += LABEL_H + PADDING_HIGHT;
+    
+    height += 30;   //下拉label
+    
+    if (self.cookStarDetailTopView.tagsView.lineCount==1) {
+        height -= 30;
+    }
+    return height;
 }
 
 
+-(void)UpLoadHeadViewHeight:(CGFloat)height{
+    
+    float updateHeight = [self getHeight];
+    
+//    updateHeight += self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H);
+    
+    updateHeight += (self.cookStarDetailTopView.tagsView.lineCount - 1) * (PADDING_HIGHT + LABEL_H);
 
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        CGRect frameOfHeader = self.cookStarDetailTopView.frame;
+        frameOfHeader.size.height = updateHeight;
+        self.cookStarDetailTopView.frame = frameOfHeader;
+        
+        CGFloat heightOfContainer = self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H) + 30 + 30;
+        self.cookStarDetailTopView.backDownView.frame = CGRectMake(0, self.cookStarDetailTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
+        
+        self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30, self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H));
+        self.cookStarDetailTopView.bottomView.frame = CGRectMake(0, self.cookStarDetailTopView.tagsView.bottom, Main_Screen_Width, 56);
+        
+        self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
+        
+        self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+    }];
+    
+    
+    
+//    [self.cookStarDetailTopView setNeedsLayout];
+    
+    
+    NSLog(@"%f",height);
+}
 /*
 #pragma mark - Navigation
 

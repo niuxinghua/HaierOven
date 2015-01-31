@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CookStarPullView;
+@protocol CookStarPullViewDelegate <NSObject>
 
+-(void)showMoreTags;
+
+@end
 @interface CookStarPullView : UIView
-
+@property (weak, nonatomic)id<CookStarPullViewDelegate>delegate;
 @end

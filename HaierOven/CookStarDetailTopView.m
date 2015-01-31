@@ -8,24 +8,21 @@
 //
 
 #import "CookStarDetailTopView.h"
-#import "AutoSizeLabelView.h"
-@interface CookStarDetailTopView ()<AutoSizeLabelViewDelegate>
+
+
+@interface CookStarDetailTopView ()<AutoSizeLabelViewDelegate,CookStarPullViewDelegate>
 {
     CGFloat tempHeight;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *avaterImage;
-@property (strong, nonatomic) IBOutlet UIView *backDownView;//计算用
-@property (strong, nonatomic) IBOutlet AutoSizeLabelView *tagsView;
+
+
 /**
  *  某人的菜谱“Daniel Boulud 的菜谱”
  */
 @property (strong, nonatomic) IBOutlet UILabel *cookBookLabel;
-/**
- *  底部下拉view
- */
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-@property (strong, nonatomic) IBOutlet UILabel *chickMoreLabel;
-@property (strong, nonatomic) IBOutlet UIButton *studyCook;
+
+
 
 
 @property NSInteger top;
@@ -42,12 +39,12 @@
     self.tagsView.delegate = self;
     self.studyCook.layer.masksToBounds = YES;
     self.studyCook.layer.cornerRadius = 15;
-    [self initTagsView];
-
+    [self initSubviews];
+    
     self.top     = self.vedioImage.bottom+180+56;
     self.bottom  = self.bottomView.top;
-    NSLog(@"%ld  %ld" , (long)self.top,(long)self.bottom);
 
+    
     return self;
 }
 -(void)layoutSubviews{
@@ -55,32 +52,74 @@
 }
 
 
--(void)initTagsView{
-    self.tagsView = [[AutoSizeLabelView alloc]initWithFrame:CGRectMake(15, self.cookBookLabel.bottom+8, self.width-30, self.backDownView.height-57)];
-    self.tagsView.delegate = self;
-    [self.backDownView addSubview:self.tagsView];
+-(void)initSubviews{
+    self.backDownView = [UIView new];
+//    self.backDownView.clipsToBounds = YES;
+    self.backDownView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    
+    self.bottomView = [[CookStarPullView alloc]init];
+    self.bottomView.backgroundColor = [UIColor clearColor];
+
+    self.tagsView = [[AutoSizeLabelView alloc]init];
+    
+    self.bottomView.userInteractionEnabled = YES;
+    UISwipeGestureRecognizer* swipGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMoreTags)];
+    swipGesture.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.bottomView addGestureRecognizer:swipGesture];
+    
+    self.bottomView.delegate = self;
+    self.cookBookLabel = [UILabel new];
+    self.cookBookLabel.textColor = GlobalOrangeColor;
+    self.cookBookLabel.font = [UIFont fontWithName:GlobalTitleFontName size:16];
+    self.cookBookLabel.textAlignment = NSTextAlignmentCenter;
+
+
 }
 
 
-
+#define PADDING_WIDE    15   //标签左右间距
+#define PADDING_HIGHT    8   //标签上下间距
+#define LABEL_H    20   //标签high
 -(void)setTags:(NSArray *)tags{
     _tags = tags;
     self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
     self.tagsView.tags = tags;
- 
-//    self.bottomView.hidden = !(self.tagsView.lineCount >= 2);
+    
+//    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT)+PADDING_HIGHT+30+28);
+   
+    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW,1*(PADDING_HIGHT+LABEL_H)+PADDING_HIGHT+30+28);
+ //   self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW,1*(PADDING_HIGHT+LABEL_H)+PADDING_HIGHT+30 + 20);
+    
+    self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
+
+    
+    self.tagsView.Frame = CGRectMake(15, self.cookBookLabel.bottom+8, self.width-30, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
+    self.tagsView.clipsToBounds = YES;
+    self.tagsView.delegate = self;
+    
+    
+    self.bottomView.frame = CGRectMake(0, self.backDownView.height-26, self.backDownView.width, 56);
+
+    
+    [self addSubview:self.backDownView];
+    [self.backDownView addSubview:self.cookBookLabel];
+    [self.backDownView addSubview:self.tagsView];
+    [self.backDownView addSubview:self.bottomView];
+    
+    
+    
     if (self.tagsView.lineCount < 2) {
-//        [self.bottomView removeFromSuperview];
-        for (UIView *view in self.bottomView.subviews) {
-            view.hidden = YES;
-        }
-        self.bottomView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        self.bottomView.clipsToBounds = NO;
-//        CGRect rect =  self.bottomView.frame;
+        self.bottomView.hidden = YES;
+        self.clipsToBounds = YES;
+//        CGRect rect = self.bottomView.frame;
 //        rect.size.height = 0;
 //        self.bottomView.frame = rect;
-//        self.bottomView.hidden = YES;
+    } else {
+        self.bottomView.hidden = NO;
+        self.clipsToBounds = NO;
     }
+    
 }
 
 - (void)setCookerStar:(CookerStar *)cookerStar
@@ -121,6 +160,8 @@
     
     
 }
+
+
 - (IBAction)follow:(UIButton *)sender {
     [self.delegate follow:sender];
 }
@@ -156,36 +197,14 @@
     
 }
 
+-(void)showMoreTags{
+//    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW, self.tagsView.lineCount*(PADDING_HIGHT+LABEL_H)+PADDING_HIGHT+30+28);
+//    
+//    self.tagsView.Frame = CGRectMake(15, self.cookBookLabel.bottom+8, self.width-30, self.tagsView.lineCount*(LABEL_H+PADDING_HIGHT));
+//    
+//    self.bottomView.frame = CGRectMake(0, self.backDownView.height-26, self.backDownView.width, 56);
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    
-//    UITouch * touch = [touches allObjects][0];
-//    CGPoint location = [touch locationInView:self];
-//    
-//    CGRect rect = [self.chickMoreLabel convertRect:self.chickMoreLabel.frame toView:self];
-//    
-//    if(CGRectContainsPoint(rect, location)){
-//        NSLog(@"在里面");
-//        UITableView *table =  (UITableView *)self.superview;
-//        table.scrollEnabled = NO;
-//    }else {
-//        NSLog(@"不在");
-//        UITableView *table =  (UITableView *)self.superview;
-//        table.scrollEnabled = YES;
-//    }
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-//    UITableView *table =  (UITableView *)self.superview;
-//    table.scrollEnabled = YES;
-//}
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+    [self.delegate UpLoadHeadViewHeight:self.studyCook.bottom+self.bottomView.height];
 }
-*/
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AutoSizeLabelView.h"
+#import "CookStarPullView.h"
+
 @class CookStarDetailTopView;
+
+
 @protocol CookStarDetailTopViewDelegate <NSObject>
 
 -(void)chickTags:(UIButton *)btn;
@@ -18,6 +23,7 @@
 -(void)leaveMessage;
 -(void)playVideo;
 -(void)studyCook;
+-(void)UpLoadHeadViewHeight:(CGFloat)height;
 @end
 
 @interface CookStarDetailTopView : UIView
@@ -36,6 +42,21 @@
  *  关注按钮
  */
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+
+@property (strong, nonatomic) AutoSizeLabelView *tagsView;
+
+/**
+ *  container
+ */
+@property (strong, nonatomic) IBOutlet UIView *backDownView;//计算用
+
+/**
+ *  底部下拉view
+ */
+@property (strong, nonatomic) IBOutlet CookStarPullView *bottomView;
+
+
+@property (strong, nonatomic) IBOutlet UIButton *studyCook;
 
 /**
  *  级别图标

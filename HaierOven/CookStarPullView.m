@@ -18,4 +18,16 @@
 }
 */
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([CookStarPullView class]) owner:self options:nil] firstObject];
+    }
+    return self;
+}
+- (IBAction)showMoreTags:(id)sender {
+    [self.delegate showMoreTags];
+}
+
 @end
