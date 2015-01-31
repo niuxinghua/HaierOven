@@ -516,6 +516,25 @@
     self.alertDate.frame =alertHiddenRect;
 }
 
+- (void)beginEditFood:(UITextField *)sender
+{
+    if (PageH- alertShowRect.origin.y-alertShowRect.size.height<256) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alertEdit.frame = CGRectMake(15, 90, PageW-30, 138); //138
+        }];
+        
+    }
+    
+}
+
+- (void)endEditFood:(UITextField *)sender
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.self.alertEdit.frame = alertShowRect;
+    }];
+    
+}
 
 #pragma mark - alertChangePsdDelegate
 

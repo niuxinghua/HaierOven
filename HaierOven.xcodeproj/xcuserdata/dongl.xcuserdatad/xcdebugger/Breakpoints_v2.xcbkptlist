@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/CreatMneuController.m"
-            timestampString = "444295005.986093"
+            timestampString = "444362817.06594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
-            landmarkName = "-cropViewController:didFinishCroppingImage:transform:cropRect:"
+            startingLineNumber = "802"
+            endingLineNumber = "802"
+            landmarkName = "-openEditor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -160,22 +160,6 @@
             startingLineNumber = "41"
             endingLineNumber = "41"
             landmarkName = "-setUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/CreatMneuController.m"
-            timestampString = "444299928.184569"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
-            landmarkName = "-getHeight"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

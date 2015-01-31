@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qb9-bz-vmv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qb9-bz-vmv">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1036,7 +1036,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                     </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="菜谱名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7VE-YF-XPk">
-                                        <rect key="frame" x="16" y="11" width="289" height="30"/>
+                                        <rect key="frame" x="20" y="11" width="279" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qXK-aS-SIz"/>
                                         </constraints>
@@ -1049,11 +1049,11 @@
                                     <constraint firstItem="xp0-x4-He3" firstAttribute="top" secondItem="EyL-K1-ecm" secondAttribute="bottom" constant="8" id="9VX-wK-26p"/>
                                     <constraint firstAttribute="trailing" secondItem="xp0-x4-He3" secondAttribute="trailing" constant="15" id="9yO-Rh-ywv"/>
                                     <constraint firstItem="7VE-YF-XPk" firstAttribute="top" secondItem="vmv-QE-iwg" secondAttribute="top" constant="11" id="Ael-2K-7sf"/>
-                                    <constraint firstAttribute="trailing" secondItem="7VE-YF-XPk" secondAttribute="trailing" constant="15" id="GPl-rY-B1b"/>
+                                    <constraint firstAttribute="trailing" secondItem="7VE-YF-XPk" secondAttribute="trailing" constant="21" id="GPl-rY-B1b"/>
                                     <constraint firstAttribute="bottom" secondItem="xp0-x4-He3" secondAttribute="bottom" constant="8" id="Kyy-5F-ScL"/>
                                     <constraint firstAttribute="width" secondItem="vmv-QE-iwg" secondAttribute="height" multiplier="32:15" id="NRA-BR-8td"/>
                                     <constraint firstAttribute="trailing" secondItem="EyL-K1-ecm" secondAttribute="trailing" constant="15" id="Pfl-Ce-3YT"/>
-                                    <constraint firstItem="7VE-YF-XPk" firstAttribute="leading" secondItem="vmv-QE-iwg" secondAttribute="leading" constant="16" id="Ufa-x2-f73"/>
+                                    <constraint firstItem="7VE-YF-XPk" firstAttribute="leading" secondItem="vmv-QE-iwg" secondAttribute="leading" constant="20" id="Ufa-x2-f73"/>
                                     <constraint firstItem="xp0-x4-He3" firstAttribute="leading" secondItem="vmv-QE-iwg" secondAttribute="leading" constant="16" id="cSb-hA-2Ce"/>
                                     <constraint firstItem="EyL-K1-ecm" firstAttribute="top" secondItem="vmv-QE-iwg" secondAttribute="top" constant="8" id="oSL-AR-NuX"/>
                                     <constraint firstItem="EyL-K1-ecm" firstAttribute="leading" secondItem="vmv-QE-iwg" secondAttribute="leading" constant="16" id="spK-d9-IEp"/>
@@ -1104,7 +1104,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="eaw-J9-Gfg">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <rect key="frame" x="96" y="6" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E06-Km-AnG">
@@ -2385,7 +2385,7 @@
                                             </state>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjn-TT-85M">
-                                            <rect key="frame" x="76" y="19" width="37.5" height="16.5"/>
+                                            <rect key="frame" x="76" y="19" width="38" height="17"/>
                                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -2790,7 +2790,7 @@
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您的手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KwT-kV-jGj">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您的手机号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KwT-kV-jGj">
                                 <rect key="frame" x="16" y="262" width="288" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2799,7 +2799,7 @@
                                 <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBo-qK-G6c">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBo-qK-G6c">
                                 <rect key="frame" x="25" y="340" width="270" height="31"/>
                                 <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>

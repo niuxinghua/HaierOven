@@ -512,19 +512,25 @@
 }
 
 -(void)ChickAlert:(UILabel *)label andTextFailed:(UITextField *)textfield{
-    label.text = textfield.text;
-    label.textColor = [UIColor blackColor];
+    NSLog(@"%@",label.text);
+    NSLog(@"%@",textfield.text);
+    NSLog(@"%d",label.tag);
+
+    if (![textfield.text isEqualToString:@"请输入食材"]&&label.tag == 2) {
+        label.text = textfield.text;
+        label.textColor = [UIColor blackColor];
+        self.edittingFood.name = label.text;
+
+    }else if (![textfield.text isEqualToString:@"用量"]&&label.tag == 1) {
+        label.text = textfield.text;
+        label.textColor = [UIColor blackColor];
+        self.edittingFood.desc = label.text;
+    }
+    
     self.myWindow.hidden = YES;
     self.addFoodAlertView.frame = alertRectHidden;
     [textfield resignFirstResponder];
     
-    if (label.tag == 2) {
-        self.edittingFood.name = label.text;
-    }
-    if (label.tag == 1) {
-        self.edittingFood.desc = label.text;
-    }
-
     
 }
 
@@ -639,6 +645,8 @@
         }
     }
     
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
+    
     DataCenter* dataCenter = [DataCenter sharedInstance];
     if (dataCenter.currentUser.level == 1 || dataCenter.currentUser.level == 2) {
         
@@ -749,6 +757,8 @@
     
     self.cookbookDetail.tags = self.selectedTags;
     self.cookbookDetail.steps = self.steps;
+    
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
     
     self.cookbookDetail.foods = self.foods;
     self.cookbookDetail.cookbookTip = self.myPs_String;

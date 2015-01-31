@@ -1042,6 +1042,10 @@
 
 - (void)praiseCookbook
 {
+    if (self.isPreview) {
+        [super showProgressErrorWithLabelText:@"预览状态不可以赞喔" afterDelay:1];
+        return;
+    }
     if ([self.cookbookDetail.praised isEqualToString:@"1"]) {
         [super showProgressErrorWithLabelText:@"您已赞过这个菜谱" afterDelay:1];
         self.praiseButton.selected = YES;
@@ -1066,6 +1070,11 @@
 
 - (void)shareCookbook
 {
+    if (self.isPreview) {
+        [super showProgressErrorWithLabelText:@"预览状态不分享赞喔" afterDelay:1];
+        return;
+    }
+    
     NSLog(@"分享");
     // 构建分享内容
     NSString* shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName];
