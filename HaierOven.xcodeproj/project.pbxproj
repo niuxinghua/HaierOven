@@ -1091,6 +1091,10 @@
 		845B33961A58EB4300DD8887 /* DescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33951A58EB4300DD8887 /* DescCell.m */; };
 		845B33991A590FA800DD8887 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 845B33981A590FA800DD8887 /* CommentUser.m */; };
 		847594061A720C7F0085229E /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 847594051A720C7F0085229E /* Friend.m */; };
+		848527721A7CA67400400BF8 /* use@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E61ABA1A762697009DF3FC /* use@2x.png */; };
+		848527731A7CA6AA00400BF8 /* use2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E61AC11A7629CA009DF3FC /* use2@3x.png */; };
+		848527761A7CD1BC00400BF8 /* CookStarPullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848527751A7CD1BC00400BF8 /* CookStarPullView.m */; };
+		848527781A7CD1D700400BF8 /* CookStarPullView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848527771A7CD1D700400BF8 /* CookStarPullView.xib */; };
 		84855F241A63B71200830B75 /* Cooker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84855F231A63B71200830B75 /* Cooker.m */; };
 		84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84855F2B1A64F7D600830B75 /* MediaPlayer.framework */; };
 		849392521A6E0CE700D78106 /* KKProgressTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 849392511A6E0CE700D78106 /* KKProgressTimer.m */; };
@@ -2539,6 +2543,9 @@
 		845B33981A590FA800DD8887 /* CommentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentUser.m; sourceTree = "<group>"; };
 		847594041A720C7F0085229E /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
 		847594051A720C7F0085229E /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
+		848527741A7CD1BC00400BF8 /* CookStarPullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarPullView.h; sourceTree = "<group>"; };
+		848527751A7CD1BC00400BF8 /* CookStarPullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarPullView.m; sourceTree = "<group>"; };
+		848527771A7CD1D700400BF8 /* CookStarPullView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookStarPullView.xib; sourceTree = "<group>"; };
 		84855F221A63B71200830B75 /* Cooker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cooker.h; sourceTree = "<group>"; };
 		84855F231A63B71200830B75 /* Cooker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cooker.m; sourceTree = "<group>"; };
 		84855F281A64CA9900830B75 /* CookerStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookerStar.h; sourceTree = "<group>"; };
@@ -2709,6 +2716,9 @@
 				452A6E641A5A90BE00ABFE75 /* CookStarController.m */,
 				452A6E691A5A921800ABFE75 /* CookStarCell.h */,
 				452A6E6A1A5A921800ABFE75 /* CookStarCell.m */,
+				848527741A7CD1BC00400BF8 /* CookStarPullView.h */,
+				848527751A7CD1BC00400BF8 /* CookStarPullView.m */,
+				848527771A7CD1D700400BF8 /* CookStarPullView.xib */,
 			);
 			name = CookStarController;
 			sourceTree = "<group>";
@@ -5431,6 +5441,7 @@
 				452A6E771A5A964100ABFE75 /* followed.png in Resources */,
 				458DD06B1A651A4B006E84DD /* PEPhotoCropEditor.bundle in Resources */,
 				45A5E8291A50082400FCD2BD /* xcqr@3x.png in Resources */,
+				848527731A7CA6AA00400BF8 /* use2@3x.png in Resources */,
 				45D906C61A47CAAB00B97D92 /* gfcp@3x.png in Resources */,
 				458952BE1A493C05009B5DD1 /* wifilianjie06@3x.png in Resources */,
 				45AC329F1A77A5C4004B1828 /* 3-4-3-1.png in Resources */,
@@ -6010,6 +6021,7 @@
 				849F91781A513981006234B9 /* icon_like_navi_n-.png in Resources */,
 				458952AF1A493C05009B5DD1 /* wifilianjie01@3x.png in Resources */,
 				849F91741A513981006234B9 /* icon_gfcp_s@2x.png in Resources */,
+				848527721A7CA67400400BF8 /* use@2x.png in Resources */,
 				45BB36411A4A953A000EE3C4 /* xz-xz@3x.png in Resources */,
 				45B650FE1A482DEA00A6376D /* 2-1@2x.png in Resources */,
 				458952F01A496876009B5DD1 /* tuolian.png in Resources */,
@@ -6081,6 +6093,7 @@
 				45BB136D1A49124400FA44F4 /* progressBorder@2x.png in Resources */,
 				840141521A4BDD470050615F /* Icon.png in Resources */,
 				45D906F81A47CAAB00B97D92 /* searchborder@2x.png in Resources */,
+				848527781A7CD1D700400BF8 /* CookStarPullView.xib in Resources */,
 				45AC322C1A779BCD004B1828 /* StudyCookPart_3.plist in Resources */,
 				45BC57A61A4B0DDB0052F520 /* shijian-cxz.png in Resources */,
 				45BC57311A4AF27C0052F520 /* dlfp-wxz.png in Resources */,
@@ -6192,6 +6205,7 @@
 				844117861A4BB8AF00628A64 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				458DD0681A651A4B006E84DD /* PECropRectView.m in Sources */,
 				844117741A4BB8AF00628A64 /* Creator.m in Sources */,
+				848527761A7CD1BC00400BF8 /* CookStarPullView.m in Sources */,
 				C4B1104D1A517ECD005ADE4B /* CookbookOven.m in Sources */,
 				45C7E5611A3FD9AE000B086B /* BaseViewController.m in Sources */,
 				45AC31FF1A77469C004B1828 /* StudyCookTools.m in Sources */,

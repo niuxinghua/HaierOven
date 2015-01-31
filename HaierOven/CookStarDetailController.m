@@ -156,7 +156,7 @@
 
 -(void)SetUpSubviews{
     self.decString = @"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试";
-    movesize = [MyUtils getTextSizeWithText:self.decString andTextAttribute:@{NSFontAttributeName:[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:PageW-32];
+    movesize = [MyUtils getTextSizeWithText:self.decString andTextAttribute:@{NSFontAttributeName:[UIFont fontWithName:GlobalTitleFontName size:11.5]} andTextWidth:PageW-32];
     
     topViewHight = [self getHeight];
     
@@ -263,12 +263,11 @@
 
 #pragma mark-  TopViewDelegate
 -(void)ponnedHeadView:(NSInteger)height top:(NSInteger)top AndBottom:(NSInteger)Bottom{
-
     
     if (height>topViewHight) {
         height=topViewHight;
-    }else if (height<455+movesize.height){
-        height=455+movesize.height;
+    }else if (height<445+movesize.height){
+        height=445+movesize.height;
     }
     self.cookStarDetailTopView.height = height;
     self.mainTable.tableHeaderView = self.cookStarDetailTopView;
@@ -279,6 +278,10 @@
   
     if (!IsLogin) {
         [super openLoginController];
+        return;
+    }
+    if ([self.cookerStar.userBaseId isEqualToString:CurrentUserBaseId]) {
+        [super showProgressErrorWithLabelText:@"不能关注自己" afterDelay:1];
         return;
     }
     NSString* userBaseId = CurrentUserBaseId;
@@ -309,6 +312,11 @@
 -(void)leaveMessage{
     
     NSLog(@"留言");
+    
+    if ([self.cookerStar.userBaseId isEqualToString:CurrentUserBaseId]) {
+        [super showProgressErrorWithLabelText:@"不能给自己留言" afterDelay:1];
+        return;
+    }
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
@@ -386,9 +394,11 @@
         leftpadding +=wide;
         count++;
     }
-
     
-    return (PADDING_HIGHT+LABEL_H)*line+455+movesize.height;
+//    if (line>1) {
+        return (PADDING_HIGHT+LABEL_H)*line+465+movesize.height;
+//    }else
+//        return (PADDING_HIGHT+LABEL_H)*line+455+movesize.height;
 }
 
 

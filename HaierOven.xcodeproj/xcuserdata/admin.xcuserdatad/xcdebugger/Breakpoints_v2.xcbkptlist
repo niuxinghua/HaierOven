@@ -99,22 +99,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "443693446.279845"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "-registerWithEmail:andPhone:andPassword:callBack:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
             timestampString = "444222523.336171"
             startingColumnNumber = "9223372036854775807"
@@ -163,12 +147,12 @@
                   symbolName = "-[InternetManager completeThirdPartyWithPassword:phone:email:userName:nickName:callBack:]"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "444322048.938508"
+                  timestampString = "444384422.696771"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "488"
                   endingLineNumber = "488"
-                  offsetFromSymbolStart = "628">
+                  offsetFromSymbolStart = "850">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -177,14 +161,46 @@
                   symbolName = "__89-[InternetManager completeThirdPartyWithPassword:phone:email:userName:nickName:callBack:]_block_invoke"
                   moduleName = "HaierOven"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "444322048.93865"
+                  timestampString = "444384422.696972"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "488"
                   endingLineNumber = "488"
-                  offsetFromSymbolStart = "90">
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/CookStarDetailController.m"
+            timestampString = "444383994.234902"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "-getHeight"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HaierOven/CookStarDetailController.m"
+            timestampString = "444384406.483142"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
+            landmarkName = "-getHeight"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

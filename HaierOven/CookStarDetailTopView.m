@@ -67,6 +67,20 @@
     _tags = tags;
     self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
     self.tagsView.tags = tags;
+ 
+//    self.bottomView.hidden = !(self.tagsView.lineCount >= 2);
+    if (self.tagsView.lineCount < 2) {
+//        [self.bottomView removeFromSuperview];
+        for (UIView *view in self.bottomView.subviews) {
+            view.hidden = YES;
+        }
+        self.bottomView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.bottomView.clipsToBounds = NO;
+//        CGRect rect =  self.bottomView.frame;
+//        rect.size.height = 0;
+//        self.bottomView.frame = rect;
+//        self.bottomView.hidden = YES;
+    }
 }
 
 - (void)setCookerStar:(CookerStar *)cookerStar

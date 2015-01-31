@@ -15,7 +15,7 @@
     
 //    self.foodLabel.textColor = [UIColor blackColor];
 //    self.foodCountLabel.textColor = [UIColor blackColor];
-    
+    [self.deleteBtn setEnlargeEdgeWithTop:8 right:10 bottom:8 left:10];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

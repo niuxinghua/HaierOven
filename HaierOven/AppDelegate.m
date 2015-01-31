@@ -69,7 +69,7 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    NSInteger seconds = 10;
+    NSInteger seconds = 2;
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds];
     localNotification.alertBody = @"hello";
     localNotification.alertAction = @"alertAction";

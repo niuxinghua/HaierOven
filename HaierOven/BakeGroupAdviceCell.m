@@ -69,7 +69,7 @@
     self.tagLabel.layer.masksToBounds = YES;
     self.tagLabel.layer.cornerRadius = 3;
     self.followBtn.layer.masksToBounds = YES;
-    self.followBtn.layer.cornerRadius = 15;
+    self.followBtn.layer.cornerRadius = self.followBtn.height / 2;
 }
 - (IBAction)follow:(UIButton *)sender {
     [self.delegate bakeGroupAdviceCell:self followed:sender];

@@ -25,13 +25,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAp-Xz-45w">
-                        <rect key="frame" x="242" y="18" width="70" height="30"/>
+                        <rect key="frame" x="242" y="18" width="70" height="25"/>
                         <color key="backgroundColor" red="0.32156862749999998" green="0.63137254899999995" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="mzk-D9-s4B"/>
-                            <constraint firstAttribute="height" constant="30" id="n43-6z-RTG"/>
+                            <constraint firstAttribute="height" constant="25" id="n43-6z-RTG"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="12"/>
                         <state key="normal" title="＋关注">
                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -41,7 +41,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="官方厨神" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBf-8T-FOg">
-                        <rect key="frame" x="144" y="14" width="60" height="17"/>
+                        <rect key="frame" x="143" y="14" width="60" height="17"/>
                         <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="Frp-i5-ek8"/>
@@ -62,7 +62,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniel.B" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uW-MH-7wh">
-                        <rect key="frame" x="76" y="13" width="65" height="19"/>
+                        <rect key="frame" x="76" y="13" width="64.5" height="18.5"/>
                         <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                     <constraint firstItem="aJ3-PV-VfE" firstAttribute="top" secondItem="Sh6-oN-393" secondAttribute="bottom" constant="2" id="5UN-ms-LdU"/>
                     <constraint firstItem="3I3-jZ-Ok8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="9Zl-1o-Tom"/>
                     <constraint firstItem="3I3-jZ-Ok8" firstAttribute="top" secondItem="aJ3-PV-VfE" secondAttribute="bottom" id="9uy-8M-rQp"/>
-                    <constraint firstItem="nAp-Xz-45w" firstAttribute="centerY" secondItem="oJL-5v-FxC" secondAttribute="centerY" id="9vg-Nu-Sed"/>
+                    <constraint firstItem="nAp-Xz-45w" firstAttribute="centerY" secondItem="oJL-5v-FxC" secondAttribute="centerY" constant="-2.5" id="9vg-Nu-Sed"/>
                     <constraint firstItem="0uW-MH-7wh" firstAttribute="leading" secondItem="oJL-5v-FxC" secondAttribute="trailing" constant="8" id="Cov-xD-lRc"/>
                     <constraint firstItem="oJL-5v-FxC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Gvf-Ab-iAk"/>
                     <constraint firstItem="aJ3-PV-VfE" firstAttribute="top" secondItem="oJL-5v-FxC" secondAttribute="bottom" constant="8" id="IAR-RS-9Bf"/>

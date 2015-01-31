@@ -273,11 +273,11 @@
 //            return (PageW-16)*0.12*(self.foods.count+1)+45;
             break;
         case 3:
-            if ([DataCenter sharedInstance].currentUser.level != 1 || [DataCenter sharedInstance].currentUser.level != 2) {
-                //普通用户隐藏我使用了烤箱
-                return 0;
-            } else {
+            
+            if ([DataCenter sharedInstance].currentUser.level == 1 || [DataCenter sharedInstance].currentUser.level == 2) {
                 return useBake?311:71;
+            } else {
+                return 0;
             }
             
             break;
@@ -536,6 +536,9 @@
 
 - (void)beginEditFood:(UITextField *)sender
 {
+    if ([sender.text isEqualToString:@"请输入食材"] || [sender.text isEqualToString:@"用量"]) {
+        sender.text = @"";
+    }
     if (PageH- alertRectShow.origin.y-alertRectShow.size.height<256) {
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -558,15 +561,19 @@
 
 - (IBAction)UseDevice:(UIButton*)sender {
     DataCenter* dataCenter = [DataCenter sharedInstance];
-    if (dataCenter.currentUser.level != 1 || dataCenter.currentUser.level != 2) {
+    
+    if (dataCenter.currentUser.level == 1 || dataCenter.currentUser.level == 2) {
+        
+        sender.selected = !sender.selected;
+        useBake = !useBake;
+        [self.tableView reloadData];
+        NSLog(@"我使用了烤箱");
+        
+    } else {
         [super showProgressErrorWithLabelText:@"只有厨神才可选择烤箱模式哦" afterDelay:1];
         return;
     }
     
-    sender.selected = !sender.selected;
-    useBake = !useBake;
-    [self.tableView reloadData];
-    NSLog(@"我使用了烤箱");
 }
 
 #pragma mark -

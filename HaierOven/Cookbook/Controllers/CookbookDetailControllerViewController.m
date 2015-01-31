@@ -805,7 +805,7 @@
 {
     CGFloat height = 17;
     
-    height += [MyUtils getTextSizeWithText:self.cookbookDetail.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:14.0f]} andTextWidth:Main_Screen_Width - 30].height;
+    height += [MyUtils getTextSizeWithText:self.cookbookDetail.desc andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTextFontName size:13.0f]} andTextWidth:Main_Screen_Width - 30].height;
     
     return height;
 }
@@ -813,7 +813,7 @@
 - (CGFloat)getStepsViewHeight
 {
     CGFloat height = 0.0f;
-    height += 88; //两个固定cell高度
+    height += 44 + 67; //两个固定cell高度
     for (Step* step in self.cookbookDetail.steps) {
         height += 20; // 图片距离上边距
         height += (Main_Screen_Width - 54 - 26) * 7 / 12;   //图片宽高比位7:12
@@ -822,7 +822,7 @@
         height += 8; //Label距离下边距
     }
     
-    height += 36 + 49;
+    height += 36 + 71; //----
     height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
     
     return height;
@@ -1046,15 +1046,18 @@
         [super showProgressErrorWithLabelText:@"预览状态不可以赞喔" afterDelay:1];
         return;
     }
-    if ([self.cookbookDetail.praised isEqualToString:@"1"]) {
-        [super showProgressErrorWithLabelText:@"您已赞过这个菜谱" afterDelay:1];
-        self.praiseButton.selected = YES;
-        return;
-    }
+    
     if (!IsLogin) {
         [super openLoginController];
         return;
     }
+    
+    if (self.praiseButton.selected) {
+        [super showProgressErrorWithLabelText:@"您已赞过这个菜谱" afterDelay:1];
+        self.praiseButton.selected = YES;
+        return;
+    }
+    
     NSString* userID = CurrentUserBaseId;
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {

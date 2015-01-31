@@ -50,8 +50,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.row < 2) {
+    if (indexPath.row == 0) {
         return 44;
+    } else if (indexPath.row == 1) {
+        return 67;
     } else if (indexPath.row < self.steps.count + 2) {
         return [self getHeightWithStep:self.steps[indexPath.row - 2]];
     } else {

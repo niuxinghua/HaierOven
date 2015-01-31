@@ -126,6 +126,15 @@
         [super openLoginController];
         return;
     }
+    
+    NSIndexPath* index = [self.tableView indexPathForCell:cell];
+    CookerStar* cooker = self.cookerStars[index.row];
+    
+    if ([cooker.userBaseId isEqualToString:CurrentUserBaseId]) {
+        [super showProgressErrorWithLabelText:@"不能关注自己哦" afterDelay:1];
+        return;
+    }
+    
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     CookerStar* selectedCooker = self.cookerStars[indexPath.row];
     NSString* userBaseId = CurrentUserBaseId;

@@ -37,6 +37,8 @@
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_pageIndex == 1) {
+                if (self.cookbooks.count == 0)
+                    [super showProgressErrorWithLabelText:@"没有更多数据了..." afterDelay:1];
                 self.cookbooks = obj;
             } else {
                 [self.cookbooks addObjectsFromArray:arr];

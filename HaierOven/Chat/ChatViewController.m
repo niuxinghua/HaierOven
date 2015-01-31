@@ -40,6 +40,8 @@
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_pageIndex == 1) {
+                if (self.messages.count == 0)
+                    [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 self.messages = obj;
             } else {
                 [self.messages addObjectsFromArray:arr];

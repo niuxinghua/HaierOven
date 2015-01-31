@@ -141,20 +141,25 @@
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView{
+    tempFloat = textView.origin.y + [MyUtils getTextSizeWithText:textView.text andTextAttribute:@{NSFontAttributeName:textView.font} andTextWidth:Main_Screen_Width - 32].height;
+    self.placeholderLabel.hidden = !(textView.text.length == 0);
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     //    textField.text = self.titleString;
     return [textField resignFirstResponder];
 }
 
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    tempFloat = textView.bottom+64;
-    return YES;
-}
+//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+//    tempFloat = textView.origin.y+64;
+//    return YES;
+//}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text {
-    self.placeholderLabel.hidden = text.length>0?YES:NO;
+//    self.placeholderLabel.hidden = text.length>0?YES:NO;
     self.descrCountLabel.text = [NSString stringWithFormat:@"%d/500",textView.text.length];
     return YES;
 }

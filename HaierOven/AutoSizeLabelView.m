@@ -59,6 +59,8 @@
 -(void)setTags:(NSArray *)tags{
     _tags = tags;
     
+    self.lineCount = 1;
+    
     for (UIButton* button in self.subviews) {
         [button removeFromSuperview];
     }
@@ -77,6 +79,7 @@
             rect.origin.y = self.tempBtn.bottom+PADDING_HIGHT;
             self.tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.tempBtn.frame = CGRectMake(0, rect.origin.y, 0, 0);
+            self.lineCount ++;
         }
 
 
