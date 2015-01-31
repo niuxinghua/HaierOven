@@ -42,8 +42,11 @@
     
     self.goodCountLabel.text = cookbook.praises;
     
+    
+    
     [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto]];
 //    [self.MainCellFoodBackground setContentMode:UIViewContentModeScaleAspectFill];
+    //[self.MainCellFoodBackground setImageWithURL:<#(NSURL *)#>]
     
     // 这里应该判断是否是官方菜谱
     if (cookbook.creator.userLevel != nil) {
@@ -71,7 +74,9 @@
     
     
     
-    [self.avater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
+    //[self.avater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
+    
+    [self.avater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
     
     self.foodName.text = cookbook.name;
     self.foodMakeFunction.text = cookbook.desc;

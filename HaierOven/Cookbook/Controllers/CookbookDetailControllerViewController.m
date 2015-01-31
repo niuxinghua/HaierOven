@@ -995,9 +995,9 @@
     }
     
     //获取购物清单，保存数量不能超过10条
-    if (self.shoppingListCount >= 10) {
+    if (self.shoppingListCount > 10) {
         [super showProgressErrorWithLabelText:@"清单里菜谱太多啦，删掉一些吧！" afterDelay:2];
-        return;
+        //return;
     }
     
     //构建购物清单对象
@@ -1021,7 +1021,8 @@
     // 发送网络请求
     [[InternetManager sharedManager] saveShoppingOrderWithShoppingOrder:shoppingOrder callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
-            [super showProgressCompleteWithLabelText:@"添加成功" afterDelay:1];
+            if (self.shoppingListCount <= 10) 
+                [super showProgressCompleteWithLabelText:@"添加成功" afterDelay:1];
         } else {
             [super showProgressErrorWithLabelText:@"添加失败" afterDelay:1];
         }
@@ -1077,6 +1078,11 @@
         [super showProgressErrorWithLabelText:@"预览状态不分享赞喔" afterDelay:1];
         return;
     }
+    
+//    if (!IsLogin) {
+//        [super openLoginController];
+//        return;
+//    }
     
     NSLog(@"分享");
     // 构建分享内容

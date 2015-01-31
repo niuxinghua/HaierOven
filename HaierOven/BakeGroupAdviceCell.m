@@ -31,7 +31,8 @@
 - (void)setCooker:(Cooker *)cooker
 {
     _cooker = cooker;
-    [self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
+    //[self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
+    [self.avaterBtn setImageWithURL:[NSURL URLWithString:cooker.avatar]];
     switch (cooker.userLevel) {
         case 1:
             self.tagLabel.text = @"天子一号";

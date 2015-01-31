@@ -29,7 +29,8 @@
 {
     _cookbook = cookbook;
     
-    [self.cookerAvater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
+    //[self.cookerAvater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
+    [self.cookerAvater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
     self.foodNameLabel.text = cookbook.name;
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@人赞过", cookbook.praises];
     [self.foodImage setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto]];

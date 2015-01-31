@@ -22,4 +22,10 @@
 @property (copy, nonatomic) NSString* toUserName;
 
 
+@property (strong, nonatomic) UIImage* myAvatar;
+
+
+@property (strong, nonatomic) UIImage* toUserAvatar;
+
+
 @end

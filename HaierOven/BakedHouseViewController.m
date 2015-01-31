@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, SortType) {
                                                                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                                                             }
                                                             if (_pageIndex == 1) {
-                                                                if (self.products.count == 0)
+                                                                if (arr.count == 0)
                                                                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                                                                 self.products = obj;
                                                             } else {
