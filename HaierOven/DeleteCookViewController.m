@@ -96,6 +96,10 @@
 - (void)deleteShoppingList
 {
     NSString* userBaseId = CurrentUserBaseId;
+    if (self.deleteArr.count == 0) {
+        [super showProgressErrorWithLabelText:@"您已没有可以删除的清单了" afterDelay:1];
+        return;
+    }
     [[InternetManager sharedManager] deleteShoppingOrderWithUserBaseId:userBaseId
                                                            cookbooks:self.deleteArr
                                                               callBack:^(BOOL success, id obj, NSError *error) {

@@ -234,19 +234,21 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
     if (self.notificationType == NotificationTypeSystem) {
         NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
-        if (self.allNotifications.count == 0) {
-            return [[UIView alloc] init];
-        }
+//        if (self.allNotifications.count == 0) {
+//            return [[UIView alloc] init];
+//        }
         if (section == 0) {
-            if (self.cookbookNotifications.count == 0) {
-                return [[UIView alloc] init];
-            }
-            sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
+//            if (self.cookbookNotifications.count == 0) {
+//                return [[UIView alloc] init];
+//            }
+//            sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
+            sectionview.sectionTitleLabel.text = @"菜谱";
         } else {
-            if (self.messagesNotifications.count == 0) {
-                return [[UIView alloc] init];
-            }
-            sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
+//            if (self.messagesNotifications.count == 0) {
+//                return [[UIView alloc] init];
+//            }
+//            sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
+            sectionview.sectionTitleLabel.text = @"厨神";
         }
         
         return sectionview;

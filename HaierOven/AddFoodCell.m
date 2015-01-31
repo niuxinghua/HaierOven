@@ -15,7 +15,7 @@
     
 //    self.foodLabel.textColor = [UIColor blackColor];
 //    self.foodCountLabel.textColor = [UIColor blackColor];
-    
+    [self.deleteBtn setEnlargeEdgeWithTop:8 right:10 bottom:8 left:10];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -50,11 +50,8 @@
     _food = food;
     
     self.foodLabel.text = food.name == nil ? @"请输入食材" : food.name;
-    self.foodCountLabel.text = food.desc == nil ? @"分量" : food.desc;
-//    
-//    if ([self.foodLabel.text isEqualToString:@"请输入食材"]) {
-//        self.foodLabel.textColor = [UIColor lightGrayColor];
-//    }
+    self.foodCountLabel.text = food.desc == nil ? @"用量" : food.desc;
+    
 }
 
 -(void)import:(UITapGestureRecognizer*)tap{

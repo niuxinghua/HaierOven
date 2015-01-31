@@ -158,11 +158,11 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     
-    if (![self.currentUser.status isEqualToString:@"1"] && [userDefaults boolForKey:@"phoneLogin"]) {
-        
-        [[[UIAlertView alloc] initWithTitle:@"用户未激活" message:@"检测到您的账号还没激活，请激活账号吧" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"去激活", nil] show];
-        
-    }
+//    if (![self.currentUser.status isEqualToString:@"1"] && [userDefaults boolForKey:@"phoneLogin"]) {
+//        
+//        [[[UIAlertView alloc] initWithTitle:@"用户未激活" message:@"检测到您的账号还没激活，请激活账号吧" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"去激活", nil] show];
+//        
+//    }
     
 }
 

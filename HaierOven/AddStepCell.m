@@ -114,6 +114,8 @@
         step.index = [NSString stringWithFormat:@"%d",i+1];
     }
     
+    self.editStyle = self.editStyle ==EditStyleNone? EditStyleDelete:EditStyleNone;
+    
     [self.addStepTableView reloadData];
     [self.delegate DeleteStepOfMainTableView:self.steps];
 

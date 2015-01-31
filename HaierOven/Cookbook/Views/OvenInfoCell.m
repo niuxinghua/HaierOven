@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *ovenInfoLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *ovenSettingLabel;
 
 @end
 
@@ -32,9 +33,9 @@
     _oven = oven;
     NSString* ovenInfo = [oven.ovenInfo isKindOfClass:[NSNull class]] ? @"" : oven.ovenInfo[@"name"];
     
-    ovenInfo = [ovenInfo stringByAppendingFormat:@" %@ %@ %@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
-
     self.ovenInfoLabel.text = ovenInfo;
+    
+    self.ovenSettingLabel.text = [NSString stringWithFormat:@"模式:%@ 温度:%@ 时间:%@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
     
 }
 

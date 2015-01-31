@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
 
     // Initialization code
+    [self.deleteBtn setEnlargeEdgeWithTop:8 right:10 bottom:8 left:10];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,7 +25,6 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-
 
 }
 

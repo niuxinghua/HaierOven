@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger, AutoSizeLabelViewStyle) {
 
 @property (strong, nonatomic)NSArray* selectedTags;
 
+@property (nonatomic) NSInteger lineCount;
+
 @property (nonatomic)AutoSizeLabelViewStyle style;
 @property (nonatomic,weak)id<AutoSizeLabelViewDelegate>delegate;
 +(float )boolLabelLength:(NSString *)strString

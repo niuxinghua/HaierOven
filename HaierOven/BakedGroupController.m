@@ -50,16 +50,18 @@
         [super openLoginController];
         return;
     }
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    //[super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
-        [super hiddenProgressHUD];
+        //[super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _followPageIndex != 1) {
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_followPageIndex == 1) {
+                if (self.followedCookbooks.count == 0)
+                    [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 self.followedCookbooks = obj;
             } else {
                 [self.followedCookbooks addObjectsFromArray:arr];
@@ -89,6 +91,8 @@
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_recommentPageIndex == 1) {
+                if (self.recommendCookers.count == 0)
+                    [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 self.recommendCookers = obj;
             } else {
                 [self.recommendCookers addObjectsFromArray:arr];
@@ -274,7 +278,14 @@
 
 -(void)setBackGroupType:(BackGroupType)backGroupType{
     _backGroupType = backGroupType;
-    [self.tableview reloadData];
+    
+    if (backGroupType == BackGroupTypeAdvice) {
+        [self loadRecommendCookers];
+    } else {
+        [self loadFollowedCookbooks];
+    }
+    
+    //[self.tableview reloadData];
 }
 
 - (void)bakeGroupAdviceCell:(BakeGroupAdviceCell *)cell followed:(UIButton *)sender

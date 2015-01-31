@@ -34,6 +34,7 @@
         self.steps = cookbookDetail.steps;
         self.cookbookDetail = cookbookDetail;
         self.delegate = delegate;
+        
     }
     return self;
 }
@@ -49,8 +50,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.row < 2) {
+    if (indexPath.row == 0) {
         return 44;
+    } else if (indexPath.row == 1) {
+        return 67;
     } else if (indexPath.row < self.steps.count + 2) {
         return [self getHeightWithStep:self.steps[indexPath.row - 2]];
     } else {
@@ -100,7 +103,7 @@
         
         SkillCell* skillCell = [tableView dequeueReusableCellWithIdentifier:@"Skill cell" forIndexPath:indexPath];
         skillCell.delegate = self.delegate;
-        skillCell.skillLabel.text = self.cookbookDetail.cookbookTip;
+        skillCell.skillLabel.text = [self.cookbookDetail.cookbookTip isEqualToString:@"(null)"] ? @"无" : self.cookbookDetail.cookbookTip;
         return skillCell;
     }
 }
