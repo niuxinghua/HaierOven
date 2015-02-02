@@ -83,24 +83,6 @@
         if (success) {
             for (Tag* tag in obj) {
                 [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-
             }
             self.cookStarDetailTopView.tags = self.tags;
             

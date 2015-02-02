@@ -109,6 +109,10 @@
 #endif
         
     } else {    //设置时间
+        if (self.myOven == nil) {
+            [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+        }
+        
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"hh:mm";
         NSString* time = [formatter stringFromDate:[NSDate date]];
