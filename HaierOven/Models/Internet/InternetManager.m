@@ -108,7 +108,7 @@
 
 - (BOOL)canConnectInternet{
     BOOL canConnectWebsite = NO;
-    for (int loop = 0; loop < 10; loop++) {
+    for (int loop = 0; loop < 4; loop++) {
         
         if (self.canConnectToInternetFlag) {
             canConnectWebsite = YES;
@@ -140,7 +140,7 @@
             canConnectWebsite = YES;
             break;
         } else {
-            [NSThread sleepForTimeInterval:0.2];
+            [NSThread sleepForTimeInterval:0.1];
         }
         
     }

@@ -85,15 +85,17 @@
 
 - (IBAction)logout:(UIButton *)sender
 {
-    
-    [super showProgressCompleteWithLabelText:@"您已退出登录" afterDelay:2];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
-    
-    [super openLoginController];
-    
+    if (IsLogin) {
+        [super showProgressCompleteWithLabelText:@"您已退出登录" afterDelay:2];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
+        
+        [super openLoginController];
+    } else {
+        [super showProgressCompleteWithLabelText:@"您还没有登录" afterDelay:2];
+    }
 }
 
 

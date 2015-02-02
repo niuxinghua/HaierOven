@@ -60,7 +60,7 @@
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_followPageIndex == 1) {
-                if (self.followedCookbooks.count == 0)
+                if (arr.count == 0 && self.backGroupType == BackGroupTypeFollowed)
                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 self.followedCookbooks = obj;
             } else {
@@ -91,7 +91,7 @@
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
             if (_recommentPageIndex == 1) {
-                if (self.recommendCookers.count == 0)
+                if (arr.count == 0 && self.backGroupType == BackGroupTypeAdvice)
                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
                 self.recommendCookers = obj;
             } else {

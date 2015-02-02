@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
                 }
                 if (_pageIndex == 1) {
                     self.allNotifications = obj;
-                    if (self.allNotifications.count == 0) {
+                    if (arr.count == 0) {
                         [super showProgressErrorWithLabelText:@"您没有未读消息" afterDelay:1];
                     }
                 } else {
@@ -358,6 +358,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
             ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
             chatViewController.toUserId = selectedNotice.promoter.userBaseId;
             chatViewController.toUserName = selectedNotice.promoter.nickName;
+            
             [self.navigationController pushViewController:chatViewController animated:YES];
             
         }

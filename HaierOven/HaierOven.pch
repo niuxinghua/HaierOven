@@ -55,6 +55,10 @@
 
 #import "UIButton+EnlargeTouchArea.h"
 
+#import "UIImageView+WebCache.h"
+
+#import "UIButton+WebCache.h"
+
 /**
  *  海尔app信息
  */

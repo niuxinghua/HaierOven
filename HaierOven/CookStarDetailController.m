@@ -83,24 +83,6 @@
         if (success) {
             for (Tag* tag in obj) {
                 [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-                [self.tags addObject:tag.name];
-
             }
             self.cookStarDetailTopView.tags = self.tags;
             
@@ -300,6 +282,7 @@
 
 
 #pragma mark-  TopViewDelegate
+
 -(void)ponnedHeadView:(NSInteger)height top:(NSInteger)top AndBottom:(NSInteger)Bottom{
     
     if (height>topViewHight) {
