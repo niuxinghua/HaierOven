@@ -24,6 +24,10 @@
 {
     NSDictionary* userDict = dict[@"data"];
     
+    if ([userDict isKindOfClass:[NSNull class]]) {
+        return [[User alloc] init];
+    }
+    
     User* user = [DataParser parseUserInfoWithDict:userDict];
     
     return user;
@@ -107,6 +111,11 @@
 + (NSMutableArray*)parseUsersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
 {
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSMutableArray* follows = [NSMutableArray array];
@@ -148,6 +157,11 @@
     NSMutableArray* comments = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* commentArr = dataDict[@"items"];
@@ -223,6 +237,11 @@
     NSMutableArray* cookbooks = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookbooksArr = dataDict[@"items"];
@@ -291,6 +310,10 @@
     
     NSDictionary* detailDict = dict[@"data"];
     
+    if ([detailDict isKindOfClass:[NSNull class]]) {
+        return [[CookbookDetail alloc] init];
+    }
+    
     cookbookDetail.cookbookId       = [detailDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookID"]];
     cookbookDetail.name             = [detailDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookName"]];
     cookbookDetail.desc             = [detailDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookDesc"]];
@@ -329,6 +352,7 @@
     oven.roastTemperature           = [ovenDict[@"roastTemperature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTemperature"]];
     oven.roastTime                  = [ovenDict[@"roastTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTime"]];
     oven.ovenInfo                   = ovenDict[@"oveninfo"];
+    oven.ovenType                   = [ovenDict[@"ovenType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"ovenType"]];
     cookbookDetail.oven             = oven;
     
     cookbookDetail.creator          = [DataParser parseCreatorWithDict:detailDict[@"creator"]];
@@ -341,6 +365,11 @@
     NSMutableArray* shoppingList = [NSMutableArray array];
     
     NSArray* shoppingListArr = dict[@"data"];
+    
+    if ([shoppingListArr isKindOfClass:[NSNull class]]) {
+        return shoppingList;
+    }
+    
     for (NSDictionary* shoppingListDict in shoppingListArr) {
         ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
         shoppingOrder.cookbookID = [shoppingListDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"cookbookID"]];
@@ -372,6 +401,11 @@
     NSMutableArray* cookers = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return cookers;
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookerArr = dataDict[@"items"];
@@ -424,6 +458,11 @@
     NSMutableArray* cookerStars = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return cookerStars;
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookerArr = dataDict[@"items"];
@@ -454,6 +493,10 @@
     
     NSDictionary* dataDict = dict[@"data"];
     
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return messages;
+    }
+    
     NSArray* messageArr = dataDict[@"items"];
     
     for (NSDictionary* messageDict in messageArr) {
@@ -480,6 +523,11 @@
     NSMutableArray* equipments = [NSMutableArray array];
     
     NSDictionary* jsonData = dict[@"data"];
+    
+    if ([jsonData isKindOfClass:[NSNull class]]) {
+        return equipments;
+    }
+    
     NSArray* equipmentArr = jsonData[@"items"];
     
     for (NSDictionary* equipmentDict in equipmentArr) {
@@ -509,6 +557,10 @@
     NSMutableArray* notificationList = [NSMutableArray array];
     
     NSDictionary* jsonData = dict[@"data"];
+    
+    if ([jsonData isKindOfClass:[NSNull class]]) {
+        return notificationList;
+    }
     
     NSArray* notificationArr = jsonData[@"items"];
     

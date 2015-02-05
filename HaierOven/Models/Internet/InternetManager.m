@@ -1557,12 +1557,13 @@
         
         NSDictionary* paramsDict;
         
-        if (cookbookDetail.oven != nil) {
+//        if (cookbookDetail.oven != nil) {
             NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
             cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
             cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
             cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
             cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
             
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
                            @"cookbookDesc" : cookbookDetail.desc,
@@ -1578,21 +1579,21 @@
                            };
 
             
-        } else {
-            
-            paramsDict = @{@"cookbookName" : cookbookDetail.name,
-                           @"cookbookDesc" : cookbookDetail.desc,
-                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
-                           @"cookbookTip" : cookbookDetail.cookbookTip,
-                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
-                           @"tags" : tags,
-                           @"steps" : steps,
-                           @"foods" : foods,
-                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
-                           
-                           };
-            
-        }
+//        } else {
+//            
+//            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+//                           @"cookbookDesc" : cookbookDetail.desc,
+//                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+//                           @"cookbookTip" : cookbookDetail.cookbookTip,
+//                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+//                           @"tags" : tags,
+//                           @"steps" : steps,
+//                           @"foods" : foods,
+//                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+//                           
+//                           };
+//            
+//        }
         
         
         
@@ -1662,12 +1663,13 @@
         
         NSDictionary* paramsDict;
         
-        if (cookbookDetail.oven != nil) {
+//        if (cookbookDetail.oven != nil) {
             NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
             cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
             cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
             cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
             cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
             
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
                            @"cookbookDesc" : cookbookDetail.desc,
@@ -1679,25 +1681,25 @@
                            @"foods" : foods,
                            @"cookbookOven" : cookbookOvenDict,
                            @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
-                           
-                           };
-            
-            
-        } else {
-            
-            paramsDict = @{@"cookbookName" : cookbookDetail.name,
-                           @"cookbookDesc" : cookbookDetail.desc,
-                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
-                           @"cookbookTip" : cookbookDetail.cookbookTip,
-                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
-                           @"tags" : tags,
-                           @"steps" : steps,
-                           @"foods" : foods,
-                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
                            @"cookbookID" : cookbookDetail.cookbookId
                            };
             
-        }
+            
+//        } else {
+//            
+//            paramsDict = @{@"cookbookName" : cookbookDetail.name,
+//                           @"cookbookDesc" : cookbookDetail.desc,
+//                           @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
+//                           @"cookbookTip" : cookbookDetail.cookbookTip,
+//                           @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
+//                           @"tags" : tags,
+//                           @"steps" : steps,
+//                           @"foods" : foods,
+//                           @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
+//                           @"cookbookID" : cookbookDetail.cookbookId
+//                           };
+//        
+//        }
         
         NSData* data = [NSJSONSerialization dataWithJSONObject:paramsDict options:NSJSONWritingPrettyPrinted error:nil];
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
@@ -1706,6 +1708,8 @@
         [[self manager] POST:UpdateCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            NSLog(@"%@", responseObject[@"err"]);
             
             if ([status isEqualToString:@"1"]) {
                 // 3. 回调添加结果

@@ -19,8 +19,9 @@
 #import "BottomCell.h"
 #import "CookbookDetailControllerViewController.h"
 #import "PECropViewController.h"
+#import "OvenTypeAlert.h"
 
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate, OvenTypeAlertDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -42,6 +43,9 @@
 @property (strong, nonatomic) NSMutableArray* selectedTags;
 @property (strong, nonatomic) UIImage *peTempImage;//剪切暂存图片
 @property (strong, nonatomic) YIPopupTextView* popupTextView;
+
+@property (strong, nonatomic) UseDeviceCell* useDeviceCell;
+
 @property BOOL ischangeCover;
 
 /**
@@ -54,7 +58,7 @@
  */
 @property (strong, nonatomic) Food* edittingFood;
 
-
+@property (strong, nonatomic) OvenTypeAlert* ovenTypeAlert;
 
 #pragma mark - outlets
 
@@ -118,6 +122,7 @@
             
             NSRange range = [self.cookbookDetail.coverPhoto rangeOfString:[BaseOvenUrl lastPathComponent]];
             self.cookbookDetail.coverPhoto = [self.cookbookDetail.coverPhoto substringFromIndex:range.location+range.length];
+            
             self.steps = [self.cookbookDetail.steps mutableCopy];
             for (Step* step in self.steps) {
                 range = [step.photo rangeOfString:[BaseOvenUrl lastPathComponent]];
@@ -177,6 +182,11 @@
     self.chooseCoverView = [[ChooseCoverView alloc]initWithFrame:CGRectMake(0, PageH, PageW, PageW*0.58)];
     self.chooseCoverView.delegate = self;
     [self.myWindow addSubview:self.chooseCoverView];
+    
+    
+    self.ovenTypeAlert = [[OvenTypeAlert alloc]initWithFrame:alert_RectHidden];
+    self.ovenTypeAlert.delegate = self;
+    [self.myWindow addSubview:self.ovenTypeAlert];
 
 }
 - (void)didReceiveMemoryWarning {
@@ -239,7 +249,14 @@
 
             return cell;
         }else if(indexPath.row ==3){
+            
             UseDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UseDeviceCell" forIndexPath:indexPath];
+            self.useDeviceCell = cell;
+            if (self.isDraft) {
+                NSString* ovenType = [self.cookbookDetail.oven.ovenType isEqualToString:@""] ? @"我使用了烤箱" : [NSString stringWithFormat:@"我使用了烤箱（%@）", self.cookbookDetail.oven.ovenType];
+                [self.useDeviceCell.usedOvenButton setTitle:ovenType forState:UIControlStateNormal];
+            }
+            
             cell.delegate = self;
             return cell;
         }else if(indexPath.row == 4){
@@ -273,14 +290,16 @@
 //            return (PageW-16)*0.12*(self.foods.count+1)+45;
             break;
         case 3:
-            
-            if ([DataCenter sharedInstance].currentUser.level == 1 || [DataCenter sharedInstance].currentUser.level == 2) {
+        {
+//            DataCenter* dataCenter = [DataCenter sharedInstance];
+//            if (dataCenter.currentUser.level == 1 || dataCenter.currentUser.level == 2) {
                 return useBake?311:71;
-            } else {
-                return 0;
-            }
+//            } else {
+//                return 0;
+//            }
             
             break;
+        }
         case 4:
             return (PageW - 60)*0.58*(self.steps.count)+80;
             break;
@@ -567,8 +586,17 @@
         NSLog(@"我使用了烤箱");
         
     } else {
-        [super showProgressErrorWithLabelText:@"只有厨神才可选择烤箱模式哦" afterDelay:1];
-        return;
+        //[super showProgressErrorWithLabelText:@"只有厨神才可选择烤箱模式哦" afterDelay:1];
+        //return;
+        
+        // 弹窗选择使用了烤箱类型：台式烤箱、嵌入式烤箱
+        self.myWindow.hidden= NO;
+        [UIView animateWithDuration:0.2 animations:^{
+            self.ovenTypeAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 160);
+            
+        }];
+        
+        
     }
     
 }
@@ -660,7 +688,11 @@
         }
         
     } else {
-        self.cookbookDetail.oven = nil;
+//        self.cookbookDetail.oven = nil;
+        if (self.cookbookDetail.oven.ovenType == nil) {
+            [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
+            return NO;
+        }
     }
     
     
@@ -679,6 +711,11 @@
     }
     
     return YES;
+}
+
+- (void)close
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)submitCookbook
@@ -706,7 +743,7 @@
                     NSLog(@"发布成功");
                     NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布成功" : @"保存成功";
                     [super showProgressCompleteWithLabelText:promptStr afterDelay:1];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [self performSelector:@selector(close) withObject:nil afterDelay:1];
                     
                 } else {
                     if (error.code == InternetErrorCodeConnectInternetFailed) {
@@ -740,7 +777,7 @@
             NSLog(@"发布成功");
             NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布成功" : @"保存成功";
             [super showProgressCompleteWithLabelText:promptStr afterDelay:1];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self performSelector:@selector(close) withObject:nil afterDelay:1];
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
                 [super showProgressErrorWithLabelText:@"网络连接失败..." afterDelay:1];
@@ -872,7 +909,7 @@
     [controller dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
+#pragma mark - 我使用了烤箱
 
 -(void)getUseDeviceDataWithWorkModel:(NSString *)workmodel andTime:(NSString *)time andTemperature:(NSString *)temperature{
     NSLog(@"%@ ,%@ ,%@",workmodel,time,temperature);
@@ -882,7 +919,33 @@
     self.cookbookDetail.oven = [[CookbookOven alloc] initWithRoastStyle:workmodel
                                                        roastTemperature:temperature
                                                               roastTime:time
-                                                               ovenInfo:@{@"name" : @"HaierOven"}];
+                                                               ovenType:@""
+                                                               ovenInfo:@{@"name" : @""}];
     
 }
+
+
+- (void)selectedOvenType:(NSString *)ovenType
+{
+    self.myWindow.hidden = YES;
+    self.ovenTypeAlert.frame = alert_RectHidden;
+    
+    [self.useDeviceCell.usedOvenButton setTitle:[NSString stringWithFormat:@"我使用了烤箱（%@）", ovenType] forState:UIControlStateNormal];
+    
+    
+#warning 补全烤箱型号
+    self.cookbookDetail.oven = [[CookbookOven alloc] initWithRoastStyle:@""
+                                                       roastTemperature:@""
+                                                              roastTime:@""
+                                                               ovenType:ovenType
+                                                               ovenInfo:@{@"name" : @""}];
+    
+}
+
+
 @end
+
+
+
+
+

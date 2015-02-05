@@ -208,33 +208,33 @@
     NSLog(@"age:%@", userInfo[@"age"]);
 }
 
-#if SUPPORT_IOS8
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    //register to receive notifications
-    [application registerForRemoteNotifications];
-    
-    NSLog(@"didRegisterUserNotificationSettings");
-    
-}
-#endif
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
-    
-}
-
-// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
-- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
-    
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    
-    NSLog(@"didReceiveRemoteNotification");
-}
+//#if SUPPORT_IOS8
+//- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+//{
+//    //register to receive notifications
+//    [application registerForRemoteNotifications];
+//    
+//    NSLog(@"didRegisterUserNotificationSettings");
+//    
+//}
+//#endif
+//
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//{
+//    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
+//    
+//}
+//
+//// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
+//- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
+//    
+//}
+//
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+//{
+//    
+//    NSLog(@"didReceiveRemoteNotification");
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -10,9 +10,9 @@
 #import "uSDKConstantInfo.h"
 
 //#define CERTIFICATE_FILE_PATH [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/ios.cert"]
-//NSString* usdk_appID;
-//NSString* usdk_secretKey;
-//NSString* usdk_curTime;
+NSString* appID;
+NSString* secretKey;
+NSString* curTime;
 /**
  *	@brief	功能描述：<br>
  *      uSDK服务单例类，用于管理uSDK服务的生命周期。

@@ -35,7 +35,18 @@
     
     self.ovenInfoLabel.text = ovenInfo;
     
-    self.ovenSettingLabel.text = [NSString stringWithFormat:@"模式:%@ 温度:%@ 时间:%@分钟", oven.roastStyle, oven.roastTemperature, oven.roastTime];
+    NSString* ovenSetting = @"";
+    if (![oven.roastStyle isEqualToString:@""]) {
+        ovenSetting = [ovenSetting stringByAppendingFormat:@"模式:%@ ", oven.roastStyle];
+    }
+    if (![oven.roastTemperature isEqualToString:@""]) {
+        ovenSetting = [ovenSetting stringByAppendingFormat:@"温度:%@ ", oven.roastTemperature];
+    }
+    if (![oven.roastTime isEqualToString:@""]) {
+        ovenSetting = [ovenSetting stringByAppendingFormat:@"时间:%@分钟", oven.roastTime];
+    }
+    
+    self.ovenSettingLabel.text = ovenSetting;
     
 }
 

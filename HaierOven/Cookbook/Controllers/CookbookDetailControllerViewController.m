@@ -994,6 +994,11 @@
         return;
     }
     
+    if (self.isPreview) {
+        [super showProgressErrorWithLabelText:@"预览状态不可以添加喔" afterDelay:1];
+        return;
+    }
+    
     //获取购物清单，保存数量不能超过10条
     if (self.shoppingListCount > 10) {
         [super showProgressErrorWithLabelText:@"清单里菜谱太多啦，删掉一些吧！" afterDelay:2];

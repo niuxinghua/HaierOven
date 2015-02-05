@@ -36,7 +36,8 @@
 -(void)initData{
     self.workModels = [NSMutableArray array];
     for (NSDictionary* bakeMode in [OvenManager sharedManager].bakeModes) {
-        [self.workModels addObject:[[bakeMode allValues] firstObject]];
+        NSString* modeStr = [[bakeMode[@"bakeMode"] allValues] firstObject];
+        [self.workModels addObject:modeStr];
     }
     self.temputure = [self getTempArr];
     self.times = [self getMinute];

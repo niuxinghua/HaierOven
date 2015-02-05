@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OvenCommandsDefine.h"
-#import <uSDKFramework/BaseMessage.h>
+//#import <uSDKFramework/BaseMessage.h>
 #import <uSDKFramework/uSDKBusinessMessage.h>
 #import <uSDKFramework/uSDKConstantInfo.h>
 #import <uSDKFramework/uSDKDevice.h>

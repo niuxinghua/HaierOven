@@ -67,7 +67,9 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 - (void)loadPublishedCookbooks
 {
     NSString* userBaseId = CurrentUserBaseId;
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:userBaseId cookbookStatus:1 pageIndex:_publishedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _publishedPageIndex != 1) {
