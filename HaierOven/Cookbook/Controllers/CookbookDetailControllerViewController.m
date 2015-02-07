@@ -22,6 +22,7 @@
 @interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate, SkillCellDelegate>
 {
     CGFloat _lastContentOffsetY;
+    BOOL _iOS7OvenListFlag;     //避免iOS7系统从烤箱列表跳回来时sectionHeader不在顶部
 }
 
 #pragma mark - NavigationBar
@@ -602,6 +603,12 @@
     self.navigationController.navigationBar.translucent = YES;
 //    [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0 && _iOS7OvenListFlag) {
+        _iOS7OvenListFlag = NO;
+        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+        [self showRightNavigationView:NO];
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -910,6 +917,7 @@
 
 - (void)startCook
 {
+    _iOS7OvenListFlag = YES;
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeviceViewController* devicesController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
     [self.navigationController pushViewController:devicesController animated:YES];

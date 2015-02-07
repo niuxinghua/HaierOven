@@ -19,33 +19,145 @@
 
 @property (strong, nonatomic) NSMutableArray* devices;
 
+@property (strong, nonatomic) NSTimer* timer;
+
 @end
 
 @implementation DeviceViewController
+
+
+#pragma mark - 新消息标记及移除标记
+
+- (void)updateMarkStatus:(NSNotification*)notification
+{
+    NSDictionary* countDict = notification.userInfo;
+    NSInteger count = [countDict[@"count"] integerValue];
+    if (count > 0) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
+    
+}
+
+- (void)markNewMessage
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //小圆点
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(-8, -5, 10, 10)];
+    label.layer.masksToBounds = YES;
+    label.layer.cornerRadius = label.height / 2;
+    label.backgroundColor = [UIColor redColor];
+    
+    //添加到button
+    [liebiaoBtn addSubview:label];
+    self.navigationItem.leftBarButtonItem = liebiao;
+    
+}
+
+- (void)deleteMarkLabel
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //移除小圆点Label
+    for (UIView* view in liebiaoBtn.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    //重新赋值leftBarButtonItem
+    self.navigationItem.leftBarButtonItem = liebiao;
+}
+
+#pragma mark - 加载系列
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if (self.navigationController.viewControllers.count > 1) {
         UIButton* leftButton = [[UIButton alloc] init];
-        //        [leftButton addTarget:self action:@selector(turnLeftMenu) forControlEvents:UIControlEventTouchUpInside];
-        //        [super setLeftBarButtonItemWithImageName:@"liebieo.png" andTitle:nil andCustomView:leftButton];
         
         [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
         
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMarkStatus:) name:MessageCountUpdateNotification object:nil];
+        if ([DataCenter sharedInstance].messagesCount > 0 && IsLogin) {
+            [self markNewMessage];
+        } else {
+            [self deleteMarkLabel];
+        }
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalOvens) name:MyOvensInfoHadChangedNotificatin object:nil];
     
-    [self loadOvenDevices];
-    // Do any additional setup after loading the view.
+    self.myDevices = [DataCenter sharedInstance].myOvens;
+    
+    [self updateOvenLinkStatus];
+    
+    
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //[self removeObserver:self forKeyPath:@"self.ovenManager.currentStatus.isReady" context:NULL];
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // 订阅这些设备以获取连线状态
+    NSMutableArray* macs = [NSMutableArray array];
+    for (LocalOven* localOven in self.myDevices) {
+        [macs addObject:localOven.mac];
+    }
+    [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:macs];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(updateOvenLinkStatus) userInfo:nil repeats:YES];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // 离开页面取消订阅这些设备
+    NSMutableArray* macs = [NSMutableArray array];
+    for (LocalOven* localOven in self.myDevices) {
+        [macs addObject:localOven.mac];
+    }
+    [[OvenManager sharedManager] unSubscribeAllNotifications:macs];
+    
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)updateOvenLinkStatus
+{
+    if (self.myDevices.count == 0) {
+        [self SetUpSubviews];
+    } else {
+        for (LocalOven* localOven in self.myDevices) {
+            [[OvenManager sharedManager] getOvenStatus:localOven.mac status:^(BOOL success, id obj, NSError *error) {
+                if (success) {
+                    OvenStatus* status = obj;
+                    localOven.isReady = status.isReady;
+                }
+                [self SetUpSubviews];
+            }];
+        }
+    }
 }
 
 - (void)loadLocalOvens
@@ -61,9 +173,6 @@
     [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.devices = obj;
-            for (uSDKDevice* oven in self.devices) {
-                [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:oven];
-            }
         }
         [self loadLocalOvens];
     }];
@@ -129,9 +238,10 @@
             deviceView.delegate = self;
             LocalOven* oven = self.myDevices[i];
             deviceView.deviceName.text = oven.name;
-            if ([oven.ssid isEqualToString:[[OvenManager sharedManager] fetchSSID]] && self.devices.count > 0) {
+            //if ([oven.ssid isEqualToString:[[OvenManager sharedManager] fetchSSID]] && self.devices.count > 0) {
+            if (oven.isReady) {
                 deviceView.connectStatusImage.image = IMAGENAMED(@"lianjie.png");
-                deviceView.deviceStatusLabel.text = @"已连接";
+                deviceView.deviceStatusLabel.text = @"已链接";
             } else {
                 deviceView.connectStatusImage.image = IMAGENAMED(@"tuolian.png");
 //#warning 这里是在调试！！！！！！！一定要改回来！！！！！！！！！！！！！！！！！！
@@ -181,9 +291,11 @@
 
 #pragma mark - DeviceUnconnectControllerDelegate
 
-- (void)bindOvenAgain
+- (void)bindOvenAgainWithMac:(NSString *)mac
 {
-    [self AddDevice];
+    AddDeviceStepOneController *stepone = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"];
+    stepone.currentMac = mac;
+    [self.navigationController pushViewController:stepone animated:YES];
 }
 
 /*

@@ -65,16 +65,17 @@
 - (void)loadTags
 {
 //    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
-    [[InternetManager sharedManager] getTagsCallBack:^(BOOL success, id obj, NSError *error) {
-//        [super hiddenProgressHUD];
+    
+    [[InternetManager sharedManager] getHotTagsCallback:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.tags = obj;
             [self setupRecommendView];
             
         } else {
-         
+            
         }
     }];
+    
 }
 
 - (void)setupRecommendView

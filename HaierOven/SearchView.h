@@ -19,6 +19,8 @@
 @end
 @interface SearchView : UIView<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *cancelbtn;
+@property (weak, nonatomic) IBOutlet UIButton *confirmOrCancelButton;
+
 @property (strong, nonatomic) IBOutlet UITextField *searchTextFailed;
 @property (weak, nonatomic)id<searchViewDelegate>delegate;
 @end

@@ -68,6 +68,9 @@
 }
 - (IBAction)TurnStepTwo:(id)sender {
     AddDeviceStepTwoController *stepTwo = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepTwoController"];
+    if (self.currentMac) {
+        stepTwo.currentMac = self.currentMac;
+    }
     [self.navigationController pushViewController:stepTwo animated:YES];
 }
 

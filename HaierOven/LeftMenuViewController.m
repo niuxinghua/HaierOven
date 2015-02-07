@@ -20,6 +20,12 @@
 @property (nonatomic) NSInteger notificationCount;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) LeftMenuAlert *leftMenuAlert;
+
+/**
+ *  定时获取消息数量
+ */
+@property (strong, nonatomic) NSTimer* noticeTimer;
+
 @end
 
 @implementation LeftMenuViewController
@@ -50,6 +56,8 @@
     [self loadUserInfo];
     
     [self updateNotificationCount];
+    // 每隔2分钟获取一次未读通知数量
+    self.noticeTimer = [NSTimer scheduledTimerWithTimeInterval:1*60 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:LoginSuccussNotification object:nil];
@@ -57,6 +65,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
+    
+    self.notificationCount = 0;
     
     self.myWindow = [UIWindow new];
     self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
@@ -101,6 +111,8 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.tempView = nil;
+    [self.noticeTimer invalidate];
+    self.noticeTimer = nil;
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
@@ -151,8 +163,12 @@
                 
                 [self.tableView reloadData];
                 
-                // 每隔2分钟获取一次未读通知数量
-                //[self performSelector:@selector(updateNotificationCount) withObject:nil afterDelay:2*60];
+                [DataCenter sharedInstance].messagesCount = self.notificationCount;
+                
+                //发通知告知其他Controller当前新消息数量
+                NSNotification* notification = [NSNotification notificationWithName:MessageCountUpdateNotification object:nil userInfo:@{@"count" : obj[@"data"]}];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
             }
         }];
     }

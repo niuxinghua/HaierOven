@@ -111,6 +111,57 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     
 }
 
+#pragma mark - 新消息标记及移除标记
+
+- (void)updateMarkStatus:(NSNotification*)notification
+{
+    NSDictionary* countDict = notification.userInfo;
+    NSInteger count = [countDict[@"count"] integerValue];
+    if (count > 0) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
+    
+}
+
+- (void)markNewMessage
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //小圆点
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(-8, -5, 10, 10)];
+    label.layer.masksToBounds = YES;
+    label.layer.cornerRadius = label.height / 2;
+    label.backgroundColor = [UIColor redColor];
+    
+    //添加到button
+    [liebiaoBtn addSubview:label];
+    self.navigationItem.leftBarButtonItem = liebiao;
+    
+}
+
+- (void)deleteMarkLabel
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //移除小圆点Label
+    for (UIView* view in liebiaoBtn.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    //重新赋值leftBarButtonItem
+    self.navigationItem.leftBarButtonItem = liebiao;
+}
+
 #pragma mark - 加载视图和初始化
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -141,6 +192,22 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     [self loadPraisedCookbooks];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        UIButton* leftButton = [[UIButton alloc] init];
+        
+        [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
+        
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMarkStatus:) name:MessageCountUpdateNotification object:nil];
+        if ([DataCenter sharedInstance].messagesCount > 0 && IsLogin) {
+            [self markNewMessage];
+        } else {
+            [self deleteMarkLabel];
+        }
+    }
+    
 }
 
 - (void)dealloc
@@ -158,7 +225,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     [self.watchBtn setTitle:[NSString stringWithFormat:@"%@关注", self.currentUser.focusCount] forState:UIControlStateNormal];
     [self.followBtn setTitle:[NSString stringWithFormat:@"粉丝%@", self.currentUser.followCount] forState:UIControlStateNormal];
     
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     
 //    if (![self.currentUser.status isEqualToString:@"1"] && [userDefaults boolForKey:@"phoneLogin"]) {
 //        

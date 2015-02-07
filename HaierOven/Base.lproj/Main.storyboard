@@ -116,6 +116,7 @@
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
         <mutableArray key="FZLTXHK.TTF">
             <string>FZLTXHK--GBK1-0</string>
@@ -3713,7 +3714,7 @@
                                                         <constraint firstAttribute="width" secondItem="Mc6-yb-HsL" secondAttribute="height" multiplier="59:10" id="mHC-k9-E1d"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
-                                                    <state key="normal" title="180°">
+                                                    <state key="normal" title="--">
                                                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="disabled">
@@ -3802,7 +3803,7 @@
                                                         <constraint firstAttribute="width" secondItem="jqv-wN-Qn5" secondAttribute="height" multiplier="59:10" constant="-4.8000000000000114" id="Lf9-Yc-Qfn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
-                                                    <state key="normal" title="30 分钟">
+                                                    <state key="normal" title="--">
                                                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="disabled">
@@ -5295,7 +5296,7 @@
                                             <rect key="frame" x="8" y="99" width="304" height="28"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杨小错家美食" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWi-35-b87">
-                                                    <rect key="frame" x="104" y="4" width="96" height="19"/>
+                                                    <rect key="frame" x="104" y="4" width="96" height="18.5"/>
                                                     <fontDescription key="fontDescription" name="FZLTCHJW--GB1-0" family="FZLanTingHeiS-B-GB" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -5381,6 +5382,16 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的积分" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8H-bo-sSD">
+                                            <rect key="frame" x="270" y="35" width="45" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="3t5-kH-gJr"/>
+                                                <constraint firstAttribute="width" constant="45" id="b8B-q2-ejS"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -5398,9 +5409,11 @@
                                         <constraint firstAttribute="trailing" secondItem="dyb-ya-LFU" secondAttribute="trailing" id="Ugn-Kd-wYt"/>
                                         <constraint firstAttribute="centerX" secondItem="l6m-IJ-Gin" secondAttribute="centerX" id="VnW-Ep-Pmd"/>
                                         <constraint firstItem="d5u-na-mO8" firstAttribute="top" secondItem="DpD-F1-ndi" secondAttribute="bottom" constant="21" id="ZEf-wB-hpq"/>
+                                        <constraint firstItem="b8H-bo-sSD" firstAttribute="top" secondItem="JQc-Hj-cwu" secondAttribute="top" constant="35" id="cbZ-5j-JOA"/>
                                         <constraint firstItem="dyb-ya-LFU" firstAttribute="top" secondItem="JQc-Hj-cwu" secondAttribute="top" id="iKY-pf-GaR"/>
                                         <constraint firstItem="dy2-WY-H8z" firstAttribute="top" secondItem="l6m-IJ-Gin" secondAttribute="bottom" constant="34" id="iyM-jG-69w"/>
                                         <constraint firstAttribute="trailing" secondItem="UzA-NC-OGR" secondAttribute="trailing" constant="8" id="m4S-TE-EWv"/>
+                                        <constraint firstAttribute="trailing" secondItem="b8H-bo-sSD" secondAttribute="trailing" constant="5" id="mBk-mc-i6F"/>
                                         <constraint firstAttribute="trailing" secondItem="dy2-WY-H8z" secondAttribute="trailing" constant="8" id="mln-eM-Xyj"/>
                                         <constraint firstItem="DpD-F1-ndi" firstAttribute="leading" secondItem="JQc-Hj-cwu" secondAttribute="leading" constant="8" id="pT5-3K-chw"/>
                                         <constraint firstAttribute="bottom" secondItem="i5y-R2-FJB" secondAttribute="bottom" constant="11" id="uRd-c4-1JE"/>
@@ -6089,7 +6102,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="wtg-Pn-KAI">
-                            <rect key="frame" x="96" y="6" width="128" height="33"/>
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sh-yR-5L8">

@@ -112,9 +112,8 @@
 }
 
 /**
- *  绑定成功后保存烤箱到本地，这里可能需要优化：保存指定烤箱信息（如果有很多烤箱的话）
+ *  绑定成功后保存烤箱到本地
  */
-#warning 这里可能需要优化：保存指定烤箱信息（如果有很多烤箱的话）
 - (void)saveDeviceInfo
 {
     if (self.deviceTextFailed.text.length == 0) {
@@ -127,33 +126,27 @@
         return;
     }
     
-    [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
-        if (success) {
-            NSArray* ovens = obj;
-            LocalOven* oven = [[LocalOven alloc] init];
-            uSDKDevice* device = [ovens firstObject];
-            oven.name = self.deviceTextFailed.text;
-            oven.ip = device.ip;
-            oven.mac = device.mac;
-            oven.ssid = [[OvenManager sharedManager] fetchSSID];
-            oven.typeIdentifier = device.typeIdentifier;
-//            oven.attribute = device.attributeDict;
-            [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
-            
-            if (IsLogin) {
-                [[InternetManager sharedManager] bindOvenWithUserBaseId:CurrentUserBaseId deviceMac:oven.mac callBack:^(BOOL success, id obj, NSError *error) {
-//                    if (success) {
-//                        [super showProgressCompleteWithLabelText:@"绑定成功 +500点心" afterDelay:1];
-//                    }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
-                }];
-            }
-            
-            
-        } else {
-            [super showProgressErrorWithLabelText:@"发生错误" afterDelay:1];
-        }
-    }];
+    // 保存到本地
+    LocalOven* oven = [[LocalOven alloc] init];
+    uSDKDevice* device = self.bindedDevice;
+    oven.name = self.deviceTextFailed.text;
+    oven.ip = device.ip;
+    oven.mac = device.mac;
+    oven.ssid = [[OvenManager sharedManager] fetchSSID];
+    oven.typeIdentifier = device.typeIdentifier;
+    //            oven.attribute = device.attributeDict;
+    [[DataCenter sharedInstance] addOvenInfoToLocal:oven];
+    
+    //登录用户发送网络请求，增加积分
+    if (IsLogin) {
+        [[InternetManager sharedManager] bindOvenWithUserBaseId:CurrentUserBaseId deviceMac:oven.mac callBack:^(BOOL success, id obj, NSError *error) {
+            //                    if (success) {
+            //                        [super showProgressCompleteWithLabelText:@"绑定成功 +500点心" afterDelay:1];
+            //                    }
+            [[NSNotificationCenter defaultCenter] postNotificationName:BindDeviceSuccussNotification object:nil];
+        }];
+    }
+    
 }
 
 - (void)dealloc

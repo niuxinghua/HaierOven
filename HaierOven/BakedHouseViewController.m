@@ -102,6 +102,57 @@ typedef NS_ENUM(NSInteger, SortType) {
     
 }
 
+#pragma mark - 新消息标记及移除标记
+
+- (void)updateMarkStatus:(NSNotification*)notification
+{
+    NSDictionary* countDict = notification.userInfo;
+    NSInteger count = [countDict[@"count"] integerValue];
+    if (count > 0) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
+    
+}
+
+- (void)markNewMessage
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //小圆点
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(-8, -5, 10, 10)];
+    label.layer.masksToBounds = YES;
+    label.layer.cornerRadius = label.height / 2;
+    label.backgroundColor = [UIColor redColor];
+    
+    //添加到button
+    [liebiaoBtn addSubview:label];
+    self.navigationItem.leftBarButtonItem = liebiao;
+    
+}
+
+- (void)deleteMarkLabel
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
+    
+    //移除小圆点Label
+    for (UIView* view in liebiaoBtn.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    //重新赋值leftBarButtonItem
+    self.navigationItem.leftBarButtonItem = liebiao;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpSubviews];
@@ -111,6 +162,18 @@ typedef NS_ENUM(NSInteger, SortType) {
     
     [self loadProducts];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMarkStatus:) name:MessageCountUpdateNotification object:nil];
+    if ([DataCenter sharedInstance].messagesCount > 0 && IsLogin) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
+    
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)addHeader
@@ -254,6 +317,7 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 
 #pragma mark - 获取点击label
+
 -(void)tapLabel:(UILabel *)label{
     NSLog(@"%@",self.equipments[label.tag]);
     NSString* categoryName = self.equipments[label.tag];
@@ -295,7 +359,20 @@ typedef NS_ENUM(NSInteger, SortType) {
     [self loadProducts];
 }
 
+/**
+ *  点击搜索按钮
+ */
 - (void)cancelSearch
+{
+    //self.searchTextField.text = @"";
+    [self.searchTextField resignFirstResponder];
+    [self loadProducts];
+}
+
+/**
+ *  取消搜索
+ */
+- (void)deleteSearch
 {
     self.searchTextField.text = @"";
     [self.searchTextField resignFirstResponder];

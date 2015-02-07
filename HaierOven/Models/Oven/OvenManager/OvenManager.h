@@ -78,14 +78,16 @@ typedef void (^result) (BOOL result);
  */
 - (NSString*)fetchSSID;
 
+
 /**
  *  通过ssid和wifi password构建uSDKDeviceConfigInfo， 通过CONFIG_MODE_SMARTCONFIG方式绑定
  *
- *  @param ssid     wifi名称
- *  @param password wifi密码
- *  @param result   绑定结果
+ *  @param ssid      WiFi名称
+ *  @param password  WiFi密码
+ *  @param rebindMac 如果是重新绑定，则传此设备的Mac，否则传nil
+ *  @param result    绑定结果，将返回绑定成功的usdkDevice对象
  */
-- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password bindResult:(result)result;
+- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password rebindOvenMac:(NSString*)rebindMac bindResult:(completion)result;
 
 #pragma mark - 获取设备列表和设备信息
 
@@ -104,7 +106,7 @@ typedef void (^result) (BOOL result);
  *
  *  @param device uSDKDevice对象
  */
-- (void)subscribeDevice:(uSDKDevice*)device;
+- (void)subscribeDevice:(NSArray*)deviceMacs;
 
 /**
  *  订阅设备列表变化
@@ -124,12 +126,12 @@ typedef void (^result) (BOOL result);
 /**
  *  订阅所有通知
  */
-- (void)subscribeAllNotificationsWithDevice:(uSDKDevice*)device;
+- (void)subscribeAllNotificationsWithDevice:(NSArray*)deviceMacs;
 
 /**
  *  取消订阅设备
  */
-- (void)unSubscribeDevice:(uSDKDevice*)device;
+- (void)unSubscribeDevice:(NSArray*)deviceMacs;
 
 /**
  *  取消订阅设备列表变化
@@ -149,7 +151,7 @@ typedef void (^result) (BOOL result);
 /**
  *  取消订阅所有通知，应该与subscribeAllNotifications成对出现
  */
-- (void)unSubscribeAllNotifications:(uSDKDevice*)device;
+- (void)unSubscribeAllNotifications:(NSArray*)deviceMacs;
 
 #pragma mark - 命令执行流程
 
@@ -207,8 +209,25 @@ typedef void (^result) (BOOL result);
 
 #pragma mark -
 
+/**
+ *  获取指定设备的状态
+ *
+ *  @param deviceMac 指定设备Mac
+ *  @param callback  返回OvenStatus对象
+ */
+- (void)getOvenStatus:(NSString*)deviceMac status:(completion)callback;
 
 @end
+
+
+
+
+
+
+
+
+
+
 
 
 

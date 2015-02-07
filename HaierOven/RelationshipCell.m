@@ -19,6 +19,7 @@
     // Initialization code
     self.watchingBtn.layer.cornerRadius = 15;
     self.watchingBtn.layer.masksToBounds = YES;
+    [self.watchingBtn setBackgroundImage:[MyTool createImageWithColor:UIColorFromRGB(0xb5b5b5)] forState:UIControlStateSelected];
     
 }
 

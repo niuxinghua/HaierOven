@@ -19,6 +19,8 @@
 
 #define LogoutSuccussNotification       @"Logout successfully"
 
+#define MessageCountUpdateNotification  @"Message count update" //更新未读消息数量通知
+
 #define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
 
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
@@ -62,6 +64,11 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  *  我已绑定的烤箱列表
  */
 @property (strong, nonatomic) NSMutableArray* myOvens;
+
+/**
+ *  保存消息数量，所有controller均可访问
+ */
+@property (nonatomic) NSInteger messagesCount;
 
 /**
  *  模型层单例
