@@ -369,12 +369,12 @@
                                      @"loginId" : loginId,
                                      @"password" : password,
                                      @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId ,
-                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAppId,
+                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
                                      @"loginType" : logintp
                                     };
         
         // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
-        
+        NSLog(@"login info:%@", paramsDict);
         [[self manager] POST:UserLogin parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
@@ -401,7 +401,7 @@
 
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
-//                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
@@ -736,6 +736,40 @@
     }
 }
 
+- (void)checkSignInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"userBaseID" : userBaseId,         //用户ID
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:CheckSignIn parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                completion(YES, responseObject, nil);
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+    
+}
+
 
 - (void)signInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion
 {
@@ -988,6 +1022,48 @@
     }
 }
 
+- (void)searchUsersWithKeyword:(NSString*)keyword pageIndex:(NSInteger)pageIndex userBaseId:(NSString*)userId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSDictionary* paramsDict = @{
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,     //当前请求的页数
+                                     @"userBaseID" : userId, //用户Id
+                                     @"key" : keyword
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:SearchUsers parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* follows = [DataParser parseUsersWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, follows, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
 - (void)currentUser:(NSString*)currentUserId followedUser:(NSString*)userBaseId callBack:(myCallback)completion
 {
     
@@ -998,7 +1074,7 @@
         NSDictionary* paramsDict = @{
                                      @"userBaseID" : currentUserId,
                                      @"followedUserBaseID" : userBaseId == nil ? @"0" : userBaseId
-                                     };
+                                    };
         
         // 2. 发送网络请求
         [[self manager] POST:CheckFollowed parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -1805,6 +1881,47 @@
         
     }
 }
+
+- (void)cancelPraiseCookbook:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSDictionary* paramsDict = @{
+                                     @"cookbookID" : cookbookId,     //关键字
+                                     @"userBaseID" : userBaseId
+                                    };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:CancelPraiseCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 解析
+                
+                completion(YES, responseObject, nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        
+    }
+    
+}
+
+
 
 #pragma mark - 购物清单
 

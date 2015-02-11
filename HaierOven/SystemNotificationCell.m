@@ -53,6 +53,15 @@
         case 3:
             desc = [NSString stringWithFormat:@"回复了我的私信"];
             break;
+        case 4:
+            desc = [NSString stringWithFormat:@"关注了我"];
+            break;
+        case 5:
+            desc = [NSString stringWithFormat:@"取消关注我"];
+            break;
+        case 6:
+            desc = [NSString stringWithFormat:@"取消赞我的菜谱%@", notice.relatedDesc];
+            break;
             
         default:
             break;

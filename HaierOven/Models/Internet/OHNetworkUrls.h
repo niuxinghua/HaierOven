@@ -102,6 +102,11 @@
 #define FollowDelete     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/delete"]
 
 /**
+ *  检查今天是否已签到
+ */
+#define CheckSignIn     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/signin/check"]
+
+/**
  *  签到
  */
 #define SignIn      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/signin"]
@@ -126,8 +131,15 @@
  */
 #define GetFans  [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/fans/get/userBaseID"]
 
-
+/**
+ *  是否关注某人
+ */
 #define CheckFollowed   [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/follow/check"]
+
+/**
+ *  搜索用户
+ */
+#define SearchUsers     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/search"]
 
 
 #pragma mark - 标签
@@ -217,6 +229,12 @@
  *  赞菜谱
  */
 #define PraiseCookbook      [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/praise"]
+
+/**
+ *  取消赞菜谱
+ */
+#define CancelPraiseCookbook    [NSString stringWithFormat:@"%@/%@", BaseUrl, @"cookbook/cancelpraise"]
+
 
 
 #pragma mark - 购物车
@@ -316,7 +334,7 @@
 #define NotificationList     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"noticfication/get"]
 
 
-#pragma mark - 通知
+#pragma mark - 设置
 
 /**
  *  意见反馈

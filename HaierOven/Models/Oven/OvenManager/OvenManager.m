@@ -138,6 +138,9 @@
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        
+        [NSThread sleepForTimeInterval:3]; //无意义的延时
+        
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
             
@@ -172,6 +175,10 @@
                 }
                 
                 // 2. 订阅绑定的烤箱
+                if (theDevice == nil) {
+                    result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
+                    return;
+                }
                 [self subscribeAllNotificationsWithDevice:@[theDevice.mac]];
                 self.subscribedDevice = theDevice;
                 
@@ -714,71 +721,94 @@
 
 #pragma mark - getters
 
-//NSArray *xz = @[@"icon_ssk_s", @"icon_sxsk_s", @"icon_xsk_s", @"icon_fj_s", @"icon_jd_s", @"icon_3Dhb_s",
-//                @"icon_3Dsk_s", @"icon_psms_s", @"icon_cthb_s", @"icon_rfsk_s", @"icon_dlhb_s", @"icon_rfqsk_s"];
+//NSArray *cxz = @[@"icon_ssk_n", @"icon_sxsk_n", @"icon_xsk_n", @"icon_fj_n", @"icon_jd_n", @"icon_3Dhb_n",
+//                 @"icon_3Dsk_n", @"icon_psms_n", @"icon_cthb_n", @"icon_rfsk_n", @"icon_dlhb_n", @"icon_rfqsk_n",
+//                 @"icon_3Drf_n", @"icon_bk_n", @"icon_cz_n", @"icon_gwz_n", @"icon_jssk_n", @"icon_qsk_n", @"icon_rfbk_n"];
 - (NSArray *)bakeModes
 {
     if (_bakeModes == nil) {
-        _bakeModes = @[@{@"bakeMode" : @{@"30v0Me" :@"烧烤"},
+        _bakeModes = @[
+                       @{@"bakeMode" : @{@"30v0Me" :@"上烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Mf" :@"上下烧烤"},
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v6Mm" :@"全烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*纯蒸汽*/,
-                       @{@"bakeMode" : @{@"30v0Mg" :@"下烧烤"} ,
-                         @"defaultTemperature" : @230,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*下烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Mb" :@"发酵功能"} ,
-                         @"defaultTemperature" : @40,
-                         @"defaultTime" : @60,
-                         @"temperatureChangeble" : @NO}/*发酵功能*/,
-                       @{@"bakeMode" : @{@"30v0Ma" :@"解冻功能"} ,
-                         @"defaultTemperature" : @60,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @NO}/*解冻功能*/,
-                       @{@"bakeMode" : @{@"30v0Mc" :@"3D热风"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*3D热风*/,
-                       @{@"bakeMode" : @{@"30v0M9" :@"3D烧烤"} ,
-                         @"defaultTemperature" : @230,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*3D烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Md" :@"披萨模式"} ,
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*披萨模式*/,
-                       @{@"bakeMode" : @{@"30v0M6" :@"传统烘焙"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
                          @"temperatureChangeble" : @YES},
                        @{@"bakeMode" : @{@"30v0M5" :@"热风烧烤"} ,
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*热风烧烤*/,
-                       @{@"bakeMode" : @{@"30v0M8" :@"对流烘焙"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*对流烘焙*/,
-                       @{@"bakeMode" : @{@"30v7Mn" :@"热分全烧烤"},
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v7Mn" :@"热风全烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M9" :@"3D烧烤"} ,
+                         @"defaultTemperature" : @230,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mf" :@"传统烘焙"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M6" :@"对流烘焙"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M8" :@"热风焙烤"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mg" :@"焙烤"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mc" :@"3D热风"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Md" :@"披萨模式"} ,
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Ma" :@"解冻"} ,
+                         @"defaultTemperature" : @60,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @120,
+                         @"temperatureChangeble" : @NO},
+                       @{@"bakeMode" : @{@"30v0Mb" :@"发酵"} ,
+                         @"defaultTemperature" : @40,
+                         @"defaultTime" : @60,
+                         @"defaultSelectTime" : @60,
+                         @"temperatureChangeble" : @NO},
+                       @{@"bakeMode" : @{@"30v0Mh" :@"加湿烧烤"} ,
+                         @"defaultTemperature" : @230,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mi" :@"高温蒸"} ,
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mj" :@"纯蒸"} ,
+                         @"defaultTemperature" : @100,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
                          @"temperatureChangeble" : @YES}
                        
-                       
-                       
-                       
-                       
-//                       @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
-//                       @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
-//                       @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
-//                       @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
-//                       @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
-//                       @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
-//                       @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/
                        ];
     }
     return _bakeModes;

@@ -16,6 +16,7 @@
 
 #import "MainSearchViewController.h"
 #import "UpLoadingMneuController.h"
+#import "MyPointsController.h"
 
 typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     CurrentCookbookTypePublished,
@@ -23,9 +24,20 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 };
 
 @interface PersonalCenterViewController ()<MainViewNormalCellDelegate, PersonalCenterSectionViewDelegate, UIAlertViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UITableView *table;
+
 @property (strong, nonatomic) IBOutlet UIImageView *personalAvater;
+
+/**
+ *  如果不是登录用户则隐藏
+ */
 @property (strong, nonatomic) IBOutlet UILabel *myDessertCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *myPointsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *myPointsImageView;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *personalNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *personDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UIButton *followBtn;
@@ -52,7 +64,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
         [super openLoginController];
         return;
     }
-    NSString* userBaseId = CurrentUserBaseId;
+    NSString* userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
     [[InternetManager sharedManager] getUserInfoWithUserBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             self.currentUser = obj;
@@ -66,7 +78,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)loadPublishedCookbooks
 {
-    NSString* userBaseId = CurrentUserBaseId;
+    NSString* userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:userBaseId cookbookStatus:1 pageIndex:_publishedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
@@ -90,7 +102,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 
 - (void)loadPraisedCookbooks
 {
-    NSString* userBaseId = CurrentUserBaseId;
+    NSString* userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
     [[InternetManager sharedManager] getMyPraisedCookbooksWithUserBaseId:userBaseId pageIndex:_praisedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             NSArray* arr = obj;
@@ -196,7 +208,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     if (self.navigationController.viewControllers.count > 1) {
         UIButton* leftButton = [[UIButton alloc] init];
         
-        [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [leftButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         [super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
         
     } else {
@@ -215,13 +227,29 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = NO;
+}
+
 - (void)updateUI
 {
+    if (![self.currentUserId isEqualToString:CurrentUserBaseId] && self.currentUserId != nil) {
+        //不是登录用户隐藏积分、编辑按钮
+        self.myDessertCountLabel.hidden = YES;
+        self.myPointsImageView.hidden = YES;
+        self.myPointsLabel.hidden = YES;
+        self.editButton.hidden = YES;
+    
+    }
+    
     [self.personalAvater setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar]];
     self.myDessertCountLabel.text = self.currentUser.points;
-    self.personalNameLabel.text = self.currentUser.nickName;
+    self.personalNameLabel.text = self.currentUser.userName;
     self.personDescriptionLabel.text = self.currentUser.note;
-    self.genderImage.image = [self.currentUser.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    self.genderImage.image = ![self.currentUser.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
     [self.watchBtn setTitle:[NSString stringWithFormat:@"%@关注", self.currentUser.focusCount] forState:UIControlStateNormal];
     [self.followBtn setTitle:[NSString stringWithFormat:@"粉丝%@", self.currentUser.followCount] forState:UIControlStateNormal];
     
@@ -318,6 +346,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 }
 
 -(void)setUpSubviews{
+    
     self.table.delegate = self;
     self.table.dataSource = self;
     self.table.tableFooterView = [[UIView alloc] init];
@@ -330,9 +359,12 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     [self.personalAvater.layer setBorderWidth:1.5]; //边框宽度
     [self.personalAvater.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
+    self.personalNameLabel.text = @"";
+    self.personDescriptionLabel.text = @"";
     
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -407,26 +439,45 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 #pragma mark-
 
 #pragma mark topview各种点击事件
+
 //跳转关注页面
 - (IBAction)TurnWatchList:(id)sender {
     RelationshipListViewController *relation = [self.storyboard instantiateViewControllerWithIdentifier:@"RelationshipListViewController"];
     relation.iswathching = YES;
-    relation.userBaseId = CurrentUserBaseId;
+    relation.userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
     [self.navigationController pushViewController:relation animated:YES];
     NSLog(@"关注列表");
 }
+
 - (IBAction)TurnFollowsList:(id)sender {
     RelationshipListViewController *relation = [self.storyboard instantiateViewControllerWithIdentifier:@"RelationshipListViewController"];
     relation.iswathching = NO;
-    relation.userBaseId = CurrentUserBaseId;
+    relation.userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
     [self.navigationController pushViewController:relation animated:YES];
     NSLog(@"粉丝列表");
 }
+
 - (IBAction)Edit:(id)sender {
     PersonalEditViewController *personalEdit = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonalEditViewController"];
     personalEdit.user = self.currentUser;
     [self.navigationController pushViewController:personalEdit animated:YES];
 }
+
+- (void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)myPointsTapped:(UITapGestureRecognizer *)sender
+{
+    MyPointsController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"My points controller"];
+    controller.title = @"积分说明";
+    controller.navigationItem.hidesBackButton = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+    
+}
+
+
 
 #pragma mark-
 

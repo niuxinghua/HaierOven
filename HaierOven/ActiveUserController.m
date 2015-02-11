@@ -241,7 +241,7 @@
                                                             }
                                                             
                                                             [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                            [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                            //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                             
                                                         }];
                                                         

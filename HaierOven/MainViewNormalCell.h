@@ -26,7 +26,8 @@
  */
 @property (weak, nonatomic) IBOutlet UIImageView *cookStarImageView;
 
-@property (strong, nonatomic) IBOutlet UIButton *chickGoodBtn;
+@property (strong, nonatomic) IBOutlet UIButton *chickGoodBtn; //赞
+
 @property (strong, nonatomic) IBOutlet UILabel *goodCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet ContainerView *bottomOrangeView;

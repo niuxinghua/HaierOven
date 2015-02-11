@@ -10,6 +10,13 @@
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.8
+
+@interface PersonalCenterSectionView ()
+
+@property (nonatomic) BOOL isFirstContent;
+
+@end
+
 @implementation PersonalCenterSectionView
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -17,10 +24,13 @@
     self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([PersonalCenterSectionView class]) owner:self options:nil] firstObject];
     self.frame = frame;
     self.sectionType = sectionPersonalCenter;
+    self.isFirstContent = YES;
+
+//    self.orangeLine = [[UIImageView alloc]initWithFrame:CGRectMake(15, self.pushedButton.height-9, self.width/2-30, 2)];
+
+    self.orangeLine = [[UIImageView alloc]init];
+
     
-//    self.pushedButton.frame = CGRectMake(0, PageW*ScrRate-30/2, PageW/2, 30);
-//    self.likeButton.frame = CGRectMake(PageW/2, PageW*ScrRate-30/2, PageW/2, 30);
-    self.orangeLine = [[UIImageView alloc]initWithFrame:CGRectMake(15, self.pushedButton.height-11, self.width/2-30, 2)];
     self.orangeLine.image = IMAGENAMED(@"orangel.png");
 //    self.orangeLine.frame = CGRectMake(15, frame.size.height-7, self.width/2-30, 2);
     self.middleLine.hidden = YES;
@@ -28,9 +38,17 @@
     return self;
 }
 
-
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (_isFirstContent) {
+        self.orangeLine.frame = CGRectMake(self.pushedButton.left + 15, self.pushedButton.height-9, self.pushedButton.width-30, 2);
+    }
+    
+}
 
 - (IBAction)TurnPushedController:(UIButton *)sender {
+    _isFirstContent = YES;
         [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
         }completion:^(BOOL finished) {
             [self.delegate SectionType:sender.tag];
@@ -39,7 +57,7 @@
 }
 
 - (IBAction)TurnLikeController:(UIButton *)sender {
-    
+    _isFirstContent = NO;
     [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(self.likeButton.left+15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
     }completion:^(BOOL finished) {
         [self.delegate SectionType:sender.tag];

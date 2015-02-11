@@ -113,7 +113,6 @@ typedef NS_ENUM(NSInteger, SortType) {
     } else {
         [self deleteMarkLabel];
     }
-    
 }
 
 - (void)markNewMessage
@@ -273,6 +272,19 @@ typedef NS_ENUM(NSInteger, SortType) {
     }
 }
 
+/* 定义每个UICollectionView 的大小 */
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return CGSizeMake(Main_Screen_Width / 2 - 32, Main_Screen_Width / 2 - 32);
+}
+
+/* 定义每个UICollectionView 的边缘 */
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(20, 15, 10, 15);//上 左 下 右
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BakeHouseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BakeHouseCell" forIndexPath:indexPath];
     // Configure the cell
@@ -307,10 +319,11 @@ typedef NS_ENUM(NSInteger, SortType) {
     fiexViewY = newLocation.y;
     
     if (sender.selected==NO){
-        if (self.collectionView.contentOffset.y==0) {
-            [self fiexViewDown];
+        if (self.collectionView.contentOffset.y!=0) {
+            [self.collectionView setContentOffset:CGPointMake(0, 0)];
         }
-    }else
+        [self fiexViewDown];
+    } else
         [self fiexViewUp];
 }
 

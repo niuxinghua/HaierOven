@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) Friend* user;
 
+@property (copy, nonatomic) NSString* userId;
+
 @property (weak, nonatomic) id <RelationshipCellDelegate> delegate;
 
 @end

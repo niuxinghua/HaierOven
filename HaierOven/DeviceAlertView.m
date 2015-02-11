@@ -79,7 +79,7 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, self.titleBg.height-8);
             self.alertDescription = @"";
             self.pickViewArr = [self getTimeArr];
-            [self.pickview selectRow:30 inComponent:0 animated:NO];
+            [self.pickview selectRow:self.defaultSelectTime - 1 inComponent:0 animated:NO];
             break;
             
         case alertTempture:
@@ -87,7 +87,8 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, self.titleBg.height-8);
             self.alertDescription = @"";
             self.pickViewArr = [self getTempArr];
-            [self.pickview selectRow:35 inComponent:0 animated:NO];
+            [self.pickview selectRow:0 inComponent:0 animated:NO];
+            
             break;
             
         case alertClock:
@@ -101,7 +102,7 @@
             self.alertTitle = @"设置探针目标温度";
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在探针温度达到目标温度时提醒您";
-            self.pickViewArr = [self getTempArr];
+            self.pickViewArr = [self getCheckTemperatureArr];
             break;
             
         case alertWormUp:
@@ -125,6 +126,7 @@
             break;
     }
 }
+
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return self.alertType==alertOrder?2:1;
@@ -186,25 +188,50 @@
 }
 
 
-
+- (NSArray*)getCheckTemperatureArr
+{
+    NSString *temp;
+    NSMutableArray *temps = [NSMutableArray new];
+    int t = 0 ;
+    for ( int i = 74; i < 95; i++) {   //探针温度75°-95°，调整单位是1°
+        t = i+1;
+        temp = [NSString stringWithFormat:@"%d°",t];
+        [temps addObject:temp];
+    }
+    return [temps copy];
+}
 
 -(NSArray *)getTempArr{
     NSString *temp;
     NSMutableArray *temps = [NSMutableArray new];
     int t = 0 ;
-    for ( int i = 0; i < 60; i++) {   //烘烤温度上限是300°，调整单位是5°
-        t = t+5;
-        temp = [NSString stringWithFormat:@"%d°",t];
-        [temps addObject:temp];
+    
+    if (!self.isChunzheng) {
+        t = 45;
+        for ( int i = 50; i <= 90; i++) {   //烘烤温度上限是300°，调整单位是5°
+            t = t+5;
+            temp = [NSString stringWithFormat:@"%d°",t];
+            [temps addObject:temp];
+        }
+        return [temps copy];
+    } else {
+        t = 35;
+        for ( int i = 40; i <= 54; i++) {   //纯蒸模式
+            t = t+5;
+            temp = [NSString stringWithFormat:@"%d°",t];
+            [temps addObject:temp];
+        }
+        return [temps copy];
     }
-    return [temps copy];
+    
+    
     
 }
 
 -(NSArray *)getTimeArr{
     NSString *minute;
     NSMutableArray *minutes = [NSMutableArray new];
-    for ( int i = 1; i <= 150; i++) {  //烘烤时间上限是150分钟，调整单位是1分钟，从1分钟开始
+    for ( int i = 1; i <= 180; i++) {  //烘烤时间上限是150分钟，调整单位是1分钟，从1分钟开始
         minute = [NSString stringWithFormat:@"%d 分钟",i];
         [minutes addObject:minute];
     }

@@ -67,8 +67,8 @@
 {
     [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar]];
     self.nikeNameLabel.text = self.user.nickName;
-    self.genderLabel.text = [self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
-    self.genderImage.image = [self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    self.genderLabel.text = ![self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
+    self.genderImage.image = ![self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
     self.placeLabel.text = self.user.address;
     self.descriptionLabel.text = self.user.note;
     self.birthdayLabel.text = self.user.birthday;

@@ -17,7 +17,8 @@
 #import "AddShoppingListCell.h"
 #import "StudyCookViewController.h"
 #import "DeviceViewController.h"
-
+#import "PersonalCenterViewController.h"
+#import "DeviceBoardViewController.h"
 
 @interface CookbookDetailControllerViewController () <UIScrollViewDelegate, AutoSizeLabelViewDelegate, CookbookSectionHeaderDelegate, AddShoppingListCellDelegate, UMSocialDataDelegate, UMSocialUIDelegate, SkillCellDelegate>
 {
@@ -305,7 +306,7 @@
         case CurrentContentTypeMethods:
         {
             self.stepsTableView = tableView;
-            tableView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getStepsViewHeight]);
+            tableView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getStepsViewHeight] + [self getSkillCellHeight]);
             tableView.tag = 6;
             StepsViewController* controller = [[StepsViewController alloc] initWithCookbookDetail:self.cookbookDetail delegate:self];
             self.stepsTableViewDataSource = controller;
@@ -462,6 +463,13 @@
     self.learnButton.backgroundColor = GlobalOrangeColor;
     
     self.cookbookDescLabel.textColor = RGB(105, 84, 89);
+    
+    [self.followButton setTitle:@"+ 关注" forState:UIControlStateNormal];
+    [self.followButton setTitle:@"已关注" forState:UIControlStateSelected];
+    [self.followButton setBackgroundImage:[MyTool createImageWithColor:RGB(100, 170, 140)] forState:UIControlStateNormal];
+    [self.followButton setBackgroundImage:[MyTool createImageWithColor:RGB(200, 200, 200)] forState:UIControlStateSelected];
+    self.followButton.layer.masksToBounds = YES;
+    self.followButton.layer.cornerRadius = self.followButton.height / 2;
 }
 
 - (void)setupInputView
@@ -642,22 +650,22 @@
     //    NSLog(@"%f", scrollView.contentOffset.y);
     if (scrollView.tag != 5) { // 不是滑动评论
         
-        if (scrollView.contentOffset.y < self.cookbookImageView.height + self.praiseButton.center.y) {
+        if (scrollView.contentOffset.y < self.headerView.height + self.praiseButton.bottom) {
             [self showRightNavigationView:NO];
         } else {
             [self showRightNavigationView:YES];
         }
         
         if (self.contentType == CurrentContentTypeComment) {
-            
-            CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
+            NSLog(@"%f", scrollView.contentOffset.y);
+            CGFloat height = self.headerView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
             if (IsLogin) {
                 self.window.hidden = scrollView.contentOffset.y >= height ? NO : YES;
             }
             
         }
         
-        if (scrollView.contentOffset.y > self.cookbookImageView.height - 64) {
+        if (scrollView.contentOffset.y > self.headerView.height - 64) {
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
             self.navigationController.navigationBar.translucent = NO;
             
@@ -829,9 +837,6 @@
         height += 8; //Label距离下边距
     }
     
-    height += 36 + 71; //----
-    height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
-    
     return height;
 }
 
@@ -856,7 +861,7 @@
         self.window.hidden = YES;
     }
     
-    CGFloat height = self.cookbookImageView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
+    CGFloat height = self.headerView.height + self.cookbookTitleCell.height + self.cookbookDescCell.height + self.learnCookBtnCell.height - 20;
     
     if (_lastContentOffsetY >= height && self.contentType == CurrentContentTypeComment && IsLogin) {
         self.window.hidden = NO;
@@ -919,8 +924,18 @@
 {
     _iOS7OvenListFlag = YES;
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    DeviceViewController* devicesController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
-    [self.navigationController pushViewController:devicesController animated:YES];
+    
+    if ([DataCenter sharedInstance].myOvens.count > 1 || [DataCenter sharedInstance].myOvens.count == 0) {
+        DeviceViewController* devicesController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
+        [self.navigationController pushViewController:devicesController animated:YES];
+    } else {
+        //只有1台的时候直接跳转到烤箱控制面板
+        DeviceBoardViewController* deviceBoardController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceBoardViewController"];
+        deviceBoardController.currentOven = [[DataCenter sharedInstance].myOvens firstObject];
+        [self.navigationController pushViewController:deviceBoardController animated:YES];
+        
+    }
+    
 }
 
 - (IBAction)back:(id)sender
@@ -968,13 +983,42 @@
  */
 - (IBAction)praiseCookbookTapped:(UIButton *)sender
 {
-    [self praiseCookbook];
+    if (self.isPreview) {
+        [super showProgressErrorWithLabelText:@"预览状态不可以赞喔" afterDelay:1];
+        return;
+    }
+    
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
+    
+    if (self.praiseButton.selected) { // 已赞
+        
+        [self cancelPraiseCookbook];
+        
+    } else { // 未赞
+        
+        [self praiseCookbook];
+        
+    }
     
 }
 
 - (IBAction)shareCookbookTapped:(UIButton *)sender
 {
     [self shareCookbook];
+}
+
+
+- (IBAction)userAvatarTapped:(UITapGestureRecognizer *)sender
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalCenterViewController* personalViewController = [storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"];
+    
+    personalViewController.currentUserId = self.cookbookDetail.creator.userBaseId;
+    [self.navigationController pushViewController:personalViewController animated:YES];
+    
 }
 
 #pragma mark - AddShoppingListCellDelegate
@@ -1052,25 +1096,10 @@
 }
 
 
-#pragma mark - 点赞和分享
+#pragma mark - 点赞、取消点赞和分享
 
 - (void)praiseCookbook
 {
-    if (self.isPreview) {
-        [super showProgressErrorWithLabelText:@"预览状态不可以赞喔" afterDelay:1];
-        return;
-    }
-    
-    if (!IsLogin) {
-        [super openLoginController];
-        return;
-    }
-    
-    if (self.praiseButton.selected) {
-        [super showProgressErrorWithLabelText:@"您已赞过这个菜谱" afterDelay:1];
-        self.praiseButton.selected = YES;
-        return;
-    }
     
     NSString* userID = CurrentUserBaseId;
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
@@ -1083,6 +1112,20 @@
         }
     }];
     
+}
+
+- (void)cancelPraiseCookbook
+{
+    NSString* userID = CurrentUserBaseId;
+    [[InternetManager sharedManager] cancelPraiseCookbook:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            [super showProgressCompleteWithLabelText:@"取消赞成功" afterDelay:1];
+            self.praiseButton.selected = NO;
+        } else {
+            [super showProgressErrorWithLabelText:@"取消赞没有成功" afterDelay:1];
+            self.praiseButton.selected = YES;
+        }
+    }];
 }
 
 - (void)shareCookbook

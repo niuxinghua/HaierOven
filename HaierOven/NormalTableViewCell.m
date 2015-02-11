@@ -64,9 +64,9 @@
     _notificationCount = notificationCount;
     [self.notificationbtn setTitle:notificationCount forState:UIControlStateNormal];
     [self.notificationbtn setTitle:notificationCount forState:UIControlStateHighlighted];
-    self.notificationbtn.layer.cornerRadius = self.notificationbtn.height/3;
+    self.notificationbtn.layer.cornerRadius = self.notificationbtn.height/2;
     self.notificationbtn.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.notificationbtn.layer.borderWidth = 1.5f;
+    self.notificationbtn.layer.borderWidth = 1.0f;
     self.notificationbtn.layer.masksToBounds = YES;
     self.notificationbtn.hidden = [notificationCount integerValue] == 0;
 }

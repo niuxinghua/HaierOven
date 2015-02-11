@@ -58,6 +58,8 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *studyCook;
 
+@property (strong, nonatomic) IBOutlet UIImageView *avaterImage;
+
 /**
  *  级别图标
  */

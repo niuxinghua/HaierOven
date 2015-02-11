@@ -201,6 +201,13 @@
 {
     [super viewWillAppear:animated];
     
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -238,7 +245,6 @@
             self.tagsView.selectedTags = sTags;
             cell.tagsView.tags = self.tagsForTagsView;
             self.tagsView = cell.tagsView;
-            
             return cell;
             
         }else if(indexPath.row == 2){

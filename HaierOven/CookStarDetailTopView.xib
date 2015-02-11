@@ -52,13 +52,13 @@
                                 <constraint firstAttribute="height" constant="80" id="LQy-73-RF4"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Haier 官方菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-H2-fGX">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Haier 官方菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-H2-fGX">
                             <rect key="frame" x="104" y="91" width="115" height="19"/>
                             <fontDescription key="fontDescription" name="FZLTCHJW--GB1-0" family="FZLanTingHeiS-B-GB" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Vcs.png" translatesAutoresizingMaskIntoConstraints="NO" id="34w-En-m8s">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vcs.png" translatesAutoresizingMaskIntoConstraints="NO" id="34w-En-m8s">
                             <rect key="frame" x="75" y="89" width="21" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="p6f-Ic-hcZ"/>

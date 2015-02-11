@@ -46,12 +46,16 @@
 /**
  *  用户级别
  */
-@property (copy, nonatomic) NSString* uerLevel;
+@property (nonatomic) NSInteger userLevel;
 
 /**
  *  姓名/昵称
  */
 @property (copy, nonatomic) NSString* userName;
+
+
+
+@property (strong, nonatomic) NSMutableArray* cookbooks;
 
 
 @end

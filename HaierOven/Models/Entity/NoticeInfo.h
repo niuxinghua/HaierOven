@@ -17,7 +17,7 @@
 @property (copy, nonatomic) NSString* ID;
 
 /**
- *  通知类型。1：赞菜谱；2：评论菜谱；3：新的私信
+ *  通知类型。1：赞菜谱；2：评论菜谱；3：新的私信；4：关注；5：取消关注；6：取消赞
  */
 @property (nonatomic) NSInteger type;
 

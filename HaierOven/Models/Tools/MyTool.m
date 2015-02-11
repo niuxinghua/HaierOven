@@ -43,21 +43,41 @@
 //判断是否是手机号码是否合法
 + (BOOL)validateTelephone:(NSString *)str
 {
-    //1[0-9]{10}
-    //^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$
-    //    NSString *regex = @"[0-9]{11}";
-    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:str];
-    return isMatch;
+    @try {
+        //1[0-9]{10}
+        //^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$
+        //    NSString *regex = @"[0-9]{11}";
+        str = [NSString stringWithFormat:@"%@", str];
+        NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,2,5-9]))\\d{8}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        BOOL isMatch = [pred evaluateWithObject:str];
+        return isMatch;
+    }
+    @catch (NSException *exception) {
+        return NO;
+    }
+    @finally {
+        
+    }
+    
 }
 
 //判断邮箱地址是否合法
 + (BOOL)validateEmail: (NSString *) candidate
 {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:candidate];
+    @try {
+        candidate = [NSString stringWithFormat:@"%@", candidate];
+        NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+        return [emailTest evaluateWithObject:candidate];
+    }
+    @catch (NSException *exception) {
+        return NO;
+    }
+    @finally {
+        
+    }
+    
 }
 
 #pragma mark －获取当前系统的时间

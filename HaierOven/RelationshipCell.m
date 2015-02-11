@@ -35,8 +35,20 @@
     [self.avaterImage setImageWithURL:[NSURL URLWithString:user.avatar]];
     self.nameLabel.text = user.userName;
     self.descriptionLabel.text = user.signature;
-    
-    self.watchingBtn.selected = user.isFollowed;
+    if (!IsLogin || [self.userId isEqualToString:CurrentUserBaseId]) {
+        self.watchingBtn.selected = user.isFollowed;
+    } else { //判断我是否关注了此人
+        [[InternetManager sharedManager] currentUser:CurrentUserBaseId followedUser:user.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                NSInteger status = [obj[@"data"] integerValue];
+                if (status == 1) {
+                    self.watchingBtn.selected = YES;
+                } else {
+                    self.watchingBtn.selected = NO;
+                }
+            }
+        }];
+    }
     
 }
 

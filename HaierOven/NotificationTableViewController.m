@@ -14,6 +14,7 @@
 #import "CookbookDetailControllerViewController.h"
 #import "ChatViewController.h"
 #import "DeviceMessageCell.h"
+#import "PersonalCenterViewController.h"
 
 typedef NS_ENUM(NSInteger, NotificationType)
 {
@@ -25,15 +26,40 @@ typedef NS_ENUM(NSInteger, NotificationType)
 @property (strong, nonatomic) IBOutlet UIView *headView;
 
 @property (nonatomic) NSInteger pageIndex;
+
+/**
+ *  所有系统通知
+ */
 @property (strong, nonatomic) NSMutableArray* allNotifications;
 
+/**
+ *  菜谱通知
+ */
 @property (strong, nonatomic) NSMutableArray* cookbookNotifications;
 
+/**
+ *  厨神私信通知
+ */
 @property (strong, nonatomic) NSMutableArray* messagesNotifications;
 
+/**
+ *  关注通知
+ */
+@property (strong, nonatomic) NSMutableArray* followNotifications;
+
+/**
+ *  烤箱通知
+ */
 @property (strong, nonatomic) NSMutableArray* ovenNotifications;
 
+/**
+ *  通知类型：系统通知、设备通知
+ */
 @property (nonatomic) NotificationType notificationType;
+
+@property (strong, nonatomic) UIImage* myAvatar;
+
+@property (strong, nonatomic) UIImage* toUserAvatar;
 
 @end
 
@@ -47,10 +73,9 @@ typedef NS_ENUM(NSInteger, NotificationType)
         self.allNotifications = [NSMutableArray array];
         self.cookbookNotifications = [NSMutableArray array];
         self.messagesNotifications = [NSMutableArray array];
+        self.followNotifications = [NSMutableArray array];
         self.ovenNotifications = [NSMutableArray array];
         self.notificationType = NotificationTypeOven;
-        
-        
         
     }
     return self;
@@ -69,7 +94,8 @@ typedef NS_ENUM(NSInteger, NotificationType)
         [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
             
             if (success) {
-                // 15秒后设置为已读
+                // 10秒后设置为已读
+                
                 [self performSelector:@selector(updateReadStatus) withObject:nil afterDelay:10];
                 
                 NSArray* arr = obj;
@@ -115,12 +141,37 @@ typedef NS_ENUM(NSInteger, NotificationType)
     if (self.notificationType == NotificationTypeSystem) {
         self.cookbookNotifications = [NSMutableArray array];
         self.messagesNotifications = [NSMutableArray array];
+        self.followNotifications = [NSMutableArray array];
         for (NoticeInfo* notice in self.allNotifications) {
-            if (notice.type == 3) { //私信
-                [self.messagesNotifications addObject:notice];
-            } else { // 1赞菜谱 2评论菜谱
-                [self.cookbookNotifications addObject:notice];
+            
+            switch (notice.type) {
+                case 1:     //赞
+                    [self.cookbookNotifications addObject:notice];
+                    break;
+                case 2:     //评论
+                    [self.cookbookNotifications addObject:notice];
+                    break;
+                case 3:     //私信
+                    [self.messagesNotifications addObject:notice];
+                    break;
+                case 4:     //关注
+                    [self.followNotifications addObject:notice];
+                    break;
+                case 5:     //取消关注
+                    [self.followNotifications addObject:notice];
+                    break;
+                case 6:     //取消赞
+                    [self.cookbookNotifications addObject:notice];
+                    break;
+                    
+                default:
+                    break;
             }
+//            if (notice.type == 3) { //私信
+//                [self.messagesNotifications addObject:notice];
+//            } else if (notice.type == 1){ // 1赞菜谱 2评论菜谱
+//                [self.cookbookNotifications addObject:notice];
+//            }
         }
     } else {
         
@@ -128,6 +179,18 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
     [self.tableView reloadData];
 }
+
+
+- (void)loadMyImage
+{
+    if (_myAvatar == nil) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            _myAvatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].currentUser.userAvatar]]];
+        });
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -137,6 +200,8 @@ typedef NS_ENUM(NSInteger, NotificationType)
     [self addFooter];
     
     [self loadNotifications];
+    
+    [self loadMyImage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMarkStatus:) name:MessageCountUpdateNotification object:nil];
     if ([DataCenter sharedInstance].messagesCount > 0 && IsLogin) {
@@ -286,7 +351,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.notificationType == NotificationTypeSystem ? 2 : 1;
+    return self.notificationType == NotificationTypeSystem ? 3 : 1;
 }
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectio{
@@ -306,12 +371,14 @@ typedef NS_ENUM(NSInteger, NotificationType)
 //            }
 //            sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
             sectionview.sectionTitleLabel.text = @"菜谱";
-        } else {
+        } else if (section == 1){
 //            if (self.messagesNotifications.count == 0) {
 //                return [[UIView alloc] init];
 //            }
 //            sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
             sectionview.sectionTitleLabel.text = @"厨神";
+        } else {
+            sectionview.sectionTitleLabel.text = @"关注";
         }
         
         return sectionview;
@@ -346,8 +413,12 @@ typedef NS_ENUM(NSInteger, NotificationType)
     if (self.notificationType == NotificationTypeSystem) {
         if (section == 0) {
             return self.cookbookNotifications.count;
+        } else if (section == 1) {
+            return self.messagesNotifications.count;
+        } else {
+            return self.followNotifications.count;
         }
-        return self.messagesNotifications.count;
+        
     } else {
         return self.ovenNotifications.count;
     }
@@ -367,9 +438,13 @@ typedef NS_ENUM(NSInteger, NotificationType)
             
             cell.notice = self.cookbookNotifications[indexPath.row];
             
-        } else {
+        } else if (indexPath.section == 1){
             
             cell.notice = self.messagesNotifications[indexPath.row];
+            
+        } else {
+            
+            cell.notice = self.followNotifications[indexPath.row];
             
         }
         
@@ -400,6 +475,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (self.notificationType == NotificationTypeSystem) {
         
         if (indexPath.section == 0) {
@@ -413,7 +489,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
             
             [self.navigationController pushViewController:cookbookDetailController animated:YES];
             
-        } else {
+        } else  if (indexPath.section == 1){
             // 跳转到聊天界面
             
             NoticeInfo* selectedNotice = self.messagesNotifications[indexPath.row];
@@ -421,8 +497,19 @@ typedef NS_ENUM(NSInteger, NotificationType)
             ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
             chatViewController.toUserId = selectedNotice.promoter.userBaseId;
             chatViewController.toUserName = selectedNotice.promoter.nickName;
+            chatViewController.myAvatar = self.myAvatar;
+            chatViewController.toUserAvatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:selectedNotice.promoter.userAvatar]]];
             
             [self.navigationController pushViewController:chatViewController animated:YES];
+            
+        } else {
+            NoticeInfo* selectedNotice = self.followNotifications[indexPath.row];
+            
+            PersonalCenterViewController* personalController = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"];
+            
+            personalController.currentUserId = selectedNotice.promoter.userBaseId;
+            
+            [self.navigationController pushViewController:personalController animated:YES];
             
         }
         

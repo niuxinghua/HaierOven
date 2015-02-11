@@ -40,6 +40,8 @@
 
 @property (strong, nonatomic) NSMutableArray* messages;
 
+@property (strong, nonatomic) UIImage* myAvatar;
+
 @end
 
 @implementation CookStarDetailController
@@ -153,6 +155,16 @@
     
 }
 
+- (void)loadMyImage
+{
+    if (_myAvatar == nil) {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            _myAvatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[DataCenter sharedInstance].currentUser.userAvatar]]];
+        });
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self SetUpSubviews];
@@ -160,6 +172,8 @@
     self.mainTable.dataSource  = self;
     [self addFooter];
     [self updateUI];
+    [self loadMyImage];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -185,7 +199,6 @@
     [self.mainTable registerNib:[UINib nibWithNibName:NSStringFromClass([MainViewNormalCell class]) bundle:nil] forCellReuseIdentifier:@"MainViewNormalCell"];
     self.cookStarDetailTopView.tags =self.tags;
     
-
 }
 
 - (void)addHeader
@@ -344,6 +357,8 @@
     chatViewController.toUserId = self.cookerStar.userBaseId;
 //    chatViewController.messages = self.messages;
     chatViewController.toUserName = self.cookerStar.userName;
+    chatViewController.toUserAvatar = self.cookStarDetailTopView.avaterImage.image;
+    chatViewController.myAvatar = self.myAvatar;
     [self.navigationController pushViewController:chatViewController animated:YES];
     
     
@@ -353,8 +368,8 @@
 #warning 暂用视频
     
 //    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
-    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
-//    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
+//    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
+    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];
@@ -389,9 +404,9 @@
 }
 
 -(void)chickTags:(UIButton*)btn{
-    self.tempBtn.selected = NO;
-    btn.selected= btn.selected ==YES? NO:YES;
-    self.tempBtn = btn;
+//    self.tempBtn.selected = NO;
+//    btn.selected= btn.selected ==YES? NO:YES;
+//    self.tempBtn = btn;
     
 }
 

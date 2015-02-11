@@ -261,7 +261,11 @@
                                                         [userDefaults synchronize];
                                                         
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                        if (loginType == LoginTypeEmail) {
+                                                            [[[UIAlertView alloc] initWithTitle:@"激活" message:@"注册成功，请前往邮箱激活您的账号" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+                                                        }
+                                                        
+                                                        //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                     } else {
                                                         [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                     }

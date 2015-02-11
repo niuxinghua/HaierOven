@@ -16,6 +16,9 @@
 #import "MJRefresh.h"
 #import "CookStarDetailController.h"
 #import "UpLoadingMneuController.h"
+#import "StudyCookViewController.h"
+
+
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.8
@@ -102,12 +105,18 @@
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                //[cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
-                cookerImage.image = IMAGENAMED(@"home_banner_default.png");
-                cookerImage.backgroundColor = GlobalOrangeColor;
+                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                //cookerImage.image = IMAGENAMED(@"home_banner_default.png");
+                //cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
             }
+            
+            // 新手学烘焙
+            UIImageView* learnImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
+            learnImage.image = [UIImage imageNamed:@"APPkv-banner1.jpg"];
+            learnImage.contentMode = UIViewContentModeScaleAspectFill;
+            [viewsArray addObject:learnImage];
             
         }
         self.adCycleView.totalPagesCount = ^NSInteger(void){
@@ -122,8 +131,11 @@
         self.adCycleView.TapActionBlock = ^(NSInteger pageIndex){
             NSLog(@"点击了第%ld个",(long)pageIndex);
             
-            if (vc.recommendCookerStars.count == 0) {
-                [super showProgressErrorWithLabelText:@"推荐厨神无数据" afterDelay:1];
+            if (pageIndex == vc.recommendCookerStars.count) { //点击了最后一个，跳转新手学烘焙
+                
+                StudyCookViewController* studyController = [vc.storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
+                [vc.navigationController pushViewController:studyController animated:YES];
+                
             } else {
                 
                 CookerStar* cooker = vc.recommendCookerStars[pageIndex];
@@ -134,12 +146,13 @@
                 
             }
             
-            
         };
     }];
     
     
 }
+
+
 
 #pragma mark - 新消息标记及移除标记
 

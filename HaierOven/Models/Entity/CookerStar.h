@@ -21,6 +21,11 @@
 @property (copy, nonatomic) NSString* avatar;
 
 /**
+ *  首页厨神背景
+ */
+@property (copy, nonatomic) NSString* chefBackgroundImageUrl;
+
+/**
  *  姓名
  */
 @property (copy, nonatomic) NSString* userName;
@@ -49,6 +54,11 @@
  *  视频介绍连接
  */
 @property (copy, nonatomic) NSString* videoPath;
+
+/**
+ *  视频封面
+ */
+@property (copy, nonatomic) NSString* videoCover;
 
 /**
  *  菜谱数量

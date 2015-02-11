@@ -27,6 +27,15 @@
     
     self.cookStarImageView.hidden = YES;
     self.placeholder = [MyTool createImageWithColor:RGB(240, 240, 240)];
+    
+    // 设置文本阴影
+    self.goodCountLabel.shadowColor = RGBACOLOR(0, 0, 0, 0.6);
+    self.goodCountLabel.shadowOffset = CGSizeMake(1.0, 1.0);
+    self.timeLabel.shadowColor = RGBACOLOR(0, 0, 0, 0.6);
+    self.timeLabel.shadowOffset = CGSizeMake(1.0, 1.0);
+//    self.goodCountLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.goodCountLabel.layer.shadowOffset = CGSizeMake(3.0, 3.0);
+    
 // Initialization code
 }
 
@@ -62,13 +71,13 @@
         
     } else {
         //假数据
-        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
-            self.cookStarImageView.hidden = NO;
-            self.AuthorityLabel.hidden = NO;
-        } else {
-            self.cookStarImageView.hidden = YES;
-            self.AuthorityLabel.hidden = YES;
-        }
+//        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
+//            self.cookStarImageView.hidden = NO;
+//            self.AuthorityLabel.hidden = NO;
+//        } else {
+//            self.cookStarImageView.hidden = YES;
+//            self.AuthorityLabel.hidden = YES;
+//        }
         
     }
     

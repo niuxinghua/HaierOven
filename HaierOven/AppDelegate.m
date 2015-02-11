@@ -107,15 +107,16 @@
     //设置友盟社会化组件appkey
     [UMSocialData setAppKey:UMengAppKey];
     
-    // QQ
-    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+    // QQ  APPKEY可能issue
+    [UMSocialQQHandler setQQWithAppId:QQAppID appKey:@"4hyK6cWsLYMuv2tQ" url:@"http://www.umeng.com/social"];
     
     // 微博
     //追爱行动 AppKey:1162620904 App Secret:08006bb891e3d8b8a4e303399f61dbe4
-    [UMSocialSinaHandler openSSOWithRedirectURL:@"https://api.weibo.com/oauth2/default.html"];
+#warning 设置安全域名和回调页
+    [UMSocialSinaHandler openSSOWithRedirectURL:nil];
     
     // 微信 朋友圈
-    [UMSocialWechatHandler setWXAppId:@"wxd135c736264fd98d" appSecret:@"8296da588aa8e35ebf2ab09f0baf10ff" url:@"http://weibo.com/origheart"];
+    [UMSocialWechatHandler setWXAppId:@"wx925a3b8264b54390" appSecret:@"5b389c8a123c4e0981ad9fe1431006eb" url:@"http://weibo.com/origheart"];
     
     
 }
@@ -167,7 +168,7 @@
                                                         if (success) {
                                                             NSLog(@"自动登录成功");
                                                         
-                                                            [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                            //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                             
                                                             
                                                         } else {
