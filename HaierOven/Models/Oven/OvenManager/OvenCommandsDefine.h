@@ -132,6 +132,9 @@
 #define kOrderTime      @"20v00h"
 
 
+#define kSetNeedleTemerature    @"20v01S"
+
+
 #endif
 
 

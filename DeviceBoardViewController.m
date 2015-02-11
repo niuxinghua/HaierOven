@@ -389,7 +389,7 @@
         self.timeable = nil;
     }
     self.time = self.time==0? 0:self.time-1;
-    self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d",self.time/60, self.time%60];
+    self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d:%02d",self.time/3600, (self.time%3600)/60, (self.time%3600)%60];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -1088,9 +1088,11 @@
         {
             self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
             
-            NSString* leftTime = self.startStatusView.timeLabel.text;
-            NSRange range = [leftTime rangeOfString:@":"];
-            leftTime = [[leftTime substringToIndex:range.location] stringByAppendingString:@" 分钟"];
+            NSInteger leftValue = self.time / 60;
+            
+            NSString* leftTime = [NSString stringWithFormat:@"%d", leftValue];
+            
+            leftTime = [leftTime stringByAppendingString:@" 分钟"];
             
             [self.howlong setTitle:leftTime forState:UIControlStateNormal];
             //[self.temputure setTitle:@"--" forState:UIControlStateNormal];
@@ -1217,6 +1219,17 @@
 - (void)setNeedleTemperature:(NSString*)temperatureString
 {
     
+    NSRange range = [temperatureString rangeOfString:@"°"];
+    NSString* temperatureValue = [temperatureString substringToIndex:range.location];
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kSetNeedleTemerature
+                                                                        commandAttrValue:temperatureValue];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
 }
 
@@ -1242,9 +1255,6 @@
     NSString* timeValue = [timeStr substringToIndex:range.location];
     NSInteger minutes = [timeStr integerValue];
     timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
-    
-#warning 预热模式UI要改，暂时是假数据
-    
     
     //    调用顺序：检测是否已开机 - 设置模式 - 启动 - 设置温度 - 设置时间
     //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
@@ -1320,7 +1330,6 @@
         
     }];
 
-    
     
 }
 
@@ -1477,10 +1486,11 @@
     NSLog(@"%d",sender.tag);
     if (sender.tag ==5) {   // 预约按钮按下
         
-//        if (!self.howlong.selected) {
-//            [super showProgressErrorWithLabelText:@"请先设定预约的烘焙时长" afterDelay:2];
-//            return;
-//        }
+        if ([self.howlong.currentTitle isEqualToString:@"--"]) {
+            [super showProgressErrorWithLabelText:@"请先设定预约的烘焙时长" afterDelay:2];
+            return;
+        }
+        
         
         NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
         NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
@@ -1521,6 +1531,10 @@
                 
                 self.deviceAlertView.string = @"30 分钟";
                 break;
+            
+            
+            
+                
             default:
                 break;
         }
@@ -1543,15 +1557,29 @@
     
     [self OrderAlertViewHidden];
     
-    // 计算开始烘焙时间，已确保在预约时间之前完成烘焙：开始烘焙时间 = 预约完成时间 - 烘焙所需时间间隔
+//    // 计算开始烘焙时间，已确保在预约时间之前完成烘焙：开始烘焙时间 = 预约完成时间 - 烘焙所需时间间隔
+//    
+//    // 1. 得到预约完成时间距离现在的秒数
+//    NSTimeInterval inteval = [date timeIntervalSinceNow];
+//    // 2. 得到开始烘焙的时间距离现在的秒数
+//    inteval = inteval - self.orderAlert.minimumInteval;
+//    
+//    // 3. inteval时间后发送预约指令
     
-    // 1. 得到预约完成时间距离现在的秒数
-    NSTimeInterval inteval = [date timeIntervalSinceNow];
-    // 2. 得到开始烘焙的时间距离现在的秒数
-    inteval = inteval - self.orderAlert.minimumInteval;
     
-    // 3. inteval时间后发送预约指令
-#warning 这里需要补全
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"hh:mm";
+    NSString* time = [formatter stringFromDate:date];
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kOrderTime
+                                                                        commandAttrValue:time];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
     
 }

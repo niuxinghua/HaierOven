@@ -317,13 +317,20 @@
                     
                 }
             } else {
+                if ([DataCenter sharedInstance].myOvens.count == 0) {
+                    self.myWindow.hidden= NO;
+                    [UIView animateWithDuration:0.2 animations:^{
+                        self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+                    }];
                 
-                self.myWindow.hidden= NO;
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+                } else {
                     
-                }];
-                break;
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+                                                                 animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
+                    
+                }
+                
                 
             }
             
