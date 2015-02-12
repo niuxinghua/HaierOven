@@ -8,10 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+
 typedef NS_ENUM(NSUInteger, BackGroupType) {
     BackGroupTypeFollowed = 1,
     BackGroupTypeAdvice   = 2,
 };
+
+typedef NS_ENUM(NSUInteger, ContentMode) {
+    /**
+     *  常规显示
+     */
+    ContentModeNormal,
+    /**
+     *  搜索结果显示
+     */
+    ContentModeSearch
+};
+
+
 @interface BakedGroupController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic) BackGroupType backGroupType;
 @end

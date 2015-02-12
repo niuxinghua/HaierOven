@@ -11,4 +11,6 @@
 @interface DeviceConnectProgressView : UIView
 @property (strong, nonatomic)LDProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIImageView *wifiStatusImage;
+@property (weak, nonatomic) IBOutlet UILabel *countDownLabel;
+
 @end

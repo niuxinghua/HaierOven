@@ -36,6 +36,17 @@ typedef NS_ENUM(NSInteger, AlertType)
 @property (strong, nonatomic) NSString *alertDescription;
 @property (strong, nonatomic) NSArray *pickViewArr;
 @property (strong, nonatomic) NSString *string; //pickerview选完后数字
+
+/**
+ *  pickerView显示默认设置的时间 （分钟）
+ */
+@property (nonatomic) NSInteger defaultSelectTime;
+
+/**
+ *  是不是纯蒸模式，因为只有纯蒸模式的温度可调范围是40-110，其他都是50-250
+ */
+@property (nonatomic) BOOL isChunzheng;
+
 @property (strong, nonatomic) NSString *hour;
 @property (strong, nonatomic) NSString *min;
 @property (weak, nonatomic)id<DeviceAlertViewDelegate>delegate;

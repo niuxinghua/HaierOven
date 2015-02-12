@@ -10,4 +10,6 @@
 
 @interface PersonalCenterViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
+@property (copy, nonatomic) NSString* currentUserId;
+
 @end

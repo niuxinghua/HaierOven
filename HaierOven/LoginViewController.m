@@ -110,7 +110,7 @@
                                                     if (success) {
                                                         NSLog(@"登录成功");
                                                         [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                        //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                         
                                                         //保存手动登录的时间，超过20天后，需再次手动登录
                                                         NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
@@ -200,7 +200,7 @@
                                                       andAccType:AccTypeQQ
                                                       andloginId:response.data[@"openid"]
                                                      andPassword:response.data[@"openid"]
-                                              andThirdpartyAppId:@"100424468"
+                                              andThirdpartyAppId:QQAppID
                                         andThirdpartyAccessToken:response.data[@"access_token"]
                                                     andLoginType:LoginTypeUserName
                                                         callBack:^(BOOL success, id obj, NSError *error) {
@@ -257,7 +257,7 @@
                                                   andAccType:AccTypeSina
                                                   andloginId:response.data[@"uid"]
                                                  andPassword:response.data[@"uid"]
-                                          andThirdpartyAppId:@"1162620904"
+                                          andThirdpartyAppId:SinaAppKey
                                     andThirdpartyAccessToken:response.data[@"access_token"]
                                                 andLoginType:LoginTypeUserName
                                                     callBack:^(BOOL success, id obj, NSError *error) {

@@ -71,7 +71,7 @@
 
 #define AppVersion  @"0.1"
 
-#define UMengAppKey                 @"54601e25fd98c51761002286"
+
 
 /**
  *  用户积分定义
@@ -89,8 +89,11 @@
  */
 #define AppStoreID      @"958425224"
 
+#define UMengAppKey                 @"54daa0edfd98c5160d000687"
 
+#define QQAppID        @"1104081866"
 
+#define SinaAppKey       @"4024847126"
 
 
 

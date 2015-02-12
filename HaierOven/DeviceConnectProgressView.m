@@ -24,7 +24,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    progressView = [[LDProgressView alloc] initWithFrame:CGRectMake(20, self.wifiStatusImage.bottom+30, self.frame.size.width-40, 10)];
+    progressView = [[LDProgressView alloc] initWithFrame:CGRectMake(20, self.wifiStatusImage.bottom+40, self.frame.size.width-40, 10)];
     progressView.color = GlobalOrangeColor;
     progressView.flat = @YES;
 //    progressView.progress = 0.0;

@@ -17,6 +17,16 @@
 //    }
     return self;
 }
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self = [[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([SearchView class]) owner:self options:nil] firstObject];
+    }
+    return self;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

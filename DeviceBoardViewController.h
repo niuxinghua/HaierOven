@@ -27,6 +27,10 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
      *  开机模式
      */
     DeviceBoardStatusOpened           = 4,
+    /**
+     *  停止运行
+     */
+    DeviceBoardStatusStop           = 5
 
 };
 

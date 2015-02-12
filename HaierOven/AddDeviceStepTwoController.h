@@ -10,4 +10,9 @@
 
 @interface AddDeviceStepTwoController : BaseViewController<UITextFieldDelegate>
 
+/**
+ *  如果是重新配置，currentMac为重新配置的设备的Mac
+ */
+@property (copy, nonatomic) NSString* currentMac;
+
 @end

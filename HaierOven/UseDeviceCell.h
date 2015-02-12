@@ -10,5 +10,9 @@
 #import "UseBakeView.h"
 
 @interface UseDeviceCell : UITableViewCell<UseBakeViewDelegate>
+
 @property(weak, nonatomic)id <UseBakeViewDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *usedOvenButton;
+
 @end

@@ -20,6 +20,14 @@
 @property (nonatomic) NSInteger notificationCount;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) LeftMenuAlert *leftMenuAlert;
+
+/**
+ *  定时获取消息数量
+ */
+@property (strong, nonatomic) NSTimer* noticeTimer;
+
+@property (strong, nonatomic) UIWindow* signInAlert;
+
 @end
 
 @implementation LeftMenuViewController
@@ -49,7 +57,11 @@
     
     [self loadUserInfo];
     
+    [self autoSignIn];
+    
     [self updateNotificationCount];
+    // 每隔2分钟获取一次未读通知数量
+    self.noticeTimer = [NSTimer scheduledTimerWithTimeInterval:1*60 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:ModifiedUserInfoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserInfo) name:LoginSuccussNotification object:nil];
@@ -57,6 +69,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
+    
+    self.notificationCount = 0;
     
     self.myWindow = [UIWindow new];
     self.myWindow.frame = CGRectMake(0, 0, PageW, PageH);
@@ -72,6 +86,76 @@
     // Do any additional setup after loading the view.
     self.sideMenuViewController.delegate = self;
 }
+
+#pragma mark - 自动签到
+
+- (void)autoSignIn
+{
+    
+    // 1.判断是否登录
+    if (!IsLogin)
+        return;
+    
+    // 2.判断今日是否已签到
+    [[InternetManager sharedManager] checkSignInWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            
+            NSInteger hadSignIn = [obj[@"data"] integerValue];
+            
+            // 3.签到
+            if (hadSignIn == 0) {
+                [[InternetManager sharedManager] signInWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+                    if (success) {
+                        [self showSignInViewWithPromt:[NSString stringWithFormat:@"签到成功 点心＋%d", SignInScore]];
+                    }
+                }];
+            } else {
+                //[super showProgressCompleteWithLabelText:@"您今日已签到" afterDelay:2.0];
+                //[self showSignInViewWithPromt:@"您今日已签到"];
+            }
+        }
+    }];
+    
+}
+
+- (void)showSignInViewWithPromt:(NSString*)prompt
+{
+    UIWindow* alert = [[UIWindow alloc] initWithFrame:CGRectZero];
+    alert.center = CGPointMake(Main_Screen_Width / 2, Main_Screen_Height / 2);
+    self.signInAlert = alert;
+    UILabel* label = [[UILabel alloc] initWithFrame:alert.bounds];
+    label.backgroundColor = RGBACOLOR(10, 10, 10, 0.8);
+    label.text = prompt;
+    label.font = [UIFont fontWithName:GlobalTitleFontName size:17];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    [alert addSubview:label];
+    alert.windowLevel = UIWindowLevelAlert;
+    [alert makeKeyAndVisible];
+    alert.layer.cornerRadius = 8;
+    alert.layer.masksToBounds = YES;
+    [UIView animateWithDuration:0.2 animations:^{
+        alert.frame = CGRectMake(0, 0, Main_Screen_Width - 30, 40);
+        alert.center = CGPointMake(Main_Screen_Width / 2, Main_Screen_Height / 2);
+        label.frame = alert.bounds;
+    }];
+    [self performSelector:@selector(hideAlert) withObject:nil afterDelay:2.5];
+}
+
+- (void)hideAlert
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.signInAlert.center = CGPointMake(Main_Screen_Width / 2, Main_Screen_Height / 2);
+        self.signInAlert.frame = CGRectMake(Main_Screen_Width / 2, Main_Screen_Height / 2, 0, 0);
+    } completion:^(BOOL finished) {
+        self.signInAlert.hidden = YES;
+        self.signInAlert = nil;
+    }];
+    
+    
+}
+
+#pragma mark -
 
 -(void)isGoingToLogin:(BOOL)goLogin{
     self.myWindow.hidden = YES;
@@ -101,6 +185,8 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.tempView = nil;
+    [self.noticeTimer invalidate];
+    self.noticeTimer = nil;
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
@@ -144,16 +230,29 @@
     if (!IsLogin) {
         return;
     }
-    [[InternetManager sharedManager] getNotificationCountWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
-        if (success) {
-            self.notificationCount = [obj[@"data"] integerValue];
-            
-            [self.tableView reloadData];
-            
-            // 每隔2分钟获取一次未读通知数量
-            [self performSelector:@selector(updateNotificationCount) withObject:nil afterDelay:2*60];
-        }
-    }];
+    @try {
+        [[InternetManager sharedManager] getNotificationCountWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+            if (success) {
+                self.notificationCount = [obj[@"data"] integerValue];
+                
+                [self.tableView reloadData];
+                
+                [DataCenter sharedInstance].messagesCount = self.notificationCount;
+                
+                //发通知告知其他Controller当前新消息数量
+                NSNotification* notification = [NSNotification notificationWithName:MessageCountUpdateNotification object:nil userInfo:@{@"count" : obj[@"data"]}];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
+            }
+        }];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"****获取未读信息出错了****");
+    }
+    @finally {
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -218,13 +317,20 @@
                     
                 }
             } else {
+                if ([DataCenter sharedInstance].myOvens.count == 0) {
+                    self.myWindow.hidden= NO;
+                    [UIView animateWithDuration:0.2 animations:^{
+                        self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+                    }];
                 
-                self.myWindow.hidden= NO;
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
+                } else {
                     
-                }];
-                break;
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"]]
+                                                                 animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
+                    
+                }
+                
                 
             }
             
@@ -339,7 +445,7 @@
         NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
         if (indexPath.row ==7) {
-            cell.notificationCount = [NSString stringWithFormat:@" %d ", self.notificationCount];
+            cell.notificationCount = [NSString stringWithFormat:@"%d", self.notificationCount];
         }
         cell.titleLabel.text = titles[indexPath.row-2];
         cell.titleLabel.font = [UIFont fontWithName:GlobalTitleFontName size:14];

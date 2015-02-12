@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "MainSearchViewController.h"
 #import "UpLoadingMneuController.h"
+#import "PersonalCenterViewController.h"
 
 #define CellRate 0.167
 @interface RelationshipListViewController () <RelationshipCellDelegate>
@@ -23,7 +24,9 @@
 
 - (void)loadMyFans // 粉丝
 {
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getFansWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -45,7 +48,9 @@
 
 - (void)loadMyFollowers //我关注的人
 {
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getFollowersWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -166,7 +171,7 @@
     RelationshipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RelationshipCell" forIndexPath:indexPath];
     cell.delegate = self;
     cell.user = self.friends[indexPath.row];
-    
+    cell.userId = self.userBaseId;
     return cell;
 }
 
@@ -174,10 +179,23 @@
     return PageW*CellRate;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Friend* friend = self.friends[indexPath.row];
+    PersonalCenterViewController* personalViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"];
+    
+    personalViewController.currentUserId = friend.userBaseId;
+    [self.navigationController pushViewController:personalViewController animated:YES];
+}
+
 #pragma mark - RelationshipCellDelegate
 
 - (void)RelationshipCell:(RelationshipCell *)cell watchingButtonTapped:(UIButton *)sender
 {
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     Friend* friend = self.friends[indexPath.row];
     

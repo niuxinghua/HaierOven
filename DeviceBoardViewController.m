@@ -127,6 +127,8 @@
     
 }
 
+
+
 #pragma mark - 监听烤箱状态并作出反应
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -147,10 +149,13 @@
         
     } else if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.opened"]) {
         
-        if (self.deviceBoardStatus == DeviceBoardStatusOpened && !_ovenManager.currentStatus.opened) {
-            [self bootup];
-        }
+//        if (self.deviceBoardStatus == DeviceBoardStatusOpened && !_ovenManager.currentStatus.opened) {
+//            [self bootup];
+//        }
         
+//        if (!_ovenManager.currentStatus.isWorking) { 
+//            self.deviceBoardStatus = _ovenManager.currentStatus.opened ? DeviceBoardStatusOpened : DeviceBoardStatusClosed;
+//        }
         
     } else if ([keyPath isEqualToString:@"self.clockIcon.selected"]) {
         self.cookTimeView.hidden = !self.clockIcon.selected;
@@ -231,16 +236,14 @@
 -(void)SetUpSubviews{
     self.tableView.backgroundView = [[UIImageView alloc]initWithImage:IMAGENAMED(@"boardbg")];
     
-//    NSArray *cxz = @[@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz",@"cthp-cxz",@"dlfp-cxz",@"rfpk-cxz",@"pk-cxz",@"sk-cxz"];
-//    
-//    NSArray *xz = @[@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz",@"cthp-xz",@"dlfp-xz",@"rfpk-xz",@"pk-xz",@"sk-xz"];
-//    NSArray *wxz = @[@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz",@"cthp-wxz",@"dlfp-wxz",@"rfpk-wxz",@"pk-wxz",@"sk-wxz"];
+    //这里的顺序与bakeModes一一对应
+    NSArray *cxz = @[@"icon_ssk_n", @"icon_qsk_n", @"icon_rfsk_n", @"icon_rfqsk_n", @"icon_3Dsk_n", @"icon_cthb_n",
+                     @"icon_dlhb_n", @"icon_rfbk_n", @"icon_bk_n", @"icon_3Drf_n", @"icon_psms_n", @"icon_jd_n",
+                     @"icon_fj_n", @"icon_jssk_n", @"icon_gwz_n", @"icon_cz_n"];
     
-    NSArray *cxz = @[@"icon_ssk_n", @"icon_sxsk_n", @"icon_xsk_n", @"icon_fj_n", @"icon_jd_n", @"icon_3Dhb_n",
-                     @"icon_3Dsk_n", @"icon_psms_n", @"icon_cthb_n", @"icon_rfsk_n", @"icon_dlhb_n", @"icon_rfqsk_n"];
-    
-    NSArray *xz = @[@"icon_ssk_s", @"icon_sxsk_s", @"icon_xsk_s", @"icon_fj_s", @"icon_jd_s", @"icon_3Dhb_s",
-                    @"icon_3Dsk_s", @"icon_psms_s", @"icon_cthb_s", @"icon_rfsk_s", @"icon_dlhb_s", @"icon_rfqsk_s"];
+    NSArray *xz = @[@"icon_ssk_s", @"icon_qsk_s", @"icon_rfsk_s", @"icon_rfqsk_s", @"icon_3Dsk_s", @"icon_cthb_s",
+                    @"icon_dlhb_s", @"icon_rfbk_s", @"icon_bk_s", @"icon_3Drf_s", @"icon_psms_s", @"icon_jd_s",
+                    @"icon_fj_s", @"icon_jssk_s", @"icon_gwz_s", @"icon_cz_s"];
     
     self.workModelBtns = [NSMutableArray new];
     for (int i = 0; i<cxz.count; i++) {
@@ -260,8 +263,8 @@
     [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，关机中", self.currentOven.name] forState:UIControlStateNormal];
     
 #warning 调试PageView
-    self.pageView.numberOfPages = 3;
-    self.deviceScrollView.contentSize = CGSizeMake(_deviceScrollView.frame.size.width * 3, _deviceScrollView.frame.size.height);
+    self.pageView.numberOfPages = 4;
+    self.deviceScrollView.contentSize = CGSizeMake(_deviceScrollView.frame.size.width * 4, _deviceScrollView.frame.size.height);
     self.deviceScrollView.pagingEnabled = YES;
     self.deviceScrollView.delegate = self;
     
@@ -386,7 +389,7 @@
         self.timeable = nil;
     }
     self.time = self.time==0? 0:self.time-1;
-    self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d",self.time/60, self.time%60];
+    self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d:%02d",self.time/3600, (self.time%3600)/60, (self.time%3600)%60];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -397,12 +400,12 @@
 - (void)loadMyOvenInstance
 {
     if (self.myOven != nil && [self.currentOven.mac isEqualToString:self.myOven.mac]) {
-        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
+        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:@[self.myOven.mac]];
     } else {
         
         [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
         [[OvenManager sharedManager] getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
-            [super hiddenProgressHUD];
+            
             if (success) {
                 //找到Wifi下烤箱列表，并获取指定烤箱对象
                 NSArray* ovenList = obj;
@@ -412,7 +415,9 @@
                         [OvenManager sharedManager].subscribedDevice = self.myOven;
                         //搜索到设备则开始订阅通知，订阅成功烤箱即进入就绪状态，可以发送指令
                         //                    [[OvenManager sharedManager] subscribeDevice:self.myOven];
-                        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:self.myOven];
+                        [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:@[self.myOven.mac]];
+                        
+                        [self updateOvenStatus];
                         
                     }
                 }
@@ -423,6 +428,82 @@
         
     }
     
+}
+
+#pragma mark - 获取烤箱的状态
+
+- (void)updateOvenStatus
+{
+    [[OvenManager sharedManager] getOvenStatus:self.myOven.mac status:^(BOOL success, id obj, NSError *error) {
+        OvenStatus* status = obj;
+        if (success) {
+            
+            if (status.isReady) {
+                
+                [super hiddenProgressHUD];
+                
+                if (status.opened) {
+                    self.deviceBoardStatus = DeviceBoardStatusOpened;
+                }
+                if (status.closed) {
+                    self.deviceBoardStatus = DeviceBoardStatusClosed;
+                }
+                if (status.isWorking) {
+                    
+                    NSInteger bakeModeIndex = 0;
+                    
+                    for (NSDictionary* mode in [OvenManager sharedManager].bakeModes) {
+                        NSDictionary* bakeMode = mode[@"bakeMode"];
+                        if ([[[bakeMode allKeys] firstObject] isEqualToString:status.bakeMode]) {
+                            self.bakeMode = mode;
+                            bakeModeIndex = [[OvenManager sharedManager].bakeModes indexOfObject:mode];
+                            break;
+                        }
+                    }
+                    
+                    self.deviceBoardStatus = DeviceBoardStatusWorking;
+                    
+                    [self.timeable invalidate];
+                    self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+                    
+                    // 01:25 -> 01*60*60 + 25*60
+                    self.time = [[status.bakeTime substringToIndex:2] integerValue] * 60 * 60 + [[status.bakeTime substringFromIndex:3] integerValue] * 60;
+                    
+                    float animateDueation = self.time;
+                    self.startStatusView.animationDuration = animateDueation;
+                    
+                    NSString* modeStr = [[self.bakeMode[@"bakeMode"] allValues] firstObject];
+                    
+                    self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", modeStr];
+                    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", self.time/60];
+                    self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%d°", status.temperature];
+                    
+                    [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", self.time/60] forState:UIControlStateNormal];
+                    [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
+                    
+                    [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
+                    
+                    UIButton* currentModeBtn = self.workModelBtns[bakeModeIndex];
+                    currentModeBtn.selected = YES;
+                    
+                    NSTimeInterval bakeSeconds = self.time;
+                    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:@"您的食物烘焙完成了"];
+                    
+                    
+                    //[self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
+                    self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeBake) userInfo:nil repeats:NO];
+                    
+                }
+                
+                
+            } else {
+                [self performSelector:@selector(updateOvenStatus) withObject:nil afterDelay:2];
+            }
+            
+            
+        }
+        
+    }];
 }
 
 #pragma mark - Table view data source
@@ -436,7 +517,7 @@
          return   PageW*0.278;
             break;
         case 2:
-            return  self.deviceBoardStatus ==DeviceBoardStatusWorking? PageW*0.33:0;
+            return  self.deviceBoardStatus == DeviceBoardStatusWorking ? PageW*0.33 : 0;
             break;
         case 4:
             return  PageW*0.1528;
@@ -508,16 +589,23 @@
         return;
     }
     
-    [self setWarmUpTemperature:self.temputure.currentTitle];
+    //[self setWarmUpTemperature:self.temputure.currentTitle];
     
-//    self.myWindow.hidden = NO;
-//    [UIView animateWithDuration:0.2 animations:^{
-//        self.deviceAlertView.frame = alertRectShow;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    self.deviceAlertView.alertType = alertWormUp;
+    // 判断有没有设定温度
+    if ([self.temputure.currentTitle isEqualToString:@"--"]) {
+        self.myWindow.hidden = NO;
+        [UIView animateWithDuration:0.2 animations:^{
+            self.deviceAlertView.frame = alertRectShow;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        self.deviceAlertView.alertType = alertWormUp;
+    } else {
+        [self setWarmUpTemperature:self.temputure.currentTitle];
+    }
+    
+    
 
 }
 
@@ -590,15 +678,16 @@
                                                                     
                                                                     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
                                                                     
-                                                                    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
-                                                                    
-                                                                    NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
-                                                                    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:@"您的食物烘焙完成了"];
-                                                                    
+                                                                    NSString* notificationBody = [NSString stringWithFormat:@"设备\"%@\"开始烘焙，模式：%@，时间：%@，温度：%@",self.currentOven.name, modeStr, self.howlong.currentTitle,  self.temputure.currentTitle];
                                                                     NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
-                                                                                           @"desc" : [NSString stringWithFormat:@"设备\"%@\"开始烘焙，模式：%@，时间：%@，温度：%@",self.currentOven.name, modeStr, self.howlong.currentTitle,  self.temputure.currentTitle]};
+                                                                                           @"desc" : notificationBody};
                                                                     
                                                                     [[DataCenter sharedInstance] addOvenNotification:info];
+                                                                    
+                                                                     notificationBody = [NSString stringWithFormat:@"设备\"%@\"结束烘焙，模式：%@，时间：%@，温度：%@",self.currentOven.name, modeStr, self.howlong.currentTitle,  self.temputure.currentTitle];
+                                                                    
+                                                                    NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
+                                                                    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:notificationBody];
                                                                     
                                                                     //[self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
                                                                     self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeBake) userInfo:nil repeats:NO];
@@ -630,7 +719,6 @@
 
 - (void)completeBake
 {
-    self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     
     self.deviceBoardStatus = DeviceBoardStatusOpened;
     
@@ -645,13 +733,12 @@
     completeController.myOven = self.myOven;
     [self.navigationController pushViewController:completeController animated:YES];
     
+    [self StopWorking];
     
 }
 
 - (void)completeWarmUp
 {
-    self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
-    
     self.deviceBoardStatus = DeviceBoardStatusOpened;
     
     NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
@@ -665,6 +752,8 @@
     completeController.myOven = self.myOven;
     [self.navigationController pushViewController:completeController animated:YES];
     
+    [self StopWorking];
+    
 }
 
 -(void)StopWorking{
@@ -674,10 +763,9 @@
     }
     
     [self.bakeTimer invalidate];
-    self.toolbarItems = @[ fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
     [self.timeable invalidate];
     self.timeable = nil;
-    self.deviceBoardStatus = DeviceBoardStatusOpened;
+    self.deviceBoardStatus = DeviceBoardStatusStop;
     
     uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kPause commandAttrValue:kPause];
     
@@ -704,9 +792,9 @@
         
         [[DataCenter sharedInstance] addOvenNotification:info];
         
-        for (UIButton* button in self.deviceStatusBtns) {
-            button.selected = NO;
-        }
+//        for (UIButton* button in self.deviceStatusBtns) {
+//            button.selected = NO;
+//        }
     } else {
         self.deviceBoardStatus = DeviceBoardStatusOpened;
         
@@ -715,9 +803,9 @@
         
         [[DataCenter sharedInstance] addOvenNotification:info];
         
-        for (UIButton* button in self.deviceStatusBtns) {
-            button.selected = YES;
-        }
+//        for (UIButton* button in self.deviceStatusBtns) {
+//            button.selected = YES;
+//        }
     }
 }
 
@@ -854,6 +942,16 @@
     _deviceBoardStatus = deviceBoardStatus;
     switch (_deviceBoardStatus) {
         case DeviceBoardStatusClosed:
+            
+            self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+            
+            [self.howlong setTitle:@"--" forState:UIControlStateNormal];
+            [self.temputure setTitle:@"--" forState:UIControlStateNormal];
+            
+            for (UIButton* btn in self.deviceStatusBtns) {
+                btn.selected = NO;
+            }
+            
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = NO;
                 btn.selected = NO;
@@ -863,6 +961,7 @@
                 btn.enabled = NO;
                 btn.selected = NO;
             }
+            
             for (UIButton *btn in self.workModelBtns) {
                 btn.enabled = NO;
                 btn.selected = NO;
@@ -876,16 +975,30 @@
             [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
             
             [self.tableView reloadData];
+            
+            
             break;
             
         case DeviceBoardStatusOpened:
+            
+            self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+            
+            [self.howlong setTitle:@"--" forState:UIControlStateNormal];
+            [self.temputure setTitle:@"--" forState:UIControlStateNormal];
+            
+            for (UIButton* button in self.deviceStatusBtns) {
+                button.selected = YES;
+            }
+            
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = YES;
                 btn.selected = NO;
             }
             
             for (UIButton *btn in self.controlBtns) {
-                btn.enabled = btn.tag == 3 ? YES : NO;
+                if (btn.tag == 3 || btn.tag == 4) { //照明和锁定可点击
+                    btn.enabled = YES;
+                }
                 btn.selected = NO;
             }
             
@@ -898,8 +1011,9 @@
                 btn.enabled = NO;
             }
             
-            //初始状态下闹钟按钮和快速预热可点击
+            //初始状态下闹钟按钮、快速预热可点击
             self.clockIcon.enabled = YES;
+            
             self.ksyrTab.enabled = YES;
             
             self.actionCell.hidden = YES;
@@ -907,9 +1021,11 @@
             [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
             
             [self.tableView reloadData];
+            
             break;
 
         case DeviceBoardStatusWorking:
+            self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = YES;
             }
@@ -931,16 +1047,23 @@
             [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，关机中", self.currentOven.name] forState:UIControlStateNormal];
             
             [self.tableView reloadData];
+            
             break;
             
             
         case DeviceBoardStatusSelectMode:
+            
+            self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
+            
             for (UIButton* btn in self.allbtns) {
                 btn.enabled = YES;
             }
             
             for (UIButton *btn in self.controlBtns) {
-                btn.enabled = YES;
+                if (btn.tag == 3 || btn.tag == 4) { //照明和锁定可点击
+                    btn.enabled = YES;
+                }
+                btn.selected = NO;
             }
             
             for (UIButton *btn in self.workModelBtns) {
@@ -957,9 +1080,63 @@
             
             [self.tableView reloadData];
             
+            
+            
             break;
             
+        case DeviceBoardStatusStop:
+        {
+            self.toolbarItems = @[fixbtn,ksyrTab,fixbtn,startTab,fixbtn];
             
+            NSInteger leftValue = self.time / 60;
+            
+            NSString* leftTime = [NSString stringWithFormat:@"%d", leftValue];
+            
+            leftTime = [leftTime stringByAppendingString:@" 分钟"];
+            
+            [self.howlong setTitle:leftTime forState:UIControlStateNormal];
+            //[self.temputure setTitle:@"--" forState:UIControlStateNormal];
+            
+            for (UIButton* button in self.deviceStatusBtns) {
+                button.selected = YES;
+            }
+            
+            for (UIButton* btn in self.allbtns) {
+                btn.enabled = YES;
+                btn.selected = NO;
+            }
+            
+            for (UIButton *btn in self.controlBtns) {
+                if (btn.tag == 3 || btn.tag == 4) { //照明和锁定可点击
+                    btn.enabled = YES;
+                }
+                btn.selected = NO;
+            }
+            
+            for (UIButton *btn in self.workModelBtns) {
+                btn.enabled =YES;
+                btn.selected = NO;
+            }
+            
+            for (UIBarButtonItem *btn in self.toolbarItems) {
+                btn.enabled = NO;
+            }
+            
+            //初始状态下闹钟按钮、快速预热可点击
+            self.clockIcon.enabled = YES;
+            
+            self.ksyrTab.enabled = YES;
+            
+            self.actionCell.hidden = YES;
+            [self.timeable invalidate];  //停止运行
+            
+            
+            [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
+            
+            [self.tableView reloadData];
+            
+            break;
+        }
         default:
             break;
     }
@@ -1042,33 +1219,45 @@
 - (void)setNeedleTemperature:(NSString*)temperatureString
 {
     
+    NSRange range = [temperatureString rangeOfString:@"°"];
+    NSString* temperatureValue = [temperatureString substringToIndex:range.location];
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kSetNeedleTemerature
+                                                                        commandAttrValue:temperatureValue];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
 }
 
-// 预热
+// 预热 选择温度后：80°
 - (void)setWarmUpTemperature:(NSString*)temperatureString
 {
-  
-   // NSString* timeStr = @"5";   //设置默认预热5分钟
-    
-    
-    NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
-    NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
-    
+    //判断有没有设定时间
+    NSString* timeStr;
+    if ([self.howlong.currentTitle isEqualToString:@"--"]) {
+        timeStr = @"5 分钟";
+    } else {
+        timeStr = self.howlong.currentTitle;
+    }
     
     self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", @"快速预热"];
-    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@ 分钟", timeStr];
+    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@", timeStr];
     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", temperatureString];
     
-    range = [temperatureString rangeOfString:@"°"];
+    NSRange range = [temperatureString rangeOfString:@"°"];
     NSString* temperatureValue = [temperatureString substringToIndex:range.location];
     
+    range = [timeStr rangeOfString:@" 分钟"];
+    NSString* timeValue = [timeStr substringToIndex:range.location];
     NSInteger minutes = [timeStr integerValue];
-    NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
+    timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
     
     //    调用顺序：检测是否已开机 - 设置模式 - 启动 - 设置温度 - 设置时间
     //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
-    
     if (!self.ovenManager.currentStatus.opened) {
         [self bootup];
     }
@@ -1104,8 +1293,6 @@
                                                                     self.startStatusView.animationDuration = animateDueation;
                                                                     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
                                                                     
-                                                                    self.toolbarItems = @[ fixbtn,tzyxTab,fixbtn];
-                                                                    
                                                                     NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
                                                                     [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeWarmUp fireTime:bakeSeconds alertBody:@"您的烤箱预热完成了"];
                                                                     
@@ -1117,7 +1304,7 @@
                                                                     
                                                                     [[DataCenter sharedInstance] addOvenNotification:info];
                                                                     
-//                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
+                                                                    //                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
                                                                     self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeWarmUp) userInfo:nil repeats:NO];
                                                                     
                                                                 }];
@@ -1146,7 +1333,107 @@
     
 }
 
+//// 预热 选择温度后：80°
+//- (void)setWarmUpTemperature:(NSString*)temperatureString
+//{
+//
+//   // NSString* timeStr = @"5";   //设置默认预热5分钟
+//
+//
+//    NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
+//    NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
+//
+//
+//    self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", @"快速预热"];
+//    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@ 分钟", timeStr];
+//    self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", temperatureString];
+//    
+//    range = [temperatureString rangeOfString:@"°"];
+//    NSString* temperatureValue = [temperatureString substringToIndex:range.location];
+//    
+//    NSInteger minutes = [timeStr integerValue];
+//    NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
+//    
+//    //    调用顺序：检测是否已开机 - 设置模式 - 启动 - 设置温度 - 设置时间
+//    //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
+//    
+//    if (!self.ovenManager.currentStatus.opened) {
+//        [self bootup];
+//    }
+//    
+//    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+//    [[OvenManager sharedManager] setBakeMode:@"30v0M1" callback:^(BOOL success, uSDKErrorConst errorCode) {     //快速预热模式
+//        [super hiddenProgressHUD];
+//        if (success) {
+//            [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+//            [[OvenManager sharedManager] setBakeTime:timeValue callback:^(BOOL success, uSDKErrorConst errorCode) {
+//                [super hiddenProgressHUD];
+//                if (success) {
+//                    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+//                    [[OvenManager sharedManager] setBakeTemperature:temperatureValue callback:^(BOOL success, uSDKErrorConst errorCode) {
+//                        [super hiddenProgressHUD];
+//                        if (success) {
+//                            
+//                            uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kStartUp commandAttrValue:kStartUp];
+//                            [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+//                            [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+//                                                                toDevice:self.myOven
+//                                                            andCommandSN:0
+//                                                     andGroupCommandName:@""
+//                                                                callback:^(BOOL success, uSDKErrorConst errorCode) {
+//                                                                    [super hiddenProgressHUD];
+//                                                                    self.deviceBoardStatus = DeviceBoardStatusWorking;
+//                                                                    
+//                                                                    //点击运行后显示
+//                                                                    self.timeable =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+//                                                                    
+//                                                                    self.time = [timeStr integerValue] * 60;
+//                                                                    float animateDueation = [timeStr integerValue] * 60;
+//                                                                    self.startStatusView.animationDuration = animateDueation;
+//                                                                    [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
+//                                                                    
+//                                                                    NSTimeInterval bakeSeconds = [timeStr integerValue] * 60.0;
+//                                                                    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeWarmUp fireTime:bakeSeconds alertBody:@"您的烤箱预热完成了"];
+//                                                                    
+//                                                                    NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+//                                                                                           @"desc" : [NSString stringWithFormat:@"设备\"%@\"开始烘焙，模式：快速预热，时间：%@，温度：%@",
+//                                                                                                      self.currentOven.name,
+//                                                                                                      timeStr,
+//                                                                                                      temperatureString]};
+//                                                                    
+//                                                                    [[DataCenter sharedInstance] addOvenNotification:info];
+//                                                                    
+////                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
+//                                                                    self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeWarmUp) userInfo:nil repeats:NO];
+//                                                                    
+//                                                                }];
+//                            
+//                        } else {
+//                            
+//                            [super showProgressErrorWithLabelText:@"设置烘焙温度失败" afterDelay:1];
+//                            
+//                        }
+//                        
+//                    }];
+//                    
+//                } else {
+//                    [super showProgressErrorWithLabelText:@"设置烘焙时间失败" afterDelay:1];
+//                }
+//                
+//                
+//            }];
+//            
+//        } else {
+//            [super showProgressErrorWithLabelText:@"设置烘焙模式失败" afterDelay:1];
+//        }
+//        
+//    }];
+//
+//    
+//}
+
 #pragma mark- 提示框显示deviceAlertView
+
 -(void)cancel{
     self.myWindow.hidden = YES;
     self.deviceAlertView.frame = alertRectHidden;
@@ -1199,10 +1486,11 @@
     NSLog(@"%d",sender.tag);
     if (sender.tag ==5) {   // 预约按钮按下
         
-//        if (!self.howlong.selected) {
-//            [super showProgressErrorWithLabelText:@"请先设定预约的烘焙时长" afterDelay:2];
-//            return;
-//        }
+        if ([self.howlong.currentTitle isEqualToString:@"--"]) {
+            [super showProgressErrorWithLabelText:@"请先设定预约的烘焙时长" afterDelay:2];
+            return;
+        }
+        
         
         NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
         NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
@@ -1213,12 +1501,16 @@
             self.orderAlert.frame = alertRectShow;
             
             self.myWindow.hidden = NO;
+            [self.orderAlert setDefaultDate];
 
         } completion:^(BOOL finished) {
             
         }];
 
     } else if (sender.selected ==NO ||sender.tag==1||sender.tag==2) {
+        
+        self.deviceAlertView.defaultSelectTime = [self.bakeMode[@"defaultSelectTime"] integerValue];
+        self.deviceAlertView.isChunzheng = [[[self.bakeMode[@"bakeMode"] allValues] firstObject] isEqualToString:@"纯蒸"];   //@"bakeMode" : @{@"30v0Mj" :@"纯蒸"}
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
         
@@ -1236,8 +1528,13 @@
                     [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
                     return;
                 }
+                
                 self.deviceAlertView.string = @"30 分钟";
                 break;
+            
+            
+            
+                
             default:
                 break;
         }
@@ -1260,15 +1557,29 @@
     
     [self OrderAlertViewHidden];
     
-    // 计算开始烘焙时间，已确保在预约时间之前完成烘焙：开始烘焙时间 = 预约完成时间 - 烘焙所需时间间隔
+//    // 计算开始烘焙时间，已确保在预约时间之前完成烘焙：开始烘焙时间 = 预约完成时间 - 烘焙所需时间间隔
+//    
+//    // 1. 得到预约完成时间距离现在的秒数
+//    NSTimeInterval inteval = [date timeIntervalSinceNow];
+//    // 2. 得到开始烘焙的时间距离现在的秒数
+//    inteval = inteval - self.orderAlert.minimumInteval;
+//    
+//    // 3. inteval时间后发送预约指令
     
-    // 1. 得到预约完成时间距离现在的秒数
-    NSTimeInterval inteval = [date timeIntervalSinceNow];
-    // 2. 得到开始烘焙的时间距离现在的秒数
-    inteval = inteval - self.orderAlert.minimumInteval;
     
-    // 3. inteval时间后发送预约指令
-#warning 这里需要补全
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"hh:mm";
+    NSString* time = [formatter stringFromDate:date];
+    
+    uSDKDeviceAttribute* command = [[OvenManager sharedManager] structureWithCommandName:kOrderTime
+                                                                        commandAttrValue:time];
+    [[OvenManager sharedManager] executeCommands:[@[command] mutableCopy]
+                                        toDevice:self.myOven
+                                    andCommandSN:0
+                             andGroupCommandName:@""
+                                        callback:^(BOOL success, uSDKErrorConst errorCode) {
+                                            
+                                        }];
     
     
 }

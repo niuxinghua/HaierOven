@@ -10,13 +10,14 @@
 
 @implementation CookbookOven
 
-- (instancetype)initWithRoastStyle:(NSString*)roastStyle roastTemperature:(NSString*)temperature roastTime:(NSString*)time ovenInfo:(NSDictionary*)ovenInfo
+- (instancetype)initWithRoastStyle:(NSString*)roastStyle roastTemperature:(NSString*)temperature roastTime:(NSString*)time ovenType:(NSString*)ovenType ovenInfo:(NSDictionary*)ovenInfo
 {
     if (self = [super init]) {
         self.roastStyle = roastStyle;
         self.roastTemperature = temperature;
         self.roastTime = time;
         self.ovenInfo = ovenInfo;
+        self.ovenType = ovenType;
     }
     return self;
 }

@@ -29,6 +29,11 @@
 @property (copy, nonatomic) NSString* roastTime;
 
 /**
+ *  烤箱类型：台式烤箱，嵌入式烤箱
+ */
+@property (copy, nonatomic) NSString* ovenType;
+
+/**
  *  烤箱信息：{“name”:”OBT600-10G”}
  */
 @property (strong, nonatomic) NSDictionary* ovenInfo;
@@ -39,11 +44,12 @@
  *  @param roastStyle  烘焙模式
  *  @param temperature 温度
  *  @param time        时间
+ @  @param ovenType    台式烤箱、嵌入式烤箱
  *  @param ovenInfo    烤箱信息 {“name”:”OBT600-10G”}
  *
  *  @return CookbookOven
  */
-- (instancetype)initWithRoastStyle:(NSString*)roastStyle roastTemperature:(NSString*)temperature roastTime:(NSString*)time ovenInfo:(NSDictionary*)ovenInfo;
+- (instancetype)initWithRoastStyle:(NSString*)roastStyle roastTemperature:(NSString*)temperature roastTime:(NSString*)time ovenType:(NSString*)ovenType ovenInfo:(NSDictionary*)ovenInfo;
 
 @end
 

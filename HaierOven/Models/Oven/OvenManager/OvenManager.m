@@ -123,22 +123,66 @@
     return configInfo;
 }
 
-- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password bindResult:(result)result
+/**
+ *  通过ssid和wifi password构建uSDKDeviceConfigInfo， 通过CONFIG_MODE_SMARTCONFIG方式绑定
+ *
+ *  @param ssid      WiFi名称
+ *  @param password  WiFi密码
+ *  @param rebindMac 如果是重新绑定，则传此设备的Mac，否则传nil
+ *  @param result    绑定结果，将返回绑定成功的usdkDevice对象
+ */
+- (void)bindDeviceWithSsid:(NSString*)ssid andApPassword:(NSString*)password rebindOvenMac:(NSString*)rebindMac bindResult:(completion)result
 {
     uSDKDeviceConfigInfo* configInfo = [self getDeviceConfigInfoWithSsid:ssid andApPassword:password];
     uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        
+        [NSThread sleepForTimeInterval:3]; //无意义的延时
+        
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
             
             if (success) {
                 
-                uSDKDevice* device = [obj firstObject];
-                [self subscribeAllNotificationsWithDevice:device];
-                self.subscribedDevice = device;
+                uSDKDevice* theDevice;
+                DataCenter* dataCenter = [DataCenter sharedInstance];
                 
+                // 1. 根据不同的情况获取需要绑定的烤箱，每次只取一台不与已有烤箱重复的烤箱设备
+                if (rebindMac) { // 重新绑定
+                    // 从搜索到的周边烤箱中拿到此台设备
+                    for (uSDKDevice* device in obj) {
+                        if ([device.mac isEqualToString:rebindMac]) {
+                            theDevice = device;
+                            break;
+                        }
+                    }
+                    
+                } else { // 绑定不重复的新设备
+                    
+                    for (uSDKDevice* device in obj) {
+                        if (dataCenter.myOvens.count == 0) {
+                            theDevice = [obj firstObject];
+                        } else {
+                            for (LocalOven* localOven in dataCenter.myOvens) {
+                                if (![device.mac isEqualToString:localOven.mac]) {
+                                    theDevice = device;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // 2. 订阅绑定的烤箱
+                if (theDevice == nil) {
+                    result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
+                    return;
+                }
+                [self subscribeAllNotificationsWithDevice:@[theDevice.mac]];
+                self.subscribedDevice = theDevice;
+                
+                // 3. 当指定烤箱在一段时间内变成在线状态内，则表示绑定成功
                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
                 dispatch_async(queue, ^{
                     BOOL runSuccess = NO;
@@ -151,19 +195,23 @@
                         [NSThread sleepForTimeInterval:1];
                     }
                     
+                    // 4. 取消订阅
+                    [self unSubscribeAllNotifications:@[theDevice.mac]];
+                    
+                    // 5. 返回绑定结果
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (errorConst == RET_USDK_OK && runSuccess) {
                             
-                            result(YES);
+                            result(YES, theDevice, nil);
                         } else {
-                            result(NO);
+                            result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
                         }
                     });
                     
                 });
                 
             } else {
-                result(NO);
+                result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
             }
             
         }];
@@ -197,11 +245,11 @@
 
 #pragma mark - 订阅通知
 
-- (void)subscribeDevice:(uSDKDevice*)device
+- (void)subscribeDevice:(NSArray*)deviceMacs
 {
     uSDKNotificationCenter* sdkNotificationCenter = [uSDKNotificationCenter defaultCenter];
     
-    [sdkNotificationCenter subscribeDevice:self selector:@selector(deviceAttributeReport:) withMacList:@[device.mac]];
+    [sdkNotificationCenter subscribeDevice:self selector:@selector(deviceAttributeReport:) withMacList:deviceMacs];
     
 }
 
@@ -222,9 +270,9 @@
     [[uSDKNotificationCenter defaultCenter] subscribeBusinessMessage:self selector:@selector(businessMessageReport:)];
 }
 
-- (void)subscribeAllNotificationsWithDevice:(uSDKDevice*)device
+- (void)subscribeAllNotificationsWithDevice:(NSArray*)deviceMacs
 {
-    [self subscribeDevice:device];
+    [self subscribeDevice:deviceMacs];
     [self subscribeBusinessMessage];
     [self subscribeDeviceListChanged];
     [self subscribeInnerError];
@@ -232,9 +280,9 @@
 
 #pragma mark - 取消订阅通知
 
-- (void)unSubscribeDevice:(uSDKDevice*)device;
+- (void)unSubscribeDevice:(NSArray*)deviceMacs;
 {
-    [[uSDKNotificationCenter defaultCenter] unSubscribeDevice:self withMacList:@[device.mac]];
+    [[uSDKNotificationCenter defaultCenter] unSubscribeDevice:self withMacList:deviceMacs];
 }
 
 - (void)unSubscribeDeviceListChanged
@@ -252,9 +300,9 @@
     [[uSDKNotificationCenter defaultCenter] unSubscribeBusinessMessage:self];
 }
 
-- (void)unSubscribeAllNotifications:(uSDKDevice*)device
+- (void)unSubscribeAllNotifications:(NSArray*)deviceMacs
 {
-    [self unSubscribeDevice:device];
+    [self unSubscribeDevice:deviceMacs];
     [self unSubscribeDeviceListChanged];
     [self unSubscribeInnerError];
     [self unSubscribeBusinessMeassage];
@@ -591,11 +639,11 @@
         statusAttr = attrDict[@"20v00e"];
         _currentStatus.bakeMode = statusAttr.attrValue;
         
-        // 烤箱温度
+        // 设置的烤箱温度
         statusAttr = attrDict[@"20v00g"];
         _currentStatus.temperature = [statusAttr.attrValue integerValue];
         
-        // 烘焙时间
+        // 剩余烘焙时间
         statusAttr = attrDict[@"20v00f"];
         _currentStatus.bakeTime = statusAttr.attrValue;
         
@@ -603,8 +651,69 @@
         statusAttr = attrDict[@"60v003"];
         _currentStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
         
+    }];
+    
+}
+
+- (void)getOvenStatus:(NSString*)deviceMac status:(completion)callback
+{
+    
+    
+    [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         
+        OvenStatus * ovenStatus = [[OvenStatus alloc] init];
         
+        if (success) {
+            
+            uSDKDevice* currentDevice;
+            for (uSDKDevice* device in obj) {
+                if ([deviceMac isEqualToString:device.mac]) {
+                    currentDevice = device;
+                    break;
+                }
+            }
+            
+            
+            // 更新连线状态
+            ovenStatus.isReady = currentDevice.status == STATUS_READY ? YES : NO;
+            
+            NSMutableDictionary* attrDict = currentDevice.attributeDict;
+            uSDKDeviceAttribute* statusAttr;
+            
+            // 是否开机
+            statusAttr = attrDict[@"20v001"];
+            ovenStatus.opened = [statusAttr.attrValue isEqualToString:@"20v001"] ? YES : NO;
+            
+            // 是否已关机
+            statusAttr = attrDict[@"20v002"];
+            ovenStatus.closed = [statusAttr.attrValue isEqualToString:@"20v002"] ? YES : NO;
+            
+            // 是否已启动
+            statusAttr = attrDict[@"20v003"];
+            ovenStatus.isWorking = [statusAttr.attrValue isEqualToString:@"20v003"] ? YES : NO;
+            
+            // 烘焙模式
+            statusAttr = attrDict[@"20v00e"];
+            ovenStatus.bakeMode = statusAttr.attrValue;
+            
+            // 设置的烤箱温度
+            statusAttr = attrDict[@"20v00g"];
+            ovenStatus.temperature = [statusAttr.attrValue integerValue];
+            
+            // 剩余烘焙时间
+            statusAttr = attrDict[@"20v00f"];
+            ovenStatus.bakeTime = statusAttr.attrValue;
+            
+            // 是否有感肉温度探针
+            statusAttr = attrDict[@"60v003"];
+            ovenStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
+            
+            callback(YES, ovenStatus, nil);
+            
+        } else {
+            
+            callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"获取状态失败"]);
+        }
         
     }];
     
@@ -612,71 +721,94 @@
 
 #pragma mark - getters
 
-//NSArray *xz = @[@"icon_ssk_s", @"icon_sxsk_s", @"icon_xsk_s", @"icon_fj_s", @"icon_jd_s", @"icon_3Dhb_s",
-//                @"icon_3Dsk_s", @"icon_psms_s", @"icon_cthb_s", @"icon_rfsk_s", @"icon_dlhb_s", @"icon_rfqsk_s"];
+//NSArray *cxz = @[@"icon_ssk_n", @"icon_sxsk_n", @"icon_xsk_n", @"icon_fj_n", @"icon_jd_n", @"icon_3Dhb_n",
+//                 @"icon_3Dsk_n", @"icon_psms_n", @"icon_cthb_n", @"icon_rfsk_n", @"icon_dlhb_n", @"icon_rfqsk_n",
+//                 @"icon_3Drf_n", @"icon_bk_n", @"icon_cz_n", @"icon_gwz_n", @"icon_jssk_n", @"icon_qsk_n", @"icon_rfbk_n"];
 - (NSArray *)bakeModes
 {
     if (_bakeModes == nil) {
-        _bakeModes = @[@{@"bakeMode" : @{@"30v0Me" :@"烧烤"},
+        _bakeModes = @[
+                       @{@"bakeMode" : @{@"30v0Me" :@"上烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Mf" :@"上下烧烤"},
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v6Mm" :@"全烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*纯蒸汽*/,
-                       @{@"bakeMode" : @{@"30v0Mg" :@"下烧烤"} ,
-                         @"defaultTemperature" : @230,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*下烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Mb" :@"发酵功能"} ,
-                         @"defaultTemperature" : @40,
-                         @"defaultTime" : @60,
-                         @"temperatureChangeble" : @NO}/*发酵功能*/,
-                       @{@"bakeMode" : @{@"30v0Ma" :@"解冻功能"} ,
-                         @"defaultTemperature" : @60,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @NO}/*解冻功能*/,
-                       @{@"bakeMode" : @{@"30v0Mc" :@"3D热风"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*3D热风*/,
-                       @{@"bakeMode" : @{@"30v0M9" :@"3D烧烤"} ,
-                         @"defaultTemperature" : @230,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*3D烧烤*/,
-                       @{@"bakeMode" : @{@"30v0Md" :@"披萨模式"} ,
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*披萨模式*/,
-                       @{@"bakeMode" : @{@"30v0M6" :@"传统烘焙"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
                          @"temperatureChangeble" : @YES},
                        @{@"bakeMode" : @{@"30v0M5" :@"热风烧烤"} ,
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES}/*热风烧烤*/,
-                       @{@"bakeMode" : @{@"30v0M8" :@"对流烘焙"},
-                         @"defaultTemperature" : @180,
-                         @"defaultTime" : @120,
-                         @"temperatureChangeble" : @YES} /*对流烘焙*/,
-                       @{@"bakeMode" : @{@"30v7Mn" :@"热分全烧烤"},
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v7Mn" :@"热风全烧烤"},
                          @"defaultTemperature" : @230,
                          @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M9" :@"3D烧烤"} ,
+                         @"defaultTemperature" : @230,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @10,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mf" :@"传统烘焙"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M6" :@"对流烘焙"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0M8" :@"热风焙烤"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mg" :@"焙烤"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mc" :@"3D热风"},
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Md" :@"披萨模式"} ,
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Ma" :@"解冻"} ,
+                         @"defaultTemperature" : @60,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @120,
+                         @"temperatureChangeble" : @NO},
+                       @{@"bakeMode" : @{@"30v0Mb" :@"发酵"} ,
+                         @"defaultTemperature" : @40,
+                         @"defaultTime" : @60,
+                         @"defaultSelectTime" : @60,
+                         @"temperatureChangeble" : @NO},
+                       @{@"bakeMode" : @{@"30v0Mh" :@"加湿烧烤"} ,
+                         @"defaultTemperature" : @230,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mi" :@"高温蒸"} ,
+                         @"defaultTemperature" : @180,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
+                         @"temperatureChangeble" : @YES},
+                       @{@"bakeMode" : @{@"30v0Mj" :@"纯蒸"} ,
+                         @"defaultTemperature" : @100,
+                         @"defaultTime" : @120,
+                         @"defaultSelectTime" : @30,
                          @"temperatureChangeble" : @YES}
                        
-                       
-                       
-                       
-                       
-//                       @{@"30v0Mf" :@"焙烤" }/*应该是焙烤，这里是传统烧烤*/,
-//                       @{@"30V1Mh" :@"上烧烤＋蒸汽"} /*上烧烤＋蒸汽*/,
-//                       @{@"30v2Mi" :@"传统烘焙" }/*上下烧烤＋蒸汽*/,
-//                       @{@"30v4Mk" :@"消毒 1" }/*消毒 1*/,
-//                       @{@"30v5Ml" :@"消毒 2" }/*消毒 2*/,
-//                       @{@"30v6Mm" :@"全烧烤" }/*全烧烤*/,
-//                       @{@"30v7Mn" :@"热分全烧烤"} /*热分全烧烤*/
                        ];
     }
     return _bakeModes;

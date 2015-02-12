@@ -36,6 +36,11 @@
 @property (copy, nonatomic) NSString* typeIdentifier;
 
 /**
+ *  是否连线，不需要保存。方便记录和读取当前烤箱连接状态
+ */
+@property (nonatomic) BOOL isReady;
+
+/**
  *  烤箱属性
  */
 //@property (strong, nonatomic) NSDictionary* attribute;

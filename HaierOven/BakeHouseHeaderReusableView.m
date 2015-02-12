@@ -15,7 +15,10 @@
 @property (strong, nonatomic) IBOutlet UIView *sectionScrollView;
 @property (strong, nonatomic) IBOutlet UIView *sectionFliexView;
 
+@property (weak, nonatomic) SearchView* searchView;
+
 @end
+
 @implementation BakeHouseHeaderReusableView
 
 -(void)awakeFromNib{
@@ -43,13 +46,17 @@
 
 -(void)initSearchView{
 //    PageW-25, 35
-    SearchView *search = [[SearchView alloc]initWithFrame:CGRectMake(0, 0, self.sectionSearchView.width-25, 30)];
+    SearchView *search = [[SearchView alloc] init];
+    self.searchView = search;
+    
+    [search.confirmOrCancelButton setTitle:@"搜索" forState:UIControlStateNormal];
     search.searchTextFailed.placeholder = @"请搜索你的烘焙装备....";
     self.searchTextField = search.searchTextFailed;
     search.delegate = self;
     search.center = self.sectionSearchView.center;
     [self.sectionSearchView addSubview:search];
 }
+
 -(void)initSectionView{
     PersonalCenterSectionView * scroll = [[PersonalCenterSectionView alloc]initWithFrame:CGRectMake(0, 0, self.sectionScrollView.width, self.sectionScrollView.height)];
     scroll.sectionType = sectionBakeHouse;
@@ -65,8 +72,15 @@
     [self.sectionFliexView addSubview:fiex];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.searchView.frame = CGRectMake(12, 7, self.sectionSearchView.width-25, 30);
+}
 
 #pragma mark - 搜索栏回调方法
+
 -(void)TouchUpInsideCancelBtn{
     [self.delegate cancelSearch];
 }
@@ -76,7 +90,9 @@
 }
 
 -(void)Cancel{
-
+    if ([self.delegate respondsToSelector:@selector(deleteSearch)]) {
+        [self.delegate deleteSearch];
+    }
 }
 
 - (void)textFieldTextChanged:(NSString*)text{

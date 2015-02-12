@@ -22,5 +22,10 @@
  */
 @property (nonatomic) NSTimeInterval minimumInteval;
 
+/**
+ *  显示的时候一定要设置默认时间
+ */
+- (void)setDefaultDate;
+
 
 @end

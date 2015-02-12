@@ -11,4 +11,9 @@
 
 @interface AddDeviceSucceedController : BaseViewController<UITextFieldDelegate>
 
+/**
+ *  绑定成功的设备
+ */
+@property (strong, nonatomic) uSDKDevice* bindedDevice;
+
 @end

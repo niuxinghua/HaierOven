@@ -7,7 +7,7 @@
 //
 
 #import "AutoSizeLabelView.h"
-#define PADDING_WIDE    15   //标签左右间距
+#define PADDING_WIDE    12   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
 #define LABEL_H    20   //标签high
 
@@ -75,7 +75,7 @@
     }
     
     for (int i = 0; i<tags.count; i++) {
-        float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:12]}]+20;
+        float wide  =  [AutoSizeLabelView boolLabelLength:tags[i] andAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:12]}]+10;
         UIButton *title = [UIButton buttonWithType:UIButtonTypeCustom];
      
         if (i==0) {
@@ -96,12 +96,11 @@
         
         self.tempBtn = title;
 
-        
         [title setTitle:tags[i] forState:UIControlStateNormal];
         [title setTitle:tags[i] forState:UIControlStateSelected];
         [title setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [title setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        title.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        title.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size:12];
         title.titleLabel.textAlignment = NSTextAlignmentCenter;
         title.tag = i;
         if (self.selectedTags != nil) {

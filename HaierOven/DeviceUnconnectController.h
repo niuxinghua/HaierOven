@@ -11,7 +11,7 @@
 @protocol DeviceUnconnectControllerDelegate <NSObject>
 
 @required
-- (void)bindOvenAgain;
+- (void)bindOvenAgainWithMac:(NSString*)mac;
 
 @end
 

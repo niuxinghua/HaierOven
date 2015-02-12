@@ -43,14 +43,12 @@ typedef enum{
     NET_TYPE_LOCAL,
 } uSDKDeviceNetTypeConst;
 
-/*
 typedef enum {
 	PHONE_NUM = 1,
 	MAILBOX = 2,
 	USERNAME = 3,
 } uSDKLoginTypeConst;
-*/
- 
+
 /**
  *	@brief	设备配置方式
  */

@@ -24,6 +24,10 @@
 {
     NSDictionary* userDict = dict[@"data"];
     
+    if ([userDict isKindOfClass:[NSNull class]]) {
+        return [[User alloc] init];
+    }
+    
     User* user = [DataParser parseUserInfoWithDict:userDict];
     
     return user;
@@ -100,6 +104,31 @@
     friend.avatar = [DataParser parseImageUrlWithString:userAvatar];
     friend.userBaseId = [dict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"userBaseID"]];
     friend.userName = [dict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", dict[@"userName"]];
+    friend.userLevel = [dict[@"userLevel"] isKindOfClass:[NSNull class]] ? 5 : [[NSString stringWithFormat:@"%@", dict[@"userLevel"]] integerValue];
+    
+    if (friend.cookbookAmount > 0) {
+        NSArray* cookbookArr = dict[@"cookbooks"];
+        NSMutableArray* cookbooks = [NSMutableArray array];
+        for (NSDictionary* cookbookDict in cookbookArr) {
+            Cookbook* cookbook = [[Cookbook alloc] init];
+            
+            cookbook.ID             = [cookbookDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookID"]];
+            cookbook.name           = [cookbookDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookName"]];
+            cookbook.desc           = [cookbookDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookDesc"]];
+            NSString* coverPhoto     = [cookbookDict[@"cookbookCoverPhoto"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"cookbookCoverPhoto"]];
+            cookbook.coverPhoto     = [DataParser parseImageUrlWithString:coverPhoto];
+            cookbook.modifiedTime   = [cookbookDict[@"modifiedTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"modifiedTime"]];
+            cookbook.modifiedTime   = [DataParser parseTime:cookbook.modifiedTime];
+            NSDictionary* creatDict = cookbookDict[@"creator"];
+            cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
+            cookbook.praises        = [cookbookDict[@"praiseCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praiseCount"]];
+            
+            [cookbooks addObject:cookbook];
+        }
+        
+        friend.cookbooks = cookbooks;
+    }
+    
     
     return friend;
 }
@@ -107,6 +136,11 @@
 + (NSMutableArray*)parseUsersWithDict:(NSDictionary*)dict hadNextPage:(BOOL*)hadNextPage
 {
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSMutableArray* follows = [NSMutableArray array];
@@ -148,6 +182,11 @@
     NSMutableArray* comments = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* commentArr = dataDict[@"items"];
@@ -207,7 +246,7 @@
 {
     Creator* creator = [[Creator alloc] init];
     
-    creator.ID              = [creatorDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"id"]];
+    //creator.ID              = [creatorDict[@"id"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"id"]];
     creator.userBaseId      = [creatorDict[@"userBaseID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userBaseID"]];
     creator.userName        = [creatorDict[@"userName"] isKindOfClass:[NSNull class]] || creatorDict[@"userName"] == nil ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userName"]];
     NSString* avatarPath    = [creatorDict[@"userAvatar"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", creatorDict[@"userAvatar"]];
@@ -223,6 +262,11 @@
     NSMutableArray* cookbooks = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return [NSMutableArray array];
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookbooksArr = dataDict[@"items"];
@@ -291,6 +335,10 @@
     
     NSDictionary* detailDict = dict[@"data"];
     
+    if ([detailDict isKindOfClass:[NSNull class]]) {
+        return [[CookbookDetail alloc] init];
+    }
+    
     cookbookDetail.cookbookId       = [detailDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookID"]];
     cookbookDetail.name             = [detailDict[@"cookbookName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookName"]];
     cookbookDetail.desc             = [detailDict[@"cookbookDesc"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", detailDict[@"cookbookDesc"]];
@@ -329,6 +377,7 @@
     oven.roastTemperature           = [ovenDict[@"roastTemperature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTemperature"]];
     oven.roastTime                  = [ovenDict[@"roastTime"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"roastTime"]];
     oven.ovenInfo                   = ovenDict[@"oveninfo"];
+    oven.ovenType                   = [ovenDict[@"ovenType"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", ovenDict[@"ovenType"]];
     cookbookDetail.oven             = oven;
     
     cookbookDetail.creator          = [DataParser parseCreatorWithDict:detailDict[@"creator"]];
@@ -341,6 +390,11 @@
     NSMutableArray* shoppingList = [NSMutableArray array];
     
     NSArray* shoppingListArr = dict[@"data"];
+    
+    if ([shoppingListArr isKindOfClass:[NSNull class]]) {
+        return shoppingList;
+    }
+    
     for (NSDictionary* shoppingListDict in shoppingListArr) {
         ShoppingOrder* shoppingOrder = [[ShoppingOrder alloc] init];
         shoppingOrder.cookbookID = [shoppingListDict[@"cookbookID"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", shoppingListDict[@"cookbookID"]];
@@ -372,6 +426,11 @@
     NSMutableArray* cookers = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return cookers;
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookerArr = dataDict[@"items"];
@@ -394,7 +453,7 @@
             cookbook.modifiedTime   = [DataParser parseTime:cookbook.modifiedTime];
             NSDictionary* creatDict = cookbookDict[@"creator"];
             cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
-            cookbook.praises        = [cookbookDict[@"praises"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praises"]];
+            cookbook.praises        = [cookbookDict[@"praiseCount"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookbookDict[@"praiseCount"]];
             
             [cookbooks addObject:cookbook];
         }
@@ -424,6 +483,11 @@
     NSMutableArray* cookerStars = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return cookerStars;
+    }
+    
     *hadNextPage = [dataDict[@"hasNextPage"] boolValue];
     
     NSArray* cookerArr = dataDict[@"items"];
@@ -436,6 +500,11 @@
         cookerStar.signature = [cookerDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"signature"]];
         cookerStar.introduction = [cookerDict[@"introduction"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"introduction"]];
         cookerStar.videoPath = [cookerDict[@"vedioPath"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"vedioPath"]];
+        cookerStar.videoCover = [cookerDict[@"videoCover"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"videoCover"]];
+        cookerStar.videoCover = [DataParser parseImageUrlWithString:cookerStar.videoCover];
+        cookerStar.chefBackgroundImageUrl = [cookerDict[@"chefBackgroundImage"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"chefBackgroundImage"]];
+        cookerStar.chefBackgroundImageUrl = [DataParser parseImageUrlWithString:cookerStar.chefBackgroundImageUrl];
+        
         cookerStar.cookbookAmount = [cookerDict[@"cookbookAmount"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"cookbookAmount"] integerValue];
         cookerStar.userLevel = [cookerDict[@"userLevel"] isKindOfClass:[NSNull class]] ? 0 : [cookerDict[@"userLevel"] integerValue];
         cookerStar.isFollowed = [cookerDict[@"isFollowed"] integerValue] == 0 ? NO : YES;
@@ -453,6 +522,10 @@
     NSMutableArray* messages = [NSMutableArray array];
     
     NSDictionary* dataDict = dict[@"data"];
+    
+    if ([dataDict isKindOfClass:[NSNull class]]) {
+        return messages;
+    }
     
     NSArray* messageArr = dataDict[@"items"];
     
@@ -480,6 +553,11 @@
     NSMutableArray* equipments = [NSMutableArray array];
     
     NSDictionary* jsonData = dict[@"data"];
+    
+    if ([jsonData isKindOfClass:[NSNull class]]) {
+        return equipments;
+    }
+    
     NSArray* equipmentArr = jsonData[@"items"];
     
     for (NSDictionary* equipmentDict in equipmentArr) {
@@ -509,6 +587,10 @@
     NSMutableArray* notificationList = [NSMutableArray array];
     
     NSDictionary* jsonData = dict[@"data"];
+    
+    if ([jsonData isKindOfClass:[NSNull class]]) {
+        return notificationList;
+    }
     
     NSArray* notificationArr = jsonData[@"items"];
     

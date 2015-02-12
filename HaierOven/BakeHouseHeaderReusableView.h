@@ -17,7 +17,15 @@
 
 -(void)GetNeedEquipmentType:(NSInteger)type;
 
+/**
+ *  点击搜索按钮
+ */
 - (void)cancelSearch;
+
+/**
+ *  点击小x取消搜索
+ */
+- (void)deleteSearch;
 
 @end
 @interface BakeHouseHeaderReusableView : UICollectionReusableView

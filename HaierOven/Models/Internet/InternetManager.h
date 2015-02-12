@@ -272,6 +272,14 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)modifyPassword;
 
 /**
+ *  检查今日是否签到
+ *
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)checkSignInWithUserBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
+
+/**
  *  每日签到
  *
  *  @param userBaseId 用户ID
@@ -342,6 +350,15 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)currentUser:(NSString*)currentUserId followedUser:(NSString*)userBaseId callBack:(myCallback)completion;
 
+/**
+ *  搜索用户
+ *
+ *  @param keyword    关键词
+ *  @param pageIndex  当前请求页数
+ *  @param userId     用户id
+ *  @param completion 结果回调
+ */
+- (void)searchUsersWithKeyword:(NSString*)keyword pageIndex:(NSInteger)pageIndex userBaseId:(NSString*)userId callBack:(myCallback)completion;
 
 
 #pragma mark - 标签
@@ -489,6 +506,14 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)praiseCookbookWithCookbookId:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
 
+/**
+ *  取消赞菜谱
+ *
+ *  @param cookbookId 菜谱ID
+ *  @param userBaseId 用户ID
+ *  @param completion 结果回调
+ */
+- (void)cancelPraiseCookbook:(NSString*)cookbookId userBaseId:(NSString*)userBaseId callBack:(myCallback)completion;
 
 #pragma mark - 购物清单
 

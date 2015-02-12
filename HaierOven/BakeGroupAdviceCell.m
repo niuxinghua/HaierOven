@@ -45,7 +45,7 @@
             break;
             
         default:
-            self.tagLabel.text = @"官方厨神";
+            self.tagLabel.text = @"普通用户";
             break;
     }
     
@@ -59,6 +59,37 @@
     self.recentCookLabel.text = cookNames;
     self.followBtn.selected = cooker.isFollowed;
     
+}
+
+- (void)setSearchedUser:(Friend *)searchedUser
+{
+    _searchedUser = searchedUser;
+    [self.avaterBtn setImageWithURL:[NSURL URLWithString:searchedUser.avatar]];
+    switch (searchedUser.userLevel) {
+        case 1:
+            self.tagLabel.text = @"天子一号";
+            break;
+        case 2:
+            self.tagLabel.text = @"厨神名人";
+            break;
+        case 3:
+            self.tagLabel.text = @"推荐达人";
+            break;
+            
+        default:
+            self.tagLabel.text = @"普通用户";
+            break;
+    }
+    
+    self.nameLabel.text = searchedUser.userName;
+    self.titleLabel.text = searchedUser.signature;
+    NSString* cookNames = @"最近做过：";
+    for (int loop = 0; loop < searchedUser.cookbooks.count; loop++) {
+        Cookbook* cookbook = searchedUser.cookbooks[loop];
+        cookNames = loop == self.cooker.cookbooks.count-1 ? [cookNames stringByAppendingFormat:@"%@", cookbook.name] : [cookNames stringByAppendingFormat:@"%@、", cookbook.name];
+    }
+    self.recentCookLabel.text = cookNames;
+    self.followBtn.selected = searchedUser.isFollowed;
 }
 
 -(void)layoutSubviews{

@@ -40,7 +40,7 @@
 }
 - (IBAction)ConnectDevice:(id)sender {
     [self.navigationController popViewControllerAnimated:NO];
-    [self.delegate bindOvenAgain];
+    [self.delegate bindOvenAgainWithMac:self.currentOven.mac];
     
 }
 - (IBAction)TurnBack:(id)sender {

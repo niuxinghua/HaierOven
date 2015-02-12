@@ -107,14 +107,7 @@
  */
 - (void)subscribeDeviceListChanged:(id)object selector:(SEL)selector withDeviceType:(uSDKDeviceTypeConst)deviceType;
 
-/**
- *	@brief	订阅内部错误上报。
- *
- *	@param 	object 	需要接收通知的对象实例
- *	@param 	selector 	接收到通知后执行的回调方法
- */
 -(void)subscribeInnerErrorMessage:(id)object selector:(SEL)selector;
-
 /**
  *	@brief	订阅业务数据上报通知
  *
@@ -196,19 +189,6 @@
  */
 - (void)unSubscribeBusinessMessage:(id)object;
 
-/**
- *	@brief	取消内部错误上报通知
- *
- *	@param 	object 	取消接收通知的对象实例
- *
- *  <p>
- *  示例代码：
- *  </p>
- *
- *  <pre>
- *      // 取消订阅业务消息
- *      [[uSDKNotificationCenter defaultCenter] unsubscribeInnerErrorMessage:self];
- *  </pre>
- */
+
 -(void)unsubscribeInnerErrorMessage:(id)object;
 @end

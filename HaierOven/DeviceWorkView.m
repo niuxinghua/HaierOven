@@ -111,7 +111,7 @@
     self.timeLabel.textColor = [UIColor whiteColor];
     self.timeLabel.textAlignment = NSTextAlignmentCenter;
 //    self.timeLabel.text = @"22.49";
-    self.timeLabel.font = [UIFont fontWithName:GlobalTitleFontName size:16];
+    self.timeLabel.font = [UIFont fontWithName:GlobalTitleFontName size:12];
     [self addSubview:self.timeLabel];
     
 }

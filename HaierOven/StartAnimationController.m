@@ -22,15 +22,17 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     RootViewController *root = [self.storyboard instantiateViewControllerWithIdentifier:@"RootViewController"];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     AnimationView *animation = [[AnimationView alloc]initWithFrame:CGRectMake((PageW-254)/2, PageH-100, 254, 100)];
     [self.view addSubview:animation];
     animation.alpha = 0;
-    [UIView animateWithDuration:3 animations:^{
+    [UIView animateWithDuration:1.5 animations:^{
         animation.frame =CGRectMake((PageW-254)/2, PageH-150, 254, 100);
         animation.alpha = 0.8;
     } completion:^(BOOL finished) {
         
-        [UIView animateWithDuration:3 animations:^{
+        [UIView animateWithDuration:1 animations:^{
             animation.alpha = 1;
         } completion:^(BOOL finished) {
             [self presentViewController:root animated:YES completion:nil];

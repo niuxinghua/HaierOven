@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FZLTHJW.ttf">
+            <string>FZLTHJW--GB1-0</string>
+        </mutableArray>
+        <mutableArray key="FZLTXHK.TTF">
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wX0-kE-Q3r" customClass="OvenTypeAlert">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="168"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Mp-Ae-0kf">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用烤箱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TvD-1R-WN6">
+                            <rect key="frame" x="20" y="8" width="267" height="24"/>
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="TvD-1R-WN6" secondAttribute="bottom" constant="8" id="7zL-xx-IYI"/>
+                        <constraint firstAttribute="width" secondItem="8Mp-Ae-0kf" secondAttribute="height" multiplier="15:2" id="Asj-pi-g32"/>
+                        <constraint firstItem="TvD-1R-WN6" firstAttribute="leading" secondItem="8Mp-Ae-0kf" secondAttribute="leading" constant="20" id="Qtu-zW-TB6"/>
+                        <constraint firstAttribute="trailing" secondItem="TvD-1R-WN6" secondAttribute="trailing" constant="13" id="V9E-f5-DPV"/>
+                        <constraint firstItem="TvD-1R-WN6" firstAttribute="top" secondItem="8Mp-Ae-0kf" secondAttribute="top" constant="8" id="zPY-GA-BiJ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnq-fR-Gny">
+                    <rect key="frame" x="0.0" y="120" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="v2K-Fs-TT7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                    <state key="normal" title="台式烤箱">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ovenTypeTapped:" destination="wX0-kE-Q3r" eventType="touchUpInside" id="wNM-0G-v6W"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择您使用的烤箱类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-Vp-myt">
+                    <rect key="frame" x="0.0" y="40" width="300" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Y2R-QZ-S38"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wak-MN-atv">
+                    <rect key="frame" x="0.0" y="80" width="300" height="40"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="vFW-WE-wfH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                    <state key="normal" title="嵌入式烤箱">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ovenTypeTapped:" destination="wX0-kE-Q3r" eventType="touchUpInside" id="4mz-z1-ndi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="8Mp-Ae-0kf" firstAttribute="top" secondItem="wX0-kE-Q3r" secondAttribute="top" id="2M0-fi-etb"/>
+                <constraint firstItem="yA2-Vp-myt" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="4am-Jg-qmt"/>
+                <constraint firstAttribute="trailing" secondItem="Wak-MN-atv" secondAttribute="trailing" id="6ap-rG-hCr"/>
+                <constraint firstAttribute="trailing" secondItem="Vnq-fR-Gny" secondAttribute="trailing" id="Hgx-8k-ZZ3"/>
+                <constraint firstItem="Wak-MN-atv" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="Le0-yY-4Xy"/>
+                <constraint firstItem="Wak-MN-atv" firstAttribute="top" secondItem="yA2-Vp-myt" secondAttribute="bottom" id="LtA-qj-XYD"/>
+                <constraint firstItem="Vnq-fR-Gny" firstAttribute="top" secondItem="Wak-MN-atv" secondAttribute="bottom" id="NcP-vE-my5"/>
+                <constraint firstItem="Vnq-fR-Gny" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="Wf8-OP-25S"/>
+                <constraint firstItem="8Mp-Ae-0kf" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="dgL-9x-fq3"/>
+                <constraint firstAttribute="trailing" secondItem="8Mp-Ae-0kf" secondAttribute="trailing" id="nrh-oV-G1n"/>
+                <constraint firstItem="yA2-Vp-myt" firstAttribute="top" secondItem="8Mp-Ae-0kf" secondAttribute="bottom" id="q7o-Xv-XHP"/>
+                <constraint firstAttribute="trailing" secondItem="yA2-Vp-myt" secondAttribute="trailing" id="xQW-xz-TfU"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="202" y="-49"/>
+        </view>
+    </objects>
+</document>

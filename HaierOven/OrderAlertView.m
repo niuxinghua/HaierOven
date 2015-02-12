@@ -31,6 +31,12 @@
     return self;
 }
 
+- (void)setDefaultDate
+{
+    NSDate* minimumDate = [[NSDate date] dateByAddingTimeInterval:self.minimumInteval];
+    [self.datepicker setDate:minimumDate animated:YES];
+}
+
 #pragma mark - DatePicker响应事件
 
 - (IBAction)pickViewValueChanged:(UIDatePicker *)sender
@@ -47,10 +53,22 @@
 
 - (IBAction)OrderChick:(UIButton *)sender {
     if (sender.tag ==1) {
+        // 点击确定时必须确认时间
+        NSDate* minimumDate = [[NSDate date] dateByAddingTimeInterval:self.minimumInteval];
+        if ([self.datepicker.date compare:minimumDate] == NSOrderedAscending) {
+            [self.datepicker setDate:minimumDate animated:YES];
+        }
+        
         [self.delegate SettingOrder:self.datepicker.date];
     }else{
         [self.delegate OrderAlertViewHidden];
     }
     
 }
+
+
+
 @end
+
+
+

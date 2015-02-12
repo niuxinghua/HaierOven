@@ -14,16 +14,11 @@
 {
     CGFloat tempHeight;
 }
-@property (strong, nonatomic) IBOutlet UIImageView *avaterImage;
-
 
 /**
  *  某人的菜谱“Daniel Boulud 的菜谱”
  */
 @property (strong, nonatomic) IBOutlet UILabel *cookBookLabel;
-
-
-
 
 @property NSInteger top;
 @property NSInteger bottom;
@@ -94,7 +89,7 @@
     self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
 
     
-    self.tagsView.Frame = CGRectMake(15, self.cookBookLabel.bottom+8, self.width-30, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
+    self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
     self.tagsView.clipsToBounds = YES;
     self.tagsView.delegate = self;
     
@@ -126,7 +121,7 @@
 {
     _cookerStar = cookerStar;
     
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar]];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"default_avatar.png")];
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
@@ -147,10 +142,12 @@
     self.followButton.selected = cookerStar.isFollowed;
     self.descriptionLabel.text = cookerStar.introduction;
     self.cookBookLabel.text = [NSString stringWithFormat:@"%@ 的菜谱", cookerStar.userName];
+    [self.vedioImage setImageWithURL:[NSURL URLWithString:cookerStar.videoCover] placeholderImage:IMAGENAMED(@"cookbook_list_item_bg_default.png")];
     
 }
 
--(void)chooseTags:(UIButton *)btn{
+-(void)chooseTags:(UIButton *)btn
+{
     [self.delegate chickTags:btn];
 }
 

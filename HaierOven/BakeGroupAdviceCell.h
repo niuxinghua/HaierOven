@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Cooker.h"
+#import "Friend.h"
+
 @class BakeGroupAdviceCell;
 @protocol BackGroupAdviceCellDelegate <NSObject>
 
@@ -17,6 +19,11 @@
 @interface BakeGroupAdviceCell : UITableViewCell
 @property (weak, nonatomic)id<BackGroupAdviceCellDelegate>delegate;
 
+/**
+ *  推荐用户
+ */
 @property (strong, nonatomic) Cooker* cooker;
+
+@property (strong, nonatomic) Friend* searchedUser;
 
 @end

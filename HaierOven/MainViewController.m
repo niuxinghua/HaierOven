@@ -16,6 +16,9 @@
 #import "MJRefresh.h"
 #import "CookStarDetailController.h"
 #import "UpLoadingMneuController.h"
+#import "StudyCookViewController.h"
+
+
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.8
@@ -102,12 +105,18 @@
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                //[cookerImage setImageWithURL:[NSURL URLWithString:cooker.avatar] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
-                cookerImage.image = IMAGENAMED(@"home_banner_default.png");
-                cookerImage.backgroundColor = GlobalOrangeColor;
+                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                //cookerImage.image = IMAGENAMED(@"home_banner_default.png");
+                //cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
             }
+            
+            // 新手学烘焙
+            UIImageView* learnImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
+            learnImage.image = [UIImage imageNamed:@"APPkv-banner1.jpg"];
+            learnImage.contentMode = UIViewContentModeScaleAspectFill;
+            [viewsArray addObject:learnImage];
             
         }
         self.adCycleView.totalPagesCount = ^NSInteger(void){
@@ -122,8 +131,11 @@
         self.adCycleView.TapActionBlock = ^(NSInteger pageIndex){
             NSLog(@"点击了第%ld个",(long)pageIndex);
             
-            if (vc.recommendCookerStars.count == 0) {
-                [super showProgressErrorWithLabelText:@"推荐厨神无数据" afterDelay:1];
+            if (pageIndex == vc.recommendCookerStars.count) { //点击了最后一个，跳转新手学烘焙
+                
+                StudyCookViewController* studyController = [vc.storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
+                [vc.navigationController pushViewController:studyController animated:YES];
+                
             } else {
                 
                 CookerStar* cooker = vc.recommendCookerStars[pageIndex];
@@ -134,16 +146,63 @@
                 
             }
             
-            
         };
     }];
     
     
+}
+
+
+
+#pragma mark - 新消息标记及移除标记
+
+- (void)updateMarkStatus:(NSNotification*)notification
+{
+    NSDictionary* countDict = notification.userInfo;
+    NSInteger count = [countDict[@"count"] integerValue];
+    if (count > 0) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
     
+}
+
+- (void)markNewMessage
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
     
+    //小圆点
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(-8, -5, 10, 10)];
+    label.layer.masksToBounds = YES;
+    label.layer.cornerRadius = label.height / 2;
+    label.backgroundColor = [UIColor redColor];
     
+    //添加到button
+    [liebiaoBtn addSubview:label];
+    self.navigationItem.leftBarButtonItem = liebiao;
     
+}
+
+- (void)deleteMarkLabel
+{
+    //拿到左侧栏按钮
+    UIBarButtonItem* liebiao = self.navigationItem.leftBarButtonItem;
+    UIButton* liebiaoBtn = (UIButton*)liebiao.customView;
+    liebiaoBtn.clipsToBounds = NO;
     
+    //移除小圆点Label
+    for (UIView* view in liebiaoBtn.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    //重新赋值leftBarButtonItem
+    self.navigationItem.leftBarButtonItem = liebiao;
 }
 
 #pragma mark - 加载系列
@@ -177,11 +236,20 @@
     [self addHeader];
     [self addFooter];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMarkStatus:) name:MessageCountUpdateNotification object:nil];
+    if ([DataCenter sharedInstance].messagesCount > 0 && IsLogin) {
+        [self markNewMessage];
+    } else {
+        [self deleteMarkLabel];
+    }
+    
     // Do any additional setup after loading the view.
 }
 
-
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)setupSubviews
 {
@@ -225,6 +293,7 @@
 }
 
 #pragma mark 点击tag方法
+
 -(void)SelectTagBtn:(UIButton*)sender{
     FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
     Tag* theTag = self.tags[sender.tag];
@@ -233,6 +302,8 @@
     [self.navigationController pushViewController:foodlist animated:YES];
  
 }
+
+
 #pragma mark -
 
 

@@ -49,6 +49,7 @@
             [self parseMessagesToJSQMessages];
             [self.collectionView reloadData];
             
+            
         } else {
             [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
         }
@@ -126,10 +127,10 @@
     
     
     
-    JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
+    JSQMessagesAvatarImage *fromeImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:self.myAvatar == nil ? [UIImage imageNamed:@"default_avatar.png"] : self.myAvatar
                                                                                  diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
-    JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"default_avatar.png"]
+    JSQMessagesAvatarImage *toImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:self.myAvatar == nil ? [UIImage imageNamed:@"default_avatar.png"] : self.toUserAvatar
                                                                                   diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     User* currentUser = [[User alloc] init];

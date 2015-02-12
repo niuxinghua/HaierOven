@@ -16,6 +16,15 @@
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) DeviceConnectProgressView *deviceConnectProgressView;
 @property (weak, nonatomic) IBOutlet UILabel *wifiNameLabel;
+
+/**
+ *  绑定成功的设备
+ */
+@property (strong, nonatomic) uSDKDevice* bindedDevice;
+
+@property (strong, nonatomic) NSTimer* countDownTimer;
+@property (nonatomic) NSInteger currentCount;
+
 @end
 
 @implementation AddDeviceStepTwoController
@@ -119,19 +128,35 @@
     [self.psdTextField resignFirstResponder];
     
     self.myWindow.hidden = NO;
+    
+    self.currentCount = 60;
+    self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    
     [self.deviceConnectProgressView.progressView setProgress:0.8 andTimeInterval:0.03];
     
-    [[OvenManager sharedManager] bindDeviceWithSsid:nil andApPassword:self.psdTextField.text bindResult:^(BOOL result) {
-        if (result) {
+    [[OvenManager sharedManager] bindDeviceWithSsid:nil andApPassword:self.psdTextField.text rebindOvenMac:self.currentMac bindResult:^(BOOL success, id obj, NSError *error) {
+        
+        [self.countDownTimer invalidate];
+        self.countDownTimer = nil;
+        
+        if (success) {
             NSLog(@"绑定成功");
+            
+            self.bindedDevice = obj;
+            
             [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
             [self performSelector:@selector(jumpPageTwo) withObject:nil afterDelay:1];
+            
+            
         } else {
+            
             NSLog(@"绑定失败");
             [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
             AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
             [self.navigationController pushViewController:failed animated:YES];
+            
         }
+        
     }];
     
 }
@@ -143,6 +168,7 @@
 //    AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
 //    [self.navigationController pushViewController:failed animated:YES];
     AddDeviceSucceedController *succeed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceSucceedController"];
+    succeed.bindedDevice = self.bindedDevice;
     [self.navigationController pushViewController:succeed animated:YES];
 }
 
@@ -155,4 +181,28 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - 倒计时
+
+- (void)countDown
+{
+    self.currentCount --;
+    self.deviceConnectProgressView.countDownLabel.text = [NSString stringWithFormat:@"%d", self.currentCount];
+    if (self.currentCount == 0) {
+        [self.countDownTimer invalidate];
+        self.countDownTimer = nil;
+        [self.deviceConnectProgressView.progressView setProgress:1 andTimeInterval:0.03];
+        self.myWindow.hidden = YES;
+        NSLog(@"绑定超时");
+        
+        AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
+        [self.navigationController pushViewController:failed animated:YES];
+        
+    }
+}
+
 @end
+
+
+
+
+
