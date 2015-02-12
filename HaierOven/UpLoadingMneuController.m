@@ -70,7 +70,12 @@ typedef void (^result) (BOOL success);
     self.chooseCoverView.delegate = self;
     [self.myWindow addSubview:self.chooseCoverView];
     
+    UITapGestureRecognizer *hiddenWindow = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenW)];
+    [self.myWindow addGestureRecognizer:hiddenWindow];
     
+    
+
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
      
@@ -147,6 +152,22 @@ typedef void (^result) (BOOL success);
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text {
     self.descriptionString = text;
+    textView.textColor = [UIColor darkGrayColor];
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    if (textView.text.length ==0) {
+        textView.text =@"关于菜谱（选填）";
+        textView.textColor = ([UIColor colorWithRed:170.0f/255 green:170.0f/255 blue:170.0f/255 alpha:0.6]);
+    }
+    return YES;
+}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    
+    if ([textView.text isEqualToString:@"关于菜谱（选填）"]) {
+        textView.text = @"";
+    }
     return YES;
 }
 
@@ -331,4 +352,8 @@ typedef void (^result) (BOOL success);
     
 }
 
+-(void)hiddenW{
+    self.myWindow.hidden = YES;
+    self.chooseCoverView.Frame=CGRectMake(0, PageH, PageW, PageW*0.58);
+}
 @end

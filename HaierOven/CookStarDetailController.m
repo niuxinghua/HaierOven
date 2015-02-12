@@ -23,6 +23,7 @@
 {
     CGSize movesize;
     CGFloat topViewHight;
+    BOOL isfiex;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTable;
@@ -368,8 +369,9 @@
 #warning 暂用视频
     
 //    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
-//    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
-    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
+    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
+//    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
+    NSLog(@"%@",self.cookerStar.videoPath);
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];
@@ -449,37 +451,59 @@
 
 
 -(void)UpLoadHeadViewHeight:(CGFloat)height{
-    
-    float updateHeight = [self getHeight];
-    
-//    updateHeight += self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H);
-    
-    updateHeight += (self.cookStarDetailTopView.tagsView.lineCount - 1) * (PADDING_HIGHT + LABEL_H);
 
+
+    if (!isfiex) {
+        float updateHeight = [self getHeight];
+
+        //    updateHeight += self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H);
+        updateHeight += (self.cookStarDetailTopView.tagsView.lineCount - 1) * (PADDING_HIGHT + LABEL_H);
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            CGRect frameOfHeader = self.cookStarDetailTopView.frame;
+            frameOfHeader.size.height = updateHeight;
+            self.cookStarDetailTopView.frame = frameOfHeader;
+            
+            CGFloat heightOfContainer = self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H) + 30 + 30;
+            self.cookStarDetailTopView.backDownView.frame = CGRectMake(0, self.cookStarDetailTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
+            
+            self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30, self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H));
+            self.cookStarDetailTopView.bottomView.frame = CGRectMake(0, self.cookStarDetailTopView.tagsView.bottom, Main_Screen_Width, 56);
+            
+            self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
+            
+            self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+        }];
+        
+
+    }else{
+        float updateHeight = [self getHeight];
+
+//        updateHeight +=  (PADDING_HIGHT + LABEL_H);
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            CGRect frameOfHeader = self.cookStarDetailTopView.frame;
+            frameOfHeader.size.height = updateHeight;
+            self.cookStarDetailTopView.frame = frameOfHeader;
+            
+            CGFloat heightOfContainer = (PADDING_HIGHT + LABEL_H) + 30 + 30;
+            self.cookStarDetailTopView.backDownView.frame = CGRectMake(0, self.cookStarDetailTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
+            
+            self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30,  (PADDING_HIGHT + LABEL_H));
+            self.cookStarDetailTopView.bottomView.frame = CGRectMake(0, self.cookStarDetailTopView.tagsView.bottom, Main_Screen_Width, 56);
+            
+            self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
+            
+            self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+        }];
+
+        
+    }
     
-    [UIView animateWithDuration:0.2 animations:^{
-        
-        CGRect frameOfHeader = self.cookStarDetailTopView.frame;
-        frameOfHeader.size.height = updateHeight;
-        self.cookStarDetailTopView.frame = frameOfHeader;
-        
-        CGFloat heightOfContainer = self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H) + 30 + 30;
-        self.cookStarDetailTopView.backDownView.frame = CGRectMake(0, self.cookStarDetailTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
-        
-        self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30, self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H));
-        self.cookStarDetailTopView.bottomView.frame = CGRectMake(0, self.cookStarDetailTopView.tagsView.bottom, Main_Screen_Width, 56);
-        
-        self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
-        
-        self.mainTable.tableHeaderView = self.cookStarDetailTopView;
-    }];
     
-    
-    
+    isfiex = !isfiex;
 //    [self.cookStarDetailTopView setNeedsLayout];
     
-    
-    NSLog(@"%f",height);
 }
 /*
 #pragma mark - Navigation

@@ -16,17 +16,27 @@
             <rect key="frame" x="0.0" y="0.0" width="379" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gw-WY-S1h">
-                    <rect key="frame" x="17" y="12" width="46" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gw-WY-S1h">
+                    <rect key="frame" x="17" y="13" width="40" height="18"/>
                     <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="15"/>
                     <color key="textColor" red="0.13725490196078433" green="0.019607843137254902" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdz-cl-AqF">
+                    <rect key="frame" x="0.0" y="43" width="379" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="3t1-tO-B3R"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="kdz-cl-AqF" secondAttribute="trailing" id="Cut-hh-c1N"/>
                 <constraint firstItem="7gw-WY-S1h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17" id="QGP-wn-RRp"/>
                 <constraint firstAttribute="centerY" secondItem="7gw-WY-S1h" secondAttribute="centerY" constant="0.5" id="SZj-28-L0f"/>
+                <constraint firstAttribute="bottom" secondItem="kdz-cl-AqF" secondAttribute="bottom" id="Y8p-aV-D5a"/>
+                <constraint firstItem="kdz-cl-AqF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wfj-hr-ece"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

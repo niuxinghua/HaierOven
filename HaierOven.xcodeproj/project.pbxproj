@@ -99,6 +99,7 @@
 		456402291A5FB5B50091CDFD /* mj.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402261A5FB5B50091CDFD /* mj.png */; };
 		4564022A1A5FB5B50091CDFD /* mj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402271A5FB5B50091CDFD /* mj@2x.png */; };
 		4564022B1A5FB5B50091CDFD /* mj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 456402281A5FB5B50091CDFD /* mj@3x.png */; };
+		456BC4481A8C82F3000D9355 /* jifen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 456BC4471A8C82F3000D9355 /* jifen2.png */; };
 		457662281A70A7A900B29E3A /* LeftMenuAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 457662271A70A7A900B29E3A /* LeftMenuAlert.m */; };
 		4576622A1A70A7C500B29E3A /* LeftMenuAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457662291A70A7C500B29E3A /* LeftMenuAlert.xib */; };
 		457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 457A76CA1A4158C800E422D0 /* page_state_normal.png */; };
@@ -1313,6 +1314,7 @@
 		456402261A5FB5B50091CDFD /* mj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mj.png; sourceTree = "<group>"; };
 		456402271A5FB5B50091CDFD /* mj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@2x.png"; sourceTree = "<group>"; };
 		456402281A5FB5B50091CDFD /* mj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mj@3x.png"; sourceTree = "<group>"; };
+		456BC4471A8C82F3000D9355 /* jifen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jifen2.png; sourceTree = "<group>"; };
 		457662261A70A7A900B29E3A /* LeftMenuAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuAlert.h; sourceTree = "<group>"; };
 		457662271A70A7A900B29E3A /* LeftMenuAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuAlert.m; sourceTree = "<group>"; };
 		457662291A70A7C500B29E3A /* LeftMenuAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuAlert.xib; sourceTree = "<group>"; };
@@ -4267,6 +4269,7 @@
 			isa = PBXGroup;
 			children = (
 				84AD2E901A8A230A0014126A /* jifen.jpg */,
+				456BC4471A8C82F3000D9355 /* jifen2.png */,
 				84AD2EA31A8B5E0F0014126A /* APPkv-banner1.jpg */,
 				84AD2EA11A8B5B190014126A /* APPkv-banner1@2x.jpg */,
 				45AC32001A777337004B1828 /* studyCook */,
@@ -6316,6 +6319,7 @@
 				45D906E61A47CAAB00B97D92 /* mrqd@2x.png in Resources */,
 				45D906BA1A47CAAB00B97D92 /* fakebg@3x.png in Resources */,
 				45B651151A48448500A6376D /* wodeWIFI.png in Resources */,
+				456BC4481A8C82F3000D9355 /* jifen2.png in Resources */,
 				45B88E4F1A4BE2A300722EF6 /* tzyx-cxz.png in Resources */,
 				450850AD1A6CD740003559FE /* UseBakeView.xib in Resources */,
 				4564022B1A5FB5B50091CDFD /* mj@3x.png in Resources */,

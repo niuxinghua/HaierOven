@@ -31,6 +31,7 @@
   @[@"测量工具",@"分离工具",@"搅拌工具",@"整形工具",@"成形工具",@"烘烤工具",@"切割工具"],
   @[@"粉类材料",@"膨大剂",@"油脂、芝士材料",@"糖类材料"],
   @[@"打发黄油",@"简易蛋糕制作要点",@"蛋白打发法",@"全蛋打发法",@"打发鲜奶油",@"面包制作流程",@"酥皮制作"]];
+    indexFiex = 99;
     
 }
 
@@ -58,7 +59,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *arr = self.detailArr[indexPath.row];
-    return  isfixed&&indexFiex == indexPath.row? 80 + arr.count * 45+16:80;
+    
+    
+   return  indexFiex==indexPath.row && isfixed? 80 + arr.count * 45+16:80;
 }
 
 
@@ -73,21 +76,33 @@
     return cell;
 }
 
+
 -(void)fixedCell:(StudyCookCell *)cell{
+
     NSIndexPath *index = [self.tableView indexPathForCell:cell];
-    indexSection  = index.row;
-    if (self.tempBtn.tag != index.row)
-        self.tempBtn.selected = !self.tempBtn.selected;
     
+    if (indexFiex!=index.row)
+        self.tempBtn.selected = NO;
+    
+        indexFiex = index.row;
+    cell.icon.selected = !cell.icon.selected;
+    
+    self.tempBtn = cell.icon;
     
     isfixed = cell.icon.selected;
-    if (cell.icon.selected) {
-        indexFiex = index.row;
-        
-        self.tempBtn = cell.icon;
-        self.tempBtn.tag = index.row;
-    }
+//    if (self.tempBtn.tag != index.row)
+//        self.tempBtn.selected = !self.tempBtn.selected;
+//    
+//    
+//    isfixed = cell.icon.selected;
+//    if (cell.icon.selected) {
+//        indexFiex = index.row;
+//        
+//        self.tempBtn.tag = index.row;
+//    }
+    
     [self.tableView reloadData];
+
 }
 
 - (IBAction)TurnBack:(id)sender {

@@ -24,11 +24,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+   
     // Configure the view for the selected state
 }
 - (IBAction)showDetail:(id)sender {
-    self.icon.selected = !self.icon.selected;
+//    self.icon.selected = !self.icon.selected;
     [self.delegate fixedCell:self];
 }
 
@@ -41,6 +41,8 @@
     _bkImage = bkImage;
     [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateNormal];
     [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateHighlighted];
+    [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateDisabled];
+
 }
 
 -(void)setDetails:(NSArray *)details{

@@ -43,7 +43,7 @@
 
 + (UIButton *)defaultSendButtonItem
 {
-    NSString *sendTitle = NSLocalizedStringFromTable(@"回复", @"JSQMessages", @"Text for the send button on the messages view toolbar");
+    NSString *sendTitle = NSLocalizedStringFromTable(@"发送", @"JSQMessages", @"Text for the send button on the messages view toolbar");
     
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [sendButton setTitle:sendTitle forState:UIControlStateNormal];

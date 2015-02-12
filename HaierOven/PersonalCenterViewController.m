@@ -249,7 +249,10 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     self.myDessertCountLabel.text = self.currentUser.points;
     self.personalNameLabel.text = self.currentUser.userName;
     self.personDescriptionLabel.text = self.currentUser.note;
-    self.genderImage.image = ![self.currentUser.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    
+
+    self.genderImage.image = [self.currentUser.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    
     [self.watchBtn setTitle:[NSString stringWithFormat:@"%@关注", self.currentUser.focusCount] forState:UIControlStateNormal];
     [self.followBtn setTitle:[NSString stringWithFormat:@"粉丝%@", self.currentUser.followCount] forState:UIControlStateNormal];
     
