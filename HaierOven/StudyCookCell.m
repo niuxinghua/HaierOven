@@ -44,7 +44,9 @@
 }
 
 -(void)setDetails:(NSArray *)details{
-    
+    for (StudyCookView *view in self.bottomView.subviews) {
+        [view removeFromSuperview];
+    }
     for (int i = 0; i<details.count; i++) {
         StudyCookView *stuView = [[StudyCookView alloc]initWithFrame:CGRectMake(0, i*45+8, self.bottomView.width, 44)];
         stuView.layer.masksToBounds = YES;
