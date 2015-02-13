@@ -72,6 +72,12 @@
                     <date key="date" timeIntervalSinceReferenceDate="442913259.34447497">
                         <!--2015-01-14 07:27:39 +0000-->
                     </date>
+                    <date key="minimumDate" timeIntervalSinceReferenceDate="-1609419600">
+                        <!--1950-01-01 11:00:00 +0000-->
+                    </date>
+                    <date key="maximumDate" timeIntervalSinceReferenceDate="473252400">
+                        <!--2015-12-31 11:00:00 +0000-->
+                    </date>
                     <locale key="locale" localeIdentifier="zh"/>
                 </datePicker>
             </subviews>

@@ -172,6 +172,11 @@
     cell.delegate = self;
     cell.user = self.friends[indexPath.row];
     cell.userId = self.userBaseId;
+
+
+    if ([cell.user.userBaseId isEqualToString: CurrentUserBaseId]) {
+        cell.watchingBtn.hidden = YES;
+    }
     return cell;
 }
 

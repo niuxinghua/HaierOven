@@ -49,10 +49,10 @@
             self.searchedFlag = YES;
             self.searchedCookbooks = obj;
             if (self.searchedCookbooks.count > 0) {
-                // 当有搜索结果时，保存搜索关键字
-                [[DataCenter sharedInstance] saveSearchedKeyword:keyword];
-                //重新拿关键字
-                self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
+//                // 当有搜索结果时，保存搜索关键字
+//                [[DataCenter sharedInstance] saveSearchedKeyword:keyword];
+//                //重新拿关键字
+//                self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
                 self.notfFindLabel.text = @"";
             } else {
                 self.notfFindLabel.text = [NSString stringWithFormat:@"没有找到“%@”的相关菜谱", keyword];
@@ -271,19 +271,26 @@
 //    FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
 //    [self.navigationController pushViewController:foodlist animated:YES];
     
-    
-    
+    SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
+
     if (!self.searchedFlag) {
         self.searchedFlag = NO;
         if (indexPath.row == 0) { //点击了“最近搜索记录”cell
             return;
         }
-        SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
+//        SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
         self.tempTextField.text = cell.cookbookNameLabel.text;
         [self searchCookbookWithKeyword:self.tempTextField.text];
         
         return;
     }
+    
+    
+    // 当有搜索结果时，保存搜索关键字
+    [[DataCenter sharedInstance] saveSearchedKeyword:cell.cookbookNameLabel.text];
+    //重新拿关键字
+    self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
+    
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];

@@ -7,10 +7,17 @@
 //
 
 #import "CookStarCell.h"
+@interface CookStarCell()
+@property (weak, nonatomic) IBOutlet UIButton *followBtn;
 
+@end
 @implementation CookStarCell
 
 - (void)awakeFromNib {
+    self.followBtn.layer.masksToBounds = YES;
+    self.followBtn.layer.cornerRadius = self.followBtn.height/2;
+
+    
     // Initialization code
 }
 
@@ -44,7 +51,7 @@
     
     self.nameLabel.text = cookerStar.userName;
     self.descLabel.text = cookerStar.signature;
-    self.foodCountLabel.text = [NSString stringWithFormat:@"%d个菜谱", cookerStar.cookbookAmount];
+    self.foodCountLabel.text = [NSString stringWithFormat:@"%ld个菜谱", (long)cookerStar.cookbookAmount];
     self.followButton.selected = cookerStar.isFollowed;
     
 }

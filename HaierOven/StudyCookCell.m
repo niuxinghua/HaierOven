@@ -24,11 +24,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+   
     // Configure the view for the selected state
 }
 - (IBAction)showDetail:(id)sender {
-    self.icon.selected = !self.icon.selected;
+//    self.icon.selected = !self.icon.selected;
     [self.delegate fixedCell:self];
 }
 
@@ -41,10 +41,14 @@
     _bkImage = bkImage;
     [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateNormal];
     [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateHighlighted];
+    [self.bkImageBtn setBackgroundImage:bkImage forState:UIControlStateDisabled];
+
 }
 
 -(void)setDetails:(NSArray *)details{
-    
+    for (StudyCookView *view in self.bottomView.subviews) {
+        [view removeFromSuperview];
+    }
     for (int i = 0; i<details.count; i++) {
         StudyCookView *stuView = [[StudyCookView alloc]initWithFrame:CGRectMake(0, i*45+8, self.bottomView.width, 44)];
         stuView.layer.masksToBounds = YES;

@@ -106,13 +106,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrq-Lq-mf9" customClass="UnderLineButton">
-                    <rect key="frame" x="138" y="218" width="140" height="29"/>
+                    <rect key="frame" x="138" y="218" width="112" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="112" id="3no-GY-aUf"/>
                         <constraint firstAttribute="height" constant="29" id="5LS-Fy-91n"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="14"/>
-                    <state key="normal" title="海尔注册用户服务条款">
+                    <state key="normal" title="海尔烤箱隐私协议">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -163,7 +163,7 @@
                         <action selector="getPassCode:" destination="iN0-l3-epB" eventType="touchUpInside" id="cYV-MV-TPw"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJc-TP-S3x">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJc-TP-S3x">
                     <rect key="frame" x="16" y="224" width="17" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="17" id="c7L-cN-KEc"/>

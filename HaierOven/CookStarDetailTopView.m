@@ -39,7 +39,9 @@
     self.top     = self.vedioImage.bottom+180+56;
     self.bottom  = self.bottomView.top;
 
-    
+    self.followButton.layer.cornerRadius = self.followButton.height/2;
+    self.followButton.layer.masksToBounds = YES;
+
     return self;
 }
 -(void)layoutSubviews{

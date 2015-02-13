@@ -188,6 +188,9 @@
     self.ovenTypeAlert.delegate = self;
     [self.myWindow addSubview:self.ovenTypeAlert];
 
+    UITapGestureRecognizer *hiddenWindow = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenW)];
+    [self.myWindow addGestureRecognizer:hiddenWindow];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -948,6 +951,16 @@
     
 }
 
+-(void)hiddenW{
+    self.myWindow.hidden = YES;
+    self.addFoodAlertView.frame=alertRectHidden;
+
+    
+    self.chooseCoverView.frame=CGRectMake(0, PageH, PageW, PageW*0.58);
+
+    
+    self.ovenTypeAlert .frame=alert_RectHidden;
+}
 
 @end
 
