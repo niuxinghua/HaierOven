@@ -95,6 +95,30 @@
 
 @property (strong, nonatomic) NSTimer* bakeTimer;
 
+
+#pragma mark - 约束
+
+/**
+ *  控制开关左边约束
+ */
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *controlConstraintArr;
+
+/**
+ *  控制开关宽度约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlWidthConstraint;
+
+/**
+ *  辅助功能按钮左边约束
+ */
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *functionConstraintArr;
+
+/**
+ *  辅助功能按钮宽度约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionWidthConstraint;
+
+
 @end
 
 @implementation DeviceBoardViewController
@@ -104,6 +128,31 @@
 @synthesize tzyxTab;
 @synthesize fixbtn;
 @synthesize ksyr;
+
+#pragma mark - 更新约束
+
+- (void)updateViewConstraints
+{
+    
+    [self autoArrangeBoxWithConstraints:self.controlConstraintArr width:self.controlWidthConstraint.constant];
+    
+    [self autoArrangeBoxWithConstraints:self.functionConstraintArr width:self.functionWidthConstraint.constant];
+    
+    [super updateViewConstraints];
+}
+
+- (void)autoArrangeBoxWithConstraints:(NSArray*)constraintArray width:(CGFloat)width
+{
+    CGFloat step = (self.view.frame.size.width - (width * constraintArray.count)) / (constraintArray.count + 1);
+    for (int i = 0; i < constraintArray.count; i++) {
+        NSLayoutConstraint* constraint = constraintArray[i];
+        constraint.constant = step * (i + 1) + width * i;
+    }
+    
+    
+}
+
+#pragma mark - 初始化
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -292,6 +341,7 @@
     }];
 
 }
+
 -(void)SetUPAlertView{
     alertRectHidden = CGRectMake(PageW/2, PageH/2, 0, 0);
     alertRectShow = CGRectMake(20, (PageH-((PageW-40)*1.167))/2, PageW-40, (PageW-40)*1.167);

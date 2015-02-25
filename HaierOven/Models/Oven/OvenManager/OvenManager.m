@@ -168,9 +168,11 @@
                             for (LocalOven* localOven in dataCenter.myOvens) {
                                 if (![device.mac isEqualToString:localOven.mac]) {
                                     theDevice = device;
+                                    break;
                                 }
                             }
                         }
+                        if (theDevice != nil) break;
                     }
                 }
                 
