@@ -90,6 +90,9 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
     if (self.notificationType == NotificationTypeSystem) {
         
+        //统计页面加载耗时
+        UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+        
         NSString* userBaseId = CurrentUserBaseId; //@"5";
         [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
             
@@ -111,6 +114,10 @@ typedef NS_ENUM(NSInteger, NotificationType)
                     [self.allNotifications addObjectsFromArray:arr];
                 }
                 [self reload];
+                
+                UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+                [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"通知中心页面"];
+                
             }
             
         }];
@@ -362,22 +369,15 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
     if (self.notificationType == NotificationTypeSystem) {
         NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
-//        if (self.allNotifications.count == 0) {
-//            return [[UIView alloc] init];
-//        }
+        
         if (section == 0) {
-//            if (self.cookbookNotifications.count == 0) {
-//                return [[UIView alloc] init];
-//            }
-//            sectionview.sectionTitleLabel.text = self.cookbookNotifications.count == 0 ? @"" : @"菜谱";
+            
             sectionview.sectionTitleLabel.text = @"菜谱";
         } else if (section == 1){
-//            if (self.messagesNotifications.count == 0) {
-//                return [[UIView alloc] init];
-//            }
-//            sectionview.sectionTitleLabel.text = self.messagesNotifications.count == 0 ? @"" : @"厨神";
+            
             sectionview.sectionTitleLabel.text = @"厨神";
         } else {
+            
             sectionview.sectionTitleLabel.text = @"关注";
         }
         

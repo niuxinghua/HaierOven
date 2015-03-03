@@ -11,4 +11,5 @@
 
 @interface DeviceViewController : BaseViewController <DeviceUnconnectControllerDelegate>
 @property (strong, nonatomic) NSArray *myDevices;
+@property (nonatomic) BOOL addDeviceFlag;
 @end

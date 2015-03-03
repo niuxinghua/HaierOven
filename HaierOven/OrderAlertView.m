@@ -37,21 +37,37 @@
     [self.datepicker setDate:minimumDate animated:YES];
 }
 
+- (void)setSelectedDate:(NSDate *)selectedDate
+{
+    _selectedDate = selectedDate;
+    if (selectedDate != nil) {
+        [self.datepicker setDate:selectedDate];
+    }
+}
+
 #pragma mark - DatePicker响应事件
 
 - (IBAction)pickViewValueChanged:(UIDatePicker *)sender
 {
     NSDate* minimumDate = [[NSDate date] dateByAddingTimeInterval:self.minimumInteval];
-    if ([sender.date compare:minimumDate] == NSOrderedAscending) {
+    
+    // 选择的时间前后不能超过12小时
+    NSTimeInterval inteval = [sender.date timeIntervalSinceDate:minimumDate];
+    
+    NSDate* maxDate = [[NSDate date] dateByAddingTimeInterval:inteval + 12 * 60 * 60];
+    
+    if ([sender.date compare:minimumDate] == NSOrderedAscending || [sender.date compare:maxDate] == NSOrderedDescending) {
         [sender setDate:minimumDate animated:YES];
     }
+    
 }
 
 
 
 #pragma mark - 回调方法
 
-- (IBAction)OrderChick:(UIButton *)sender {
+- (IBAction)OrderChick:(UIButton *)sender
+{
     if (sender.tag ==1) {
         // 点击确定时必须确认时间
         NSDate* minimumDate = [[NSDate date] dateByAddingTimeInterval:self.minimumInteval];
@@ -59,7 +75,7 @@
             [self.datepicker setDate:minimumDate animated:YES];
         }
         
-        [self.delegate SettingOrder:self.datepicker.date];
+        [self.delegate SettingOrder:self.datepicker.date sender:sender];
     }else{
         [self.delegate OrderAlertViewHidden];
     }

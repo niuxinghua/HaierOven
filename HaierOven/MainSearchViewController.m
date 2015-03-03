@@ -8,6 +8,7 @@
 
 #import "MainSearchViewController.h"
 #import "SearchTableCell.h"
+#import "FoodListCell.h"
 #import "RecommendTagView.h"
 #import "FoodListViewController.h"
 #import "CookbookDetailControllerViewController.h"
@@ -37,6 +38,9 @@
 
 - (void)searchCookbookWithKeyword:(NSString*)keyword
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     if (keyword.length == 0) {
         self.searchedFlag = NO;
         self.notfFindLabel.text = @"";
@@ -58,6 +62,9 @@
                 self.notfFindLabel.text = [NSString stringWithFormat:@"没有找到“%@”的相关菜谱", keyword];
             }
             [self.table reloadData];
+            
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"搜索页面"];
         }
     }];
 }
@@ -227,12 +234,17 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.searchedFlag) {
         
-        NSString *cellIdentifier =@"SearchTableCell";
-        SearchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        Cookbook* cookbook = self.searchedCookbooks[indexPath.row];
-        cell.cookbookNameLabel.text = cookbook.name;
+//        NSString *cellIdentifier =@"SearchTableCell";
+//        SearchTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//        cell.backgroundColor = [UIColor clearColor];
+//        Cookbook* cookbook = self.searchedCookbooks[indexPath.row];
+//        cell.cookbookNameLabel.text = cookbook.name;
+//        return cell;
+        NSString *cellIdentifier =@"FoodListCell";
+        FoodListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        cell.cookbook = self.searchedCookbooks[indexPath.row];
         return cell;
+        
         
     } else {
         
@@ -260,34 +272,34 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==0) {
-        return self.searchedFlag ? 60 : 35;
+    if (indexPath.row == 0) {
+        //return self.searchedFlag ? 60 : 35;
+        return self.searchedFlag ? 100 : 35;
     }else{
-        return 60;
+        //return 60;
+        return self.searchedFlag ? 100 :60;
+        //return 100;
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    FoodListViewController *foodlist = [self.storyboard instantiateViewControllerWithIdentifier:@"FoodListViewController"];
-//    [self.navigationController pushViewController:foodlist animated:YES];
     
-    SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
-
     if (!self.searchedFlag) {
+        SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
         self.searchedFlag = NO;
         if (indexPath.row == 0) { //点击了“最近搜索记录”cell
             return;
         }
-//        SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
+
         self.tempTextField.text = cell.cookbookNameLabel.text;
         [self searchCookbookWithKeyword:self.tempTextField.text];
         
         return;
     }
     
-    
+    FoodListCell* cell = (FoodListCell*)[tableView cellForRowAtIndexPath:indexPath];
     // 当有搜索结果时，保存搜索关键字
-    [[DataCenter sharedInstance] saveSearchedKeyword:cell.cookbookNameLabel.text];
+    [[DataCenter sharedInstance] saveSearchedKeyword:cell.cookbook.name];
     //重新拿关键字
     self.recentSearchedKeywords = [[DataCenter sharedInstance] getSearchedKeywords];
     
@@ -300,6 +312,7 @@
     [self.navigationController pushViewController:detailController animated:YES];
     
 }
+
 #pragma mark-
 
 #pragma mark  监听table.hidden

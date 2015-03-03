@@ -202,7 +202,7 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate =  [[NSDate date] dateByAddingTimeInterval:seconds]; //[NSDate dateWithTimeIntervalSinceNow:seconds];
     localNotification.alertBody = alertBody;
-    localNotification.alertAction = @"alertAction";
+    localNotification.alertAction = @"查看";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     localNotification.applicationIconBadgeNumber = 1;
     localNotification.userInfo = @{@"name": @"sansang", @"age": @99}; //給将来的此程序传参
@@ -232,7 +232,13 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
             self.clockTimeUpNotification = localNotification;
             break;
         }
+        case LocalNotificationTypeAlert:
+        {
+            
+            break;
+        }
         default:
+            
             break;
     }
     
@@ -252,14 +258,21 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
         [keywords addObject:keyword];
         
     } else {
-        //只保存10个关键词 不保存已有关键词
+        //只保存10个关键词 已有关键词排最前面
         keywords = [NSMutableArray arrayWithContentsOfFile:filePath];
+        NSString* theExistKeyword = nil;
         for (NSString* existKeyword in keywords) {
             if ([existKeyword isEqualToString:keyword]) {
-                return;
+                theExistKeyword = existKeyword;
             }
         }
-        if (keywords.count > 10) {
+        
+        if (theExistKeyword != nil) {
+            [keywords removeObject:theExistKeyword];
+
+        }
+        
+        if (keywords.count >= 10) {
             [keywords removeLastObject];
         }
         [keywords insertObject:keyword atIndex:0];
@@ -343,18 +356,30 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     NSMutableArray* ovens = self.myOvens;
     NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
     LocalOven* theOven;
-    for (LocalOven* localOven in ovens) {
-        if ([localOven.mac isEqualToString:oven.mac]) {
-            theOven = localOven;
-        } else {
-            [ovenArr addObject:localOven];
+    
+    if (ovens.count == 0) {
+        NSDictionary* ovenDict = [oven toDictionary];
+        [ovenArr addObject:ovenDict];
+    } else {
+        
+        for (LocalOven* localOven in ovens) {
+            if ([localOven.mac isEqualToString:oven.mac]) {
+                theOven = localOven;
+            } else {
+                [ovens addObject:oven];
+            }
         }
+        if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
+            [ovens removeObject:theOven];
+        }
+        
+        for (LocalOven* localOven in ovens) {
+            NSDictionary* ovenDict = [localOven toDictionary];
+            [ovenArr addObject:ovenDict];
+        }
+        
     }
-    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
-        [ovens removeObject:theOven];
-    }
-    NSDictionary* ovenDict = [oven toDictionary];
-    [ovenArr addObject:ovenDict];
+    
     NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
     [ovenArr writeToFile:filePath atomically:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
@@ -377,8 +402,15 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
         [ovens removeObject:theOven];
     }
+    
+    NSMutableArray* ovenArr = [NSMutableArray array];
+    for (LocalOven* localOven in ovens) {
+        NSDictionary* ovenDict = [localOven toDictionary];
+        [ovenArr addObject:ovenDict];
+    }
+    
     NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
-    [ovens writeToFile:filePath atomically:YES];
+    [ovenArr writeToFile:filePath atomically:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
 }
 

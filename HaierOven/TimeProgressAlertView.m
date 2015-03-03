@@ -51,6 +51,7 @@
 - (IBAction)CancelClock:(id)sender {
     [self.delegate HiddenClockAlert];
 }
+
 - (IBAction)StopClock:(id)sender {
     [self.delegate StopClock];
 }

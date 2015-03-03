@@ -47,6 +47,11 @@ typedef NS_ENUM(NSInteger, AlertType)
  */
 @property (nonatomic) BOOL isChunzheng;
 
+/**
+ *  已调整了的温度，弹框时，默认选中此温度
+ */
+@property (copy, nonatomic) NSString* selectedTemperature;
+
 @property (strong, nonatomic) NSString *hour;
 @property (strong, nonatomic) NSString *min;
 @property (weak, nonatomic)id<DeviceAlertViewDelegate>delegate;

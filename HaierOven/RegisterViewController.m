@@ -154,8 +154,8 @@
             
             
         } else {
-            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
-
+            //[super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+            [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
         }
     }];
     
@@ -215,7 +215,7 @@
             [self loginWithUserName:email password:password];
             
         } else {
-            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+            [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
         }
     }];
     
@@ -267,10 +267,8 @@
                                                         
                                                         //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                     } else {
-                                                        [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                        [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                     }
-                                                    
-                                                    
                                                 }];
     
     

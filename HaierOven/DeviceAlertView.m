@@ -40,7 +40,10 @@
         case 1:
             if (self.alertType == alertOrder) {
                 self.string = [NSString stringWithFormat:@"%@:%@",self.hour,self.min];
+            } else {
+                self.string = self.pickViewArr[[self.pickview selectedRowInComponent:0]];
             }
+            
             [self.delegate confirm:self.string andAlertTye:_alertType andbtn:self.btn];
             break;
         case 2:
@@ -70,8 +73,33 @@
     [self.pickview reloadAllComponents];
 }
 
+- (void)setSelectedTemperature:(NSString *)selectedTemperature
+{
+    _selectedTemperature = selectedTemperature;
+    
+    // 取出行数
+    NSInteger index = 0;
+    if (self.alertType == alertTempture || self.alertType == alertNeedle || self.alertType == alertWormUp) {
+        
+        for (NSString* tempStr in self.pickViewArr) {
+            if ([tempStr isEqualToString:selectedTemperature]) {
+                index = [self.pickViewArr indexOfObject:tempStr];
+                break;
+            }
+        }
+        
+        if (self.selectedTemperature == nil) {
+            self.string = [self.pickViewArr firstObject];
+        }
+        
+        [self.pickview selectRow:index inComponent:0 animated:YES];
+    }
+    
+}
 
--(void)setAlertType:(AlertType)alertType{
+
+-(void)setAlertType:(AlertType)alertType
+{
     _alertType = alertType;
     switch (_alertType) {
         case alertTime:
@@ -79,7 +107,13 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, self.titleBg.height-8);
             self.alertDescription = @"";
             self.pickViewArr = [self getTimeArr];
+            
             [self.pickview selectRow:self.defaultSelectTime - 1 inComponent:0 animated:NO];
+            
+            if (self.defaultSelectTime != 0) {
+                self.string = self.pickViewArr[self.defaultSelectTime - 1];
+            }
+            
             break;
             
         case alertTempture:
@@ -96,6 +130,7 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在时间达到时提醒您";
             self.pickViewArr = [self getTimeArr];
+            self.string = [self.pickViewArr firstObject];
             break;
             
         case alertNeedle:
@@ -103,13 +138,15 @@
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在探针温度达到目标温度时提醒您";
             self.pickViewArr = [self getCheckTemperatureArr];
+            [self.pickview selectRow:0 inComponent:0 animated:NO];
             break;
             
         case alertWormUp:
             self.alertTitle = @"设置预热目标温度";
             self.alertTitleLabel.frame = CGRectMake(25, 4, self.titleBg.width-30, 21);
             self.alertDescription = @"将在烤箱内温度达到目标温度时提醒您";
-            self.pickViewArr = [self getTempArr];
+            self.pickViewArr = [self getWarmUpTempArr];
+            [self.pickview selectRow:0 inComponent:0 animated:NO];
             break;
             
         case alertOrder:
@@ -128,20 +165,25 @@
 }
 
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
     return self.alertType==alertOrder?2:1;
 }
--(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
     
     if (self.alertType == alertOrder) {
         return component==0?25:61;
     }else
     return self.pickViewArr.count;
 }
+
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
     return 50;
 }
+
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     if (self.alertType == alertOrder) {
@@ -175,7 +217,6 @@
 }
 
 
-
 -(void) pickerView: (UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent: (NSInteger)component{
 
     if (self.alertType == alertOrder) {
@@ -201,7 +242,23 @@
     return [temps copy];
 }
 
--(NSArray *)getTempArr{
+- (NSArray*)getWarmUpTempArr
+{
+    NSString *temp;
+    NSMutableArray *temps = [NSMutableArray new];
+    int t = 0 ;
+    
+        for ( int i = 0; i <= 49; i++) {   //快速预热：5—250
+            t = t+5;
+            temp = [NSString stringWithFormat:@"%d°",t];
+            [temps addObject:temp];
+        }
+    
+    return [temps copy];
+}
+
+-(NSArray *)getTempArr
+{
     NSString *temp;
     NSMutableArray *temps = [NSMutableArray new];
     int t = 0 ;

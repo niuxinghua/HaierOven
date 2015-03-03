@@ -67,8 +67,8 @@
 {
     [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar]];
     self.nikeNameLabel.text = self.user.nickName;
-    self.genderLabel.text = [self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
-    self.genderImage.image = [self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
+    self.genderLabel.text = ![self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
+    self.genderImage.image = ![self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");
     self.placeLabel.text = self.user.address;
     self.descriptionLabel.text = self.user.note;
     self.birthdayLabel.text = self.user.birthday;
@@ -384,15 +384,15 @@
 
 #pragma  mark - alertGenderDelegate
 -(void)chooseGender:(NSInteger)gender{
-    self.genderLabel.text = gender==1?@"男":@"女";
-    self.genderImage.image = gender==1?IMAGENAMED(@"nan"):IMAGENAMED(@"femail");
+    self.genderLabel.text = gender==1 ? @"男" : @"女";
+    self.genderImage.image = gender==1 ? IMAGENAMED(@"nan") : IMAGENAMED(@"femail");
     self.alertGender.hidden = YES;
     self.myWindow.hidden = YES;
     self.alertGender.frame =alertHiddenRect;
     
     // 修改性别
     
-    self.user.sex = gender == 1 ? @"1" : @"0";
+    self.user.sex = gender == 1 ? @"0" : @"1";
     [self modifyUserInfo];
     
 }

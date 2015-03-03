@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "OvenCommandsDefine.h"
-//#import <uSDKFramework/BaseMessage.h>
+#import <uSDKFramework/BaseMessage.h>
 #import <uSDKFramework/uSDKBusinessMessage.h>
+#import <uSDKFramework/uSDKCommandPackage.h>
 #import <uSDKFramework/uSDKConstantInfo.h>
 #import <uSDKFramework/uSDKDevice.h>
 #import <uSDKFramework/uSDKDeviceConfigInfo.h>
@@ -21,6 +22,8 @@
 
 #define BindDeviceSuccussNotification  @"Bind device success"
 #define DeleteLocalOvenSuccessNotification @"Delete local oven success"
+
+#define DebugOvenFlag   0
 
 @interface OvenManager : NSObject
 

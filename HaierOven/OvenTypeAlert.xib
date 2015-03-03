@@ -13,13 +13,14 @@
             <string>FZLTXHK--GBK1-0</string>
             <string>FZLTXHK--GBK1-0</string>
             <string>FZLTXHK--GBK1-0</string>
+            <string>FZLTXHK--GBK1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="wX0-kE-Q3r" customClass="OvenTypeAlert">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="168"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="202"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Mp-Ae-0kf">
@@ -82,6 +83,21 @@
                         <action selector="ovenTypeTapped:" destination="wX0-kE-Q3r" eventType="touchUpInside" id="4mz-z1-ndi"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0R3-E3-jVP">
+                    <rect key="frame" x="0.0" y="160" width="300" height="40"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="5oR-12-2Pr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="15"/>
+                    <state key="normal" title="未使用烤箱">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ovenTypeTapped:" destination="wX0-kE-Q3r" eventType="touchUpInside" id="ga8-uA-ZTb"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -92,15 +108,19 @@
                 <constraint firstItem="Wak-MN-atv" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="Le0-yY-4Xy"/>
                 <constraint firstItem="Wak-MN-atv" firstAttribute="top" secondItem="yA2-Vp-myt" secondAttribute="bottom" id="LtA-qj-XYD"/>
                 <constraint firstItem="Vnq-fR-Gny" firstAttribute="top" secondItem="Wak-MN-atv" secondAttribute="bottom" id="NcP-vE-my5"/>
+                <constraint firstAttribute="trailing" secondItem="0R3-E3-jVP" secondAttribute="trailing" id="WA8-k1-jK7"/>
                 <constraint firstItem="Vnq-fR-Gny" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="Wf8-OP-25S"/>
                 <constraint firstItem="8Mp-Ae-0kf" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="dgL-9x-fq3"/>
+                <constraint firstAttribute="bottom" secondItem="0R3-E3-jVP" secondAttribute="bottom" constant="2" id="gDS-p7-cmw"/>
+                <constraint firstItem="0R3-E3-jVP" firstAttribute="top" secondItem="Vnq-fR-Gny" secondAttribute="bottom" id="n3K-Or-oNc"/>
                 <constraint firstAttribute="trailing" secondItem="8Mp-Ae-0kf" secondAttribute="trailing" id="nrh-oV-G1n"/>
                 <constraint firstItem="yA2-Vp-myt" firstAttribute="top" secondItem="8Mp-Ae-0kf" secondAttribute="bottom" id="q7o-Xv-XHP"/>
+                <constraint firstItem="0R3-E3-jVP" firstAttribute="leading" secondItem="wX0-kE-Q3r" secondAttribute="leading" id="v1O-X3-rKZ"/>
                 <constraint firstAttribute="trailing" secondItem="yA2-Vp-myt" secondAttribute="trailing" id="xQW-xz-TfU"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="202" y="-49"/>
+            <point key="canvasLocation" x="202" y="-32"/>
         </view>
     </objects>
 </document>

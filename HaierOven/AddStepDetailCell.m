@@ -51,20 +51,24 @@
     stepIndexLabel.layer.cornerRadius = self.stepIndexLabel.height/2;
 }
 
--(void)setStepIndexString:(NSString *)stepIndexString{
+-(void)setStepIndexString:(NSString *)stepIndexString
+{
     _stepIndexString = stepIndexString;
     _stepIndexLabel.text = stepIndexString;
 }
--(void)setStepDescriptionString:(NSString *)stepDescriptionString{
+
+-(void)setStepDescriptionString:(NSString *)stepDescriptionString
+{
     _stepDescriptionString = stepDescriptionString;
     self.stepDescriptionLabel.text = stepDescriptionString;
 }
 
--(void)setEditStyle:(EditStyle)editStyle{
+-(void)setEditStyle:(EditStyle)editStyle
+{
     _editStyle = editStyle;
     if (editStyle == EditStyleNone) {
         self.deleteBtn.hidden = YES;
-    }else
+    } else
         self.deleteBtn.hidden = NO;
 }
 
@@ -72,12 +76,15 @@
     _step = step;
     if (step.desc) {
         self.stepDescriptionLabel.text =  step.desc;
+    } else {
+        self.stepDescriptionLabel.text = @"";
     }
     
     if (step.photo != nil) {
         NSString* imagePath = [BaseOvenUrl stringByAppendingPathComponent:step.photo];
-        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath]];
-
+        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"YJTP"]];
+    } else {
+        self.stepImage.image = [UIImage imageNamed:@"YJTP"];
     }
 //    self.stepImage.image = step.
 }
@@ -88,11 +95,17 @@
     [self.delegate stepDetailCell:self AddStepImage:self.stepImage];
 
 }
--(void)AddDescription{
+
+-(void)AddDescription
+{
     [self.delegate stepDetailCell:self AddStepDescription:self.stepDescriptionLabel];
 
 }
-- (IBAction)DeleteStep:(UIButton*)sender {
+
+- (IBAction)DeleteStep:(UIButton*)sender
+{
     [self.delegate stepDetailCell:self DeleteStepsAtIndex:sender.tag];
 }
+
 @end
+

@@ -101,7 +101,7 @@ const CGFloat kTimeLabelWidth = 150.0;
     CGPoint center = self.userAvatar.center;
     CGRect frame = CGRectMake(self.userAvatar.right + 10, center.y - 21 / 2, self.width - 10 - kAvatarSize - 10 - 10, 21);
     self.userNameLabel.frame = frame;
-    self.userNameLabel.text = self.comment.fromUser.loginName;
+    self.userNameLabel.text = self.comment.fromUser.userName;
     
     self.commentLabel.text = self.comment.content;
     CGFloat commentHeight = [self.commentLabel getAttributedStringHeightWidthValue:self.width - 60];

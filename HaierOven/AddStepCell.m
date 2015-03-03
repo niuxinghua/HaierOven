@@ -97,9 +97,10 @@
 }
 
 #pragma mark- 删除步骤
+
 -(void)stepDetailCell:(AddStepDetailCell*)cell DeleteStepsAtIndex:(NSInteger)index{
 
-    NSIndexPath* indexPath= [self.addStepTableView indexPathForCell:cell];
+    NSIndexPath* indexPath = [self.addStepTableView indexPathForCell:cell];
     
     [self.steps removeObjectAtIndex:indexPath.row];
     

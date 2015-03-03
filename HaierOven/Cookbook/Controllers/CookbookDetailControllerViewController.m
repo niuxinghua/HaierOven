@@ -114,6 +114,10 @@
     if (self.isPreview) {
         [self updateUI];
     } else {
+        
+        //统计页面加载耗时
+        UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+        
         self.cookbookDescLabel.text = @"";
         [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
         [[InternetManager sharedManager] getCookbookDetailWithCookbookId:self.cookbookId userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
@@ -121,6 +125,10 @@
             if (success) {
                 self.cookbookDetail = obj;
                 [self updateUI];
+                
+                UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+                [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"菜谱详情页面"];
+                
             } else {
                 if (error.code == InternetErrorCodeConnectInternetFailed) {
                     [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
@@ -569,35 +577,41 @@
     comment.fromUser.userAvatar = [DataCenter sharedInstance].currentUser.userAvatar;
     comment.commentTime = @"刚刚";
     comment.fromUser.loginName = [DataCenter sharedInstance].currentUser.userName;
-    [self.comments addObject:comment];
-    CGPoint point = self.commentsTableView.contentOffset;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
-    }
-                     completion:nil];
-    [UIView animateWithDuration:0.3 animations:^{
-        self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
-    } completion:^(BOOL finished) {
-        
-        [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbookId
-                                                    andUserBaseId:CurrentUserBaseId
-                                                       andComment:self.commentTextField.text
-                                                         parentId:self.cookbookDetail.creator.ID      //nil
-                                                         callBack:^(BOOL success, id obj, NSError *error) {
-                                                             if (success) {
-                                                                 NSLog(@"评论成功");
-                                                                 self.commentTextField.text = @"";
-                                                                 
-                                                                 self.lastCommentTime = [NSDate date];
-                                                                 
-                                                             } else {
-                                                                 NSLog(@"评论失败");
-                                                                 [super showProgressErrorWithLabelText:@"评论失败" afterDelay:1];
+    
+    [[InternetManager sharedManager] addCommentWithCookbookId:self.cookbookId
+                                                andUserBaseId:CurrentUserBaseId
+                                                   andComment:self.commentTextField.text
+                                                     parentId:@"0"  //self.cookbookDetail.creator.ID      //nil
+                                                     callBack:^(BOOL success, id obj, NSError *error) {
+                                                         if (success) {
+                                                             NSLog(@"评论成功");
+                                                             self.commentTextField.text = @"";
+                                                             
+                                                             self.lastCommentTime = [NSDate date];
+                                                             
+                                                             [self.comments addObject:comment];
+                                                             CGPoint point = self.commentsTableView.contentOffset;
+                                                             [UIView animateWithDuration:0.3 animations:^{
+                                                                 self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
                                                              }
-                                                         }];
-        
-    }];
-    [self.commentsTableView reloadData];
+                                                                              completion:nil];
+                                                             [UIView animateWithDuration:0.3 animations:^{
+                                                                 self.commentsTableView.contentOffset = CGPointMake(0, point.y + [comment getHeight]);
+                                                             } completion:^(BOOL finished) {
+                                                                 
+                                                             }];
+                                                             [self.commentsTableView reloadData];
+                                                             
+                                                         } else {
+                                                             NSLog(@"评论失败");
+                                                             [super showProgressErrorWithLabelText:@"评论失败" afterDelay:1];
+                                                             
+                                                         }
+                                                         [self.commentsTableView reloadData];
+                                                     }];
+    
+    
+    
     
 }
 

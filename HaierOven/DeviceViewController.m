@@ -103,6 +103,9 @@
     
     [self updateOvenLinkStatus];
     
+    UIButton* addButton = [[UIButton alloc] init];
+    [addButton addTarget:self action:@selector(AddDevice) forControlEvents:UIControlEventTouchUpInside];
+    [super setRightBarButtonItemWithImageName:@"xinzeng.png" andTitle:nil andCustomView:addButton];
     
 }
 
@@ -118,14 +121,14 @@
 {
     [super viewWillAppear:animated];
     
-    // 订阅这些设备以获取连线状态
-    NSMutableArray* macs = [NSMutableArray array];
-    for (LocalOven* localOven in self.myDevices) {
-        [macs addObject:localOven.mac];
+    if (self.addDeviceFlag) { //侧边栏跳转过来直接添加烤箱
+        self.addDeviceFlag = NO;
+        [self AddDevice];
     }
-    [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:macs];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(updateOvenLinkStatus) userInfo:nil repeats:YES];
+    
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateOvenLinkStatus) userInfo:nil repeats:YES];
     
 }
 
@@ -145,6 +148,13 @@
 
 - (void)updateOvenLinkStatus
 {
+    // 订阅这些设备以获取连线状态
+    NSMutableArray* macs = [NSMutableArray array];
+    for (LocalOven* localOven in self.myDevices) {
+        [macs addObject:localOven.mac];
+    }
+    [[OvenManager sharedManager] subscribeAllNotificationsWithDevice:macs];
+    
     if (self.myDevices.count == 0) {
         [self SetUpSubviews];
     } else {
@@ -258,7 +268,8 @@
 
 }
 
--(void)AddDevice{
+-(void)AddDevice
+{
     AddDeviceStepOneController *stepone = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"];
     [self.navigationController pushViewController:stepone animated:YES];
     NSLog(@"添加设备");

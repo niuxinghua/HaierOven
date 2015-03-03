@@ -58,6 +58,9 @@
 
 - (void)loadCookbooks
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
     [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
@@ -71,6 +74,9 @@
             } else {
                 [self.cookbooks addObjectsFromArray:arr];
             }
+            
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"主页"];
             
             [self.maintable reloadData];
         } else {

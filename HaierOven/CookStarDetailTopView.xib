@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -34,7 +34,7 @@
                                 <constraint firstAttribute="height" constant="180" id="K9g-UL-b1T"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haW-vc-bkC">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haW-vc-bkC">
                             <rect key="frame" x="29" y="137" width="112" height="31"/>
                             <color key="backgroundColor" red="0.32156862749999998" green="0.62352941179999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -57,20 +57,20 @@
                                 <constraint firstAttribute="height" constant="80" id="LQy-73-RF4"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Haier 官方菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-H2-fGX">
-                            <rect key="frame" x="104" y="91" width="115" height="19"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Haier 官方菜谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyV-H2-fGX">
+                            <rect key="frame" x="103" y="91" width="114.5" height="18.5"/>
                             <fontDescription key="fontDescription" name="FZLTCHJW--GB1-0" family="FZLanTingHeiS-B-GB" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Vcs.png" translatesAutoresizingMaskIntoConstraints="NO" id="34w-En-m8s">
-                            <rect key="frame" x="75" y="89" width="21" height="21"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vcs.png" translatesAutoresizingMaskIntoConstraints="NO" id="34w-En-m8s">
+                            <rect key="frame" x="74" y="89" width="21" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="p6f-Ic-hcZ"/>
                                 <constraint firstAttribute="width" constant="21" id="pAh-O9-Ys5"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvf-nf-8nn">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvf-nf-8nn">
                             <rect key="frame" x="180" y="137" width="112" height="31"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="112" id="LIB-CU-zOH"/>
@@ -85,7 +85,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闲暇之时，写写美食专栏，写写心情感悟。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQL-Vd-Cvz">
-                            <rect key="frame" x="51" y="116" width="219" height="14"/>
+                            <rect key="frame" x="51" y="116" width="218.5" height="13.5"/>
                             <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="11.5"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -174,6 +174,7 @@
                 <outlet property="followButton" destination="haW-vc-bkC" id="bZs-6i-f74"/>
                 <outlet property="levelImageView" destination="34w-En-m8s" id="Chi-ch-A03"/>
                 <outlet property="nameLabel" destination="LyV-H2-fGX" id="6P2-wq-ccf"/>
+                <outlet property="playButton" destination="7VQ-wG-jCU" id="wnr-N9-1TW"/>
                 <outlet property="signatureLabel" destination="RQL-Vd-Cvz" id="pTo-pR-wOk"/>
                 <outlet property="studyCook" destination="8Iz-Mb-QEO" id="wXT-H9-Rwt"/>
                 <outlet property="vedioImage" destination="vdx-MB-Bft" id="BY5-8W-ae9"/>

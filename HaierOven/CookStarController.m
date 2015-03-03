@@ -33,6 +33,9 @@
 //        return;
 //    }
     
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     NSString* userBaseId = CurrentUserBaseId;
     
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
@@ -50,7 +53,8 @@
             }
             
             [self.tableView reloadData];
-            
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"厨神名人堂页面"];
             
         } else {
             
