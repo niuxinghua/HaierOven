@@ -8,8 +8,17 @@
 
 #import "BaseViewController.h"
 
+@protocol cookStarDetailControllerDelegate <NSObject>
+
+@required
+- (void)cookerStarDidFollowd;
+
+@end
+
 @interface CookStarDetailController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) CookerStar* cookerStar;
+
+@property (weak, nonatomic) id <cookStarDetailControllerDelegate> delegate;
 
 @end

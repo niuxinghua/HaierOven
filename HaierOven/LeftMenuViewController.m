@@ -16,7 +16,7 @@
 
 #import "DeviceViewController.h"
 
-@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate,LeftMenuAlertDelegate, SecTableViewCellDelegate>
+@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate,LeftMenuAlertDelegate, SecTableViewCellDelegate, SecDeviceTableViewCellDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
 @property (strong, nonatomic) User* currentUser;
@@ -55,7 +55,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FirstTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"LeftMenuFirstCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"LeftMenuSecCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NormalTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"normalMenuCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecDeviceTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"SecDeviceTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecDeviceTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Device table view cell"];
     [self.view addSubview:self.tableView];
     
     [self loadUserInfo];
@@ -310,7 +310,12 @@
 }
 
 
-#pragma mark - SecTableViewCellDelegate
+#pragma mark - SecTableViewCellDelegate & SecDeviceTableViewCellDelegate
+
+- (void)deviceInfoButtonTapped
+{
+    [self infoButtonTapped];
+}
 
 - (void)infoButtonTapped
 {
@@ -481,8 +486,19 @@
         
     }else if (indexPath.row==1){
         if ([DataCenter sharedInstance].myOvens.count != 0) {
-            NSString *cellIdentifier =@"SecDeviceTableViewCell";
-            SecDeviceTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+//            NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SecDeviceTableViewCell class]) owner:nil options:nil];
+//            for (id obj in nibArray) {
+//                if ([obj isMemberOfClass:[SecDeviceTableViewCell class]]) {
+//                    // Assign cell to obj
+//                    cell = (HotelCell *)obj;
+//                    break;
+//                }
+//            }
+            
+            NSString *cellIdentifier =@"Device table view cell";
+            SecDeviceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.delegate = self;
             cell.backgroundColor = GlobalGrayColor;
             return cell;
         }else{

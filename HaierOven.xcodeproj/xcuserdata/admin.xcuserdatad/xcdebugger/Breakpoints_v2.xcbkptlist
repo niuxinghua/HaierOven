@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/AppDelegate.m"
-            timestampString = "446950814.222225"
+            timestampString = "447156093.010396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "-tik"
             landmarkType = "5">
          </BreakpointContent>
@@ -131,29 +131,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DeviceBoardViewController.m"
-            timestampString = "446982172.782948"
+            filePath = "HaierOven/CreatMneuController.m"
+            timestampString = "447155094.693743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1473"
-            endingLineNumber = "1473"
-            landmarkName = "-setWarmUpTemperature:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Oven/OvenManager/OvenManager.m"
-            timestampString = "446978726.053674"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
-            landmarkName = "-sendErrorNotification"
+            startingLineNumber = "689"
+            endingLineNumber = "689"
+            landmarkName = "-promptAlertView:buttonTapped:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SecDeviceTableViewCellDelegate <NSObject>
+
+@required
+- (void)deviceInfoButtonTapped;
+
+@end
+
 @interface SecDeviceTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) id <SecDeviceTableViewCellDelegate> delegate;
 
 @end

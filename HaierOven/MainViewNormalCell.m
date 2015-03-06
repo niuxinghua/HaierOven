@@ -88,7 +88,13 @@
     [self.avater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
     
     self.foodName.text = cookbook.name;
-    self.foodMakeFunction.text = cookbook.desc;
+    
+    if (cookbook.desc.length == 0 || [cookbook.desc isEqualToString:@"(null)"]) {
+        self.foodMakeFunction.text = @"";
+    } else {
+        self.foodMakeFunction.text = cookbook.desc;
+    }
+    
     self.cookerName.text = cookbook.creator.userName;
     
     self.timeLabel.text = cookbook.modifiedTime;

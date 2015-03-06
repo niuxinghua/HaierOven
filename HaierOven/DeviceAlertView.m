@@ -92,7 +92,7 @@
             self.string = [self.pickViewArr firstObject];
         }
         
-        [self.pickview selectRow:index inComponent:0 animated:YES];
+        [self.pickview selectRow:index inComponent:0 animated:NO];
     }
     
 }

@@ -14,7 +14,7 @@
 #import "MainSearchViewController.h"
 #import "UpLoadingMneuController.h"
 
-@interface CookStarController () <CookStarCellDelegate>
+@interface CookStarController () <CookStarCellDelegate, cookStarDetailControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray* cookerStars;
 
@@ -185,7 +185,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CookStarDetailController *csd = [self.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
     csd.cookerStar = self.cookerStars[indexPath.row];
+    csd.delegate = self;
     [self.navigationController pushViewController:csd animated:YES];
+}
+
+#pragma mark - cookStarDetailControllerDelegate
+
+- (void)cookerStarDidFollowd
+{
+    [self loadCookerStars];
 }
 
 #pragma mark - CookStarCellDelegate
@@ -213,6 +221,8 @@
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"取消关注成功");
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+                sender.selected = NO;
             } else {
                 [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
             }
@@ -222,13 +232,15 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedCooker.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"关注成功");
+                [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
+                sender.selected = YES;
             } else {
                 [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
             }
         }];
     }
     
-    sender.selected = !sender.selected;
+    //sender.selected = !sender.selected;
 }
 
 - (void)addHeader

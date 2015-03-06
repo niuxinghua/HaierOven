@@ -212,6 +212,7 @@
             } else {
                 //更新个人中心显示
                 sender.selected = !sender.selected;
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedUserInfoNotification object:nil];
             }
         }];
@@ -223,6 +224,7 @@
             } else {
                 //更新个人中心显示
                 sender.selected = !sender.selected;
+                [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ModifiedUserInfoNotification object:nil];
             }
         }];

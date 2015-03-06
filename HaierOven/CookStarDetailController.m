@@ -124,6 +124,9 @@
             if (arr.count < PageLimit && _pageIndex != 1) {
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
             }
+            if (arr.count == 0 && _pageIndex == 1) {
+                [super showProgressErrorWithLabelText:@"对不起，没有所选信息！" afterDelay:1];
+            }
             if (_pageIndex == 1) {
                 self.cookbooks = obj;
             } else {
@@ -376,6 +379,11 @@
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"取消关注成功");
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+                sender.selected = NO;
+                if ([self.delegate respondsToSelector:@selector(cookerStarDidFollowd)]) {
+                    [self.delegate cookerStarDidFollowd];
+                }
             } else {
                 [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
             }
@@ -385,13 +393,18 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"关注成功");
+                [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
+                sender.selected = YES;
+                if ([self.delegate respondsToSelector:@selector(cookerStarDidFollowd)]) {
+                    [self.delegate cookerStarDidFollowd];
+                }
             } else {
                 [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
             }
         }];
     }
     
-    sender.selected = !sender.selected;
+    //sender.selected = !sender.selected;
     
     
 }
@@ -487,12 +500,23 @@
     // 拿到选中的tag的ID
     NSMutableArray* tagArr = [NSMutableArray array];
     self.tagArr = tagArr;
-    for (UIButton* tagButton in self.cookStarDetailTopView.tagsView.subviews) {
-        if (tagButton.selected) {
-            Tag* tag = self.tags[tagButton.tag];
-            [tagArr addObject:tag.ID];
+    if (self.hadVideo) {
+        for (UIButton* tagButton in self.cookStarDetailTopView.tagsView.subviews) {
+            if (tagButton.selected) {
+                Tag* tag = self.tags[tagButton.tag];
+                [tagArr addObject:tag.ID];
+            }
+        }
+    } else {
+        for (UIButton* tagButton in self.cookStarTopView.tagsView.subviews) {
+            if (tagButton.selected) {
+                Tag* tag = self.tags[tagButton.tag];
+                [tagArr addObject:tag.ID];
+            }
         }
     }
+    
+    _pageIndex = 1;
     
     if (tagArr.count == 0) {
 //        [super showProgressErrorWithLabelText:@"请至少选择一个标签" afterDelay:1];
@@ -501,11 +525,10 @@
 //        [tagArr addObject:tag.ID];
 //        return;
         self.selectedTagsFlag = NO;
+        [self loadUserCookbooks];
+    } else {
+        [self loadUserCookbooksWithTags];
     }
-    
-    _pageIndex = 1;
-    
-    [self loadUserCookbooksWithTags];
     
 }
 

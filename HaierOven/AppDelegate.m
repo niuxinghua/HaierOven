@@ -61,6 +61,9 @@
     
     [self initNotification];
     
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
+    
     [self checkLoginExpired];
     
     [self autoLogin];

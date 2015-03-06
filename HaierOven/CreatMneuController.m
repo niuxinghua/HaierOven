@@ -20,8 +20,9 @@
 #import "CookbookDetailControllerViewController.h"
 #import "PECropViewController.h"
 #import "OvenTypeAlert.h"
+#import "PromptAlertView.h"
 
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate, OvenTypeAlertDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate, OvenTypeAlertDelegate, PromptAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
+@property (strong, nonatomic) PromptAlertView* promptAlertView; // 提示框
 @property (strong, nonatomic) NSMutableArray *steps;
 @property (strong, nonatomic) ChooseCoverView  *chooseCoverView;
 @property (strong, nonatomic) UIImageView *tempImageView; //记录 添加步骤 delegate 上来的图片
@@ -130,7 +132,8 @@
             }
             self.selectedTags = [self.cookbookDetail.tags mutableCopy];
             self.foods = [self.cookbookDetail.foods mutableCopy];
-            self.myPs_String = self.cookbookDetail.cookbookTip;
+            self.myPs_String = [self.cookbookDetail.cookbookTip isEqualToString:@"(null)"] ? @"" : self.cookbookDetail.cookbookTip;
+            
             [self.tableView reloadData];
         } else {
             [super showProgressErrorWithLabelText:@"获取菜谱信息失败" afterDelay:1];
@@ -178,6 +181,8 @@
     self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:alertRectHidden];
     self.addFoodAlertView.delegate = self;
     [self.myWindow addSubview:self.addFoodAlertView];
+    
+    
     
     self.chooseCoverView = [[ChooseCoverView alloc]initWithFrame:CGRectMake(0, PageH, PageW, PageW*0.58)];
     self.chooseCoverView.delegate = self;
@@ -669,10 +674,27 @@
     NSLog(@"发发发布");
     self.cookbookDetail.status = @"1";
     if ([self validateCookbookDetail]) {
-        [self submitCookbook];
+        
+        self.promptAlertView = [[PromptAlertView alloc] initWithTitle:@"确认发布" message:@"一旦发布菜谱不能编辑和删除" frame:alertRectShow delegate:self];
+        [self.myWindow addSubview:self.promptAlertView];
+        self.myWindow.hidden = NO;
+        
+        
     }
     
 }
+
+- (void)promptAlertView:(PromptAlertView *)alertView buttonTapped:(UIButton *)sender
+{
+    self.myWindow.hidden = YES;
+    self.promptAlertView.frame = alertRectHidden;
+    if (sender.tag == 1) { // 确定
+        [self submitCookbook];
+    } else if (sender.tag == 2) { // 取消
+        
+    }
+}
+
 
 /**
  *  检查或补充空信息，如果是保存草稿
@@ -691,7 +713,7 @@
         }
     }
     
-    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @" " : self.cookbookDetail.desc;
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
     if (self.cookbookDetail.desc == nil || [self.cookbookDetail.desc isEqualToString:@"(null)"]) {
         self.cookbookDetail.desc = @"";
     }
@@ -725,17 +747,19 @@
         return NO;
     }
     for (Food* food in self.foods) {
-        if(food.name.length == 0) {
+        NSString* tempStr = [food.name stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if(food.name.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材名称" afterDelay:1];
             return NO;
         }
-        if (food.desc.length == 0) {
+        tempStr = [food.desc stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (food.desc.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材用量" afterDelay:1];
             return NO;
         }
     }
     
-    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @" " : self.cookbookDetail.desc;
     if (self.cookbookDetail.desc == nil) {
         self.cookbookDetail.desc = @"";
     }
@@ -762,12 +786,14 @@
             [super showProgressErrorWithLabelText:@"请选择步骤图片" afterDelay:1];
             return NO;
         }
-        if (step.desc.length == 0) {
+        NSString* tempStr = [step.desc stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (step.desc.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写步骤描述" afterDelay:1];
             return NO;
         }
     }
-    if (self.myPs_String.length == 0) {
+    NSString* tempStr = [self.myPs_String stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (self.myPs_String.length == 0 || tempStr.length == 0) {
         [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
         return NO;
     }
@@ -887,11 +913,6 @@
     }completion:nil];
     
 }
-
-
-
-
-
 
 
 - (void)openEditor

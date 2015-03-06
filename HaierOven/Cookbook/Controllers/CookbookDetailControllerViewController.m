@@ -30,8 +30,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *rightNavigationView;
 
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 #pragma mark - headerView
+
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *cookbookImageView;
@@ -221,7 +223,11 @@
     
     self.cookbookNameLabel.text = self.cookbookDetail.name;
     
-    self.cookbookDescLabel.text = self.cookbookDetail.desc;
+    if (self.cookbookDetail.desc.length == 0 || [self.cookbookDetail.desc isEqualToString:@"(null)"]) {
+        self.cookbookDescLabel.text = @"";
+    } else {
+        self.cookbookDescLabel.text = self.cookbookDetail.desc;
+    }
     
     // reloadData
     [self.tableView reloadData];
@@ -625,6 +631,8 @@
     self.navigationController.navigationBar.translucent = YES;
 //    [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
     
+    [self.backButton setImage:[UIImage imageNamed:@"cookbook_back"] forState:UIControlStateNormal];
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0 && _iOS7OvenListFlag) {
         _iOS7OvenListFlag = NO;
         [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -644,6 +652,7 @@
 {
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+    [self.backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [self.cookbookDetailCell.contentView removeKeyboardControl];
     self.navigationController.navigationBar.translucent = NO;
     
@@ -681,10 +690,12 @@
         
         if (scrollView.contentOffset.y > self.headerView.height - 64) {
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
+            [self.backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
             self.navigationController.navigationBar.translucent = NO;
             
         } else {
             [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
+            [self.backButton setImage:[UIImage imageNamed:@"cookbook_back"] forState:UIControlStateNormal];
             self.navigationController.navigationBar.translucent = YES;
         }
         

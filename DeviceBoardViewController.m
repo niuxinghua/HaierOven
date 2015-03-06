@@ -739,6 +739,7 @@
         self.time = [timeStr integerValue] * 60;
         self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d:%02d",self.time/3600, (self.time%3600)/60, (self.time%3600)%60];
         
+        self.startStatusView.animationDuration = 0;
         
         self.orderingTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkBakeTime) userInfo:nil repeats:YES];
         
@@ -837,7 +838,6 @@
                                                                     self.time = [timeStr integerValue] * 60;
                                                                     float animateDueation = [timeStr integerValue] * 60;
                                                                     self.startStatusView.animationDuration = animateDueation;
-                                                                    
                                                                     
                                                                     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
                                                                     
@@ -980,10 +980,13 @@
 
 #pragma mark - 按钮响应事件
 
-- (IBAction)TurnBack:(id)sender {
+- (IBAction)TurnBack:(id)sender
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (IBAction)TurnEdit:(id)sender {
+
+- (IBAction)TurnEdit:(id)sender
+{
     DeviceEditController *edit = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceEditController"];
     
     edit.currentOven = self.currentOven;
@@ -991,7 +994,9 @@
     
     [self.navigationController pushViewController:edit animated:YES];
 }
-- (IBAction)TurnMessage:(id)sender {
+
+- (IBAction)TurnMessage:(id)sender
+{
     DeviceMessageController *message = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceMessageController"];
     [self.navigationController pushViewController:message animated:YES];
 }
@@ -1119,6 +1124,9 @@
 }
 
 -(void)setDeviceBoardStatus:(DeviceBoardStatus)deviceBoardStatus{
+    
+    [self.orderingTimer invalidate];
+    
     _deviceBoardStatus = deviceBoardStatus;
     switch (_deviceBoardStatus) {
         case DeviceBoardStatusClosed:
@@ -1152,6 +1160,7 @@
             }
             self.actionCell.hidden = YES;
             
+            [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateNormal];
             [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
             
             [self.tableView reloadData];
@@ -1300,6 +1309,8 @@
             
             leftTime = [leftTime stringByAppendingString:@" 分钟"];
             
+            self.selectedNeedleTemperature = nil;
+            
             [self.howlong setTitle:leftTime forState:UIControlStateNormal];
             //[self.temputure setTitle:@"--" forState:UIControlStateNormal];
             
@@ -1308,8 +1319,11 @@
             }
             
             for (UIButton* btn in self.allbtns) {
+                if (btn.tag != 3) {  // 闹钟不可消失
+                    btn.selected = NO;
+                }
                 btn.enabled = YES;
-                btn.selected = NO;
+                
             }
             
             for (UIButton *btn in self.controlBtns) {
@@ -1319,14 +1333,15 @@
                 btn.selected = NO;
             }
             
-            for (UIButton *btn in self.workModelBtns) {
-                btn.enabled =YES;
-                btn.selected = NO;
-            }
+            // 停止运行状态，保留烘焙模式
+//            for (UIButton *btn in self.workModelBtns) {
+//                btn.enabled =YES;
+//                btn.selected = NO;
+//            }
             
-            for (UIBarButtonItem *btn in self.toolbarItems) {
-                btn.enabled = NO;
-            }
+//            for (UIBarButtonItem *btn in self.toolbarItems) {
+//                btn.enabled = NO;
+//            }
             
             //初始状态下闹钟按钮、快速预热可点击
             self.clockIcon.enabled = YES;
@@ -1407,6 +1422,8 @@
     self.clockAlert.seconds = seconds;
     self.clockAlert.start = YES;
     
+    self.clockStopFlag = NO;
+    
     NSString* notificationBody = [NSString stringWithFormat:@"设定闹钟：%@", clockString];
     NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
                            @"desc" : notificationBody};
@@ -1434,10 +1451,14 @@
 }
 
 // 温度探针
-- (void)setNeedleTemperature:(NSString*)temperatureString
+- (void)setNeedleTemperature:(NSString*)temperatureString sender:(UIButton*)sender
 {
     
     if (self.deviceBoardStatus == DeviceBoardStatusWorking || self.deviceBoardStatus == DeviceBoardStatusOrdering) {
+        if (sender.selected && self.selectedNeedleTemperature == nil) {
+            // 没有设置温度探针确保温度探针按钮没被选中
+            sender.selected = NO;
+        }
         [super showProgressErrorWithLabelText:@"运行状态下辅助功能不可操作" afterDelay:1];
         return;
     }
@@ -1686,7 +1707,7 @@
 
         case alertNeedle:   //温度探针
             self.neddleString = string;
-            [self setNeedleTemperature:string];
+            [self setNeedleTemperature:string sender:btn];
             break;
         case alertWormUp:
             self.warmUpString = string;
@@ -1776,6 +1797,7 @@
                 
                 self.deviceAlertView.selectedTemperature = self.selectedNeedleTemperature;
                 
+                
                 break;
                 
             default:
@@ -1790,7 +1812,9 @@
         } completion:^(BOOL finished) {
             
         }];
-    } else sender.selected = NO;
+    } else {
+        sender.selected = NO;
+    }
 
 }
 
@@ -1887,14 +1911,20 @@
     self.clockAlert.frame = alertRectHidden;
 }
 
+- (void)userStopClock
+{
+    [self StopClock];
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeClockTimeUp fireTime:1 alertBody:@"闹钟已取消"];
+    self.clockStopFlag = YES;
+}
+
 -(void)StopClock
 {
     self.myWindow.hidden = YES;
     self.clockAlert.frame = alertRectHidden;
     self.clockIcon.selected = NO;
     self.clockAlert.start = NO;
-    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeClockTimeUp fireTime:1 alertBody:@"闹钟已取消"];
-    self.clockStopFlag = YES;
+    
 }
 
 -(void)timeOutAlertHidden
@@ -1907,7 +1937,7 @@
 -(void)TimeOutAlertShow
 {
     if (self.clockStopFlag) {
-        self.clockStopFlag = NO;
+        //self.clockStopFlag = NO;
         return;
     }
     self.clockAlert.frame = alertRectHidden;

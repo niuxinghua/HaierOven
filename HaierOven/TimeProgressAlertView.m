@@ -53,7 +53,7 @@
 }
 
 - (IBAction)StopClock:(id)sender {
-    [self.delegate StopClock];
+    [self.delegate userStopClock];
 }
 
 -(void)setStart:(BOOL)start{

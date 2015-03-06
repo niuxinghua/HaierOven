@@ -38,8 +38,6 @@
 
 - (void)searchCookbookWithKeyword:(NSString*)keyword
 {
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
     
     if (keyword.length == 0) {
         self.searchedFlag = NO;
@@ -47,6 +45,17 @@
         [self.table reloadData];
         return;
     }
+    
+    if ([keyword isEqualToString:@"'"]) { // 简单过滤一下特殊字符
+        self.searchedFlag = YES;
+        self.notfFindLabel.text = [NSString stringWithFormat:@"没有找到“%@”的相关菜谱", keyword];
+        self.searchedCookbooks = [NSMutableArray array];
+        [self.table reloadData];
+        return;
+    }
+    
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
     
     [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {

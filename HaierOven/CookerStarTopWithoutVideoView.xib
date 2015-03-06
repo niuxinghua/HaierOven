@@ -10,6 +10,7 @@
         </mutableArray>
         <mutableArray key="FZLTHJW.ttf">
             <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
         <mutableArray key="FZLTXHK.TTF">
             <string>FZLTXHK--GBK1-0</string>
@@ -34,14 +35,14 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGG-r6-xfV">
-                            <rect key="frame" x="29" y="137" width="112" height="31"/>
+                            <rect key="frame" x="25" y="137" width="70" height="31"/>
                             <color key="backgroundColor" red="0.32156862749999998" green="0.62352941179999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="31" id="TXn-3C-cXP"/>
-                                <constraint firstAttribute="width" constant="112" id="yq8-ax-zUE"/>
+                                <constraint firstAttribute="width" constant="70" id="yq8-ax-zUE"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
-                            <state key="normal" title="+关注">
+                            <state key="normal" title="+ 关注">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" title="已关注"/>
@@ -69,13 +70,22 @@
                                 <constraint firstAttribute="width" constant="21" id="chS-CO-qCG"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闲暇之时，写写美食专栏，写写心情感悟。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gb-Q8-tMd">
+                            <rect key="frame" x="51" y="116" width="218.5" height="13.5"/>
+                            <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="11.5"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-gt-bQV">
-                            <rect key="frame" x="180" y="137" width="112" height="31"/>
+                            <rect key="frame" x="222.5" y="137" width="75" height="31"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="112" id="SHh-8l-5eD"/>
+                                <constraint firstAttribute="width" constant="75" id="SHh-8l-5eD"/>
                                 <constraint firstAttribute="height" constant="31" id="rCm-AH-7DO"/>
                             </constraints>
-                            <state key="normal" image="ly.png">
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
+                            <state key="normal" title="给厨神留言">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="ly.png"/>
@@ -83,12 +93,6 @@
                                 <action selector="leaveMessage:" destination="lOl-Xc-xTn" eventType="touchUpInside" id="BdC-56-7m8"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闲暇之时，写写美食专栏，写写心情感悟。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Gb-Q8-tMd">
-                            <rect key="frame" x="51" y="116" width="218.5" height="13.5"/>
-                            <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="11.5"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -100,10 +104,10 @@
                         <constraint firstAttribute="centerX" secondItem="I8Z-VN-bYa" secondAttribute="centerX" id="R5V-Te-bjd"/>
                         <constraint firstItem="I8Z-VN-bYa" firstAttribute="top" secondItem="542-yd-dnx" secondAttribute="top" constant="8" id="V2M-Ly-yFC"/>
                         <constraint firstItem="Ttg-T4-dAY" firstAttribute="leading" secondItem="FHR-oi-ont" secondAttribute="trailing" constant="8" id="YDh-sF-xVP"/>
-                        <constraint firstAttribute="centerX" secondItem="sGG-r6-xfV" secondAttribute="centerX" constant="75" id="ZMy-kf-fSi"/>
+                        <constraint firstAttribute="centerX" secondItem="sGG-r6-xfV" secondAttribute="centerX" constant="100" id="ZMy-kf-fSi"/>
                         <constraint firstItem="1JF-gt-bQV" firstAttribute="top" secondItem="3Gb-Q8-tMd" secondAttribute="bottom" constant="8" id="cy3-6o-pn0"/>
                         <constraint firstAttribute="height" constant="180" id="n7c-s6-PyN"/>
-                        <constraint firstAttribute="centerX" secondItem="1JF-gt-bQV" secondAttribute="centerX" constant="-76" id="neP-wC-nXK"/>
+                        <constraint firstAttribute="centerX" secondItem="1JF-gt-bQV" secondAttribute="centerX" constant="-100" id="neP-wC-nXK"/>
                         <constraint firstItem="Ttg-T4-dAY" firstAttribute="top" secondItem="I8Z-VN-bYa" secondAttribute="bottom" constant="3" id="uJE-Mp-fgo"/>
                         <constraint firstItem="3Gb-Q8-tMd" firstAttribute="centerX" secondItem="Ttg-T4-dAY" secondAttribute="centerX" id="uNR-Ck-oUh"/>
                         <constraint firstAttribute="trailing" secondItem="BUI-uI-TSx" secondAttribute="trailing" id="xKo-Kq-gZg"/>
@@ -150,6 +154,7 @@
                 <outlet property="avaterImage" destination="I8Z-VN-bYa" id="MZQ-1v-lvK"/>
                 <outlet property="descriptionLabel" destination="ZAv-Y1-KD3" id="Sau-lg-LHc"/>
                 <outlet property="followButton" destination="sGG-r6-xfV" id="1g7-GW-fw8"/>
+                <outlet property="leaveMsgButton" destination="1JF-gt-bQV" id="UsB-f4-yQo"/>
                 <outlet property="levelImageView" destination="FHR-oi-ont" id="QEs-YL-Ovf"/>
                 <outlet property="nameLabel" destination="Ttg-T4-dAY" id="zod-p1-0YG"/>
                 <outlet property="signatureLabel" destination="3Gb-Q8-tMd" id="S7i-S0-oB5"/>

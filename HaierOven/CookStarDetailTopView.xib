@@ -11,6 +11,7 @@
         </mutableArray>
         <mutableArray key="FZLTHJW.ttf">
             <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
         <mutableArray key="FZLTXHK.TTF">
             <string>FZLTXHK--GBK1-0</string>
@@ -35,14 +36,14 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haW-vc-bkC">
-                            <rect key="frame" x="29" y="137" width="112" height="31"/>
+                            <rect key="frame" x="25" y="137" width="70" height="31"/>
                             <color key="backgroundColor" red="0.32156862749999998" green="0.62352941179999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="112" id="4v7-1L-MIk"/>
+                                <constraint firstAttribute="width" constant="70" id="4v7-1L-MIk"/>
                                 <constraint firstAttribute="height" constant="31" id="SrB-yl-beu"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
-                            <state key="normal" title="+关注">
+                            <state key="normal" title="+  关注">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" title="已关注"/>
@@ -71,12 +72,15 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvf-nf-8nn">
-                            <rect key="frame" x="180" y="137" width="112" height="31"/>
+                            <rect key="frame" x="222.5" y="137" width="75" height="31"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="112" id="LIB-CU-zOH"/>
+                                <constraint firstAttribute="width" constant="75" id="LIB-CU-zOH"/>
                                 <constraint firstAttribute="height" constant="31" id="nKZ-U2-FRU"/>
                             </constraints>
-                            <state key="normal" image="ly.png">
+                            <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="13"/>
+                            <state key="normal" title="给厨神留言">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="ly.png"/>
@@ -98,12 +102,12 @@
                         <constraint firstItem="LyV-H2-fGX" firstAttribute="centerX" secondItem="n4e-WA-n2a" secondAttribute="centerX" constant="0.5" id="HuC-J9-h33"/>
                         <constraint firstAttribute="centerX" secondItem="n4e-WA-n2a" secondAttribute="centerX" id="Qo1-w3-Yds"/>
                         <constraint firstAttribute="trailing" secondItem="iaY-80-a6e" secondAttribute="trailing" id="RzR-RQ-exo"/>
-                        <constraint firstAttribute="centerX" secondItem="haW-vc-bkC" secondAttribute="centerX" constant="75" id="Uyz-ER-lbW"/>
+                        <constraint firstAttribute="centerX" secondItem="haW-vc-bkC" secondAttribute="centerX" constant="100" id="Uyz-ER-lbW"/>
                         <constraint firstItem="LyV-H2-fGX" firstAttribute="top" secondItem="n4e-WA-n2a" secondAttribute="bottom" constant="3" id="YZi-xj-pVq"/>
                         <constraint firstItem="iaY-80-a6e" firstAttribute="top" secondItem="Fla-pX-FH2" secondAttribute="top" id="ZzY-t4-rXL"/>
                         <constraint firstItem="RQL-Vd-Cvz" firstAttribute="centerX" secondItem="LyV-H2-fGX" secondAttribute="centerX" id="hLo-EC-1fB"/>
                         <constraint firstItem="RQL-Vd-Cvz" firstAttribute="top" secondItem="34w-En-m8s" secondAttribute="bottom" constant="6" id="jep-xD-VZd"/>
-                        <constraint firstAttribute="centerX" secondItem="Mvf-nf-8nn" secondAttribute="centerX" constant="-76" id="juk-l6-yf6"/>
+                        <constraint firstAttribute="centerX" secondItem="Mvf-nf-8nn" secondAttribute="centerX" constant="-100" id="juk-l6-yf6"/>
                         <constraint firstItem="iaY-80-a6e" firstAttribute="leading" secondItem="Fla-pX-FH2" secondAttribute="leading" id="jxH-oT-WNI"/>
                         <constraint firstItem="LyV-H2-fGX" firstAttribute="leading" secondItem="34w-En-m8s" secondAttribute="trailing" constant="8" id="prp-fH-AlC"/>
                         <constraint firstItem="34w-En-m8s" firstAttribute="centerY" secondItem="LyV-H2-fGX" secondAttribute="centerY" constant="-1" id="tTU-jA-pvZ"/>
@@ -172,6 +176,7 @@
                 <outlet property="avaterImage" destination="n4e-WA-n2a" id="j5w-9f-LJ4"/>
                 <outlet property="descriptionLabel" destination="6ll-0j-BJu" id="kxq-cE-lJ8"/>
                 <outlet property="followButton" destination="haW-vc-bkC" id="bZs-6i-f74"/>
+                <outlet property="leaveMsgButton" destination="Mvf-nf-8nn" id="xhp-PY-3YH"/>
                 <outlet property="levelImageView" destination="34w-En-m8s" id="Chi-ch-A03"/>
                 <outlet property="nameLabel" destination="LyV-H2-fGX" id="6P2-wq-ccf"/>
                 <outlet property="playButton" destination="7VQ-wG-jCU" id="wnr-N9-1TW"/>

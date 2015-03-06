@@ -1070,6 +1070,10 @@
 		84AD2EA41A8B5E0F0014126A /* APPkv-banner1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84AD2EA31A8B5E0F0014126A /* APPkv-banner1.jpg */; };
 		84AD6D961A53A1C0002729D9 /* CommentCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD6D941A53A1C0002729D9 /* CommentCountCell.m */; };
 		84AD6D971A53A1C0002729D9 /* CommentCountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */; };
+		84B443BE1AA6FA710029C8D0 /* cookbook_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B443BC1AA6FA710029C8D0 /* cookbook_back.png */; };
+		84B443BF1AA6FA710029C8D0 /* cookbook_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B443BD1AA6FA710029C8D0 /* cookbook_back@2x.png */; };
+		84B443C31AA705DE0029C8D0 /* PromptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B443C21AA705DE0029C8D0 /* PromptAlertView.m */; };
+		84B443C51AA706000029C8D0 /* PromptAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B443C41AA706000029C8D0 /* PromptAlertView.xib */; };
 		84BA2A291A845D69000B17BD /* sz-b.png in Resources */ = {isa = PBXBuildFile; fileRef = 842642FC1A765037004B2513 /* sz-b.png */; };
 		84BA2A2A1A845D69000B17BD /* sz-b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842642FD1A765037004B2513 /* sz-b@2x.png */; };
 		84BA2A2B1A845D69000B17BD /* sz-b@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842642FE1A765037004B2513 /* sz-b@3x.png */; };
@@ -2698,6 +2702,11 @@
 		84AD6D931A53A1C0002729D9 /* CommentCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCountCell.h; sourceTree = "<group>"; };
 		84AD6D941A53A1C0002729D9 /* CommentCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCountCell.m; sourceTree = "<group>"; };
 		84AD6D951A53A1C0002729D9 /* CommentCountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCountCell.xib; sourceTree = "<group>"; };
+		84B443BC1AA6FA710029C8D0 /* cookbook_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookbook_back.png; sourceTree = "<group>"; };
+		84B443BD1AA6FA710029C8D0 /* cookbook_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookbook_back@2x.png"; sourceTree = "<group>"; };
+		84B443C11AA705DE0029C8D0 /* PromptAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptAlertView.h; sourceTree = "<group>"; };
+		84B443C21AA705DE0029C8D0 /* PromptAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptAlertView.m; sourceTree = "<group>"; };
+		84B443C41AA706000029C8D0 /* PromptAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptAlertView.xib; sourceTree = "<group>"; };
 		84BA2A9B1A8499A4000B17BD /* mydessertcount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mydessertcount.png; sourceTree = "<group>"; };
 		84BA2A9C1A8499A4000B17BD /* mydessertcount@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mydessertcount@3x.png"; sourceTree = "<group>"; };
 		84BA2A9D1A8499A4000B17BD /* mydessertcount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mydessertcount@2x.png"; sourceTree = "<group>"; };
@@ -4336,6 +4345,7 @@
 		45D9FEB81A5285F500023B9D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
+				84B443C01AA705990029C8D0 /* promptAlert */,
 				45332B7A1A6F66600014E8AA /* alertnormal */,
 				45332B791A6F4FFB0014E8AA /* alertTimeProgress */,
 				45A6614E1A67660F00FC9B90 /* alertEditPsd */,
@@ -5296,6 +5306,8 @@
 		849F91471A512D21006234B9 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
+				84B443BC1AA6FA710029C8D0 /* cookbook_back.png */,
+				84B443BD1AA6FA710029C8D0 /* cookbook_back@2x.png */,
 				C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */,
 				849F91481A513981006234B9 /* icon_follow-.png */,
 				849F91491A513981006234B9 /* icon_follow.png */,
@@ -5334,6 +5346,16 @@
 				849F91681A513981006234B9 /* step3.png */,
 			);
 			name = Cookbook;
+			sourceTree = "<group>";
+		};
+		84B443C01AA705990029C8D0 /* promptAlert */ = {
+			isa = PBXGroup;
+			children = (
+				84B443C11AA705DE0029C8D0 /* PromptAlertView.h */,
+				84B443C21AA705DE0029C8D0 /* PromptAlertView.m */,
+				84B443C41AA706000029C8D0 /* PromptAlertView.xib */,
+			);
+			name = promptAlert;
 			sourceTree = "<group>";
 		};
 		84E113751A52A2E200D16DDB /* CommentView */ = {
@@ -5639,6 +5661,7 @@
 				45AC32A11A77A5C4004B1828 /* 3-5-1-1.png in Resources */,
 				457A76CE1A4158C800E422D0 /* page_state_normal.png in Resources */,
 				45B88E101A4BCC8B00722EF6 /* yy-wxz@3x.png in Resources */,
+				84B443BF1AA6FA710029C8D0 /* cookbook_back@2x.png in Resources */,
 				452A6E5F1A5A8FEA00ABFE75 /* Vcs.png in Resources */,
 				84BA2A8B1A845D69000B17BD /* icon_ssk_n@3x.png in Resources */,
 				45BB36391A4A953A000EE3C4 /* xz-cxz.png in Resources */,
@@ -5853,6 +5876,7 @@
 				45B650E41A48177E00A6376D /* deviceAdd@3x.png in Resources */,
 				45A5E8081A4FCACC00FCD2BD /* CGXDJ@2x.png in Resources */,
 				45AC32251A77734A004B1828 /* 1_6_3_1.png in Resources */,
+				84B443BE1AA6FA710029C8D0 /* cookbook_back.png in Resources */,
 				45D906D81A47CAAB00B97D92 /* jianjing@3x.png in Resources */,
 				45D906C11A47CAAB00B97D92 /* garyline.png in Resources */,
 				45AC32871A77A5C4004B1828 /* 3-2-7-1.png in Resources */,
@@ -6291,6 +6315,7 @@
 				45BC577D1A4B08380052F520 /* wendu-wxz@2x.png in Resources */,
 				84BA2A771A845D69000B17BD /* icon_rfbk_n.png in Resources */,
 				84BA2A301A845D69000B17BD /* icon_3Dhb_n@2x.png in Resources */,
+				84B443C51AA706000029C8D0 /* PromptAlertView.xib in Resources */,
 				45B88E221A4BCEDD00722EF6 /* wdtz-wxz@3x.png in Resources */,
 				842A86D31A52473400C75EE4 /* AddShoppingListCell.xib in Resources */,
 				45A546AE1A593E9C00BE62EC /* wty@3x.png in Resources */,
@@ -6488,6 +6513,7 @@
 				45AC31FC1A77457B004B1828 /* StudyCookPartOne.m in Sources */,
 				457662281A70A7A900B29E3A /* LeftMenuAlert.m in Sources */,
 				45B650DC1A48169000A6376D /* MyDeviceAddView.m in Sources */,
+				84B443C31AA705DE0029C8D0 /* PromptAlertView.m in Sources */,
 				45A546CD1A5A4EC200BE62EC /* UIView+Extension.m in Sources */,
 				45A999701A513EE60008AFE3 /* AddFoodCell.m in Sources */,
 				8438F6FA1A67CFA500E1436C /* NoticeInfo.m in Sources */,

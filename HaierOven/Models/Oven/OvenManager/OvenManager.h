@@ -23,6 +23,7 @@
 #define BindDeviceSuccussNotification  @"Bind device success"
 #define DeleteLocalOvenSuccessNotification @"Delete local oven success"
 
+#warning 是否是debug模式
 #define DebugOvenFlag   0
 
 @interface OvenManager : NSObject

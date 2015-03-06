@@ -20,6 +20,8 @@
  */
 @property (strong, nonatomic) IBOutlet UILabel *cookBookLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *leaveMsgButton;
+
 @property NSInteger top;
 @property NSInteger bottom;
 @end
@@ -41,6 +43,8 @@
 
     self.followButton.layer.cornerRadius = self.followButton.height/2;
     self.followButton.layer.masksToBounds = YES;
+    self.leaveMsgButton.layer.cornerRadius = self.leaveMsgButton.height / 2;
+    self.leaveMsgButton.layer.masksToBounds = YES;
 
     return self;
 }
@@ -159,9 +163,11 @@
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            [self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
             break;
         case 2:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            [self.leaveMsgButton setTitle:@"给厨神留言" forState:UIControlStateNormal];
             break;
         case 3:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
