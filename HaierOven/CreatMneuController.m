@@ -20,8 +20,9 @@
 #import "CookbookDetailControllerViewController.h"
 #import "PECropViewController.h"
 #import "OvenTypeAlert.h"
+#import "PromptAlertView.h"
 
-@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate, OvenTypeAlertDelegate>
+@interface CreatMneuController ()<AutoSizeLabelViewDelegate,CellOfAddFoodTableDelegate,AddFoodAlertViewDelegate,AddStepCellDelegate,ChooseCoverViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YIPopupTextViewDelegate,CoverCellDelegate,PECropViewControllerDelegate,UseBakeViewDelegate, OvenTypeAlertDelegate, PromptAlertViewDelegate>
 {
     CGRect alertRectShow;
     CGRect alertRectHidden;
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *foods;
 @property (strong, nonatomic) UIWindow *myWindow;
 @property (strong, nonatomic) AddFoodAlertView *addFoodAlertView;
+@property (strong, nonatomic) PromptAlertView* promptAlertView; // 提示框
 @property (strong, nonatomic) NSMutableArray *steps;
 @property (strong, nonatomic) ChooseCoverView  *chooseCoverView;
 @property (strong, nonatomic) UIImageView *tempImageView; //记录 添加步骤 delegate 上来的图片
@@ -130,7 +132,8 @@
             }
             self.selectedTags = [self.cookbookDetail.tags mutableCopy];
             self.foods = [self.cookbookDetail.foods mutableCopy];
-            self.myPs_String = self.cookbookDetail.cookbookTip;
+            self.myPs_String = [self.cookbookDetail.cookbookTip isEqualToString:@"(null)"] ? @"" : self.cookbookDetail.cookbookTip;
+            
             [self.tableView reloadData];
         } else {
             [super showProgressErrorWithLabelText:@"获取菜谱信息失败" afterDelay:1];
@@ -178,6 +181,8 @@
     self.addFoodAlertView = [[AddFoodAlertView alloc]initWithFrame:alertRectHidden];
     self.addFoodAlertView.delegate = self;
     [self.myWindow addSubview:self.addFoodAlertView];
+    
+    
     
     self.chooseCoverView = [[ChooseCoverView alloc]initWithFrame:CGRectMake(0, PageH, PageW, PageW*0.58)];
     self.chooseCoverView.delegate = self;
@@ -275,7 +280,7 @@
             return cell;
         }else {
             BottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCell" forIndexPath:indexPath];
-            if (self.myPs_String.length >0 )
+            //if (self.myPs_String.length > 0 )
                 cell.myPS_String = self.myPs_String;
             
             return cell;
@@ -332,6 +337,7 @@
     }completion:nil];
     [self.tableView reloadData];
 }
+
 -(void)ImportAlertView:(UILabel *)label withFoodIndex:(NSInteger)foodIndex
 {
     self.edittingFood = self.foods[foodIndex];
@@ -359,18 +365,22 @@
     self.steps = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
     
-    [UIView animateWithDuration:0.6 animations:^{self.tableView.contentOffset = CGPointMake(0, point.y+(PageW - 60)*0.58);
+    [UIView animateWithDuration:0.6 animations:^{
+        self.tableView.contentOffset = CGPointMake(0, point.y+(PageW - 60)*0.58);
     }completion:nil];
     [self.tableView reloadData];
     
 }
+
 -(void)DeleteStepOfMainTableView:(NSMutableArray *)arr
 {
     self.steps = [arr mutableCopy];
     CGPoint point = self.tableView.contentOffset;
     
-    [UIView animateWithDuration:0.6 animations:^{self.tableView.contentOffset = CGPointMake(0, point.y-(PageW - 60)*0.58);
+    [UIView animateWithDuration:0.6 animations:^{
+        self.tableView.contentOffset = CGPointMake(0, point.y-(PageW - 60)*0.58);
     }completion:nil];
+    
     [self.tableView reloadData];
 }
 
@@ -399,18 +409,24 @@
         NSLog(@"取消评论了");
     } else {
         if (text.length == 0) {
-            return;
-        }else{
+            text = @"";
+            //return;
+        } //else {
             if (textView.tag ==1) { //步骤描述
                 self.tempLabel.text = text;
                 self.tempLabel.textColor = [UIColor darkGrayColor];
                 self.edittingStep.desc = text;
-            }else if (textView.tag==2){ //菜谱小贴士
+            } else if (textView.tag==2){ //菜谱小贴士
                 self.myPs_String = text;
                 CGSize size = CGSizeZero;
-                size = [MyUtils getTextSizeWithText:self.myPs_String andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:self.tableView.width-100];
-                size.height = size.height<18?18:size.height;
-                self.psCellHight =size.height+145;
+                if (self.myPs_String.length == 0) {
+                    self.psCellHight = 18 + 145;
+                } else {
+                    size = [MyUtils getTextSizeWithText:self.myPs_String andTextAttribute:@{NSFontAttributeName :[UIFont fontWithName:GlobalTitleFontName size:15]} andTextWidth:self.tableView.width-100];
+                    size.height = size.height < 18 ? 18 : size.height;
+                    self.psCellHight =size.height+145;
+                }
+                
             
                 [self.tableView reloadData];
                 
@@ -418,7 +434,7 @@
                 self.cookbookDetail.name = text;
                 [self.tableView reloadData];
             }
-        }
+        //}
     }
 }
 
@@ -601,10 +617,8 @@
         // 弹窗选择使用了烤箱类型：台式烤箱、嵌入式烤箱
         self.myWindow.hidden= NO;
         [UIView animateWithDuration:0.2 animations:^{
-            self.ovenTypeAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 160);
-            
+            self.ovenTypeAlert.frame = CGRectMake(25, PageH/2-80, PageW-50, 217);
         }];
-        
         
     }
     
@@ -651,7 +665,7 @@
 - (IBAction)SaveToDraft:(id)sender {
     NSLog(@"存存存");
     self.cookbookDetail.status = @"0";
-    if ([self validateCookbookDetail]) {
+    if ([self validateCookbookDraft]) {  //草稿箱检查较少,如果用户未填写，则补充空信息
         [self submitCookbook];
     }
 }
@@ -660,9 +674,65 @@
     NSLog(@"发发发布");
     self.cookbookDetail.status = @"1";
     if ([self validateCookbookDetail]) {
-        [self submitCookbook];
+        
+        self.promptAlertView = [[PromptAlertView alloc] initWithTitle:@"确认发布" message:@"一旦发布菜谱不能编辑和删除" frame:alertRectShow delegate:self];
+        [self.myWindow addSubview:self.promptAlertView];
+        self.myWindow.hidden = NO;
+        
+        
     }
     
+}
+
+- (void)promptAlertView:(PromptAlertView *)alertView buttonTapped:(UIButton *)sender
+{
+    self.myWindow.hidden = YES;
+    self.promptAlertView.frame = alertRectHidden;
+    if (sender.tag == 1) { // 确定
+        [self submitCookbook];
+    } else if (sender.tag == 2) { // 取消
+        
+    }
+}
+
+
+/**
+ *  检查或补充空信息，如果是保存草稿
+ *
+ *  @return 菜谱格式是否OK
+ */
+- (BOOL)validateCookbookDraft
+{
+    
+    for (Food* food in self.foods) {
+        if(food.name.length == 0) {
+            food.name = @"";
+        }
+        if (food.desc.length == 0) {
+            food.desc = @"";
+        }
+    }
+    
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
+    if (self.cookbookDetail.desc == nil || [self.cookbookDetail.desc isEqualToString:@"(null)"]) {
+        self.cookbookDetail.desc = @"";
+    }
+    
+    for (Step* step in self.steps) {
+        if (step.photo.length == 0) {
+            step.photo = @"";
+        }
+        if (step.desc.length == 0) {
+            step.desc = @"";
+        }
+    }
+    if (self.myPs_String.length == 0) {
+        self.myPs_String = @"";
+    }
+    
+    
+    
+    return YES;
 }
 
 /**
@@ -677,16 +747,22 @@
         return NO;
     }
     for (Food* food in self.foods) {
-        if(food.name.length == 0) {
+        NSString* tempStr = [food.name stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if(food.name.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材名称" afterDelay:1];
             return NO;
-        } else if (food.desc.length == 0) {
+        }
+        tempStr = [food.desc stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (food.desc.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写食材用量" afterDelay:1];
             return NO;
         }
     }
     
-    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @"" : self.cookbookDetail.desc;
+    self.cookbookDetail.desc = [self.cookbookDetail.desc isEqualToString:@"关于菜谱（选填）"] ? @" " : self.cookbookDetail.desc;
+    if (self.cookbookDetail.desc == nil) {
+        self.cookbookDetail.desc = @"";
+    }
     
     DataCenter* dataCenter = [DataCenter sharedInstance];
     if (dataCenter.currentUser.level == 1 || dataCenter.currentUser.level == 2) {
@@ -709,12 +785,15 @@
         if (step.photo.length == 0) {
             [super showProgressErrorWithLabelText:@"请选择步骤图片" afterDelay:1];
             return NO;
-        } else if (step.desc.length == 0) {
+        }
+        NSString* tempStr = [step.desc stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (step.desc.length == 0 || tempStr.length == 0) {
             [super showProgressErrorWithLabelText:@"请填写步骤描述" afterDelay:1];
             return NO;
         }
     }
-    if (self.myPs_String.length == 0) {
+    NSString* tempStr = [self.myPs_String stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (self.myPs_String.length == 0 || tempStr.length == 0) {
         [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
         return NO;
     }
@@ -751,6 +830,7 @@
                 if (success) {
                     NSLog(@"发布成功");
                     NSString* promptStr = [self.cookbookDetail.status isEqualToString:@"1"] ? @"发布成功" : @"保存成功";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:SubmitCookbookSuccessNotification object:nil];
                     [super showProgressCompleteWithLabelText:promptStr afterDelay:1];
                     [self performSelector:@selector(close) withObject:nil afterDelay:1];
                     
@@ -833,11 +913,6 @@
     }completion:nil];
     
 }
-
-
-
-
-
 
 
 - (void)openEditor

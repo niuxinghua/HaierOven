@@ -20,6 +20,9 @@
 #import "UIView+Sizes.h"
 #import "MyTool.h"
 #import "MyUtils.h"
+
+#import <uAnalytics/uAnalysisManager.h>
+
 #define GlobalTextFontName              @"FZLTXHK--GBK1-0"
 #define GlobalTitleFontName              @"FZLTHJW--GB1-0"
 
@@ -87,7 +90,7 @@
 /**
  *  根据此ID，可在APP内部打开App Store 界面
  */
-#define AppStoreID      @"958425224"
+#define AppStoreID      @"960608488"
 
 #define UMengAppKey                 @"54daa0edfd98c5160d000687"
 

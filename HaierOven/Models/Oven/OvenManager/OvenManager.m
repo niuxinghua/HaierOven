@@ -168,9 +168,11 @@
                             for (LocalOven* localOven in dataCenter.myOvens) {
                                 if (![device.mac isEqualToString:localOven.mac]) {
                                     theDevice = device;
+                                    break;
                                 }
                             }
                         }
+                        if (theDevice != nil) break;
                     }
                 }
                 
@@ -330,6 +332,8 @@
     } else if ([notification.name isEqualToString:DEVICE_ALARM_NOTIFICATION]) {
         NSLog(@"设备报警");
         
+        [self sendErrorNotification];
+        
     } else if ([notification.name isEqualToString:DEVICE_INFRAREDINFO_NOTIFICATION]) {
         NSLog(@"设备红外上报");
         
@@ -370,6 +374,22 @@
     if ([notification.name isEqualToString:INNER_ERROR_NOTIFICATION]) {
         NSLog(@"发生了内部错误");
         
+        InnerErrorReportMessage * errnoInfo = notification.object;
+        NSInteger errorNo = errnoInfo.errorNo;
+        
+        NSString* notificationBody = [NSString stringWithFormat:@"设定的闹钟时间到"];
+        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                               @"desc" : notificationBody};
+        
+        [[DataCenter sharedInstance] addOvenNotification:info];
+        
+        
+        //3.针对目前统计,开发者需要过滤出来这几个错误码然后调用接口
+        if (errorNo == 90105101 || errorNo == 90105102 || errorNo == 90105103 || errorNo == 90105107) {
+            [uAnalysisManager onDeviceOnlineChangeEvent:[NSString stringWithFormat:@"%d", errorNo] withDeviceMac:[errnoInfo.message objectForKey:@"mac"]];
+        }
+        
+        
     } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
         NSLog(@"Session失效");
         
@@ -404,6 +424,11 @@
     andGroupCommandName:(NSString*)groupCmdName
                callback:(run)completion
 {
+    
+    if (DebugOvenFlag) {
+        completion(YES, RET_USDK_OK);
+        return;
+    }
 //    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -432,6 +457,10 @@
 
 - (void)setBakeMode:(NSString*)mode callback:(run)completion
 {
+    if (DebugOvenFlag) {
+        completion(YES, RET_USDK_OK);
+        return;
+    }
     
     uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeMode commandAttrValue:mode];
     
@@ -494,6 +523,11 @@
 - (void)setBakeTime:(NSString*)time callback:(run)completion
 {
     
+    if (DebugOvenFlag) {
+        completion(YES, RET_USDK_OK);
+        return;
+    }
+    
     uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeTime commandAttrValue:time];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -526,6 +560,11 @@
 
 - (void)setBakeTemperature:(NSString*)temperature callback:(run)completion
 {
+    
+    if (DebugOvenFlag) {
+        completion(YES, RET_USDK_OK);
+        return;
+    }
     
     uSDKDeviceAttribute* command = [self structureWithCommandName:kBakeTemperature commandAttrValue:temperature];
     
@@ -658,7 +697,6 @@
 - (void)getOvenStatus:(NSString*)deviceMac status:(completion)callback
 {
     
-    
     [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
         
         OvenStatus * ovenStatus = [[OvenStatus alloc] init];
@@ -717,6 +755,76 @@
         
     }];
     
+}
+
+- (void)sendErrorNotification
+{
+    [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            
+            uSDKDevice* currentDevice;
+            for (uSDKDevice* device in obj) {
+                if ([self.subscribedDevice.mac isEqualToString:device.mac]) {
+                    currentDevice = device;
+                    break;
+                }
+            }
+            
+            NSMutableDictionary* attrDict = currentDevice.attributeDict;
+            
+            NSString* notificationBody;
+            
+            
+            // 报警信息
+            if (attrDict[@"50v001"] != nil) {
+                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v002"] != nil) {
+                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v003"] != nil) {
+                notificationBody = @"温馨提示：通过检测，您的烤箱预热已经超时，请检查烤箱门体是否关闭，烤箱工作后15min未达到设定温度";
+            } else if (attrDict[@"50v004"] != nil) {
+                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v005"] != nil) {
+                notificationBody = @"温馨提示：通过检测，您家的烤箱已多次使用，建议您方便的时候进行保养、清洁，以便于保证他的使用效果";
+            } else if (attrDict[@"50v006"] != nil) {
+                notificationBody = @"温馨提示：通过检测，烤箱运行已经超过1个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
+            } else if (attrDict[@"50v007"] != nil) {
+                notificationBody = @"温馨提示：通过检测，烤箱运行已经超过2个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
+            } else if (attrDict[@"50v008"] != nil) {
+                notificationBody = @"温馨提示：此次烘培未设定烹饪时间，请随时关注烘培时间以及食物状态";
+            } else if (attrDict[@"50v009"] != nil) {
+                notificationBody = @"温馨提示：烤箱预热完成，请将食物放入烤箱";
+            } else if (attrDict[@"50v00a"] != nil) {
+                notificationBody = @"温馨提示：烤箱持续运行时间超过2个小时，仍未自动关机";
+            } else if (attrDict[@"50v00b"] != nil) {
+                notificationBody = @"闹铃时间到，请进行下一步操作";
+            } else if (attrDict[@"50v00c"] != nil) {
+                notificationBody = @"温馨提示：PCB板线路故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v00d"] != nil) {
+                notificationBody = @"温馨提示：WIFI(通讯协议）故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v00e"] != nil) {
+                notificationBody = @"温馨提示：电路板温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else if (attrDict[@"50v00f"] != nil) {
+                notificationBody = @"温馨提示：显示屏幕温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+            } else {
+                notificationBody = nil;
+            }
+            
+            if (notificationBody != nil) {
+                NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                                       @"desc" : notificationBody};
+                
+                [[DataCenter sharedInstance] addOvenNotification:info];
+                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeAlert fireTime:1 alertBody:notificationBody];
+            }
+            
+        } else {
+            
+            
+        }
+        
+    }];
 }
 
 #pragma mark - getters

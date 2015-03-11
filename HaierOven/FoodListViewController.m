@@ -33,6 +33,9 @@
 
 - (void)loadCookbooks
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithTagIds:@[self.tagId] pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
@@ -50,6 +53,9 @@
             }
             
             [self.tableView reloadData];
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"标签食谱列表页面"];
+            
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
                 [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];

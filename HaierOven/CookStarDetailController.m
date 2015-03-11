@@ -8,6 +8,7 @@
 
 #import "CookStarDetailController.h"
 #import "CookStarDetailTopView.h"
+#import "CookerStarTopWithoutVideoView.h"
 #import "MainViewNormalCell.h"
 #import "AutoSizeLabelView.h"
 #import "ChatViewController.h"
@@ -19,7 +20,7 @@
 #import "MainSearchViewController.h"
 #import "UpLoadingMneuController.h"
 
-@interface CookStarDetailController ()<CookStarDetailTopViewDelegate>
+@interface CookStarDetailController () <CookStarDetailTopViewDelegate, CookerStarTopWithoutVideoViewDelegate>
 {
     CGSize movesize;
     CGFloat topViewHight;
@@ -27,15 +28,42 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTable;
-@property (strong, nonatomic) CookStarDetailTopView *cookStarDetailTopView;
+
+/**
+ *  有视频
+ */
+@property (strong, nonatomic) CookStarDetailTopView* cookStarDetailTopView;
+
+/**
+ *  无视频
+ */
+@property (strong, nonatomic) CookerStarTopWithoutVideoView* cookStarTopView;
+
+/**
+ *  是否有视频
+ */
+@property (nonatomic) BOOL hadVideo;
+
+
 @property (strong, nonatomic) NSString *decString;
 
 @property (strong, nonatomic) NSMutableArray *tags;
+
 @property (strong, nonatomic) UIButton *tempBtn;
 
 @property (strong, nonatomic) NSMutableArray* cookbooks;
 
 @property (nonatomic) NSInteger pageIndex;
+
+/**
+ *  选中的tagID
+ */
+@property (strong, nonatomic) NSMutableArray* tagArr;
+
+/**
+ *  是否选择了标签
+ */
+@property (nonatomic) BOOL selectedTagsFlag;
 
 @property (strong, nonatomic) MPMoviePlayerController* player;
 
@@ -57,62 +85,67 @@
     return self;
 }
 
-#pragma mark - 获取聊天记录
-
-- (void)loadMessages
-{
-    NSString* userBaseId = CurrentUserBaseId;
-    self.messages = [NSMutableArray array];
-    [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.cookerStar.userBaseId status:-1 pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
-        
-        if (success) {
-            NSArray* arr = obj;
-            
-            [self.messages addObjectsFromArray:arr];
-
-        } else {
-            [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
-        }
-        
-    }];
-    
-}
-
-#pragma mark - 其他网络请求
+#pragma mark - 网络请求
 
 - (void)loadCookerStarTags
 {
     [[InternetManager sharedManager] getUserTagsWithUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
+            self.tags = obj;
+            
+            NSMutableArray* tagNames = [NSMutableArray array];
             for (Tag* tag in obj) {
-                [self.tags addObject:tag.name];
+                [tagNames addObject:tag.name];
             }
-            self.cookStarDetailTopView.tags = self.tags;
+            self.cookStarDetailTopView.tags = tagNames;
+            self.cookStarTopView.tags = tagNames;
             
-            
-            
-            //topViewHight = [self getHeight];
             CGRect frameOfHeader = self.cookStarDetailTopView.frame;
             frameOfHeader.size.height =[self getHeight];
             self.cookStarDetailTopView.frame = frameOfHeader;
             
-//            self.cookStarDetailTopView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getHeight]);
-            self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+            frameOfHeader = self.cookStarTopView.frame;
+            frameOfHeader.size.height = [self getHeight];
+            self.cookStarTopView.frame = frameOfHeader;
             
-            
-//            self.mainTable.tableHeaderView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getHeight]);
-//            self.mainTable.tableHeaderView.clipsToBounds = YES;
-//            self.cookStarDetailTopView.Frame=CGRectMake(0, 0, PageW, topViewHight-36);
-//            self.mainTable.tableHeaderView.frame=CGRectMake(0, 0, PageW, topViewHight-36);
-//           [self.mainTable reloadData];
+            self.mainTable.tableHeaderView = self.hadVideo ? self.cookStarDetailTopView : self.cookStarTopView;
+            //self.cookStarDetailTopView.tags = tagNames;
         }else {
             [super showProgressErrorWithLabelText:@"获取标签失败" afterDelay:1];
         }
     }];
 }
 
+- (void)loadUserCookbooksWithTags
+{
+    [[InternetManager sharedManager] getCookbooksWithTagIds:self.tagArr userBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        if (success) {
+            NSArray* arr = obj;
+            if (arr.count < PageLimit && _pageIndex != 1) {
+                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+            }
+            if (arr.count == 0 && _pageIndex == 1) {
+                [super showProgressErrorWithLabelText:@"对不起，没有所选信息！" afterDelay:1];
+            }
+            if (_pageIndex == 1) {
+                self.cookbooks = obj;
+            } else {
+                [self.cookbooks addObjectsFromArray:arr];
+            }
+            
+            [self.mainTable reloadData];
+            
+        } else {
+            [super showProgressErrorWithLabelText:@"获取菜谱失败" afterDelay:1];
+        }
+    }];
+}
+
 - (void)loadUserCookbooks
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:self.cookerStar.userBaseId cookbookStatus:1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
@@ -127,6 +160,10 @@
             }
             
             [self.mainTable reloadData];
+            
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"厨神详情页面"];
+            
         } else {
             [super showProgressErrorWithLabelText:@"获取菜谱失败" afterDelay:1];
         }
@@ -181,24 +218,31 @@
 - (void)updateUI
 {
     self.cookStarDetailTopView.cookerStar = self.cookerStar;
+    self.cookStarTopView.cookerStar = self.cookerStar;
     [self loadCookerStarTags];
     [self loadUserCookbooks];
-//    [self loadMessages];
 }
 
 -(void)SetUpSubviews{
     self.decString = @"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试";
     movesize = [MyUtils getTextSizeWithText:self.decString andTextAttribute:@{NSFontAttributeName:[UIFont fontWithName:GlobalTitleFontName size:11.5]} andTextWidth:PageW-32];
     
+    self.hadVideo = [self.cookerStar.videoPath hasPrefix:@"http"];
+    
     topViewHight = [self getHeight];
     
-    self.cookStarDetailTopView = [[CookStarDetailTopView alloc]initWithFrame:CGRectMake(0, 0, PageW, topViewHight-36)];
+    self.cookStarDetailTopView = [[CookStarDetailTopView alloc] initWithFrame:CGRectMake(0, 0, PageW, topViewHight-36)];
     
     self.cookStarDetailTopView.delegate = self;
-    self.mainTable.tableHeaderView = self.cookStarDetailTopView;
+    
+    self.cookStarTopView = [[CookerStarTopWithoutVideoView alloc] initWithFrame:CGRectMake(0, 0, PageW, topViewHight - 36)];
+    self.cookStarTopView.delegate = self;
+    
+    self.mainTable.tableHeaderView = self.hadVideo ? self.cookStarDetailTopView : self.cookStarTopView;
     
     [self.mainTable registerNib:[UINib nibWithNibName:NSStringFromClass([MainViewNormalCell class]) bundle:nil] forCellReuseIdentifier:@"MainViewNormalCell"];
-    self.cookStarDetailTopView.tags =self.tags;
+    self.cookStarDetailTopView.tags = self.tags;
+    self.cookStarTopView.tags = self.tags;
     
 }
 
@@ -212,7 +256,11 @@
         
         // 增加根据pageIndex加载数据
         vc.pageIndex = 1;
-        [vc loadUserCookbooks];
+        if (vc.selectedTagsFlag) {
+            [vc loadUserCookbooksWithTags];
+        } else {
+            [vc loadUserCookbooks];
+        }
         
         // 加载数据，0.5秒后执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -239,7 +287,13 @@
         // 增加根据pageIndex加载数据
         
         vc.pageIndex++;
-        [vc loadUserCookbooks];
+        //[vc loadUserCookbooks];
+        
+        if (vc.selectedTagsFlag) {
+            [vc loadUserCookbooksWithTags];
+        } else {
+            [vc loadUserCookbooks];
+        }
         
         // 加载数据，0.5秒后执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -325,6 +379,11 @@
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"取消关注成功");
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+                sender.selected = NO;
+                if ([self.delegate respondsToSelector:@selector(cookerStarDidFollowd)]) {
+                    [self.delegate cookerStarDidFollowd];
+                }
             } else {
                 [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
             }
@@ -334,13 +393,18 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"关注成功");
+                [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
+                sender.selected = YES;
+                if ([self.delegate respondsToSelector:@selector(cookerStarDidFollowd)]) {
+                    [self.delegate cookerStarDidFollowd];
+                }
             } else {
                 [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
             }
         }];
     }
     
-    sender.selected = !sender.selected;
+    //sender.selected = !sender.selected;
     
     
 }
@@ -369,15 +433,31 @@
 #warning 暂用视频
     
 //    NSURL* url = [[NSBundle mainBundle] URLForResource:@"product-design-animation-cn-20130712_848x480" withExtension:@"mp4"];
-    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
-//    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
+//    NSURL* url = [NSURL URLWithString:@"http://cloud.edaysoft.cn/content/iceage4.mp4"];
+    NSURL* url = [NSURL URLWithString:self.cookerStar.videoPath];
     NSLog(@"%@",self.cookerStar.videoPath);
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:url];
     self.player.view.frame = self.cookStarDetailTopView.vedioImage.frame;
     [self.cookStarDetailTopView addSubview:self.player.view];
     [self.player play];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrame:) name:MPMoviePlayerWillExitFullscreenNotification object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allowLandscape:) name:MPMoviePlayerWillEnterFullscreenNotification object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notAllowLandscape:) name:MPMoviePlayerWillExitFullscreenNotification object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrame:) name:MPMoviePlayerDidExitFullscreenNotification object:self.player];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(close:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    
+}
+
+- (void)allowLandscape:(NSNotification*)notification
+{
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.orientationState = InterfaceOrientationStateNormal;
+    
+}
+
+- (void)notAllowLandscape:(NSNotification*)notification
+{
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.orientationState = InterfaceOrientationStatePortraitOnly;
     
 }
 
@@ -405,10 +485,50 @@
     [self.navigationController pushViewController:studyController animated:YES];
 }
 
--(void)chickTags:(UIButton*)btn{
-//    self.tempBtn.selected = NO;
-//    btn.selected= btn.selected ==YES? NO:YES;
-//    self.tempBtn = btn;
+/**
+ *  选择了标签
+ *
+ *  @param btn 标签按钮
+ */
+-(void)chickTags:(UIButton*)btn
+{
+    self.selectedTagsFlag = YES;
+    
+    btn.selected = !btn.selected;
+    self.tempBtn = btn;
+    
+    // 拿到选中的tag的ID
+    NSMutableArray* tagArr = [NSMutableArray array];
+    self.tagArr = tagArr;
+    if (self.hadVideo) {
+        for (UIButton* tagButton in self.cookStarDetailTopView.tagsView.subviews) {
+            if (tagButton.selected) {
+                Tag* tag = self.tags[tagButton.tag];
+                [tagArr addObject:tag.ID];
+            }
+        }
+    } else {
+        for (UIButton* tagButton in self.cookStarTopView.tagsView.subviews) {
+            if (tagButton.selected) {
+                Tag* tag = self.tags[tagButton.tag];
+                [tagArr addObject:tag.ID];
+            }
+        }
+    }
+    
+    _pageIndex = 1;
+    
+    if (tagArr.count == 0) {
+//        [super showProgressErrorWithLabelText:@"请至少选择一个标签" afterDelay:1];
+//        self.tempBtn.selected = YES;
+//        Tag* tag = self.tags[self.tempBtn.tag];
+//        [tagArr addObject:tag.ID];
+//        return;
+        self.selectedTagsFlag = NO;
+        [self loadUserCookbooks];
+    } else {
+        [self loadUserCookbooksWithTags];
+    }
     
 }
 
@@ -421,35 +541,132 @@
     
     float height = 0.0;
     
-    if (self.cookStarDetailTopView.descriptionLabel.text.length==0) {
-        height -= 16;
+    if (self.hadVideo) {
+        
+        if (self.cookStarDetailTopView.descriptionLabel.text.length==0) {
+            height -= 16;
+        }
+        
+        height += [MyUtils getTextSizeWithText:self.cookerStar.introduction andTextAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:11.5]} andTextWidth:Main_Screen_Width - 32].height;
+        
+        self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 20+8+8, Main_Screen_Width - 30, (LABEL_H + PADDING_HIGHT));
+        
+        height += 188 + 8; // 厨神简介顶部距离 + 下边距
+        
+        height += (Main_Screen_Width - 70) / 5 * 3; //视频高度
+        height += 8;  //视频下边距
+        
+        
+        height += 31 + 8; //新手学烘焙下边距
+        
+        //height += 35;   //额外添加
+        
+        height += 8 + 20 + 8;   //厨神姓名高度
+        
+        height += LABEL_H + PADDING_HIGHT;
+        
+        height += 30;   //下拉label
+        
+        if (self.cookStarDetailTopView.tagsView.lineCount==1) {
+            height -= 30;
+        }
+        
+    } else {
+        
+        if (self.cookStarTopView.descriptionLabel.text.length == 0) {
+            height -= 16;
+        }
+        
+        height += [MyUtils getTextSizeWithText:self.cookerStar.introduction andTextAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:11.5]} andTextWidth:Main_Screen_Width - 32].height;
+        
+        self.cookStarTopView.tagsView.frame = CGRectMake(15, 20+8+8, Main_Screen_Width - 30, (LABEL_H + PADDING_HIGHT));
+        
+        height += 188 + 8; // 厨神简介顶部距离 + 下边距
+        
+        height += 31 + 8; //新手学烘焙下边距
+        
+        //height += 35;   //额外添加
+        
+        height += 8 + 20 + 8;   //厨神姓名高度
+        
+        height += LABEL_H + PADDING_HIGHT;
+        
+        height += 30;   //下拉label
+        
+        if (self.cookStarTopView.tagsView.lineCount == 1) {
+            height -= 30;
+        }
+        
     }
     
-    height += [MyUtils getTextSizeWithText:self.cookerStar.introduction andTextAttribute:@{NSFontAttributeName: [UIFont fontWithName:GlobalTextFontName size:11.5]} andTextWidth:Main_Screen_Width - 32].height;
-    
-    self.cookStarDetailTopView.tagsView.frame = CGRectMake(15, 20+8+8, Main_Screen_Width - 30, (LABEL_H + PADDING_HIGHT));
-    
-    height += 188 + 8;
-    
-    height += (Main_Screen_Width - 70) / 5 * 3;
-    
-    height += 8 + 31 + 8;
-    
-    //height += 35;   //额外添加
-    
-    height += 8  + 20 + 8;   //出身姓名高度
-    
-    height += LABEL_H + PADDING_HIGHT;
-    
-    height += 30;   //下拉label
-    
-    if (self.cookStarDetailTopView.tagsView.lineCount==1) {
-        height -= 30;
-    }
     return height;
 }
 
+/**
+ *  无视频播放View
+ *
+ *  @return <#return value description#>
+ */
+- (void)updateHeadViewHeight:(CGFloat)height
+{
+    
+    if (!isfiex) {
+        float updateHeight = [self getHeight];
+        
+        //    updateHeight += self.cookStarDetailTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H);
+        updateHeight += (self.cookStarTopView.tagsView.lineCount - 1) * (PADDING_HIGHT + LABEL_H);
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            CGRect frameOfHeader = self.cookStarTopView.frame;
+            frameOfHeader.size.height = updateHeight;
+            self.cookStarTopView.frame = frameOfHeader;
+            
+            CGFloat heightOfContainer = self.cookStarTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H) + 30 + 30;
+            self.cookStarTopView.backDownView.frame = CGRectMake(0, self.cookStarTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
+            
+            self.cookStarTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30, self.cookStarTopView.tagsView.lineCount * (PADDING_HIGHT + LABEL_H));
+            self.cookStarTopView.bottomView.frame = CGRectMake(0, self.cookStarTopView.tagsView.bottom, Main_Screen_Width, 56);
+            
+            self.cookStarTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
+            
+            self.mainTable.tableHeaderView = self.cookStarTopView;
+        }];
+        
+        
+    } else {
+        float updateHeight = [self getHeight];
+        
+        //        updateHeight +=  (PADDING_HIGHT + LABEL_H);
+        [UIView animateWithDuration:0.2 animations:^{
+            
+            CGRect frameOfHeader = self.cookStarTopView.frame;
+            frameOfHeader.size.height = updateHeight;
+            self.cookStarTopView.frame = frameOfHeader;
+            
+            CGFloat heightOfContainer = (PADDING_HIGHT + LABEL_H) + 30 + 30;
+            self.cookStarTopView.backDownView.frame = CGRectMake(0, self.cookStarTopView.studyCook.bottom + 8, Main_Screen_Width,heightOfContainer);
+            
+            self.cookStarTopView.tagsView.frame = CGRectMake(15, 38, Main_Screen_Width - 30,  (PADDING_HIGHT + LABEL_H));
+            self.cookStarTopView.bottomView.frame = CGRectMake(0, self.cookStarTopView.tagsView.bottom, Main_Screen_Width, 56);
+            
+            self.cookStarTopView.frame = CGRectMake(0, 0, Main_Screen_Width, updateHeight);
+            
+            self.mainTable.tableHeaderView = self.cookStarTopView;
+        }];
+        
+        
+    }
+    
+    
+    isfiex = !isfiex;
+    
+}
 
+/**
+ *  有视频播放View
+ *
+ *  @param height <#height description#>
+ */
 -(void)UpLoadHeadViewHeight:(CGFloat)height{
 
 
@@ -476,7 +693,7 @@
         }];
         
 
-    }else{
+    } else {
         float updateHeight = [self getHeight];
 
 //        updateHeight +=  (PADDING_HIGHT + LABEL_H);

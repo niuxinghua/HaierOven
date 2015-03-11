@@ -27,6 +27,10 @@
         [super openLoginController];
         return;
     }
+    
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:CurrentUserBaseId cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
@@ -45,6 +49,9 @@
             }
             
             [self.tableView reloadData];
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"草稿箱页面"];
+            
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
                 [super showProgressErrorWithLabelText:@"无网络" afterDelay:1];
@@ -77,11 +84,18 @@
     [self addHeader];
     [self addFooter];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCookbookDrafts) name:SubmitCookbookSuccessNotification object:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

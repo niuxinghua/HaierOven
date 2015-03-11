@@ -30,7 +30,11 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
     /**
      *  停止运行
      */
-    DeviceBoardStatusStop           = 5
+    DeviceBoardStatusStop           = 5,
+    /**
+     *  预约状态
+     */
+    DeviceBoardStatusOrdering       = 6
 
 };
 

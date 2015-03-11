@@ -42,7 +42,7 @@
     self.alertTextFailed.text = @"";
     if (addFoodAlertType == AddFoodAlertTypeAddFood) {
         self.alertTitle.text = @"填写添加食材";
-    }else{
+    } else {
         self.alertTitle.text = @"填写添加食材分量";
     }
 }

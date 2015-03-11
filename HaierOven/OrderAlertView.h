@@ -10,7 +10,7 @@
 @class OrderAlertView;
 @protocol OrderAlertViewDelegate <NSObject>
 
--(void)SettingOrder:(NSDate*)date;
+-(void)SettingOrder:(NSDate*)date sender:(UIButton*)sender;
 -(void)OrderAlertViewHidden;
 
 @end
@@ -21,6 +21,11 @@
  *  烘焙时长，根据此参数计算最小预约时间点
  */
 @property (nonatomic) NSTimeInterval minimumInteval;
+
+/**
+ *  已设置的预约时间
+ */
+@property (strong, nonatomic) NSDate* selectedDate;
 
 /**
  *  显示的时候一定要设置默认时间

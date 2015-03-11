@@ -154,6 +154,9 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
         
+        // 统计用户使用时长
+        [uAnalysisManager onUserLogout];
+        
         [super openLoginController];
     } else {
         [super showProgressCompleteWithLabelText:@"您还没有登录" afterDelay:2];

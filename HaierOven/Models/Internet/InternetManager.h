@@ -457,6 +457,17 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)getCookbooksWithTagIds:(NSArray*)tagIds pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
 
 /**
+ *  根据标签获取某个人的菜谱
+ *
+ *  @param tagIds     标签数组
+ *  @param userBaseId 用户ID
+ *  @param pageIndex  获取的页数
+ *  @param completion 结果回调
+ */
+- (void)getCookbooksWithTagIds:(NSArray*)tagIds userBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion;
+
+
+/**
  *  搜索菜谱
  *
  *  @param keyword    搜索关键字

@@ -101,6 +101,8 @@
 //        self.tempBtn.tag = index.row;
 //    }
     
+   
+    
     [self.tableView reloadData];
 
 }
@@ -116,7 +118,7 @@
 //    
 //    
     StudyDetailController * detail = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyDetailController"];
-    detail.studyType = indexSection;
+    detail.studyType = indexFiex;
     detail.toolIndex = studycook.tag;
     [self.navigationController pushViewController:detail animated:YES];
 }

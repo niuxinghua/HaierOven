@@ -31,8 +31,15 @@
 
 - (void)loadMessages
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getChatMessagesFromUser:userBaseId toUser:self.toUserId status:-1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        
+        [super hiddenProgressHUD];
         
         if (success) {
             NSArray* arr = obj;
@@ -49,6 +56,8 @@
             [self parseMessagesToJSQMessages];
             [self.collectionView reloadData];
             
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"给厨神留言页面"];
             
         } else {
             [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
@@ -343,12 +352,12 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 3 == 0) {
+    //if (indexPath.item % 3 == 0) {
         JSQMessage *message = [self.messagesModel.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
-    }
+    //}
     
-    return nil;
+    //return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -448,11 +457,11 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 3 == 0) {
+    //if (indexPath.item % 3 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
-    }
+    //}
     
-    return 0.0f;
+    //return 0.0f;
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView

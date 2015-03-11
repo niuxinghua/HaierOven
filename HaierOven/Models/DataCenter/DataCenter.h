@@ -21,6 +21,10 @@
 
 #define MessageCountUpdateNotification  @"Message count update" //更新未读消息数量通知
 
+#define ReceivedLocalNotification   @"Received local notification"
+
+#define SubmitCookbookSuccessNotification   @"Submit cookbook success notification"
+
 #define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
 
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
@@ -38,7 +42,8 @@ extern NSString* const kRecommendProjectsFileName;
 typedef NS_ENUM(NSInteger, LocalNotificationType) {
     LocalNotificationTypeWarmUp,      // 预热完成
     LocalNotificationTypeBakeComplete,  // 烘焙完成
-    LocalNotificationTypeClockTimeUp    // 闹钟时间到
+    LocalNotificationTypeClockTimeUp,    // 闹钟时间到
+    LocalNotificationTypeAlert  //异常报警
     
 };
 

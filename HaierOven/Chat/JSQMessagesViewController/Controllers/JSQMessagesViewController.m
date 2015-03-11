@@ -128,7 +128,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.collectionView.delegate = self;
     
     self.inputToolbar.delegate = self;
-    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"请输入回复...", @"JSQMessages", @"Placeholder text for the message input text view");
+    self.inputToolbar.contentView.textView.placeHolder = NSLocalizedStringFromTable(@"", @"JSQMessages", @"Placeholder text for the message input text view");
     self.inputToolbar.contentView.textView.delegate = self;
 //    self.inputToolbar.contentView.textView.font = [UIFont fontWithName:GlobalTextFontName size:14.5];
     

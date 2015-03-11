@@ -74,6 +74,10 @@
         [super openLoginController];
         return;
     }
+    
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     //[super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
@@ -92,6 +96,8 @@
             }
             
             [self.tableview reloadData];
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"烘焙圈页面"];
             
         } else {
             [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
@@ -637,6 +643,8 @@
         [[InternetManager sharedManager] deleteFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedUserId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"取消关注成功");
+                [super showProgressCompleteWithLabelText:@"取消关注" afterDelay:1];
+                sender.selected = NO;
             } else {
                 [super showProgressErrorWithLabelText:@"取消失败" afterDelay:1];
             }
@@ -646,13 +654,15 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:selectedUserId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"关注成功");
+                [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
+                sender.selected = YES;
             } else {
                 [super showProgressErrorWithLabelText:@"关注失败" afterDelay:1];
             }
         }];
     }
     
-    sender.selected = !sender.selected;
+    //sender.selected = !sender.selected;
 }
 
 

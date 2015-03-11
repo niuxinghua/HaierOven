@@ -20,6 +20,8 @@
  */
 @property (strong, nonatomic) IBOutlet UILabel *cookBookLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *leaveMsgButton;
+
 @property NSInteger top;
 @property NSInteger bottom;
 @end
@@ -41,6 +43,8 @@
 
     self.followButton.layer.cornerRadius = self.followButton.height/2;
     self.followButton.layer.masksToBounds = YES;
+    self.leaveMsgButton.layer.cornerRadius = self.leaveMsgButton.height / 2;
+    self.leaveMsgButton.layer.masksToBounds = YES;
 
     return self;
 }
@@ -75,13 +79,17 @@
 }
 
 
+
+
 #define PADDING_WIDE    15   //标签左右间距
 #define PADDING_HIGHT    8   //标签上下间距
 #define LABEL_H    20   //标签high
+
+
+
 -(void)setTags:(NSArray *)tags{
     _tags = tags;
-    self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
-    self.tagsView.tags = tags;
+    
     
 //    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT)+PADDING_HIGHT+30+28);
    
@@ -94,7 +102,8 @@
     self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
     self.tagsView.clipsToBounds = YES;
     self.tagsView.delegate = self;
-    
+    self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
+    self.tagsView.tags = tags;
     
     self.bottomView.frame = CGRectMake(0, self.backDownView.height-26, self.backDownView.width, 56);
 
@@ -103,8 +112,6 @@
     [self.backDownView addSubview:self.cookBookLabel];
     [self.backDownView addSubview:self.tagsView];
     [self.backDownView addSubview:self.bottomView];
-    
-    
     
     if (self.tagsView.lineCount < 2) {
         self.bottomView.hidden = YES;
@@ -119,6 +126,35 @@
     
 }
 
+- (void)updateUIConstraints
+{
+    // 1. 隐藏播放
+    self.vedioImage.hidden = YES;
+    self.playButton.hidden = YES;
+    
+    // 2. 更新厨神简介和新手学烘焙按钮的约束
+    //    for (NSLayoutConstraint* constraint in self.descriptionLabel.superview.constraints) {
+    //        if (constraint.firstItem == self.vedioImage && constraint.secondItem == self.descriptionLabel) {
+    //
+    //
+    //        }
+    //    }
+    
+    // 3. 删除视频播放视图的约束
+    [self.vedioImage removeConstraints:self.vedioImage.constraints];
+    [self.playButton removeConstraints:self.playButton.constraints];
+    
+    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW,1*(PADDING_HIGHT+LABEL_H)+PADDING_HIGHT+30+28);
+    self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
+    self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
+    self.bottomView.frame = CGRectMake(0, self.backDownView.height-26, self.backDownView.width, 56);
+  
+    self.backDownView.backgroundColor = [UIColor redColor];
+    self.cookBookLabel.backgroundColor = [UIColor orangeColor];
+    self.tagsView.backgroundColor = [UIColor greenColor];
+    self.bottomView.backgroundColor = [UIColor yellowColor];
+}
+
 - (void)setCookerStar:(CookerStar *)cookerStar
 {
     _cookerStar = cookerStar;
@@ -127,9 +163,11 @@
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            [self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
             break;
         case 2:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
+            [self.leaveMsgButton setTitle:@"给厨神留言" forState:UIControlStateNormal];
             break;
         case 3:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
@@ -141,7 +179,26 @@
     }
     self.nameLabel.text = cookerStar.userName;
     self.signatureLabel.text = cookerStar.signature;
-    self.followButton.selected = cookerStar.isFollowed;
+    //self.followButton.selected = cookerStar.isFollowed;
+    
+    // 当从首页跳转到厨神详情时获取不到是否关注此厨神，需要重新获取
+    [[InternetManager sharedManager] currentUser:CurrentUserBaseId followedUser:cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        
+        if (success) {
+            NSInteger status = [obj[@"data"] integerValue];
+            if (status == 1) {
+                self.followButton.selected = YES;
+            } else {
+                self.followButton.selected = NO;
+            }
+            
+            
+        } else {
+            self.followButton.selected = NO;
+        }
+        
+    }];
+    
     self.descriptionLabel.text = cookerStar.introduction;
     self.cookBookLabel.text = [NSString stringWithFormat:@"%@ 的菜谱", cookerStar.userName];
     [self.vedioImage setImageWithURL:[NSURL URLWithString:cookerStar.videoCover] placeholderImage:IMAGENAMED(@"cookbook_list_item_bg_default.png")];

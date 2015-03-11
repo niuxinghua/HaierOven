@@ -11,7 +11,7 @@
 @protocol TimeProgressAlertViewDelegate <NSObject>
 
 -(void)HiddenClockAlert;
--(void)StopClock;
+-(void)userStopClock;
 -(void)TimeOutAlertShow;
 @end
 @interface TimeProgressAlertView : UIView

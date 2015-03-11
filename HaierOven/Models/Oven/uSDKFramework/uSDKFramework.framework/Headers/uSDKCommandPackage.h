@@ -12,7 +12,7 @@
 #import "uSDKConstantInfo.h"
 #import "uSDKDeviceConfigInfo.h"
 #import "uSDKBusinessMessage.h"
-#import "BaseMessage/BaseMessage.h"
+#import "BaseMessage.h"
 
 /*  inner
  *	@brief	uSDKCommandPackage

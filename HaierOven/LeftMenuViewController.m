@@ -13,7 +13,10 @@
 #import "SecDeviceTableViewCell.h"
 #import "NormalTableViewCell.h"
 #import "LeftMenuAlert.h"
-@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate,LeftMenuAlertDelegate>
+
+#import "DeviceViewController.h"
+
+@interface LeftMenuViewController ()<FirstTableViewCellDelegate,NormalTableViewCellDelegate,LeftMenuAlertDelegate, SecTableViewCellDelegate, SecDeviceTableViewCellDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *tempView;
 @property (strong, nonatomic) User* currentUser;
@@ -52,7 +55,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FirstTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"LeftMenuFirstCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"LeftMenuSecCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NormalTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"normalMenuCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecDeviceTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"SecDeviceTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SecDeviceTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Device table view cell"];
     [self.view addSubview:self.tableView];
     
     [self loadUserInfo];
@@ -69,6 +72,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:NotificationsHadReadNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification) name:ReceivedLocalNotification object:nil];
     
     self.notificationCount = 0;
     
@@ -85,6 +89,16 @@
     [self.myWindow addSubview:self.leftMenuAlert];
     // Do any additional setup after loading the view.
     self.sideMenuViewController.delegate = self;
+    
+    // 从通知点进app跳转到通知界面
+    AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    if (appDelegate.hadTappedNotification) {
+        
+        [self receivedNotification];
+        
+    }
+
+    
 }
 
 #pragma mark - 自动签到
@@ -165,7 +179,10 @@
         [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
     } else {
         
-        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
+        DeviceViewController* deviceViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
+        deviceViewController.addDeviceFlag = YES;
+        
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:deviceViewController]
                                                      animated:YES];
         [self.sideMenuViewController hideMenuViewController];
         
@@ -189,11 +206,32 @@
     self.noticeTimer = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+- (void)receivedNotification
+{
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
+                                                 animated:YES];
+    //[self.sideMenuViewController hideMenuViewController];
+}
+
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
     [self updateNotificationCount];
     [self loadUserInfo];
+    
     [self reload];
+    
 }
 
 - (void)reload
@@ -270,7 +308,23 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 5;
 }
-#pragma mark -
+
+
+#pragma mark - SecTableViewCellDelegate & SecDeviceTableViewCellDelegate
+
+- (void)deviceInfoButtonTapped
+{
+    [self infoButtonTapped];
+}
+
+- (void)infoButtonTapped
+{
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
+                                                 animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+}
+
+
 #pragma mark UITableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -301,7 +355,10 @@
             if (IsLogin) {
                 if ([DataCenter sharedInstance].myOvens.count == 0) {
                     
-                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"DeviceGuideListController"]]
+                    DeviceViewController* deviceViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
+                    deviceViewController.addDeviceFlag = YES;
+                    
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:deviceViewController]
                                                                  animated:YES];
                     [self.sideMenuViewController hideMenuViewController];
                     
@@ -319,6 +376,7 @@
             } else {
                 if ([DataCenter sharedInstance].myOvens.count == 0) {
                     self.myWindow.hidden= NO;
+                    [self.sideMenuViewController hideMenuViewController];
                     [UIView animateWithDuration:0.2 animations:^{
                         self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
                     }];
@@ -352,25 +410,26 @@
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
+            /*
         case 5:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedHouseViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
-            
-        case 6:
+            */
+        case 5:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
 
-        case 7:
+        case 6:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
 
-        case 8:
+        case 7:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
@@ -389,7 +448,7 @@
     if (indexPath.row ==0) {
         return 115;
     }else
-    return (PageH-115-5-20)/8;
+    return (PageH-115-5-20)/7;
 //        return 56;
 }
 
@@ -400,7 +459,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 9;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -427,13 +486,25 @@
         
     }else if (indexPath.row==1){
         if ([DataCenter sharedInstance].myOvens.count != 0) {
-            NSString *cellIdentifier =@"SecDeviceTableViewCell";
-            SecDeviceTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+//            NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SecDeviceTableViewCell class]) owner:nil options:nil];
+//            for (id obj in nibArray) {
+//                if ([obj isMemberOfClass:[SecDeviceTableViewCell class]]) {
+//                    // Assign cell to obj
+//                    cell = (HotelCell *)obj;
+//                    break;
+//                }
+//            }
+            
+            NSString *cellIdentifier =@"Device table view cell";
+            SecDeviceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.delegate = self;
             cell.backgroundColor = GlobalGrayColor;
             return cell;
         }else{
             NSString *cellIdentifier =@"LeftMenuSecCell";
             SecTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.delegate = self;
             cell.backgroundColor = GlobalGrayColor;
             return cell;
         }
@@ -441,10 +512,10 @@
         
         NSString *cellIdentifier = @"normalMenuCell";
         NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈", @"烘焙屋", @"购物清单",@"通知", @"设置"];
-        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
+        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈",/* @"烘焙屋",*/ @"购物清单",@"通知", @"设置"];
+        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),/*IMAGENAMED(@"hongbeiwu"),*/IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
-        if (indexPath.row ==7) {
+        if (indexPath.row == 6) {  //通知
             cell.notificationCount = [NSString stringWithFormat:@"%d", self.notificationCount];
         }
         cell.titleLabel.text = titles[indexPath.row-2];
@@ -452,10 +523,22 @@
         cell.titleImage.image = images[indexPath.row-2];
         cell.cellSelectedView.backgroundColor = UIColorFromRGB(0xb06206);
         cell.backgroundColor = GlobalOrangeColor;
-        if (indexPath.row ==2&&!self.tempView) {
+        
+        // 从通知点进app跳转到通知界面
+        AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if (indexPath.row == 6 && appDelegate.hadTappedNotification) {
+            //appDelegate.hadTappedNotification = NO;
+            self.tempView.hidden = YES;
             self.tempView = cell.cellSelectedView;
             self.tempView.hidden = NO;
         }
+        
+        if (indexPath.row ==2 && !self.tempView) {
+            self.tempView = cell.cellSelectedView;
+            self.tempView.hidden = NO;
+        }
+        
         return cell;
     }
 }
@@ -499,5 +582,7 @@
     tempView.hidden = YES;
     tempView = btn;
     btn.hidden = NO;
+    AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.hadTappedNotification = NO;
 }
 @end

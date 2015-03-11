@@ -29,6 +29,9 @@
 //        return;
     }
     
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     [super showProgressHUDWithLabelText:@"获取购物清单" dimBackground:NO];
     
     NSString* userBaseId = CurrentUserBaseId;
@@ -39,6 +42,10 @@
             self.shoppingList = obj;
             self.shoppingListCountLabel.text = [NSString stringWithFormat:@"已添加%d个菜谱",self.shoppingList.count];
             [self.tableView reloadData];
+            
+            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"购物清单页面"];
+            
         } else {
             [super showProgressErrorWithLabelText:@"加载失败" afterDelay:1];
         }

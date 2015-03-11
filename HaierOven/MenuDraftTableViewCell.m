@@ -45,7 +45,12 @@
     NSURL* imageUrl = [NSURL URLWithString:cookbook.coverPhoto];
     [self.coverImage setImageWithURL:imageUrl];
     self.foodNameLabel.text = cookbook.name;
-    self.descriptionLabel.text = cookbook.desc;
+    if (cookbook.desc.length == 0 || [cookbook.desc isEqualToString:@"(null)"]) {
+        self.descriptionLabel.text = @"";
+    } else {
+        self.descriptionLabel.text = cookbook.desc;
+    }
+    
 }
 
 @end

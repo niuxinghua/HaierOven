@@ -21,15 +21,18 @@
 }
 */
 
--(instancetype)initWithFrame:(CGRect)frame{
-//    if (self = [super initWithFrame:frame]) {
-        self =[[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AlertDatePicker class]) owner:self options:nil]firstObject];
-        self.layer.cornerRadius = 5;
-        self.layer.masksToBounds = YES;
-//    }
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self =[[[NSBundle mainBundle]loadNibNamed:NSStringFromClass([AlertDatePicker class]) owner:self options:nil]firstObject];
+    self.layer.cornerRadius = 5;
+    self.layer.masksToBounds = YES;
+    
+    self.myDatePickerView.maximumDate = [NSDate date];
+    
     return self;
     
 }
+
 - (IBAction)ChickDate:(UIButton*)sender {
     if (sender.tag) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

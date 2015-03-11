@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -10,19 +10,20 @@
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
             <string>FZLTHJW--GB1-0</string>
+            <string>FZLTHJW--GB1-0</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="AF9-yW-uID" customClass="OrderAlertView">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="258"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXw-Ve-ZMB">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置预约开始时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYK-Mb-hvK">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置预约结束时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYK-Mb-hvK">
                             <rect key="frame" x="25" y="4" width="267" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="mGt-xl-fPL"/>
@@ -43,27 +44,26 @@
                     <color key="backgroundColor" red="1" green="0.6588235294" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="rYK-Mb-hvK" firstAttribute="leading" secondItem="lXw-Ve-ZMB" secondAttribute="leading" constant="25" id="3Ql-Ji-zjI"/>
-                        <constraint firstAttribute="bottom" secondItem="x3d-Q7-zYB" secondAttribute="bottom" constant="3" id="EG8-u3-juU"/>
+                        <constraint firstAttribute="bottom" secondItem="x3d-Q7-zYB" secondAttribute="bottom" constant="8" id="EG8-u3-juU"/>
                         <constraint firstItem="rYK-Mb-hvK" firstAttribute="top" secondItem="lXw-Ve-ZMB" secondAttribute="top" constant="4" id="GLO-YT-W79"/>
                         <constraint firstAttribute="trailing" secondItem="x3d-Q7-zYB" secondAttribute="trailing" constant="8" id="QiC-SZ-cm3"/>
-                        <constraint firstAttribute="width" secondItem="lXw-Ve-ZMB" secondAttribute="height" multiplier="15:2" id="Tnr-SK-q18"/>
+                        <constraint firstAttribute="width" secondItem="lXw-Ve-ZMB" secondAttribute="height" multiplier="15:2" constant="-37.5" id="Tnr-SK-q18"/>
                         <constraint firstItem="x3d-Q7-zYB" firstAttribute="leading" secondItem="lXw-Ve-ZMB" secondAttribute="leading" constant="25" id="UAs-aG-WZV"/>
                         <constraint firstAttribute="trailing" secondItem="rYK-Mb-hvK" secondAttribute="trailing" constant="8" id="qXe-Zn-PdA"/>
                         <constraint firstItem="x3d-Q7-zYB" firstAttribute="top" secondItem="rYK-Mb-hvK" secondAttribute="bottom" constant="1" id="rcr-BD-8py"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk.png" translatesAutoresizingMaskIntoConstraints="NO" id="TM6-Sx-nDM" customClass="tk">
-                    <rect key="frame" x="0.0" y="218" width="300" height="40"/>
+                    <rect key="frame" x="0.0" y="260" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="dsg-q1-Elc"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuo-nG-USu">
-                    <rect key="frame" x="0.0" y="218" width="150" height="40"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuo-nG-USu">
+                    <rect key="frame" x="0.0" y="260" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="NZ5-ly-HxP"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                     <state key="normal" title="取消">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,12 +72,11 @@
                         <action selector="OrderChick:" destination="AF9-yW-uID" eventType="touchUpInside" id="kVa-dT-3MH"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-U1-klO">
-                    <rect key="frame" x="150" y="218" width="150" height="40"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-U1-klO">
+                    <rect key="frame" x="150" y="260" width="150" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="e7H-k8-H1P"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
                     <state key="normal" title="完成">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,8 +85,34 @@
                         <action selector="OrderChick:" destination="AF9-yW-uID" eventType="touchUpInside" id="5jM-MK-NIC"/>
                     </connections>
                 </button>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="5ce-UA-MUC">
-                    <rect key="frame" x="8" y="48" width="283" height="162"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="烤箱将在" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2o-Th-HeL">
+                    <rect key="frame" x="33" y="226" width="56" height="16.5"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结束工作" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEM-b8-ah1">
+                    <rect key="frame" x="209.5" y="226.5" width="56" height="16.5"/>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03月05日 19:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-qa-uac">
+                    <rect key="frame" x="97" y="226" width="104.5" height="16.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="XcY-h1-iBD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="FZLTHJW--GB1-0" family="FZLanTingHeiS-R-GB" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="XcY-h1-iBD"/>
+                        </mask>
+                    </variation>
+                </label>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="5ce-UA-MUC">
+                    <rect key="frame" x="0.0" y="53" width="300" height="162"/>
                     <date key="date" timeIntervalSinceReferenceDate="443513271.59430498">
                         <!--2015-01-21 06:07:51 +0000-->
                     </date>
@@ -98,30 +123,43 @@
             </subviews>
             <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="5ce-UA-MUC" firstAttribute="top" secondItem="lXw-Ve-ZMB" secondAttribute="bottom" constant="8" id="7LS-9k-aep"/>
+                <constraint firstItem="5ce-UA-MUC" firstAttribute="top" secondItem="lXw-Ve-ZMB" secondAttribute="bottom" constant="9" id="7LS-9k-aep"/>
+                <constraint firstItem="FRh-qa-uac" firstAttribute="leading" secondItem="F2o-Th-HeL" secondAttribute="trailing" constant="8" id="7Qh-NB-Krx"/>
                 <constraint firstAttribute="trailing" secondItem="lXw-Ve-ZMB" secondAttribute="trailing" id="9av-ze-vQf"/>
                 <constraint firstAttribute="trailing" secondItem="ykW-U1-klO" secondAttribute="trailing" id="9de-43-VhS"/>
+                <constraint firstItem="NEM-b8-ah1" firstAttribute="leading" secondItem="FRh-qa-uac" secondAttribute="trailing" constant="8" id="A6G-hW-JrG"/>
                 <constraint firstItem="ykW-U1-klO" firstAttribute="leading" secondItem="Nuo-nG-USu" secondAttribute="trailing" id="AJM-gx-1gg"/>
+                <constraint firstItem="FRh-qa-uac" firstAttribute="top" secondItem="5ce-UA-MUC" secondAttribute="bottom" constant="11" id="Bsn-Zq-8t0"/>
+                <constraint firstAttribute="centerX" secondItem="FRh-qa-uac" secondAttribute="centerX" id="E9Z-Br-sOg"/>
                 <constraint firstItem="ykW-U1-klO" firstAttribute="width" secondItem="Nuo-nG-USu" secondAttribute="width" id="Gae-bH-cbW"/>
                 <constraint firstItem="Nuo-nG-USu" firstAttribute="leading" secondItem="AF9-yW-uID" secondAttribute="leading" id="OJc-t1-zcy"/>
-                <constraint firstItem="5ce-UA-MUC" firstAttribute="leading" secondItem="AF9-yW-uID" secondAttribute="leading" constant="8" id="P16-S4-LDW"/>
+                <constraint firstItem="5ce-UA-MUC" firstAttribute="leading" secondItem="AF9-yW-uID" secondAttribute="leading" id="P16-S4-LDW"/>
+                <constraint firstItem="FRh-qa-uac" firstAttribute="centerY" secondItem="NEM-b8-ah1" secondAttribute="centerY" id="THq-Yg-dT9"/>
                 <constraint firstAttribute="bottom" secondItem="TM6-Sx-nDM" secondAttribute="bottom" id="aG7-UH-90Z"/>
-                <constraint firstAttribute="trailing" secondItem="5ce-UA-MUC" secondAttribute="trailing" constant="9" id="bbo-C9-9um"/>
+                <constraint firstAttribute="trailing" secondItem="5ce-UA-MUC" secondAttribute="trailing" id="bbo-C9-9um"/>
                 <constraint firstItem="lXw-Ve-ZMB" firstAttribute="top" secondItem="AF9-yW-uID" secondAttribute="top" id="cgj-oe-0B6"/>
+                <constraint firstAttribute="centerY" secondItem="5ce-UA-MUC" secondAttribute="centerY" constant="16" id="f5L-ez-KfT"/>
+                <constraint firstItem="FRh-qa-uac" firstAttribute="centerY" secondItem="F2o-Th-HeL" secondAttribute="centerY" id="f9x-xp-EoQ"/>
                 <constraint firstItem="TM6-Sx-nDM" firstAttribute="leading" secondItem="AF9-yW-uID" secondAttribute="leading" id="gVm-qb-5zu"/>
                 <constraint firstItem="ykW-U1-klO" firstAttribute="leading" secondItem="Nuo-nG-USu" secondAttribute="trailing" id="ifG-qG-q7q"/>
                 <constraint firstItem="lXw-Ve-ZMB" firstAttribute="leading" secondItem="AF9-yW-uID" secondAttribute="leading" id="jSx-Sm-GRV"/>
                 <constraint firstAttribute="bottom" secondItem="Nuo-nG-USu" secondAttribute="bottom" id="jhz-dW-lOC"/>
                 <constraint firstAttribute="trailing" secondItem="TM6-Sx-nDM" secondAttribute="trailing" id="k5G-lz-ZXv"/>
-                <constraint firstItem="ykW-U1-klO" firstAttribute="top" secondItem="5ce-UA-MUC" secondAttribute="bottom" constant="8" id="tmt-Jt-kue"/>
+                <constraint firstItem="ykW-U1-klO" firstAttribute="top" secondItem="5ce-UA-MUC" secondAttribute="bottom" constant="45" id="tmt-Jt-kue"/>
                 <constraint firstAttribute="bottom" secondItem="ykW-U1-klO" secondAttribute="bottom" id="y84-XM-MT9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="7LS-9k-aep"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="datepicker" destination="5ce-UA-MUC" id="5bC-vB-wG3"/>
+                <outlet property="selectedTimeLabel" destination="FRh-qa-uac" id="NB2-eI-3zt"/>
             </connections>
-            <point key="canvasLocation" x="213" y="196"/>
+            <point key="canvasLocation" x="213" y="172"/>
         </view>
     </objects>
     <resources>

@@ -402,6 +402,10 @@
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                
+                // 统计用户使用时长
+                [uAnalysisManager onUserLogin:loginId];
+                
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
             }
@@ -1193,7 +1197,7 @@
                                     };
         // 1. 发送请求
         
-        [[self manager] POST:GetHotTags parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[self manager] POST:GetMyTags parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
             
@@ -1515,6 +1519,46 @@
     }
 }
 
+- (void)getCookbooksWithTagIds:(NSArray*)tagIds userBaseId:(NSString*)userBaseId pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 将参数序列化
+        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
+        NSDictionary* paramsDict = @{
+                                     @"tagIDs" : tagIds,     //UsrId
+                                     @"userBaseID" : userBaseId,
+                                     @"limit" : @PageLimit,     //每页行数
+                                     @"page" : currentPage,     //当前请求的页数
+                                     };
+        
+        // 2. 发送网络请求
+        [[self manager] POST:GetCookbooksByTagIds parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                BOOL hadNextPage;
+                NSMutableArray* cookbooks = [DataParser parseCookbooksWithDict:responseObject hadNextPage:&hadNextPage];
+                completion(YES, cookbooks, nil);
+                if (!hadNextPage) {
+                    NSLog(@"没有更多了");
+                }
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
+
 - (void)searchCookbooksWithKeyword:(NSString*)keyword pageIndex:(NSInteger)pageIndex callBack:(myCallback)completion
 {
     
@@ -1632,15 +1676,16 @@
 //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
         NSDictionary* paramsDict;
+        NSMutableDictionary* cookbookOvenDict;
+        if (cookbookDetail.oven != nil) {
+            cookbookOvenDict = [NSMutableDictionary dictionary];
+            cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle == nil ? @"" : cookbookDetail.oven.roastStyle;
+            cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature == nil ? @"" : cookbookDetail.oven.roastTemperature;
+            cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime == nil ? @0 : [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
+            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo == nil ? @"" : cookbookDetail.oven.ovenInfo;
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"未使用烤箱" : cookbookDetail.oven.ovenType;
+        }
         
-//        if (cookbookDetail.oven != nil) {
-            NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
-            cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
-            cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
-            cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
-            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
-            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
-            
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
                            @"cookbookDesc" : cookbookDetail.desc,
                            @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
@@ -1649,12 +1694,12 @@
                            @"tags" : tags,
                            @"steps" : steps,
                            @"foods" : foods,
-                           @"cookbookOven" : cookbookOvenDict,
+                           @"cookbookOven" : cookbookOvenDict == nil ? [NSNull null] : cookbookOvenDict,
                            @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
                            
                            };
-
-            
+        
+        
 //        } else {
 //            
 //            paramsDict = @{@"cookbookName" : cookbookDetail.name,
@@ -1738,24 +1783,24 @@
         //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
         NSDictionary* paramsDict;
-        
-//        if (cookbookDetail.oven != nil) {
-            NSMutableDictionary* cookbookOvenDict = [NSMutableDictionary dictionary];
+        NSMutableDictionary* cookbookOvenDict;
+        if (cookbookDetail.oven != nil) {
+            cookbookOvenDict = [NSMutableDictionary dictionary];
             cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
             cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
             cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
             cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
-            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
-            
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"未使用烤箱" : cookbookDetail.oven.ovenType;
+        }
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
                            @"cookbookDesc" : cookbookDetail.desc,
                            @"cookbookCoverPhoto" : cookbookDetail.coverPhoto,
                            @"cookbookTip" : cookbookDetail.cookbookTip,
                            @"status" : [NSNumber numberWithInt:[cookbookDetail.status intValue]],
-                           @"tags" : tags,
-                           @"steps" : steps,
-                           @"foods" : foods,
-                           @"cookbookOven" : cookbookOvenDict,
+                           @"tags" : tags.count == 0 ? [NSNull null] : tags,
+                           @"steps" : steps == 0 ? [NSNull null] : steps,
+                           @"foods" : foods == 0 ? [NSNull null] : foods,
+                           @"cookbookOven" : cookbookOvenDict == nil ? [NSNull null] : cookbookOvenDict,
                            @"creatorID" : [NSNumber numberWithInt:[cookbookDetail.creator.ID intValue]],
                            @"cookbookID" : cookbookDetail.cookbookId
                            };

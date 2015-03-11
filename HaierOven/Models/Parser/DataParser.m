@@ -499,7 +499,7 @@
         cookerStar.userName = [cookerDict[@"userName"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"userName"]];
         cookerStar.signature = [cookerDict[@"signature"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"signature"]];
         cookerStar.introduction = [cookerDict[@"introduction"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"introduction"]];
-        cookerStar.videoPath = [cookerDict[@"vedioPath"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"vedioPath"]];
+        cookerStar.videoPath = [cookerDict[@"videoPath"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"videoPath"]];
         cookerStar.videoCover = [cookerDict[@"videoCover"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"videoCover"]];
         cookerStar.videoCover = [DataParser parseImageUrlWithString:cookerStar.videoCover];
         cookerStar.chefBackgroundImageUrl = [cookerDict[@"chefBackgroundImage"] isKindOfClass:[NSNull class]] ? @"" : [NSString stringWithFormat:@"%@", cookerDict[@"chefBackgroundImage"]];

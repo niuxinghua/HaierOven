@@ -33,10 +33,17 @@
 @property (strong, nonatomic) NSArray *tags;
 
 @property (weak, nonatomic)id<CookStarDetailTopViewDelegate>delegate;
+
 /**
  *  播放视频imageview
  */
 @property (strong, nonatomic) IBOutlet UIImageView *vedioImage;
+
+/**
+ *  视频播放点击按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+
 
 /**
  *  关注按钮
@@ -82,5 +89,6 @@
 
 
 @property (strong, nonatomic) CookerStar* cookerStar;
+
 
 @end

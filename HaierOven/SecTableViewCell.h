@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SecTableViewCellDelegate <NSObject>
+
+@required
+- (void)infoButtonTapped;
+
+@end
+
 @interface SecTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *laftIconButton;
 @property (strong, nonatomic) IBOutlet UILabel *centerLabel;
 @property (strong, nonatomic) IBOutlet UIButton *rightButton;
 @property (strong, nonatomic) IBOutlet UIView *bottomLineView;
+
+@property (weak, nonatomic) id <SecTableViewCellDelegate> delegate;
 
 @end

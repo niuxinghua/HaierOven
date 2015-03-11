@@ -285,6 +285,9 @@ typedef void (^result) (BOOL success);
 
 - (void)createCookbook
 {
+    //统计页面加载耗时
+    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    
     CookbookDetail* cookbookDetail = [[CookbookDetail alloc] init];
     cookbookDetail.name = self.menuTitleTextFiled.text;
     cookbookDetail.desc = self.descriptionTextView.text;
@@ -304,6 +307,9 @@ typedef void (^result) (BOOL success);
                     creatMenu.cookbookDetail = cookbookDetail;
                     creatMenu.tags = self.tags;
                     [self.navigationController pushViewController:creatMenu animated:YES];
+                    
+                    UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
+                    [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"创建菜谱页面"];
                 }
             }];
             

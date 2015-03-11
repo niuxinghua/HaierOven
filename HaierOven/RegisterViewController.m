@@ -154,8 +154,12 @@
             
             
         } else {
-            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
-
+            //[super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+            NSString* errorMsg = error.userInfo[NSLocalizedDescriptionKey];
+            if ([error.userInfo[NSLocalizedDescriptionKey] hasSuffix:@"已存"]) {
+                errorMsg = @"手机已注册";
+            }
+            [super showProgressErrorWithLabelText:errorMsg afterDelay:1];
         }
     }];
     
@@ -215,7 +219,13 @@
             [self loginWithUserName:email password:password];
             
         } else {
-            [super showProgressErrorWithLabelText:@"注册失败" afterDelay:1];
+            
+            NSString* errorMsg = error.userInfo[NSLocalizedDescriptionKey];
+            if ([error.userInfo[NSLocalizedDescriptionKey] hasSuffix:@"已存"]) {
+                errorMsg = @"邮箱已注册";
+            }
+            [super showProgressErrorWithLabelText:errorMsg afterDelay:1];
+            
         }
     }];
     
@@ -267,10 +277,8 @@
                                                         
                                                         //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                     } else {
-                                                        [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                        [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                     }
-                                                    
-                                                    
                                                 }];
     
     

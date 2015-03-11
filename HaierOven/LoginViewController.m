@@ -118,7 +118,8 @@
                                                         [userDefaults synchronize];
                                                         
                                                     } else {
-                                                        [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                        //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                        [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                     }
                                                     
                                                     
@@ -221,7 +222,8 @@
                                                                 //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
 
                                                             } else {
-                                                                [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                                //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                             }
                                                             
                                                             
@@ -275,7 +277,8 @@
                                                             self.loginId = response.data[@"openid"];
                                                             //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
                                                         } else {
-                                                            [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                            //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                            [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                         }
                                                         
                                                         

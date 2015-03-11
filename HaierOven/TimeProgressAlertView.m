@@ -51,8 +51,9 @@
 - (IBAction)CancelClock:(id)sender {
     [self.delegate HiddenClockAlert];
 }
+
 - (IBAction)StopClock:(id)sender {
-    [self.delegate StopClock];
+    [self.delegate userStopClock];
 }
 
 -(void)setStart:(BOOL)start{
