@@ -342,7 +342,10 @@
 #define Feedback     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/feedback"]
 
 
-
+/**
+ *  根据标签获取菜谱
+ */
+#define GetCookBookWithTags     @"http://115.29.8.251:8080/haieroven/app/cookbook/getbytagids"
 
 
 
@@ -352,14 +355,6 @@
 #define DownloadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Download"]
 
 #define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8082/file/upload"]
-
-
-
-
-
-
-
-
 
 
 

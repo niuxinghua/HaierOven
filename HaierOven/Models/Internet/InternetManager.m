@@ -2570,6 +2570,8 @@
     } else {
         completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
+
+    
 }
 
 
@@ -2578,8 +2580,8 @@
     if ([self canConnectInternet]) {
         
         // 1. 将参数序列化
-        NSNumber* currentPage = [NSNumber numberWithInteger:pageIndex];
-        NSNumber* messageStatus = [NSNumber numberWithInteger:status];
+        NSNumber* currentPage    = [NSNumber numberWithInteger:pageIndex];
+        NSNumber* messageStatus  = [NSNumber numberWithInteger:status];
         NSDictionary* paramsDict = @{
                                      @"userBaseID" : userBaseId,
                                      @"limit" : @PageLimit,     //每页行数
@@ -2630,9 +2632,9 @@
         
         // 1. 将参数序列化
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-        NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-        
-        NSDictionary* paramsDict = @{
+        NSString *version            = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+
+        NSDictionary* paramsDict     = @{
                                      @"mobile" : phone,
                                      @"feedback" : content,     //每页行数
                                      @"osType" : @"iOS",
@@ -2928,6 +2930,12 @@
         completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
     }
     
+}
+
+
+-(void)getCookbookDetailWithTagIDs:(NSArray*)tagids
+                           andPage:(NSInteger)page
+                          andlimit:(NSInteger)limit{
 }
 
 @end

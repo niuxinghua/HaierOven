@@ -267,30 +267,32 @@
 
 - (void)setupTagsScrollView
 {
-    self.tagsScrollView = [UIScrollView new];
-    self.tagsScrollView.frame = CGRectMake(0, self.adCycleView.bottom, PageW, PageW*ScrRate);
+    self.tagsScrollView             = [UIScrollView new];
+    self.tagsScrollView.frame       = CGRectMake(0, self.adCycleView.bottom, PageW, PageW*ScrRate);
     self.tagsScrollView.contentSize = CGSizeMake((PageW/5)*self.tags.count, self.tagsScrollView.height);
     [self.adView addSubview:self.tagsScrollView];
     
     
     for (int loop = 0 ; loop < self.tags.count ; loop++) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        Tag* tag = self.tags[loop];
+        UIButton *btn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        Tag* tag                          = self.tags[loop];
         [btn setTitle:[NSString stringWithFormat:@"  %@", tag.name] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"orangepoint"] forState:UIControlStateNormal];
-        btn.tag = loop;
+        btn.tag                           = loop;
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size: 15.0];
-        
+        btn.titleLabel.font               = [UIFont fontWithName:GlobalTextFontName size: 15.0];
+
         [btn addTarget:self action:@selector(SelectTagBtn:) forControlEvents:UIControlEventTouchUpInside];
         if (self.tags.count<5) {
-            btn.frame = CGRectMake((PageW-8)/self.tags.count*loop+8,0,(PageW-8)/self.tags.count, self.tagsScrollView.height);
+        btn.frame                         = CGRectMake((PageW-8)/self.tags.count*loop+8,0,(PageW-8)/self.tags.count, self.tagsScrollView.height);
         }else
-        btn.frame = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
+        btn.frame                         = CGRectMake((PageW-8)/5*loop+8,0,(PageW-8)/5, self.tagsScrollView.height);
         self.tagsScrollView.pagingEnabled = YES;
         [self.tagsScrollView addSubview:btn];
     }
+    
 }
+
 
 #pragma mark 点击tag方法
 
