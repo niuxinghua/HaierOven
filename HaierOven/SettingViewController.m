@@ -11,6 +11,10 @@
 
 @interface SettingViewController () <SKStoreProductViewControllerDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIButton *versionButton;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
 @end
@@ -70,6 +74,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString* versionTitle = [NSString stringWithFormat:@"版本号%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    [self.versionButton setTitle:versionTitle forState:UIControlStateNormal];
+    
     self.logoutButton.layer.cornerRadius = 10;
     self.logoutButton.layer.masksToBounds = YES;
     

@@ -26,7 +26,9 @@
     }
     return self;
 }
-- (IBAction)showMoreTags:(id)sender {
+- (IBAction)showMoreTags:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    self.arrowButton.selected = !self.arrowButton.selected;
     [self.delegate showMoreTags];
 }
 

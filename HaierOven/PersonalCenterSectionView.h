@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, SectionType) {
 @end
 @interface PersonalCenterSectionView : UIView
 
+@property (nonatomic) BOOL isFirstContent;
+
 @property (nonatomic) SectionType sectionType;
 @property (strong, nonatomic) IBOutlet UIButton *pushedButton;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;

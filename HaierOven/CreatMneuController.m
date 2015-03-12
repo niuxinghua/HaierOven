@@ -998,10 +998,13 @@
 -(void)getUseDeviceDataWithWorkModel:(NSString *)workmodel andTime:(NSString *)time andTemperature:(NSString *)temperature{
     NSLog(@"%@ ,%@ ,%@",workmodel,time,temperature);
     useBake = !useBake;
+    NSRange range = [temperature rangeOfString:@"°"];
+    NSString* temperatureValue = [temperature substringToIndex:range.location];
+    
     [self.tableView reloadData];
 #warning 补全烤箱型号
     self.cookbookDetail.oven = [[CookbookOven alloc] initWithRoastStyle:workmodel
-                                                       roastTemperature:temperature
+                                                       roastTemperature:temperatureValue
                                                               roastTime:time
                                                                ovenType:@""
                                                                ovenInfo:@{@"name" : @""}];

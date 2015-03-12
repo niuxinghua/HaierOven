@@ -401,6 +401,8 @@
 
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
+                
+                // 发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                 
                 // 统计用户使用时长
@@ -1675,6 +1677,10 @@
 //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
 //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
         
+        if (cookbookDetail.desc == nil || [cookbookDetail.desc isEqualToString:@""]) {
+            cookbookDetail.desc = @" ";
+        }
+        
         NSDictionary* paramsDict;
         NSMutableDictionary* cookbookOvenDict;
         if (cookbookDetail.oven != nil) {
@@ -1781,6 +1787,10 @@
         //        creatorDict[@"creatorID"] = cookbookDetail.creator.ID;
         //        creatorDict[@"userName"] = cookbookDetail.creator.userName;
         //        creatorDict[@"userAvatar"] = cookbookDetail.creator.avatarPath;
+        
+        if (cookbookDetail.desc == nil || [cookbookDetail.desc isEqualToString:@""]) {
+            cookbookDetail.desc = @" ";
+        }
         
         NSDictionary* paramsDict;
         NSMutableDictionary* cookbookOvenDict;

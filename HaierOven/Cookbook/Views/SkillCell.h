@@ -22,6 +22,7 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *skillLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *startCookBtn;
 
 @property (weak, nonatomic) id <SkillCellDelegate> delegate;
 

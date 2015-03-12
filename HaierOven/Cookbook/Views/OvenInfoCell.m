@@ -40,7 +40,7 @@
         ovenSetting = [ovenSetting stringByAppendingFormat:@"模式:%@ ", oven.roastStyle];
     }
     if (![oven.roastTemperature isEqualToString:@""]) {
-        ovenSetting = [ovenSetting stringByAppendingFormat:@"温度:%@ ", oven.roastTemperature];
+        ovenSetting = [ovenSetting stringByAppendingFormat:@"温度:%@° ", oven.roastTemperature];
     }
     if (![oven.roastTime isEqualToString:@""]) {
         ovenSetting = [ovenSetting stringByAppendingFormat:@"时间:%@分钟", oven.roastTime];

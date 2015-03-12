@@ -11,6 +11,11 @@
 
 @interface StepsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+/**
+ *  是不是官方菜谱，如果不是官方菜谱则隐藏“开始烹饪”按钮
+ */
+@property (nonatomic) BOOL isAuthority;
+
 - (instancetype)initWithCookbookDetail:(CookbookDetail*)cookbookDetail delegate:(id<SkillCellDelegate>) delegate;
 
 @end

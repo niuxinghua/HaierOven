@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
         self.messagesNotifications = [NSMutableArray array];
         self.followNotifications = [NSMutableArray array];
         self.ovenNotifications = [NSMutableArray array];
-        self.notificationType = NotificationTypeOven;
+        self.notificationType = NotificationTypeSystem;
         
     }
     return self;
@@ -282,14 +282,17 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
 }
 
--(void)initHeadView{
+-(void)initHeadView
+{
     CGRect rect = self.headView.frame;
     rect.size.height = PageW*0.1388888;
     self.headView.frame = rect;
-    PersonalCenterSectionView *head = [[PersonalCenterSectionView alloc]initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    PersonalCenterSectionView *head = [[PersonalCenterSectionView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [self.headView addSubview:head];
+    head.isFirstContent = NO;
     head.delegate = self;
     head.sectionType = sectionNotification;
-    [self.headView addSubview:head];
+    [head setNeedsLayout];
     
 }
 
@@ -365,10 +368,11 @@ typedef NS_ENUM(NSInteger, NotificationType)
 //    return @"123";
 //}    // fixed font style. use custom view (UILabel) if you want something different
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     
     if (self.notificationType == NotificationTypeSystem) {
-        NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc]initWithFrame:CGRectMake(0, 0, PageW, 44)];
+        NotificationSectionHeadView *sectionview = [[NotificationSectionHeadView alloc] initWithFrame:CGRectMake(0, 0, PageW, 44)];
         
         if (section == 0) {
             

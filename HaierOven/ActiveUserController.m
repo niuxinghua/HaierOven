@@ -184,13 +184,15 @@
                                                               } else { // 如果是其他页面跳进来激活则返回
                                                                   
                                                                   // 激活用户送积分
-                                                                  [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
-                                                                      
-                                                                      if (success) {
-                                                                          NSLog(@"激活用户送积分OK");
-                                                                      }
-                                                                      [self.navigationController popViewControllerAnimated:YES];
-                                                                  }];
+//                                                                  [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+//                                                                      
+//                                                                      if (success) {
+//                                                                          NSLog(@"激活用户送积分OK");
+//                                                                      }
+//                                                                      [self.navigationController popViewControllerAnimated:YES];
+//                                                                  }];
+                                                                  
+                                                                  [self.navigationController popViewControllerAnimated:YES];
                                                                   
                                                               }
                                                           } else {
@@ -232,18 +234,19 @@
                                                     [super hiddenProgressHUD];
                                                     if (success) {
                                                         NSLog(@"登录成功");
+                                                        [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
                                                         
                                                         // 激活用户送积分
-                                                        [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
-                                                            
-                                                            if (success) {
-                                                                NSLog(@"激活用户送积分OK");
-                                                            }
-                                                            
-                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                            //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
-                                                            
-                                                        }];
+//                                                        [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
+//                                                            
+//                                                            if (success) {
+//                                                                NSLog(@"激活用户送积分OK");
+//                                                            }
+//                                                            
+//                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+//                                                            //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+//                                                            
+//                                                        }];
                                                         
                                                         
                                                     } else {

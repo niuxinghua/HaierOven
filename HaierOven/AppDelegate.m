@@ -385,6 +385,7 @@ void uncaughtExceptionHandler(NSException *exception)
     
     if ([[UIApplication sharedApplication] backgroundTimeRemaining] < 61.0) {
         
+        // 播放无声音乐
         [[OHPlayAudio sharedAudioPlayer] playFuck];
         
         self.bgTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];

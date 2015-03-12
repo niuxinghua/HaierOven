@@ -99,7 +99,7 @@
     self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
 
     
-    self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
+    self.tagsView.Frame = CGRectMake(8, self.cookBookLabel.bottom+8, self.width - 16, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
     self.tagsView.clipsToBounds = YES;
     self.tagsView.delegate = self;
     self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
@@ -126,35 +126,6 @@
     
 }
 
-- (void)updateUIConstraints
-{
-    // 1. 隐藏播放
-    self.vedioImage.hidden = YES;
-    self.playButton.hidden = YES;
-    
-    // 2. 更新厨神简介和新手学烘焙按钮的约束
-    //    for (NSLayoutConstraint* constraint in self.descriptionLabel.superview.constraints) {
-    //        if (constraint.firstItem == self.vedioImage && constraint.secondItem == self.descriptionLabel) {
-    //
-    //
-    //        }
-    //    }
-    
-    // 3. 删除视频播放视图的约束
-    [self.vedioImage removeConstraints:self.vedioImage.constraints];
-    [self.playButton removeConstraints:self.playButton.constraints];
-    
-    self.backDownView.frame = CGRectMake(0, self.studyCook.bottom+8, PageW,1*(PADDING_HIGHT+LABEL_H)+PADDING_HIGHT+30+28);
-    self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
-    self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
-    self.bottomView.frame = CGRectMake(0, self.backDownView.height-26, self.backDownView.width, 56);
-  
-    self.backDownView.backgroundColor = [UIColor redColor];
-    self.cookBookLabel.backgroundColor = [UIColor orangeColor];
-    self.tagsView.backgroundColor = [UIColor greenColor];
-    self.bottomView.backgroundColor = [UIColor yellowColor];
-}
-
 - (void)setCookerStar:(CookerStar *)cookerStar
 {
     _cookerStar = cookerStar;
@@ -163,7 +134,8 @@
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
-            [self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
+            //[self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
+            [self.leaveMsgButton setTitle:@"给厨神留言" forState:UIControlStateNormal];
             break;
         case 2:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");

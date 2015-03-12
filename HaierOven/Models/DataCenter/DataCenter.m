@@ -371,6 +371,7 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
         }
         if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
             [ovens removeObject:theOven];
+            [ovens addObject:oven];
         }
         
         for (LocalOven* localOven in ovens) {
@@ -492,6 +493,14 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
 //    
 //    return _currentUser;
 //}
+
+- (UIImage *)placeHolder
+{
+    if (_placeHolder == nil) {
+        _placeHolder = [MyTool createImageWithColor:RGB(240, 240, 240)];
+    }
+    return _placeHolder;
+}
 
 - (NSMutableArray *)myOvens
 {

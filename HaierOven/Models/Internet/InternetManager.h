@@ -218,7 +218,12 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param nickName   昵称
  *  @param completion 结果回调
  */
-- (void)completeThirdPartyWithPassword:(NSString*)password phone:(NSString*)phone email:(NSString*)email userName:(NSString*)userName nickName:(NSString*)nickName callBack:(myCallback)completion;
+- (void)completeThirdPartyWithPassword:(NSString*)password
+                                 phone:(NSString*)phone
+                                 email:(NSString*)email
+                              userName:(NSString*)userName
+                              nickName:(NSString*)nickName
+                              callBack:(myCallback)completion;
 
 
 /**

@@ -76,6 +76,11 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
 @property (nonatomic) NSInteger messagesCount;
 
 /**
+ *  加载菜谱的预设图
+ */
+@property (strong, nonatomic) UIImage* placeHolder;
+
+/**
  *  模型层单例
  *
  *  @return 返回DataCenter单例

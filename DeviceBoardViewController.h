@@ -47,5 +47,10 @@ typedef NS_ENUM(NSInteger, DeviceBoardStatus)
  */
 @property (strong, nonatomic) LocalOven* currentOven;
 
+/**
+ *  点击开始烹饪的烤箱设置模式，烤箱根据此模式开始工作
+ */
+@property (strong, nonatomic) CookbookOven* startBakeOvenInfo;
+
 
 @end

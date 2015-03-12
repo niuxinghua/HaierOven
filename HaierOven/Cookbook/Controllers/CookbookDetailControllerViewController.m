@@ -323,6 +323,7 @@
             tableView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getStepsViewHeight] + [self getSkillCellHeight]);
             tableView.tag = 6;
             StepsViewController* controller = [[StepsViewController alloc] initWithCookbookDetail:self.cookbookDetail delegate:self];
+            controller.isAuthority = self.isAuthority;
             self.stepsTableViewDataSource = controller;
             tableView.delegate = controller;
             tableView.dataSource = controller;
@@ -531,7 +532,6 @@
     
     self.tableView.keyboardTriggerOffset = window.bounds.size.height;
     
-    
     [self.cookbookDetailCell.contentView addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
         
         NSLog(@"keyboardFrameInView y : %.2f", keyboardFrameInView.origin.y);
@@ -657,6 +657,7 @@
     self.navigationController.navigationBar.translucent = NO;
     
     [self hideKeyboard];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
 }
 
@@ -868,7 +869,7 @@
 - (CGFloat)getSkillCellHeight
 {
     // 技巧小贴士
-    CGFloat height = 36 + 71;
+    CGFloat height = self.isAuthority ? 36 + 71 : 36 + 10;
     height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
     return height;
 }
@@ -945,6 +946,9 @@
 
 #pragma mark - 按钮响应事件
 
+/**
+ *  开始烘焙
+ */
 - (void)startCook
 {
     _iOS7OvenListFlag = YES;
@@ -957,6 +961,10 @@
         //只有1台的时候直接跳转到烤箱控制面板
         DeviceBoardViewController* deviceBoardController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceBoardViewController"];
         deviceBoardController.currentOven = [[DataCenter sharedInstance].myOvens firstObject];
+        
+        // 根据烤箱设置信息查找烘焙模式
+        deviceBoardController.startBakeOvenInfo = self.cookbookDetail.oven;
+        
         [self.navigationController pushViewController:deviceBoardController animated:YES];
         
     }
@@ -1240,7 +1248,7 @@
             [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
                 if (success) {
                     NSLog(@"分享成功送积分OK");
-                    [super showProgressCompleteWithLabelText:@"分享成功 +20点心" afterDelay:1];
+                    [super showProgressCompleteWithLabelText:@"分享成功，获得20点心" afterDelay:1];
                 }
             }];
             
