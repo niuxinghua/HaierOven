@@ -217,6 +217,8 @@ typedef NS_ENUM(NSInteger, NotificationType)
         [self deleteMarkLabel];
     }
     
+    [MobClick event:@"view_notification"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -479,7 +481,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.notificationType == NotificationTypeSystem) {
         
         if (indexPath.section == 0) {

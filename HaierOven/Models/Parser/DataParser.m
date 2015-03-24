@@ -236,8 +236,7 @@
     NSString* imagePath;
     
 //    path = [path stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
-    
-    imagePath = [BaseOvenUrl stringByAppendingPathComponent:path];
+    imagePath = [path hasPrefix:@"http"] ? path : [BaseOvenUrl stringByAppendingPathComponent:path];
     
     return imagePath;
 }
@@ -285,7 +284,7 @@
         NSDictionary* creatDict = cookbookDict[@"creator"];
         cookbook.creator        = [DataParser parseCreatorWithDict:creatDict];
         
-        if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
+        if ([cookbook.creator.userLevel isEqualToString:@"1"] /*|| [cookbook.creator.userLevel isEqualToString:@"2"]*/) {
             cookbook.isAuthority = YES;
         }
         

@@ -320,7 +320,8 @@
 //                                    @"uvc" : uvc
                                     };
         
-        // 2. 发送网络请求
+        // 2. 发送网络请求 拼接字符串
+
         NSString* path = [[GetVerifyCode stringByAppendingPathComponent:uvc] stringByAppendingPathComponent:@"verify"];
         [[self manager] POST:path parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
@@ -399,6 +400,88 @@
                 // 是不是手机号登录
                 [userDefaults setBool:[MyTool validateTelephone:loginId] forKey:@"phoneLogin"];
 
+                [userDefaults synchronize];
+                completion(YES, responseObject, nil);
+                
+                // 发送通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                
+                // 统计用户使用时长
+                [uAnalysisManager onUserLogin:loginId];
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            completion(NO, nil, error);
+            
+        }];
+        
+    } else {
+        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+    
+}
+
+- (void)loginWithSequenceId:(NSString*)sequenceId
+                 andAccType:(AccType)accType
+                 andloginId:(NSString*)loginId
+                andPassword:(NSString*)password
+         andThirdpartyAppId:(NSString*)thirdPartyAppId
+   andThirdpartyAccessToken:(NSString*)thirdPartyAccessToken
+               andLoginType:(LoginType)loginType
+                   nickName:(NSString*)nickName
+                 userAvatar:(NSString*)userAvatar
+                   callBack:(myCallback)completion
+{
+    
+    if ([self canConnectInternet]) {
+        
+        //        NSString* md5Password = [MyTool stringToMD5:password];
+        
+        // 1. 将参数序列化
+        NSNumber* acctp = [NSNumber numberWithInteger:accType];
+        NSNumber* logintp = [NSNumber numberWithInteger:loginType];
+        NSDictionary* paramsDict = @{
+                                     @"sequenceId" : sequenceId,
+                                     @"accType": acctp,
+                                     @"loginId" : loginId,
+                                     @"password" : password,
+                                     @"thirdpartyAppId" : thirdPartyAppId == nil ? [NSNull null] : thirdPartyAppId ,
+                                     @"thirdpartyAccessToken" : thirdPartyAccessToken == nil ? [NSNull null] : thirdPartyAccessToken,
+                                     @"loginType" : logintp,
+                                     @"nickName" : nickName,
+                                     @"userAvatar" : userAvatar
+                                     };
+        
+        // 2. 发送网络请求，登录Header需要appId,appKey,appVersion,clientId, accessToken为空
+        NSLog(@"login info:%@", paramsDict);
+        [[self manager] POST:UserLogin parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            NSLog(@"%@", responseObject[@"err"]);
+            
+            if ([status isEqualToString:@"1"]) {
+                // 3. 保存登录信息
+                
+                NSDictionary* dataDict = responseObject[@"data"];
+                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                NSString* baseId = [NSString stringWithFormat:@"%@", dataDict[@"userBaseID"]];
+                [userDefaults setObject:baseId forKey:@"userBaseId"];
+                
+                NSString* accToken = [NSString stringWithFormat:@"%@", dataDict[@"accessToken"]];
+                [userDefaults setObject:accToken forKey:@"accessToken"];
+                
+                [userDefaults setObject:loginId forKey:@"loginId"];
+                [userDefaults setObject:password forKey:@"password"];
+                
+                [userDefaults setBool:YES forKey:@"isLogin"];
+                
+                // 是不是手机号登录
+                [userDefaults setBool:[MyTool validateTelephone:loginId] forKey:@"phoneLogin"];
+                
                 [userDefaults synchronize];
                 completion(YES, responseObject, nil);
                 
@@ -1688,8 +1771,8 @@
             cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle == nil ? @"" : cookbookDetail.oven.roastStyle;
             cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature == nil ? @"" : cookbookDetail.oven.roastTemperature;
             cookbookOvenDict[@"roastTime"] = cookbookDetail.oven.roastTime == nil ? @0 : [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
-            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo == nil ? @"" : cookbookDetail.oven.ovenInfo;
-            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"未使用烤箱" : cookbookDetail.oven.ovenType;
+            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo == nil ? @{@"name" : @""} : cookbookDetail.oven.ovenInfo;
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
         }
         
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
@@ -1732,7 +1815,7 @@
         [[self manager] POST:AddCookbook parameters:paramsDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
-            
+            NSLog(@"err: %@", responseObject[@"err"]);
             if ([status isEqualToString:@"1"]) {
                 // 3. 回调添加结果
                 completion(YES, cookbookDetail, nil);
@@ -1799,8 +1882,8 @@
             cookbookOvenDict[@"roastStyle"] = cookbookDetail.oven.roastStyle;
             cookbookOvenDict[@"roastTemperature"] = cookbookDetail.oven.roastTemperature;
             cookbookOvenDict[@"roastTime"] = [NSNumber numberWithInt:[cookbookDetail.oven.roastTime intValue]];
-            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo;
-            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"未使用烤箱" : cookbookDetail.oven.ovenType;
+            cookbookOvenDict[@"oveninfo"] = cookbookDetail.oven.ovenInfo == nil ? @{@"name" : @""} : cookbookDetail.oven.ovenInfo;
+            cookbookOvenDict[@"ovenType"] = cookbookDetail.oven.ovenType == nil ? @"" : cookbookDetail.oven.ovenType;
         }
             paramsDict = @{@"cookbookName" : cookbookDetail.name,
                            @"cookbookDesc" : cookbookDetail.desc,
@@ -2721,7 +2804,40 @@
     
 }
 
-
+- (void)getAppStoreUrlCallback:(myCallback)completion
+{
+    if ([self canConnectInternet]) {
+        
+        // 1. 发送请求
+        
+        [[self manager] GET:GetAppStorePath parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString* status = [NSString stringWithFormat:@"%@", responseObject[@"status"]];
+            
+            if ([status isEqualToString:@"1"]) {
+                // 2. 缓存本地
+                
+                // 3. 解析json字典
+                NSDictionary* data = responseObject[@"data"];
+                
+                completion(YES, data[@"iosAPP"], nil);
+                
+            } else {
+                completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:nil]);
+        }];
+        
+    } else {
+        // 如果没有网络，从本地缓存读取用户信息
+        id tagsDict = [[DataCenter sharedInstance] getTagsObject];
+        NSMutableArray* tags = [DataParser parseTagsWithDict:tagsDict];
+        completion(YES, tags, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+    }
+}
 
 
 

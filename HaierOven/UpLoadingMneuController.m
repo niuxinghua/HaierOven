@@ -186,10 +186,12 @@ typedef void (^result) (BOOL success);
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    self.tempImage = image;
+    [picker dismissViewControllerAnimated:YES completion:^{
+        self.tempImage = image;
+        [self openEditor];
+
+    }];
     
-    [self openEditor];
     
 }
 
@@ -225,10 +227,6 @@ typedef void (^result) (BOOL success);
 {
     [controller dismissViewControllerAnimated:YES completion:NULL];
 }
-
-
-
-
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];

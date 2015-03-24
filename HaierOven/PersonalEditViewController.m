@@ -449,10 +449,11 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    self.tempAvatar = image;
-    
-    [self openEditor];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        self.tempAvatar = image;
+        [self openEditor];
+        
+    }];
     
 }
 - (void)openEditor

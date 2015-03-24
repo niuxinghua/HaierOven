@@ -247,7 +247,7 @@
 //                                                            //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
 //                                                            
 //                                                        }];
-                                                        
+                                                        [MobClick event:@"user_register"];
                                                         
                                                     } else {
                                                         [super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];

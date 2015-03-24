@@ -17,9 +17,18 @@
 //#define BaseUrl         @"http://115.29.8.251:8081/app"
 //#define BaseOvenUrl     @"http://115.29.8.251:8081"
 
-#define BaseUrl         @"http://115.29.8.251:8082/app"
-#define BaseOvenUrl     @"http://115.29.8.251:8082"
-#define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
+//#define BaseUrl         @"http://115.29.8.251:8082/app"
+//#define BaseOvenUrl     @"http://115.29.8.251:8082"
+
+//#define BaseUrl         @"http://115.29.172.65:8080/app"  //模拟正式环境Url
+//#define BaseOvenUrl     @"http://115.29.172.65:8080"
+//
+//#define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
+
+#define BaseUrl         @"http://203.130.41.38/app"  //模拟正式环境Url
+#define BaseOvenUrl     @"http://203.130.41.38"
+
+#define BaseShareUrl    @"203.130.41.38/cookbook/detail"
 
 //#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
 
@@ -60,8 +69,8 @@
 /**
  *  获取动态验证码
  */
-//#define GetVerifyCode       [NSString stringWithFormat:@"%@/%@", BaseUrl, @"user/vercode"]
-#define GetVerifyCode        @"http://103.8.220.166:40000/commonapp/uvcs"
+#define GetVerifyCode       [NSString stringWithFormat:@"%@/%@", BaseUhomeUrl, @"uvcs"]
+//#define GetVerifyCode        @"http://uhome.haier.net:6000/commonapp/uvcs"
 
 /**
  *  用户退出登录
@@ -341,7 +350,10 @@
  */
 #define Feedback     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/feedback"]
 
-
+/**
+ * 获取App下载路径
+ */
+#define GetAppStorePath     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/appstore"]
 
 
 
@@ -351,11 +363,8 @@
 
 #define DownloadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Download"]
 
-#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8082/file/upload"]
-
-
-
-
+//#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8082/file/upload"]
+#define UploadFile    [NSString stringWithFormat:@"%@/%@", BaseOvenUrl, @"file/upload"]
 
 
 

@@ -910,6 +910,8 @@
                                                                     //[self performSelector:@selector(completeBake) withObject:nil afterDelay:bakeSeconds];
                                                                     self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeBake) userInfo:nil repeats:NO];
                                                                     
+                                                                    [MobClick event:@"start_bake"];
+                                                                    
                                                                 }];
                             
                         } else {
@@ -1608,6 +1610,8 @@
                                                                     
                                                                     //                                                                    [self performSelector:@selector(completeWarmUp) withObject:nil afterDelay:bakeSeconds];
                                                                     self.bakeTimer = [NSTimer scheduledTimerWithTimeInterval:bakeSeconds target:self selector:@selector(completeWarmUp) userInfo:nil repeats:NO];
+                                                                    
+                                                                    [MobClick event:@"quick_warmup"];
                                                                     
                                                                 }];
                             

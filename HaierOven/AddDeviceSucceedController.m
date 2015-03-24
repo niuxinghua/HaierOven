@@ -147,6 +147,8 @@
         }];
     }
     
+    [MobClick event:@"bind_oven" attributes:@{@"烤箱MAC" : oven.mac}];
+    
 }
 
 - (void)dealloc

@@ -72,6 +72,8 @@
             }
             [self.table reloadData];
             
+            [MobClick event:@"search_cookbook" attributes:@{@"关键词" : keyword}];
+            
             UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
             [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"搜索页面"];
         }
@@ -231,6 +233,7 @@
     foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
     
+    [MobClick event:@"click_tag" attributes:@{@"标签名" : theTag.name}];
 
     NSLog(@"跳跳跳");
 }
@@ -292,7 +295,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (!self.searchedFlag) {
         SearchTableCell* cell = (SearchTableCell*)[tableView cellForRowAtIndexPath:indexPath];
         self.searchedFlag = NO;

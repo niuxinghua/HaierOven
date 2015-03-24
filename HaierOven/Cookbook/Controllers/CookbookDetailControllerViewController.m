@@ -219,7 +219,10 @@
     self.tagsView.style = AutoSizeLabelViewStyleMenuDetail;
     self.tagsView.tags = [tagNames copy];
     
-    
+    if (!self.isPreview) {
+        [MobClick event:@"cookbook_detail" attributes:@{@"菜谱": self.cookbookDetail.name,
+                                                        @"作者": self.cookbookDetail.creator.userName}];
+    }
     
     self.cookbookNameLabel.text = self.cookbookDetail.name;
     
@@ -517,7 +520,7 @@
     
     UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [sendButton addTarget:self action:@selector(didTapSend:) forControlEvents:UIControlEventTouchUpInside];
-    [sendButton setTitle:@"确定" forState:UIControlStateNormal];
+    [sendButton setTitle:@"发送" forState:UIControlStateNormal];
     [sendButton setTitleColor:GlobalOrangeColor forState:UIControlStateNormal];
     sendButton.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size:15];
     
@@ -607,6 +610,8 @@
                                                                  
                                                              }];
                                                              [self.commentsTableView reloadData];
+                                                             
+                                                             [MobClick event:@"comment_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
                                                              
                                                          } else {
                                                              NSLog(@"评论失败");
@@ -1113,6 +1118,12 @@
         if (success) {
             if (self.shoppingListCount <= 10) 
                 [super showProgressCompleteWithLabelText:@"添加成功" afterDelay:1];
+            if (!self.isPreview) {
+                [MobClick event:@"add_shoppinglist" attributes:@{@"菜谱": self.cookbookDetail.name,
+                                                                 @"作者": self.cookbookDetail.creator.userName}];
+            }
+            
+            
         } else {
             [super showProgressErrorWithLabelText:@"添加失败" afterDelay:1];
         }
@@ -1138,6 +1149,7 @@
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             [super showProgressCompleteWithLabelText:@"菜谱点赞成功" afterDelay:1];
+            [MobClick event:@"praise_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
             self.praiseButton.selected = YES;
         } else {
             [super showProgressErrorWithLabelText:@"赞菜谱没有成功" afterDelay:1];
@@ -1213,7 +1225,8 @@
         [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
     } else if ([platformName hasPrefix:@"sina"]) {
         
-        NSString* sharePath = [@"http://115.29.8.251:8082/cookbook/detail" stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
+        NSString* sharePath = [NSString stringWithFormat:@"http://%@", BaseShareUrl];
+        sharePath = [sharePath stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
         sharePath = [sharePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [UMSocialData defaultData].shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@。\n%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName, sharePath];
         

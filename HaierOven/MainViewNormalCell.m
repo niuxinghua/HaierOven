@@ -11,6 +11,8 @@
 
 @interface MainViewNormalCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 @property (strong, nonatomic) UIImage* placeholder;
 
 @end
@@ -27,6 +29,9 @@
     
     self.cookStarImageView.hidden = YES;
     self.placeholder = [DataCenter sharedInstance].placeHolder;
+    
+    self.containerView.layer.cornerRadius = 8;
+    self.containerView.layer.masksToBounds = YES;
     
     // 设置文本阴影
     self.goodCountLabel.shadowColor = RGBACOLOR(0, 0, 0, 0.6);
@@ -54,8 +59,10 @@
     [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto] placeholderImage:self.placeholder];
 
     // 判断是否是官方菜谱
-    self.cookStarImageView.hidden = !cookbook.isAuthority;
-    self.AuthorityLabel.hidden = !cookbook.isAuthority;
+    if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
+        self.cookStarImageView.hidden = NO;
+    }
+    self.AuthorityLabel.hidden = !cookbook.isAuthority; // 只有userLevel为1才显示“官方菜谱”
     
     [self.avater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     

@@ -135,16 +135,31 @@
 
 - (IBAction)PostMark:(id)sender {
     NSLog(@"app打分");
-    
-    SKStoreProductViewController *skVC=[SKStoreProductViewController new];
-    skVC.delegate = self;
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:AppStoreID forKey:SKStoreProductParameterITunesItemIdentifier];
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
-    [self performSelector:@selector(dismissHud) withObject:nil afterDelay:10];
-    [skVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error) {
-        //[super hiddenProgressHUD];
+    [[InternetManager sharedManager] getAppStoreUrlCallback:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
+        if (success) {
+            NSString* appUrl = obj;
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+            [MobClick event:@"app_comment"];
+        } else {
+            [super showProgressErrorWithLabelText:@"获取App路径失败" afterDelay:1];
+        }
+        
     }];
-    [self presentViewController:skVC animated:YES completion:nil];
+    
+//    SKStoreProductViewController *skVC=[SKStoreProductViewController new];
+//    skVC.delegate = self;
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:AppStoreID forKey:SKStoreProductParameterITunesItemIdentifier];
+//    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+//    [self performSelector:@selector(dismissHud) withObject:nil afterDelay:10];
+//    [skVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error) {
+//        //[super hiddenProgressHUD];
+//        
+//        [MobClick event:@"app_comment"];
+//        
+//    }];
+//    [self presentViewController:skVC animated:YES completion:nil];
     
 }
 

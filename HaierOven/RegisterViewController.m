@@ -276,6 +276,9 @@
                                                         }
                                                         
                                                         //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
+                                                        
+                                                        [MobClick event:@"user_register"];
+                                                        
                                                     } else {
                                                         [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                                     }

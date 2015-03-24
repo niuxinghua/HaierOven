@@ -186,6 +186,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Friend* friend = self.friends[indexPath.row];
     PersonalCenterViewController* personalViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonalCenterViewController"];
     
