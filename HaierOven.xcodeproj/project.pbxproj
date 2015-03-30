@@ -871,6 +871,7 @@
 		8438F6F31A67B7A200E1436C /* Equipment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F21A67B7A200E1436C /* Equipment.m */; };
 		8438F6F71A67C89A00E1436C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F61A67C89A00E1436C /* WebViewController.m */; };
 		8438F6FA1A67CFA500E1436C /* NoticeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F6F91A67CFA500E1436C /* NoticeInfo.m */; };
+		8439CA5D1AC2C12B0041FC59 /* OvenOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8439CA5C1AC2C12B0041FC59 /* OvenOperator.m */; };
 		843CD1AE1AA02007005BC8D7 /* uAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CD1AD1AA02007005BC8D7 /* uAnalytics.framework */; };
 		843CD1B11AA07710005BC8D7 /* cookbook_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 843CD1AF1AA07710005BC8D7 /* cookbook_cancel.png */; };
 		843CD1B21AA07710005BC8D7 /* cookbook_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */; };
@@ -2365,6 +2366,8 @@
 		8438F6F61A67C89A00E1436C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		8438F6F81A67CFA500E1436C /* NoticeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeInfo.h; sourceTree = "<group>"; };
 		8438F6F91A67CFA500E1436C /* NoticeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeInfo.m; sourceTree = "<group>"; };
+		8439CA5B1AC2C12B0041FC59 /* OvenOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvenOperator.h; sourceTree = "<group>"; };
+		8439CA5C1AC2C12B0041FC59 /* OvenOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvenOperator.m; sourceTree = "<group>"; };
 		843CD1AD1AA02007005BC8D7 /* uAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = uAnalytics.framework; sourceTree = "<group>"; };
 		843CD1AF1AA07710005BC8D7 /* cookbook_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookbook_cancel.png; sourceTree = "<group>"; };
 		843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookbook_cancel@2x.png"; sourceTree = "<group>"; };
@@ -4778,6 +4781,8 @@
 				844117661A4BB8AF00628A64 /* OvenManager.m */,
 				849392531A6F3ECB00D78106 /* OvenStatus.h */,
 				849392541A6F3ECB00D78106 /* OvenStatus.m */,
+				8439CA5B1AC2C12B0041FC59 /* OvenOperator.h */,
+				8439CA5C1AC2C12B0041FC59 /* OvenOperator.m */,
 			);
 			path = OvenManager;
 			sourceTree = "<group>";
@@ -6642,6 +6647,7 @@
 				45C7E5C21A400D71000B086B /* LeftMenuViewController.m in Sources */,
 				45C7E55E1A3FD9AE000B086B /* BaseNavigationController.m in Sources */,
 				45332B9C1A6FA17F0014E8AA /* StudyDetailFiexView.m in Sources */,
+				8439CA5D1AC2C12B0041FC59 /* OvenOperator.m in Sources */,
 				458952E31A496237009B5DD1 /* DeviceBoardViewController.m in Sources */,
 				458952CB1A49400E009B5DD1 /* AddDeviceFailedController.m in Sources */,
 				8447CB771A5FC73700FADF9D /* JSQMessagesAvatarImage.m in Sources */,

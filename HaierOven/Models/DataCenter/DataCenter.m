@@ -93,6 +93,7 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
  **/
 - (NSString*)getUserDataPath;
 {
+    NSLog(@"%@", USER_DATA_PATH);
     return USER_DATA_PATH;
 }
 
@@ -425,21 +426,47 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     NSMutableArray* ovens = self.myOvens;
     NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
     LocalOven* theOven;
+    
+    
     for (LocalOven* localOven in ovens) {
         if ([localOven.mac isEqualToString:oven.mac]) {
             theOven = localOven;
-        } else {
-            [ovenArr addObject:localOven];
+            break;
         }
     }
     if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
         [ovens removeObject:theOven];
+        [ovens addObject:oven];
     }
-    NSDictionary* ovenDict = [oven toDictionary];
-    [ovenArr addObject:ovenDict];
+    
+    for (LocalOven* localOven in ovens) {
+        NSDictionary* ovenDict = [localOven toDictionary];
+        [ovenArr addObject:ovenDict];
+    }
+    
+    
     NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
     [ovenArr writeToFile:filePath atomically:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
+    
+//    NSMutableArray* ovens = self.myOvens;
+//    NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
+//    LocalOven* theOven;
+//    for (LocalOven* localOven in ovens) {
+//        if ([localOven.mac isEqualToString:oven.mac]) {
+//            theOven = localOven;
+//        } else {
+//            [ovenArr addObject:localOven];
+//        }
+//    }
+//    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
+//        [ovens removeObject:theOven];
+//    }
+//    NSDictionary* ovenDict = [oven toDictionary];
+//    [ovenArr addObject:ovenDict];
+//    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
+//    [ovenArr writeToFile:filePath atomically:YES];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
 }
 
 

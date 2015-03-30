@@ -139,9 +139,12 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-        [NSThread sleepForTimeInterval:3]; //无意义的延时
+        [NSThread sleepForTimeInterval:2]; //无意义的延时
         
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
+        
+        [NSThread sleepForTimeInterval:2]; //无意义的延时
+        
         [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
             
             if (success) {
@@ -232,7 +235,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
 //            uSDKDevice* device = [devices firstObject];
             if (devices.count == 0) {
-                callback(NO, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"获取失败"], nil);
+                callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"获取失败"]);
             } else {
                 callback(YES, devices, nil);
             }
@@ -331,7 +334,9 @@
         
     } else if ([notification.name isEqualToString:DEVICE_ALARM_NOTIFICATION]) {
         NSLog(@"设备报警");
-        
+        NSLog(@"%@", notification.userInfo);
+        NSLog(@"%@", self.subscribedDevice.alarmList);
+        [self updateCurrentOvenStatus];
         [self sendErrorNotification];
         
     } else if ([notification.name isEqualToString:DEVICE_INFRAREDINFO_NOTIFICATION]) {
@@ -376,13 +381,6 @@
         
         InnerErrorReportMessage * errnoInfo = notification.object;
         NSInteger errorNo = errnoInfo.errorNo;
-        
-        NSString* notificationBody = [NSString stringWithFormat:@"设定的闹钟时间到"];
-        NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
-                               @"desc" : notificationBody};
-        
-        [[DataCenter sharedInstance] addOvenNotification:info];
-        
         
         //3.针对目前统计,开发者需要过滤出来这几个错误码然后调用接口
         if (errorNo == 90105101 || errorNo == 90105102 || errorNo == 90105103 || errorNo == 90105107) {
@@ -690,6 +688,10 @@
         statusAttr = attrDict[@"60v003"];
         _currentStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
         
+        // 是否预热完成
+        statusAttr = attrDict[@"50v009"];
+        _currentStatus.preheatCompleted = statusAttr != nil;
+        
     }];
     
 }
@@ -746,6 +748,10 @@
             statusAttr = attrDict[@"60v003"];
             ovenStatus.hadTemperatureDetector = [statusAttr.attrValue isEqualToString:@"30v002"] ? YES : NO;
             
+            // 是否预热完成
+            statusAttr = attrDict[@"50v009"];
+            ovenStatus.preheatCompleted = statusAttr != nil;
+            
             callback(YES, ovenStatus, nil);
             
         } else {
@@ -771,53 +777,121 @@
                 }
             }
             
-            NSMutableDictionary* attrDict = currentDevice.attributeDict;
-            
             NSString* notificationBody;
             
-            
-            // 报警信息
-            if (attrDict[@"50v001"] != nil) {
-                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v002"] != nil) {
-                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v003"] != nil) {
-                notificationBody = @"温馨提示：通过检测，您的烤箱预热已经超时，请检查烤箱门体是否关闭，烤箱工作后15min未达到设定温度";
-            } else if (attrDict[@"50v004"] != nil) {
-                notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v005"] != nil) {
-                notificationBody = @"温馨提示：通过检测，您家的烤箱已多次使用，建议您方便的时候进行保养、清洁，以便于保证他的使用效果";
-            } else if (attrDict[@"50v006"] != nil) {
-                notificationBody = @"温馨提示：通过检测，烤箱运行已经超过1个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
-            } else if (attrDict[@"50v007"] != nil) {
-                notificationBody = @"温馨提示：通过检测，烤箱运行已经超过2个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
-            } else if (attrDict[@"50v008"] != nil) {
-                notificationBody = @"温馨提示：此次烘培未设定烹饪时间，请随时关注烘培时间以及食物状态";
-            } else if (attrDict[@"50v009"] != nil) {
-                notificationBody = @"温馨提示：烤箱预热完成，请将食物放入烤箱";
-            } else if (attrDict[@"50v00a"] != nil) {
-                notificationBody = @"温馨提示：烤箱持续运行时间超过2个小时，仍未自动关机";
-            } else if (attrDict[@"50v00b"] != nil) {
-                notificationBody = @"闹铃时间到，请进行下一步操作";
-            } else if (attrDict[@"50v00c"] != nil) {
-                notificationBody = @"温馨提示：PCB板线路故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v00d"] != nil) {
-                notificationBody = @"温馨提示：WIFI(通讯协议）故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v00e"] != nil) {
-                notificationBody = @"温馨提示：电路板温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else if (attrDict[@"50v00f"] != nil) {
-                notificationBody = @"温馨提示：显示屏幕温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
-            } else {
-                notificationBody = nil;
-            }
-            
-            if (notificationBody != nil) {
-                NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
-                                       @"desc" : notificationBody};
+            for (uSDKDeviceAlarm* deviceAlarm in self.subscribedDevice.alarmList) {
+                // 报警信息
                 
-                [[DataCenter sharedInstance] addOvenNotification:info];
-                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeAlert fireTime:1 alertBody:notificationBody];
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v001"]) {
+                    notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v002"]) {
+                    notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v003"]) {
+                    notificationBody = @"温馨提示：通过检测，您的烤箱预热已经超时，请检查烤箱门体是否关闭，烤箱工作后15min未达到设定温度";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v004"]) {
+                    notificationBody = @"温馨提示：通过检测，您的烤箱存在异常，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v005"]) {
+                    notificationBody = @"温馨提示：通过检测，您家的烤箱已多次使用，建议您方便的时候进行保养、清洁，以便于保证他的使用效果";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v006"]) {
+                    notificationBody = @"温馨提示：通过检测，烤箱运行已经超过1个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v007"]) {
+                    notificationBody = @"温馨提示：通过检测，烤箱运行已经超过2个小时，已经超过一般烹饪所需时间，请查看烤箱及食物状态";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v008"]) {
+                    notificationBody = @"温馨提示：此次烘培未设定烹饪时间，请随时关注烘培时间以及食物状态";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v009"]) {
+                    
+                    self.currentStatus.preheatCompleted = YES;
+                    
+                    notificationBody = @"温馨提示：烤箱预热完成，请将食物放入烤箱";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00a"]) {
+                    notificationBody = @"温馨提示：烤箱持续运行时间超过2个小时，仍未自动关机";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00b"]) {
+                    notificationBody = @"闹铃时间到，请进行下一步操作";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00c"]) {
+                    notificationBody = @"温馨提示：PCB板线路故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00d"]) {
+                    notificationBody = @"温馨提示：WIFI(通讯协议）故障，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00e"]) {
+                    notificationBody = @"温馨提示：电路板温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
+                
+                if ([deviceAlarm.alarmMessage isEqualToString:@"50v00f"]) {
+                    notificationBody = @"温馨提示：显示屏幕温度超标，请将烤箱立即断电并联系海尔客服进行4006999999检修";
+                    [self sendNotificationWithInfo:@{@"time" : [MyTool getCurrentTime],
+                                                     @"desc" : notificationBody}
+                                         alertBody:notificationBody];
+                }
             }
+            
             
         } else {
             
@@ -827,116 +901,200 @@
     }];
 }
 
+- (void)sendNotificationWithInfo:(NSDictionary*)info alertBody:(NSString*)notificationBody
+{
+    [[DataCenter sharedInstance] addOvenNotification:info];
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeAlert fireTime:1 alertBody:notificationBody];
+}
+
 #pragma mark - getters
 
-//NSArray *cxz = @[@"icon_ssk_n", @"icon_sxsk_n", @"icon_xsk_n", @"icon_fj_n", @"icon_jd_n", @"icon_3Dhb_n",
-//                 @"icon_3Dsk_n", @"icon_psms_n", @"icon_cthb_n", @"icon_rfsk_n", @"icon_dlhb_n", @"icon_rfqsk_n",
-//                 @"icon_3Drf_n", @"icon_bk_n", @"icon_cz_n", @"icon_gwz_n", @"icon_jssk_n", @"icon_qsk_n", @"icon_rfbk_n"];
+//NSArray *cxz = @[@"icon_ssk_n", @"icon_qsk_n", @"icon_rfsk_n", @"icon_rfqsk_n", @"icon_3Dsk_n", @"icon_cthb_n",
+//                 @"icon_dlhb_n", @"icon_rfbk_n", @"icon_bk_n", @"icon_3Drf_n", @"icon_psms_n", @"icon_jd_n",
+//                 @"icon_fj_n", @"icon_jssk_n", @"icon_gwz_n", @"icon_cz_n"];
+//
+//NSArray *xz = @[@"icon_ssk_s", @"icon_qsk_s", @"icon_rfsk_s", @"icon_rfqsk_s", @"icon_3Dsk_s", @"icon_cthb_s",
+//                @"icon_dlhb_s", @"icon_rfbk_s", @"icon_bk_s", @"icon_3Drf_s", @"icon_psms_s", @"icon_jd_s",
+//                @"icon_fj_s", @"icon_jssk_s", @"icon_gwz_s", @"icon_cz_s"];
 - (NSArray *)bakeModes
 {
     if (_bakeModes == nil) {
+        /**
+         *  烧烤、3D烘焙
+         */
         _bakeModes = @[
                        @{@"bakeMode"                : @{@"30v0Me" :@"上烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @10,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_ssk_n",
+                         @"selectedImage"           : @"icon_ssk_s",
+                         @"supportedDevices"        : @[@"0291800018", @"0291800020", @"0291800017", @"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v6Mm" :@"全烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @10,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_qsk_n",
+                         @"selectedImage"           : @"icon_qsk_s",
+                         @"supportedDevices"        : @[@""]},
                        
                        @{@"bakeMode"                : @{@"30v0M5" :@"热风烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @10,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_rfsk_n",
+                         @"selectedImage"           : @"icon_rfsk_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v7Mn" :@"热风全烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @10,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_rfqsk_n",
+                         @"selectedImage"           : @"icon_rfqsk_s",
+                         @"supportedDevices"        : @[@""]},
                        
                        @{@"bakeMode"                : @{@"30v0M9" :@"3D烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @10,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_3Dsk_n",
+                         @"selectedImage"           : @"icon_3Dsk_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mf" :@"传统烘焙"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_cthb_n",
+                         @"selectedImage"           : @"icon_cthb_s",
+                         @"supportedDevices"        : @[@"0291800018", @"0291800020", @"0291800017", @"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0M6" :@"对流烘焙"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_dlhb_n",
+                         @"selectedImage"           : @"icon_dlhb_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0M8" :@"热风焙烤"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_rfbk_n",
+                         @"selectedImage"           : @"icon_rfbk_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mg" :@"焙烤"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_bk_n",
+                         @"selectedImage"           : @"icon_bk_s",
+                         @"supportedDevices"        : @[@"0291800018", @"0291800020", @"0291800017"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mc" :@"3D热风"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_3Drf_n",
+                         @"selectedImage"           : @"icon_3Drf_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Md" :@"披萨模式"} ,
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_psms_n",
+                         @"selectedImage"           : @"icon_psms_s",
+                         @"supportedDevices"        : @[@"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Ma" :@"解冻"} ,
                          @"defaultTemperature"      : @60,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @120,
-                         @"temperatureChangeble"    : @NO},
+                         @"temperatureChangeble"    : @NO,
+                         @"normalImage"             : @"icon_jd_n",
+                         @"selectedImage"           : @"icon_jd_s",
+                         @"supportedDevices"        : @[@"0291800018", @"0291800020", @"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mb" :@"发酵"} ,
                          @"defaultTemperature"      : @40,
                          @"defaultTime"             : @60,
                          @"defaultSelectTime"       : @60,
-                         @"temperatureChangeble"    : @NO},
+                         @"temperatureChangeble"    : @NO,
+                         @"normalImage"             : @"icon_fj_n",
+                         @"selectedImage"           : @"icon_fj_s",
+                         @"supportedDevices"        : @[@"0291800018", @"0291800020", @"0291800017", @"0291800021"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mh" :@"加湿烧烤"},
                          @"defaultTemperature"      : @230,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_jssk_n",
+                         @"selectedImage"           : @"icon_jssk_s",
+                         @"supportedDevices"        : @[@"0291800020"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mi" :@"高温蒸"},
                          @"defaultTemperature"      : @180,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES},
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_gwz_n",
+                         @"selectedImage"           : @"icon_gwz_s",
+                         @"supportedDevices"        : @[@"0291800020"]},
                        
                        @{@"bakeMode"                : @{@"30v0Mj" :@"纯蒸"},
                          @"defaultTemperature"      : @100,
                          @"defaultTime"             : @120,
                          @"defaultSelectTime"       : @30,
-                         @"temperatureChangeble"    : @YES}
+                         @"temperatureChangeble"    : @YES,
+                         @"normalImage"             : @"icon_cz_n",
+                         @"selectedImage"           : @"icon_cz_s",
+                         @"supportedDevices"        : @[@"0291800020"]}
                        
                        ];
     }
+    
     return _bakeModes;
 }
 
+#pragma mark - 获取指定型号烤箱的烘焙模式
+
+- (NSMutableArray*)bakeModesForType:(NSString*)typeIdentifier
+{
+    NSMutableArray* modes = [NSMutableArray array];
+    
+    if (typeIdentifier == nil) {    //默认型号
+        typeIdentifier = @"0291800018";
+    }
+    
+    for (NSDictionary* modeDict in self.bakeModes) {
+        for (NSString* type in modeDict[@"supportedDevices"]) {
+            NSRange range = [typeIdentifier rangeOfString:type];
+            if (range.length != 0) {
+                [modes addObject:modeDict];
+                break;
+            }
+        }
+    }
+    
+    return modes;
+}
 
 @end
 
