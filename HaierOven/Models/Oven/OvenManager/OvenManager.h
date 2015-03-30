@@ -40,7 +40,7 @@ typedef void (^result) (BOOL result);
 @property (strong, nonatomic)uSDKDevice* subscribedDevice;
 
 /**
- *  当前烤箱的状态，当接收到设备状态变化时会更新此属性
+ *  当前烤箱的属性状态，当接收到设备状态变化时会更新此属性
  */
 @property (strong, nonatomic) OvenStatus* currentStatus;
 
@@ -207,10 +207,6 @@ typedef void (^result) (BOOL result);
  */
 - (void)setBakeTemperature:(NSString*)temperature callback:(run)completion;
 
-
-
-
-
 #pragma mark -
 
 /**
@@ -220,6 +216,17 @@ typedef void (^result) (BOOL result);
  *  @param callback  返回OvenStatus对象
  */
 - (void)getOvenStatus:(NSString*)deviceMac status:(completion)callback;
+
+#pragma mark - 获取设备支持的模式
+
+/**
+ *  根据设备型号获取支持的模式
+ *
+ *  @param typeIdentifier 型号
+ *
+ *  @return 模式列表
+ */
+- (NSMutableArray*)bakeModesForType:(NSString*)typeIdentifier;
 
 @end
 

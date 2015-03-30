@@ -50,6 +50,10 @@
  */
 @property (nonatomic) BOOL hadTemperatureDetector;
 
+/**
+ *  是否预热完成
+ */
+@property (nonatomic) BOOL preheatCompleted;
 
 
 @end

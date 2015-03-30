@@ -135,8 +135,11 @@
     }];
     [_pageViews removeAllObjects];
     
+    
     NSInteger pages = self.numberOfPages;
-    CGFloat xOffset = Main_Screen_Width > 320 ? 20 * self.numberOfPages + 50 : 20 * self.numberOfPages + 20;
+    //CGFloat xOffset = Main_Screen_Width / 2 - 20 * pages;
+    CGFloat xOffset = Main_Screen_Width / 2 - 15 * pages;
+    
     for (int i=0; i<pages; i++) {
         NSString *key = [_pattern substringWithRange:NSMakeRange(i, 1)];
         UIImageView *imageView = [self imageViewForKey:key];
