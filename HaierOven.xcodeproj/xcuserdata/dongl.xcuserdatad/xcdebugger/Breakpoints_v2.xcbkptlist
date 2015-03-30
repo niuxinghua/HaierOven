@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "700"
             endingLineNumber = "700"
-            landmarkName = "-updateUserInfo:callBack:"
+            landmarkName = "-updateEmailUserBaseId:andEmail:callBack:"
             landmarkType = "5">
             <Locations>
                <Location
