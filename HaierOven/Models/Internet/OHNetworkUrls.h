@@ -350,6 +350,10 @@
  */
 #define Feedback     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/feedback"]
 
+/**
+ * 获取App下载路径
+ */
+#define GetAppStorePath     [NSString stringWithFormat:@"%@/%@", BaseUrl, @"setting/appstore"]
 
 /**
  *  根据标签获取菜谱
