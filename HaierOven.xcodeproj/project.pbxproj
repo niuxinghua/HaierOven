@@ -4330,12 +4330,8 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				45F938601A919402006A211B /* back2.png */,
-				45F938611A919402006A211B /* back2@2x.png */,
-				45F938621A919402006A211B /* camera1.png */,
-				45F938631A919402006A211B /* camera1@2x.png */,
-				45F938641A919402006A211B /* back2@3x.png */,
-				45F938651A919402006A211B /* camera1@3x.png */,
+				843CD1AF1AA07710005BC8D7 /* cookbook_cancel.png */,
+				843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */,
 				84AD2E901A8A230A0014126A /* jifen.jpg */,
 				456BC4471A8C82F3000D9355 /* jifen2.png */,
 				84AD2EA31A8B5E0F0014126A /* APPkv-banner1.jpg */,
@@ -4711,7 +4707,6 @@
 			isa = PBXGroup;
 			children = (
 				844117371A4BB8AF00628A64 /* AFNetworking */,
-				8441174B1A4BB8AF00628A64 /* ASIHttpRequest */,
 				8441174C1A4BB8AF00628A64 /* InternetManager.h */,
 				8441174D1A4BB8AF00628A64 /* InternetManager.m */,
 				8441174E1A4BB8AF00628A64 /* OHNetworkUrls.h */,
@@ -4745,13 +4740,6 @@
 				8441174A1A4BB8AF00628A64 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		8441174B1A4BB8AF00628A64 /* ASIHttpRequest */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
 		844117631A4BB8AF00628A64 /* Oven */ = {

@@ -293,7 +293,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="authorityButton" destination="2ST-Cq-DTt" id="ZUa-MM-6ck"/>
-                        <outlet property="backIcon" destination="qKe-Om-BRx" id="eH0-wg-OUr"/>
+                        <outlet property="backButton" destination="qKe-Om-BRx" id="MTI-nD-7e8"/>
                         <outlet property="cookbookDescCell" destination="e9d-yT-7My" id="tji-Z8-V3n"/>
                         <outlet property="cookbookDescLabel" destination="hKg-OC-Whd" id="HNj-fj-KFd"/>
                         <outlet property="cookbookDetailCell" destination="smK-F0-EMr" id="B8x-No-8Td"/>

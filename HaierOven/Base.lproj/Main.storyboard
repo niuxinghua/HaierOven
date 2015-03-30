@@ -1226,7 +1226,7 @@
                                                 <constraint firstAttribute="height" constant="26" id="5Fy-7n-cyw"/>
                                                 <constraint firstAttribute="width" constant="26" id="Jv2-lN-qyh"/>
                                             </constraints>
-                                            <state key="normal" image="camera1.png">
+                                            <state key="normal" image="cookbook_camera.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
