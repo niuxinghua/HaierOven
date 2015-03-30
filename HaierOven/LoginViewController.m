@@ -117,6 +117,8 @@
                                                         [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
                                                         [userDefaults synchronize];
                                                         
+                                                        [MobClick event:@"user_login"];
+                                                        
                                                     } else {
                                                         //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                         [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
@@ -198,36 +200,70 @@
         [super showProgressHUDWithLabelText:@"请稍候" dimBackground:NO];
         
         [[InternetManager sharedManager] loginWithSequenceId:sequence
-                                                      andAccType:AccTypeQQ
-                                                      andloginId:response.data[@"openid"]
-                                                     andPassword:response.data[@"openid"]
-                                              andThirdpartyAppId:QQAppID
-                                        andThirdpartyAccessToken:response.data[@"access_token"]
-                                                    andLoginType:LoginTypeUserName
-                                                        callBack:^(BOOL success, id obj, NSError *error) {
-                                                            [super hiddenProgressHUD];
-                                                            if (success) {
-                                                                NSLog(@"登录成功");
-                                                                
-                                                                [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
-                                                                
-                                                                //保存手动登录的时间，超过20天后，需再次手动登录
-                                                                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-                                                                [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
-                                                                [userDefaults synchronize];
-                                                                
-                                                                 // 如果是第一次第三方登录，需补全用户信息
-                                                                
-                                                                self.loginId = response.data[@"openid"];
-                                                                //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
-
-                                                            } else {
-                                                                //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
-                                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
-                                                            }
+                                                  andAccType:AccTypeQQ
+                                                  andloginId:response.data[@"openid"]
+                                                 andPassword:response.data[@"openid"]
+                                          andThirdpartyAppId:QQAppID
+                                    andThirdpartyAccessToken:response.data[@"access_token"]
+                                                andLoginType:LoginTypeUserName
+                                                    nickName:response.data[@"screen_name"]
+                                                  userAvatar:response.data[@"profile_image_url"]
+                                                    callBack:^(BOOL success, id obj, NSError *error) {
+                                                        [super hiddenProgressHUD];
+                                                        if (success) {
+                                                            NSLog(@"登录成功");
                                                             
+                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
                                                             
-                                                        }];
+                                                            //保存手动登录的时间，超过20天后，需再次手动登录
+                                                            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                                                            [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+                                                            [userDefaults synchronize];
+                                                            
+                                                            // 如果是第一次第三方登录，需补全用户信息
+                                                            
+                                                            self.loginId = response.data[@"openid"];
+                                                            //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+                                                            
+                                                            [MobClick event:@"user_login"];
+                                                            
+                                                        } else {
+                                                            //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+                                                            [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
+                                                        }
+                                                    }];
+        
+//        [[InternetManager sharedManager] loginWithSequenceId:sequence
+//                                                      andAccType:AccTypeQQ
+//                                                      andloginId:response.data[@"openid"]
+//                                                     andPassword:response.data[@"openid"]
+//                                              andThirdpartyAppId:QQAppID
+//                                        andThirdpartyAccessToken:response.data[@"access_token"]
+//                                                    andLoginType:LoginTypeUserName
+//                                                        callBack:^(BOOL success, id obj, NSError *error) {
+//                                                            [super hiddenProgressHUD];
+//                                                            if (success) {
+//                                                                NSLog(@"登录成功");
+//                                                                
+//                                                                [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+//                                                                
+//                                                                //保存手动登录的时间，超过20天后，需再次手动登录
+//                                                                NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//                                                                [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+//                                                                [userDefaults synchronize];
+//                                                                
+//                                                                 // 如果是第一次第三方登录，需补全用户信息
+//                                                                
+//                                                                self.loginId = response.data[@"openid"];
+//                                                                //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+//
+//                                                            } else {
+//                                                                //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+//                                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
+//                                                            }
+//                                                            
+//                                                            
+//                                                        }];
         
         
     }];
@@ -262,6 +298,8 @@
                                           andThirdpartyAppId:SinaAppKey
                                     andThirdpartyAccessToken:response.data[@"access_token"]
                                                 andLoginType:LoginTypeUserName
+                                                    nickName:response.data[@"screen_name"]
+                                                  userAvatar:response.data[@"profile_image_url"]
                                                     callBack:^(BOOL success, id obj, NSError *error) {
                                                         
                                                         if (success) {
@@ -276,6 +314,9 @@
                                                             // 如果是第一次第三方登录，需补全用户信息
                                                             self.loginId = response.data[@"openid"];
                                                             //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+                                                            
+                                                            [MobClick event:@"user_login"];
+                                                            
                                                         } else {
                                                             //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                             [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
@@ -283,6 +324,35 @@
                                                         
                                                         
                                                     }];
+        
+//        [[InternetManager sharedManager] loginWithSequenceId:sequence
+//                                                  andAccType:AccTypeSina
+//                                                  andloginId:response.data[@"uid"]
+//                                                 andPassword:response.data[@"uid"]
+//                                          andThirdpartyAppId:SinaAppKey
+//                                    andThirdpartyAccessToken:response.data[@"access_token"]
+//                                                andLoginType:LoginTypeUserName
+//                                                    callBack:^(BOOL success, id obj, NSError *error) {
+//                                                        
+//                                                        if (success) {
+//                                                            NSLog(@"登录成功");
+//                                                            [super showProgressCompleteWithLabelText:@"登录成功" afterDelay:1];
+//                                                            
+//                                                            //保存手动登录的时间，超过20天后，需再次手动登录
+//                                                            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//                                                            [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
+//                                                            [userDefaults synchronize];
+//                                                            
+//                                                            // 如果是第一次第三方登录，需补全用户信息
+//                                                            self.loginId = response.data[@"openid"];
+//                                                            //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
+//                                                        } else {
+//                                                            //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
+//                                                            [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
+//                                                        }
+//                                                        
+//                                                        
+//                                                    }];
         
         
     }];

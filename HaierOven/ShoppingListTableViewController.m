@@ -114,6 +114,9 @@
     } else {
         [self deleteMarkLabel];
     }
+    
+    [MobClick event:@"shopping_list"];
+    
 }
 
 - (void)dealloc

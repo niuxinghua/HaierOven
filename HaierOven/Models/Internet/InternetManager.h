@@ -195,6 +195,31 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
                    callBack:(myCallback)completion;
 
 /**
+ *  第三方登录接口
+ *
+ *  @param sequenceId            流水号
+ *  @param accType               接入类型
+ *  @param loginId               用户名
+ *  @param password              密码
+ *  @param thirdPartyAppId       第三方登录AppId
+ *  @param thirdPartyAccessToken 第三方登录AccessToken
+ *  @param loginType             登录类型
+ *  @param nickName              昵称
+ *  @param userAvatar            头像
+ *  @param completion            结果回调
+ */
+- (void)loginWithSequenceId:(NSString*)sequenceId
+                 andAccType:(AccType)accType
+                 andloginId:(NSString*)loginId
+                andPassword:(NSString*)password
+         andThirdpartyAppId:(NSString*)thirdPartyAppId
+   andThirdpartyAccessToken:(NSString*)thirdPartyAccessToken
+               andLoginType:(LoginType)loginType
+                   nickName:(NSString*)nickName
+                 userAvatar:(NSString*)userAvatar
+                   callBack:(myCallback)completion;
+
+/**
  *  获取动态验证码
  *
  *  @param loginName     用户名
@@ -218,7 +243,12 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  *  @param nickName   昵称
  *  @param completion 结果回调
  */
-- (void)completeThirdPartyWithPassword:(NSString*)password phone:(NSString*)phone email:(NSString*)email userName:(NSString*)userName nickName:(NSString*)nickName callBack:(myCallback)completion;
+- (void)completeThirdPartyWithPassword:(NSString*)password
+                                 phone:(NSString*)phone
+                                 email:(NSString*)email
+                              userName:(NSString*)userName
+                              nickName:(NSString*)nickName
+                              callBack:(myCallback)completion;
 
 
 /**
@@ -698,7 +728,11 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)feedbackWithContent:(NSString*)content phone:(NSString*)phone callBack:(myCallback)completion;
 
-
+/**
+ *  获取App下载路径
+ *  @param completion 结果回调
+ */
+- (void)getAppStoreUrlCallback:(myCallback)completion;
 
 
 

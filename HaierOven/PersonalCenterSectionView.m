@@ -13,7 +13,7 @@
 
 @interface PersonalCenterSectionView ()
 
-@property (nonatomic) BOOL isFirstContent;
+
 
 @end
 
@@ -43,22 +43,27 @@
     [super layoutSubviews];
     if (_isFirstContent) {
         self.orangeLine.frame = CGRectMake(self.pushedButton.left + 15, self.pushedButton.height-9, self.pushedButton.width-30, 2);
+    } else {
+        [self.orangeLine setFrame:CGRectMake(self.likeButton.left+15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
     }
-    
+
 }
 
 - (IBAction)TurnPushedController:(UIButton *)sender {
     _isFirstContent = YES;
-        [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.orangeLine setFrame:CGRectMake(15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
         }completion:^(BOOL finished) {
             [self.delegate SectionType:sender.tag];
         }];
     
 }
 
-- (IBAction)TurnLikeController:(UIButton *)sender {
+- (IBAction)TurnLikeController:(UIButton *)sender
+{
     _isFirstContent = NO;
-    [UIView animateWithDuration:0.2 animations:^{[self.orangeLine setFrame:CGRectMake(self.likeButton.left+15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.orangeLine setFrame:CGRectMake(self.likeButton.left+15, self.pushedButton.height-9, self.pushedButton.width-30, 2)];
     }completion:^(BOOL finished) {
         [self.delegate SectionType:sender.tag];
     }];

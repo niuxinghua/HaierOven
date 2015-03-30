@@ -33,6 +33,8 @@
   @[@"打发黄油",@"简易蛋糕制作要点",@"蛋白打发法",@"全蛋打发法",@"打发鲜奶油",@"面包制作流程",@"酥皮制作"]];
     indexFiex = 99;
     
+    [MobClick event:@"learn_bake"];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated

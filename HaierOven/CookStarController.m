@@ -137,6 +137,8 @@
         [self deleteMarkLabel];
     }
     
+    [MobClick event:@"cookerStar_list"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -183,6 +185,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CookStarDetailController *csd = [self.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
     csd.cookerStar = self.cookerStars[indexPath.row];
     csd.delegate = self;

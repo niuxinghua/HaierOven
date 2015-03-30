@@ -117,6 +117,8 @@
     
     self.title = self.toUserName;
     
+    [MobClick event:@"leave_message"];
+    
 }
 
 - (void)setupSubviews

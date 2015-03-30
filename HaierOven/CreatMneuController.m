@@ -267,7 +267,7 @@
             UseDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UseDeviceCell" forIndexPath:indexPath];
             self.useDeviceCell = cell;
             if (self.isDraft) {
-                NSString* ovenType = [self.cookbookDetail.oven.ovenType isEqualToString:@""] ? @"我使用了烤箱" : [NSString stringWithFormat:@"我使用了烤箱（%@）", self.cookbookDetail.oven.ovenType];
+                NSString* ovenType = self.cookbookDetail.oven.ovenType.length == 0 ? @"我使用了烤箱" : [NSString stringWithFormat:@"我使用了烤箱（%@）", self.cookbookDetail.oven.ovenType];
                 [self.useDeviceCell.usedOvenButton setTitle:ovenType forState:UIControlStateNormal];
             }
             
@@ -490,8 +490,11 @@
     
     UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
     self.peTempImage = image;
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [self openEditor];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        self.peTempImage = image;
+        [self openEditor];
+        
+    }];
     
 }
 
@@ -667,6 +670,7 @@
     self.cookbookDetail.status = @"0";
     if ([self validateCookbookDraft]) {  //草稿箱检查较少,如果用户未填写，则补充空信息
         [self submitCookbook];
+        [MobClick event:@"save_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
     }
 }
 
@@ -679,7 +683,6 @@
         [self.myWindow addSubview:self.promptAlertView];
         self.myWindow.hidden = NO;
         
-        
     }
     
 }
@@ -690,6 +693,8 @@
     self.promptAlertView.frame = alertRectHidden;
     if (sender.tag == 1) { // 确定
         [self submitCookbook];
+        [MobClick event:@"add_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
+        
     } else if (sender.tag == 2) { // 取消
         
     }
@@ -774,7 +779,7 @@
         
     } else {
 //        self.cookbookDetail.oven = nil;
-        if (self.cookbookDetail.oven.ovenType == nil) {
+        if (self.cookbookDetail.oven.ovenType == nil || self.cookbookDetail.oven.ovenType.length == 0) {
             [super showProgressErrorWithLabelText:@"请选择使用烤箱信息" afterDelay:1];
             return NO;
         }
@@ -792,10 +797,14 @@
             return NO;
         }
     }
-    NSString* tempStr = [self.myPs_String stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (self.myPs_String.length == 0 || tempStr.length == 0) {
-        [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
-        return NO;
+//    NSString* tempStr = [self.myPs_String stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    if (self.myPs_String.length == 0 || tempStr.length == 0) {
+//        [super showProgressErrorWithLabelText:@"请填写小贴士" afterDelay:1];
+//        return NO;
+//    }
+    // 技巧小贴士可以不填写
+    if (self.myPs_String.length == 0) {
+        self.myPs_String = @"";
     }
     
     return YES;
@@ -998,10 +1007,13 @@
 -(void)getUseDeviceDataWithWorkModel:(NSString *)workmodel andTime:(NSString *)time andTemperature:(NSString *)temperature{
     NSLog(@"%@ ,%@ ,%@",workmodel,time,temperature);
     useBake = !useBake;
+    NSRange range = [temperature rangeOfString:@"°"];
+    NSString* temperatureValue = [temperature substringToIndex:range.location];
+    
     [self.tableView reloadData];
 #warning 补全烤箱型号
     self.cookbookDetail.oven = [[CookbookOven alloc] initWithRoastStyle:workmodel
-                                                       roastTemperature:temperature
+                                                       roastTemperature:temperatureValue
                                                               roastTime:time
                                                                ovenType:@""
                                                                ovenInfo:@{@"name" : @""}];

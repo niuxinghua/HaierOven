@@ -78,10 +78,10 @@
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
     
-    //[super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
-        //[super hiddenProgressHUD];
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _followPageIndex != 1) {
@@ -114,7 +114,9 @@
         return;
     }
     NSString* userBaseId = CurrentUserBaseId;
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getRecommentCookersWithUserBaseId:userBaseId pageIndex:self.recommentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _recommentPageIndex != 1) {
@@ -144,8 +146,9 @@
     }
     
     NSString* userBaseId = CurrentUserBaseId;
-    
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] searchUsersWithKeyword:self.searchView.searchTextFailed.text pageIndex:_searchPageIndex userBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _searchPageIndex != 1) {
@@ -172,8 +175,8 @@
     [super viewDidLoad];
     [self SetUpSubviews];
     
-    [self loadFollowedCookbooks];
-    [self loadRecommendCookers];
+    //[self loadFollowedCookbooks]; 初始化的时候调用，这里不需要调用
+    //[self loadRecommendCookers];
     
     [self addHeader];
     [self addFooter];
@@ -185,6 +188,7 @@
         [self deleteMarkLabel];
     }
     
+    [MobClick event:@"bake_group"];
     // Do any additional setup after loading the view.
 }
 
@@ -569,7 +573,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.contentMode == ContentModeNormal) {
         if (self.backGroupType == BackGroupTypeFollowed) {
             //关注人的菜谱

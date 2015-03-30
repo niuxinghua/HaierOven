@@ -11,6 +11,8 @@
 
 @interface MainViewNormalCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 @property (strong, nonatomic) UIImage* placeholder;
 
 @end
@@ -26,7 +28,10 @@
     [self.avater.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
     
     self.cookStarImageView.hidden = YES;
-    self.placeholder = [MyTool createImageWithColor:RGB(240, 240, 240)];
+    self.placeholder = [DataCenter sharedInstance].placeHolder;
+    
+    self.containerView.layer.cornerRadius = 8;
+    self.containerView.layer.masksToBounds = YES;
     
     // 设置文本阴影
     self.goodCountLabel.shadowColor = RGBACOLOR(0, 0, 0, 0.6);
@@ -47,45 +52,19 @@
 - (void)setCookbook:(Cookbook *)cookbook
 {
     _cookbook = cookbook;
-    [self resetCell];
+    //[self resetCell];
     
     self.goodCountLabel.text = cookbook.praises;
     
-    
-    
-    [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto]];
-//    [self.MainCellFoodBackground setContentMode:UIViewContentModeScaleAspectFill];
-    //[self.MainCellFoodBackground setImageWithURL:<#(NSURL *)#>]
-    
-    // 这里应该判断是否是官方菜谱
-    if (cookbook.creator.userLevel != nil) {
-        
-        if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
-            self.cookStarImageView.hidden = NO;
-            self.AuthorityLabel.hidden = NO;
-        } else {
-            self.cookStarImageView.hidden = YES;
-            self.AuthorityLabel.hidden = YES;
-        }
-        
-        
-    } else {
-        //假数据
-//        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
-//            self.cookStarImageView.hidden = NO;
-//            self.AuthorityLabel.hidden = NO;
-//        } else {
-//            self.cookStarImageView.hidden = YES;
-//            self.AuthorityLabel.hidden = YES;
-//        }
-        
+    [self.MainCellFoodBackground setImageWithURL: [NSURL URLWithString:cookbook.coverPhoto] placeholderImage:self.placeholder];
+
+    // 判断是否是官方菜谱
+    if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
+        self.cookStarImageView.hidden = NO;
     }
+    self.AuthorityLabel.hidden = !cookbook.isAuthority; // 只有userLevel为1才显示“官方菜谱”
     
-    
-    
-    //[self.avater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
-    
-    [self.avater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
+    [self.avater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     self.foodName.text = cookbook.name;
     

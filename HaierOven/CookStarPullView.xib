@@ -26,6 +26,7 @@
                     <state key="normal" title="点击显示更多标签">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" title="点击隐藏标签"/>
                     <connections>
                         <action selector="showMoreTags:" destination="ezr-e6-dQ2" eventType="touchUpInside" id="YiL-qM-9nB"/>
                     </connections>
@@ -35,6 +36,7 @@
                     <state key="normal" image="xl.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="arrow_upon.png"/>
                     <connections>
                         <action selector="showMoreTags:" destination="ezr-e6-dQ2" eventType="touchUpInside" id="y8h-6d-pty"/>
                     </connections>
@@ -50,10 +52,14 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="arrowButton" destination="SkR-a6-6t5" id="O2O-kD-qzX"/>
+            </connections>
             <point key="canvasLocation" x="384" y="454"/>
         </view>
     </objects>
     <resources>
+        <image name="arrow_upon.png" width="58" height="25"/>
         <image name="xl.png" width="58" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

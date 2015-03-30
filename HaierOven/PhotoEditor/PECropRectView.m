@@ -176,11 +176,20 @@
 
 - (void)resizeControlViewDidResize:(PEResizeControl *)resizeControlView
 {
-    self.frame = [self cropRectMakeWithResizeControlView:resizeControlView];
+    @try {
+        self.frame = [self cropRectMakeWithResizeControlView:resizeControlView];
         
-    if ([self.delegate respondsToSelector:@selector(cropRectViewEditingChanged:)]) {
-        [self.delegate cropRectViewEditingChanged:self];
+        if ([self.delegate respondsToSelector:@selector(cropRectViewEditingChanged:)]) {
+            [self.delegate cropRectViewEditingChanged:self];
+        }
     }
+    @catch (NSException *exception) {
+        NSLog(@"Resize control view error...");
+    }
+    @finally {
+        
+    }
+    
 }
 
 - (void)resizeControlViewDidEndResizing:(PEResizeControl *)resizeControlView

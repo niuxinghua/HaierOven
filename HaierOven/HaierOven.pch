@@ -20,7 +20,7 @@
 #import "UIView+Sizes.h"
 #import "MyTool.h"
 #import "MyUtils.h"
-
+#import "MobClick.h"
 #import <uAnalytics/uAnalysisManager.h>
 
 #define GlobalTextFontName              @"FZLTXHK--GBK1-0"
@@ -65,10 +65,14 @@
 /**
  *  海尔app信息
  */
-#define AppId       @"MB-HBDS-0001"
-//#define AppId       @"MB-HBDS-0000"
 
-#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key
+//MB-HBDS-0000 85c66852a1a8dced9af52c6589e28be7 fe2c43d24ea9f1c86f083f125cf90522
+
+//#define AppId       @"MB-HBDS-0001"     // 开发时用的这个
+#define AppId       @"MB-HBDS-0000"
+
+//#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key  开发时用的这个
+#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"
 //#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
 //#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // android 测试Key
 
@@ -79,7 +83,7 @@
 /**
  *  用户积分定义
  */
-#define SignInScore         2       //签到积分  后台加积分
+#define SignInScore         10       //签到积分  后台加积分
 
 #define BindOvenScore       500     //绑定设备积分 这里是后台加积分，但需要调用设备绑定接口
 #define ShareScore          20       //分享积分

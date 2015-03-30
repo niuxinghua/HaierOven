@@ -14,5 +14,10 @@
 
 @end
 @interface CookStarPullView : UIView
+
 @property (weak, nonatomic)id<CookStarPullViewDelegate>delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *arrowButton;
+
+
 @end

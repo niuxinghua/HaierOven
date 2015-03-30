@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headview;
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
+
 @end
 
 @implementation HowToUseControllerViewController
@@ -37,6 +38,7 @@
 
 -(void)SectionType:(NSInteger)type{
     self.cellimage.image = type==1?IMAGENAMED(@"use.png"):IMAGENAMED(@"use2.png");
+    [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -45,6 +47,11 @@
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return Main_Screen_Width * 1.47;
 }
 
 /*

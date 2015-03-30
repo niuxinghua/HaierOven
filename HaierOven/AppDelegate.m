@@ -68,8 +68,6 @@
     
     [self autoLogin];
     
-    
-    
     NSLog(@"加载结束...");
     UInt64 end=[[NSDate date]timeIntervalSince1970]*1000;
     
@@ -153,6 +151,11 @@ void uncaughtExceptionHandler(NSException *exception)
     // 微信 朋友圈
     [UMSocialWechatHandler setWXAppId:@"wx925a3b8264b54390" appSecret:@"5b389c8a123c4e0981ad9fe1431006eb" url:@"http://weibo.com/origheart"];
     
+    // 友盟统计
+    [MobClick startWithAppkey:UMengAppKey reportPolicy:SEND_INTERVAL channelId:@"App Store"];
+    [MobClick setLogSendInterval:600.]; //10分钟发送一次
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
     
 }
 
@@ -385,6 +388,7 @@ void uncaughtExceptionHandler(NSException *exception)
     
     if ([[UIApplication sharedApplication] backgroundTimeRemaining] < 61.0) {
         
+        // 播放无声音乐
         [[OHPlayAudio sharedAudioPlayer] playFuck];
         
         self.bgTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];

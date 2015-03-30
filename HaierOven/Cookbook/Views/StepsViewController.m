@@ -79,7 +79,7 @@
 - (CGFloat)getSkillCellHeight
 {
     // 技巧小贴士
-    CGFloat height = 36 + 71;
+    CGFloat height = self.isAuthority ? 36 + 71 : 36 + 10;
     height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
     return height;
 }
@@ -103,6 +103,7 @@
         
         SkillCell* skillCell = [tableView dequeueReusableCellWithIdentifier:@"Skill cell" forIndexPath:indexPath];
         skillCell.delegate = self.delegate;
+        skillCell.startCookBtn.hidden = !self.isAuthority;
         skillCell.skillLabel.text = [self.cookbookDetail.cookbookTip isEqualToString:@"(null)"] ? @"无" : self.cookbookDetail.cookbookTip;
         return skillCell;
     }

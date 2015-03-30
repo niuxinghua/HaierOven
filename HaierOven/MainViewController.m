@@ -264,7 +264,7 @@
     
     self.adView.frame = CGRectMake(0, 0, PageW, PageW*(AdvRate+ScrRate));
     // 构建广告条
-    self.adCycleView = [[CycleScrollView alloc]initWithFrame:CGRectMake(0, 0, PageW, PageW*AdvRate) animationDuration:10];;
+    self.adCycleView = [[CycleScrollView alloc]initWithFrame:CGRectMake(0, 0, PageW, PageW*AdvRate) animationDuration:10];
     self.adCycleView.pageControlMiddle = YES;
     [self.adView addSubview:self.adCycleView];
     
@@ -308,6 +308,7 @@
     foodlist.tagId = theTag.ID;
     foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
+    [MobClick event:@"click_tag" attributes:@{@"标签名" : theTag.name}];
  
 }
 
@@ -386,6 +387,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* cookbookDetailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     Cookbook* cookbook = self.cookbooks[indexPath.row];

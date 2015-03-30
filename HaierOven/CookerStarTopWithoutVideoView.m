@@ -100,7 +100,7 @@
     self.cookBookLabel.frame = CGRectMake(0, 8, self.backDownView.width, 20);
     
     
-    self.tagsView.Frame = CGRectMake(0, self.cookBookLabel.bottom+8, self.width, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
+    self.tagsView.Frame = CGRectMake(8, self.cookBookLabel.bottom+8, self.width - 16, self.tagsView.lineCount*(PADDING_HIGHT+PADDING_HIGHT));
     self.tagsView.clipsToBounds = YES;
     self.tagsView.delegate = self;
     self.tagsView.style = AutoSizeLabelViewStyleCookStarDetail;
@@ -135,7 +135,8 @@
     switch (cookerStar.userLevel) {
         case 1:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");
-            [self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
+            //[self.leaveMsgButton setTitle:@"留言" forState:UIControlStateNormal];
+            [self.leaveMsgButton setTitle:@"给厨神留言" forState:UIControlStateNormal];
             break;
         case 2:
             self.levelImageView.image = IMAGENAMED(@"Vcs.png");

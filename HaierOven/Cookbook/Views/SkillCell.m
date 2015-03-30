@@ -10,7 +10,7 @@
 
 @interface SkillCell ()
 
-@property (weak, nonatomic) IBOutlet UIButton *startCookBtn;
+
 
 
 @end
@@ -27,6 +27,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
 }
 
 - (IBAction)startCookTapped:(UIButton *)sender

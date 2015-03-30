@@ -220,7 +220,10 @@
     self.tagsView.style = AutoSizeLabelViewStyleMenuDetail;
     self.tagsView.tags = [tagNames copy];
     
-    
+    if (!self.isPreview) {
+        [MobClick event:@"cookbook_detail" attributes:@{@"菜谱": self.cookbookDetail.name,
+                                                        @"作者": self.cookbookDetail.creator.userName}];
+    }
     
     self.cookbookNameLabel.text = self.cookbookDetail.name;
     
@@ -324,6 +327,7 @@
             tableView.frame = CGRectMake(0, 0, Main_Screen_Width, [self getStepsViewHeight] + [self getSkillCellHeight]);
             tableView.tag = 6;
             StepsViewController* controller = [[StepsViewController alloc] initWithCookbookDetail:self.cookbookDetail delegate:self];
+            controller.isAuthority = self.isAuthority;
             self.stepsTableViewDataSource = controller;
             tableView.delegate = controller;
             tableView.dataSource = controller;
@@ -517,7 +521,7 @@
     
     UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [sendButton addTarget:self action:@selector(didTapSend:) forControlEvents:UIControlEventTouchUpInside];
-    [sendButton setTitle:@"确定" forState:UIControlStateNormal];
+    [sendButton setTitle:@"发送" forState:UIControlStateNormal];
     [sendButton setTitleColor:GlobalOrangeColor forState:UIControlStateNormal];
     sendButton.titleLabel.font = [UIFont fontWithName:GlobalTextFontName size:15];
     
@@ -531,7 +535,6 @@
     window.hidden = YES;
     
     self.tableView.keyboardTriggerOffset = window.bounds.size.height;
-    
     
     [self.cookbookDetailCell.contentView addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
         
@@ -609,6 +612,8 @@
                                                              }];
                                                              [self.commentsTableView reloadData];
                                                              
+                                                             [MobClick event:@"comment_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
+                                                             
                                                          } else {
                                                              NSLog(@"评论失败");
                                                              [super showProgressErrorWithLabelText:@"评论失败" afterDelay:1];
@@ -658,6 +663,7 @@
     self.navigationController.navigationBar.translucent = NO;
     
     [self hideKeyboard];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
 }
 
@@ -871,7 +877,7 @@
 - (CGFloat)getSkillCellHeight
 {
     // 技巧小贴士
-    CGFloat height = 36 + 71;
+    CGFloat height = self.isAuthority ? 36 + 71 : 36 + 10;
     height += [MyUtils getTextSizeWithText:self.cookbookDetail.cookbookTip andTextAttribute:@{NSFontAttributeName : [UIFont fontWithName:GlobalTitleFontName size:13.0f]} andTextWidth:Main_Screen_Width - 25 -17].height;
     return height;
 }
@@ -948,6 +954,9 @@
 
 #pragma mark - 按钮响应事件
 
+/**
+ *  开始烘焙
+ */
 - (void)startCook
 {
     _iOS7OvenListFlag = YES;
@@ -960,6 +969,10 @@
         //只有1台的时候直接跳转到烤箱控制面板
         DeviceBoardViewController* deviceBoardController = [storyboard instantiateViewControllerWithIdentifier:@"DeviceBoardViewController"];
         deviceBoardController.currentOven = [[DataCenter sharedInstance].myOvens firstObject];
+        
+        // 根据烤箱设置信息查找烘焙模式
+        deviceBoardController.startBakeOvenInfo = self.cookbookDetail.oven;
+        
         [self.navigationController pushViewController:deviceBoardController animated:YES];
         
     }
@@ -1108,6 +1121,12 @@
         if (success) {
             if (self.shoppingListCount <= 10) 
                 [super showProgressCompleteWithLabelText:@"添加成功" afterDelay:1];
+            if (!self.isPreview) {
+                [MobClick event:@"add_shoppinglist" attributes:@{@"菜谱": self.cookbookDetail.name,
+                                                                 @"作者": self.cookbookDetail.creator.userName}];
+            }
+            
+            
         } else {
             [super showProgressErrorWithLabelText:@"添加失败" afterDelay:1];
         }
@@ -1133,6 +1152,7 @@
     [[InternetManager sharedManager] praiseCookbookWithCookbookId:self.cookbookId userBaseId:userID callBack:^(BOOL success, id obj, NSError *error) {
         if (success) {
             [super showProgressCompleteWithLabelText:@"菜谱点赞成功" afterDelay:1];
+            [MobClick event:@"praise_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
             self.praiseButton.selected = YES;
         } else {
             [super showProgressErrorWithLabelText:@"赞菜谱没有成功" afterDelay:1];
@@ -1208,7 +1228,8 @@
         [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
     } else if ([platformName hasPrefix:@"sina"]) {
         
-        NSString* sharePath = [@"http://115.29.8.251:8082/cookbook/detail" stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
+        NSString* sharePath = [NSString stringWithFormat:@"http://%@", BaseShareUrl];
+        sharePath = [sharePath stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
         sharePath = [sharePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [UMSocialData defaultData].shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@。\n%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName, sharePath];
         
@@ -1243,7 +1264,7 @@
             [[InternetManager sharedManager] addPoints:ActiveUserScore userBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
                 if (success) {
                     NSLog(@"分享成功送积分OK");
-                    [super showProgressCompleteWithLabelText:@"分享成功 +20点心" afterDelay:1];
+                    [super showProgressCompleteWithLabelText:@"分享成功，获得20点心" afterDelay:1];
                 }
             }];
             

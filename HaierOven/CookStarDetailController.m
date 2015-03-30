@@ -118,7 +118,9 @@
 
 - (void)loadUserCookbooksWithTags
 {
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithTagIds:self.tagArr userBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -145,9 +147,9 @@
 {
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
+    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:self.cookerStar.userBaseId cookbookStatus:1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
-        
+        [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
@@ -211,6 +213,8 @@
     [self addFooter];
     [self updateUI];
     [self loadMyImage];
+    
+    [MobClick event:@"cookerStar_detail" attributes:@{@"厨神姓名" : self.cookerStar.userName}];
     
     // Do any additional setup after loading the view.
 }
@@ -341,10 +345,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Cookbook* selectedCookbook = self.cookbooks[indexPath.row];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     CookbookDetailControllerViewController* detailController = [storyboard instantiateViewControllerWithIdentifier:@"Cookbook detail controller"];
     detailController.cookbookId = selectedCookbook.ID;
+    detailController.isAuthority = selectedCookbook.isAuthority;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

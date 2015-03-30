@@ -120,7 +120,7 @@
             if (hadSignIn == 0) {
                 [[InternetManager sharedManager] signInWithUserBaseId:CurrentUserBaseId callBack:^(BOOL success, id obj, NSError *error) {
                     if (success) {
-                        [self showSignInViewWithPromt:[NSString stringWithFormat:@"签到成功 点心＋%d", SignInScore]];
+                        [self showSignInViewWithPromt:[NSString stringWithFormat:@"签到成功，获得%d个积分", SignInScore]];
                     }
                 }];
             } else {

@@ -96,6 +96,7 @@
     [[InternetManager sharedManager] feedbackWithContent:self.descriptionTextView.text phone:self.phoneTextField.text callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
+            [MobClick event:@"suggest_feedback"];
             [super showProgressCompleteWithLabelText:@"谢谢反馈" afterDelay:1];
             [self performSelector:@selector(close) withObject:nil afterDelay:1.5];
         } else {
