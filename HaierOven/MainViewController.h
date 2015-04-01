@@ -11,4 +11,5 @@
 @interface MainViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic)NSArray *tags;
+
 @end

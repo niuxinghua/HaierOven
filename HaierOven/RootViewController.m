@@ -36,21 +36,21 @@
 
 - (void)awakeFromNib
 {
-    self.menuPreferredStatusBarStyle = UIStatusBarStyleLightContent;
-    self.contentViewShadowColor = [UIColor blackColor];
-    self.contentViewShadowOffset = CGSizeMake(0, 0);
-    self.contentViewShadowOpacity = 0.6;
-    self.contentViewShadowRadius = 12;
-    self.contentViewShadowEnabled = YES;
-    
-    //    self.panGestureEnabled = NO;
-    self.scaleContentView = NO;
-    self.contentViewInPortraitOffsetCenterX = 100;
-    self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
-    self.leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftMenuViewController"];
+    self.menuPreferredStatusBarStyle        = UIStatusBarStyleLightContent;
+    self.contentViewShadowColor             = [UIColor blackColor];
+    self.contentViewShadowOffset            = CGSizeMake(0, 0);
+    self.contentViewShadowOpacity           = 0.6;
+    self.contentViewShadowRadius            = 12;
+    self.contentViewShadowEnabled           = YES;
 
-    self.backgroundImage = [MyTool createImageWithColor:[UIColor lightGrayColor]];
-    self.delegate = self;
+    //    self.panGestureEnabled = NO;
+    self.scaleContentView                   = NO;
+    self.contentViewInPortraitOffsetCenterX = 100;
+    self.contentViewController              = [self.storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
+    self.leftMenuViewController             = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftMenuViewController"];
+
+    self.backgroundImage                    = [MyTool createImageWithColor:[UIColor lightGrayColor]];
+    self.delegate                           = self;
 }
 
 

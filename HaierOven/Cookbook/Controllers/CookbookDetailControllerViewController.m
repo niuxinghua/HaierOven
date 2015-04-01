@@ -44,6 +44,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *backIcon;
 
 
 #pragma mark - section 0
@@ -698,11 +699,13 @@
             [self.navigationController.navigationBar setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor] forBarMetrics:UIBarMetricsDefault];
             [self.backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
             self.navigationController.navigationBar.translucent = NO;
-            
+            self.backIcon.selected = YES;
+
         } else {
             [self.navigationController.navigationBar setBackgroundImage:IMAGENAMED(@"clear.png") forBarMetrics:UIBarMetricsDefault];
             [self.backButton setImage:[UIImage imageNamed:@"cookbook_back"] forState:UIControlStateNormal];
             self.navigationController.navigationBar.translucent = YES;
+            self.backIcon.selected = NO;
         }
         
         if (scrollView.contentOffset.y < _lastContentOffsetY)

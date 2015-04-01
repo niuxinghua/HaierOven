@@ -7015,6 +7015,7 @@
         <image name="b_02.png" width="81" height="20"/>
         <image name="back.png" width="26" height="26"/>
         <image name="boardbg.png" width="360" height="640"/>
+        <image name="camera1.png" width="21" height="21"/>
         <image name="chef_bg_img.png" width="360" height="319"/>
         <image name="cookbook_camera.png" width="33" height="33"/>
         <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
