@@ -33,6 +33,13 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotification:) name:PreheatCompleteNotification object:nil];
+    
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setLeftBarButtonItemWithImageName:(NSString*)imageName andTitle:(NSString*)title andCustomView:(UIView*)customView
@@ -204,6 +211,12 @@
     _tipWindow = nil;
 }
 
+- (void)showNotification:(NSNotification*)notification
+{
+    NSDictionary* dict = notification.userInfo;
+    [self showStatusTip:YES title:dict[@"info"]];
+    [self performSelector:@selector(removeTipWindow) withObject:nil afterDelay:3];
+}
 
 - (void)openLoginController
 {

@@ -1704,7 +1704,7 @@
 
     } else if (sender.selected == NO ||sender.tag==1 || sender.tag==2 || sender.tag == 4) {
         
-        self.deviceAlertView.defaultSelectTime = [self.bakeMode[@"defaultSelectTime"] integerValue];
+        //self.deviceAlertView.defaultSelectTime = [self.bakeMode[@"defaultSelectTime"] integerValue];
         self.deviceAlertView.isChunzheng = [[[self.bakeMode[@"bakeMode"] allValues] firstObject] isEqualToString:@"纯蒸"];   //@"bakeMode" : @{@"30v0Mj" :@"纯蒸"}
         self.deviceAlertView.alertType = sender.tag;
         self.deviceAlertView.btn = sender;
@@ -1712,21 +1712,30 @@
         switch (sender.tag) {
                 
             case 1: //温度
+                self.deviceAlertView.string = @"180°";
                 if (self.deviceBoardStatus == DeviceBoardStatusWorking || self.deviceBoardStatus == DeviceBoardStatusOrdering || self.deviceBoardStatus == DeviceBoardStatusPreheating) {
                     [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
                     return;
                 }
-                self.deviceAlertView.string = @"180°";
+                
                 self.deviceAlertView.selectedTemperature = self.temputure.currentTitle;
                 break;
                 
             case 2: //时间
+                self.deviceAlertView.string = @"30 分钟";
                 if (self.deviceBoardStatus == DeviceBoardStatusWorking || self.deviceBoardStatus == DeviceBoardStatusOrdering || self.deviceBoardStatus == DeviceBoardStatusPreheating) {
                     [super showProgressErrorWithLabelText:@"停止运行后，参数可调" afterDelay:1];
                     return;
+                } else if (self.deviceBoardStatus == DeviceBoardStatusStop) {
+                    NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
+                    NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
+                    self.deviceAlertView.defaultSelectTime = [timeStr integerValue];
+                } else {
+                    self.deviceAlertView.defaultSelectTime = [self.bakeMode[@"defaultSelectTime"] integerValue];
                 }
                 
-                self.deviceAlertView.string = @"30 分钟";
+                
+                
                 
                 break;
             

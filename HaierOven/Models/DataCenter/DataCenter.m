@@ -19,6 +19,7 @@ NSString* const kCurrentLoginUserName                = @"Current login user name
 NSString* const kLocalUserInfoFileName          = @"currentUser.data";
 NSString* const kLocalTagsFileName              = @"tags.data";
 NSString* const kLocalCookbooksFileName         = @"cookbooks.data";
+NSString* const kLocalRecommendCookersFileName  = @"cookerStars.data";
 NSString* const kLocalOvensFileName             = @"myOvens.data";
 NSString* const kLocalSearchedKeywordsFileName  = @"searchedKeywords.plist";
 NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
@@ -352,6 +353,24 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     return jsonObj;
 }
 
+- (void)saveRecommendCookersWithObject:(id)jsonObj
+{
+    NSData* data = [NSJSONSerialization dataWithJSONObject:jsonObj options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalRecommendCookersFileName];
+    [data writeToFile:filePath atomically:YES];
+}
+
+- (id)getRecommendCookersObject
+{
+    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalRecommendCookersFileName];
+    NSData* data = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary* jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    return jsonObj;
+}
+
 - (void)addOvenInfoToLocal:(LocalOven*)oven
 {
     NSMutableArray* ovens = self.myOvens;
@@ -448,25 +467,6 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
     [ovenArr writeToFile:filePath atomically:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
-    
-//    NSMutableArray* ovens = self.myOvens;
-//    NSMutableArray* ovenArr = [NSMutableArray array]; //重新构建数组保存对象
-//    LocalOven* theOven;
-//    for (LocalOven* localOven in ovens) {
-//        if ([localOven.mac isEqualToString:oven.mac]) {
-//            theOven = localOven;
-//        } else {
-//            [ovenArr addObject:localOven];
-//        }
-//    }
-//    if (theOven != nil) { //如果本地已保存了此台设备，则删除后重新保存
-//        [ovens removeObject:theOven];
-//    }
-//    NSDictionary* ovenDict = [oven toDictionary];
-//    [ovenArr addObject:ovenDict];
-//    NSString* filePath = [[self getUserDataPath] stringByAppendingPathComponent:kLocalOvensFileName];
-//    [ovenArr writeToFile:filePath atomically:YES];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:MyOvensInfoHadChangedNotificatin object:nil];
 }
 
 

@@ -193,12 +193,30 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  */
 - (void)saveCookbooksWithObject:(id)jsonObj;
 
+
+
+
+
 /**
  *  获取缓存的菜谱列表
  *
  *  @return json dict
  */
 - (id)getCookbooksObject;
+
+/**
+ *  缓存推荐厨神
+ *
+ *  @param jsonObj 字典
+ */
+- (void)saveRecommendCookersWithObject:(id)jsonObj;
+
+/**
+ *  获取缓存推荐厨神
+ *
+ *  @return json dict
+ */
+- (id)getRecommendCookersObject;
 
 /**
  *  保存烤箱信息到本地

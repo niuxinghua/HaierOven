@@ -2365,6 +2365,7 @@
                 BOOL hadNextPage;
                 NSMutableArray* cookers = [DataParser parseCookerStarsWithDict:responseObject hadNextPage:&hadNextPage];
                 completion(YES, cookers, nil);
+                [[DataCenter sharedInstance] saveRecommendCookersWithObject:responseObject];
                 if (!hadNextPage) {
                     NSLog(@"没有更多了");
                 }
@@ -2379,7 +2380,12 @@
         }];
         
     } else {
-        completion(NO, nil, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        
+        id recommendDict = [[DataCenter sharedInstance] getRecommendCookersObject];
+        BOOL hadNextPage;
+        NSMutableArray* cookers = [DataParser parseCookerStarsWithDict:recommendDict hadNextPage:&hadNextPage];
+        completion(YES, cookers, [self errorWithCode:InternetErrorCodeConnectInternetFailed andDescription:nil]);
+        
     }
     
 }

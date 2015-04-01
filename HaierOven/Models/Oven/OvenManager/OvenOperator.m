@@ -77,7 +77,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 - (void)startBakeWithTime:(NSString *)time temperature:(NSString *)temperature mode:(NSDictionary *)modeDict operateResult:(completion)callback
 {
     NSString* mode = [[modeDict[@"bakeMode"] allKeys] firstObject];
-    NSString* modeStr = [[modeDict[@"bakeMode"] allValues] firstObject];
+    //NSString* modeStr = [[modeDict[@"bakeMode"] allValues] firstObject];
     self.currentBakeMode = modeDict;
     
     if (self.orderingTimer != nil) {
@@ -248,13 +248,13 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 // 预热完成判断条件：1. 烘焙预热10分钟 2. 收到uSDK的预热结束通知，满足其中一点即可
 - (void)preheatCountdownTimerAction:(NSTimer*)timer
 {
-    
-    self.preheatCountSeconds++;
-    if (self.preheatCountSeconds >= 10 * 1) {
-        [self preheatComplete];
-        return;
-    }
     if (self.deviceStatus == CurrentDeviceStatusPreheating) {
+        self.preheatCountSeconds++;
+        if (self.preheatCountSeconds >= 10 * 1) {
+            [self preheatComplete];
+            return;
+        }
+        
         [[OvenManager sharedManager] getOvenStatus:self.currentLocalOven.mac status:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 OvenStatus* status = obj;
@@ -271,6 +271,16 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 
 - (void)preheatComplete
 {
+    NSString* alertBody = [NSString stringWithFormat:@"设备\"%@\"预热完成，开始烘焙！", self.currentLocalOven.name];
+    [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeWarmUp fireTime:1 alertBody:alertBody];
+    NSDictionary* info = @{@"time" : [MyTool getCurrentTime],
+                           @"desc" : alertBody};
+    [[DataCenter sharedInstance] addOvenNotification:info];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PreheatCompleteNotification object:nil userInfo:@{@"info" : alertBody}];
+    
+#warning 这里违反了MVC设计模式，以后修改吧。。。
+    [[[UIAlertView alloc] initWithTitle:@"味之道美食" message:alertBody delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+    
     [self.preheatCountdownTimer invalidate];
     [self startBakeWithTime:self.totalBakeTime
                 temperature:self.currentBakeTemperature

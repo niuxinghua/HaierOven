@@ -97,6 +97,23 @@
     
 }
 
+- (void)setDefaultSelectTime:(NSInteger)defaultSelectTime
+{
+    _defaultSelectTime = defaultSelectTime;
+    
+    // 取出行数
+    NSInteger index = 0;
+    if (self.alertType == alertTime) {
+        for (NSString* timeStr in self.pickViewArr) {
+            if ([timeStr hasPrefix:[NSString stringWithFormat:@"%d", defaultSelectTime]]) {
+                index = [self.pickViewArr indexOfObject:timeStr];
+                self.string = timeStr;
+                break;
+            }
+        }
+    }
+    [self.pickview selectRow:index inComponent:0 animated:NO];
+}
 
 -(void)setAlertType:(AlertType)alertType
 {

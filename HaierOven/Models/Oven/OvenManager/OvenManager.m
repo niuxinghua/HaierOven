@@ -139,13 +139,9 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-        [NSThread sleepForTimeInterval:2]; //无意义的延时
-        
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         
-        [NSThread sleepForTimeInterval:2]; //无意义的延时
-        
-        [self getDevicesCompletion:^(BOOL success, id obj, NSError *error) {
+        [self getDevicesInSeconds:55 completion:^(BOOL success, id obj, NSError *error) {
             
             if (success) {
                 
@@ -216,12 +212,40 @@
                 });
                 
             } else {
-                result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
+                });
             }
             
         }];
         
     });
+}
+
+/**
+ *  绑定设备时调用，smartlink方式发送配置信息后，在一定的时间内获取周边的设备，此方法应该在子线程调用
+ *
+ *  @param seconds  超时的秒数
+ *  @param callback 结果回调
+ */
+- (void)getDevicesInSeconds:(NSInteger)seconds completion:(completion)callback
+{
+    uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
+    for (int loop = seconds; loop >= 0; loop--) {
+        NSArray* devices = [deviceManager getDeviceList:OVEN];
+        if (devices.count == 0) {
+            if (loop <= 0) {
+                callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"未获取到附近的烤箱列表"]);
+                break;
+            } else {
+                [NSThread sleepForTimeInterval:1.0];
+                continue;
+            }
+        } else {
+            callback(YES, devices, nil);
+            break;
+        }
+    }
 }
 
 #pragma mark - 获取设备列表和设备信息
@@ -360,7 +384,7 @@
 - (void)receiveDeviceListChanged:(NSNotification*)notification
 {
     if ([notification.name isEqualToString:DEVICE_LIST_CHANGED_NOTIFICATION]) {
-        NSLog(@"设备列表发生了变化");
+        NSLog(@"*********设备列表发生了变化*********");
         
     } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
         NSLog(@"Session失效");
