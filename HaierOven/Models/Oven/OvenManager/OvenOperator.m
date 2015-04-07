@@ -250,7 +250,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 {
     if (self.deviceStatus == CurrentDeviceStatusPreheating) {
         self.preheatCountSeconds++;
-        if (self.preheatCountSeconds >= 10 * 1) {
+        if (self.preheatCountSeconds >= 10 * 60) {
             [self preheatComplete];
             return;
         }
@@ -277,9 +277,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
                            @"desc" : alertBody};
     [[DataCenter sharedInstance] addOvenNotification:info];
     [[NSNotificationCenter defaultCenter] postNotificationName:PreheatCompleteNotification object:nil userInfo:@{@"info" : alertBody}];
-    
-#warning 这里违反了MVC设计模式，以后修改吧。。。
-    [[[UIAlertView alloc] initWithTitle:@"味之道美食" message:alertBody delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+
     
     [self.preheatCountdownTimer invalidate];
     [self startBakeWithTime:self.totalBakeTime
@@ -305,17 +303,17 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
     
     // 工作过程中实时检测设备的状态
     if (self.deviceStatus == CurrentDeviceStatusWorking) {
-        [super getOvenStatus:[OvenManager sharedManager].subscribedDevice.mac status:^(BOOL success, id obj, NSError *error) {
+        [[OvenManager sharedManager] getOvenStatus:[OvenManager sharedManager].subscribedDevice.mac status:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 OvenStatus* status = obj;
                 if (!status.isWorking && status.isReady) {
                     self.deviceStatus = CurrentDeviceStatusReady;
                     [self workComplete];
                 }
-                if (!status.isReady) {
-                    self.deviceStatus = CurrentDeviceStatusOffline;
-                    [self workComplete];
-                }
+//                if (!status.isReady) {
+//                    self.deviceStatus = CurrentDeviceStatusOffline;
+//                    [self workComplete];
+//                }
             }
         }];
     }
@@ -338,6 +336,37 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey : errorMsg};
     NSError *error = [NSError errorWithDomain:@"com.haier.usdk" code:-1 userInfo:userInfo];
     return error;
+}
+
+//获取当前屏幕显示的viewcontroller
+
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    
+    return result;
 }
 
 @end

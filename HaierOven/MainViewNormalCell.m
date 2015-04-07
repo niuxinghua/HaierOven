@@ -41,6 +41,7 @@
 //    self.goodCountLabel.layer.shadowColor = [UIColor blackColor].CGColor;
 //    self.goodCountLabel.layer.shadowOffset = CGSizeMake(3.0, 3.0);
     
+    
 // Initialization code
 }
 

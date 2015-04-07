@@ -141,7 +141,7 @@
         
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         
-        [self getDevicesInSeconds:55 completion:^(BOOL success, id obj, NSError *error) {
+        [self getDevicesInSeconds:58 rebindMac:rebindMac completion:^(BOOL success, id obj, NSError *error) {
             
             if (success) {
                 
@@ -164,12 +164,19 @@
                         if (dataCenter.myOvens.count == 0) {
                             theDevice = [obj firstObject];
                         } else {
-                            for (LocalOven* localOven in dataCenter.myOvens) {
-                                if (![device.mac isEqualToString:localOven.mac]) {
-                                    theDevice = device;
-                                    break;
-                                }
+                            
+                            if (![self deviceExistWithMac:device.mac]) {
+                                theDevice = device;
                             }
+                            
+//                            for (LocalOven* localOven in dataCenter.myOvens) {
+//                                
+//                                if (![device.mac isEqualToString:localOven.mac]) {
+//                                    theDevice = device;
+//                                    break;
+//                                }
+//                                
+//                            }
                         }
                         if (theDevice != nil) break;
                     }
@@ -222,13 +229,25 @@
     });
 }
 
+- (BOOL)deviceExistWithMac:(NSString*)mac
+{
+    DataCenter* dataCenter = [DataCenter sharedInstance];
+    BOOL existFlag = false;
+    for (LocalOven* localOven in dataCenter.myOvens) {
+        if ([mac isEqualToString:localOven.mac]) {
+            existFlag = true;
+        }
+    }
+    return existFlag;
+}
+
 /**
  *  绑定设备时调用，smartlink方式发送配置信息后，在一定的时间内获取周边的设备，此方法应该在子线程调用
  *
  *  @param seconds  超时的秒数
  *  @param callback 结果回调
  */
-- (void)getDevicesInSeconds:(NSInteger)seconds completion:(completion)callback
+- (void)getDevicesInSeconds:(NSInteger)seconds rebindMac:(NSString*)rebindMac completion:(completion)callback
 {
     uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     for (int loop = seconds; loop >= 0; loop--) {
@@ -242,8 +261,28 @@
                 continue;
             }
         } else {
-            callback(YES, devices, nil);
-            break;
+            
+            if (rebindMac) {
+                callback(YES, devices, nil);
+                break;
+            } else {
+                BOOL hasNewDevice = NO;
+                for (uSDKDevice* theDevice in devices) {
+                    
+                    if (![self deviceExistWithMac:theDevice.mac]) {
+                        callback(YES, @[theDevice], nil);
+                        hasNewDevice = YES;
+                        break;
+                    }
+                    
+                }
+                
+                if (hasNewDevice) {
+                    break;
+                }
+            }
+            
+            
         }
     }
 }
@@ -384,10 +423,10 @@
 - (void)receiveDeviceListChanged:(NSNotification*)notification
 {
     if ([notification.name isEqualToString:DEVICE_LIST_CHANGED_NOTIFICATION]) {
-        NSLog(@"*********设备列表发生了变化*********");
+        //NSLog(@"*********设备列表发生了变化*********");
         
     } else if ([notification.name isEqualToString:SESSION_EXCEPTION_NOTIFICATION]) {
-        NSLog(@"Session失效");
+        //NSLog(@"Session失效");
         
     }
     

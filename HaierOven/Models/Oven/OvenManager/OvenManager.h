@@ -25,7 +25,7 @@
 #define PreheatCompleteNotification @"Preheat complete notification"
 
 #warning 是否是debug模式
-#define DebugOvenFlag   1
+#define DebugOvenFlag   0
 
 @interface OvenManager : NSObject
 
