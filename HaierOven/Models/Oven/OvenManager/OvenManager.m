@@ -169,14 +169,6 @@
                                 theDevice = device;
                             }
                             
-//                            for (LocalOven* localOven in dataCenter.myOvens) {
-//                                
-//                                if (![device.mac isEqualToString:localOven.mac]) {
-//                                    theDevice = device;
-//                                    break;
-//                                }
-//                                
-//                            }
                         }
                         if (theDevice != nil) break;
                     }
@@ -251,37 +243,48 @@
 {
     uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
     for (int loop = seconds; loop >= 0; loop--) {
+        
+        [NSThread sleepForTimeInterval:1.0];
         NSArray* devices = [deviceManager getDeviceList:OVEN];
+        
         if (devices.count == 0) {
+            
             if (loop <= 0) {
                 callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"未获取到附近的烤箱列表"]);
                 break;
-            } else {
-                [NSThread sleepForTimeInterval:1.0];
-                continue;
             }
+            
         } else {
             
             if (rebindMac) {
-                callback(YES, devices, nil);
-                break;
+                BOOL hasTheDevice = NO;
+                for (uSDKDevice* theDevice in devices) {
+                    if ([self deviceExistWithMac:theDevice.mac]) {
+                        callback(YES, devices, nil);
+                        hasTheDevice = YES;
+                        break;
+                    }
+                }
+                if (hasTheDevice) {
+                    break;
+                }
+                
             } else {
+                
                 BOOL hasNewDevice = NO;
                 for (uSDKDevice* theDevice in devices) {
-                    
                     if (![self deviceExistWithMac:theDevice.mac]) {
                         callback(YES, @[theDevice], nil);
                         hasNewDevice = YES;
                         break;
                     }
-                    
                 }
                 
                 if (hasNewDevice) {
                     break;
                 }
+                
             }
-            
             
         }
     }

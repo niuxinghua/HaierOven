@@ -29,6 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"注册页面"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     [self SetUpSubView];
     // Do any additional setup after loading the view.
 }
@@ -115,6 +120,11 @@
     self.registerType = sender.tag;
 }
 - (IBAction)Turnback:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Register"     // Event category (required)
+                                                          action:@"login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -125,6 +135,11 @@
 
 #pragma mark - 手机注册回调方法
 -(void)turnBack{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Register"     // Event category (required)
+                                                          action:@"login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -143,6 +158,12 @@
 //#warning 调试
 //    [self goToActiveUser:phone];    // 调试用的
 //    return;
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Register"     // Event category (required)
+                                                          action:@"mobile_register"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] registerWithEmail:nil andPhone:phone andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
@@ -190,6 +211,11 @@
 
 #pragma mark - 邮箱注册回调方法
 -(void)turnBackEmail{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Register"     // Event category (required)
+                                                          action:@"login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -208,6 +234,12 @@
 
 -(void)RegisterWithEmail:(NSString *)email andPassword:(NSString *)password
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Register"     // Event category (required)
+                                                          action:@"email_register"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
+    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] registerWithEmail:email andPhone:nil andPassword:password callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];

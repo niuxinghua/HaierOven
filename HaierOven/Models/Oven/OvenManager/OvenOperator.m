@@ -88,7 +88,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
     //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
     
     // 是否开机
-    if (!self.currentStatus.opened) {
+    if (![OvenManager sharedManager].currentStatus.opened) {
         if ([OvenManager sharedManager].subscribedDevice == nil && !DebugOvenFlag) {
             callback(NO, nil, [self errorWithDescription:@"烤箱连接失败"]);
             return;
@@ -239,7 +239,6 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
         default:
             break;
     }
-    
     
 }
 

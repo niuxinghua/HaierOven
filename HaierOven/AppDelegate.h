@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UMSocial.h"
 #import "UMSocialQQHandler.h"
+#import "GAI.h"
 
 typedef NS_ENUM(NSUInteger, InterfaceOrientationState) {
     InterfaceOrientationStateLandscapeOnly = 1,

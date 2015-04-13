@@ -577,7 +577,7 @@
                         
                         [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
                         
-                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue];
+                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
                         
                         self.startStatusView.leftTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
                                                          totalSeconds/3600,
@@ -1615,6 +1615,11 @@
                                                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:self.ovenOperator.bakeLeftSeconds alertBody:notificationBody];
                                                
                                                [MobClick event:@"quick_warmup"];
+                                               id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                               [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                                                     action:@"button_press"  // Event action (required)
+                                                                                                      label:@"快速预热"          // Event label
+                                                                                                      value:nil] build]];    // Event value
                                                
                                            } else {
                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];

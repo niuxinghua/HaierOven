@@ -30,6 +30,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"登录页面"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     if (self.navigationController.viewControllers.count == 1) {
         UIButton* leftButton = [[UIButton alloc] init];
 
@@ -55,6 +60,11 @@
 - (void)close
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"back to homepage"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +86,12 @@
 }
 
 - (IBAction)Login:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     if (![MyTool validateTelephone:self.userNameTextFailed.text]) {
         if (![MyTool validateEmail:self.userNameTextFailed.text]) {
@@ -130,6 +146,11 @@
     
 }
 - (IBAction)forgetPsd:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"forget_password"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     WebViewController* webController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
     webController.titleText = @"忘记密码";
@@ -138,6 +159,11 @@
     
 }
 - (IBAction)TencentLogin:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"qq_login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -151,6 +177,11 @@
 
 
 - (IBAction)SinawbLogin:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"sinaweibo_login"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -163,6 +194,13 @@
     
 }
 - (IBAction)Register:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
+                                                          action:@"register"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
+    
     [self.userNameTextFailed resignFirstResponder];
     [self.psdTextfailed resignFirstResponder];
     RegisterViewController* reg = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterViewController"];

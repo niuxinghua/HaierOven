@@ -75,6 +75,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
+                                                          action:@"draft box"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MenuDraftTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"MenuDraftTableViewCell"];
     self.deleteBtn.selected = NO;
     self.delete = self.deleteBtn.selected;

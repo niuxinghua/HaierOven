@@ -58,6 +58,7 @@
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
     
     [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
+        
         if (success) {
             self.searchedFlag = YES;
             self.searchedCookbooks = obj;
@@ -73,6 +74,12 @@
             [self.table reloadData];
             
             [MobClick event:@"search_cookbook" attributes:@{@"关键词" : keyword}];
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
+                                                                  action:@"Search"  // Event action (required)
+                                                                   label:keyword          // Event label
+                                                                   value:nil] build]];    // Event value
             
             UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
             [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"搜索页面"];
@@ -150,6 +157,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+//    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"搜索页面"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
     
     [self loadTags];
     
@@ -234,8 +245,12 @@
     [self.navigationController pushViewController:foodlist animated:YES];
     
     [MobClick event:@"click_tag" attributes:@{@"标签名" : theTag.name}];
+//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+//    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+//                                                          action:@"button_press"  // Event action (required)
+//                                                           label:@"点击标签"          // Event label
+//                                                           value:nil] build]];    // Event value
 
-    NSLog(@"跳跳跳");
 }
 #pragma mark-
 #pragma mark TableDelegate

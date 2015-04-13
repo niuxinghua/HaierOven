@@ -45,6 +45,7 @@
 @implementation PersonalEditViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpSubviews];
     
     [self updateUI];

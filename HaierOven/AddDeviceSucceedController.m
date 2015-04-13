@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self SetUpSubViews];
     // Do any additional setup after loading the view.
 }
@@ -148,6 +149,13 @@
     }
     
     [MobClick event:@"bind_oven" attributes:@{@"烤箱MAC" : oven.mac}];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Add Oven"     // Event category (required)
+                                                          action:@"add oven"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
 }
 

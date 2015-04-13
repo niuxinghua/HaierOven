@@ -82,6 +82,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.titleLabel.text = self.iswathching?@"已关注列表":@"粉丝列表";
     
     self.tableView.tableFooterView = [[UIView alloc] init];

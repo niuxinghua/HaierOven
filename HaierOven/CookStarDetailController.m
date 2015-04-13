@@ -207,6 +207,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self SetUpSubviews];
     self.mainTable.delegate = self;
     self.mainTable.dataSource  = self;
@@ -399,6 +400,12 @@
         [[InternetManager sharedManager] addFollowWithUserBaseId:userBaseId andFollowedUserBaseId:self.cookerStar.userBaseId callBack:^(BOOL success, id obj, NSError *error) {
             if (success) {
                 NSLog(@"关注成功");
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Masterchef %@ Detail", self.cookerStar.userName]     // Event category (required)
+                                                                      action:@"follow"    // Event action (required)
+                                                                       label:nil          // Event label
+                                                                       value:nil] build]];    // Event value
+                
                 [super showProgressCompleteWithLabelText:@"已关注" afterDelay:1];
                 sender.selected = YES;
                 if ([self.delegate respondsToSelector:@selector(cookerStarDidFollowd)]) {
@@ -422,6 +429,12 @@
         [super showProgressErrorWithLabelText:@"不能给自己留言" afterDelay:1];
         return;
     }
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Masterchef %@ Detail", self.cookerStar.userName]     // Event category (required)
+                                                          action:@"leave a message"    // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Liukang" bundle:nil];
     ChatViewController* chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"Chat view controller"];
@@ -450,6 +463,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notAllowLandscape:) name:MPMoviePlayerWillExitFullscreenNotification object:self.player];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrame:) name:MPMoviePlayerDidExitFullscreenNotification object:self.player];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(close:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Masterchef %@ Detail", self.cookerStar.userName]     // Event category (required)
+                                                          action:@"video"    // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
 }
 
@@ -489,6 +508,11 @@
     NSLog(@"新手学烘焙");
     StudyCookViewController* studyController = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
     [self.navigationController pushViewController:studyController animated:YES];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Masterchef %@ Detail", self.cookerStar.userName]     // Event category (required)
+                                                          action:@"study baking"    // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 /**

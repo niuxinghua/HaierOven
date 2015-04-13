@@ -453,6 +453,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"菜谱详情页面"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     [self setupSubviews];
     [self loadCookbookDetail];
     if (!self.isPreview) {
@@ -613,6 +618,12 @@
                                                              [self.commentsTableView reloadData];
                                                              
                                                              [MobClick event:@"comment_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
+                                                             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                                             
+                                                             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                                                                   action:@"tab_comment"  // Event action (required)
+                                                                                                                    label:nil          // Event label
+                                                                                                                    value:nil] build]];    // Event value
                                                              
                                                          } else {
                                                              NSLog(@"评论失败");
@@ -906,25 +917,36 @@
             [view removeFromSuperview];
         }
     }
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     switch (type) {
         case CurrentContentTypeFoods:
         {
 
             [self.cookbookDetailCell.contentView addSubview:self.foodsTableView];
-            
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                  action:@"tab_food"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
         }
             
         
         case CurrentContentTypeMethods:
         {
-            
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                  action:@"tab_method"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             [self.cookbookDetailCell.contentView addSubview:self.stepsTableView];
             break;
         }
             
         case CurrentContentTypeComment:
         {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                  action:@"tab_comment"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             if (!IsLogin) {
                 self.commentsTableView.frame = CGRectMake(0, 0, Main_Screen_Width, self.cookbookDetailCell.contentView.height);
             } else {
@@ -1124,6 +1146,11 @@
             if (!self.isPreview) {
                 [MobClick event:@"add_shoppinglist" attributes:@{@"菜谱": self.cookbookDetail.name,
                                                                  @"作者": self.cookbookDetail.creator.userName}];
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                      action:@"add to shoppinglist"  // Event action (required)
+                                                                       label:nil          // Event label
+                                                                       value:nil] build]];    // Event value
             }
             
             
@@ -1139,6 +1166,11 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     StudyCookViewController* studyController = [storyboard instantiateViewControllerWithIdentifier:@"StudyCookViewController"];
     [self.navigationController pushViewController:studyController animated:YES];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                          action:@"study baking"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
     
 }
 
@@ -1154,6 +1186,13 @@
             [super showProgressCompleteWithLabelText:@"菜谱点赞成功" afterDelay:1];
             [MobClick event:@"praise_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
             self.praiseButton.selected = YES;
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                                  action:@"like"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
+            
+            
         } else {
             [super showProgressErrorWithLabelText:@"赞菜谱没有成功" afterDelay:1];
             self.praiseButton.selected = NO;
@@ -1196,6 +1235,12 @@
     NSArray* snsNames = [QQApi isQQInstalled] ? @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ] : @[ UMShareToSina, UMShareToWechatSession, UMShareToWechatTimeline];
     [UMSocialSnsService presentSnsIconSheetView:self appKey:UMengAppKey shareText:shareText shareImage:self.cookbookImageView.image shareToSnsNames:snsNames delegate:self];
     
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                          action:@"share"  // Event action (required)
+                                                           label:@"share"          // Event label
+                                                           value:nil] build]];    // Event value
+    
 }
 
 #pragma mark - UMSocialDataDelegate & UMSocialUIDelegate
@@ -1206,6 +1251,9 @@
     NSString* shareUrl = [BaseShareUrl stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
     
     NSLog(@"platform: %@, shareUrl: %@", platformName, shareUrl);
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
     
     if ([platformName hasPrefix:@"wx"]) { //微信分享，只分享图片，分享到朋友圈时的连接为app下载地址
         
@@ -1222,16 +1270,35 @@
         [UMSocialData defaultData].extConfig.wechatSessionData.url = shareUrl;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
         
+        NSString* eventLabelText = @"share_wechat";
+        if ([platformName isEqualToString:@"wxsession"]) {
+            eventLabelText = @"share_wechat";
+        } else if ([platformName isEqualToString:@"wxtimeline"]) {
+            eventLabelText = @"share_wechat-circle";
+        }
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                              action:@"share"  // Event action (required)
+                                                               label:eventLabelText          // Event label
+                                                               value:nil] build]];    // Event value
+        
     } else if ([platformName hasPrefix:@"qq"]) {
 //        socialData.shareImage = self.cookbookImageView.image;
         [UMSocialData defaultData].extConfig.qqData.url = shareUrl;
         [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                              action:@"share"  // Event action (required)
+                                                               label:@"share_qq"          // Event label
+                                                               value:nil] build]];    // Event value
     } else if ([platformName hasPrefix:@"sina"]) {
         
         NSString* sharePath = [NSString stringWithFormat:@"http://%@", BaseShareUrl];
         sharePath = [sharePath stringByAppendingPathComponent:self.cookbookDetail.cookbookId];
         sharePath = [sharePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [UMSocialData defaultData].shareText = [NSString stringWithFormat:@"海尔带你分享美食：%@，作者：%@。\n%@", self.cookbookDetail.name, self.cookbookDetail.creator.userName, sharePath];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Cookbook detail"     // Event category (required)
+                                                              action:@"share"  // Event action (required)
+                                                               label:@"share_sinaweibo"          // Event label
+                                                               value:nil] build]];    // Event value
         
     }
     

@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.arr=@[@"烘焙必备工具",@"烘焙材料",@"烘焙必备技法"];
     self.images = @[IMAGENAMED(@"fresh-group-1.png"),IMAGENAMED(@"fresh-group-2.png"),IMAGENAMED(@"fresh-group-3.png")];
     self.detailArr = @[
@@ -103,7 +104,32 @@
 //        self.tempBtn.tag = index.row;
 //    }
     
-   
+    if (cell.icon.selected) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        
+        switch (index.row) {
+            case 0:
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                      action:@"Menu_a"  // Event action (required)
+                                                                       label:@"Menu_a"          // Event label
+                                                                       value:nil] build]];    // Event value
+                break;
+            case 1:
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                      action:@"Menu_b"  // Event action (required)
+                                                                       label:@"Menu_a"          // Event label
+                                                                       value:nil] build]];    // Event value
+                break;
+            case 2:
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                      action:@"Menu_c"  // Event action (required)
+                                                                       label:@"Menu_a"          // Event label
+                                                                       value:nil] build]];    // Event value
+                break;
+            default:
+                break;
+        }
+    }
     
     [self.tableView reloadData];
 
@@ -111,18 +137,49 @@
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                          action:@"back"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 -(void)getSelectedView:(StudyCookView *)studycook{
     
 //    NSLog(@"%d",studycook.tag);
 //    NSLog(@"%d",indexSection);
-//    
-//    
+    
+    NSLog(@"%@", studycook.title);
     StudyDetailController * detail = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyDetailController"];
     detail.studyType = indexFiex;
     detail.toolIndex = studycook.tag;
     [self.navigationController pushViewController:detail animated:YES];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    switch (indexFiex) {
+        case 0:
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                  action:@"Menu_a"  // Event action (required)
+                                                                   label:[@"a-" stringByAppendingString:studycook.title]          // Event label
+                                                                   value:nil] build]];    // Event value
+            break;
+        case 1:
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                  action:@"Menu_a"  // Event action (required)
+                                                                   label:[@"b-" stringByAppendingString:studycook.title]          // Event label
+                                                                   value:nil] build]];    // Event value
+            break;
+        case 2:
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                                  action:@"Menu_a"  // Event action (required)
+                                                                   label:[@"c-" stringByAppendingString:studycook.title]          // Event label
+                                                                   value:nil] build]];    // Event value
+            break;
+        default:
+            break;
+    }
+    
 }
 
 @end

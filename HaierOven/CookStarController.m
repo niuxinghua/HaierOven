@@ -125,6 +125,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addFooter];
     [self addHeader];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -187,9 +188,16 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CookStarDetailController *csd = [self.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
-    csd.cookerStar = self.cookerStars[indexPath.row];
+    CookerStar* cooker = self.cookerStars[indexPath.row];
+    csd.cookerStar = cooker;
     csd.delegate = self;
     [self.navigationController pushViewController:csd animated:YES];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Masterchef Page"     // Event category (required)
+                                                          action:cooker.userName    // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 #pragma mark - cookStarDetailControllerDelegate
