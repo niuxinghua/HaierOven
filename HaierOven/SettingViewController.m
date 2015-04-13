@@ -51,7 +51,7 @@
     //添加到button
     [liebiaoBtn addSubview:label];
     self.navigationItem.leftBarButtonItem = liebiao;
-    
+
 }
 
 - (void)deleteMarkLabel
