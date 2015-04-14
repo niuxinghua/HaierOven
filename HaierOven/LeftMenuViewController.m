@@ -413,7 +413,7 @@
             
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"Homepage"  // Event action (required)
+                                                                  action:@"homepage"  // Event action (required)
                                                                    label:nil          // Event label
                                                                    value:nil] build]];    // Event value
             

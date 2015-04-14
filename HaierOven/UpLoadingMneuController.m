@@ -44,7 +44,7 @@ typedef void (^result) (BOOL success);
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
-                                                          action:@"upload_cookbook"  // Event action (required)
+                                                          action:@"upload cookbook"  // Event action (required)
                                                            label:nil          // Event label
                                                            value:nil] build]];    // Event value
     

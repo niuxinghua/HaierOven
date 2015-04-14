@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>88E16459-1648-4C10-993E-1D08B7D4EA4D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>HaierOven</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>A56BC0CDCF1E5C8560ACBE1293CF316A56E5FBCB</key>
 		<string>github.com:HaierOven-Edaysoft/HaierOven.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HaierOven.xcodeproj/project.xcworkspace</string>
+	<string>HaierOven.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A56BC0CDCF1E5C8560ACBE1293CF316A56E5FBCB</key>

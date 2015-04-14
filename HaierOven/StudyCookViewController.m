@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) UIButton *tempBtn;
 @property (strong, nonatomic) NSArray *detailArr;
+@property (copy, nonatomic) NSString* currentMainMenu;
 @end
 
 @implementation StudyCookViewController
@@ -103,32 +104,14 @@
 //        
 //        self.tempBtn.tag = index.row;
 //    }
-    
+    NSLog(@"%@", self.tempBtn.currentTitle);
     if (cell.icon.selected) {
+        self.currentMainMenu = cell.title;
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        
-        switch (index.row) {
-            case 0:
-                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                      action:@"Menu_a"  // Event action (required)
-                                                                       label:@"Menu_a"          // Event label
-                                                                       value:nil] build]];    // Event value
-                break;
-            case 1:
-                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                      action:@"Menu_b"  // Event action (required)
-                                                                       label:@"Menu_a"          // Event label
-                                                                       value:nil] build]];    // Event value
-                break;
-            case 2:
-                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                      action:@"Menu_c"  // Event action (required)
-                                                                       label:@"Menu_a"          // Event label
-                                                                       value:nil] build]];    // Event value
-                break;
-            default:
-                break;
-        }
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                              action:[@"Menu_" stringByAppendingString:cell.title]  // Event action (required)
+                                                               label:[@"Menu_" stringByAppendingString:cell.title]          // Event label
+                                                               value:nil] build]];    // Event value
     }
     
     [self.tableView reloadData];
@@ -146,39 +129,20 @@
 
 -(void)getSelectedView:(StudyCookView *)studycook{
     
-//    NSLog(@"%d",studycook.tag);
-//    NSLog(@"%d",indexSection);
-    
     NSLog(@"%@", studycook.title);
     StudyDetailController * detail = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyDetailController"];
     detail.studyType = indexFiex;
     detail.toolIndex = studycook.tag;
     [self.navigationController pushViewController:detail animated:YES];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    NSLog(@"%@-%@", self.currentMainMenu, studycook.title);
     
-    switch (indexFiex) {
-        case 0:
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                  action:@"Menu_a"  // Event action (required)
-                                                                   label:[@"a-" stringByAppendingString:studycook.title]          // Event label
-                                                                   value:nil] build]];    // Event value
-            break;
-        case 1:
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                  action:@"Menu_a"  // Event action (required)
-                                                                   label:[@"b-" stringByAppendingString:studycook.title]          // Event label
-                                                                   value:nil] build]];    // Event value
-            break;
-        case 2:
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                                  action:@"Menu_a"  // Event action (required)
-                                                                   label:[@"c-" stringByAppendingString:studycook.title]          // Event label
-                                                                   value:nil] build]];    // Event value
-            break;
-        default:
-            break;
-    }
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                          action:[@"Menu_" stringByAppendingString:self.currentMainMenu]  // Event action (required)
+                                                           label:[NSString stringWithFormat:@"%@-%@", self.currentMainMenu, studycook.title]          // Event label
+                                                           value:nil] build]];    // Event value
+    
     
 }
 
