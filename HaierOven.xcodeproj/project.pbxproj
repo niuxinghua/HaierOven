@@ -1014,6 +1014,7 @@
 		84781E651AA3E7E500A01264 /* fuck.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84781E641AA3E7E500A01264 /* fuck.mp3 */; };
 		84781E681AA4069300A01264 /* cookbook_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 84781E661AA4069300A01264 /* cookbook_camera.png */; };
 		84781E691AA4069300A01264 /* cookbook_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84781E671AA4069300A01264 /* cookbook_camera@2x.png */; };
+		8484AF1F1AD4D831004A4932 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8484AF1E1AD4D831004A4932 /* libGoogleAnalyticsServices.a */; };
 		848527721A7CA67400400BF8 /* use@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E61ABA1A762697009DF3FC /* use@2x.png */; };
 		848527731A7CA6AA00400BF8 /* use2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E61AC11A7629CA009DF3FC /* use2@3x.png */; };
 		848527761A7CD1BC00400BF8 /* CookStarPullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848527751A7CD1BC00400BF8 /* CookStarPullView.m */; };
@@ -1210,6 +1211,8 @@
 		84E113831A52A46B00D16DDB /* CommentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E113801A52A46B00D16DDB /* CommentListCell.xib */; };
 		84E113891A52A4B100D16DDB /* AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E113871A52A4B100D16DDB /* AttributedLabel.m */; };
 		84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1138B1A52A4C700D16DDB /* DrawedButton.m */; };
+		84ED2E621AD3C44400F668C4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED2E611AD3C44400F668C4 /* AdSupport.framework */; };
+		84ED2E641AD3C44E00F668C4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED2E631AD3C44E00F668C4 /* CoreData.framework */; };
 		C4182E181A4E4A4A006A44D0 /* Liukang.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4182E171A4E4A4A006A44D0 /* Liukang.storyboard */; };
 		C4182E1B1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */; };
 		C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */; };
@@ -2642,6 +2645,17 @@
 		84781E641AA3E7E500A01264 /* fuck.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fuck.mp3; sourceTree = "<group>"; };
 		84781E661AA4069300A01264 /* cookbook_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookbook_camera.png; sourceTree = "<group>"; };
 		84781E671AA4069300A01264 /* cookbook_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookbook_camera@2x.png"; sourceTree = "<group>"; };
+		8484AF141AD4D831004A4932 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		8484AF151AD4D831004A4932 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		8484AF161AD4D831004A4932 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		8484AF171AD4D831004A4932 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		8484AF181AD4D831004A4932 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		8484AF191AD4D831004A4932 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		8484AF1A1AD4D831004A4932 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		8484AF1B1AD4D831004A4932 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		8484AF1C1AD4D831004A4932 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		8484AF1D1AD4D831004A4932 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		8484AF1E1AD4D831004A4932 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		848527741A7CD1BC00400BF8 /* CookStarPullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookStarPullView.h; sourceTree = "<group>"; };
 		848527751A7CD1BC00400BF8 /* CookStarPullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookStarPullView.m; sourceTree = "<group>"; };
 		848527771A7CD1D700400BF8 /* CookStarPullView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CookStarPullView.xib; sourceTree = "<group>"; };
@@ -2750,6 +2764,8 @@
 		84E113871A52A4B100D16DDB /* AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributedLabel.m; sourceTree = "<group>"; };
 		84E1138A1A52A4C700D16DDB /* DrawedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawedButton.h; sourceTree = "<group>"; };
 		84E1138B1A52A4C700D16DDB /* DrawedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawedButton.m; sourceTree = "<group>"; };
+		84ED2E611AD3C44400F668C4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		84ED2E631AD3C44E00F668C4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C4182E171A4E4A4A006A44D0 /* Liukang.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Liukang.storyboard; sourceTree = "<group>"; };
 		C4182E191A4E4ACF006A44D0 /* CookbookDetailControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookDetailControllerViewController.h; sourceTree = "<group>"; };
 		C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookDetailControllerViewController.m; sourceTree = "<group>"; };
@@ -2768,6 +2784,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84ED2E641AD3C44E00F668C4 /* CoreData.framework in Frameworks */,
+				84ED2E621AD3C44400F668C4 /* AdSupport.framework in Frameworks */,
 				8423882A1A70FA26007AB206 /* StoreKit.framework in Frameworks */,
 				84855F2C1A64F7D600830B75 /* MediaPlayer.framework in Frameworks */,
 				8447CAE61A5B98EE00FADF9D /* libz.dylib in Frameworks */,
@@ -2777,6 +2795,7 @@
 				8447CADE1A5B98BF00FADF9D /* CoreGraphics.framework in Frameworks */,
 				8447CADC1A5B98B200FADF9D /* SystemConfiguration.framework in Frameworks */,
 				8447CADA1A5B98A300FADF9D /* libiconv.dylib in Frameworks */,
+				8484AF1F1AD4D831004A4932 /* libGoogleAnalyticsServices.a in Frameworks */,
 				8447CAD81A5B989100FADF9D /* Security.framework in Frameworks */,
 				8447CAD41A5B7FEE00FADF9D /* libSocialWhatsapp.a in Frameworks */,
 				8447CAC91A5B7FEE00FADF9D /* libSocialQQ.a in Frameworks */,
@@ -4415,6 +4434,8 @@
 		8401414E1A4BC9C20050615F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84ED2E631AD3C44E00F668C4 /* CoreData.framework */,
+				84ED2E611AD3C44400F668C4 /* AdSupport.framework */,
 				842388291A70FA26007AB206 /* StoreKit.framework */,
 				84855F2B1A64F7D600830B75 /* MediaPlayer.framework */,
 				8447CAE51A5B98EE00FADF9D /* libz.dylib */,
@@ -4647,6 +4668,7 @@
 		8441171C1A4BB8AF00628A64 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8484AF131AD4D831004A4932 /* GoogleAnalyticsLibrary */,
 				8447CA581A5B7FEE00FADF9D /* Umeng */,
 				8441171D1A4BB8AF00628A64 /* DataCenter */,
 				844117201A4BB8AF00628A64 /* Entity */,
@@ -5300,6 +5322,24 @@
 			path = uSDKFramework;
 			sourceTree = "<group>";
 		};
+		8484AF131AD4D831004A4932 /* GoogleAnalyticsLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				8484AF141AD4D831004A4932 /* GAI.h */,
+				8484AF151AD4D831004A4932 /* GAIDictionaryBuilder.h */,
+				8484AF161AD4D831004A4932 /* GAIEcommerceFields.h */,
+				8484AF171AD4D831004A4932 /* GAIEcommerceProduct.h */,
+				8484AF181AD4D831004A4932 /* GAIEcommerceProductAction.h */,
+				8484AF191AD4D831004A4932 /* GAIEcommercePromotion.h */,
+				8484AF1A1AD4D831004A4932 /* GAIFields.h */,
+				8484AF1B1AD4D831004A4932 /* GAILogger.h */,
+				8484AF1C1AD4D831004A4932 /* GAITrackedViewController.h */,
+				8484AF1D1AD4D831004A4932 /* GAITracker.h */,
+				8484AF1E1AD4D831004A4932 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalyticsLibrary;
+			sourceTree = "<group>";
+		};
 		848527791A7CD57400400BF8 /* WebImage&Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -5499,7 +5539,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = AEPFFMR544;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -6933,6 +6973,10 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
+					"$(PROJECT_DIR)/HaierOven/Models/Google",
+					Analytics,
+					Library,
+					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6976,6 +7020,10 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/Whatsapp",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/YiXin",
+					"$(PROJECT_DIR)/HaierOven/Models/Google",
+					Analytics,
+					Library,
+					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

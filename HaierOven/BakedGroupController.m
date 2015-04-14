@@ -173,6 +173,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self SetUpSubviews];
     
     //[self loadFollowedCookbooks]; 初始化的时候调用，这里不需要调用

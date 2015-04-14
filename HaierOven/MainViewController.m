@@ -146,6 +146,12 @@
                 
                 CookerStar* cooker = vc.recommendCookerStars[pageIndex];
                 
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
+                                                                      action:@"KV"  // Event action (required)
+                                                                       label:cooker.userName          // Event label
+                                                                       value:nil] build]];    // Event value
+                
                 CookStarDetailController* cookerController = [vc.storyboard instantiateViewControllerWithIdentifier:@"CookStarDetailController"];
                 cookerController.cookerStar = cooker;
                 [vc.navigationController pushViewController:cookerController animated:YES];
@@ -225,6 +231,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"主页"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
 
     [self setupSubviews];
     
@@ -309,7 +319,11 @@
     foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
     [MobClick event:@"click_tag" attributes:@{@"标签名" : theTag.name}];
- 
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
+                                                          action:@"Tab"  // Event action (required)
+                                                           label:theTag.name          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 
@@ -394,6 +408,13 @@
     cookbookDetailController.cookbookId = cookbook.ID;
     cookbookDetailController.isAuthority = cookbook.isAuthority;
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
+                                                          action:@"Go-to-cookbook"  // Event action (required)
+                                                           label:cookbook.name          // Event label
+                                                           value:nil] build]];    // Event value
+    
 }
 
 

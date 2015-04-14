@@ -110,6 +110,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:@"给厨神留言页面" value:@"给厨神留言页面"];
+    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     [self setupSubviews];
     
     [self loadMessages];
@@ -118,7 +122,6 @@
     self.title = self.toUserName;
     
     [MobClick event:@"leave_message"];
-    
 }
 
 - (void)setupSubviews

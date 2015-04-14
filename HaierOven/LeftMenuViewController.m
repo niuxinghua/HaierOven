@@ -227,6 +227,12 @@
 
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
+                                                          action:@"menu"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
+    
     [self updateNotificationCount];
     [self loadUserInfo];
     
@@ -340,10 +346,6 @@
                 [self.sideMenuViewController hideMenuViewController];
             } else {
                 
-//                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]
-//                                                             animated:YES];
-//                [self.sideMenuViewController hideMenuViewController];
-                
                 [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Login view controller"] animated:YES completion:nil];
                 
             }
@@ -358,13 +360,15 @@
                     DeviceViewController* deviceViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceViewController"];
                     deviceViewController.addDeviceFlag = YES;
                     
-                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:deviceViewController]
-                                                                 animated:YES];
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:deviceViewController] animated:YES];
                     [self.sideMenuViewController hideMenuViewController];
                     
-//                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceStepOneController"]]
-//                                                                 animated:YES];
-//                    [self.sideMenuViewController hideMenuViewController];
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                          action:@"Add oven"  // Event action (required)
+                                                                           label:nil          // Event label
+                                                                           value:nil] build]];    // Event value
+                    
                     break;
                 }else{
                     
@@ -380,6 +384,12 @@
                     [UIView animateWithDuration:0.2 animations:^{
                         self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
                     }];
+                    
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                          action:@"Add oven"  // Event action (required)
+                                                                           label:nil          // Event label
+                                                                           value:nil] build]];    // Event value
                 
                 } else {
                     
@@ -396,45 +406,95 @@
             
         }
         case 2:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"homepage"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
+            
             break;
+        }
         case 3:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"CookStarController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"masterchef"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
+            
             break;
+        }
         case 4:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedGroupController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"cookcircle"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
-            /*
+        }
+        /*
         case 5:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedHouseViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"cookroom"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
-            */
+        }
+        */
         case 5:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"shopping_list"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
-
+        }
         case 6:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"notification"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
-
+        }
         case 7:
+        {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
+                                                                  action:@"setting"  // Event action (required)
+                                                                   label:nil          // Event label
+                                                                   value:nil] build]];    // Event value
             break;
-            
+        }
         default:
             break;
     }

@@ -19,12 +19,14 @@
 @property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) UIButton *tempBtn;
 @property (strong, nonatomic) NSArray *detailArr;
+@property (copy, nonatomic) NSString* currentMainMenu;
 @end
 
 @implementation StudyCookViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.arr=@[@"烘焙必备工具",@"烘焙材料",@"烘焙必备技法"];
     self.images = @[IMAGENAMED(@"fresh-group-1.png"),IMAGENAMED(@"fresh-group-2.png"),IMAGENAMED(@"fresh-group-3.png")];
     self.detailArr = @[
@@ -102,8 +104,15 @@
 //        
 //        self.tempBtn.tag = index.row;
 //    }
-    
-   
+    NSLog(@"%@", self.tempBtn.currentTitle);
+    if (cell.icon.selected) {
+        self.currentMainMenu = cell.title;
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                              action:[@"Menu_" stringByAppendingString:cell.title]  // Event action (required)
+                                                               label:[@"Menu_" stringByAppendingString:cell.title]          // Event label
+                                                               value:nil] build]];    // Event value
+    }
     
     [self.tableView reloadData];
 
@@ -111,18 +120,30 @@
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                          action:@"back"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 -(void)getSelectedView:(StudyCookView *)studycook{
     
-//    NSLog(@"%d",studycook.tag);
-//    NSLog(@"%d",indexSection);
-//    
-//    
+    NSLog(@"%@", studycook.title);
     StudyDetailController * detail = [self.storyboard instantiateViewControllerWithIdentifier:@"StudyDetailController"];
     detail.studyType = indexFiex;
     detail.toolIndex = studycook.tag;
     [self.navigationController pushViewController:detail animated:YES];
+    
+    NSLog(@"%@-%@", self.currentMainMenu, studycook.title);
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
+                                                          action:[@"Menu_" stringByAppendingString:self.currentMainMenu]  // Event action (required)
+                                                           label:[NSString stringWithFormat:@"%@-%@", self.currentMainMenu, studycook.title]          // Event label
+                                                           value:nil] build]];    // Event value
+    
+    
 }
 
 @end

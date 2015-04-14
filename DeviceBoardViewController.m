@@ -411,8 +411,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSLog(@"******设备状态变化啦**********");
-    NSLog(@"在线：%d, 开机：%d, 工作：%d, 温度：%d, 时间：%@", self.ovenManager.currentStatus.isReady, _ovenManager.currentStatus.opened, self.ovenManager.currentStatus.isWorking, _ovenManager.currentStatus.temperature, _ovenManager.currentStatus.bakeTime);
+//    NSLog(@"******设备状态变化啦**********");
+//    NSLog(@"在线：%d, 开机：%d, 工作：%d, 温度：%d, 时间：%@", self.ovenManager.currentStatus.isReady, _ovenManager.currentStatus.opened, self.ovenManager.currentStatus.isWorking, _ovenManager.currentStatus.temperature, _ovenManager.currentStatus.bakeTime);
     
     if ([keyPath isEqualToString:@"self.ovenManager.currentStatus.isReady"]) {
         if (_ovenManager.currentStatus.isReady) {
@@ -469,6 +469,7 @@
     self.navigationController.toolbar.frame = CGRectMake(0, PageH-PageW*0.18, PageW, PageW*0.18);
     
     if (self.deviceBoardStatus == DeviceBoardStatusWorking) {
+        [self.startStatusView resetAnimate];
         self.startStatusView.animationDuration = self.ovenOperator.bakeLeftSeconds;
         [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
     }
@@ -559,6 +560,7 @@
                     }
                     
                     float animateDueation = self.ovenOperator.bakeLeftSeconds;
+                    [self.startStatusView resetAnimate];
                     self.startStatusView.animationDuration = animateDueation;
                     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
                     
@@ -575,9 +577,10 @@
                         
                         self.deviceBoardStatus = DeviceBoardStatusPreheating;
                         
-                        [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
+                        [self.startStatusView resetAnimate];
+                        //[self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
                         
-                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue];
+                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
                         
                         self.startStatusView.leftTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
                                                          totalSeconds/3600,
@@ -799,54 +802,66 @@
 
 -(void)StartWorking
 {
-    if (self.selectedOrderTime != nil && self.orderButton.selected) {
-        // 有设置预约
-        
-        
-        if (self.myOven == nil && !DebugOvenFlag) {
-            [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
-            return;
+    @try {
+        [self.startStatusView resetAnimate];
+        [self.tableView reloadData];
+        if (self.selectedOrderTime != nil && self.orderButton.selected) {
+            // 有设置预约
+            
+            if (self.myOven == nil && !DebugOvenFlag) {
+                [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
+                return;
+            }
+            
+            NSString* modeStr = [[self.bakeMode[@"bakeMode"] allValues] firstObject];
+            
+            NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
+            NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
+            NSInteger minutes = [timeStr integerValue];
+            NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
+            
+            range = [self.temputure.currentTitle rangeOfString:@"°"];
+            NSString* temperatureValue = [self.temputure.currentTitle substringToIndex:range.location];
+            
+            self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", modeStr];
+            self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@", self.howlong.currentTitle];
+            self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
+            
+            [self.ovenOperator startOrderWithDate:self.selectedOrderTime
+                                         bakeTime:timeValue
+                                      temperature:temperatureValue
+                                             mode:self.bakeMode
+                                    operateResult:^(BOOL success, id obj, NSError *error) {
+                                        
+                                        if (success) {
+                                            self.deviceBoardStatus = DeviceBoardStatusOrdering;
+                                        }
+                                        
+                                    }];
+            
+            self.ovenOperator.bakeLeftSeconds = [timeStr integerValue] * 60;
+            self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d:%02d",
+                                             self.ovenOperator.bakeLeftSeconds/3600,
+                                             (self.ovenOperator.bakeLeftSeconds%3600)/60,
+                                             (self.ovenOperator.bakeLeftSeconds%3600)%60];
+            
+            //self.startStatusView.animationDuration = 0;
+            //self.startStatusView.lineProgressView.radius = 0;
+            //self.startStatusView.lineProgressView.innerRadius = 0;
+            
+            [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
+            
+        } else {
+            [self preheatAndBake];
         }
-        
-        NSString* modeStr = [[self.bakeMode[@"bakeMode"] allValues] firstObject];
-        
-        NSRange range = [self.howlong.currentTitle rangeOfString:@" 分钟"];
-        NSString* timeStr = [self.howlong.currentTitle substringToIndex:range.location];
-        NSInteger minutes = [timeStr integerValue];
-        NSString* timeValue = [NSString stringWithFormat:@"%02d:%02d", minutes/60, minutes%60];
-        
-        range = [self.temputure.currentTitle rangeOfString:@"°"];
-        NSString* temperatureValue = [self.temputure.currentTitle substringToIndex:range.location];
-        
-        self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", modeStr];
-        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%@", self.howlong.currentTitle];
-        self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
-        
-        [self.ovenOperator startOrderWithDate:self.selectedOrderTime
-                                     bakeTime:timeValue
-                                  temperature:temperatureValue
-                                         mode:self.bakeMode
-                                operateResult:^(BOOL success, id obj, NSError *error) {
-                                    
-                                    if (success) {
-                                        self.deviceBoardStatus = DeviceBoardStatusOrdering;
-                                    }
-                                    
-                                }];
-        
-        self.ovenOperator.bakeLeftSeconds = [timeStr integerValue] * 60;
-        self.startStatusView.leftTime = [NSString stringWithFormat:@"%02d:%02d:%02d",
-                                         self.ovenOperator.bakeLeftSeconds/3600,
-                                         (self.ovenOperator.bakeLeftSeconds%3600)/60,
-                                         (self.ovenOperator.bakeLeftSeconds%3600)%60];
-        
-        self.startStatusView.animationDuration = 0;
-        [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
-        
-    } else {
-        [self preheatAndBake];
     }
-  
+    @catch (NSException *exception) {
+        [super showProgressErrorWithLabelText:@"发生错误" afterDelay:1];
+    }
+    @finally {
+        
+    }
+    
 }
 
 - (void)preheatAndBake
@@ -965,6 +980,7 @@
     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%@", self.temputure.currentTitle];
     
     float animateDueation = [timeStr integerValue] * 60;
+    [self.startStatusView resetAnimate];
     self.startStatusView.animationDuration = animateDueation;
     [self.startStatusView.lineProgressView setCompleted:1.0*80 animated:YES];
     
@@ -1416,6 +1432,8 @@
             
             self.actionCell.hidden = YES;
             
+            [self.startStatusView resetAnimate];
+            
             [self.deviceNameButton setTitle:[NSString stringWithFormat:@"%@已连接，待机中", self.currentOven.name] forState:UIControlStateSelected];
             
             [self.tableView reloadData];
@@ -1615,6 +1633,11 @@
                                                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:self.ovenOperator.bakeLeftSeconds alertBody:notificationBody];
                                                
                                                [MobClick event:@"quick_warmup"];
+                                               id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                               [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
+                                                                                                     action:@"button_press"  // Event action (required)
+                                                                                                      label:@"快速预热"          // Event label
+                                                                                                      value:nil] build]];    // Event value
                                                
                                            } else {
                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];

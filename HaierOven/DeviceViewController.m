@@ -277,6 +277,18 @@
 
 -(void)SelectDeviceWithDeviceView:(MyDeviceView *)deviceView
 {
+    
+    if (DebugOvenFlag) {
+        DeviceBoardViewController *deviceboard = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceBoardViewController"];
+        
+        deviceboard.currentOven = self.myDevices[deviceView.tag];
+        
+        [self.navigationController pushViewController:deviceboard animated:YES];
+        
+        return;
+    }
+    
+    
     if([deviceView.deviceStatusLabel.text isEqualToString:@"脱机中"])
     {
         DeviceUnconnectController* uncollectController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeviceUnconnectController"];

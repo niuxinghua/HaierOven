@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) NSString * leftTime;
 @property (nonatomic)float animationDuration;
+
+- (void)resetAnimate;
+
 @end

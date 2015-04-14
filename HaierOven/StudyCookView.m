@@ -8,6 +8,7 @@
 
 #import "StudyCookView.h"
 @interface StudyCookView()
+
 @property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 
 @end

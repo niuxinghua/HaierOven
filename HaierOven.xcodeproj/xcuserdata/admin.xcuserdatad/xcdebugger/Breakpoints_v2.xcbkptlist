@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/BakedGroupController.m"
-            timestampString = "448343729.403429"
+            timestampString = "450590121.791971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "420"
-            endingLineNumber = "420"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "-Cancel"
             landmarkType = "5">
          </BreakpointContent>
@@ -35,28 +35,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/OHPlayAudio.m"
-            timestampString = "446949531.386881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "-playFuck"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "HaierOven/AppDelegate.m"
-            timestampString = "448190900.722735"
+            timestampString = "450087304.83839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "-tik"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/CookStarDetailController.m"
-            timestampString = "448341569.08171"
+            timestampString = "450590121.791971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "714"
+            endingLineNumber = "714"
             landmarkName = "-UpLoadHeadViewHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -114,13 +98,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[InternetManager getVerCodeWithLoginName:andValidateType:andValidateScene:andAccType:callBack:]"
                   moduleName = "HaierOven"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "449562674.327859"
+                  timestampString = "450692739.190906"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "510">
+                  offsetFromSymbolStart = "614">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -128,13 +113,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__96-[InternetManager getVerCodeWithLoginName:andValidateType:andValidateScene:andAccType:callBack:]_block_invoke"
                   moduleName = "HaierOven"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "449562674.32801"
+                  timestampString = "450692739.191076"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "90">
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -145,13 +131,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/UpLoadingMneuController.m"
-            timestampString = "448795365.822423"
+            filePath = "HaierOven/Models/Oven/OvenManager/OvenManager.m"
+            timestampString = "450181841.993692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "-cropViewController:didFinishCroppingImage:transform:cropRect:"
+            startingLineNumber = "962"
+            endingLineNumber = "962"
+            landmarkName = "-sendErrorNotification"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -161,13 +147,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Oven/OvenManager/OvenManager.m"
-            timestampString = "449550634.97082"
+            filePath = "DeviceBoardViewController.m"
+            timestampString = "450590121.791971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "912"
-            endingLineNumber = "912"
-            landmarkName = "-sendErrorNotification"
+            startingLineNumber = "1003"
+            endingLineNumber = "1003"
+            landmarkName = "-completeWarmUp"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

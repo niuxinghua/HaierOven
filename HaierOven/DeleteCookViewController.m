@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.deleteArr = [NSMutableArray new];
     
     self.shoppingListCountLabel.text = [NSString stringWithFormat:@"已添加%d个菜谱", self.shoppingList.count];

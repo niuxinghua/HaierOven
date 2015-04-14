@@ -216,6 +216,7 @@
     NSDictionary* dict = notification.userInfo;
     [self showStatusTip:YES title:dict[@"info"]];
     [self performSelector:@selector(removeTipWindow) withObject:nil afterDelay:3];
+    [self showProgressCompleteWithLabelText:dict[@"info"] afterDelay:2];
 }
 
 - (void)openLoginController

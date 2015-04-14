@@ -18,6 +18,7 @@
 @synthesize hadDevice;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self SetUpSubviews];
     // Do any additional setup after loading the view.
     

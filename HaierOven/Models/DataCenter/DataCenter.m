@@ -64,6 +64,7 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     if (self = [super init]) {
         [self createDirectories];
         self.clientId = [FCUUID uuidForDevice];
+        NSLog(@"push to the new branch~~~~~~~~");
     }
     return self;
 }

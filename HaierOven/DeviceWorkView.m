@@ -55,6 +55,7 @@
     [super layoutSubviews];
     
     self.backgroundColor = [UIColor clearColor];
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -78,6 +79,7 @@
     
     CGContextRestoreGState(context);
 }
+
 -(void)InitLineProgressLayer{
      x = (self.width - 2*radius)/2.0 + radius;
      y = (self.height - 2*radius)/2.0 + radius;
@@ -90,7 +92,8 @@
     lineProgressView.color = GlobalOrangeColor;
     lineProgressView.radius = radius-5;
     lineProgressView.innerRadius = 93;
-    lineProgressView.completedColor = [UIColor lightGrayColor];
+//    lineProgressView.completedColor = [UIColor lightGrayColor];
+    lineProgressView.completedColor = GlobalOrangeColor;
     lineProgressView.endAngle = M_PI * 0.72;
     lineProgressView.startAngle = M_PI * 2.28;
 //    lineProgressView.animationDuration = 8;
@@ -137,9 +140,16 @@
     self.timeLabel.text = leftTime;
 }
 
+- (void)resetAnimate {
+    self.animationDuration = 4.0 * 60 * 60;
+    lineProgressView.completedColor = GlobalOrangeColor;
+    [self.lineProgressView setCompleted:1.0*80 animated:YES];
+}
+
 -(void)setAnimationDuration:(float)animationDuration{
     _animationDuration = animationDuration ;
     lineProgressView.animationDuration = animationDuration;
+    lineProgressView.completedColor = [UIColor lightGrayColor];
 }
 
 @end

@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self SetUpSubViews];
     
     // Do any additional setup after loading the view.

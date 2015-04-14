@@ -25,6 +25,7 @@
 @synthesize toolIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpSubviews];
     
 }
@@ -126,10 +127,6 @@
         self.fiexView.frame = CGRectMake(25, 0, PageW-50, 0);
     }];
 }
-
-
-
-
 
 -(void)setStudyType:(StudyType)studyType{
     _studyType = studyType;

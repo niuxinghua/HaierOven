@@ -68,6 +68,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
+//    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"标签菜谱列表页面"];
+//    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     self.tableView.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
@@ -134,6 +139,12 @@
 }
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    NSString* category = [self.title stringByAppendingString:@" page"];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category     // Event category (required)
+                                                          action:@"Back"  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 #pragma mark TableDelegate
@@ -169,6 +180,13 @@
     Cookbook* cookbook = self.cookbooks[indexPath.row];
     cookbookDetailController.cookbookId = cookbook.ID;
     [self.navigationController pushViewController:cookbookDetailController animated:YES];
+    
+    NSString* category = [self.title stringByAppendingString:@" page"];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category     // Event category (required)
+                                                          action:cookbook.name  // Event action (required)
+                                                           label:nil          // Event label
+                                                           value:nil] build]];    // Event value
 }
 
 #pragma mark-

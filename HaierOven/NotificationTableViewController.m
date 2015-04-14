@@ -201,6 +201,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initHeadView];
     
     [self addHeader];

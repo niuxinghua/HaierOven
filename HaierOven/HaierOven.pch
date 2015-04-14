@@ -102,6 +102,14 @@
 
 #define SinaAppKey       @"4024847126"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
+#define kGoogleAnalyticsTrackingId  @"UA-61647559-2" //nurun
+//#define kGoogleAnalyticsTrackingId        @"UA-61644426-1" // test
+
+#define kGAIScreenName  @"Screen name"
+
 
 
 

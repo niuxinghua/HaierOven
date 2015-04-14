@@ -25,7 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSLog(@"开始加载。。。");
+    //NSLog(@"开始加载。。。");
     UInt64 start=[[NSDate date]timeIntervalSince1970]*1000;
     
     // 统计crash日志
@@ -55,9 +55,14 @@
     // app启动日志
     [uAnalysisManager onAppStartEvent:@USDK_CLIENT_VERSION withAppVsersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     
+    // 不自动锁屏
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
     [self startUSdk];
     
     [self initUmengSdk];
+    
+    [self initGoogleAnalytics];
     
     [self initNotification];
     
@@ -68,7 +73,7 @@
     
     [self autoLogin];
     
-    NSLog(@"加载结束...");
+    //NSLog(@"加载结束...");
     UInt64 end=[[NSDate date]timeIntervalSince1970]*1000;
     
     // 统计加载耗时
@@ -156,6 +161,22 @@ void uncaughtExceptionHandler(NSException *exception)
     [MobClick setLogSendInterval:600.]; //10分钟发送一次
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    
+}
+
+- (void)initGoogleAnalytics
+{
+     // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:kGoogleAnalyticsTrackingId];
     
 }
 
@@ -408,7 +429,7 @@ void uncaughtExceptionHandler(NSException *exception)
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    [self stopUSdk];
+    //[self stopUSdk];
     
 }
 
