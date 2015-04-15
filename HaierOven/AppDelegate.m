@@ -149,7 +149,6 @@ void uncaughtExceptionHandler(NSException *exception)
     [UMSocialQQHandler setQQWithAppId:QQAppID appKey:@"4hyK6cWsLYMuv2tQ" url:@"http://www.umeng.com/social"];
     
     // 微博
-    //追爱行动 AppKey:1162620904 App Secret:08006bb891e3d8b8a4e303399f61dbe4
 #warning 设置安全域名和回调页
     [UMSocialSinaHandler openSSOWithRedirectURL:nil];
     
