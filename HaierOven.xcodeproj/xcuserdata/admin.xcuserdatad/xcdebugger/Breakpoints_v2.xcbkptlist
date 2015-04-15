@@ -84,12 +84,12 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "450763499.188371"
+                  timestampString = "450776735.823249"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "614">
+                  offsetFromSymbolStart = "498">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -99,12 +99,12 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "450763499.188625"
+                  timestampString = "450776735.823402"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "92">
+                  offsetFromSymbolStart = "82">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -115,13 +115,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HaierOven/Models/Oven/OvenManager/OvenManager.m"
-            timestampString = "450181841.993692"
+            filePath = "DeviceBoardViewController.m"
+            timestampString = "450771289.187226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "962"
-            endingLineNumber = "962"
-            landmarkName = "-sendErrorNotification"
+            startingLineNumber = "1012"
+            endingLineNumber = "1012"
+            landmarkName = "-completeBake:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,12 +132,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "450590121.791971"
+            timestampString = "450770644.982978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1003"
-            endingLineNumber = "1003"
-            landmarkName = "-completeBake:"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
+            landmarkName = "-updateOvenStatus"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -142,79 +142,13 @@
         uSDKErrorConst errorConst = [deviceManager setDeviceConfigInfo:CONFIG_MODE_SMARTCONFIG watitingConfirm:NO deviceConfigInfo:configInfo];
         
         [self getDevicesInSeconds:58 rebindMac:rebindMac completion:^(BOOL success, id obj, NSError *error) {
-            
-            if (success) {
-                
-                uSDKDevice* theDevice;
-                DataCenter* dataCenter = [DataCenter sharedInstance];
-                
-                // 1. 根据不同的情况获取需要绑定的烤箱，每次只取一台不与已有烤箱重复的烤箱设备
-                if (rebindMac) { // 重新绑定
-                    // 从搜索到的周边烤箱中拿到此台设备
-                    for (uSDKDevice* device in obj) {
-                        if ([device.mac isEqualToString:rebindMac]) {
-                            theDevice = device;
-                            break;
-                        }
-                    }
-                    
-                } else { // 绑定不重复的新设备
-                    
-                    for (uSDKDevice* device in obj) {
-                        if (dataCenter.myOvens.count == 0) {
-                            theDevice = [obj firstObject];
-                        } else {
-                            
-                            if (![self deviceExistWithMac:device.mac]) {
-                                theDevice = device;
-                            }
-                            
-                        }
-                        if (theDevice != nil) break;
-                    }
-                }
-                
-                // 2. 订阅绑定的烤箱
-                if (theDevice == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (success && errorConst == RET_USDK_OK) {
+                    result(YES, obj, nil);
+                } else {
                     result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
-                    return;
                 }
-                [self subscribeAllNotificationsWithDevice:@[theDevice.mac]];
-                self.subscribedDevice = theDevice;
-                
-                // 3. 当指定烤箱在一段时间内变成在线状态内，则表示绑定成功
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                dispatch_async(queue, ^{
-                    BOOL runSuccess = NO;
-                    for (int loop = 0; loop < 10; loop++) {
-                        if (self.currentStatus.isReady) {
-                            NSLog(@"**********绑定成功**********");
-                            runSuccess = YES;
-                            break;
-                        }
-                        [NSThread sleepForTimeInterval:1];
-                    }
-                    
-                    // 4. 取消订阅
-                    [self unSubscribeAllNotifications:@[theDevice.mac]];
-                    
-                    // 5. 返回绑定结果
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (errorConst == RET_USDK_OK && runSuccess) {
-                            
-                            result(YES, theDevice, nil);
-                        } else {
-                            result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
-                        }
-                    });
-                    
-                });
-                
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    result(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"绑定失败"]);
-                });
-            }
+            });
             
         }];
         
@@ -242,46 +176,56 @@
 - (void)getDevicesInSeconds:(NSInteger)seconds rebindMac:(NSString*)rebindMac completion:(completion)callback
 {
     uSDKDeviceManager* deviceManager = [uSDKDeviceManager getSingleInstance];
+    
+    uSDKDevice* foundedDevice = nil;
+    BOOL bindSuccess = NO;
+    
     for (int loop = seconds; loop >= 0; loop--) {
         
         [NSThread sleepForTimeInterval:1.0];
+        
+        if (bindSuccess && loop > 0) {
+            callback(YES, foundedDevice, nil);
+            [self unSubscribeAllNotifications:@[foundedDevice.mac]];
+            break;
+        }
+        
+        if (loop <= 0) {
+            callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"未获取到附近的烤箱列表"]);
+            if (foundedDevice != nil) {
+                [self unSubscribeAllNotifications:@[foundedDevice.mac]];
+            }
+        }
+        
+        if (foundedDevice != nil) {
+            if (self.currentStatus.isReady) {
+                bindSuccess = YES;
+            }
+            continue;
+        }
+        
         NSArray* devices = [deviceManager getDeviceList:OVEN];
         
-        if (devices.count == 0) {
-            
-            if (loop <= 0) {
-                callback(NO, nil, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:@"未获取到附近的烤箱列表"]);
-                break;
-            }
-            
-        } else {
+        if (devices.count > 0) {
             
             if (rebindMac) {
-                BOOL hasTheDevice = NO;
                 for (uSDKDevice* theDevice in devices) {
                     if ([self deviceExistWithMac:theDevice.mac]) {
-                        callback(YES, devices, nil);
-                        hasTheDevice = YES;
+                        foundedDevice = theDevice;
+                        self.subscribedDevice = theDevice;
+                        [self subscribeAllNotificationsWithDevice:@[foundedDevice.mac]];
                         break;
                     }
-                }
-                if (hasTheDevice) {
-                    break;
                 }
                 
             } else {
-                
-                BOOL hasNewDevice = NO;
                 for (uSDKDevice* theDevice in devices) {
                     if (![self deviceExistWithMac:theDevice.mac]) {
-                        callback(YES, @[theDevice], nil);
-                        hasNewDevice = YES;
+                        foundedDevice = theDevice;
+                        self.subscribedDevice = theDevice;
+                        [self subscribeAllNotificationsWithDevice:@[foundedDevice.mac]];
                         break;
                     }
-                }
-                
-                if (hasNewDevice) {
-                    break;
                 }
                 
             }

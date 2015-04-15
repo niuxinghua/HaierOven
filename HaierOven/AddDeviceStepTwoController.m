@@ -195,8 +195,8 @@
         self.myWindow.hidden = YES;
         NSLog(@"绑定超时");
         
-        AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
-        [self.navigationController pushViewController:failed animated:YES];
+//        AddDeviceFailedController *failed = [self.storyboard instantiateViewControllerWithIdentifier:@"AddDeviceFailedController"];
+//        [self.navigationController pushViewController:failed animated:YES];
         
     }
 }

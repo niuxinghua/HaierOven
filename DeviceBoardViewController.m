@@ -573,6 +573,8 @@
                     UIButton* currentModeBtn = self.workModelBtns[bakeModeIndex];
                     currentModeBtn.selected = YES;
                     
+                    NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
+                    
                     if (self.ovenOperator.deviceStatus == CurrentDeviceStatusPreheating) {
                         
                         self.deviceBoardStatus = DeviceBoardStatusPreheating;
@@ -580,20 +582,26 @@
                         [self.startStatusView resetAnimate];
                         //[self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
                         
-                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
-                        
                         self.startStatusView.leftTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
                                                          totalSeconds/3600,
                                                          (totalSeconds%3600)/60,
                                                          (totalSeconds%3600)%60];
                         [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
                         [self.temputure setTitle:[NSString stringWithFormat:@"%@°", self.ovenOperator.currentBakeTemperature] forState:UIControlStateNormal];
+                        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
+                        
+                    } else if (self.ovenOperator.deviceStatus == CurrentDeviceStatusWorking) {
+                        
+                        [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
+                        [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
+                        
+                        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
+                        self.deviceBoardStatus = DeviceBoardStatusWorking;
                         
                     } else {
                         
-                        if (self.ovenOperator.deviceStatus != CurrentDeviceStatusWorking) {
-                            self.ovenOperator.bakeLeftSeconds = [[status.bakeTime substringToIndex:2] integerValue] * 60 * 60 + [[status.bakeTime substringFromIndex:3] integerValue] * 60;
-                        }
+                        self.ovenOperator.bakeLeftSeconds = [[status.bakeTime substringToIndex:2] integerValue] * 60 * 60 + [[status.bakeTime substringFromIndex:3] integerValue] * 60;
+                        self.ovenOperator.totalBakeTime = status.bakeTime;
                         
                         [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", self.ovenOperator.bakeLeftSeconds/60] forState:UIControlStateNormal];
                         [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
@@ -603,10 +611,11 @@
                         
                         self.deviceBoardStatus = DeviceBoardStatusWorking;
                         self.ovenOperator.deviceStatus = CurrentDeviceStatusWorking;
+                        
+                        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", self.ovenOperator.bakeLeftSeconds/60];
                     }
                     
                     self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", modeStr];
-                    self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", self.ovenOperator.bakeLeftSeconds/60];
                     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%d°", status.temperature];
                     
                 }

@@ -141,7 +141,7 @@
 }
 
 - (void)resetAnimate {
-    self.animationDuration = 4.0 * 60 * 60;
+    self.animationDuration = 10.0 * 60 * 60;
     lineProgressView.completedColor = GlobalOrangeColor;
     [self.lineProgressView setCompleted:1.0*80 animated:YES];
 }
