@@ -13,7 +13,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 
 @interface OvenOperator ()
 
-
+@property (nonatomic) BOOL isPreheat;
 
 @end
 
@@ -56,6 +56,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
         self.orderingTimer = nil;
     }
     
+    self.isPreheat = YES;
     self.totalBakeTime = time;
     self.currentBakeTemperature = temperature;
     
@@ -85,6 +86,11 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
         self.orderingTimer = nil;
     }
     
+    if (!self.isPreheat) { //不是预热 —> 开始烘焙的步骤, 快速预热，一键烘焙
+        self.totalBakeTime = time;
+        self.isPreheat = NO;
+    }
+    
     //调用顺序：检测是否已开机 - 设置模式 - 设置温度 - 设置时间 - 启动
     
     // 是否开机
@@ -102,7 +108,7 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
                      callback:^(BOOL success, uSDKErrorConst errorCode) {
                          
                      }];
-        [NSThread sleepForTimeInterval:0.5];
+        [NSThread sleepForTimeInterval:1.0];
     }
     
     // 设置烘焙模式

@@ -136,6 +136,11 @@
  */
 @property (nonatomic) BOOL clockStopFlag;
 
+/**
+ *  是不是上次订阅的设备
+ */
+@property (nonatomic) BOOL isLastDevice;
+
 
 #pragma mark - 约束
 
@@ -457,6 +462,11 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    // 保存上次订阅设备的Mac
+    if (self.myOven != nil) {
+        self.ovenManager.lastSubscribedDeviceMac = self.myOven.mac;
+    }
+    
 //    self.bakeTimer = nil;
 }
 
@@ -482,6 +492,11 @@
 }
 
 #pragma mark - 获取烤箱的状态
+
+- (BOOL)isLastDevice
+{
+    return [self.myOven.mac isEqualToString:[OvenManager sharedManager].lastSubscribedDeviceMac];
+}
 
 - (void)updateOvenStatus
 {
@@ -568,38 +583,55 @@
                     
                     if (modeStr == nil) {
                         modeStr = @"快速预热";
+                    } else {
+                        UIButton* currentModeBtn = self.workModelBtns[bakeModeIndex];
+                        currentModeBtn.selected = YES;
                     }
                     
-                    UIButton* currentModeBtn = self.workModelBtns[bakeModeIndex];
-                    currentModeBtn.selected = YES;
-                    
-                    NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
-                    
-                    if (self.ovenOperator.deviceStatus == CurrentDeviceStatusPreheating) {
+                    if (self.isLastDevice) {
+                        // 点进来的是上次的设备
+                        NSInteger totalSeconds = [[self.ovenOperator.totalBakeTime substringToIndex:2] integerValue] * 60 * 60 + [[self.ovenOperator.totalBakeTime substringFromIndex:3] integerValue] * 60;
                         
-                        self.deviceBoardStatus = DeviceBoardStatusPreheating;
-                        
-                        [self.startStatusView resetAnimate];
-                        //[self.startStatusView.lineProgressView setCompleted:1.0*80 animated:NO];
-                        
-                        self.startStatusView.leftTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
-                                                         totalSeconds/3600,
-                                                         (totalSeconds%3600)/60,
-                                                         (totalSeconds%3600)%60];
-                        [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
-                        [self.temputure setTitle:[NSString stringWithFormat:@"%@°", self.ovenOperator.currentBakeTemperature] forState:UIControlStateNormal];
-                        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
-                        
-                    } else if (self.ovenOperator.deviceStatus == CurrentDeviceStatusWorking) {
-                        
-                        [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
-                        [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
-                        
-                        self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
-                        self.deviceBoardStatus = DeviceBoardStatusWorking;
+                        if (self.ovenOperator.deviceStatus == CurrentDeviceStatusPreheating) {
+                            
+                            self.deviceBoardStatus = DeviceBoardStatusPreheating;
+                            
+                            [self.startStatusView resetAnimate];
+                            self.startStatusView.leftTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
+                                                             totalSeconds/3600,
+                                                             (totalSeconds%3600)/60,
+                                                             (totalSeconds%3600)%60];
+                            [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
+                            [self.temputure setTitle:[NSString stringWithFormat:@"%@°", self.ovenOperator.currentBakeTemperature] forState:UIControlStateNormal];
+                            self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
+                            
+                        } else if (self.ovenOperator.deviceStatus == CurrentDeviceStatusWorking) {
+                            
+                            [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", totalSeconds/60] forState:UIControlStateNormal];
+                            [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
+                            
+                            self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", totalSeconds/60];
+                            self.deviceBoardStatus = DeviceBoardStatusWorking;
+                            
+                        } else {
+                            
+                            self.ovenOperator.bakeLeftSeconds = [[status.bakeTime substringToIndex:2] integerValue] * 60 * 60 + [[status.bakeTime substringFromIndex:3] integerValue] * 60;
+                            self.ovenOperator.totalBakeTime = status.bakeTime;
+                            
+                            [self.howlong setTitle:[NSString stringWithFormat:@"%d 分钟", self.ovenOperator.bakeLeftSeconds/60] forState:UIControlStateNormal];
+                            [self.temputure setTitle:[NSString stringWithFormat:@"%d°", status.temperature] forState:UIControlStateNormal];
+                            
+                            NSTimeInterval bakeSeconds = self.ovenOperator.bakeLeftSeconds;
+                            [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:bakeSeconds alertBody:@"您的食物烘焙完成了"];
+                            
+                            self.deviceBoardStatus = DeviceBoardStatusWorking;
+                            self.ovenOperator.deviceStatus = CurrentDeviceStatusWorking;
+                            
+                            self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", self.ovenOperator.bakeLeftSeconds/60];
+                        }
                         
                     } else {
-                        
+                        // 点进来的不是上次控制的设备
                         self.ovenOperator.bakeLeftSeconds = [[status.bakeTime substringToIndex:2] integerValue] * 60 * 60 + [[status.bakeTime substringFromIndex:3] integerValue] * 60;
                         self.ovenOperator.totalBakeTime = status.bakeTime;
                         
@@ -613,8 +645,8 @@
                         self.ovenOperator.deviceStatus = CurrentDeviceStatusWorking;
                         
                         self.bakeTimeLabel.text = [NSString stringWithFormat:@"时间：%d 分钟", self.ovenOperator.bakeLeftSeconds/60];
+                        
                     }
-                    
                     self.bakeModeLabel.text = [NSString stringWithFormat:@"工作模式：%@", modeStr];
                     self.bakeTemperatureLabel.text = [NSString stringWithFormat:@"目标温度：%d°", status.temperature];
                     
@@ -623,7 +655,6 @@
             } else {
                 [self performSelector:@selector(updateOvenStatus) withObject:nil afterDelay:2];
             }
-            
             
         }
         
@@ -782,6 +813,7 @@
 #pragma mark - 点击快速预热
 
 -(void)StartWarmUp:(UIButton*)sender{
+    
     if (self.myOven == nil && !DebugOvenFlag) {
         [super showProgressErrorWithLabelText:@"烤箱连接失败" afterDelay:1];
         return;
@@ -1642,11 +1674,6 @@
                                                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:self.ovenOperator.bakeLeftSeconds alertBody:notificationBody];
                                                
                                                [MobClick event:@"quick_warmup"];
-                                               id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                                               [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-                                                                                                     action:@"button_press"  // Event action (required)
-                                                                                                      label:@"快速预热"          // Event label
-                                                                                                      value:nil] build]];    // Event value
                                                
                                            } else {
                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];

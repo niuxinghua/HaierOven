@@ -41,6 +41,11 @@ typedef void (^result) (BOOL result);
 @property (strong, nonatomic)uSDKDevice* subscribedDevice;
 
 /**
+ *  上一次控制面板订阅的设备的Mac
+ */
+@property (copy, nonatomic) NSString* lastSubscribedDeviceMac;
+
+/**
  *  当前烤箱的属性状态，当接收到设备状态变化时会更新此属性
  */
 @property (strong, nonatomic) OvenStatus* currentStatus;
