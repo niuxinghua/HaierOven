@@ -17,6 +17,7 @@
 #import "CookStarDetailController.h"
 #import "UpLoadingMneuController.h"
 #import "StudyCookViewController.h"
+#import "WebViewController.h"
 
 
 #define AdvRate         0.5
@@ -260,6 +261,25 @@
     }
     
     // Do any additional setup after loading the view.
+    [self performSelector:@selector(displayAd) withObject:nil afterDelay:2];
+}
+
+- (void)displayAd {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+        NSString* adUrl = [MobClick getAdURL];
+        NSLog(@"%@", adUrl);
+        
+        if (adUrl.length != 0 && arc4random()%100 > 50) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                WebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
+                webViewController.webPath = adUrl;
+                webViewController.titleText = @"广告";
+                [self.navigationController pushViewController:webViewController animated:YES];
+            });
+        }
+        
+    });
 }
 
 - (void)dealloc

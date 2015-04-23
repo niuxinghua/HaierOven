@@ -24,7 +24,9 @@
     
     self.title = self.titleText;
     
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.webPath]];
+    NSString* encodingString = [self.webPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:encodingString]];
     [self.webView loadRequest:request];
     
     

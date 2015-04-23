@@ -425,6 +425,11 @@
     
     NSLog(@"留言");
     
+    if (!IsLogin) {
+        [super openLoginController];
+        return;
+    }
+    
     if ([self.cookerStar.userBaseId isEqualToString:CurrentUserBaseId]) {
         [super showProgressErrorWithLabelText:@"不能给自己留言" afterDelay:1];
         return;

@@ -843,6 +843,7 @@
 		840141501A4BDAE60050615F /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 8401414F1A4BDAE60050615F /* clear.png */; };
 		840141521A4BDD470050615F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 840141511A4BDD470050615F /* Icon.png */; };
 		840141911A4C0B7A0050615F /* MyPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840141901A4C0B7A0050615F /* MyPageView.m */; };
+		841696B51AE8A57A0038F523 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 841696B21AE8A57A0038F523 /* libMobClickLibrary.a */; };
 		842388171A706CF8007AB206 /* CompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842388161A706CF8007AB206 /* CompleteController.m */; };
 		842388211A70A256007AB206 /* chef_bg_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 842388191A70A256007AB206 /* chef_bg_img.png */; };
 		842388221A70A256007AB206 /* chef_bg_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8423881A1A70A256007AB206 /* chef_bg_img@2x.png */; };
@@ -904,7 +905,6 @@
 		8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 844117661A4BB8AF00628A64 /* OvenManager.m */; };
 		844117911A4BB8AF00628A64 /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176C1A4BB8AF00628A64 /* DataParser.m */; };
 		844117921A4BB8AF00628A64 /* MyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441176F1A4BB8AF00628A64 /* MyTool.m */; };
-		8447CAB51A5B7FEE00FADF9D /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8447CA5A1A5B7FEE00FADF9D /* libMobClickLibrary.a */; };
 		8447CAB61A5B7FEE00FADF9D /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8447CA5F1A5B7FEE00FADF9D /* UMFeedbackLocalizable.strings */; };
 		8447CAB71A5B7FEE00FADF9D /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8447CA611A5B7FEE00FADF9D /* libUMFeedback.a */; };
 		8447CAB81A5B7FEE00FADF9D /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8447CA651A5B7FEE00FADF9D /* libUMessage_Sdk_1.1.0.a */; };
@@ -2215,6 +2215,9 @@
 		840141511A4BDD470050615F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8401418F1A4C0B7A0050615F /* MyPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageView.h; sourceTree = "<group>"; };
 		840141901A4C0B7A0050615F /* MyPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageView.m; sourceTree = "<group>"; };
+		841696B21AE8A57A0038F523 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		841696B31AE8A57A0038F523 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		841696B41AE8A57A0038F523 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		842388151A706CF8007AB206 /* CompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteController.h; sourceTree = "<group>"; };
 		842388161A706CF8007AB206 /* CompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteController.m; sourceTree = "<group>"; };
 		842388191A70A256007AB206 /* chef_bg_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chef_bg_img.png; sourceTree = "<group>"; };
@@ -2430,9 +2433,6 @@
 		8441176C1A4BB8AF00628A64 /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
 		8441176E1A4BB8AF00628A64 /* MyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTool.h; sourceTree = "<group>"; };
 		8441176F1A4BB8AF00628A64 /* MyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTool.m; sourceTree = "<group>"; };
-		8447CA5A1A5B7FEE00FADF9D /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		8447CA5B1A5B7FEE00FADF9D /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
-		8447CA5C1A5B7FEE00FADF9D /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		8447CA601A5B7FEE00FADF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
 		8447CA611A5B7FEE00FADF9D /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
 		8447CA621A5B7FEE00FADF9D /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
@@ -2810,8 +2810,8 @@
 				8447CAD11A5B7FEE00FADF9D /* libUMSocial_Sdk_Shake_1.0.a in Frameworks */,
 				8447CAB71A5B7FEE00FADF9D /* libUMFeedback.a in Frameworks */,
 				8447CAB81A5B7FEE00FADF9D /* libUMessage_Sdk_1.1.0.a in Frameworks */,
-				8447CAB51A5B7FEE00FADF9D /* libMobClickLibrary.a in Frameworks */,
 				45B88DE31A4BC42D00722EF6 /* libc++.dylib in Frameworks */,
+				841696B51AE8A57A0038F523 /* libMobClickLibrary.a in Frameworks */,
 				8461542F1A830D53008D42E4 /* uSDKFramework.framework in Frameworks */,
 				8447CAC81A5B7FEE00FADF9D /* libSocialSina.a in Frameworks */,
 				8447CAD31A5B7FEE00FADF9D /* libWeChatSDK.a in Frameworks */,
@@ -4460,6 +4460,16 @@
 			name = PageControl;
 			sourceTree = "<group>";
 		};
+		841696B11AE8A57A0038F523 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				841696B21AE8A57A0038F523 /* libMobClickLibrary.a */,
+				841696B31AE8A57A0038F523 /* MobClick.h */,
+				841696B41AE8A57A0038F523 /* MobClickSocialAnalytics.h */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		842388181A70A248007AB206 /* Default */ = {
 			isa = PBXGroup;
 			children = (
@@ -4830,22 +4840,12 @@
 		8447CA581A5B7FEE00FADF9D /* Umeng */ = {
 			isa = PBXGroup;
 			children = (
-				8447CA591A5B7FEE00FADF9D /* Analytics */,
+				841696B11AE8A57A0038F523 /* Analytics */,
 				8447CA5D1A5B7FEE00FADF9D /* Feedback */,
 				8447CA671A5B7FEE00FADF9D /* Notification */,
 				8447CA691A5B7FEE00FADF9D /* Share */,
 			);
 			path = Umeng;
-			sourceTree = "<group>";
-		};
-		8447CA591A5B7FEE00FADF9D /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				8447CA5A1A5B7FEE00FADF9D /* libMobClickLibrary.a */,
-				8447CA5B1A5B7FEE00FADF9D /* MobClick.h */,
-				8447CA5C1A5B7FEE00FADF9D /* MobClickSocialAnalytics.h */,
-			);
-			path = Analytics;
 			sourceTree = "<group>";
 		};
 		8447CA5D1A5B7FEE00FADF9D /* Feedback */ = {
@@ -5539,7 +5539,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = CWG9EF242Q;
+						DevelopmentTeam = KRV5T3384C;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
