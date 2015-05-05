@@ -7,6 +7,7 @@
 //
 
 #import "StepCell.h"
+#import "CBImageCompressor.h"
 
 @interface StepCell ()
 
@@ -43,11 +44,33 @@
 {
     _step = step;
     self.stepIndexLabel.text = step.index;
+    self.stepDescLabel.text = step.desc;
+    
     //区分是否是全路径
     NSString* imagePath = [step.photo hasPrefix:@"http"] ? step.photo : [BaseOvenUrl stringByAppendingPathComponent:step.photo];
+    imagePath = [imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [self.stepImageView setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:IMAGENAMED(@"")];
-    self.stepDescLabel.text = step.desc;
+    @try {
+        
+        dispatch_queue_t queue = dispatch_queue_create("downloadImage.queue", DISPATCH_QUEUE_SERIAL);
+        dispatch_async(queue, ^{
+            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]];
+            //UIImage* image = [UIImage imageWithData:data scale:0.1];
+            UIImage* image = [UIImage imageWithData:data];
+            [CBImageCompressor compressImage:image limitSize:512*1024*8 maxSide:400 completion:^(NSData *data) {
+                UIImage* compressedImage = [UIImage imageWithData:data];
+                self.stepImageView.image = compressedImage;
+            }];
+        });
+    
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Show Image Error...");
+    }
+    @finally {
+        
+    }
+    
 }
 
 @end

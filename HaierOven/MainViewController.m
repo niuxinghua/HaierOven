@@ -112,7 +112,8 @@
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                [cookerImage sd_setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                
                 //cookerImage.image = IMAGENAMED(@"home_banner_default.png");
                 //cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -261,7 +262,8 @@
     }
     
     // Do any additional setup after loading the view.
-    [self performSelector:@selector(displayAd) withObject:nil afterDelay:2];
+    
+    //[self performSelector:@selector(displayAd) withObject:nil afterDelay:2];
 }
 
 - (void)displayAd {
@@ -383,6 +385,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate

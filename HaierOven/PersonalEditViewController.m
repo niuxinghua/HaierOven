@@ -66,7 +66,9 @@
 
 - (void)updateUI
 {
-    [self.userAvater setImageWithURL:[NSURL URLWithString:self.user.userAvatar]];
+
+    [self.userAvater sd_setImageWithURL:[NSURL URLWithString:self.user.userAvatar]];
+    
     self.nikeNameLabel.text = self.user.nickName;
     self.genderLabel.text = ![self.user.sex isEqualToString:@"1"] ? @"男" : @"女";
     self.genderImage.image = ![self.user.sex isEqualToString:@"1"] ? IMAGENAMED(@"nan.png") : IMAGENAMED(@"femail.png");

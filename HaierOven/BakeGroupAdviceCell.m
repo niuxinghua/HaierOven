@@ -32,7 +32,9 @@
 {
     _cooker = cooker;
     //[self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
-    [self.avaterBtn setImageWithURL:[NSURL URLWithString:cooker.avatar]];
+//    [self.avaterBtn setImageWithURL:[NSURL URLWithString:cooker.avatar]];
+    [self.avaterBtn sd_setImageWithURL:[NSURL URLWithString:cooker.avatar] forState:UIControlStateNormal];
+    
     switch (cooker.userLevel) {
         case 1:
             self.tagLabel.text = @"天子一号";
@@ -64,7 +66,9 @@
 - (void)setSearchedUser:(Friend *)searchedUser
 {
     _searchedUser = searchedUser;
-    [self.avaterBtn setImageWithURL:[NSURL URLWithString:searchedUser.avatar]];
+//    [self.avaterBtn setImageWithURL:[NSURL URLWithString:searchedUser.avatar]];
+    [self.avaterBtn sd_setImageWithURL:[NSURL URLWithString:searchedUser.avatar] forState:UIControlStateNormal];
+    
     switch (searchedUser.userLevel) {
         case 1:
             self.tagLabel.text = @"天子一号";

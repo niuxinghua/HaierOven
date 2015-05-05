@@ -297,11 +297,6 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
 - (void)updateUserInfo:(User*)user callBack:(myCallback)completion;
 
 /**
- *  重置密码
- */
-- (void)modifyPassword;
-
-/**
  *  检查今日是否签到
  *
  *  @param userBaseId 用户ID

@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *userNameTextFailed;
 @property (strong, nonatomic) IBOutlet UITextField *psdTextfailed;
 
+@property (weak, nonatomic) IBOutlet UIButton *qqLoginButton;
+
 /**
  *  第三方登录时的loginId, 若是第一次授权登录，补全信息需要此值作为password
  */
@@ -45,10 +47,17 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:LoginSuccussNotification object:nil];
     
+    if (![QQApi isQQInstalled]) {
+        self.qqLoginButton.hidden = YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldCloseNotification object:nil];
+    
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

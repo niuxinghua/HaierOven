@@ -96,7 +96,7 @@ const CGFloat kTimeLabelWidth = 150.0;
 //        self.frame = frame;
 //    }
     NSString* avatarPath = self.comment.fromUser.userAvatar;
-    [self.userAvatar setImageWithURL:[NSURL URLWithString:avatarPath] placeholderImage:IMAGENAMED(@"placeholder.png")];
+    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:avatarPath] placeholderImage:IMAGENAMED(@"placeholder.png")];
     
     CGPoint center = self.userAvatar.center;
     CGRect frame = CGRectMake(self.userAvatar.right + 10, center.y - 21 / 2, self.width - 10 - kAvatarSize - 10 - 10, 21);

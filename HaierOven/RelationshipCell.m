@@ -32,7 +32,8 @@
 - (void)setUser:(Friend *)user
 {
     _user = user;
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.avatar]];
+    [self.avaterImage sd_setImageWithURL:[NSURL URLWithString:user.avatar]];
+    
     self.nameLabel.text = user.userName;
     self.descriptionLabel.text = user.signature;
     if (!IsLogin || [self.userId isEqualToString:CurrentUserBaseId]) {

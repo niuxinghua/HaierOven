@@ -77,6 +77,9 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 
 - (void)startBakeWithTime:(NSString *)time temperature:(NSString *)temperature mode:(NSDictionary *)modeDict operateResult:(completion)callback
 {
+    // 不自动锁屏
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
     NSString* mode = [[modeDict[@"bakeMode"] allKeys] firstObject];
     //NSString* modeStr = [[modeDict[@"bakeMode"] allValues] firstObject];
     self.currentBakeMode = modeDict;
@@ -161,6 +164,9 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 
 - (void)startOrderWithDate:(NSDate*)orderedDate bakeTime:(NSString*)time temperature:(NSString*)temperature mode:(NSDictionary*)modeDict operateResult:(completion)callback
 {
+    // 不自动锁屏
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
     self.deviceStatus = CurrentDeviceStatusOrdering;
     self.orderedDate = orderedDate;
     self.orderedBakeTime = time;
@@ -330,6 +336,9 @@ NSString* const DeviceStartWorkNotification = @"Device start work notification";
 
 - (void)workComplete
 {
+    // 自动锁屏
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    
     [self.bakeCountdownTimer invalidate];
     [[NSNotificationCenter defaultCenter] postNotificationName:DeviceWorkCompletedNotification object:nil userInfo:@{@"DeviceMac" : self.currentLocalOven.mac}];
 }

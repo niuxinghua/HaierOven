@@ -32,22 +32,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HaierOven/Cookbook/Views/StepsViewController.m"
-            timestampString = "447304005.998155"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-getSkillCellHeight"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -84,7 +68,7 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "451456801.77375"
+                  timestampString = "452531152.292709"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
@@ -99,7 +83,7 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "451456801.77397"
+                  timestampString = "452531152.292931"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"

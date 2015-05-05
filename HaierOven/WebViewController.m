@@ -29,6 +29,13 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:encodingString]];
     [self.webView loadRequest:request];
     
+    if (self.navigationController.viewControllers.count == 1) {
+        UIButton* leftButton = [[UIButton alloc] init];
+        
+        [leftButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        //[super setLeftBarButtonItemWithImageName:@"back.png" andTitle:nil andCustomView:leftButton];
+        [super setLeftBarButtonItemWithImageName:nil andTitle:@"关闭" andCustomView:leftButton];
+    }
     
 }
 
@@ -37,6 +44,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)close
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldShowNotification object:nil];
+    }];
+}
 
 #pragma mark - UIWebViewDelegate
 

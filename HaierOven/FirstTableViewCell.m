@@ -36,9 +36,8 @@
 - (void)setUser:(User *)user
 {
     _user = user;
-    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.userAvatar]];
+    [self.avaterImage sd_setImageWithURL:[NSURL URLWithString:user.userAvatar]];
     self.userNameLabel.text = user.userName == nil ? @"" : user.userName;
-    
     
 }
 

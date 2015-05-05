@@ -32,7 +32,8 @@
 {
     _product = product;
     
-    [self.image setImageWithURL:[NSURL URLWithString:product.imagePath] placeholderImage:IMAGENAMED(@"mf.png")];
+    [self.image sd_setImageWithURL:[NSURL URLWithString:product.imagePath] placeholderImage:IMAGENAMED(@"mf.png")];
+    
     self.priceLabel.text = product.price;
     self.label.text = product.name;
     

@@ -30,12 +30,14 @@
     _cookbook = cookbook;
     
     //[self.cookerAvater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
-    [self.cookerAvater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    //[self.cookerAvater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [self.cookerAvater sd_setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    
     //[self.cookerAvater setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath]];
     self.foodNameLabel.text = cookbook.name;
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@人赞过", cookbook.praises];
     //[self.foodImage setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto]];
-    [self.foodImage setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto] placeholderImage:[UIImage imageNamed:@"cookbook_list_item_bg_default"]];
+    [self.foodImage sd_setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto] placeholderImage:[UIImage imageNamed:@"cookbook_list_item_bg_default"]];
     
 }
 

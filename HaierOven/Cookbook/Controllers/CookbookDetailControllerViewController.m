@@ -201,14 +201,14 @@
     }
  
     NSString* coverPath = self.isPreview ? [BaseOvenUrl stringByAppendingPathComponent:self.cookbookDetail.coverPhoto] : self.cookbookDetail.coverPhoto;
-
-    [self.cookbookImageView setImageWithURL:[NSURL URLWithString:coverPath]];
+    [self.cookbookImageView sd_setImageWithURL:[NSURL URLWithString:coverPath]];
     
     if (self.isPreview) {
-        [self.creatorAvatar setImageWithURL:[NSURL URLWithString:[DataCenter sharedInstance].currentUser.userAvatar]];
+        [self.creatorAvatar sd_setImageWithURL:[NSURL URLWithString:[DataCenter sharedInstance].currentUser.userAvatar]];
+        
         self.creatorNameLabel.text = [DataCenter sharedInstance].currentUser.userName;
     } else {
-        [self.creatorAvatar setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath]];
+        [self.creatorAvatar sd_setImageWithURL:[NSURL URLWithString:self.cookbookDetail.creator.avatarPath]];
         self.creatorNameLabel.text = self.cookbookDetail.creator.userName;
     }
     

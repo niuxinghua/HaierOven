@@ -55,9 +55,6 @@
     // app启动日志
     [uAnalysisManager onAppStartEvent:@USDK_CLIENT_VERSION withAppVsersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     
-    // 不自动锁屏
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
-    
     [self startUSdk];
     
     [self initUmengSdk];
