@@ -54,9 +54,6 @@
         return;
     }
     
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     [[InternetManager sharedManager] searchCookbooksWithKeyword:keyword pageIndex:1 callBack:^(BOOL success, id obj, NSError *error) {
         
         if (success) {
@@ -72,17 +69,6 @@
                 self.notfFindLabel.text = [NSString stringWithFormat:@"没有找到“%@”的相关菜谱", keyword];
             }
             [self.table reloadData];
-            
-            [MobClick event:@"search_cookbook" attributes:@{@"关键词" : keyword}];
-            
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
-                                                                  action:@"Search"  // Event action (required)
-                                                                   label:keyword          // Event label
-                                                                   value:nil] build]];    // Event value
-            
-            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"搜索页面"];
         }
     }];
 }
@@ -243,13 +229,6 @@
     foodlist.tagId = theTag.ID;
     foodlist.title = theTag.name;
     [self.navigationController pushViewController:foodlist animated:YES];
-    
-    [MobClick event:@"click_tag" attributes:@{@"标签名" : theTag.name}];
-//    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-//    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"     // Event category (required)
-//                                                          action:@"button_press"  // Event action (required)
-//                                                           label:@"点击标签"          // Event label
-//                                                           value:nil] build]];    // Event value
 
 }
 #pragma mark-

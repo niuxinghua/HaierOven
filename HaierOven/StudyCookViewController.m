@@ -35,7 +35,6 @@
   @[@"打发黄油",@"简易蛋糕制作要点",@"蛋白打发法",@"全蛋打发法",@"打发鲜奶油",@"面包制作流程",@"酥皮制作"]];
     indexFiex = 99;
     
-    [MobClick event:@"learn_bake"];
     
 }
 
@@ -107,11 +106,6 @@
     NSLog(@"%@", self.tempBtn.currentTitle);
     if (cell.icon.selected) {
         self.currentMainMenu = cell.title;
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                              action:[@"Menu_" stringByAppendingString:cell.title]  // Event action (required)
-                                                               label:[@"Menu_" stringByAppendingString:cell.title]          // Event label
-                                                               value:nil] build]];    // Event value
     }
     
     [self.tableView reloadData];
@@ -120,11 +114,6 @@
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                          action:@"back"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 -(void)getSelectedView:(StudyCookView *)studycook{
@@ -136,12 +125,6 @@
     [self.navigationController pushViewController:detail animated:YES];
     
     NSLog(@"%@-%@", self.currentMainMenu, studycook.title);
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Study baking"     // Event category (required)
-                                                          action:[@"Menu_" stringByAppendingString:self.currentMainMenu]  // Event action (required)
-                                                           label:[NSString stringWithFormat:@"%@-%@", self.currentMainMenu, studycook.title]          // Event label
-                                                           value:nil] build]];    // Event value
     
     
 }

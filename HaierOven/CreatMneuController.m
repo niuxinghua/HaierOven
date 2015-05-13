@@ -671,12 +671,6 @@
     self.cookbookDetail.status = @"0";
     if ([self validateCookbookDraft]) {  //草稿箱检查较少,如果用户未填写，则补充空信息
         [self submitCookbook];
-        [MobClick event:@"save_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
-                                                              action:@"save to draft box"  // Event action (required)
-                                                               label:nil          // Event label
-                                                               value:nil] build]];    // Event value
     }
 }
 
@@ -699,12 +693,6 @@
     self.promptAlertView.frame = alertRectHidden;
     if (sender.tag == 1) { // 确定
         [self submitCookbook];
-        [MobClick event:@"add_cookbook" attributes:@{@"菜谱名称" : self.cookbookDetail.name}];
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
-                                                              action:@"publish"  // Event action (required)
-                                                               label:nil          // Event label
-                                                               value:nil] build]];    // Event value
         
     } else if (sender.tag == 2) { // 取消
         
@@ -919,12 +907,6 @@
     detailController.cookbookDetail = self.cookbookDetail;
     detailController.isPreview = YES;
     [self.navigationController pushViewController:detailController animated:YES];
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
-                                                          action:@"preview"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 

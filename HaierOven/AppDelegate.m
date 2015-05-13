@@ -25,9 +25,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    //NSLog(@"开始加载。。。");
-    UInt64 start=[[NSDate date]timeIntervalSince1970]*1000;
-    
     // 统计crash日志
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
@@ -49,17 +46,9 @@
     
     //[[UITableView appearance] setTableFooterView:[[UIView alloc] init]];
     
-    // 初始化uAnalytics统计功能
-    [uAnalysisManager startManagerWithAppId:AppId AndAppKey:AppKey AndClientId:[DataCenter sharedInstance].clientId];
-    
-    // app启动日志
-    [uAnalysisManager onAppStartEvent:@USDK_CLIENT_VERSION withAppVsersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    
     [self startUSdk];
     
     [self initUmengSdk];
-    
-    [self initGoogleAnalytics];
     
     [self initNotification];
     
@@ -70,12 +59,6 @@
     
     [self autoLogin];
     
-    //NSLog(@"加载结束...");
-    UInt64 end=[[NSDate date]timeIntervalSince1970]*1000;
-    
-    // 统计加载耗时
-    [uAnalysisManager onAppLoadOverEvent:((long)(end-start))];
-    
     return YES;
 }
 
@@ -83,9 +66,6 @@ void uncaughtExceptionHandler(NSException *exception)
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    [uAnalysisManager onAppCrashEvent:exception
-                       withSdkVersion:[NSString stringWithFormat:@"%@", @USDK_CLIENT_VERSION]
-                        withTimestamp:[NSString stringWithFormat:@"%@", [dateFormat stringFromDate:[NSDate date]]]];
 }
 
 - (void)initNotification
@@ -152,12 +132,6 @@ void uncaughtExceptionHandler(NSException *exception)
     // 微信 朋友圈
     [UMSocialWechatHandler setWXAppId:@"wx925a3b8264b54390" appSecret:@"5b389c8a123c4e0981ad9fe1431006eb" url:@"http://weibo.com/origheart"];
     
-    // 友盟统计
-    [MobClick startWithAppkey:UMengAppKey reportPolicy:SEND_INTERVAL channelId:@"App Store"];
-    [MobClick setLogSendInterval:600.]; //10分钟发送一次
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-    
     
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
@@ -171,22 +145,6 @@ void uncaughtExceptionHandler(NSException *exception)
 //    
 //    NSLog(@"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
-    
-}
-
-- (void)initGoogleAnalytics
-{
-     // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 20;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    
-    // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:kGoogleAnalyticsTrackingId];
     
 }
 
@@ -238,9 +196,6 @@ void uncaughtExceptionHandler(NSException *exception)
                                                         
                                                         if (success) {
                                                             NSLog(@"自动登录成功");
-                                                            
-                                                            UInt64 endLogin=[[NSDate date]timeIntervalSince1970]*1000;
-                                                            [uAnalysisManager onAppLoginEvent:((long)(endLogin-startLogin))];
                                                             
                                                             //[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                                                             

@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/BakedGroupController.m"
-            timestampString = "450590121.791971"
+            timestampString = "453188089.896428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "-Cancel"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/CookStarDetailController.m"
-            timestampString = "451459261.5578"
+            timestampString = "453188089.896428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "719"
-            endingLineNumber = "719"
+            startingLineNumber = "689"
+            endingLineNumber = "689"
             landmarkName = "-UpLoadHeadViewHeight:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HaierOven/Models/Internet/InternetManager.m"
-            timestampString = "448182071.31169"
+            timestampString = "453188089.896428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "531"
-            endingLineNumber = "531"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
             landmarkName = "-getVerCodeWithLoginName:andValidateType:andValidateScene:andAccType:callBack:"
             landmarkType = "5">
             <Locations>
@@ -68,12 +68,12 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "452531152.292709"
+                  timestampString = "452570168.647328"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "498">
+                  offsetFromSymbolStart = "496">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -83,12 +83,12 @@
                   moduleName = "HaierOven"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/iOS%20Development/%E7%83%A4%E7%AE%B1%E9%A1%B9%E7%9B%AE/%E4%BB%A3%E7%A0%81/HaierOven/HaierOven/Models/Internet/InternetManager.m"
-                  timestampString = "452531152.292931"
+                  timestampString = "452570168.647563"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
                   endingLineNumber = "531"
-                  offsetFromSymbolStart = "82">
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DeviceBoardViewController.m"
-            timestampString = "450849777.149973"
+            timestampString = "453188089.896428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1045"
-            endingLineNumber = "1045"
+            startingLineNumber = "1041"
+            endingLineNumber = "1041"
             landmarkName = "-completeBake:"
             landmarkType = "5">
          </BreakpointContent>

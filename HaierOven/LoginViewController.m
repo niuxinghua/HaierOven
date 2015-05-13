@@ -51,13 +51,10 @@
         self.qqLoginButton.hidden = YES;
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldCloseNotification object:nil];
-    
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -69,11 +66,6 @@
 - (void)close
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"back to homepage"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,12 +87,6 @@
 }
 
 - (IBAction)Login:(id)sender {
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"login"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     if (![MyTool validateTelephone:self.userNameTextFailed.text]) {
         if (![MyTool validateEmail:self.userNameTextFailed.text]) {
@@ -142,8 +128,6 @@
                                                         [userDefaults setValue:[NSDate date] forKey:@"lastLoginTime"];
                                                         [userDefaults synchronize];
                                                         
-                                                        [MobClick event:@"user_login"];
-                                                        
                                                     } else {
                                                         //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
                                                         [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
@@ -155,11 +139,6 @@
     
 }
 - (IBAction)forgetPsd:(id)sender {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"forget_password"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     WebViewController* webController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
     webController.titleText = @"忘记密码";
@@ -168,11 +147,6 @@
     
 }
 - (IBAction)TencentLogin:(id)sender {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"qq_login"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -186,11 +160,6 @@
 
 
 - (IBAction)SinawbLogin:(id)sender {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"sinaweibo_login"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -203,12 +172,6 @@
     
 }
 - (IBAction)Register:(id)sender {
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Login"     // Event category (required)
-                                                          action:@"register"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     [self.userNameTextFailed resignFirstResponder];
     [self.psdTextfailed resignFirstResponder];
@@ -271,8 +234,6 @@
                                                             
                                                             self.loginId = response.data[@"openid"];
                                                             //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
-                                                            
-                                                            [MobClick event:@"user_login"];
                                                             
                                                         } else {
                                                             //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];
@@ -361,8 +322,6 @@
                                                             // 如果是第一次第三方登录，需补全用户信息
                                                             self.loginId = response.data[@"openid"];
                                                             //[self performSelector:@selector(jumpToEditController) withObject:nil afterDelay:1];
-                                                            
-                                                            [MobClick event:@"user_login"];
                                                             
                                                         } else {
                                                             //[super showProgressErrorWithLabelText:@"登录失败" afterDelay:1];

@@ -32,10 +32,6 @@
 //        [super openLoginController];
 //        return;
 //    }
-    
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     NSString* userBaseId = CurrentUserBaseId;
     
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
@@ -53,8 +49,6 @@
             }
             
             [self.tableView reloadData];
-            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"厨神名人堂页面"];
             
         } else {
             
@@ -138,7 +132,6 @@
         [self deleteMarkLabel];
     }
     
-    [MobClick event:@"cookerStar_list"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -193,11 +186,6 @@
     csd.delegate = self;
     [self.navigationController pushViewController:csd animated:YES];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Masterchef Page"     // Event category (required)
-                                                          action:cooker.userName    // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 #pragma mark - cookStarDetailControllerDelegate

@@ -90,9 +90,6 @@ typedef NS_ENUM(NSInteger, NotificationType)
     
     if (self.notificationType == NotificationTypeSystem) {
         
-        //统计页面加载耗时
-        UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-        
         NSString* userBaseId = CurrentUserBaseId; //@"5";
         [[InternetManager sharedManager] getNotificationListWithUserBaseId:userBaseId status:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
             
@@ -114,9 +111,6 @@ typedef NS_ENUM(NSInteger, NotificationType)
                     [self.allNotifications addObjectsFromArray:arr];
                 }
                 [self reload];
-                
-                UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-                [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"通知中心页面"];
                 
             }
             
@@ -217,8 +211,6 @@ typedef NS_ENUM(NSInteger, NotificationType)
     } else {
         [self deleteMarkLabel];
     }
-    
-    [MobClick event:@"view_notification"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

@@ -394,7 +394,7 @@
         
         //3.针对目前统计,开发者需要过滤出来这几个错误码然后调用接口
         if (errorNo == 90105101 || errorNo == 90105102 || errorNo == 90105103 || errorNo == 90105107) {
-            [uAnalysisManager onDeviceOnlineChangeEvent:[NSString stringWithFormat:@"%d", errorNo] withDeviceMac:[errnoInfo.message objectForKey:@"mac"]];
+            //[uAnalysisManager onDeviceOnlineChangeEvent:[NSString stringWithFormat:@"%d", errorNo] withDeviceMac:[errnoInfo.message objectForKey:@"mac"]];
         }
         
         

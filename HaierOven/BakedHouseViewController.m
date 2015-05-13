@@ -68,9 +68,6 @@ typedef NS_ENUM(NSInteger, SortType) {
 
 - (void)loadProducts
 {
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
                                                     sortType:self.sortType
@@ -93,9 +90,6 @@ typedef NS_ENUM(NSInteger, SortType) {
                                                             }
                                                             
                                                             [self.collectionView reloadData];
-                                                            
-                                                            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-                                                            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"烘焙屋页面"];
                                                             
                                                         } else {
                                                             NSLog(@"获取失败");

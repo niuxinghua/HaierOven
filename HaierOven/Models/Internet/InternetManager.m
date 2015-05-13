@@ -406,8 +406,6 @@
                 // 发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                 
-                // 统计用户使用时长
-                [uAnalysisManager onUserLogin:loginId];
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);
@@ -488,8 +486,6 @@
                 // 发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccussNotification object:nil];
                 
-                // 统计用户使用时长
-                [uAnalysisManager onUserLogin:loginId];
                 
             } else {
                 completion(NO, responseObject, [self errorWithCode:InternetErrorCodeDefaultFailed andDescription:responseObject[@"err"]]);

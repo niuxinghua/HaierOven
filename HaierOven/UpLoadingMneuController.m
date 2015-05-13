@@ -42,12 +42,6 @@ typedef void (^result) (BOOL success);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
-                                                          action:@"upload cookbook"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
-    
     [self setUpSubview];
     // Do any additional setup after loading the view.
 }
@@ -181,12 +175,6 @@ typedef void (^result) (BOOL success);
 
 - (IBAction)TurnBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
-                                                          action:@"back"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -296,15 +284,6 @@ typedef void (^result) (BOOL success);
 
 - (void)createCookbook
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"create cookbook"     // Event category (required)
-                                                          action:@"back"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
-    
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     CookbookDetail* cookbookDetail = [[CookbookDetail alloc] init];
     cookbookDetail.name = self.menuTitleTextFiled.text;
     cookbookDetail.desc = self.descriptionTextView.text;
@@ -325,8 +304,6 @@ typedef void (^result) (BOOL success);
                     creatMenu.tags = self.tags;
                     [self.navigationController pushViewController:creatMenu animated:YES];
                     
-                    UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-                    [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"创建菜谱页面"];
                 }
             }];
             

@@ -112,31 +112,16 @@
 */
 - (IBAction)AboutHaier:(id)sender {
     NSLog(@"关于海尔烤箱APP");
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Setting"     // Event category (required)
-                                                          action:@"about app"    // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 
 - (IBAction)SuggestPost:(id)sender {
     NSLog(@"意见反馈");
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Setting"     // Event category (required)
-                                                          action:@"feedback"    // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 }
 - (IBAction)VersionChick:(id)sender {
     NSLog(@"版本确认");
     
     [super showProgressCompleteWithLabelText:@"目前已是最新版本！" afterDelay:2];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Setting"     // Event category (required)
-                                                          action:@"version info"    // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
 //    [[InternetManager sharedManager] logoutWithLoginName:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginId"] callBack:^(BOOL success, id obj, NSError *error) {
 //        if (success) {
 //            
@@ -149,18 +134,12 @@
 
 - (IBAction)PostMark:(id)sender {
     NSLog(@"app打分");
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Setting"     // Event category (required)
-                                                          action:@"rating"    // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getAppStoreUrlCallback:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSString* appUrl = obj;
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
-            [MobClick event:@"app_comment"];
             
         } else {
             [super showProgressErrorWithLabelText:@"获取App路径失败" afterDelay:1];
@@ -196,9 +175,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccussNotification object:nil];
-        
-        // 统计用户使用时长
-        [uAnalysisManager onUserLogout];
         
         [super openLoginController];
     } else {

@@ -28,9 +28,6 @@
         return;
     }
     
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:CurrentUserBaseId cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
@@ -49,8 +46,6 @@
             }
             
             [self.tableView reloadData];
-            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"草稿箱页面"];
             
         } else {
             if (error.code == InternetErrorCodeConnectInternetFailed) {
@@ -74,12 +69,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Upload Cookbook"     // Event category (required)
-                                                          action:@"draft box"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MenuDraftTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"MenuDraftTableViewCell"];
     self.deleteBtn.selected = NO;

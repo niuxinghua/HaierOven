@@ -20,8 +20,6 @@
 #import "UIView+Sizes.h"
 #import "MyTool.h"
 #import "MyUtils.h"
-#import "MobClick.h"
-#import <uAnalytics/uAnalysisManager.h>
 
 #define GlobalTextFontName              @"FZLTXHK--GBK1-0"
 #define GlobalTitleFontName              @"FZLTHJW--GB1-0"
@@ -102,8 +100,6 @@
 
 #define SinaAppKey       @"4024847126"
 
-#import "GAI.h"
-#import "GAIDictionaryBuilder.h"
 
 #define kGoogleAnalyticsTrackingId  @"UA-61647559-2" //nurun
 //#define kGoogleAnalyticsTrackingId        @"UA-61644426-1" // test

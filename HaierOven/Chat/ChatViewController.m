@@ -31,9 +31,6 @@
 
 - (void)loadMessages
 {
-    //统计页面加载耗时
-    UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
     [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     
     NSString* userBaseId = CurrentUserBaseId;
@@ -56,8 +53,6 @@
             [self parseMessagesToJSQMessages];
             [self.collectionView reloadData];
             
-            UInt64 endTime=[[NSDate date]timeIntervalSince1970]*1000;
-            [uAnalysisManager onActivityResumeEvent:((long)(endTime-startTime)) withModuleId:@"给厨神留言页面"];
             
         } else {
             [super showProgressErrorWithLabelText:@"获取失败" afterDelay:1];
@@ -110,18 +105,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // This screen name value will remain set on the tracker and sent with hits until it is set to a new value or to nil.
-    [[GAI sharedInstance].defaultTracker set:@"给厨神留言页面" value:@"给厨神留言页面"];
-    [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
-    
     [self setupSubviews];
     
     [self loadMessages];
 //    [self parseMessagesToJSQMessages];
     
     self.title = self.toUserName;
-    
-    [MobClick event:@"leave_message"];
 }
 
 - (void)setupSubviews

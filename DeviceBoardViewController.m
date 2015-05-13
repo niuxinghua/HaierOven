@@ -945,8 +945,6 @@
                                        
                                        self.deviceBoardStatus = DeviceBoardStatusPreheating;
                                        
-                                       [MobClick event:@"start_bake"];
-                                       
                                    } else {
                                        [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
                                    }
@@ -991,8 +989,6 @@
                                                [[DataCenter sharedInstance] addOvenNotification:info];
                                                
                                                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:self.ovenOperator.bakeLeftSeconds alertBody:notificationBody];
-                                               
-                                               [MobClick event:@"start_bake"];
                                                
                                            } else {
                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];
@@ -1672,8 +1668,6 @@
                                                [[DataCenter sharedInstance] addOvenNotification:info];
                                                
                                                [[DataCenter sharedInstance] sendLocalNotification:LocalNotificationTypeBakeComplete fireTime:self.ovenOperator.bakeLeftSeconds alertBody:notificationBody];
-                                               
-                                               [MobClick event:@"quick_warmup"];
                                                
                                            } else {
                                                [super showProgressErrorWithLabelText:error.userInfo[NSLocalizedDescriptionKey] afterDelay:1];

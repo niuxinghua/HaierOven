@@ -77,8 +77,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification) name:ReceivedLocalNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAdButton) name:AdButtonShouldShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideAdButton) name:AdButtonShouldCloseNotification object:nil];
     
     self.notificationCount = 0;
     
@@ -104,66 +102,6 @@
         
     }
     
-    [self setupAdView];
-    
-}
-
-#pragma mark - 构建临时广告按钮
-
-- (void)setupAdView
-{
-    self.adUrl = @"";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString* adUrl = [MobClick getAdURL];
-        self.adUrl = adUrl;
-        
-        if (self.adUrl.length != 0) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIWindow* adView = [UIWindow new];
-                self.adView = adView;
-                adView.frame = CGRectMake(PageW - 60, PageH - 80, 50, 50);
-                adView.windowLevel = UIWindowLevelAlert;
-                [adView makeKeyAndVisible];
-                
-                UIButton* adButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                [adButton setImage:[UIImage imageNamed:@"taobao.png"] forState:UIControlStateNormal];
-                adButton.frame = adView.bounds;
-                [adButton addTarget:self action:@selector(displayAd) forControlEvents:UIControlEventTouchUpInside];
-                [adView addSubview:adButton];
-            });
-            
-        }
-        
-        
-    });
-    
-}
-
-- (void)showAdButton
-{
-    if (self.adUrl.length != 0) {
-        self.adView.hidden = NO;
-    }
-}
-
-- (void)hideAdButton
-{
-    if (self.adUrl.length != 0) {
-        self.adView.hidden = YES;
-    }
-}
-
-
-- (void)displayAd {
-    
-    WebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
-    webViewController.webPath = self.adUrl;
-    webViewController.titleText = @"爱淘宝";
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:webViewController] animated:YES completion:^{
-        self.adView.hidden = YES;
-    }];
-
 }
 
 #pragma mark - 自动签到
@@ -292,12 +230,6 @@
 
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Homepage"     // Event category (required)
-                                                          action:@"menu"  // Event action (required)
-                                                           label:nil          // Event label
-                                                           value:nil] build]];    // Event value
-    
     [self updateNotificationCount];
     [self loadUserInfo];
     
@@ -428,12 +360,6 @@
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:deviceViewController] animated:YES];
                     [self.sideMenuViewController hideMenuViewController];
                     
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                          action:@"Add oven"  // Event action (required)
-                                                                           label:nil          // Event label
-                                                                           value:nil] build]];    // Event value
-                    
                     break;
                 }else{
                     
@@ -449,12 +375,6 @@
                     [UIView animateWithDuration:0.2 animations:^{
                         self.leftMenuAlert.frame = CGRectMake(25,PageH/2-85, PageW-50, 163);
                     }];
-                    
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                          action:@"Add oven"  // Event action (required)
-                                                                           label:nil          // Event label
-                                                                           value:nil] build]];    // Event value
                 
                 } else {
                     
@@ -476,12 +396,6 @@
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"homepage"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
-            
             break;
         }
         case 3:
@@ -490,12 +404,6 @@
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"masterchef"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
-            
             break;
         }
         case 4:
@@ -503,11 +411,6 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedGroupController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"cookcircle"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
             break;
         }
         /*
@@ -529,11 +432,6 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"shopping_list"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
             break;
         }
         case 6:
@@ -541,11 +439,6 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"notification"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
             break;
         }
         case 7:
@@ -553,11 +446,6 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"setting"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
             break;
         }
         default:

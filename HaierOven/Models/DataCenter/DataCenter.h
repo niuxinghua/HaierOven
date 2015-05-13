@@ -25,10 +25,6 @@
 
 #define SubmitCookbookSuccessNotification   @"Submit cookbook success notification"
 
-#define AdButtonShouldShowNotification    @"Ad Button should show notification"  //用于显示临时广告
-
-#define AdButtonShouldCloseNotification    @"Ad Button should close notification"  //用于显示临时广告
-
 #define IsLogin     ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"])
 
 #define CurrentUserBaseId   ([DataCenter sharedInstance].currentUserBaseId)
