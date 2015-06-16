@@ -5486,7 +5486,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = KRV5T3384C;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -6898,6 +6898,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/uSDKFramework",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/Analytics",
+					"$(PROJECT_DIR)/HaierOven/Admob/GoogleMobileAdsSdk",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HaierOven/HaierOven.pch";
@@ -6929,7 +6930,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e210a496-1aea-4e7f-a909-9badcd81f982";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -6946,6 +6947,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/uSDKFramework",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/Analytics",
+					"$(PROJECT_DIR)/HaierOven/Admob/GoogleMobileAdsSdk",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HaierOven/HaierOven.pch";
@@ -6976,7 +6978,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e210a496-1aea-4e7f-a909-9badcd81f982";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -413,35 +413,30 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         }
-        /*
+        
         case 5:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedHouseViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
-            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Menu"     // Event category (required)
-                                                                  action:@"cookroom"  // Event action (required)
-                                                                   label:nil          // Event label
-                                                                   value:nil] build]];    // Event value
             break;
         }
-        */
-        case 5:
+        
+        case 6:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
         }
-        case 6:
+        case 7:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
         }
-        case 7:
+        case 8:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
                                                          animated:YES];
@@ -461,8 +456,7 @@
     if (indexPath.row ==0) {
         return 115;
     }else
-    return (PageH-115-5-20)/7;
-//        return 56;
+    return (PageH-115-5-20)/8;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -472,7 +466,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -525,10 +519,10 @@
         
         NSString *cellIdentifier = @"normalMenuCell";
         NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈",/* @"烘焙屋",*/ @"购物清单",@"通知", @"设置"];
-        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),/*IMAGENAMED(@"hongbeiwu"),*/IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
+        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈", @"烘焙屋", @"购物清单",@"通知", @"设置"];
+        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"), IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
-        if (indexPath.row == 6) {  //通知
+        if (indexPath.row == 7) {  //通知
             cell.notificationCount = [NSString stringWithFormat:@"%d", self.notificationCount];
         }
         cell.titleLabel.text = titles[indexPath.row-2];
