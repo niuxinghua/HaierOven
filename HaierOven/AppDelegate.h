@@ -10,6 +10,9 @@
 #import "UMSocial.h"
 #import "UMSocialQQHandler.h"
 #import "GAI.h"
+#import "LARSAdController.h"
+#import "TOLAdAdapterGoogleAds.h"
+#import "TOLAdAdapteriAds.h"
 
 typedef NS_ENUM(NSUInteger, InterfaceOrientationState) {
     InterfaceOrientationStateLandscapeOnly = 1,

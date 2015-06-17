@@ -120,7 +120,7 @@
                                 NO)
 
 // 是否iPad
-#define isPad                   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+//#define isPad                   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 // UIView - viewWithTag
 #define VIEWWITHTAG(_OBJECT, _TAG)\

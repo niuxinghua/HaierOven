@@ -51,13 +51,10 @@
         self.qqLoginButton.hidden = YES;
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldCloseNotification object:nil];
-    
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AdButtonShouldShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

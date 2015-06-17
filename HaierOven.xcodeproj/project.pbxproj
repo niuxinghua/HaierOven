@@ -1052,7 +1052,6 @@
 		849F91881A513981006234B9 /* step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91671A513981006234B9 /* step2.png */; };
 		849F91891A513981006234B9 /* step3.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F91681A513981006234B9 /* step3.png */; };
 		84A74E911AF735B900257B5E /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A74E8E1AF735B900257B5E /* libMobClickLibrary.a */; };
-		84A74E951AF7701D00257B5E /* taobao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A74E941AF7701D00257B5E /* taobao@2x.png */; };
 		84AD2E881A8888170014126A /* cookbook_list_praise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AD2E841A8888170014126A /* cookbook_list_praise@2x.png */; };
 		84AD2E891A8888170014126A /* cookbook_list_praise.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AD2E851A8888170014126A /* cookbook_list_praise.png */; };
 		84AD2E8A1A8888170014126A /* cookbook_list_time@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AD2E861A8888170014126A /* cookbook_list_time@2x.png */; };
@@ -1223,6 +1222,13 @@
 		84E1138C1A52A4C700D16DDB /* DrawedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1138B1A52A4C700D16DDB /* DrawedButton.m */; };
 		84ED2E621AD3C44400F668C4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED2E611AD3C44400F668C4 /* AdSupport.framework */; };
 		84ED2E641AD3C44E00F668C4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED2E631AD3C44E00F668C4 /* CoreData.framework */; };
+		B9CD15071B300FD9006C6723 /* LARSAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD14FF1B300FD9006C6723 /* LARSAdController.m */; };
+		B9CD15081B300FD9006C6723 /* TOLAdAdapterGoogleAds.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD15021B300FD9006C6723 /* TOLAdAdapterGoogleAds.m */; };
+		B9CD15091B300FD9006C6723 /* TOLAdAdapteriAds.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD15041B300FD9006C6723 /* TOLAdAdapteriAds.m */; };
+		B9CD150A1B300FD9006C6723 /* TOLAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD15061B300FD9006C6723 /* TOLAdViewController.m */; };
+		B9CD15131B30192A006C6723 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9CD150C1B30192A006C6723 /* GoogleMobileAds.framework */; };
+		B9CD15141B30192A006C6723 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = B9CD15111B30192A006C6723 /* README.txt */; };
+		B9CD15151B30192A006C6723 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = B9CD15121B30192A006C6723 /* README.txt */; };
 		C4182E181A4E4A4A006A44D0 /* Liukang.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4182E171A4E4A4A006A44D0 /* Liukang.storyboard */; };
 		C4182E1B1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */; };
 		C4182E1D1A4E51AF006A44D0 /* mask_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = C4182E1C1A4E51AF006A44D0 /* mask_bottom.png */; };
@@ -2707,7 +2713,6 @@
 		84A74E8E1AF735B900257B5E /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		84A74E8F1AF735B900257B5E /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		84A74E901AF735B900257B5E /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		84A74E941AF7701D00257B5E /* taobao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "taobao@2x.png"; path = "../taobao@2x.png"; sourceTree = "<group>"; };
 		84AD2E841A8888170014126A /* cookbook_list_praise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookbook_list_praise@2x.png"; sourceTree = "<group>"; };
 		84AD2E851A8888170014126A /* cookbook_list_praise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookbook_list_praise.png; sourceTree = "<group>"; };
 		84AD2E861A8888170014126A /* cookbook_list_time@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookbook_list_time@2x.png"; sourceTree = "<group>"; };
@@ -2793,6 +2798,21 @@
 		84E1138B1A52A4C700D16DDB /* DrawedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawedButton.m; sourceTree = "<group>"; };
 		84ED2E611AD3C44400F668C4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		84ED2E631AD3C44E00F668C4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B9CD14FE1B300FD9006C6723 /* LARSAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARSAdController.h; sourceTree = "<group>"; };
+		B9CD14FF1B300FD9006C6723 /* LARSAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARSAdController.m; sourceTree = "<group>"; };
+		B9CD15001B300FD9006C6723 /* TOLAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOLAdAdapter.h; sourceTree = "<group>"; };
+		B9CD15011B300FD9006C6723 /* TOLAdAdapterGoogleAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOLAdAdapterGoogleAds.h; sourceTree = "<group>"; };
+		B9CD15021B300FD9006C6723 /* TOLAdAdapterGoogleAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOLAdAdapterGoogleAds.m; sourceTree = "<group>"; };
+		B9CD15031B300FD9006C6723 /* TOLAdAdapteriAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOLAdAdapteriAds.h; sourceTree = "<group>"; };
+		B9CD15041B300FD9006C6723 /* TOLAdAdapteriAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOLAdAdapteriAds.m; sourceTree = "<group>"; };
+		B9CD15051B300FD9006C6723 /* TOLAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOLAdViewController.h; sourceTree = "<group>"; };
+		B9CD15061B300FD9006C6723 /* TOLAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOLAdViewController.m; sourceTree = "<group>"; };
+		B9CD150C1B30192A006C6723 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		B9CD150E1B30192A006C6723 /* GADMAdNetworkAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdNetworkAdapterProtocol.h; sourceTree = "<group>"; };
+		B9CD150F1B30192A006C6723 /* GADMAdNetworkConnectorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdNetworkConnectorProtocol.h; sourceTree = "<group>"; };
+		B9CD15101B30192A006C6723 /* GADMEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMEnums.h; sourceTree = "<group>"; };
+		B9CD15111B30192A006C6723 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		B9CD15121B30192A006C6723 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		C4182E171A4E4A4A006A44D0 /* Liukang.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Liukang.storyboard; sourceTree = "<group>"; };
 		C4182E191A4E4ACF006A44D0 /* CookbookDetailControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookbookDetailControllerViewController.h; sourceTree = "<group>"; };
 		C4182E1A1A4E4ACF006A44D0 /* CookbookDetailControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookbookDetailControllerViewController.m; sourceTree = "<group>"; };
@@ -2828,6 +2848,7 @@
 				8447CAC91A5B7FEE00FADF9D /* libSocialQQ.a in Frameworks */,
 				8447CAC71A5B7FEE00FADF9D /* libSocialLine.a in Frameworks */,
 				8447CABB1A5B7FEE00FADF9D /* libUMSocial_Sdk_Comment_4.2.a in Frameworks */,
+				B9CD15131B30192A006C6723 /* GoogleMobileAds.framework in Frameworks */,
 				8447CABA1A5B7FEE00FADF9D /* libUMSocial_Sdk_4.2.a in Frameworks */,
 				843CD1AE1AA02007005BC8D7 /* uAnalytics.framework in Frameworks */,
 				8447CAD51A5B7FEE00FADF9D /* libSocialYiXin.a in Frameworks */,
@@ -4197,6 +4218,7 @@
 			isa = PBXGroup;
 			children = (
 				45C7E57A1A3FDB57000B086B /* UConstants.h */,
+				B9CD14F31B3003C5006C6723 /* Admob */,
 				8447CAEE1A5FC72400FADF9D /* Chat */,
 				C4182E121A4E49FD006A44D0 /* Cookbook */,
 				8441171C1A4BB8AF00628A64 /* Models */,
@@ -4396,7 +4418,6 @@
 				843CD1AF1AA07710005BC8D7 /* cookbook_cancel.png */,
 				843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */,
 				84AD2E901A8A230A0014126A /* jifen.jpg */,
-				84A74E941AF7701D00257B5E /* taobao@2x.png */,
 				456BC4471A8C82F3000D9355 /* jifen2.png */,
 				84B443DC1AAACBB70029C8D0 /* jifen_3.jpg */,
 				84AD2EA31A8B5E0F0014126A /* APPkv-banner1.jpg */,
@@ -5459,6 +5480,52 @@
 			name = CommentView;
 			sourceTree = "<group>";
 		};
+		B9CD14F31B3003C5006C6723 /* Admob */ = {
+			isa = PBXGroup;
+			children = (
+				B9CD150B1B30192A006C6723 /* GoogleMobileAdsSdkiOS-7.3.1 */,
+				B9CD14FD1B300FD9006C6723 /* LARSAdController */,
+			);
+			path = Admob;
+			sourceTree = "<group>";
+		};
+		B9CD14FD1B300FD9006C6723 /* LARSAdController */ = {
+			isa = PBXGroup;
+			children = (
+				B9CD14FE1B300FD9006C6723 /* LARSAdController.h */,
+				B9CD14FF1B300FD9006C6723 /* LARSAdController.m */,
+				B9CD15001B300FD9006C6723 /* TOLAdAdapter.h */,
+				B9CD15011B300FD9006C6723 /* TOLAdAdapterGoogleAds.h */,
+				B9CD15021B300FD9006C6723 /* TOLAdAdapterGoogleAds.m */,
+				B9CD15031B300FD9006C6723 /* TOLAdAdapteriAds.h */,
+				B9CD15041B300FD9006C6723 /* TOLAdAdapteriAds.m */,
+				B9CD15051B300FD9006C6723 /* TOLAdViewController.h */,
+				B9CD15061B300FD9006C6723 /* TOLAdViewController.m */,
+			);
+			path = LARSAdController;
+			sourceTree = "<group>";
+		};
+		B9CD150B1B30192A006C6723 /* GoogleMobileAdsSdkiOS-7.3.1 */ = {
+			isa = PBXGroup;
+			children = (
+				B9CD150C1B30192A006C6723 /* GoogleMobileAds.framework */,
+				B9CD150D1B30192A006C6723 /* Mediation Adapters */,
+				B9CD15121B30192A006C6723 /* README.txt */,
+			);
+			path = "GoogleMobileAdsSdkiOS-7.3.1";
+			sourceTree = "<group>";
+		};
+		B9CD150D1B30192A006C6723 /* Mediation Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				B9CD150E1B30192A006C6723 /* GADMAdNetworkAdapterProtocol.h */,
+				B9CD150F1B30192A006C6723 /* GADMAdNetworkConnectorProtocol.h */,
+				B9CD15101B30192A006C6723 /* GADMEnums.h */,
+				B9CD15111B30192A006C6723 /* README.txt */,
+			);
+			path = "Mediation Adapters";
+			sourceTree = "<group>";
+		};
 		C4182E121A4E49FD006A44D0 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -5550,11 +5617,11 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = KRV5T3384C;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = AEPFFMR544;
+						DevelopmentTeam = CWG9EF242Q;
 						TestTargetID = 45C7E52A1A3FD165000B086B;
 					};
 				};
@@ -5650,6 +5717,7 @@
 				45422DCF1A63B98B001A7223 /* xlqbwwz@2x.png in Resources */,
 				849F91731A513981006234B9 /* icon_gfcp_s.png in Resources */,
 				45A546C51A5A4EC200BE62EC /* arrow_phone.png in Resources */,
+				B9CD15151B30192A006C6723 /* README.txt in Resources */,
 				45F9386B1A919402006A211B /* camera1@3x.png in Resources */,
 				45BC57231A4AF20A0052F520 /* cthp-xz@2x.png in Resources */,
 				45A5E8271A50081200FCD2BD /* xcqr@2x.png in Resources */,
@@ -5912,7 +5980,6 @@
 				45332BA81A6FAF430014E8AA /* fresh-group-1@3x.png in Resources */,
 				45D906DD1A47CAAB00B97D92 /* liebieo@2x.png in Resources */,
 				45D9071A1A47CAAB00B97D92 /* yqd@2x.png in Resources */,
-				84A74E951AF7701D00257B5E /* taobao@2x.png in Resources */,
 				84BA2A9E1A8499A4000B17BD /* mydessertcount.png in Resources */,
 				458952BC1A493C05009B5DD1 /* wifilianjie06.png in Resources */,
 				45AC32A51A77A5C4004B1828 /* 3-5-5-1.png in Resources */,
@@ -6049,6 +6116,7 @@
 				45BC57AD1A4B0DDB0052F520 /* shijian-xz@2x.png in Resources */,
 				45D906EC1A47CAAB00B97D92 /* nan@2x.png in Resources */,
 				457A775B1A427B1800E422D0 /* FZLTHJW.ttf in Resources */,
+				B9CD15141B30192A006C6723 /* README.txt in Resources */,
 				458952B81A493C05009B5DD1 /* wifilianjie04@3x.png in Resources */,
 				45B6510E1A482EDB00A6376D /* n2@3x.png in Resources */,
 				45A546A31A593A8000BE62EC /* PhoneRegisterView.xib in Resources */,
@@ -6549,6 +6617,7 @@
 				844117851A4BB8AF00628A64 /* Reachability.m in Sources */,
 				8447CB631A5FC73700FADF9D /* NSString+JSQMessages.m in Sources */,
 				45A97BA31A6E29100094F9BA /* StudyCookView.m in Sources */,
+				B9CD15081B300FD9006C6723 /* TOLAdAdapterGoogleAds.m in Sources */,
 				8447CB7E1A5FC73700FADF9D /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				8447CB831A5FC73700FADF9D /* JSQMessagesInputToolbar.m in Sources */,
 				45D9071F1A47EBE900B97D92 /* SecDeviceTableViewCell.m in Sources */,
@@ -6639,6 +6708,7 @@
 				45D857CE1A401134007B7AB7 /* SecTableViewCell.m in Sources */,
 				45E61A971A75F2DC009DF3FC /* DeviceGuideListController.m in Sources */,
 				45A999541A50FFFF0008AFE3 /* AutoSizeLabelView.m in Sources */,
+				B9CD150A1B300FD9006C6723 /* TOLAdViewController.m in Sources */,
 				45A9996B1A51307C0008AFE3 /* CellOfAddFoodTable.m in Sources */,
 				45BBA68D1A524BED0066C143 /* UseDeviceCell.m in Sources */,
 				84855F241A63B71200830B75 /* Cooker.m in Sources */,
@@ -6647,6 +6717,7 @@
 				8441178E1A4BB8AF00628A64 /* OvenManager.m in Sources */,
 				8447CB721A5FC73700FADF9D /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				845B33961A58EB4300DD8887 /* DescCell.m in Sources */,
+				B9CD15091B300FD9006C6723 /* TOLAdAdapteriAds.m in Sources */,
 				84C7A7A71AF8A971001C10DD /* SDImageCache.m in Sources */,
 				8447CB7D1A5FC73700FADF9D /* JSQMessagesCollectionViewCell.m in Sources */,
 				84C7A7B41AF8A971001C10DD /* UIView+WebCacheOperation.m in Sources */,
@@ -6753,6 +6824,7 @@
 				84E1137B1A52A45600D16DDB /* CommentView.m in Sources */,
 				45A5E7FD1A4FC88C00FCD2BD /* UpLoadingMneuController.m in Sources */,
 				45D9061A1A47C51800B97D92 /* RelationshipCell.m in Sources */,
+				B9CD15071B300FD9006C6723 /* LARSAdController.m in Sources */,
 				84E113891A52A4B100D16DDB /* AttributedLabel.m in Sources */,
 				45C7E5601A3FD9AE000B086B /* BaseTableViewController.m in Sources */,
 				8447CB7A1A5FC73700FADF9D /* JSQVideoMediaItem.m in Sources */,
@@ -6962,10 +7034,15 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/uSDKFramework",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/Analytics",
+					"$(PROJECT_DIR)/HaierOven/Admob/GoogleMobileAdsSdkiOS-7.3.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HaierOven/HaierOven.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = HaierOven/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -7010,9 +7087,14 @@
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/uSDKFramework",
 					"$(PROJECT_DIR)/HaierOven/Models/Umeng/Share/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HaierOven/Models/Oven/Analytics",
+					"$(PROJECT_DIR)/HaierOven/Admob/GoogleMobileAdsSdkiOS-7.3.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HaierOven/HaierOven.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = HaierOven/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -7048,6 +7130,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -7059,6 +7143,7 @@
 				INFOPLIST_FILE = HaierOvenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaierOven.app/HaierOven";
 			};
 			name = Debug;
@@ -7067,6 +7152,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -7074,6 +7161,7 @@
 				INFOPLIST_FILE = HaierOvenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaierOven.app/HaierOven";
 			};
 			name = Release;

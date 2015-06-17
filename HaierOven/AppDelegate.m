@@ -11,6 +11,7 @@
 #import "UMSocialSinaHandler.h"
 #import <uSDKFramework/uSDKConst.h>
 #import "OHPlayAudio.h"
+#import "MainViewController.h"
 
 #define SUPPORT_IOS8 1
 
@@ -31,23 +32,7 @@
     // 统计crash日志
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
-    [[UINavigationBar appearance] setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor]  forBarMetrics:UIBarMetricsDefault];
-    
-    [[UINavigationBar appearance] setShadowImage:IMAGENAMED(@"clear.png")];
-    
-    NSDictionary* textAttributes = @{
-                                UITextAttributeTextColor : [UIColor whiteColor],
-                                UITextAttributeFont : [UIFont fontWithName:GlobalTitleFontName size:15],
-                                UITextAttributeTextShadowColor : [UIColor clearColor],
-                                UITextAttributeTextShadowOffset : [NSValue valueWithCGSize:CGSizeMake(1, 1)]
-                                };
-    
-    [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    
-    //[[UITableView appearance] setTableFooterView:[[UIView alloc] init]];
+    [self setAppearance];
     
     // 初始化uAnalytics统计功能
     [uAnalysisManager startManagerWithAppId:AppId AndAppKey:AppKey AndClientId:[DataCenter sharedInstance].clientId];
@@ -60,6 +45,9 @@
     [self initUmengSdk];
     
     [self initGoogleAnalytics];
+    
+    // 为了使用
+    [self initAdMob];
     
     [self initNotification];
     
@@ -77,6 +65,24 @@
     [uAnalysisManager onAppLoadOverEvent:((long)(end-start))];
     
     return YES;
+}
+
+- (void)setAppearance {
+    [[UINavigationBar appearance] setBackgroundImage:[MyTool createImageWithColor:GlobalOrangeColor]  forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:IMAGENAMED(@"clear.png")];
+    
+    NSDictionary* textAttributes = @{
+                                     UITextAttributeTextColor : [UIColor whiteColor],
+                                     UITextAttributeFont : [UIFont fontWithName:GlobalTitleFontName size:15],
+                                     UITextAttributeTextShadowColor : [UIColor clearColor],
+                                     UITextAttributeTextShadowOffset : [NSValue valueWithCGSize:CGSizeMake(1, 1)]
+                                     };
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    [UINavigationBar appearance].titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 }
 
 void uncaughtExceptionHandler(NSException *exception)
@@ -187,6 +193,14 @@ void uncaughtExceptionHandler(NSException *exception)
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:kGoogleAnalyticsTrackingId];
+    
+}
+
+- (void)initAdMob {
+   
+    [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapterGoogleAds class]
+                                      withPublisherId:@"ca-app-pub-7840826564795227/5905625599"];
+    [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapteriAds class]];
     
 }
 

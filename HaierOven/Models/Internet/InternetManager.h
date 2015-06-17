@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, LoginType) {
 /**
  *  分页请求每页的数量
  */
-#define PageLimit   20
+#define PageLimit   10
 
 
 @interface InternetManager : NSObject

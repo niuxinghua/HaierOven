@@ -32,9 +32,6 @@
 
 @property (strong, nonatomic) UIWindow* signInAlert;
 
-@property (strong, nonatomic) UIWindow* adView;
-@property (copy, nonatomic) NSString* adUrl;
-
 @end
 
 @implementation LeftMenuViewController
@@ -77,8 +74,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoDeviceListController) name:BindDeviceSuccussNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:DeleteLocalOvenSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification) name:ReceivedLocalNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAdButton) name:AdButtonShouldShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideAdButton) name:AdButtonShouldCloseNotification object:nil];
     
     self.notificationCount = 0;
     
@@ -104,66 +99,6 @@
         
     }
     
-    [self setupAdView];
-    
-}
-
-#pragma mark - 构建临时广告按钮
-
-- (void)setupAdView
-{
-    self.adUrl = @"";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString* adUrl = [MobClick getAdURL];
-        self.adUrl = adUrl;
-        
-        if (self.adUrl.length != 0) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIWindow* adView = [UIWindow new];
-                self.adView = adView;
-                adView.frame = CGRectMake(PageW - 60, PageH - 80, 50, 50);
-                adView.windowLevel = UIWindowLevelAlert;
-                [adView makeKeyAndVisible];
-                
-                UIButton* adButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                [adButton setImage:[UIImage imageNamed:@"taobao.png"] forState:UIControlStateNormal];
-                adButton.frame = adView.bounds;
-                [adButton addTarget:self action:@selector(displayAd) forControlEvents:UIControlEventTouchUpInside];
-                [adView addSubview:adButton];
-            });
-            
-        }
-        
-        
-    });
-    
-}
-
-- (void)showAdButton
-{
-    if (self.adUrl.length != 0) {
-        self.adView.hidden = NO;
-    }
-}
-
-- (void)hideAdButton
-{
-    if (self.adUrl.length != 0) {
-        self.adView.hidden = YES;
-    }
-}
-
-
-- (void)displayAd {
-    
-    WebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
-    webViewController.webPath = self.adUrl;
-    webViewController.titleText = @"爱淘宝";
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:webViewController] animated:YES completion:^{
-        self.adView.hidden = YES;
-    }];
-
 }
 
 #pragma mark - 自动签到

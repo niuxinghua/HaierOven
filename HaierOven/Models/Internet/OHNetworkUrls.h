@@ -367,7 +367,7 @@
 
 #define DownloadFile    [NSString stringWithFormat:@"http://51keman.edaysoft.cn/%@", @"File/Download"]
 
-#define UploadFile    [NSString stringWithFormat:@"%@", @"http://115.29.8.251:8082/file/upload"]
+#define UploadFile    [NSString stringWithFormat:@"%@/%@", BaseOvenUrl, @"file/upload"]
 
 
 

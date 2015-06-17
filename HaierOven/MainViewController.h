@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 edaysoft. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "TOLAdViewController.h"
 
-@interface MainViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MainViewController : TOLAdViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic)NSArray *tags;
 

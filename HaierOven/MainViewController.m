@@ -23,6 +23,9 @@
 #define AdvRate         0.5
 #define ScrRate         0.1388888
 #define CellImageRate   0.8
+
+typedef BOOL(^ShouldDisplayAd)();
+
 @interface MainViewController () <MainViewNormalCellDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) CycleScrollView *adCycleView;
@@ -94,28 +97,19 @@
 - (void)loadRecommendCookerStars
 {
     [[InternetManager sharedManager] getRecommendCookerStarsCallback:^(BOOL success, id obj, NSError *error) {
+        if (error) {
+            [super showProgressErrorWithLabelText:@"加载出错" afterDelay:1];
+            return;
+        }
         self.recommendCookerStars = obj;
         NSMutableArray *viewsArray = [@[] mutableCopy];
-        if (self.recommendCookerStars.count == 0) { // 假数据
-            NSArray *colorArray = @[[UIColor cyanColor],[UIColor blueColor],[UIColor greenColor],[UIColor yellowColor],[UIColor purpleColor]];
-            for (int i = 0; i < 5; ++i) {
-                UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                tempLabel.backgroundColor = [(UIColor *)[colorArray objectAtIndex:i] colorWithAlphaComponent:0.5];
-                tempLabel.text = [NSString stringWithFormat:@"第%d页", i+1];
-                tempLabel.textAlignment = NSTextAlignmentCenter;
-                tempLabel.font = [UIFont italicSystemFontOfSize:35];
-                tempLabel.textColor = [UIColor whiteColor];
-                [viewsArray addObject:tempLabel];
-            }
-        } else {
+        if (self.recommendCookerStars.count != 0) { // 假数据
             
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                [cookerImage sd_setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl] placeholderImage:IMAGENAMED(@"home_banner_default.png")];
+                [cookerImage sd_setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl]];
                 
-                //cookerImage.image = IMAGENAMED(@"home_banner_default.png");
-                //cookerImage.backgroundColor = GlobalOrangeColor;
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
             }
@@ -260,28 +254,28 @@
     } else {
         [self deleteMarkLabel];
     }
-    
     // Do any additional setup after loading the view.
-    
-    //[self performSelector:@selector(displayAd) withObject:nil afterDelay:2];
+
 }
 
-- (void)displayAd {
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, NULL), ^{
+//是否显示AdMob广告
+- (BOOL)shouldDisplayAds
+{
+    ShouldDisplayAd display = ^() {
         NSString* adUrl = [MobClick getAdURL];
         NSLog(@"%@", adUrl);
         
-        if (adUrl.length != 0 && arc4random()%100 > 50) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                WebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Web view controller"];
-                webViewController.webPath = adUrl;
-                webViewController.titleText = @"广告";
-                [self.navigationController pushViewController:webViewController animated:YES];
-            });
+        if (adUrl.length != 0) {
+            return YES;
+        } else {
+            return NO;
         }
-        
-    });
+    };
+    return display();
+}
+
+- (void)initAdMob {
+    
 }
 
 - (void)dealloc
