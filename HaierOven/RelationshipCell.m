@@ -13,14 +13,9 @@
 - (void)awakeFromNib {
     self.avaterImage.layer.cornerRadius = self.avaterImage.frame.size.height/2;
     self.avaterImage.layer.masksToBounds = YES;
-//    self.avaterImage.userInteractionEnabled = YES;
-    //    [self.avaterImage.layer setBorderWidth:1]; //边框宽度
-//    [self.avaterImage.layer setBorderColor:[UIColor whiteColor].CGColor];//边框颜色
-    // Initialization code
     self.watchingBtn.layer.cornerRadius = 15;
     self.watchingBtn.layer.masksToBounds = YES;
     [self.watchingBtn setBackgroundImage:[MyTool createImageWithColor:UIColorFromRGB(0xb5b5b5)] forState:UIControlStateSelected];
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,7 +27,7 @@
 - (void)setUser:(Friend *)user
 {
     _user = user;
-    [self.avaterImage sd_setImageWithURL:[NSURL URLWithString:user.avatar]];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:user.avatar]];
     
     self.nameLabel.text = user.userName;
     self.descriptionLabel.text = user.signature;

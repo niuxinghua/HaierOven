@@ -118,13 +118,17 @@
 
 - (void)loadUserCookbooksWithTags
 {
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
+    
     [[InternetManager sharedManager] getCookbooksWithTagIds:self.tagArr userBaseId:self.cookerStar.userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                //[self.mainTable.legendFooter noticeNoMoreData];
             }
             if (arr.count == 0 && _pageIndex == 1) {
                 [super showProgressErrorWithLabelText:@"对不起，没有所选信息！" afterDelay:1];
@@ -147,13 +151,17 @@
 {
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
+    
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:self.cookerStar.userBaseId cookbookStatus:1 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
                 [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                //[self.mainTable.legendFooter noticeNoMoreData];
             }
             if (_pageIndex == 1) {
                 self.cookbooks = obj;

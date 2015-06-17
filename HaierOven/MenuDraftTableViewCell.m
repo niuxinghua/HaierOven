@@ -43,7 +43,7 @@
 {
     _cookbook = cookbook;
     NSURL* imageUrl = [NSURL URLWithString:cookbook.coverPhoto];
-    [self.coverImage sd_setImageWithURL:imageUrl];
+    [self.coverImage setImageWithURL:imageUrl];
     
     self.foodNameLabel.text = cookbook.name;
     if (cookbook.desc.length == 0 || [cookbook.desc isEqualToString:@"(null)"]) {

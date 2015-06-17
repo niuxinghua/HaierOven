@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
 /**
  *  加载菜谱的预设图
  */
-@property (strong, nonatomic) UIImage* placeHolder;
+//@property (strong, nonatomic) UIImage* placeHolder;
 
 /**
  *  模型层单例

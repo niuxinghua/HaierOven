@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -15,11 +15,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cookbook_list_item_bg_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Ln-L1l">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Ln-L1l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                     </imageView>
                     <view alpha="0.85000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aac-C2-aa9" customClass="ContainerView">
-                        <rect key="frame" x="0.0" y="134" width="320" height="53"/>
+                        <rect key="frame" x="0.0" y="133" width="320" height="53"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="53" id="7aD-37-bQZ"/>
@@ -32,7 +32,7 @@
                         </variation>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTt-2t-6fb">
-                        <rect key="frame" x="0.0" y="134" width="320" height="53"/>
+                        <rect key="frame" x="0.0" y="133" width="320" height="53"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="芒果芝士蛋糕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14j-eN-fIV">
                                 <rect key="frame" x="4" y="15" width="267" height="16"/>
@@ -128,7 +128,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cookbook_list_item_bg_default.png" width="274" height="206"/>
         <image name="default_avatar.png" width="127" height="127"/>
         <image name="xcqr.png" width="26" height="26"/>
     </resources>

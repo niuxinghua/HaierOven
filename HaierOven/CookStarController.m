@@ -37,14 +37,15 @@
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
     
     NSString* userBaseId = CurrentUserBaseId;
-    
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getCookerStarsWithUserBaseId:userBaseId pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableView removeFooter];
             }
             if (_pageIndex == 1) {
                 self.cookerStars = obj;

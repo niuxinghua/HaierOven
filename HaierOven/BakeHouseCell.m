@@ -14,25 +14,12 @@
 
 @end
 @implementation BakeHouseCell
-//-(void)setKitImage:(UIImage *)kitImage{
-//    _kitImage = kitImage;
-//    self.image.image = kitImage;
-//}
-//-(void)setKitName:(NSString *)kitName{
-//    _kitName = kitName;
-//    self.label.text = kitName;
-//}
-//
-//-(void)setKitPrice:(NSString *)kitPrice{
-//    _kitPrice = kitPrice;
-//    self.priceLabel.text = kitPrice;
-//}
 
 - (void)setProduct:(Equipment *)product
 {
     _product = product;
     
-    [self.image sd_setImageWithURL:[NSURL URLWithString:product.imagePath] placeholderImage:IMAGENAMED(@"mf.png")];
+    [self.image setImageWithURL:[NSURL URLWithString:product.imagePath] placeholderImage:IMAGENAMED(@"mf.png")];
     
     self.priceLabel.text = product.price;
     self.label.text = product.name;

@@ -445,7 +445,7 @@
                                                                    value:nil] build]];    // Event value
             break;
         }
-        /*
+        
         case 5:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"BakedHouseViewController"]]
@@ -458,8 +458,8 @@
                                                                    value:nil] build]];    // Event value
             break;
         }
-        */
-        case 5:
+        
+        case 6:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"ShoppingListTableViewController"]]
                                                          animated:YES];
@@ -471,7 +471,7 @@
                                                                    value:nil] build]];    // Event value
             break;
         }
-        case 6:
+        case 7:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NotificationTableViewController"]]
                                                          animated:YES];
@@ -483,7 +483,7 @@
                                                                    value:nil] build]];    // Event value
             break;
         }
-        case 7:
+        case 8:
         {
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SettingViewController"]]
                                                          animated:YES];
@@ -508,7 +508,7 @@
     if (indexPath.row ==0) {
         return 115;
     }else
-    return (PageH-115-5-20)/7;
+    return (PageH-115-5-20)/8;
 //        return 56;
 }
 
@@ -519,7 +519,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -572,8 +572,8 @@
         
         NSString *cellIdentifier = @"normalMenuCell";
         NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈",/* @"烘焙屋",*/ @"购物清单",@"通知", @"设置"];
-        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),/*IMAGENAMED(@"hongbeiwu"),*/IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
+        NSArray *titles = @[@"首页", @"厨神名人堂", @"烘焙圈", @"烘焙屋", @"购物清单",@"通知", @"设置"];
+        NSArray *images = @[IMAGENAMED(@"shouye"),IMAGENAMED(@"mingrentang"),IMAGENAMED(@"hongbeiquan"),IMAGENAMED(@"hongbeiwu"),IMAGENAMED(@"gouwuqindan"),IMAGENAMED(@"tongzhi"),IMAGENAMED(@"shezhi")];
         cell.delegate = self;
         if (indexPath.row == 6) {  //通知
             cell.notificationCount = [NSString stringWithFormat:@"%d", self.notificationCount];
@@ -587,7 +587,7 @@
         // 从通知点进app跳转到通知界面
         AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
         
-        if (indexPath.row == 6 && appDelegate.hadTappedNotification) {
+        if (indexPath.row == 7 && appDelegate.hadTappedNotification) {
             //appDelegate.hadTappedNotification = NO;
             self.tempView.hidden = YES;
             self.tempView = cell.cellSelectedView;

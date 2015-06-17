@@ -30,19 +30,24 @@
     
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:CurrentUserBaseId cookbookStatus:0 pageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableView removeFooter];
             }
             if (_pageIndex == 1) {
-                if (arr.count == 0)
+                if (arr.count == 0) {
                     [super showProgressErrorWithLabelText:@"没有更多数据了..." afterDelay:1];
+                    [self.tableView removeFooter];
+                }
+                
                 self.cookbooks = obj;
             } else {
                 [self.cookbooks addObjectsFromArray:arr];

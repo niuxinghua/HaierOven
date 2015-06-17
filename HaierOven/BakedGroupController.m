@@ -77,19 +77,23 @@
     
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
+    if (_followPageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
     NSString* userBaseId = CurrentUserBaseId;
     [[InternetManager sharedManager] getFriendCookbooksWithUserBaseId:userBaseId pageIndex:self.followPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _followPageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableview removeFooter];
             }
             if (_followPageIndex == 1) {
-                if (arr.count == 0 && self.backGroupType == BackGroupTypeFollowed)
+                if (arr.count == 0 && self.backGroupType == BackGroupTypeFollowed) {
                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                    [self.tableview removeFooter];
+                }
                 self.followedCookbooks = obj;
             } else {
                 [self.followedCookbooks addObjectsFromArray:arr];
@@ -114,17 +118,21 @@
         return;
     }
     NSString* userBaseId = CurrentUserBaseId;
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_recommentPageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getRecommentCookersWithUserBaseId:userBaseId pageIndex:self.recommentPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _recommentPageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableview removeFooter];
             }
             if (_recommentPageIndex == 1) {
-                if (arr.count == 0 && self.backGroupType == BackGroupTypeAdvice)
+                if (arr.count == 0 && self.backGroupType == BackGroupTypeAdvice) {
                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                    [self.tableview removeFooter];
+                }
                 self.recommendCookers = obj;
             } else {
                 [self.recommendCookers addObjectsFromArray:arr];
@@ -146,17 +154,21 @@
     }
     
     NSString* userBaseId = CurrentUserBaseId;
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_searchPageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] searchUsersWithKeyword:self.searchView.searchTextFailed.text pageIndex:_searchPageIndex userBaseId:userBaseId callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _searchPageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableview removeFooter];
             }
             if (_recommentPageIndex == 1) {
-                if (arr.count == 0 && self.contentMode == ContentModeSearch)
+                if (arr.count == 0 && self.contentMode == ContentModeSearch) {
                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                    [self.tableview removeFooter];
+                }
                 self.searchedUsers = obj;
             } else {
                 [self.searchedUsers addObjectsFromArray:arr];

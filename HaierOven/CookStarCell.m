@@ -30,8 +30,7 @@
 - (void)setCookerStar:(CookerStar *)cookerStar
 {
     _cookerStar = cookerStar;
-    
-    [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"default_avatar.png")];
+    [self.avaterImageView setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"default_avatar.png")];
     
     switch (cookerStar.userLevel) {
         case 1:

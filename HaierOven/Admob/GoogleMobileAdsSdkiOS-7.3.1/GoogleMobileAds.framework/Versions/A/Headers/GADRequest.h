@@ -13,6 +13,8 @@ extern const id kGADSimulatorID;
 
 @protocol GADAdNetworkExtras;
 
+#define GAD_SIMULATOR_ID @"Simulator"
+
 /// Genders to help deliver more relevant ads.
 typedef NS_ENUM(NSInteger, GADGender) {
   kGADGenderUnknown,  ///< Unknown gender.

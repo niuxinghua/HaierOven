@@ -109,6 +109,7 @@ typedef NS_ENUM(NSInteger, NotificationType)
                     self.allNotifications = obj;
                     if (arr.count == 0) {
                         [super showProgressErrorWithLabelText:@"您没有未读消息" afterDelay:1];
+                        [self.tableView removeFooter];
                     }
                 } else {
                     [self.allNotifications addObjectsFromArray:arr];

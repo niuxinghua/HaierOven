@@ -79,7 +79,9 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
 - (void)loadPublishedCookbooks
 {
     NSString* userBaseId = self.currentUserId == nil ? CurrentUserBaseId : self.currentUserId;
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_publishedPageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getCookbooksWithUserBaseId:userBaseId cookbookStatus:1 pageIndex:_publishedPageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
@@ -245,7 +247,7 @@ typedef NS_ENUM(NSUInteger, CurrentCookbookType) {
     
     }
     
-    [self.personalAvater sd_setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar]];
+    [self.personalAvater setImageWithURL:[NSURL URLWithString:self.currentUser.userAvatar]];
     
     self.myDessertCountLabel.text = self.currentUser.points;
     self.personalNameLabel.text = self.currentUser.userName;

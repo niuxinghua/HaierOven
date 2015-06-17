@@ -522,13 +522,13 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
 //    return _currentUser;
 //}
 
-- (UIImage *)placeHolder
-{
-    if (_placeHolder == nil) {
-        _placeHolder = [MyTool createImageWithColor:RGB(240, 240, 240)];
-    }
-    return _placeHolder;
-}
+//- (UIImage *)placeHolder
+//{
+//    if (_placeHolder == nil) {
+//        _placeHolder = [MyTool createImageWithColor:RGB(240, 240, 240)];
+//    }
+//    return _placeHolder;
+//}
 
 - (NSMutableArray *)myOvens
 {

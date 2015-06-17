@@ -87,16 +87,8 @@ const CGFloat kTimeLabelWidth = 150.0;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-//    if (self.comment.isSubComment) {
-//        self.replyButton.hidden = YES;
-//        CGRect frame = self.frame;
-//        frame.origin.x += 20;
-//        frame.size.width -= 20;
-//        self.frame = frame;
-//    }
     NSString* avatarPath = self.comment.fromUser.userAvatar;
-    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:avatarPath] placeholderImage:IMAGENAMED(@"placeholder.png")];
+    [self.userAvatar setImageWithURL:[NSURL URLWithString:avatarPath] placeholderImage:IMAGENAMED(@"placeholder.png")];
     
     CGPoint center = self.userAvatar.center;
     CGRect frame = CGRectMake(self.userAvatar.right + 10, center.y - 21 / 2, self.width - 10 - kAvatarSize - 10 - 10, 21);
@@ -109,10 +101,6 @@ const CGFloat kTimeLabelWidth = 150.0;
     
     self.commentTimeLabel.frame = CGRectMake(self.right - 20 - kTimeLabelWidth, self.userNameLabel.top, kTimeLabelWidth, 21);
     self.commentTimeLabel.text = self.comment.commentTime;
-    
-//    if (!self.comment.isSubComment) {
-//        self.replyButton.frame = CGRectMake(self.width - kReplyButtonWidth - 30, self.commentTimeLabel.top, kReplyButtonWidth, 21);
-//    }
     
     self.backgroundColor = [UIColor clearColor];
     

@@ -70,8 +70,9 @@ typedef NS_ENUM(NSInteger, SortType) {
 {
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getProductsWithCategory:self.productCategory
                                                     sortType:self.sortType
                                                    pageIndex:_pageIndex
@@ -82,11 +83,13 @@ typedef NS_ENUM(NSInteger, SortType) {
                                                             
                                                             NSArray* arr = obj;
                                                             if (arr.count < PageLimit && _pageIndex != 1) {
-                                                                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                                                                [self.collectionView removeFooter];
                                                             }
                                                             if (_pageIndex == 1) {
-                                                                if (arr.count == 0)
+                                                                if (arr.count == 0) {
                                                                     [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                                                                    [self.collectionView removeFooter];
+                                                                }
                                                                 self.products = obj;
                                                             } else {
                                                                 [self.products addObjectsFromArray:arr];

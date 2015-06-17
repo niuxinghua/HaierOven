@@ -64,14 +64,15 @@ typedef BOOL(^ShouldDisplayAd)();
 {
     //统计页面加载耗时
     UInt64 startTime=[[NSDate date]timeIntervalSince1970]*1000;
-    
-    [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"正在加载" dimBackground:NO];
+    }
     [[InternetManager sharedManager] getAllCookbooksWithPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.maintable removeFooter];
             }
             if (_pageIndex == 1) {
                 self.cookbooks = obj;
@@ -108,7 +109,7 @@ typedef BOOL(^ShouldDisplayAd)();
             for (int i = 0; i < self.recommendCookerStars.count; ++i) {
                 CookerStar* cooker = self.recommendCookerStars[i];
                 UIImageView* cookerImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, PageW*AdvRate)];
-                [cookerImage sd_setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl]];
+                [cookerImage setImageWithURL:[NSURL URLWithString:cooker.chefBackgroundImageUrl]];
                 
                 cookerImage.contentMode = UIViewContentModeScaleAspectFill;
                 [viewsArray addObject:cookerImage];
@@ -287,14 +288,12 @@ typedef BOOL(^ShouldDisplayAd)();
 {
     [self.maintable registerNib:[UINib nibWithNibName:NSStringFromClass([MainViewNormalCell class]) bundle:nil] forCellReuseIdentifier:@"MainViewNormalCell"];
 
-    
     self.adView.frame = CGRectMake(0, 0, PageW, PageW*(AdvRate+ScrRate));
     // 构建广告条
     self.adCycleView = [[CycleScrollView alloc]initWithFrame:CGRectMake(0, 0, PageW, PageW*AdvRate) animationDuration:10];
     self.adCycleView.pageControlMiddle = YES;
     [self.adView addSubview:self.adCycleView];
     
-        
 }
 
 - (void)setupTagsScrollView
@@ -360,7 +359,6 @@ typedef BOOL(^ShouldDisplayAd)();
         [viewsArray addObject:tempLabel];
     }
     
-    
     self.adCycleView.totalPagesCount = ^NSInteger(void){
         return viewsArray.count;
     };
@@ -380,7 +378,6 @@ typedef BOOL(^ShouldDisplayAd)();
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -393,7 +390,6 @@ typedef BOOL(^ShouldDisplayAd)();
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
     return self.cookbooks.count;
-//    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

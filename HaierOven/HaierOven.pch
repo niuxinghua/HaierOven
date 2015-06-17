@@ -22,6 +22,7 @@
 #import "MyUtils.h"
 #import "MobClick.h"
 #import <uAnalytics/uAnalysisManager.h>
+#import "blocktypedef.h"
 
 #define GlobalTextFontName              @"FZLTXHK--GBK1-0"
 #define GlobalTitleFontName              @"FZLTHJW--GB1-0"
@@ -58,9 +59,11 @@
 
 #import "UIButton+EnlargeTouchArea.h"
 
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
+#import "UIImageView+AFNetworking.h"
+#import "UIButton+AFNetworking.h"
 
-#import "UIButton+WebCache.h"
+//#import "UIButton+WebCache.h"
 
 /**
  *  海尔app信息

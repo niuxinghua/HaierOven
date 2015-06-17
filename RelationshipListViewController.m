@@ -24,17 +24,21 @@
 
 - (void)loadMyFans // 粉丝
 {
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getFansWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableView removeFooter];
             }
             if (_pageIndex == 1) {
-                if (arr.count == 0)
+                if (arr.count == 0) {
                     [super showProgressErrorWithLabelText:@"没有更多数据了..." afterDelay:1];
+                    [self.tableView removeFooter];
+                }
                 self.friends = obj;
             } else {
                 [self.friends addObjectsFromArray:arr];
@@ -48,17 +52,21 @@
 
 - (void)loadMyFollowers //我关注的人
 {
-    [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    if (_pageIndex == 1) {
+        [super showProgressHUDWithLabelText:@"请稍候..." dimBackground:NO];
+    }
     [[InternetManager sharedManager] getFollowersWithUserBaseId:self.userBaseId andPageIndex:_pageIndex callBack:^(BOOL success, id obj, NSError *error) {
         [super hiddenProgressHUD];
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.tableView removeFooter];
             }
             if (_pageIndex == 1) {
-                if (arr.count == 0)
+                if (arr.count == 0) {
                     [super showProgressErrorWithLabelText:@"没有更多数据了..." afterDelay:1];
+                    [self.tableView removeFooter];
+                }
                 self.friends = obj;
             } else {
                 [self.friends addObjectsFromArray:arr];

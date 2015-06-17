@@ -82,7 +82,7 @@
     
     if (step.photo != nil) {
         NSString* imagePath = [BaseOvenUrl stringByAppendingPathComponent:step.photo];
-        [self.stepImage sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"YJTP"]];
+        [self.stepImage setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"YJTP"]];
         
     } else {
         self.stepImage.image = [UIImage imageNamed:@"YJTP"];

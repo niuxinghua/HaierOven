@@ -8,7 +8,6 @@
 
 #import "MainViewNormalCell.h"
 #import "CookbookDetailControllerViewController.h"
-#import "CBImageCompressor.h"
 
 @interface MainViewNormalCell ()
 
@@ -52,76 +51,21 @@
 {
     _cookbook = cookbook;
     //[self resetCell];
-    
+    self.MainCellFoodBackground.image = nil;
     
     @try {
         self.AuthorityLabel.hidden = YES;
         self.cookStarImageView.hidden = YES;
         
         self.goodCountLabel.text = cookbook.praises;
-        
-        [self.MainCellFoodBackground sd_setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto] placeholderImage:[DataCenter sharedInstance].placeHolder];
-        
-//        self.MainCellFoodBackground.image = [DataCenter sharedInstance].placeHolder;
-//        dispatch_queue_t queue = dispatch_queue_create("MainDownloadImage.queue", DISPATCH_QUEUE_SERIAL);
-//        dispatch_async(queue, ^{
-//            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:cookbook.coverPhoto]];
-//            UIImage* image = [UIImage imageWithData:data];
-//            [CBImageCompressor compressImage:image limitSize:512*1024*6 maxSide:400 completion:^(NSData *data) {
-//                UIImage* compressedImage = [UIImage imageWithData:data];
-//                self.MainCellFoodBackground.image = compressedImage;
-//            }];
-//        });
-
-//        self.MainCellFoodBackground.image = [DataCenter sharedInstance].placeHolder;
-//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//        [manager downloadImageWithURL:[NSURL URLWithString:cookbook.coverPhoto]
-//                              options:0
-//                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                                 // progression tracking code
-//                             }
-//                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//                                if (image) {
-//                                    // do something with image
-//                                    [CBImageCompressor compressImage:image limitSize:512*1024*6 maxSide:400 completion:^(NSData *data) {
-//                                        UIImage* compressedImage = [UIImage imageWithData:data];
-//                                        self.MainCellFoodBackground.image = compressedImage;
-//                                    }];
-//
-//                                }
-//                            }];
-        
-//        [[SDImageCache sharedImageCache] queryDiskCacheForKey:cookbook.coverPhoto done:^(UIImage *image, SDImageCacheType cacheType) {
-//            if (image) {
-//                [CBImageCompressor compressImage:image limitSize:512*1024*6 maxSide:400 completion:^(NSData *data) {
-//                    UIImage* compressedImage = [UIImage imageWithData:data];
-//                    self.MainCellFoodBackground.image = compressedImage;
-//                }];
-//
-//            } else {
-//                
-//                self.MainCellFoodBackground.image = [DataCenter sharedInstance].placeHolder;
-//                dispatch_queue_t queue = dispatch_queue_create("MainDownloadImage.queue", DISPATCH_QUEUE_SERIAL);
-//                dispatch_async(queue, ^{
-//                    NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:cookbook.coverPhoto]];
-//                    UIImage* image = [UIImage imageWithData:data];
-//                    [[SDImageCache sharedImageCache] storeImage:image forKey:cookbook.coverPhoto];
-//                    [CBImageCompressor compressImage:image limitSize:512*1024*6 maxSide:400 completion:^(NSData *data) {
-//                        UIImage* compressedImage = [UIImage imageWithData:data];
-//                        self.MainCellFoodBackground.image = compressedImage;
-//                    }];
-//                });
-//            }
-//        }];
-        
+        [self.MainCellFoodBackground setImageWithURL:[NSURL URLWithString:cookbook.coverPhoto]];
         // 判断是否是官方菜谱
         if ([cookbook.creator.userLevel isEqualToString:@"1"] || [cookbook.creator.userLevel isEqualToString:@"2"]) {
             self.cookStarImageView.hidden = NO;
         }
         self.AuthorityLabel.hidden = !cookbook.isAuthority; // 只有userLevel为1才显示“官方菜谱”
         
-        [self.avater sd_setImageWithURL:[NSURL URLWithString:cookbook.creator.avatarPath] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        
+        [self.avater setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cookbook.creator.avatarPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         
         self.foodName.text = cookbook.name;
         

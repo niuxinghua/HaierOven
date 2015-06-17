@@ -130,8 +130,7 @@
 - (void)setCookerStar:(CookerStar *)cookerStar
 {
     _cookerStar = cookerStar;
-    
-    [self.avaterImage sd_setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"default_avatar.png")];
+    [self.avaterImage setImageWithURL:[NSURL URLWithString:cookerStar.avatar] placeholderImage:IMAGENAMED(@"default_avatar.png")];
     
     switch (cookerStar.userLevel) {
         case 1:
@@ -175,7 +174,6 @@
     
     self.descriptionLabel.text = cookerStar.introduction;
     self.cookBookLabel.text = [NSString stringWithFormat:@"%@ 的菜谱", cookerStar.userName];
-    //[self.vedioImage setImageWithURL:[NSURL URLWithString:cookerStar.videoCover] placeholderImage:IMAGENAMED(@"cookbook_list_item_bg_default.png")];
     
 }
 

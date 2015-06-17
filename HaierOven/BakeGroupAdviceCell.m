@@ -7,6 +7,7 @@
 //
 
 #import "BakeGroupAdviceCell.h"
+
 @interface BakeGroupAdviceCell()
 @property (strong, nonatomic) IBOutlet UIButton *avaterBtn;
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
@@ -31,9 +32,7 @@
 - (void)setCooker:(Cooker *)cooker
 {
     _cooker = cooker;
-    //[self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
-//    [self.avaterBtn setImageWithURL:[NSURL URLWithString:cooker.avatar]];
-    [self.avaterBtn sd_setImageWithURL:[NSURL URLWithString:cooker.avatar] forState:UIControlStateNormal];
+    [self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:cooker.avatar]];
     
     switch (cooker.userLevel) {
         case 1:
@@ -66,8 +65,7 @@
 - (void)setSearchedUser:(Friend *)searchedUser
 {
     _searchedUser = searchedUser;
-//    [self.avaterBtn setImageWithURL:[NSURL URLWithString:searchedUser.avatar]];
-    [self.avaterBtn sd_setImageWithURL:[NSURL URLWithString:searchedUser.avatar] forState:UIControlStateNormal];
+    [self.avaterBtn setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:searchedUser.avatar]];
     
     switch (searchedUser.userLevel) {
         case 1:
