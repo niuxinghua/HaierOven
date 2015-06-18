@@ -160,7 +160,7 @@
         if (success) {
             NSArray* arr = obj;
             if (arr.count < PageLimit && _pageIndex != 1) {
-                [super showProgressErrorWithLabelText:@"没有更多了..." afterDelay:1];
+                [self.mainTable removeFooter];
                 //[self.mainTable.legendFooter noticeNoMoreData];
             }
             if (_pageIndex == 1) {

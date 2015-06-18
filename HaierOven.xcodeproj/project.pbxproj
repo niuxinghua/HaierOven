@@ -977,6 +977,7 @@
 		B9115D351B315A8C00EBD3DD /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9115D271B315A8C00EBD3DD /* UIScrollView+MJExtension.m */; };
 		B9115D361B315A8C00EBD3DD /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B9115D291B315A8C00EBD3DD /* UIScrollView+MJRefresh.m */; };
 		B9115D371B315A8C00EBD3DD /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B9115D2B1B315A8C00EBD3DD /* UIView+MJExtension.m */; };
+		B9CBFC401B3265B2006C877B /* showAds.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9CBFC3F1B3265B2006C877B /* showAds.plist */; };
 		B9CD15071B300FD9006C6723 /* LARSAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD14FF1B300FD9006C6723 /* LARSAdController.m */; };
 		B9CD15081B300FD9006C6723 /* TOLAdAdapterGoogleAds.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD15021B300FD9006C6723 /* TOLAdAdapterGoogleAds.m */; };
 		B9CD15091B300FD9006C6723 /* TOLAdAdapteriAds.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CD15041B300FD9006C6723 /* TOLAdAdapteriAds.m */; };
@@ -2303,6 +2304,7 @@
 		B9115D291B315A8C00EBD3DD /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		B9115D2A1B315A8C00EBD3DD /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		B9115D2B1B315A8C00EBD3DD /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		B9CBFC3F1B3265B2006C877B /* showAds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = showAds.plist; sourceTree = "<group>"; };
 		B9CD14FE1B300FD9006C6723 /* LARSAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARSAdController.h; sourceTree = "<group>"; };
 		B9CD14FF1B300FD9006C6723 /* LARSAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARSAdController.m; sourceTree = "<group>"; };
 		B9CD15001B300FD9006C6723 /* TOLAdAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOLAdAdapter.h; sourceTree = "<group>"; };
@@ -3288,6 +3290,11 @@
 		45BB35ED1A4A68EF000EE3C4 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */,
+				84AD2E901A8A230A0014126A /* jifen.jpg */,
+				456BC4471A8C82F3000D9355 /* jifen2.png */,
+				84B443DC1AAACBB70029C8D0 /* jifen_3.jpg */,
+				84AD2EA11A8B5B190014126A /* APPkv-banner1@2x.jpg */,
 				84AD2E8C1A88B1EC0014126A /* cookbook_list_time@3x.png */,
 				84AD2E841A8888170014126A /* cookbook_list_praise@2x.png */,
 				84AD2E8E1A88B2080014126A /* cookbook_list_praise@3x.png */,
@@ -3512,7 +3519,6 @@
 		45C7E52D1A3FD165000B086B /* HaierOven */ = {
 			isa = PBXGroup;
 			children = (
-				45C7E57A1A3FDB57000B086B /* UConstants.h */,
 				B9CD14F31B3003C5006C6723 /* Admob */,
 				8447CAEE1A5FC72400FADF9D /* Chat */,
 				C4182E121A4E49FD006A44D0 /* Cookbook */,
@@ -3521,13 +3527,6 @@
 				45C7E5641A3FDA30000B086B /* Additions */,
 				45C7E5561A3FD8FE000B086B /* Controller */,
 				45C7E5551A3FD8F6000B086B /* View */,
-				45C7E5321A3FD165000B086B /* AppDelegate.h */,
-				45C7E5331A3FD165000B086B /* AppDelegate.m */,
-				84781E611AA3E5A400A01264 /* OHPlayAudio.h */,
-				84781E621AA3E5A400A01264 /* OHPlayAudio.m */,
-				45C7E5381A3FD165000B086B /* Main.storyboard */,
-				45C7E53B1A3FD165000B086B /* Images.xcassets */,
-				45C7E53D1A3FD165000B086B /* LaunchScreen.xib */,
 				45C7E52E1A3FD165000B086B /* Supporting Files */,
 			);
 			path = HaierOven;
@@ -3536,6 +3535,9 @@
 		45C7E52E1A3FD165000B086B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				45C7E5381A3FD165000B086B /* Main.storyboard */,
+				45C7E53B1A3FD165000B086B /* Images.xcassets */,
+				45C7E53D1A3FD165000B086B /* LaunchScreen.xib */,
 				840141511A4BDD470050615F /* Icon.png */,
 				457A775A1A427B1800E422D0 /* FZLTHJW.ttf */,
 				457A775C1A427E2200E422D0 /* FZLTXHK.TTF */,
@@ -3544,6 +3546,7 @@
 				45C7E52F1A3FD165000B086B /* Info.plist */,
 				45C7E5301A3FD165000B086B /* main.m */,
 				45C7E57B1A3FDBB0000B086B /* HaierOven.pch */,
+				B9CBFC3F1B3265B2006C877B /* showAds.plist */,
 				45AC31F81A772E85004B1828 /* StudyCookPart_1.plist */,
 				45AC32291A77967C004B1828 /* StudyCookPart_2.plist */,
 				45AC322B1A779BCD004B1828 /* StudyCookPart_3.plist */,
@@ -3571,8 +3574,6 @@
 		45C7E5551A3FD8F6000B086B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				844C35AA1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.h */,
-				844C35AB1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m */,
 				B9115D131B315A8C00EBD3DD /* MJRefresh */,
 				45A661541A676B3100FC9B90 /* SectionView */,
 				45D9FEB81A5285F500023B9D /* AlertView */,
@@ -3635,9 +3636,16 @@
 			isa = PBXGroup;
 			children = (
 				B9115CDF1B3128BD00EBD3DD /* DAImageResizedImageView */,
+				45C7E5321A3FD165000B086B /* AppDelegate.h */,
+				45C7E5331A3FD165000B086B /* AppDelegate.m */,
 				B9115CEF1B31348200EBD3DD /* blocktypedef.h */,
+				45C7E57A1A3FDB57000B086B /* UConstants.h */,
 				B9115CE61B31341E00EBD3DD /* GCDHelper.h */,
 				B9115CE71B31341E00EBD3DD /* GCDHelper.m */,
+				84781E611AA3E5A400A01264 /* OHPlayAudio.h */,
+				84781E621AA3E5A400A01264 /* OHPlayAudio.m */,
+				844C35AA1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.h */,
+				844C35AB1A7B7C0D00949F40 /* UIButton+EnlargeTouchArea.m */,
 				B9115CEC1B31344200EBD3DD /* UIImage+Alpha.h */,
 				B9115CED1B31344200EBD3DD /* UIImage+Alpha.m */,
 				B9115CE31B3133BE00EBD3DD /* UIImage+Resize.h */,
@@ -3720,11 +3728,6 @@
 		45D9061B1A47CAAA00B97D92 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				843CD1B01AA07710005BC8D7 /* cookbook_cancel@2x.png */,
-				84AD2E901A8A230A0014126A /* jifen.jpg */,
-				456BC4471A8C82F3000D9355 /* jifen2.png */,
-				84B443DC1AAACBB70029C8D0 /* jifen_3.jpg */,
-				84AD2EA11A8B5B190014126A /* APPkv-banner1@2x.jpg */,
 				45AC32001A777337004B1828 /* studyCook */,
 				842388181A70A248007AB206 /* Default */,
 				45A97B941A6E23220094F9BA /* studycook */,
@@ -4358,11 +4361,11 @@
 		8447CAEF1A5FC73600FADF9D /* JSQMessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8447CB211A5FC73600FADF9D /* JSQMessages.h */,
 				8447CAF01A5FC73600FADF9D /* Assets */,
 				8447CB031A5FC73600FADF9D /* Categories */,
 				8447CB101A5FC73600FADF9D /* Controllers */,
 				8447CB161A5FC73600FADF9D /* Factories */,
-				8447CB211A5FC73600FADF9D /* JSQMessages.h */,
 				8447CB221A5FC73600FADF9D /* JSQSystemSoundPlayer */,
 				8447CB261A5FC73600FADF9D /* Layout */,
 				8447CB2D1A5FC73600FADF9D /* Model */,
@@ -4855,7 +4858,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = CWG9EF242Q;
+						DevelopmentTeam = KRV5T3384C;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -5161,6 +5164,7 @@
 				45B650E41A48177E00A6376D /* deviceAdd@3x.png in Resources */,
 				45A5E8081A4FCACC00FCD2BD /* CGXDJ@2x.png in Resources */,
 				45AC32251A77734A004B1828 /* 1_6_3_1.png in Resources */,
+				B9CBFC401B3265B2006C877B /* showAds.plist in Resources */,
 				45D906D81A47CAAB00B97D92 /* jianjing@3x.png in Resources */,
 				45AC32871A77A5C4004B1828 /* 3-2-7-1.png in Resources */,
 				45E61AC31A7629CA009DF3FC /* use2@2x.png in Resources */,
@@ -6060,7 +6064,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5d5a4678-3f87-4de9-bec5-160b1614b8bf";
 			};
 			name = Debug;
 		};
@@ -6112,7 +6116,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5d5a4678-3f87-4de9-bec5-160b1614b8bf";
 			};
 			name = Release;
 		};

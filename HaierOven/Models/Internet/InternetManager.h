@@ -742,8 +742,10 @@ typedef void (^myCallback) (BOOL success, id obj, NSError* error);
  */
 - (void)uploadFile:(NSData*)data callBack:(myCallback)completion;
 
-
-
+/**
+ *  下载广告显示控制plist
+ */
+- (void)downloadAdControlFile;
 
 
 

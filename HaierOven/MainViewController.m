@@ -262,21 +262,18 @@ typedef BOOL(^ShouldDisplayAd)();
 //是否显示AdMob广告
 - (BOOL)shouldDisplayAds
 {
-    ShouldDisplayAd display = ^() {
-        NSString* adUrl = [MobClick getAdURL];
-        NSLog(@"%@", adUrl);
-        
-        if (adUrl.length != 0) {
-            return YES;
-        } else {
-            return NO;
-        }
-    };
-    return display();
-}
-
-- (void)initAdMob {
-    
+//    ShouldDisplayAd display = ^() {
+//        NSString* adUrl = [MobClick getAdURL];
+//        NSLog(@"%@", adUrl);
+//        if (adUrl.length != 0) {
+//            return YES;
+//        } else {
+//            return NO;
+//        }
+//    };
+//    [[InternetManager sharedManager] downloadAdControlFile];
+//    return display();
+    return [[DataCenter sharedInstance] showAds];
 }
 
 - (void)dealloc

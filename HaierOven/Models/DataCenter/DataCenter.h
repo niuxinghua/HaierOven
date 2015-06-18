@@ -37,6 +37,7 @@
  */
 extern NSString* const kCurrentLoginUserName;
 extern NSString* const kRecommendProjectsFileName;
+extern NSString* const kShowAdsControlFileName;
 
 
 typedef NS_ENUM(NSInteger, LocalNotificationType) {
@@ -113,6 +114,16 @@ typedef NS_ENUM(NSInteger, LocalNotificationType) {
  * 测试方法，检查某个文件是否会被iCloud备份
  **/
 - (void)testFileAttributeWithUrl:(NSURL*)fileUrl;
+
+/**
+ * 保存是否显示广告信息
+ **/
+- (void)saveAdControlFile:(NSData*)data;
+
+/**
+ * 是否显示广告
+ **/
+- (BOOL)showAds;
 
 #pragma mark - 用户签到信息
 

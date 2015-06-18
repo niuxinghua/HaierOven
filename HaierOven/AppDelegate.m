@@ -197,10 +197,10 @@ void uncaughtExceptionHandler(NSException *exception)
 }
 
 - (void)initAdMob {
-   
+    [[InternetManager sharedManager] downloadAdControlFile];
     [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapterGoogleAds class]
                                       withPublisherId:@"ca-app-pub-7840826564795227/5905625599"];
-    [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapteriAds class]];
+    //[[LARSAdController sharedManager] registerAdClass:[TOLAdAdapteriAds class]];
     
 }
 

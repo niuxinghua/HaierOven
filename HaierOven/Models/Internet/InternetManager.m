@@ -2889,7 +2889,15 @@
     }
 }
 
-
+- (void)downloadAdControlFile
+{
+    if ([self canConnectInternet]) {
+        dispatch_async(dispatch_queue_create(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://7xjt4p.com1.z0.glb.clouddn.com/showAds.plist"]];
+            [[DataCenter sharedInstance] saveAdControlFile:data];
+        });
+    }
+}
 
 #pragma mark - 测试API接口使用
 

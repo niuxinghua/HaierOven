@@ -24,6 +24,7 @@ NSString* const kLocalOvensFileName             = @"myOvens.data";
 NSString* const kLocalSearchedKeywordsFileName  = @"searchedKeywords.plist";
 NSString* const kLocalSignInMessageFileName     = @"signInMessage.plist";
 NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
+NSString* const kShowAdsControlFileName         = @"showAds.plist";
 
 @interface DataCenter ()
 
@@ -249,6 +250,34 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     
 }
 
+- (void)saveAdControlFile:(NSData*)data {
+    NSString* filePath = [USER_DATA_PATH stringByAppendingPathComponent:kShowAdsControlFileName];
+    [data writeToFile:filePath atomically:YES];
+}
+
+- (BOOL)showAds {
+    @try {
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString* toPath = [USER_DATA_PATH stringByAppendingPathComponent:kShowAdsControlFileName];
+        if (![userDefaults boolForKey:@"OpendApp"]) {
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            NSString* fromPath = [[NSBundle mainBundle] pathForResource:@"showAds" ofType:@"plist"];
+            [fileManager moveItemAtPath:fromPath toPath:toPath error:nil];
+            [userDefaults setBool:YES forKey:@"OpendApp"];
+            [userDefaults synchronize];
+        }
+        NSDictionary* dict = [NSDictionary dictionaryWithContentsOfFile:toPath];
+        BOOL show = [dict[@"ShowAdMob"] boolValue];
+        return show;
+    }
+    @catch (NSException *exception) {
+        return YES;
+    }
+    @finally {
+        
+    }
+    
+}
 
 #pragma mark - 缓存文件 读取缓存文件
 
@@ -335,6 +364,8 @@ NSString* const kLocalOvenInfosFileName         = @"ovenNotifications.plist";
     NSDictionary* jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     return jsonObj;
 }
+
+
 
 - (void)saveCookbooksWithObject:(id)jsonObj
 {
