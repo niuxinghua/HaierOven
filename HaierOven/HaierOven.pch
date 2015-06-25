@@ -50,12 +50,16 @@
 /**
  *  海尔app信息
  */
-//#define AppId       @"MB-HBDS-0001"     // 开发时用的这个
-#define AppId       @"MB-HBDS-0000"
+//#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
 //#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key  开发时用的这个
-#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"
+
+//#define AppId       @"MB-HBDS-0000"     //海尔正式环境AppId
+//#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"     //海尔正式环境AppKey
+
 //#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
-//#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // android 测试Key
+
+#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
+#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // 开发时 android 测试Key
 #define AppVersion  @"0.1"
 
 /**

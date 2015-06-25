@@ -11,36 +11,23 @@
 
 
 // Base url
-//#define BaseUrl         @"http://115.29.8.251:8080/haieroven/app"
-//#define BaseOvenUrl     @"http://115.29.8.251:8080/haieroven"
-
-//#define BaseUrl         @"http://115.29.8.251:8081/app"
-//#define BaseOvenUrl     @"http://115.29.8.251:8081"
-
-//#define BaseUrl         @"http://115.29.8.251:8082/app"
-//#define BaseOvenUrl     @"http://115.29.8.251:8082"
 
 //#define BaseUrl         @"http://115.29.172.65:8080/app"  //模拟正式环境Url
 //#define BaseOvenUrl     @"http://115.29.172.65:8080"
-//
-//#define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
 
-#define BaseUrl         @"http://203.130.41.38/app"  //模拟正式环境Url
-#define BaseOvenUrl     @"http://203.130.41.38"
+#define BaseUrl         @"http://115.29.8.251:8082/app"  // 测试环境
+#define BaseOvenUrl     @"http://115.29.8.251:8082"
+#define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
 
-#define BaseShareUrl    @"203.130.41.38/cookbook/detail"
+//#define BaseUrl         @"http://203.130.41.38/app"  //正式环境Url
+//#define BaseOvenUrl     @"http://203.130.41.38"
+//#define BaseShareUrl    @"203.130.41.38/cookbook/detail"
 
 //#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
-
 #define BaseUhomeUrl    @"http://uhome.haier.net:6000/commonapp"
 
-
-
 #define ResetPasswordUrl    @"http://user.haier.com/ids/cn/forget_password.jsp"
-
 #define HaierPolicyUrl      @"http://user.haier.com/cn/hdyy/fwtk/201107/t20110730_27774.shtml"
-
-
 
 #pragma mark - 登录注册
 

@@ -4858,7 +4858,7 @@
 				TargetAttributes = {
 					45C7E52A1A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = KRV5T3384C;
+						DevelopmentTeam = CWG9EF242Q;
 					};
 					45C7E5431A3FD165000B086B = {
 						CreatedOnToolsVersion = 6.1;
@@ -6064,7 +6064,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5d5a4678-3f87-4de9-bec5-160b1614b8bf";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -6116,7 +6116,7 @@
 					"$(PROJECT_DIR)/HaierOven/Models/GoogleAnalyticsLibrary",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5d5a4678-3f87-4de9-bec5-160b1614b8bf";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
