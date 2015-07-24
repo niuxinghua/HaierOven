@@ -12,16 +12,44 @@
 
 // Base url
 
-//#define BaseUrl         @"http://115.29.172.65:8080/app"  //模拟正式环境Url
-//#define BaseOvenUrl     @"http://115.29.172.65:8080"
+#define TEST    0
+
+#if TEST
+
+#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
+#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // 开发时 android 测试Key
 
 #define BaseUrl         @"http://115.29.8.251:8082/app"  // 测试环境
 #define BaseOvenUrl     @"http://115.29.8.251:8082"
 #define BaseShareUrl    @"115.29.8.251:8082/cookbook/detail"
 
-//#define BaseUrl         @"http://203.130.41.38/app"  //正式环境Url
-//#define BaseOvenUrl     @"http://203.130.41.38"
-//#define BaseShareUrl    @"203.130.41.38/cookbook/detail"
+#else
+
+#define AppId       @"MB-HBDS-0000"     //海尔正式环境AppId
+#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"     //海尔正式环境AppKey
+
+#define BaseUrl         @"http://203.130.41.38/app"  //正式环境Url
+#define BaseOvenUrl     @"http://203.130.41.38"
+#define BaseShareUrl    @"203.130.41.38/cookbook/detail"
+
+#endif
+
+
+/**
+ *  海尔app信息
+ */
+//#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
+//#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key  开发时用的这个
+
+//#define AppId       @"MB-HBDS-0000"     //海尔正式环境AppId
+//#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"     //海尔正式环境AppKey
+
+//#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
+
+
+#define AppVersion  @"0.1"
+
+
 
 //#define BaseUhomeUrl    @"http://103.8.220.165:60000" //测试登录注册使用
 #define BaseUhomeUrl    @"http://uhome.haier.net:6000/commonapp"

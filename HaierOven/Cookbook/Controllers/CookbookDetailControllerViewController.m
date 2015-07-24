@@ -239,31 +239,8 @@
     // reloadData
     [self.tableView reloadData];
     
-    
     // 是否是官方菜谱
     self.authorityButton.hidden = !self.isAuthority;
-    
-//    if (self.cookbookDetail.creator.userLevel != nil) {
-//        
-//        if ([self.cookbookDetail.creator.userLevel isEqualToString:@"1"] || [self.cookbookDetail.creator.userLevel isEqualToString:@"2"]) {
-//            self.authorityButton.hidden = NO;
-//        } else {
-//            self.authorityButton.hidden = YES;
-//        }
-//        
-//        
-//    } else {
-////        //假数据
-////        if ([cookbook.creator.userName isEqualToString:@"官方厨神"]) {
-////            self.cookStarImageView.hidden = NO;
-////            self.AuthorityLabel.hidden = NO;
-////        } else {
-////            self.cookStarImageView.hidden = YES;
-////            self.AuthorityLabel.hidden = YES;
-////        }
-//        
-//    }
-
     
     // 如果是自己发布的菜谱不显示关注按钮
     if ([self.cookbookDetail.creator.userBaseId isEqualToString:CurrentUserBaseId] || self.isPreview) {
@@ -1344,12 +1321,5 @@
 }
 
 @end
-
-
-
-
-
-
-
 
 

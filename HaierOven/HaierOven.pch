@@ -47,20 +47,7 @@
 #define PageW ([[UIScreen mainScreen] bounds].size.width)
 #define alert_RectHidden   (CGRectMake(PageW/2, PageH/2, 0, 0))
 
-/**
- *  海尔app信息
- */
-//#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
-//#define AppKey      @"b1de88fe75001551d01ba42ec054ccea"     // 测试Key  开发时用的这个
 
-//#define AppId       @"MB-HBDS-0000"     //海尔正式环境AppId
-//#define AppKey      @"fe2c43d24ea9f1c86f083f125cf90522"     //海尔正式环境AppKey
-
-//#define AppKey      @"934b07870107d651aebf2f5e5e833df1" // 生产Key
-
-#define AppId       @"MB-HBDS-0000"     // 开发时用的这个
-#define AppKey      @"85c66852a1a8dced9af52c6589e28be7"     // 开发时 android 测试Key
-#define AppVersion  @"0.1"
 
 /**
  *  用户积分定义
@@ -74,7 +61,7 @@
  *  根据此ID，可在APP内部打开App Store 界面
  */
 #define AppStoreID      @"960608488"
-#define UMengAppKey     @"54daa0edfd98c5160d000687"
+#define UMengAppKey     @"55b1df88e0f55a5f54001b80"
 #define QQAppID         @"1104081866"
 #define SinaAppKey      @"4024847126"
 #define kGoogleAnalyticsTrackingId  @"UA-61647559-2" //nurun

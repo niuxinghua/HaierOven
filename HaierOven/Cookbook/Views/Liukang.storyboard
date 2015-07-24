@@ -30,7 +30,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-IQ-WUJ" customClass="DAImageResizedImageView">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-IQ-WUJ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Ms-RU-hbI">
@@ -183,7 +183,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已150度烘烤约70分钟出炉晾凉后脱模，冷藏4小时以上可切开食用。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-OC-Whd">
                                                     <rect key="frame" x="15" y="8" width="290" height="31"/>
                                                     <fontDescription key="fontDescription" name="FZLTXHK--GBK1-0" family="FZLanTingHei-EL-GBK" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -342,9 +342,9 @@
     <resources>
         <image name="back.png" width="26" height="26"/>
         <image name="back2.png" width="21" height="21"/>
-        <image name="default_avatar.png" width="127" height="127"/>
-        <image name="icon_gfcp_n.png" width="113" height="30"/>
-        <image name="icon_gfcp_s.png" width="113" height="30"/>
+        <image name="default_avatar.png" width="127" height="126"/>
+        <image name="icon_gfcp_n.png" width="112" height="30"/>
+        <image name="icon_gfcp_s.png" width="112" height="30"/>
         <image name="icon_like_n.png" width="48" height="48"/>
         <image name="icon_like_navi_n.png" width="48" height="48"/>
         <image name="icon_like_s.png" width="48" height="48"/>
